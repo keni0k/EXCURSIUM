@@ -59,7 +59,7 @@ public class HomeController {
     public String deleteData(ModelMap model,
                              @ModelAttribute("deleteRecord") @Valid Record record,
                              BindingResult result) {
-        repository.delete(record.getId());
+        repository.delete(record);
         return home(model);
     }
 }
