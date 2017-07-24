@@ -40,7 +40,7 @@ public class Record {
         return img_link;
     }
 
-    public void setImg_link(String imgLink) {
+    public void setImg_link(String img_link) {
         this.img_link = img_link;
     }
 
