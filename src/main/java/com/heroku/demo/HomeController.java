@@ -60,7 +60,7 @@ public class HomeController {
                              @ModelAttribute("deleteRecord") @Valid Record record,
                              BindingResult result) {
         if (!result.hasErrors()) {
-            repository.delete(record);
+            repository.delete(record.getId());
         }
         return home(model);
     }
