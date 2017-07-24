@@ -18,3 +18,18 @@ databaseChangeLog:
                   type: varchar(255)
                   constraints:
                     nullable: false
+              - column:
+                  name: head
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: img_link
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                 name: locate
+                 type: varchar(255)
+                 constraints:
+                    nullable: false

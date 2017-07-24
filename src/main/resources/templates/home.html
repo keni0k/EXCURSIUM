@@ -39,25 +39,25 @@
                 </div>
                 <button type="submit" class="btn btn-default">Отправить</button>
             </form>-->
-            <form action="test.php" method="POST" name="form">
+            <form th:object="${insertRecord}" method="POST">
 
                 Туристический портал:
-                <select name="locale">
+                <select name="locate">
                     <option value="ra"> Республика Алтай </option>
                     <option value="rk"> Республика Крым </option>
                     <option value="no"> Новосибирская область </option>
                     <option value="io"> Иркутская область </option>
                 </select>
 
+                <br/>
                 Заголовок новости: <input name="head_news" type="text" value=""/>
-
+                <br/>
                 Текст новости:
                 <textarea cols="40" rows="10" name="text_news"></textarea>
-
+                <br/>
                 Ссылка на изображение:
-
                 <input name="link_img_news" type="text" value=""/>
-
+                <br/>
                 <button type="submit" class="btn btn-default">Отправить</button>
 
             </form>
