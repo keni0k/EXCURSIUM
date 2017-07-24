@@ -56,7 +56,8 @@ public class HomeController {
     }
 
     @RequestMapping("/delete")
-    public String deleteData(@RequestParam("id") long id) {
+    public String deleteData(ModelMap model, @ModelAttribute("id") long id,
+                             BindingResult result) {
         repository.delete(id);
         return home(model);
     }
