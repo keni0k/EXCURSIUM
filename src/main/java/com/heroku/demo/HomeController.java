@@ -45,7 +45,7 @@ public class HomeController {
         return "home";
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping("/add")
     public String insertData(ModelMap model, 
                              @ModelAttribute("insertRecord") @Valid Record record,
                              BindingResult result) {

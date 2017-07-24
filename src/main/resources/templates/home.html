@@ -40,7 +40,7 @@
                 </div>
                 <button type="submit" class="btn btn-default">Отправить</button>
             </form>-->
-            <form th:object="${insertRecord}" method="POST">
+            <form th:object="${insertRecord}" action="/add" method="POST">
 
                 Туристический портал:
                 <select name="locate">
