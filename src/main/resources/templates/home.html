@@ -41,10 +41,7 @@
             </form>-->
             <form action="test.php" method="POST" name="form">
 
-                Заголовок новости: <input name="head_news" type="text" value="">
-
                 Туристический портал:
-
                 <select name="locale">
                     <option value="ra"> Республика Алтай </option>
                     <option value="rk"> Республика Крым </option>
@@ -52,8 +49,10 @@
                     <option value="io"> Иркутская область </option>
                 </select>
 
+                Заголовок новости: <input name="head_news" type="text" value="">
+
                 Текст новости:
-                <textarea cols="40" rows="10" name="text_news"></textarea><br><br>
+                <textarea cols="40" rows="10" name="text_news"></textarea>
 
                 <button type="submit" class="btn btn-default">Отправить</button>
 
