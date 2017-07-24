@@ -23,6 +23,12 @@
 
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" />
+
+    <script type="text/javascript">
+        function ChangeColor(id) {
+            alert(id);
+	    }
+    </script>
 </head>
 <body>
 <div class="container">
@@ -65,6 +71,7 @@
     </div>
 
     <hr />
+
     <div class="row">
         <div class="col-sm-12">
             <table class="table table-striped">
@@ -87,7 +94,7 @@
                         <td th:text="${record.data}">Some text</td>
                         <td th:text="${record.img_link}">Some text</td>
                         <td th:text="${record.locate}">Some text</td>
-                        <td><button name="btn" th:object="${deleteRecord}" onclick="${record.id}">Удалить</button></td>
+                        <td><button name="btn" th:object="${deleteRecord}" onclick="return ChangeColor(${record.id});">Удалить</button></td>
                     </tr>
                 </tbody>
             </table>
