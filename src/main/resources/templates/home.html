@@ -76,7 +76,10 @@
                 <tbody>
                     <tr th:each="record : ${records}">
                         <td th:text="${record.data}">Some text</td>
-                        <td><input type="checkbox" name="color_1" value="Черный"/></td>
+                        <td th:text="${record.head}">Some text</td>
+                        <td th:text="${record.img_link}">Some text</td>
+                        <td th:text="${record.locate}">Some text</td>
+                        <td><button name="btn">Удалить</button></td>
                     </tr>
                 </tbody>
             </table>
