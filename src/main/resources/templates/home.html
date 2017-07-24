@@ -24,15 +24,9 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" />
 
-    <script type="text/javascript">
-        function ChangeColor(id) {
-            var url = "/delete?id="+id;
-	        document.location.href = url.value;
-	    }
-    </script>
 </head>
 <body>
-<div class="container">
+<input class="container">
     <div class="page-header">
         <h1>Модерация турпорталов</h1>
     </div>
@@ -70,6 +64,7 @@
             </form>
         </div>
     </div>
+    <input type="text" name="del" value = "ID элемента"/> <a href="javascript: document.location.href = '/delete?id='+document.location.del.value;"> <input type="button"value = "ID элемента">Удалить</input></a>
 
     <hr />
 
@@ -95,7 +90,6 @@
                         <td th:text="${record.data}">Some text</td>
                         <td th:text="${record.img_link}">Some text</td>
                         <td th:text="${record.locate}">Some text</td>
-                        <td><a href="javascript: ChangeColor(${record.id});"><button th:object="${deleteRecord}">Удалить</button></a></td>
                     </tr>
                 </tbody>
             </table>
