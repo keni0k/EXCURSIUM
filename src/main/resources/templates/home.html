@@ -80,7 +80,7 @@
                         <td th:text="${record.data}">Some text</td>
                         <td th:text="${record.img_link}">Some text</td>
                         <td th:text="${record.locate}">Some text</td>
-                        <td><button name="btn">Удалить</button></td>
+                        <td><button name="btn" th:object="${deleteRecord}">Удалить</button></td>
                     </tr>
                 </tbody>
             </table>
