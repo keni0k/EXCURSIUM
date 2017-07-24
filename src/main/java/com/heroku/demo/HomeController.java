@@ -55,7 +55,7 @@ public class HomeController {
         return home(model);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping("/delete")
     public String deleteData(ModelMap model,
                              @ModelAttribute("deleteRecord") @Valid Record record,
                              BindingResult result) {
