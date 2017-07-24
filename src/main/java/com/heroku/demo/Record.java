@@ -10,6 +10,10 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Entity
 public class Record {
 
+    public long getId() {
+        return id;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
