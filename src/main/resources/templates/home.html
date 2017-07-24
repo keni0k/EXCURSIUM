@@ -26,7 +26,8 @@
 
     <script type="text/javascript">
         function ChangeColor(id) {
-            alert(id);
+            var url = "delete?id="+id;
+	        document.location.href = url.value;
 	    }
     </script>
 </head>
@@ -94,7 +95,7 @@
                         <td th:text="${record.data}">Some text</td>
                         <td th:text="${record.img_link}">Some text</td>
                         <td th:text="${record.locate}">Some text</td>
-                        <td><button name="btn" th:object="${deleteRecord}" onclick="return ChangeColor(${record.id});">Удалить</button></td>
+                        <td><a href="javascript: ChangeColor(${record.id});"><button th:object="${deleteRecord}">Удалить</button></a></td>
                     </tr>
                 </tbody>
             </table>
