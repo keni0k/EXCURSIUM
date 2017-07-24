@@ -74,6 +74,13 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <td>ID</td>
+                        <td>Заголовок</td>
+                        <td>Новость</td>
+                        <td>Ссылка на картинку</td>
+                        <td>Локализация</td>
+                    </tr>
                     <tr th:each="record : ${records}">
                         <td th:text="${record.id}">Some text</td>
                         <td th:text="${record.head}">Some text</td>
