@@ -36,15 +36,15 @@ public class Record {
 
     private String head = "Same";
 
-    public String getImgLink() {
-        return imgLink;
+    public String getImg_link() {
+        return img_link;
     }
 
-    public void setImgLink(String imgLink) {
-        this.imgLink = imgLink;
+    public void setImg_link(String imgLink) {
+        this.img_link = img_link;
     }
 
-    private String imgLink = "Same";
+    private String img_link = "Same";
 
     public String getData() {
         return data;
