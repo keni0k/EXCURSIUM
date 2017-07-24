@@ -14,7 +14,7 @@ public class Record {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @NotEmpty
-    private String data;
+    private String data = "Same";
 
     public String getLocate() {
         return locate;
@@ -25,7 +25,7 @@ public class Record {
     }
 
     @NotEmpty
-    private String locate;
+    private String locate = "Same";
 
     public String getHead() {
         return head;
@@ -36,7 +36,7 @@ public class Record {
     }
 
     @NotEmpty
-    private String head;
+    private String head = "Same";
 
     public String getImgLink() {
         return imgLink;
@@ -47,7 +47,7 @@ public class Record {
     }
 
     @NotEmpty
-    private String imgLink;
+    private String imgLink = "Same";
 
     public String getData() {
         return data;
