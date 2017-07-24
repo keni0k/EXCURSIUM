@@ -87,7 +87,7 @@
                         <td th:text="${record.data}">Some text</td>
                         <td th:text="${record.img_link}">Some text</td>
                         <td th:text="${record.locate}">Some text</td>
-                        <td><button name="btn" th:object="${deleteRecord}" onclick="location.href='/delete?id=${record.id}'">Удалить</button></td>
+                        <td><button name="btn" th:object="${deleteRecord}" th:onclick="location.href='/delete?id=${record.id}">Удалить</button></td>
                     </tr>
                 </tbody>
             </table>
