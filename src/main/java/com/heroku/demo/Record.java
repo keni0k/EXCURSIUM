@@ -24,7 +24,6 @@ public class Record {
         this.locate = locate;
     }
 
-    @NotEmpty
     private String locate = "Same";
 
     public String getHead() {
@@ -35,7 +34,6 @@ public class Record {
         this.head = head;
     }
 
-    @NotEmpty
     private String head = "Same";
 
     public String getImgLink() {
@@ -46,7 +44,6 @@ public class Record {
         this.imgLink = imgLink;
     }
 
-    @NotEmpty
     private String imgLink = "Same";
 
     public String getData() {
