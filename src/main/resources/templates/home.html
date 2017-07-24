@@ -32,24 +32,24 @@
 
     <div class="row">
         <div class="col-md-12 col-lg-6">
-            <form th:object="${insertRecord}" method="POST">
+            <!--<form th:object="${insertRecord}" method="POST">
                 <div class="form-group">
                     <label for="data">Новость турпортала</label>
                     <input id="data" type="text" class="form-control" placeholder="Введите текст" th:field="*{data}" />
                 </div>
                 <button type="submit" class="btn btn-default">Отправить</button>
-            </form>
-            <!--<form action="test.php" method="POST" name="form">
+            </form>-->
+            <form action="test.php" method="POST" name="form">
 
                 Заголовок новости: <input name="head_news" type="text" value=""><br><br>
 
                 Туристический портал: <br><br>
 
                 <select name="locale">
-                    <option value="ra"> Республика Алтай
-                    <option value="rk"> Республика Крым
-                    <option value="no"> Новосибирская область
-                    <option value="io"> Иркутская область
+                    <option value="ra"> Республика Алтай </option>
+                    <option value="rk"> Республика Крым </option>
+                    <option value="no"> Новосибирская область </option>
+                    <option value="io"> Иркутская область </option>
                 </select>
 
                 Текст новости:<br><br>
@@ -57,7 +57,7 @@
 
                 <button type="submit" class="btn btn-default">Отправить</button>
 
-            </form>-->
+            </form>
         </div>
     </div>
 
