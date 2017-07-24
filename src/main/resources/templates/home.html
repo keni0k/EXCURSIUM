@@ -32,12 +32,31 @@
 
     <div class="row">
         <div class="col-md-12 col-lg-6">
-            <form th:object="${insertRecord}" method="POST">
+            <!--<form th:object="${insertRecord}" method="POST">
                 <div class="form-group">
                     <label for="data">Новость турпортала</label>
                     <input id="data" type="text" class="form-control" placeholder="Введите текст" th:field="*{data}" />
                 </div>
-                <button type="submit" class="btn btn-default">Submit</button>
+                <button type="submit" class="btn btn-default">Отправить</button>
+            </form>-->
+            <form action="test.php" method="POST" name="form">
+
+                Заголовок новости: <input name="head_news" type="text" value=""><br><br>
+
+                Туристический портал: <br><br>
+
+                <select name="locale">
+                    <option value="ra"> Республика Алтай
+                    <option value="rk"> Республика Крым
+                    <option value="no"> Новосибирская область
+                    <option value="io"> Иркутская область
+                </select>
+
+                Текст новости:<br><br>
+                <textarea cols="40" rows="10" name="text_news"></textarea><br><br>
+
+                <button type="submit" class="btn btn-default">Отправить</button>
+
             </form>
         </div>
     </div>
@@ -54,6 +73,7 @@
                 <tbody>
                     <tr th:each="record : ${records}">
                         <td th:text="${record.data}">Some text</td>
+                        <td><input type="checkbox" name="color_1" value="Черный"></td>
                     </tr>
                 </tbody>
             </table>
