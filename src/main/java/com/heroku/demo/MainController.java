@@ -17,7 +17,7 @@ public class MainController {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    /*@RequestMapping("/drop")
+    @RequestMapping("/drop")
     void drop() {
         jdbcTemplate.execute("DROP TABLE IF EXISTS twits");
     }
@@ -31,7 +31,7 @@ public class MainController {
                         "twit VARCHAR," +
                         "who INTEGER)"
         );
-    }*/
+    }
 
     @RequestMapping ("/deletemsg")
     Boolean deletetwit(@RequestParam("token") String token,
