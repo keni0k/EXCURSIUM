@@ -23,6 +23,9 @@ import com.heroku.demo.record.RecordRepository;
 import com.heroku.demo.record.RecordServiceImpl;
 
 import javax.validation.Valid;
+
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +35,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import sun.rmi.runtime.Log;
 
 @Controller
 @RequestMapping("/")
@@ -117,10 +122,10 @@ public class HomeController {
 
     @RequestMapping("/addpoint")
     public String insertPoint(ModelMap model,
-                              @ModelAttribute("insertPoint") @Valid Point point,
+                              @ModelAttribute("insertPoint") List<String> point,
                               BindingResult result) {
-        pointRepository.save(point);
-        return points(model);
+//        pointRepository.save(point);
+        return Arrays.toString(point.toArray());
     }
 
     @RequestMapping("/deletepoint")
