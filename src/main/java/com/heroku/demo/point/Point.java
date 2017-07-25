@@ -47,7 +47,7 @@ public class Point {
     @NotEmpty
     private String p2 = "";
     @NotEmpty
-    private String id_of_guide = 0;
+    private String id_of_guide = "0";
 
     public String getData() {
         return data;
