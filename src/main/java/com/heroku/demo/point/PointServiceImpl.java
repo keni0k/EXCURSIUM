@@ -41,7 +41,7 @@ public class PointServiceImpl implements PointService {
         List<Point> copy = new ArrayList<>();
         copy.addAll(list);
         for (int i = 0; i<copy.size(); i++)
-            if (!Objects.equals(copy.get(i).getId_of_guide(), guide)) list.remove(i);
+            if (!copy.get(i).getId_of_guide().equals(guide)) list.remove(i);
         return list;
     }
 
