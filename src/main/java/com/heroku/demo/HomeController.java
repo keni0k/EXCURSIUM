@@ -44,7 +44,7 @@ public class HomeController {
 
     @RequestMapping("/news")
     public String news(ModelMap model) {
-        List<Record> records = repository.findAll();//ByType(0);
+        List<Record> records = repository.findAll(); //ByType(0);
         model.addAttribute("records", records);
         model.addAttribute("insertRecord", new Record());
         return "news";
