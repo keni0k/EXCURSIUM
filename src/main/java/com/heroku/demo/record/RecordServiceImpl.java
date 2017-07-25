@@ -23,9 +23,9 @@ public class RecordServiceImpl implements RecordService {
     @Autowired
     private RecordRepository recordRepository;
 
-//    public RecordServiceImpl(RecordRepository recordRepository) {
-//        this.recordRepository = recordRepository;
-//    }
+    public RecordServiceImpl(RecordRepository recordRepository) {
+        this.recordRepository = recordRepository;
+    }
     public RecordServiceImpl() {
 
     }
