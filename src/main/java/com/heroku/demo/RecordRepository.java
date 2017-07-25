@@ -8,6 +8,6 @@ import java.util.List;
 @Repository
 public interface RecordRepository extends JpaRepository<Record, Long> {
 
-    List<Record> findByType(int type){}
+//    List<Record> findByType(int type){}
 
 }
