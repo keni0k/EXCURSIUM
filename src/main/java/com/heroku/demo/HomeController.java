@@ -65,7 +65,7 @@ public class HomeController {
     public String deleteData(ModelMap model, @ModelAttribute("id") String id,
                              BindingResult result) {
         repository.delete(Long.parseLong(id));
-        return "news";
+        return news(model);
     }
 
     @RequestMapping("/guides")
@@ -91,6 +91,6 @@ public class HomeController {
     public String deleteGuide(ModelMap model, @ModelAttribute("id") String id,
                               BindingResult result) {
         repository.delete(Long.parseLong(id));
-        return "guides";
+        return guides(model);
     }
 }
