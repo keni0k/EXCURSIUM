@@ -7,6 +7,7 @@ package com.heroku.demo.point;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -36,8 +37,10 @@ public class PointServiceImpl implements PointService {
     @Override
     public List<Point> getByGuide(int guide) {
         List<Point> list = pointRepository.findAll();
-        for (int i = 0; i<list.size(); i++) {
-            if (list.get(i).getId_of_guide()!=guide)list.remove(list.get(i));
+        List<Point> copy = new ArrayList<>();
+        copy.addAll(list);
+        for (int i = 0; i<copy.size(); i++) {
+            if (copy.get(i).getId_of_guide()!=guide)list.remove(i);
         }
         return list;
     }
