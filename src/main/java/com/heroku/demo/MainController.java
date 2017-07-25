@@ -91,6 +91,7 @@ public class MainController {
                  @RequestParam("who") int who,
                  @RequestParam("id") int id){
 
+
         List<String> arrayList = jdbcTemplate.query("SELECT * FROM twits WHERE token ='" + token+"' AND who = '" + who + "' AND _id > '"+id+"'", new Object[]{}, new RowMapper<String>(){
             @Override
             public String mapRow(ResultSet rs, int rowNum) throws SQLException {
