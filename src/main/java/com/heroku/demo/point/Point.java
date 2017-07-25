@@ -15,7 +15,7 @@ public class Point {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
+    @NotEmpty
     private long id;
 
     public String getP1() {
@@ -44,9 +44,19 @@ public class Point {
 
     @NotEmpty
     private String p1 = "";
-
+    @NotEmpty
     private String p2 = "";
-
+    @NotEmpty
     private int id_of_guide = 0;
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+    @NotEmpty
+    private String data = "";
 
 }
