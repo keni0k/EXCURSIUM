@@ -82,7 +82,7 @@
                 <option value="io"> Иркутская область </option>
             </select>
             Маршрут
-            <select name="locate">
+            <select name="id_of_guide">
                 <option th:each="record : ${records}" value="${record.id}" th:text="${record.head}"> Same </option>
             </select>
 
@@ -115,23 +115,23 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>Маршруты</th>
+                <th>Точки маршрутов</th>
             </tr>
             </thead>
             <tbody>
             <tr>
                 <td>ID</td>
                 <td>Маршрут</td>
-                <td>Опиние</td>
-                <td>Ссылка на картинку</td>
-                <td>Локализация</td>
+                <td>Описание</td>
+                <td>Широта</td>
+                <td>Долгота</td>
             </tr>
-            <tr th:each="record : ${records}">
-                <td th:text="${record.id}">Some text</td>
-                <td th:text="${record.head}">Some text</td>
-                <td th:text="${record.data}">Some text</td>
-                <td th:text="${record.img_link}">Some text</td>
-                <td th:text="${record.locate}">Some text</td>
+            <tr th:each="point : ${points}">
+                <td th:text="${point.id}">Some text</td>
+                <td th:text="${point.id_of_guide}">Some text</td>
+                <td th:text="${point.data}">Some text</td>
+                <td th:text="${point.p1}">Some text</td>
+                <td th:text="${point.p2}">Some text</td>
             </tr>
             </tbody>
         </table>
