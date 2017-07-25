@@ -83,7 +83,7 @@
             </select>
             Маршрут
             <select name="id_of_guide">
-                <option th:each="record : ${records}" value="${record.id}t"  th:text="${record.head}"> Same </option>
+                <option th:each="record : ${records}" value="t${record.id}t"  th:text="${record.head}"> Same </option>
             </select>
 
             <br/>
