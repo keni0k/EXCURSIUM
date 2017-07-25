@@ -42,21 +42,15 @@ public class Point {
         this.id_of_guide = id_of_guide;
     }
 
-    @NotEmpty
     private String p1 = "";
-    @NotEmpty
     private String p2 = "";
-    @NotEmpty
     private String id_of_guide = "";
-
     public String getData() {
         return data;
     }
-
     public void setData(String data) {
         this.data = data;
     }
-    @NotEmpty
     private String data = "";
 
 }
