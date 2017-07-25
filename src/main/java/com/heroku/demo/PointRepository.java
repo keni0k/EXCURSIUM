@@ -1,12 +1,14 @@
 package com.heroku.demo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
 @Repository
 public interface PointRepository extends JpaRepository<Point, Long> {
-//    @Query("select * from news where news.type = :type")
-//    List<Record> findByType(@Param("type") int type);
+    @Query("select * from point where point.id_of_guide = :id")
+    List<Record> findByGuide(@Param("id") int guide);
 
 }
