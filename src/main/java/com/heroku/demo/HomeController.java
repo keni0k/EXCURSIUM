@@ -34,7 +34,7 @@ public class HomeController {
     private PointRepository pointRepository;
 
     @Autowired
-    public HomeController(RecordRepository repository, PointRpository pRepository) {
+    public HomeController(RecordRepository repository, PointRepository pRepository) {
         this.recordRepository = repository;
         this.pointRepository = pRepository;
     }
