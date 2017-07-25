@@ -91,6 +91,7 @@ public class HomeController {
     public String insertGuide(ModelMap model,
                               @ModelAttribute("insertRecord") @Valid Record record,
                               BindingResult result) {
+
         if (!result.hasErrors()) {
             record.setWhat(1);
             recordRepository.save(record);
