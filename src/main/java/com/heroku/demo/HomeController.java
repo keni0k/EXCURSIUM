@@ -119,10 +119,9 @@ public class HomeController {
     public String insertPoint(ModelMap model,
                               @ModelAttribute("insertPoint") @Valid Point point,
                               BindingResult result) {
-        if (!result.hasErrors()) {
-            pointRepository.save(point);
-        }
-        return "index";
+
+        pointRepository.save(point);
+        return points(model);
     }
 
     @RequestMapping("/deletepoint")
