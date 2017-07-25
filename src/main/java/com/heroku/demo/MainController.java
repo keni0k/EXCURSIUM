@@ -71,7 +71,7 @@ public class MainController {
     }
 
     @RequestMapping ("/getindex")
-    String getIndex(ModelMap model){
+    public String getIndex(ModelMap model){
         return "index";
     }
 
