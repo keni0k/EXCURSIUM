@@ -37,10 +37,8 @@ public class RecordServiceImpl implements RecordService {
     @Override
     public List<Record> getByType(int type) {
         List<Record> list = recordRepository.findAll();
-        List<Record> copy = new ArrayList<>();
-        copy.addAll(list);
-        for (int i = 0; i<copy.size(); i++)
-            if (copy.get(i).getWhat() != type) list.remove(i);
+        for (int i = 0; i<list.size(); i++)
+            if (list.get(i).getWhat() != type) list.remove(i);
         return list;
     }
 
