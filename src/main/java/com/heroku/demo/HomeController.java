@@ -122,7 +122,7 @@ public class HomeController {
                               @ModelAttribute("p1") String p2,
                               @ModelAttribute("data") String data,
                               BindingResult result) {
-//        pointRepository.save(new Point(p1, p2, id, data));
+        pointRepository.save(new Point(p1, p2, id, data));
         return points(model);
     }
 
