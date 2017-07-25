@@ -58,14 +58,14 @@ public class Record {
         this.data = data;
     }
 
-    public int getType() {
-        return type;
+    public int getWhat() {
+        return what;
     }
 
-    public void setType(int type) {
-        this.type = type;
+    public void setWhat(int what) {
+        this.what = what;
     }
 
-    private int type;
+    private int what;
 
 }

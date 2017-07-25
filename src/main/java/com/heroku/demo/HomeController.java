@@ -54,7 +54,7 @@ public class HomeController {
     public String insertData(ModelMap model,
                              @ModelAttribute("insertRecord") @Valid Record record,
                              BindingResult result) {
-        record.setType(0);
+        record.setWhat(0);
         if (!result.hasErrors()) {
             repository.save(record);
         }
@@ -80,7 +80,7 @@ public class HomeController {
     public String insertGuide(ModelMap model,
                               @ModelAttribute("insertRecord") @Valid Record record,
                               BindingResult result) {
-        record.setType(1);
+        record.setWhat(1);
         if (!result.hasErrors()) {
             repository.save(record);
         }
