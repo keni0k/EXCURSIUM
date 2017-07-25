@@ -38,28 +38,3 @@ databaseChangeLog:
                 type: int
                 constraints:
                   nullable: false
-
-                tableName: points
-                    columns:
-                     - column:
-                          name: id
-                          type: int
-                          autoIncrement: true
-                          constraints:
-                             primaryKey: true
-                             nullable: false
-                    - column:
-                        name: guideid
-                        type: int
-                        constraints:
-                          nullable: false
-                    - column:
-                        name: p1
-                        type: varchar(30)
-                        constraints:
-                            nullable: false
-                    - column:
-                        name: p2
-                        type: varchar(30)
-                        constraints:
-                            nullable: false
