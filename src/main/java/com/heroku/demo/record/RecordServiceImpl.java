@@ -8,6 +8,7 @@ import com.heroku.demo.point.Point;
 import com.heroku.demo.point.PointRepository;
 import com.heroku.demo.point.PointService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecordServiceImpl implements RecordService {
@@ -36,9 +37,10 @@ public class RecordServiceImpl implements RecordService {
     @Override
     public List<Record> getByType(int type) {
         List<Record> list = recordRepository.findAll();
-        for (Record r:list) {
-            if (r.getWhat()!=type)list.remove(r);
-        }
+        List<Record> copy = new ArrayList<>();
+        copy.addAll(list);
+        for (int i = 0; i<copy.size(); i++)
+            if (copy.get(i).getWhat() != type) list.remove(i);
         return list;
     }
 
