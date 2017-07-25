@@ -54,8 +54,8 @@ public class HomeController {
     public String insertData(ModelMap model,
                              @ModelAttribute("insertRecord") @Valid Record record,
                              BindingResult result) {
-        record.setWhat(0);
         if (!result.hasErrors()) {
+            record.setWhat(0);
             repository.save(record);
         }
         return news(model);
@@ -80,8 +80,8 @@ public class HomeController {
     public String insertGuide(ModelMap model,
                               @ModelAttribute("insertRecord") @Valid Record record,
                               BindingResult result) {
-        record.setWhat(1);
         if (!result.hasErrors()) {
+            record.setWhat(1);
             repository.save(record);
         }
         return guides(model);
