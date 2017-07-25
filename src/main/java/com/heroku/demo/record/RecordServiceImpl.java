@@ -8,26 +8,17 @@ import com.heroku.demo.point.Point;
 import com.heroku.demo.point.PointRepository;
 import com.heroku.demo.point.PointService;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 
-@Service
 public class RecordServiceImpl implements RecordService {
 
     public RecordRepository getRecordRepository() {
         return recordRepository;
     }
-
-    @Autowired
     private RecordRepository recordRepository;
 
     public RecordServiceImpl(RecordRepository recordRepository) {
         this.recordRepository = recordRepository;
-    }
-    public RecordServiceImpl() {
-
     }
 
     @Override
