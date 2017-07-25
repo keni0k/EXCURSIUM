@@ -30,11 +30,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/")
 public class HomeController {
 
-    private RecordRepository repository;
+    private RecordRepository recordRepository;
+    private PointRepository pointRepository;
 
     @Autowired
-    public HomeController(RecordRepository repository) {
-        this.repository = repository;
+    public HomeController(RecordRepository repository, PointRpository pRepository) {
+        this.recordRepository = repository;
+        this.pointRepository = pRepository;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -44,7 +46,7 @@ public class HomeController {
 
     @RequestMapping("/news")
     public String news(ModelMap model) {
-        List<Record> records = repository.findAll(); //ByType(0);
+        List<Record> records = recordRepository.findAll(); //ByType(0);
         model.addAttribute("records", records);
         model.addAttribute("insertRecord", new Record());
         return "news";
@@ -56,7 +58,7 @@ public class HomeController {
                              BindingResult result) {
         if (!result.hasErrors()) {
             record.setWhat(0);
-            repository.save(record);
+            recordRepository.save(record);
         }
         return news(model);
     }
@@ -64,13 +66,13 @@ public class HomeController {
     @RequestMapping("/deletenews")
     public String deleteData(ModelMap model, @ModelAttribute("id") String id,
                              BindingResult result) {
-        repository.delete(Long.parseLong(id));
+        recordRepository.delete(Long.parseLong(id));
         return news(model);
     }
 
     @RequestMapping("/guides")
     public String guides(ModelMap model) {
-        List<Record> records = repository.findAll();//ByType(1);
+        List<Record> records = recordRepository.findAll();//ByType(1);
         model.addAttribute("records", records);
         model.addAttribute("insertRecord", new Record());
         return "guides";
@@ -82,7 +84,7 @@ public class HomeController {
                               BindingResult result) {
         if (!result.hasErrors()) {
             record.setWhat(1);
-            repository.save(record);
+            recordRepository.save(record);
         }
         return guides(model);
     }
@@ -90,7 +92,35 @@ public class HomeController {
     @RequestMapping("/deleteguide")
     public String deleteGuide(ModelMap model, @ModelAttribute("id") String id,
                               BindingResult result) {
-        repository.delete(Long.parseLong(id));
+        recordRepository.delete(Long.parseLong(id));
         return guides(model);
     }
+
+    @RequestMapping("/points")
+    public String guides(ModelMap model) {
+        List<Record> records = recordRepository.findAll();//ByType(1);
+        model.addAttribute("records", records);
+        model.addAttribute("insertRecord", new Record());
+        return "guides";
+    }
+
+    @RequestMapping("/addpoint")
+    public String insertGuide(ModelMap model,
+                              @ModelAttribute("insertRecord") @Valid Record record,
+                              BindingResult result) {
+        if (!result.hasErrors()) {
+            record.setWhat(1);
+            recordRepository.save(record);
+        }
+        return guides(model);
+    }
+
+    @RequestMapping("/deletepoint")
+    public String deleteGuide(ModelMap model, @ModelAttribute("id") String id,
+                              BindingResult result) {
+        recordRepository.delete(Long.parseLong(id));
+        return guides(model);
+    }
+
+
 }
