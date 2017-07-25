@@ -83,13 +83,6 @@
     <div class="col-md-12 col-lg-6">
         <form th:object="${insertPoint}" action="/addpoint" method="POST">
 
-            <!--Туристический портал:-->
-            <!--<select name="locate">-->
-                <!--<option value="ra"> Республика Алтай </option>-->
-                <!--<option value="rk"> Республика Крым </option>-->
-                <!--<option value="no"> Новосибирская область </option>-->
-                <!--<option value="io"> Иркутская область </option>-->
-            <!--</select>-->
             Маршрут
             <select name="id_of_guide" typeof="text">
                 <option th:each="record : ${records}" typeof="text" value="t${record.id}t"  th:text="${record.head}"> Same </option>
