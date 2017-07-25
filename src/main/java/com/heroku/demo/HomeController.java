@@ -47,7 +47,7 @@ public class HomeController {
         List<Record> records = repository.findAll(); //ByType(0);
         model.addAttribute("records", records);
         model.addAttribute("insertRecord", new Record());
-        return "home";
+        return "news";
     }
 
     @RequestMapping("/addnews")
