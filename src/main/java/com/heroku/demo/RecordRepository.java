@@ -9,4 +9,5 @@ import java.util.List;
 public interface RecordRepository extends JpaRepository<Record, Long> {
 //    @Query("select * from news where news.type = :type")
 //    List<Record> findByType(@Param("type") int type);
+
 }
