@@ -6,7 +6,7 @@ databaseChangeLog:
         -createTable:
           tableName: point
           columns:
-            -column:
+             -column:
                 name: id
                 type: int
                 autoIncrement: true
