@@ -99,9 +99,9 @@ public class HomeController {
     @RequestMapping("/points")
     public String points(ModelMap model) {
         List<Record> records = recordRepository.findAll();//ByType(1);
-        List<Point> points = pointRepository.findAll();
+//        List<Point> points = pointRepository.findAll();
         model.addAttribute("records", records);
-        model.addAttribute("points", points);
+//        model.addAttribute("points", points);
         model.addAttribute("insertPoint", new Point());
         return "points";
     }
