@@ -13,17 +13,17 @@ databaseChangeLog:
               constraints:
                 primaryKey: true
                 nullable: false
-          - column:
+            - column:
               name: p1
               type: varchar(30)
               constraints:
                 nullable: false
-          - column:
+            - column:
               name: p2
               type: varchar(30)
               constraints:
                 nullable: false
-          - column:
+            - column:
               name: id_of_guide
               type: int
               constraints:
