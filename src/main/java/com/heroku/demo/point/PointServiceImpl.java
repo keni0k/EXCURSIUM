@@ -4,9 +4,6 @@ package com.heroku.demo.point;
  * Created by Keni0k on 25.07.2017.
  */
 
-import com.devcolibri.dataexam.entity.Bank;
-import com.devcolibri.dataexam.repository.BankRepository;
-import com.devcolibri.dataexam.service.BankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
