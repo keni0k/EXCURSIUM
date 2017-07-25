@@ -17,6 +17,7 @@ package com.heroku.demo;
 
 import com.heroku.demo.point.Point;
 import com.heroku.demo.point.PointRepository;
+import com.heroku.demo.point.PointServiceImpl;
 import com.heroku.demo.record.Record;
 import com.heroku.demo.record.RecordRepository;
 
@@ -37,6 +38,7 @@ public class HomeController {
 
     private RecordRepository recordRepository;
     private PointRepository pointRepository;
+    PointServiceImpl pointService;
 
     @Autowired
     public HomeController(RecordRepository repository, PointRepository pRepository) {
