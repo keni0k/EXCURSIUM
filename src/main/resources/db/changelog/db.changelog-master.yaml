@@ -25,7 +25,7 @@ databaseChangeLog:
                   nullable: false
             - column:
                 name: id_of_guide
-                type: int
+                type: varchar(20)
                 constraints:
                   nullable: false
             - column:

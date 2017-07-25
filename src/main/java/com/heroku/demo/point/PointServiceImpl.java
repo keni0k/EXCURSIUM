@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class PointServiceImpl implements PointService {
@@ -35,12 +36,12 @@ public class PointServiceImpl implements PointService {
     }
 
     @Override
-    public List<Point> getByGuide(int guide) {
+    public List<Point> getByGuide(String guide) {
         List<Point> list = pointRepository.findAll();
         List<Point> copy = new ArrayList<>();
         copy.addAll(list);
         for (int i = 0; i<copy.size(); i++)
-            if (copy.get(i).getId_of_guide() != guide) list.remove(i);
+            if (!Objects.equals(copy.get(i).getId_of_guide(), guide)) list.remove(i);
         return list;
     }
 
