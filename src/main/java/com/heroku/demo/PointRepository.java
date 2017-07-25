@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface PointRepository extends JpaRepository<Point, Long> {
-    @Query("select * from point where point.id_of_guide = :id")
+    @Query("select p from point where p.id_of_guide = :id")
     List<Record> findByGuide(@Param("id") int guide);
 
 }
