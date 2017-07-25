@@ -58,14 +58,14 @@ public class Record {
         this.data = data;
     }
 
-    public int getWhat() {
+    public String getWhat() {
         return what;
     }
 
-    public void setWhat(int what) {
+    public void setWhat(String what) {
         this.what = what;
     }
 
-    private int what = "";
+    private String what = "";
 
 }
