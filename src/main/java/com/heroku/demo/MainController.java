@@ -6,6 +6,8 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.ModelMap;
+
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -66,6 +68,11 @@ public class MainController {
                 return "{\"msg\":\""+rs.getString("twit")+"\"}";
             }}).get(0);
         return st;
+    }
+
+    @RequestMapping ("/getindex")
+    String getIndex(ModelMap model){
+        return "index";
     }
 
     @RequestMapping ("/getmsgs")
