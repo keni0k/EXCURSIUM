@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-//@Service
+@Service
 public class PointServiceImpl implements PointService {
 
-//    @Autowired
+    @Autowired
     private PointRepository pointRepository;
 
     @Override
