@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
       id: 1
-      author: jkutner
+      author: keni0k
       changes:
         - createTable:
-            tableName: record
+            tableName: news
             columns:
               - column:
                   name: id
@@ -33,3 +33,33 @@ databaseChangeLog:
                  type: varchar(255)
                  constraints:
                     nullable: false
+              - column:
+                name: type
+                type: int
+                constraints:
+                  nullable: false
+            - createTable:
+                tableName: points
+                    columns:
+                     - column:
+                          name: id
+                          type: int
+                          autoIncrement: true
+                          constraints:
+                             primaryKey: true
+                             nullable: false
+                    - column:
+                        name: guideid
+                        type: int
+                        constraints:
+                          nullable: false
+                    - column:
+                        name: p1
+                        type: varchar(30)
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: p2
+                        type: varchar(30)
+                        constraints:
+                            nullable: false

@@ -38,27 +38,59 @@ public class HomeController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String home(ModelMap model) {
-        List<Record> records = repository.findAll();
-        model.addAttribute("records", records);
-        model.addAttribute("insertRecord", new Record());
-        return "home";
+    public String index(ModelMap model) {
+        return "index";
     }
 
-    @RequestMapping("/add")
-    public String insertData(ModelMap model, 
+    @RequestMapping("/news")
+    public String news(ModelMap model) {
+        List<Record> records = repository.findByType(0);
+        model.addAttribute("records", records);
+        model.addAttribute("insertRecord", new Record());
+        return "news";
+    }
+
+    @RequestMapping("/addnews")
+    public String insertData(ModelMap model,
                              @ModelAttribute("insertRecord") @Valid Record record,
                              BindingResult result) {
+        record.setType(0);
         if (!result.hasErrors()) {
             repository.save(record);
         }
-        return home(model);
+        return news(model);
     }
 
-    @RequestMapping("/delete")
+    @RequestMapping("/deletenews")
     public String deleteData(ModelMap model, @ModelAttribute("id") String id,
                              BindingResult result) {
         repository.delete(Long.parseLong(id));
-        return home(model);
+        return "news";
+    }
+
+    @RequestMapping("/guides")
+    public String guides(ModelMap model) {
+        List<Record> records = repository.findByType(1);
+        model.addAttribute("records", records);
+        model.addAttribute("insertRecord", new Record());
+        return "guides";
+    }
+
+    @RequestMapping("/addguide")
+    public String insertGuide(ModelMap model,
+                              @ModelAttribute("insertRecord") @Valid Record record,
+                              BindingResult result) {
+        record.setType(1);
+        if (!result.hasErrors()) {
+            repository.save(record);
+        }
+        return guides(model);
+    }
+
+    @RequestMapping("/deleteguide")
+    public String deleteGuide(ModelMap model, @ModelAttribute("id") String id,
+                              BindingResult result) {
+        repository.delete(Long.parseLong(id));
+        return "guides";
     }
 }
