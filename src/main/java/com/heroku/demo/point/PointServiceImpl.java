@@ -30,10 +30,15 @@ public class PointServiceImpl implements PointService {
         pointRepository.delete(id);
     }
 
+    public PointServiceImpl(PointRepository pointRepository) {
+        this.pointRepository = pointRepository;
+    }
+
     @Override
     public List<Point> getByGuide(int guide) {
         List<Point> list = pointRepository.findAll();
         for (Point p:list) {
+
             if (p.getId_of_guide()!=guide)list.remove(p);
         }
         return list;

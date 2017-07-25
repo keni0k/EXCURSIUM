@@ -46,6 +46,7 @@ public class HomeController {
     public HomeController(RecordRepository repository, PointRepository pRepository) {
         this.recordRepository = repository;
         this.pointRepository = pRepository;
+        recordService = new RecordServiceImpl(recordRepository);
     }
 
     @RequestMapping(method = RequestMethod.GET)

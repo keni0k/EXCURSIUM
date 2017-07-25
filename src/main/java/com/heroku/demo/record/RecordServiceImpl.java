@@ -23,10 +23,15 @@ public class RecordServiceImpl implements RecordService {
     @Autowired
     private RecordRepository recordRepository;
 
+    public RecordServiceImpl(RecordRepository recordRepository) {
+        this.recordRepository = recordRepository;
+    }
+
     @Override
     public Record addRecord(Record record) {
 
         return recordRepository.saveAndFlush(record);
+
     }
 
     @Override
