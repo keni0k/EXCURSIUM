@@ -7,27 +7,27 @@ databaseChangeLog:
           tableName: point
           columns:
             -column:
-              name: id
-              type: int
-              autoIncrement: true
-              constraints:
-                primaryKey: true
-                nullable: false
+                name: id
+                type: int
+                autoIncrement: true
+                constraints:
+                  primaryKey: true
+                  nullable: false
             - column:
-              name: p1
-              type: varchar(30)
-              constraints:
-                nullable: false
+                name: p1
+                type: varchar(30)
+                constraints:
+                  nullable: false
             - column:
-              name: p2
-              type: varchar(30)
-              constraints:
-                nullable: false
+                name: p2
+                type: varchar(30)
+                constraints:
+                  nullable: false
             - column:
-              name: id_of_guide
-              type: int
-              constraints:
-                nullable: false
+                name: id_of_guide
+                type: int
+                constraints:
+                  nullable: false
 #        - createTable:
 #            tableName: record
 #            columns:
