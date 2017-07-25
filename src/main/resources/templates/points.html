@@ -61,8 +61,8 @@
     <ul>
         <li><a href="/"><i class="fa fa-home fa-fw"></i>Главная</a></li>
         <li><a href="/news">Новости</a></li>
-        <li><a href="#">Маршруты</a></li>
-        <li><a href="/points">Точки маршрутов</a></li>
+        <li><a href="/guide">Маршруты</a></li>
+        <li><a href="#">Точки маршрутов</a></li>
         <li><a href="/gallery">Фотогалерея</a></li>
         <li><a href="/contacts">Контакты</a></li>
     </ul>
@@ -70,7 +70,7 @@
 <hr />
 <div class="row">
     <div class="col-md-12 col-lg-6">
-        <form th:object="${insertRecord}" action="/addguide" method="POST">
+        <form th:object="${insertPoint}" action="/addguide" method="POST">
 
             Туристический портал:
             <select name="locate">
@@ -79,15 +79,17 @@
                 <option value="no"> Новосибирская область </option>
                 <option value="io"> Иркутская область </option>
             </select>
+            Маршрут
+            <select name="locate" th:each="record : ${records}">
+                <option value="${record.id}" th:text="${record.head}"> Same </option>
+            </select>
 
             <br/>
-            Название маршрута: <input name="head" type="text" value=""/>
+            Широта: <input name="p1" type="text" value=""/>
             <br/>
-            Ссылка на изображение:
-            <input name="img_link" type="text" value=""/>
+            Долгота: <input name="p2" type="text" value=""/>
             <br/>
-            Описание:
-            <input name="data" type="text" value=""/>
+            Описание: <input name="data" type="text" value=""/>
             <br/>
             <button type="submit" class="btn btn-default">Отправить</button>
 

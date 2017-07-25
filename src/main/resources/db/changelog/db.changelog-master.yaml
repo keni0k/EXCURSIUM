@@ -28,6 +28,11 @@ databaseChangeLog:
                 type: int
                 constraints:
                   nullable: false
+            - column:
+                name: data
+                type: varchar(250)
+                constraints:
+                  nullable: false
 #        - createTable:
 #            tableName: record
 #            columns:
