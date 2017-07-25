@@ -30,8 +30,7 @@ public class PointServiceImpl implements PointService {
         pointRepository.delete(id);
     }
 
-    public PointServiceImpl(PointRepository pointRepository) {
-        this.pointRepository = pointRepository;
+    public PointServiceImpl() {
     }
 
     @Override
