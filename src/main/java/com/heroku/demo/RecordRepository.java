@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface RecordRepository extends JpaRepository<Record, Long> {
 
-    @Query("SELECT * FROM record WHERE record.what = :what")
-    List<Record> findByType(@Param("what") int what);
+//    @Query("SELECT * FROM record WHERE record.what = :what")
+//    List<Record> findByType(@Param("what") int what);
 
 }
