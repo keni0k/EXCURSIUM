@@ -12,6 +12,10 @@ import java.util.List;
 @Service
 public class PointServiceImpl implements PointService {
 
+    public PointRepository getPointRepository() {
+        return pointRepository;
+    }
+
     @Autowired
     private PointRepository pointRepository;
 

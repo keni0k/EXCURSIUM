@@ -20,6 +20,7 @@ import com.heroku.demo.point.PointRepository;
 import com.heroku.demo.point.PointServiceImpl;
 import com.heroku.demo.record.Record;
 import com.heroku.demo.record.RecordRepository;
+import com.heroku.demo.record.RecordServiceImpl;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -39,6 +40,7 @@ public class HomeController {
     private RecordRepository recordRepository;
     private PointRepository pointRepository;
     PointServiceImpl pointService;
+    RecordServiceImpl recordService;
 
     @Autowired
     public HomeController(RecordRepository repository, PointRepository pRepository) {
@@ -53,7 +55,7 @@ public class HomeController {
 
     @RequestMapping("/news")
     public String news(ModelMap model) {
-        List<Record> records = recordRepository.findAll();//findByType(0); //ByType(0);
+        List<Record> records = recordService.getByType(0);//findByType(0); //ByType(0);
         model.addAttribute("records", records);
         model.addAttribute("insertRecord", new Record());
         return "news";
@@ -79,7 +81,7 @@ public class HomeController {
 
     @RequestMapping("/guides")
     public String guides(ModelMap model) {
-        List<Record> records = recordRepository.findAll();//findByType(1);
+        List<Record> records = recordService.getByType(1);//findByType(1);
         model.addAttribute("records", records);
         model.addAttribute("insertRecord", new Record());
         return "guides";
@@ -105,7 +107,7 @@ public class HomeController {
 
     @RequestMapping("/points")
     public String points(ModelMap model) {
-        List<Record> records = recordRepository.findAll();//findByType(1);
+        List<Record> records = recordService.getByType(1);//findByType(1);
         List<Point> points = pointRepository.findAll();
         model.addAttribute("records", records);
         model.addAttribute("points", points);
@@ -120,7 +122,7 @@ public class HomeController {
         if (!result.hasErrors()) {
             pointRepository.save(point);
         }
-        return points(model);
+        return "index";
     }
 
     @RequestMapping("/deletepoint")
