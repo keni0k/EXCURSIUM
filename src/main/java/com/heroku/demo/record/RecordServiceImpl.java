@@ -11,31 +11,9 @@ import com.heroku.demo.point.PointService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecordServiceImpl implements RecordService {
+public class RecordServiceImpl {
 
-    public RecordRepository getRecordRepository() {
-        return recordRepository;
-    }
-    private RecordRepository recordRepository;
-
-    public RecordServiceImpl(RecordRepository recordRepository) {
-        this.recordRepository = recordRepository;
-    }
-
-    @Override
-    public Record addRecord(Record record) {
-
-        return recordRepository.saveAndFlush(record);
-
-    }
-
-    @Override
-    public void delete(long id) {
-        recordRepository.delete(id);
-    }
-
-    @Override
-    public List<Record> getByType(int type) {
+    public static List<Record> getByType(RecordRepository recordRepository, int type) {
         List<Record> list = recordRepository.findAll();
         int size = list.size();
         for (int i = 0; i<size; i++)
@@ -43,13 +21,4 @@ public class RecordServiceImpl implements RecordService {
         return list;
     }
 
-    @Override
-    public Record editRecord(Record record) {
-        return recordRepository.saveAndFlush(record);
-    }
-
-    @Override
-    public List<Record> getAll() {
-        return recordRepository.findAll();
-    }
 }
