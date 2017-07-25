@@ -1,4 +1,4 @@
-package com.heroku.demo;
+package com.heroku.demo.point;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

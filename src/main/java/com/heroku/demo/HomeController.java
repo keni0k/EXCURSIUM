@@ -15,6 +15,11 @@
  */
 package com.heroku.demo;
 
+import com.heroku.demo.point.Point;
+import com.heroku.demo.point.PointRepository;
+import com.heroku.demo.record.Record;
+import com.heroku.demo.record.RecordRepository;
+
 import javax.validation.Valid;
 import java.util.List;
 
