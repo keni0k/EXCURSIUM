@@ -20,7 +20,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="/style.css">
+    <link rel="stylesheet" type="text/css" href="/style.css"/>
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" />
 
@@ -96,12 +96,12 @@
                 <td>Ссылка на картинку</td>
                 <td>Локализация</td>
             </tr>
-            <tr th:each="record : ${news}">
-                <td th:text="${record.id}">Some text</td>
-                <td th:text="${record.head}">Some text</td>
-                <td th:text="${record.data}">Some text</td>
-                <td th:text="${record.img_link}">Some text</td>
-                <td th:text="${record.locate}">Some text</td>
+            <tr th:each="news : ${news}">
+                <td th:text="${news.id}">Some text</td>
+                <td th:text="${news.head}">Some text</td>
+                <td th:text="${news.data}">Some text</td>
+                <td th:text="${news.img_link}">Some text</td>
+                <td th:text="${news.locate}">Some text</td>
             </tr>
             </tbody>
         </table>
