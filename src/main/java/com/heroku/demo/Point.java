@@ -15,6 +15,7 @@ public class Point {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private long id;
 
     public String getP1() {
