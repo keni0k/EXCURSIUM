@@ -117,9 +117,11 @@ public class HomeController {
 
     @RequestMapping("/addpoint")
     public String insertPoint(ModelMap model,
-                              @ModelAttribute("insertPoint") @Valid Point point,
-                              BindingResult result) {
-        pointRepository.save(point);
+                              @ModelAttribute("id_of_guide") String id,
+                              @ModelAttribute("p1") String p1,
+                              @ModelAttribute("p1") String p2,
+                              @ModelAttribute("data") String data) {
+        pointRepository.save(new Point(p1, p2, id, data));
         return points(model);
     }
 
