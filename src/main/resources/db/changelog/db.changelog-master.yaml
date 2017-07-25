@@ -8,33 +8,33 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  what: int
+                  type: int
                   autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
               - column:
                   name: data
-                  what: varchar(255)
+                  type: varchar(255)
                   constraints:
                     nullable: false
               - column:
                   name: head
-                  what: varchar(255)
+                  type: varchar(255)
                   constraints:
                     nullable: false
               - column:
                   name: img_link
-                  what: varchar(255)
+                  type: varchar(255)
                   constraints:
                     nullable: false
               - column:
                  name: locate
-                 what: varchar(255)
+                 type: varchar(255)
                  constraints:
                     nullable: false
               - column:
                 name: what
-                what: int
+                type: int
                 constraints:
                   nullable: false
