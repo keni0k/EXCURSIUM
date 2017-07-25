@@ -10,15 +10,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Entity
 public class Record {
 
-    public Record(long id, String data, String locate, String head, String img_link, int what) {
-        this.id = id;
-        this.data = data;
-        this.locate = locate;
-        this.head = head;
-        this.img_link = img_link;
-        this.what = what;
-    }
-
     public long getId() {
         return id;
     }
