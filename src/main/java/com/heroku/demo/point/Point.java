@@ -34,11 +34,11 @@ public class Point {
         this.p2 = p2;
     }
 
-    public int getId_of_guide() {
+    public Integer getId_of_guide() {
         return id_of_guide;
     }
 
-    public void setId_of_guide(int id_of_guide) {
+    public void setId_of_guide(Integer id_of_guide) {
         this.id_of_guide = id_of_guide;
     }
 
@@ -47,7 +47,7 @@ public class Point {
     @NotEmpty
     private String p2 = "";
     @NotEmpty
-    private int id_of_guide = 0;
+    private Integer id_of_guide = 0;
 
     public String getData() {
         return data;
