@@ -34,7 +34,7 @@ databaseChangeLog:
                  constraints:
                     nullable: false
               - column:
-                name: what
-                type: int
-                constraints:
-                  nullable: false
+                  name: what
+                  type: int
+                  constraints:
+                    nullable: false
