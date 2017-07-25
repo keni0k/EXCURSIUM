@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface PointRepository extends JpaRepository<Point, Long> {
 
-    @Query("select * from point p where p.id_of_guide = :id_of_guide")
+    @Query("select p from point p where p.id_of_guide = :id_of_guide")
     List<Point> findByGuide(@Param("id_of_guide") int id_of_guide);
 
 }
