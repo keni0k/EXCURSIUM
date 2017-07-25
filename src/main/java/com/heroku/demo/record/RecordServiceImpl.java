@@ -37,8 +37,9 @@ public class RecordServiceImpl implements RecordService {
     @Override
     public List<Record> getByType(int type) {
         List<Record> list = recordRepository.findAll();
-        for (int i = 0; i<list.size(); i++)
-            if (list.get(i).getWhat() != type) list.remove(i);
+        int size = list.size();
+        for (int i = 0; i<size; i++)
+            if (list.get(i).getWhat() != type) {list.remove(i);size--;}
         return list;
     }
 
