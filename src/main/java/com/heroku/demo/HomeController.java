@@ -46,7 +46,7 @@ public class HomeController {
 
     @RequestMapping("/news")
     public String news(ModelMap model) {
-        List<Record> records = recordRepository.findByType(0); //ByType(0);
+        List<Record> records = recordRepository.findByType("0"); //ByType(0);
         model.addAttribute("records", records);
         model.addAttribute("insertRecord", new Record());
         return "news";
@@ -72,7 +72,7 @@ public class HomeController {
 
     @RequestMapping("/guides")
     public String guides(ModelMap model) {
-        List<Record> records = recordRepository.findByType(1);//ByType(1);
+        List<Record> records = recordRepository.findByType("1");//ByType(1);
         model.addAttribute("records", records);
         model.addAttribute("insertRecord", new Record());
         return "guides";
