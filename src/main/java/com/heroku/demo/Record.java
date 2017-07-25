@@ -10,6 +10,15 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Entity
 public class Record {
 
+    public Record(long id, String data, String locate, String head, String img_link, int what) {
+        this.id = id;
+        this.data = data;
+        this.locate = locate;
+        this.head = head;
+        this.img_link = img_link;
+        this.what = what;
+    }
+
     public long getId() {
         return id;
     }
@@ -18,7 +27,7 @@ public class Record {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @NotEmpty
-    private String data;
+    private String data = "";
 
     public String getLocate() {
         return locate;
@@ -28,7 +37,7 @@ public class Record {
         this.locate = locate;
     }
 
-    private String locate;
+    private String locate = "";
 
     public String getHead() {
         return head;
@@ -38,7 +47,7 @@ public class Record {
         this.head = head;
     }
 
-    private String head;
+    private String head = "";
 
     public String getImg_link() {
         return img_link;
@@ -48,7 +57,7 @@ public class Record {
         this.img_link = img_link;
     }
 
-    private String img_link;
+    private String img_link = "";
 
     public String getData() {
         return data;
@@ -66,6 +75,6 @@ public class Record {
         this.what = what;
     }
 
-    private int what;
+    private int what = "";
 
 }
