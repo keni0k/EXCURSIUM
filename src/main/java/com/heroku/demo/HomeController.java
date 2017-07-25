@@ -97,29 +97,30 @@ public class HomeController {
     }
 
     @RequestMapping("/points")
-    public String guides(ModelMap model) {
+    public String points(ModelMap model) {
         List<Record> records = recordRepository.findAll();//ByType(1);
+        List<Point> points = pointRepository.findAll();
         model.addAttribute("records", records);
-        model.addAttribute("insertRecord", new Record());
-        return "guides";
+        model.addAttribute("points", points);
+        model.addAttribute("insertPoint", new Point());
+        return "points";
     }
 
     @RequestMapping("/addpoint")
-    public String insertGuide(ModelMap model,
-                              @ModelAttribute("insertRecord") @Valid Record record,
+    public String insertPoint(ModelMap model,
+                              @ModelAttribute("insertPoint") @Valid Point point,
                               BindingResult result) {
         if (!result.hasErrors()) {
-            record.setWhat(1);
-            recordRepository.save(record);
+            pointRepository.save(point);
         }
-        return guides(model);
+        return points(model);
     }
 
     @RequestMapping("/deletepoint")
-    public String deleteGuide(ModelMap model, @ModelAttribute("id") String id,
+    public String deletePoint(ModelMap model, @ModelAttribute("id") String id,
                               BindingResult result) {
-        recordRepository.delete(Long.parseLong(id));
-        return guides(model);
+        pointRepository.delete(Long.parseLong(id));
+        return points(model);
     }
 
 
