@@ -68,6 +68,8 @@
     </ul>
 </nav>
 <hr />
+<hr />
+<hr />
 <div class="row">
     <div class="col-md-12 col-lg-6">
         <form th:object="${insertPoint}" action="/addguide" method="POST">
@@ -80,8 +82,8 @@
                 <option value="io"> Иркутская область </option>
             </select>
             Маршрут
-            <select name="locate" th:each="record : ${records}">
-                <option value="${record.id}" th:text="${record.head}"> Same </option>
+            <select name="locate">
+                <option th:each="record : ${records}" value="${record.id}" th:text="${record.head}"> Same </option>
             </select>
 
             <br/>
