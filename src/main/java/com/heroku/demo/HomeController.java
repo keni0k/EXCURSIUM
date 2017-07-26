@@ -132,5 +132,31 @@ public class HomeController {
         return points(model);
     }
 
+    @RequestMapping("/contacts")
+    public String contacts(ModelMap model) {
+        List<Record> records = RecordServiceImpl.getByType(recordRepository, 2);//findByType(1);
+        model.addAttribute("records", records);
+        model.addAttribute("insertRecord", new Record());
+        return "guides";
+    }
+
+    @RequestMapping("/addcontact")
+    public String insertGuide(ModelMap model,
+                              @ModelAttribute("insertRecord") @Valid Record record,
+                              BindingResult result) {
+
+        if (!result.hasErrors()) {
+            record.setWhat(2);
+            recordRepository.save(record);
+        }
+        return contacts(model);
+    }
+
+    @RequestMapping("/deletecontact")
+    public String deleteGuide(ModelMap model, @ModelAttribute("id") String id,
+                              BindingResult result) {
+        recordRepository.delete(Long.parseLong(id));
+        return contacts(model);
+    }
 
 }
