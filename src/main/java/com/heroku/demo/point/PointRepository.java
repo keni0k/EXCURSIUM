@@ -1,11 +1,9 @@
 package com.heroku.demo.point;
-import com.heroku.demo.record.Record;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import javax.validation.Valid;
 
 import java.util.List;
 
