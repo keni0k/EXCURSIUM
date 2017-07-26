@@ -190,8 +190,10 @@ public class HomeController {
     @RequestMapping("/photos")
     public String photos(ModelMap model) {
         List<Record> records = RecordServiceImpl.getByType(recordRepository, 3);//findByType(1);
+        List<Point> points = pointRepository.findAll();
         model.addAttribute("records", records);
-        model.addAttribute("insertRecord", new Record());
+        model.addAttribute("points", points);
+        model.addAttribute("insertPhoto", new Point());
         return "photos";
     }
 
