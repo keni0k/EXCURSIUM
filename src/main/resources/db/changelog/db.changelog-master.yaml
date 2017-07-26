@@ -141,7 +141,7 @@ databaseChangeLog:
                     constraints:
                       nullable: false
   - changeSet:
-          id: 3
+          id: 4
           author: keni0k
           changes:
           - dropTable:
