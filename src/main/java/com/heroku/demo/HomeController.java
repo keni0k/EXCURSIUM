@@ -175,6 +175,7 @@ public class HomeController {
 
 //        if (!result.hasErrors()) {
             record.setWhat(3);
+            record.setData("");
             recordRepository.save(record);
 //        }
         return gallery(model);
