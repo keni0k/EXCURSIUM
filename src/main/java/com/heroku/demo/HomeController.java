@@ -141,7 +141,7 @@ public class HomeController {
     }
 
     @RequestMapping("/addcontact")
-    public String insertGuide(ModelMap model,
+    public String insertContact(ModelMap model,
                               @ModelAttribute("insertRecord") @Valid Record record,
                               BindingResult result) {
 
@@ -153,7 +153,7 @@ public class HomeController {
     }
 
     @RequestMapping("/deletecontact")
-    public String deleteGuide(ModelMap model, @ModelAttribute("id") String id,
+    public String deleteContact(ModelMap model, @ModelAttribute("id") String id,
                               BindingResult result) {
         recordRepository.delete(Long.parseLong(id));
         return contacts(model);
