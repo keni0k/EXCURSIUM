@@ -9,7 +9,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Entity
 public class Point {
 
-    public Point(String p1, String p2, String id_of_guide, String data) {
+    public Point(String p1, String p2, int id_of_guide, String data) {
         this.p1 = p1;
         this.p2 = p2;
         this.id_of_guide = id_of_guide;

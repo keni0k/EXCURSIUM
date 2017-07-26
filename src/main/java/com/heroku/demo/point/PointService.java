@@ -10,7 +10,7 @@ public interface PointService {
 
     Point addPoint(Point point);
     void delete(long id);
-    List<Point> getByGuide(String guide);
+    List<Point> getByGuide(int guide);
     Point editPoint(Point point);
     List<Point> getAll();
 

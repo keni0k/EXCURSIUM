@@ -34,12 +34,12 @@ public class PointServiceImpl implements PointService {
     }
 
     @Override
-    public List<Point> getByGuide(String guide) {
+    public List<Point> getByGuide(int guide) {
         List<Point> list = pointRepository.findAll();
         List<Point> copy = new ArrayList<>();
         copy.addAll(list);
         for (int i = 0; i<copy.size(); i++)
-            if (!copy.get(i).getId_of_guide().equals(guide)) list.remove(i);
+            if (copy.get(i).getId_of_guide()!=guide) list.remove(i);
         return list;
     }
 
