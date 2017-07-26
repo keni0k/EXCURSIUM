@@ -137,7 +137,7 @@ public class HomeController {
         List<Record> records = RecordServiceImpl.getByType(recordRepository, 2);//findByType(1);
         model.addAttribute("records", records);
         model.addAttribute("insertRecord", new Record());
-        return "guides";
+        return "contacts";
     }
 
     @RequestMapping("/addcontact")
