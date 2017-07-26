@@ -204,7 +204,7 @@ public class HomeController {
 
 //        if (!result.hasErrors()) {
         record.setWhat(4);
-        recordRepository.save(point);
+        recordRepository.save(record);
 //        }
         return photos(model);
     }
