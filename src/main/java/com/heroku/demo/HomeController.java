@@ -116,7 +116,7 @@ public class HomeController {
     }
 
     @RequestMapping("/addpointt")
-    public String insertPoint() {
+    public String insertPoint(ModelMap model) {
         pointRepository.save(new Point("p1","p2","3","Data"));
         return points(model);
     }
