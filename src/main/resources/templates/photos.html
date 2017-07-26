@@ -77,16 +77,16 @@
         <form th:object="${insertPhoto}" action="/addphoto" method="POST">
 
             Галерея
-            <select name="id_of_guide">
+            <select name="locate">
                 <option th:each="record : ${records}" 	th:value="${record.id}" value=""  th:text="${record.head}"> Same </option>
             </select>
 
             <br/>
-            Краткое описание: <input name="p1" type="text" value=""/>
+            Краткое описание: <input name="head" type="text" value=""/>
             <br/>
-            Полное описание: <input name="p2" type="text" value=""/>
+            Полное описание: <input name="data" type="text" value=""/>
             <br/>
-            Ссылка на фото: <input name="data" type="text" value=""/>
+            Ссылка на фото: <input name="img_link" type="text" value=""/>
             <br/>
             <button type="submit" class="btn btn-default">Отправить</button>
 
@@ -121,12 +121,12 @@
                 <td>Описание</td>
                 <td>Ссылка на фото</td>
             </tr>
-            <tr th:each="point : ${points}">
-                <td th:text="${point.id}">Some text</td>
-                <td th:text="${point.id_of_guide}">Some text</td>
-                <td th:text="${point.p1}">Some text</td>
-                <td th:text="${point.p2}">Some text</td>
-                <td th:text="${point.data}">Some text</td>
+            <tr th:each="photo : ${photos}">
+                <td th:text="${photo.id}">Some text</td>
+                <td th:text="${photo.locate}">Some text</td>
+                <td th:text="${photo.head}">Some text</td>
+                <td th:text="${photo.data}">Some text</td>
+                <td th:text="${photo.img_link}">Some text</td>
             </tr>
             </tbody>
         </table>

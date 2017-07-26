@@ -190,20 +190,21 @@ public class HomeController {
     @RequestMapping("/photos")
     public String photos(ModelMap model) {
         List<Record> records = RecordServiceImpl.getByType(recordRepository, 3);//findByType(1);
-        List<Point> points = pointRepository.findAll();
+        List<Record> photos = RecordServiceImpl.getByType(recordRepository, 4);
         model.addAttribute("records", records);
-        model.addAttribute("points", points);
-        model.addAttribute("insertPhoto", new Point());
+        model.addAttribute("photos", photos);
+        model.addAttribute("insertPhoto", new Record());
         return "photos";
     }
 
     @RequestMapping("/addphoto")
     public String insertPhotos(ModelMap model,
-                                @ModelAttribute("insertPhoto") @Valid Point point,
+                                @ModelAttribute("insertPhoto") @Valid Record record,
                                 BindingResult result) {
 
 //        if (!result.hasErrors()) {
-        pointRepository.save(point);
+        record.setWhat(4);
+        recordRepository.save(point);
 //        }
         return photos(model);
     }
