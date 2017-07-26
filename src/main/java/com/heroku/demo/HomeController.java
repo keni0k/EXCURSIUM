@@ -173,10 +173,10 @@ public class HomeController {
                                 @ModelAttribute("insertRecord") @Valid Record record,
                                 BindingResult result) {
 
-        if (!result.hasErrors()) {
+//        if (!result.hasErrors()) {
             record.setWhat(3);
             recordRepository.save(record);
-        }
+//        }
         return gallery(model);
     }
 
