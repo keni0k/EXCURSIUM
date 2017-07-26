@@ -173,10 +173,10 @@ public class HomeController {
                                 @ModelAttribute("insertRecord") @Valid Record record,
                                 BindingResult result) {
 
-//        if (!result.hasErrors()) {
+        if (!result.hasErrors()) {
             record.setWhat(3);
             recordRepository.save(record);
-//        }
+        }
         return gallery(model);
     }
 
@@ -197,17 +197,16 @@ public class HomeController {
 
     @RequestMapping("/addphoto")
     public String insertPhotos(ModelMap model,
-                                @ModelAttribute("insertRecord") @Valid Record record,
+                                @ModelAttribute("insertPhoto") @Valid Point point,
                                 BindingResult result) {
 
 //        if (!result.hasErrors()) {
-        record.setWhat(4);
-        recordRepository.save(record);
+        pointRepository.save(point);
 //        }
         return photos(model);
     }
 
-    @RequestMapping("/deletephotos")
+    @RequestMapping("/deletephoto")
     public String deletePhotos(ModelMap model, @ModelAttribute("id") String id,
                                 BindingResult result) {
         recordRepository.delete(Long.parseLong(id));
