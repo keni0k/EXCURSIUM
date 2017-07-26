@@ -54,7 +54,7 @@
 <body>
 <input class="container">
 <div class="page-header">
-    <h1>Контакты</h1>
+    <h1>Галереи</h1>
 </div>
 
 <nav class="four">
@@ -63,9 +63,9 @@
         <li><a href="/news">Новости</a></li>
         <li><a href="/guides">Маршруты</a></li>
         <li><a href="/points">Точки маршрутов</a></li>
-        <li><a href="/gallery">Галереи</a></li>
+        <li><a href="/#">Галереи</a></li>
         <li><a href="/photos">Фотографии</a></li>
-        <li><a href="/#">Контакты</a></li>
+        <li><a href="/contacts">Контакты</a></li>
     </ul>
 </nav>
 <hr />
@@ -73,7 +73,7 @@
 <hr />
 <div class="row">
     <div class="col-md-12 col-lg-6">
-        <form th:object="${insertRecord}" action="/addcontact" method="POST">
+        <form th:object="${insertRecord}" action="/addgallery" method="POST">
 
             Туристический портал:
             <select name="locate">
@@ -84,13 +84,7 @@
             </select>
 
             <br/>
-            Название контакта: <input name="head" type="text" value=""/>
-            <br/>
-            Сайт:
-            <input name="data" type="text" value=""/>
-            <br/>
-            Телефон:
-            <input name="phone" type="text" value=""/>
+            Название галереи: <input name="head" type="text" value=""/>
             <br/>
             Ссылка на изображение:
             <input name="img_link" type="text" value=""/>
@@ -106,7 +100,7 @@
 <script type='text/javascript'>
         function a(){
             var d = document.getElementById('del').value;
-            window.location='/deletecontact?id='+d;
+            window.location='/deletegallery?id='+d;
         }
     </script>
 <input type="button" onclick="javascript:a()" value="Удалить"/>
@@ -117,23 +111,19 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>Контакты</th>
+                <th>Галлереи</th>
             </tr>
             </thead>
             <tbody>
             <tr>
                 <td>ID</td>
-                <td>Название</td>
-                <td>Сайт</td>
-                <td>Телефон</td>
-                <td>Ссылка на изобраэение</td>
+                <td>Название альбома</td>
+                <td>Ссылка на изображение</td>
                 <td>Локализация</td>
             </tr>
             <tr th:each="record : ${records}">
                 <td th:text="${record.id}">Some text</td>
                 <td th:text="${record.head}">Some text</td>
-                <td th:text="${record.data}">Some text</td>
-                <td th:text="${record.phone}">Some text</td>
                 <td th:text="${record.img_link}">Some text</td>
                 <td th:text="${record.locate}">Some text</td>
             </tr>

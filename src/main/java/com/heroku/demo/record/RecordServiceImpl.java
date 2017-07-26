@@ -15,10 +15,9 @@ public class RecordServiceImpl {
 
     public static List<Record> getByType(RecordRepository recordRepository, int type) {
         List<Record> list = recordRepository.findAll();
-        int size = list.size();
-        for (int i = 0; i<size; i++)
-            if (list.get(i).getWhat() != type) {list.remove(i);size--;}
-        return list;
+        List<Record> list1 = new ArrayList<Record>();
+        for (Record r:list)
+            if (r.getWhat() == type) list1.add(r);
+        return list1;
     }
-
 }

@@ -159,4 +159,32 @@ public class HomeController {
         return contacts(model);
     }
 
+
+    @RequestMapping("/gallery")
+    public String gallery(ModelMap model) {
+        List<Record> records = RecordServiceImpl.getByType(recordRepository, 3);//findByType(1);
+        model.addAttribute("records", records);
+        model.addAttribute("insertRecord", new Record());
+        return "gallery";
+    }
+
+    @RequestMapping("/addgallery")
+    public String insertGallery(ModelMap model,
+                                @ModelAttribute("insertRecord") @Valid Record record,
+                                BindingResult result) {
+
+        if (!result.hasErrors()) {
+            record.setWhat(3);
+            recordRepository.save(record);
+        }
+        return gallery(model);
+    }
+
+    @RequestMapping("/deletegallery")
+    public String deleteGallery(ModelMap model, @ModelAttribute("id") String id,
+                                BindingResult result) {
+        recordRepository.delete(Long.parseLong(id));
+        return gallery(model);
+    }
+
 }
