@@ -189,13 +189,13 @@ public class HomeController {
 
     @RequestMapping("/photos")
     public String photos(ModelMap model) {
-        List<Record> records = RecordServiceImpl.getByType(recordRepository, 4);//findByType(1);
+        List<Record> records = RecordServiceImpl.getByType(recordRepository, 3);//findByType(1);
         model.addAttribute("records", records);
         model.addAttribute("insertRecord", new Record());
         return "photos";
     }
 
-    @RequestMapping("/addphotos")
+    @RequestMapping("/addphoto")
     public String insertPhotos(ModelMap model,
                                 @ModelAttribute("insertRecord") @Valid Record record,
                                 BindingResult result) {
