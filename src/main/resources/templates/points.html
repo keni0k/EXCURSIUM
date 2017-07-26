@@ -71,21 +71,13 @@
 <hr />
 <hr />
 
-<input name="bb" type="text" value=""/>
-<script type='text/javascript'>
-        function b(){
-            var d = document.getElementById('bb').value;
-            window.location='/addpoint?id_of_guide='+d;
-        }
-</script>
-<input type="button" onclick="javascript:b()" value="задать"/>
 <div class="row">
     <div class="col-md-12 col-lg-6">
         <form th:object="${insertPoint}" action="/addpoint" method="POST">
 
             Маршрут
             <select name="id_of_guide" typeof="text">
-                <option th:each="record : ${records}" typeof="text" value="t${record.id}t"  th:text="${record.head}"> Same </option>
+                <option th:each="record : ${records}" typeof="text" value="${record.id}"  th:text="${record.head}"> Same </option>
             </select>
 
             <br/>
