@@ -54,7 +54,7 @@
 <body>
 <input class="container">
 <div class="page-header">
-    <h1>Маршруты</h1>
+    <h1>Точки маршрутов</h1>
 </div>
 
 <nav class="four">
@@ -76,8 +76,8 @@
         <form th:object="${insertPoint}" action="/addpoint" method="POST">
 
             Маршрут
-            <select name="id_of_guide" typeof="text">
-                <option th:each="record : ${records}" typeof="text" value="${record.id}"  th:text="${record.head}"> Same </option>
+            <select name="id_of_guide">
+                <option th:each="record : ${records}" th.value="${record.id}"  th:text="${record.head}"> Same </option>
             </select>
 
             <br/>
@@ -116,9 +116,9 @@
             <tr>
                 <td>ID</td>
                 <td>Маршрут</td>
-                <td>Описание</td>
                 <td>Широта</td>
                 <td>Долгота</td>
+                <td>Описание</td>
             </tr>
             <tr th:each="point : ${points}">
                 <td th:text="${point.id}">Some text</td>

@@ -104,3 +104,39 @@ databaseChangeLog:
                   type: varchar(250)
                   constraints:
                     nullable: false
+  - changeSet:
+        id: 3
+        author: keni0k
+        changes:
+        - dropTable:
+            tableName: point
+        - createTable:
+              tableName: point
+              columns:
+                - column:
+                    name: id
+                    type: int
+                    autoIncrement: true
+                    constraints:
+                      primaryKey: true
+                      nullable: false
+                - column:
+                    name: p1
+                    type: varchar(30)
+                    constraints:
+                      nullable: false
+                - column:
+                    name: p2
+                    type: varchar(30)
+                    constraints:
+                      nullable: false
+                - column:
+                    name: id_of_guide
+                    type: int
+                    constraints:
+                      nullable: false
+                - column:
+                    name: data
+                    type: varchar(250)
+                    constraints:
+                      nullable: false

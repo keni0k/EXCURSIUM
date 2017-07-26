@@ -43,17 +43,17 @@ public class Point {
         this.p2 = p2;
     }
 
-    public String getId_of_guide() {
+    public int getId_of_guide() {
         return id_of_guide;
     }
 
-    public void setId_of_guide(String id_of_guide) {
+    public void setId_of_guide(int id_of_guide) {
         this.id_of_guide = id_of_guide;
     }
 
     private String p1 = "";
     private String p2 = "";
-    private String id_of_guide = "";
+    private int id_of_guide = -1;
     public String getData() {
         return data;
     }
