@@ -77,7 +77,7 @@
 
             Маршрут
             <select name="id_of_guide">
-                <option th:each="record : ${records}" th.value="${record.id}"  th:text="${record.head}"> Same </option>
+                <option th:each="record : ${records}" value="${record.id}"  th:text="${record.head}"> Same </option>
             </select>
 
             <br/>
@@ -123,9 +123,9 @@
             <tr th:each="point : ${points}">
                 <td th:text="${point.id}">Some text</td>
                 <td th:text="${point.id_of_guide}">Some text</td>
-                <td th:text="${point.data}">Some text</td>
                 <td th:text="${point.p1}">Some text</td>
                 <td th:text="${point.p2}">Some text</td>
+                <td th:text="${point.data}">Some text</td>
             </tr>
             </tbody>
         </table>
