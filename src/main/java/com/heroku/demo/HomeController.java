@@ -222,7 +222,7 @@ public class HomeController {
     }
 
     @RequestMapping("/getjson")
-    public String getJson(ModelMap model, BindingResult result){
+    public String getJson(){
         List<Record> array = recordRepository.findAll();
         ArrayList<String> arrayList = new ArrayList<>();
         for (Record r:array){
