@@ -23,6 +23,9 @@ import com.heroku.demo.record.RecordRepository;
 import com.heroku.demo.record.RecordServiceImpl;
 
 import javax.validation.Valid;
+import javax.xml.ws.RequestWrapper;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -205,10 +208,10 @@ public class HomeController {
                                 BindingResult result) {
 
         if (!result.hasErrors()) {
-        record.setWhat(4);
-        recordRepository.save(record);
+            record.setWhat(4);
+            recordRepository.save(record);
         }
-        return record.toString();
+        return photos(model);
     }
 
     @RequestMapping("/deletephoto")
@@ -216,6 +219,18 @@ public class HomeController {
                                 BindingResult result) {
         recordRepository.delete(Long.parseLong(id));
         return photos(model);
+    }
+
+    @RequestMapping("/getjson")
+    public String getJson(){
+        ArrayList<String> arrayList = recordRepository.findAll();
+        StringBuilder stringBuilder = new StringBuilder("{\"msgs\":[");
+        for (int i = 0; i<arrayList.size(); i++) {
+            stringBuilder.append(arrayList.get(i));
+            if (arrayList.size()-i>1) stringBuilder.append(",\n");
+        }
+        stringBuilder.append("]}");
+        return stringBuilder.toString();
     }
 
 }
