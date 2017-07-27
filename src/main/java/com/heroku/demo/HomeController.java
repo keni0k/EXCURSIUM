@@ -222,8 +222,12 @@ public class HomeController {
     }
 
     @RequestMapping("/getjson")
-    public String getJson(){
-        ArrayList<String> arrayList = recordRepository.findAll();
+    public String getJson(ModelMap model, BindingResult result){
+        ArrayList<Record> array = recordRepository.findAll();
+        ArrayList<String> arrayList = new ArrayList<>();
+        for (Record r:array){
+            arrayList.add(r.toString());
+        }
         StringBuilder stringBuilder = new StringBuilder("{\"msgs\":[");
         for (int i = 0; i<arrayList.size(); i++) {
             stringBuilder.append(arrayList.get(i));
