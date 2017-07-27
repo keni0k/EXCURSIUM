@@ -16,6 +16,12 @@ public class Point {
         this.data = data;
     }
 
+    @Override
+    public String toString() {
+        return "{\"id\":\"" + id + "\", \"p1\":\"" + p1 + "\", \"p2\":\"" + p2 +
+                "\" , \"id_of_guide\":\"" + id_of_guide + "\" , \"data\":\"" + data + "\"}";
+    }
+
     public Point() {
     }
 

@@ -245,7 +245,8 @@ public class HomeController {
             if (arrayList.size()-i>1) stringBuilder.append(",\n");
         }
         stringBuilder.append("]");
-        return stringBuilder.toString();
+        model.addAttribute("json", stringBuilder);
+        return "json"
     }
 
 }

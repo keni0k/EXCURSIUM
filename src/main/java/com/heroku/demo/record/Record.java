@@ -21,7 +21,8 @@ public class Record {
     @Override
     public String toString() {
         return "{\"id\":\""+id+"\", \"locate\":\""+locate+"\", \"head\":\"" + head + "\" , \"data\":\""
-                + data + "\" , \"img_link\":\"" + img_link + "\" , \"what\":\"" + what + "\"}";
+                + data + "\" , \"img_link\":\"" + img_link + "\" , \"what\":\"" + what +
+                "\" , \"phone\":\"" + phone + "\"}";
     }
 
     private String data = "";
