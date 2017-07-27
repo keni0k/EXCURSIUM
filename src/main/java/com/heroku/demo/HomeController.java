@@ -227,14 +227,14 @@ public class HomeController {
         ArrayList<String> arrayList = new ArrayList<>();
         switch (type){
             case 5:
-                List<Point> array = pointRepository.findAll();
-                for (Point p:array){
+                List<Point> points = pointRepository.findAll();
+                for (Point p:points){
                     arrayList.add(p.toString());
                 }
                 break;
             default:
-                List<Record> array = RecordServiceImpl.getByType(recordRepository, type);
-                for (Record r:array){
+                List<Record> records = RecordServiceImpl.getByType(recordRepository, type);
+                for (Record r:records){
                     arrayList.add(r.toString());
                 }
         }
