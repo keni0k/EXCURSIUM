@@ -102,6 +102,7 @@ public class HomeController {
     public String deleteGuide(ModelMap model, @ModelAttribute("id") String id,
                               BindingResult result) {
         recordRepository.delete(Long.parseLong(id));
+        //TODO: delete points
         return guides(model);
     }
 
@@ -184,6 +185,7 @@ public class HomeController {
     public String deleteGallery(ModelMap model, @ModelAttribute("id") String id,
                                 BindingResult result) {
         recordRepository.delete(Long.parseLong(id));
+        //TODO: delete photos
         return gallery(model);
     }
 
@@ -202,11 +204,11 @@ public class HomeController {
                                 @ModelAttribute("insertPhoto") @Valid Record record,
                                 BindingResult result) {
 
-//        if (!result.hasErrors()) {
+        if (!result.hasErrors()) {
         record.setWhat(4);
         recordRepository.save(record);
-//        }
-        return photos(model);
+        }
+        return record.toString();
     }
 
     @RequestMapping("/deletephoto")

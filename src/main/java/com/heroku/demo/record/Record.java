@@ -17,6 +17,13 @@ public class Record {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Override
+    public String toString() {
+        return "{\"id\":\""+id+"\", \"locate\":\""+locate+"\", \"head\":\"" + head + "\" , \"data\":\""
+                + data + "\" , \"img_link\":\"" + img_link + "\" , \"what\":\"" + what + "\"}";
+    }
+
     private String data = "";
 
     public String getLocate() {
