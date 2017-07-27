@@ -246,7 +246,7 @@ public class HomeController {
         }
         stringBuilder.append("]");
         model.addAttribute("json", stringBuilder);
-        return "json"
+        return "json";
     }
 
 }
