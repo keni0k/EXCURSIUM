@@ -222,18 +222,110 @@ public class HomeController {
     }
 
     @RequestMapping("/getjson")
-    public String getJson(){
-        List<Record> array = recordRepository.findAll();
+    public String getPoints(ModelMap model, @ModelAttribute("type") int type,
+                            BindingResult result){
+        List<> array;
         ArrayList<String> arrayList = new ArrayList<>();
-        for (Record r:array){
-            arrayList.add(r.toString());
+        switch (type){
+            case 5:
+                array = pointRepository.findAll();
+                for (Point p:array){
+                    arrayList.add(p.toString());
+                }
+                break;
+            default:
+                array = RecordServiceImpl.getByType(recordRepository, type);
+                for (Record r:array){
+                    arrayList.add(r.toString());
+                }
         }
-        StringBuilder stringBuilder = new StringBuilder("{\"msgs\":[");
+
+        StringBuilder stringBuilder = new StringBuilder("[");
         for (int i = 0; i<arrayList.size(); i++) {
             stringBuilder.append(arrayList.get(i));
             if (arrayList.size()-i>1) stringBuilder.append(",\n");
         }
-        stringBuilder.append("]}");
+        stringBuilder.append("]");
+        return stringBuilder.toString();
+    }
+
+    @RequestMapping("/getphotos")
+    public String getPhotos(){
+        List<Record> photos = RecordServiceImpl.getByType(recordRepository, 4);
+        ArrayList<String> arrayList = new ArrayList<>();
+        for (Record r:photos){
+            arrayList.add(r.toString());
+        }
+        StringBuilder stringBuilder = new StringBuilder("[");
+        for (int i = 0; i<arrayList.size(); i++) {
+            stringBuilder.append(arrayList.get(i));
+            if (arrayList.size()-i>1) stringBuilder.append(",\n");
+        }
+        stringBuilder.append("]");
+        return stringBuilder.toString();
+    }
+
+    @RequestMapping("/getgallerys")
+    public String getGallerys(){
+        List<Record> gallerys = RecordServiceImpl.getByType(recordRepository, 3);
+        ArrayList<String> arrayList = new ArrayList<>();
+        for (Record r:gallerys){
+            arrayList.add(r.toString());
+        }
+        StringBuilder stringBuilder = new StringBuilder("[");
+        for (int i = 0; i<arrayList.size(); i++) {
+            stringBuilder.append(arrayList.get(i));
+            if (arrayList.size()-i>1) stringBuilder.append(",\n");
+        }
+        stringBuilder.append("]");
+        return stringBuilder.toString();
+    }
+
+    @RequestMapping("/getnews")
+    public String getNews(){
+        List<Record> news = RecordServiceImpl.getByType(recordRepository, 0);
+        ArrayList<String> arrayList = new ArrayList<>();
+        for (Record r:news){
+            arrayList.add(r.toString());
+        }
+        StringBuilder stringBuilder = new StringBuilder("[");
+        for (int i = 0; i<arrayList.size(); i++) {
+            stringBuilder.append(arrayList.get(i));
+            if (arrayList.size()-i>1) stringBuilder.append(",\n");
+        }
+        stringBuilder.append("]");
+        return stringBuilder.toString();
+    }
+
+    @RequestMapping("/getguides")
+    public String getGuides(){
+        List<Record> guides = RecordServiceImpl.getByType(recordRepository, 1);
+        ArrayList<String> arrayList = new ArrayList<>();
+        for (Record r:guides){
+            arrayList.add(r.toString());
+        }
+        StringBuilder stringBuilder = new StringBuilder("[");
+        for (int i = 0; i<arrayList.size(); i++) {
+            stringBuilder.append(arrayList.get(i));
+            if (arrayList.size()-i>1) stringBuilder.append(",\n");
+        }
+        stringBuilder.append("]");
+        return stringBuilder.toString();
+    }
+
+    @RequestMapping("/getcontacts")
+    public String getContacts(){
+        List<Record> contacts = RecordServiceImpl.getByType(recordRepository, 2);;
+        ArrayList<String> arrayList = new ArrayList<>();
+        for (Record r:contacts){
+            arrayList.add(r.toString());
+        }
+        StringBuilder stringBuilder = new StringBuilder("[");
+        for (int i = 0; i<arrayList.size(); i++) {
+            stringBuilder.append(arrayList.get(i));
+            if (arrayList.size()-i>1) stringBuilder.append(",\n");
+        }
+        stringBuilder.append("]");
         return stringBuilder.toString();
     }
 
