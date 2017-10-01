@@ -248,8 +248,8 @@ public class HomeController {
             if (arrayList.size()-i>1) stringBuilder.append(",\n");
         }
         stringBuilder.append("]}");
-        String result = stringBuilder.toString();
-        return result;
+        String solve = stringBuilder.toString();
+        return solve;
     }
 
 }
