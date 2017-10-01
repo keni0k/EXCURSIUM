@@ -239,7 +239,8 @@ public class HomeController {
                 }
         }
 
-        StringBuilder stringBuilder = new StringBuilder("{ models: [");
+        StringBuilder stringBuilder = new StringBuilder("{ \"models\": [");
+
         for (int i = 0; i<arrayList.size(); i++) {
             stringBuilder.append(arrayList.get(i));
             if (arrayList.size()-i>1) stringBuilder.append(",\n");
