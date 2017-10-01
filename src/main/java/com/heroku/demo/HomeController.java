@@ -222,6 +222,7 @@ public class HomeController {
     }
 
     @RequestMapping("/getjson")
+    @ResponseBody
     public String getPoints(ModelMap model, @ModelAttribute("type") int type,
                             BindingResult result){
         ArrayList<String> arrayList = new ArrayList<>();

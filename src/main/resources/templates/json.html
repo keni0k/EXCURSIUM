@@ -1,8 +1,12 @@
-{"models": [{
-"id":"4",
-"locate":"ra",
-"head":"1",
-"data":"2",
-"img_link":"3",
-"phone":""
-}]}
+<html xmlns:th="http://www.thymeleaf.org">
+<?php
+header("Content-type: application/json");
+?>
+<head>
+    <title>JSON</title>
+    <!--<link rel="stylesheet" type="text/css" href="style.css"/>-->
+</head>
+<body>
+<p th:text="${json}"></p>
+</body>
+</html>
