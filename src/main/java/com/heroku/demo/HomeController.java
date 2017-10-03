@@ -225,7 +225,7 @@ public class HomeController {
     @RequestMapping("/getjson")
     @ResponseBody
     public String getPoints(ModelMap model, @ModelAttribute("type") int type,
-                            BindingResult result){
+            @ModelAttribute("locate") int locate, BindingResult result){
         ArrayList<String> arrayList = new ArrayList<>();
         switch (type){
             case 5:
@@ -235,7 +235,7 @@ public class HomeController {
                 }
                 break;
             default:
-                List<Record> records = RecordServiceImpl.getByType(recordRepository, type);
+                List<Record> records = RecordServiceImpl.getByTypeAndLocate(recordRepository, type, locate);
                 for (Record r:records){
                     arrayList.add(r.toString());
                 }
