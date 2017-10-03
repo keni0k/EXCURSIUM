@@ -252,38 +252,9 @@ public class HomeController {
         return solve;
     }
 
-    @RequestMapping("/getjson")
-    @ResponseBody
-    public String getPoints1(ModelMap model, @ModelAttribute("type") int type, BindingResult result){
-        ArrayList<String> arrayList = new ArrayList<>();
-        switch (type){
-            case 5:
-                List<Point> points = pointRepository.findAll();
-                for (Point p:points){
-                    arrayList.add(p.toString());
-                }
-                break;
-            default:
-                List<Record> records = RecordServiceImpl.getByType(recordRepository, type);
-                for (Record r:records){
-                    arrayList.add(r.toString());
-                }
-        }
-
-        StringBuilder stringBuilder = new StringBuilder("{ \"models\": [");
-
-        for (int i = 0; i<arrayList.size(); i++) {
-            stringBuilder.append(arrayList.get(i));
-            if (arrayList.size()-i>1) stringBuilder.append(",\n");
-        }
-        stringBuilder.append("]}");
-        String solve = stringBuilder.toString();
-        return solve;
-    }
-
     @RequestMapping("/getmarshrut")
     @ResponseBody
-    public String getPoints(ModelMap model, @ModelAttribute("type") String type,
+    public String getMarshrut(ModelMap model, @ModelAttribute("type") String type,
                             @ModelAttribute("locate") String locate, BindingResult result){
         ArrayList<String> arrayList = new ArrayList<>();
         List<Record> records = RecordServiceImpl.getMarshrutByLocate(recordRepository, type, locate);
