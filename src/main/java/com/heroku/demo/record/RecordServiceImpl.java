@@ -21,11 +21,11 @@ public class RecordServiceImpl {
         return list1;
     }
 
-    public static List<Record> getByTypeAndLocate(RecordRepository recordRepository, int type, int locate) {
+    public static List<Record> getByTypeAndLocate(RecordRepository recordRepository, int type, String locate) {
         List<Record> list = recordRepository.findAll();
         List<Record> list1 = new ArrayList<Record>();
         for (Record r:list)
-            if ((r.getWhat() == type) && (locate == r.getLocate())) list1.add(r);
+            if ((r.getWhat() == type) && (locate.equals(r.getLocate()))) list1.add(r);
         return list1;
     }
 }
