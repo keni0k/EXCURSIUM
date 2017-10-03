@@ -25,7 +25,7 @@ public class RecordServiceImpl {
         List<Record> list = recordRepository.findAll();
         List<Record> list1 = new ArrayList<Record>();
         for (Record r:list)
-            if ((r.getWhat() == type) && (locate == r.getLocte()) list1.add(r);
+            if ((r.getWhat() == type) && (locate == r.getLocte())) list1.add(r);
         return list1;
     }
 }
