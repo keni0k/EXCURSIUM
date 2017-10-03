@@ -28,4 +28,13 @@ public class RecordServiceImpl {
             if ((r.getWhat() == type) && (locate.equals(r.getLocate()))) list1.add(r);
         return list1;
     }
+
+    public static List<Record> getMarshrutByLocate(RecordRepository recordRepository, String type, String locate) {
+        List<Record> list = recordRepository.findAll();
+        List<Record> list1 = new ArrayList<Record>();
+        for (Record r:list)
+            if ((r.getWhat() == 1) && (locate.equals(r.getLocate())) && (type.equals(r.getPhone()()))) list1.add(r);
+        return list1;
+    }
+
 }
