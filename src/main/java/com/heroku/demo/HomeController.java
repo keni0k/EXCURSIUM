@@ -225,7 +225,7 @@ public class HomeController {
     @RequestMapping("/getjson")
     @ResponseBody
     public String getPoints(ModelMap model, @ModelAttribute("type") int type,
-            @ModelAttribute("locate") int locate, BindingResult result){
+            @ModelAttribute("locate") String locate, BindingResult result){
         ArrayList<String> arrayList = new ArrayList<>();
         switch (type){
             case 5:
