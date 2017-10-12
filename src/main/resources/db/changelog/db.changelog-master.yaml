@@ -197,7 +197,7 @@ databaseChangeLog:
             - createTable:
                tableName: users
                columns:
-                   - column:
+                    -column:
                        name: id
                        type: int
                        autoIncrement: true
