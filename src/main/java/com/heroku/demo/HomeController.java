@@ -304,7 +304,7 @@ public class HomeController {
                              BindingResult result) {
         if (!result.hasErrors()) {
             usersRepository.save(new Users("login", "password", "name", "surname",
-            0, "email", "phone_namber", rate, "about"));
+            0, "email", "phone_namber", rate, "about", "sity"));
         }
         return "TRUE";
     }
