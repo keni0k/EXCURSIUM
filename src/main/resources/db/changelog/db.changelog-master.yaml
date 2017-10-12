@@ -257,14 +257,14 @@ databaseChangeLog:
             - createTable:
                 tableName: events
                 columns:
-                   - column:
+                   -column:
                        name: id
                        type: int
                        autoIncrement: true
                        constraints:
                          primaryKey: true
                          nullable: false
-                    -column:
+                   -column:
                         name: guideId
                         type: int
                         constraints:
@@ -317,7 +317,7 @@ databaseChangeLog:
             - createTable:
                 tableName: orders
                 columns:
-                  - column:
+                  -column:
                      name: id
                      type: int
                      autoIncrement: true
@@ -334,26 +334,25 @@ databaseChangeLog:
                      type: int
                      constraints:
                        nullable: false
-                   -column:
+                  -column:
                       name: touristId
                       type: int
                       constraints:
                         nullable: false
-                    -column:
+                  -column:
                       name: price
                       type: int
                       constraints:
                         nullable: false
-                    -column:
+                  -column:
                       name: order_date
                       type: varchar(30)
                       constraints:
                         nullable: false
-
             - createTable:
                 tableName: messages
                 columns:
-                  - column:
+                  -column:
                      name: id
                      type: int
                      autoIncrement: true
@@ -365,17 +364,17 @@ databaseChangeLog:
                       type: varchar(30)
                       constraints:
                          nullable: false
-                   -column:
+                  -column:
                       name: touristId
                       type: varchar(30)
                       constraints:
                         nullable: false
-                   -column:
+                  -column:
                       name: msg
                       type: varchar(255)
                       constraints:
                         nullable: false
-                    -column:
+                  -column:
                       name: date
                       type: varchar(10)
                       constraints:
@@ -383,7 +382,7 @@ databaseChangeLog:
             - createTable:
                 tableName: reviews
                 columns:
-                  - column:
+                  -column:
                      name: id
                      type: int
                      autoIncrement: true
@@ -400,22 +399,22 @@ databaseChangeLog:
                      type: int
                      constraints:
                        nullable: false
-                   -column:
+                  -column:
                       name: touristId
                       type: int
                       constraints:
                         nullable: false
-                   -column:
+                  -column:
                       name: rate
                       type: int
                       constraints:
                         nullable: false
-                   -column:
+                  -column:
                       name: msg
                       type: varchar(255)
                       constraints:
                         nullable: false
-                    -column:
+                  -column:
                       name: date
                       type: varchar(10)
                       constraints:
