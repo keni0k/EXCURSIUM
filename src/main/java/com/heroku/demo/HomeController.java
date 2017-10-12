@@ -21,6 +21,7 @@ import com.heroku.demo.point.PointServiceImpl;
 import com.heroku.demo.record.Record;
 import com.heroku.demo.record.RecordRepository;
 import com.heroku.demo.record.RecordServiceImpl;
+import com.heroku.Users;
 
 import javax.validation.Valid;
 import javax.xml.ws.RequestWrapper;
@@ -281,7 +282,7 @@ public class HomeController {
     public String getUsers(ModelMap model, BindingResult result){
         ArrayList<String> arrayList = new ArrayList<>();
         List<Users> users = usersRepository.findAll();
-        for (User u:users){
+        for (Users u:users){
             arrayList.add(u.toString());
         }
 
