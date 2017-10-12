@@ -129,3 +129,69 @@ databaseChangeLog:
                  type: varchar(255)
                  constraints:
                     nullable: false
+  - changeSet:
+          id: 3
+          author: keni0k
+          changes:
+          -dropTable:
+            tableName: users
+          -createTable:
+             tableName: users
+             columns:
+                -column:
+                   name: id
+                   type: int
+                   autoIncrement: true
+                   constraints:
+                     primaryKey: true
+                     nullable: false
+                -column:
+                   name: login
+                   type: varchar(30)
+                   constraints:
+                      nullable: true
+                -column:
+                   name: password
+                   type: varchar(30)
+                   constraints:
+                      nullable: true
+                -column:
+                   name: name
+                   type: varchar(30)
+                   constraints:
+                      nullable: true
+                -column:
+                   name: surname
+                   type: varchar(30)
+                   constraints:
+                      nullable: true
+                -column:
+                   name: type
+                   type: int
+                   constraints:
+                    nullable: true
+                -column:
+                   name: city
+                   type: varchar(30)
+                   constraints:
+                      nullable: true
+                -column:
+                   name: email
+                   type: varchar(50)
+                   constraints:
+                      nullable: true
+                -column:
+                   name: phoneNumber
+                   type: varchar(15)
+                   constraints:
+                      nullable: true
+                -column:
+                   name: rate
+                   type: int
+                   constraints:
+                      nullable: true
+                -column:
+                   name: about
+                   type: varchar(255)
+                   constraints:
+                      nullable: true
