@@ -10,30 +10,30 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Entity
 public class Users {
 
-//    public Users() {
-//    }
-//
-//    public Users(String login, String password, String name, String surname,
-//                 int type, String email, String phone_namber, int rate, String about) {
-//
-//        this.login = login;
-//
-//        this.password = password;
-//
-//        this.name = name;
-//
-//        this.surname = surname;
-//
-//        this.type = type;
-//
-//        this.email = email;
-//
-//        this.phone_number = phone_namber;
-//
-//        this.rate = rate;
-//
-//        this.about = about;
-//    }
+    public Users() {
+    }
+
+    public Users(String login, String password, String name, String surname,
+                 int type, String email, String phone_namber, int rate, String about) {
+
+        this.login = login;
+
+        this.password = password;
+
+        this.name = name;
+
+        this.surname = surname;
+
+        this.type = type;
+
+        this.email = email;
+
+        this.phone_number = phone_namber;
+
+        this.rate = rate;
+
+        this.about = about;
+    }
 
 
     public long getId() {
@@ -93,6 +93,16 @@ public class Users {
     }
 
     private int type = 0;
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    private String city = "";
 
     public String getEmail() {
         return email;
