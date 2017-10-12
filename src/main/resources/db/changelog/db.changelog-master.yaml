@@ -196,7 +196,7 @@ databaseChangeLog:
                 tableName: point
             - createTable:
                tableName: users
-                 columns:
+               columns:
                    - column:
                        name: id
                        type: int
