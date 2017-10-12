@@ -300,8 +300,8 @@ public class HomeController {
     @RequestMapping("/adduser")
     @ResponseBody
     public String addUser(ModelMap model,
-                          @ModelAttribute("rate") int rate,
-                             BindingResult result) {
+                          BindingResult result,
+                          @ModelAttribute("rate") int rate) {
         if (!result.hasErrors()) {
             usersRepository.save(new Users("login", "password", "name", "surname",
             0, "email", "phone_namber", rate, "about", "sity"));
