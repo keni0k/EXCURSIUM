@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
+@Table(name = "users")
 public class Users {
 
     public Users() {
