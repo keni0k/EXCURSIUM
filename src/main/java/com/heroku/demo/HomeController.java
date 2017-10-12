@@ -21,7 +21,7 @@ import com.heroku.demo.point.PointServiceImpl;
 import com.heroku.demo.record.Record;
 import com.heroku.demo.record.RecordRepository;
 import com.heroku.demo.record.RecordServiceImpl;
-import com.heroku.Users;
+import com.heroku.demo.Users;
 
 import javax.validation.Valid;
 import javax.xml.ws.RequestWrapper;
@@ -300,7 +300,7 @@ public class HomeController {
     @RequestMapping("/adduser")
     @ResponseBody
     public String addUser(ModelMap model,
-                          @ModelAttribute("rate") int rste,
+                          @ModelAttribute("rate") int rate,
                              BindingResult result) {
         if (!result.hasErrors()) {
             usersRepository.save(new Users("login", "password", "name", "surname",
