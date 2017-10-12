@@ -279,7 +279,7 @@ public class HomeController {
 
     @RequestMapping("/getuser")
     @ResponseBody
-    public String getUsers(ModelMap model, BindingResult result){
+    public String getUsers(ModelMap model){
         ArrayList<String> arrayList = new ArrayList<>();
         List<Users> users = usersRepository.findAll();
         for (Users u:users){
@@ -300,8 +300,8 @@ public class HomeController {
     @RequestMapping("/adduser")
     @ResponseBody
     public String addUser(ModelMap model,
-                          BindingResult result,
-                          @ModelAttribute("rate") int rate) {
+                          @ModelAttribute("rate") int rate,
+                             BindingResult result) {
         if (!result.hasErrors()) {
             usersRepository.save(new Users("login", "password", "name", "surname",
             0, "email", "phone_namber", rate, "about", "sity"));
