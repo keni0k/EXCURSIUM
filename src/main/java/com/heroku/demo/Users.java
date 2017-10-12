@@ -14,7 +14,7 @@ public class Users {
     }
 
     public Users(String login, String password, String name, String surname,
-                 int type, String email, String phone_namber, int rate, String about) {
+                 int type, String email, String phone_namber, int rate, String about, String city) {
 
         this.login = login;
 
@@ -33,6 +33,8 @@ public class Users {
         this.rate = rate;
 
         this.about = about;
+
+        this.city = city;
     }
 
 
