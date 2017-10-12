@@ -186,3 +186,237 @@ databaseChangeLog:
                   type: varchar(20)
                   constraints:
                     nullable: true
+  - changeSet:
+            id: 5
+            author: keni0k
+            changes:
+            - dropTable:
+                tableName: record
+            - dropTable:
+                tableName: point
+            - createTable:
+               tableName: users
+                 columns:
+                   - column:
+                       name: id
+                       type: int
+                       autoIncrement: true
+                       constraints:
+                         primaryKey: true
+                         nullable: false
+                    -column:
+                       name: login
+                       type: varchar(30)
+                       constraints:
+                          nullable: false
+                    -column:
+                       name: password
+                       type: varchar(30)
+                       constraints:
+                          nullable: false
+                    -column:
+                       name: name
+                       type: varchar(30)
+                       constraints:
+                          nullable: false
+                    -column:
+                       name: surname
+                       type: varchar(30)
+                       constraints:
+                          nullable: false
+                    -column:
+                       name: type
+                       type: int
+                       constraints:
+                        nullable: false
+                    -column:
+                       name: city
+                       type: varchar(30)
+                       constraints:
+                          nullable: false
+                    -column:
+                       name: email
+                       type: varchar(50)
+                       constraints:
+                          nullable: false
+                    -column:
+                       name: phoneNumber
+                       type: varchar(15)
+                       constraints:
+                          nullable: false
+                    -column:
+                       name: rate
+                       type: int
+                       constraints:
+                          nullable: false
+                    -column:
+                       name: about
+                       type: varchar(255)
+                       constraints:
+                          nullable: false
+            - createTable:
+                tableName: events
+                columns:
+                   - column:
+                       name: id
+                       type: int
+                       autoIncrement: true
+                       constraints:
+                         primaryKey: true
+                         nullable: false
+                    -column:
+                        name: guideId
+                        type: int
+                        constraints:
+                           nullable: false
+                   -column:
+                       name: name
+                       type: varchar(30)
+                       constraints:
+                          nullable: false
+                   -column:
+                       name: category
+                       type: varchar(30)
+                       constraints:
+                          nullable: false
+                   -column:
+                       name: place
+                       type: varchar(30)
+                       constraints:
+                          nullable: false
+                   -column:
+                       name: startTime
+                       type: varchar(30)
+                       constraints:
+                          nullable: false
+                   -column:
+                       name: duration
+                       type: varchar(30)
+                       constraints:
+                          nullable: false
+                   -column:
+                       name: price
+                       type: varchar(30)
+                       constraints:
+                          nullable: false
+                   -column:
+                       name: description
+                       type: varchar(255)
+                       constraints:
+                          nullable: false
+                   -column:
+                       name: rate
+                       type: int
+                       constraints:
+                          nullable: false
+                   -column:
+                       name: photo
+                       type: varchar(255)
+                       constraints:
+                          nullable: false
+            - createTable:
+                tableName: orders
+                columns:
+                  - column:
+                     name: id
+                     type: int
+                     autoIncrement: true
+                     constraints:
+                       primaryKey: true
+                       nullable: false
+                  -column:
+                      name: eventId
+                      type: int
+                      constraints:
+                         nullable: false
+                  -column:
+                     name: guideId
+                     type: int
+                     constraints:
+                       nullable: false
+                   -column:
+                      name: touristId
+                      type: int
+                      constraints:
+                        nullable: false
+                    -column:
+                      name: price
+                      type: int
+                      constraints:
+                        nullable: false
+                    -column:
+                      name: order_date
+                      type: varchar(30)
+                      constraints:
+                        nullable: false
+
+            - createTable:
+                tableName: messages
+                columns:
+                  - column:
+                     name: id
+                     type: int
+                     autoIncrement: true
+                     constraints:
+                       primaryKey: true
+                       nullable: false
+                  -column:
+                      name: guideId
+                      type: varchar(30)
+                      constraints:
+                         nullable: false
+                   -column:
+                      name: touristId
+                      type: varchar(30)
+                      constraints:
+                        nullable: false
+                   -column:
+                      name: msg
+                      type: varchar(255)
+                      constraints:
+                        nullable: false
+                    -column:
+                      name: date
+                      type: varchar(10)
+                      constraints:
+                        nullable: false
+            - createTable:
+                tableName: reviews
+                columns:
+                  - column:
+                     name: id
+                     type: int
+                     autoIncrement: true
+                     constraints:
+                       primaryKey: true
+                       nullable: false
+                  -column:
+                      name: eventId
+                      type: int
+                      constraints:
+                         nullable: false
+                  -column:
+                     name: guideId
+                     type: int
+                     constraints:
+                       nullable: false
+                   -column:
+                      name: touristId
+                      type: int
+                      constraints:
+                        nullable: false
+                   -column:
+                      name: rate
+                      type: int
+                      constraints:
+                        nullable: false
+                   -column:
+                      name: msg
+                      type: varchar(255)
+                      constraints:
+                        nullable: false
+                    -column:
+                      name: date
+                      type: varchar(10)
+                      constraints:
+                        nullable: false

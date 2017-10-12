@@ -43,12 +43,14 @@ public class HomeController {
 
     private RecordRepository recordRepository;
     private PointRepository pointRepository;
+    private UsersRepository usersRepository;
     PointServiceImpl pointService;
 
     @Autowired
-    public HomeController(RecordRepository repository, PointRepository pRepository) {
+    public HomeController(RecordRepository repository, PointRepository pRepository, UsersRepository usersRepository) {
         this.recordRepository = repository;
         this.pointRepository = pRepository;
+        this.usersRepository = usersRepository;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -272,6 +274,38 @@ public class HomeController {
         stringBuilder.append("]}");
         String solve = stringBuilder.toString();
         return solve;
+    }
+
+    @RequestMapping("/getuser")
+    @ResponseBody
+    public String getUsers(ModelMap model, BindingResult result){
+        ArrayList<String> arrayList = new ArrayList<>();
+        List<Users> users = usersRepository.findAll();
+        for (User u:users){
+            arrayList.add(u.toString());
+        }
+
+        StringBuilder stringBuilder = new StringBuilder("{ \"users\": [");
+
+        for (int i = 0; i<arrayList.size(); i++) {
+            stringBuilder.append(arrayList.get(i));
+            if (arrayList.size()-i>1) stringBuilder.append(",\n");
+        }
+        stringBuilder.append("]}");
+        String solve = stringBuilder.toString();
+        return solve;
+    }
+
+    @RequestMapping("/adduser")
+    @ResponseBody
+    public String addUser(ModelMap model,
+                          @ModelAttribute("rate") int rste,
+                             BindingResult result) {
+        if (!result.hasErrors()) {
+            usersRepository.save(new Users("login", "password", "name", "surname",
+            0, "email", "phone_namber", rate, "about"));
+        }
+        return "TRUE";
     }
 
 }
