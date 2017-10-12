@@ -14,7 +14,7 @@ public class Users {
     }
 
     public Users(String login, String password, String name, String surname,
-                 int type, String email, String phone_namber, int rate, String about, String city) {
+                 int type, String email, String phoneNumber, int rate, String about, String city) {
 
         this.login = login;
 
@@ -28,7 +28,7 @@ public class Users {
 
         this.email = email;
 
-        this.phone_number = phone_namber;
+        this.phoneNumber = phoneNumber;
 
         this.rate = rate;
 
@@ -116,15 +116,15 @@ public class Users {
 
     private String email = "";
 
-    public String getPhone_number() {
-        return phone_number;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    private String phone_number = "";
+    private String phoneNumber = "";
 
     public int getRate() {
         return rate;
@@ -158,7 +158,7 @@ public class Users {
                 "\t\"surname\":" + surname + ",\n" +
                 "\t\"type\":" + type + ",\n" +
                 "\t\"email\":" + email + ",\n" +
-                "\t\"phone_number\":" + phone_number + ",\n" +
+                "\t\"phoneNumber\":" + phoneNumber + ",\n" +
                 "\t\"rate\":" + rate + ",\n" +
                 "\t\"about\":" + about + "\n" +
                 "}";
