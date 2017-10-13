@@ -304,8 +304,9 @@ public class HomeController {
                           @ModelAttribute("rate") int rate,
                              BindingResult result) {
         if (!result.hasErrors()) {
-            usersRepository.save(new Users("login", "password", "name", "surname",
-            0, "email", "phone_namber", rate, "about", "sity"));
+            usersRepository.save(new Users("login", "password"));
+//            usersRepository.save(new Users("login", "password", "name", "surname",
+//            0, "email", "phone_namber", rate, "about", "sity"));
         }
         return "TRUE";
     }
