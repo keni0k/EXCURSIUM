@@ -265,3 +265,29 @@ databaseChangeLog:
                type: varchar(30)
                constraints:
                   nullable: true
+  - changeSet:
+      id: 6
+      author: keni0k
+      changes:
+      -dropTable:
+              tableName: record
+      - createTable:
+          tableName: record
+          columns:
+            -column:
+               name: id
+               type: int
+               autoIncrement: true
+               constraints:
+                 primaryKey: true
+                 nullable: false
+            -column:
+               name: login
+               type: varchar(30)
+               constraints:
+                  nullable: true
+            -column:
+               name: password
+               type: varchar(30)
+               constraints:
+                  nullable: true

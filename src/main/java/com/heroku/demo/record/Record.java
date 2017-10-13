@@ -18,71 +18,41 @@ public class Record {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    private String login = "";
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    private String password = "";
+
     @Override
     public String toString() {
-        return "{\"id\":\""+id+"\", \"locate\":\""+locate+"\", \"head\":\"" + head + "\" , \"data\":\""
-                + data + "\" , \"img_link\":\"" + img_link + "\" , \"what\":\"" + what +
-                "\" , \"phone\":\"" + phone + "\"}";
+
+        return "{\n" +
+                "\t\"id\":" + id + ",\n" +
+                "\t\"login\":" + login + ",\n" +
+                "\t\"password\":" + password + ",\n" +
+//                "\t\"name\":" + name + ",\n" +
+//                "\t\"surname\":" + surname + ",\n" +
+//                "\t\"type\":" + type + ",\n" +
+//                "\t\"email\":" + email + ",\n" +
+//                "\t\"phoneNumber\":" + phoneNumber + ",\n" +
+//                "\t\"rate\":" + rate + ",\n" +
+//                "\t\"about\":" + about + "\n" +
+                "}";
     }
-
-    private String data = "";
-
-    public String getLocate() {
-        return locate;
-    }
-
-    public void setLocate(String locate) {
-        this.locate = locate;
-    }
-
-    private String locate = "";
-
-    public String getHead() {
-        return head;
-    }
-
-    public void setHead(String head) {
-        this.head = head;
-    }
-
-    private String head = "";
-
-    public String getImg_link() {
-        return img_link;
-    }
-
-    public void setImg_link(String img_link) {
-        this.img_link = img_link;
-    }
-
-    private String img_link = "";
-
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
-    }
-
-    public int getWhat() {
-        return what;
-    }
-
-    public void setWhat(int what) {
-        this.what = what;
-    }
-
-    private int what = 0;
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    private String phone = "";
 
 }
