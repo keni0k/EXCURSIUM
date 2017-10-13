@@ -123,6 +123,7 @@ public class HomeController {
         return "points";
     }
 
+
     @RequestMapping("/addpoint")
     public String insertPoint(ModelMap model,
                               @ModelAttribute("insertPoint") @Valid Point point,
