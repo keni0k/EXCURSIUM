@@ -15,14 +15,15 @@ public class Users {
     public Users() {
     }
 
-    public Users(String login, String password, String name){
+    public Users(String login, String password){
+//            , String name){
 //            , String surname, int type, String email, String phoneNumber, int rate, String about, String city) {
 
         this.login = login;
 
         this.password = password;
 
-        this.name = name;
+//        this.name = name;
 //
 //        this.surname = surname;
 //
