@@ -270,7 +270,7 @@ databaseChangeLog:
       author: keni0k
       changes:
       -dropTable:
-              tableName: record
+          tableName: record
       - createTable:
           tableName: record
           columns:
