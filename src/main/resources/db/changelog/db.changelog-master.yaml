@@ -195,3 +195,47 @@ databaseChangeLog:
                    type: varchar(255)
                    constraints:
                       nullable: true
+  - changeSet:
+      id: 4
+      author: keni0k
+      changes:
+      - createTable:
+          tableName: record
+          columns:
+          - column:
+              name: id
+              type: int
+              autoIncrement: true
+              constraints:
+                primaryKey: true
+                nullable: false
+          - column:
+              name: data
+              type: varchar(255)
+              constraints:
+                nullable: false
+          - column:
+              name: head
+              type: varchar(255)
+              constraints:
+                nullable: false
+          - column:
+              name: img_link
+              type: varchar(255)
+              constraints:
+                nullable: false
+          - column:
+             name: locate
+             type: varchar(255)
+             constraints:
+                nullable: false
+          - column:
+              name: what
+              type: int
+              constraints:
+                nullable: false
+          - column:
+              name: phone
+              type: varchar(20)
+              constraints:
+                nullable: true
