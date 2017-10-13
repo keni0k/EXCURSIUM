@@ -38,6 +38,15 @@ public class Record {
 
     private String password = "";
 
+    public Record(String login, String password) {
+//            , String name){
+//            , String surname, int type, String email, String phoneNumber, int rate, String about, String city) {
+
+        this.login = login;
+
+        this.password = password;
+    }
+
     @Override
     public String toString() {
 
