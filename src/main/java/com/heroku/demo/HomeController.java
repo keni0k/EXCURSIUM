@@ -41,6 +41,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/")
 public class HomeController {
 
+
     private RecordRepository recordRepository;
     private PointRepository pointRepository;
     PointServiceImpl pointService;
@@ -157,6 +158,7 @@ public class HomeController {
         return contacts(model);
     }
 
+
     @RequestMapping("/deletecontact")
     public String deleteContact(ModelMap model, @ModelAttribute("id") String id,
                               BindingResult result) {
@@ -248,8 +250,7 @@ public class HomeController {
             if (arrayList.size()-i>1) stringBuilder.append(",\n");
         }
         stringBuilder.append("]}");
-        String solve = stringBuilder.toString();
-        return solve;
+        return stringBuilder.toString();
     }
 
     @RequestMapping("/getmarshrut")
@@ -269,8 +270,7 @@ public class HomeController {
             if (arrayList.size()-i>1) stringBuilder.append(",\n");
         }
         stringBuilder.append("]}");
-        String solve = stringBuilder.toString();
-        return solve;
+        return stringBuilder.toString();
     }
 
 }
