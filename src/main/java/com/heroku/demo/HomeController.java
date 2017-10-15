@@ -288,6 +288,7 @@ public class HomeController {
         return p.toString();
     }
 
+
     @RequestMapping("/getperson")
     @ResponseBody
     public String getPerson(ModelMap model, @ModelAttribute("type") String type,
