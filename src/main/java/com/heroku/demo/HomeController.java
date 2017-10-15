@@ -298,6 +298,7 @@ public class HomeController {
              arrayList.add(p.toString());
         }
 
+
         StringBuilder stringBuilder = new StringBuilder("{ \"persons\": [");
 
         for (int i = 0; i<arrayList.size(); i++) {
