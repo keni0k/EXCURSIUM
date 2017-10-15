@@ -132,13 +132,13 @@
                 <td>Локализация</td>
                 <td>Тип точки</td>
             </tr>
-            <tr th:each="record : ${records}">
-                <td th:text="${record.id}">Some text</td>
-                <td th:text="${record.head}">Some text</td>
-                <td th:text="${record.data}">Some text</td>
-                <td th:text="${record.img_link}">Some text</td>
-                <td th:text="${record.locate}">Some text</td>
-                <td th:text="${record.phone}">Some text</td>
+            <tr th:each="person : ${records}">
+                <td th:text="${person.id}">Some text</td>
+                <td th:text="${person.head}">Some text</td>
+                <td th:text="${person.data}">Some text</td>
+                <td th:text="${person.img_link}">Some text</td>
+                <td th:text="${person.locate}">Some text</td>
+                <td th:text="${person.phone}">Some text</td>
             </tr>
             </tbody>
         </table>

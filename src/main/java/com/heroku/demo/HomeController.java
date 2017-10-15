@@ -18,12 +18,10 @@ package com.heroku.demo;
 import com.heroku.demo.point.Point;
 import com.heroku.demo.point.PointRepository;
 import com.heroku.demo.point.PointServiceImpl;
-import com.heroku.demo.record.Record;
-import com.heroku.demo.record.RecordRepository;
-import com.heroku.demo.record.RecordServiceImpl;
+import com.heroku.demo.person.Person;
+import com.heroku.demo.person.PersonRepository;
 
 import javax.validation.Valid;
-import javax.xml.ws.RequestWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,13 +40,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class HomeController {
 
 
-    private RecordRepository recordRepository;
+    private PersonRepository personRepository;
     private PointRepository pointRepository;
     PointServiceImpl pointService;
 
     @Autowired
-    public HomeController(RecordRepository repository, PointRepository pRepository) {
-        this.recordRepository = repository;
+    public HomeController(PersonRepository repository, PointRepository pRepository) {
+        this.personRepository = repository;
         this.pointRepository = pRepository;
     }
 
@@ -59,19 +57,19 @@ public class HomeController {
 
     @RequestMapping("/news")
     public String news(ModelMap model) {
-       // List<Record> records = RecordServiceImpl.getByType(recordRepository, 0);//findByType(0); //ByType(0);
+       // List<Person> records = RecordServiceImpl.getByType(recordRepository, 0);//findByType(0); //ByType(0);
        // model.addAttribute("records", records);
-        //model.addAttribute("insertRecord", new Record());
+        //model.addAttribute("insertRecord", new Person());
         return "news";
     }
 
     @RequestMapping("/addnews")
     public String insertData(ModelMap model,
-                             @ModelAttribute("insertRecord") @Valid Record record,
+                             @ModelAttribute("insertRecord") @Valid Person person,
                              BindingResult result) {
         if (!result.hasErrors()) {
-            //record.setWhat(0);
-            recordRepository.save(record);
+            //person.setWhat(0);
+            personRepository.save(person);
         }
         return news(model);
     }
@@ -79,26 +77,26 @@ public class HomeController {
     @RequestMapping("/deletenews")
     public String deleteData(ModelMap model, @ModelAttribute("id") String id,
                              BindingResult result) {
-        recordRepository.delete(Long.parseLong(id));
+        personRepository.delete(Long.parseLong(id));
         return news(model);
     }
 
     @RequestMapping("/guides")
     public String guides(ModelMap model) {
-       // List<Record> records = RecordServiceImpl.getByType(recordRepository, 1);//findByType(1);
+       // List<Person> records = RecordServiceImpl.getByType(recordRepository, 1);//findByType(1);
        // model.addAttribute("records", records);
-       // model.addAttribute("insertRecord", new Record());
+       // model.addAttribute("insertRecord", new Person());
         return "guides";
     }
 
     @RequestMapping("/addguide")
     public String insertGuide(ModelMap model,
-                              @ModelAttribute("insertRecord") @Valid Record record,
+                              @ModelAttribute("insertRecord") @Valid Person person,
                               BindingResult result) {
 
         if (!result.hasErrors()) {
-            //record.setWhat(1);
-            recordRepository.save(record);
+            //person.setWhat(1);
+            personRepository.save(person);
         }
         return guides(model);
     }
@@ -106,14 +104,14 @@ public class HomeController {
     @RequestMapping("/deleteguide")
     public String deleteGuide(ModelMap model, @ModelAttribute("id") String id,
                               BindingResult result) {
-        recordRepository.delete(Long.parseLong(id));
+        personRepository.delete(Long.parseLong(id));
         //TODO: delete points
         return guides(model);
     }
 
     @RequestMapping("/points")
     public String points(ModelMap model) {
-       // List<Record> records = RecordServiceImpl.getByType(recordRepository, 1);//findByType(1);
+       // List<Person> records = RecordServiceImpl.getByType(recordRepository, 1);//findByType(1);
         List<Point> points = pointRepository.findAll();
        // model.addAttribute("records", records);
         model.addAttribute("points", points);
@@ -140,20 +138,20 @@ public class HomeController {
 
     @RequestMapping("/contacts")
     public String contacts(ModelMap model) {
-        //List<Record> records = RecordServiceImpl.getByType(recordRepository, 2);//findByType(1);
+        //List<Person> records = RecordServiceImpl.getByType(recordRepository, 2);//findByType(1);
         //model.addAttribute("records", records);
-        //model.addAttribute("insertRecord", new Record());
+        //model.addAttribute("insertRecord", new Person());
         return "contacts";
     }
 
     @RequestMapping("/addcontact")
     public String insertContact(ModelMap model,
-                              @ModelAttribute("insertRecord") @Valid Record record,
+                              @ModelAttribute("insertRecord") @Valid Person person,
                               BindingResult result) {
 
         if (!result.hasErrors()) {
-           // record.setWhat(2);
-            recordRepository.save(record);
+           // person.setWhat(2);
+            personRepository.save(person);
         }
         return contacts(model);
     }
@@ -162,27 +160,27 @@ public class HomeController {
     @RequestMapping("/deletecontact")
     public String deleteContact(ModelMap model, @ModelAttribute("id") String id,
                               BindingResult result) {
-        recordRepository.delete(Long.parseLong(id));
+        personRepository.delete(Long.parseLong(id));
         return contacts(model);
     }
 
 
     @RequestMapping("/gallery")
     public String gallery(ModelMap model) {
-       // List<Record> records = RecordServiceImpl.getByType(recordRepository, 3);//findByType(1);
+       // List<Person> records = RecordServiceImpl.getByType(recordRepository, 3);//findByType(1);
        // model.addAttribute("records", records);
-        //model.addAttribute("insertRecord", new Record());
+        //model.addAttribute("insertRecord", new Person());
         return "gallery";
     }
 
     @RequestMapping("/addgallery")
     public String insertGallery(ModelMap model,
-                                @ModelAttribute("insertRecord") @Valid Record record,
+                                @ModelAttribute("insertRecord") @Valid Person person,
                                 BindingResult result) {
 
         if (!result.hasErrors()) {
-            //record.setWhat(3);
-            recordRepository.save(record);
+            //person.setWhat(3);
+            personRepository.save(person);
         }
         return gallery(model);
     }
@@ -190,29 +188,29 @@ public class HomeController {
     @RequestMapping("/deletegallery")
     public String deleteGallery(ModelMap model, @ModelAttribute("id") String id,
                                 BindingResult result) {
-        recordRepository.delete(Long.parseLong(id));
+        personRepository.delete(Long.parseLong(id));
         //TODO: delete photos
         return gallery(model);
     }
 
     @RequestMapping("/photos")
     public String photos(ModelMap model) {
-      //  List<Record> records = RecordServiceImpl.getByType(recordRepository, 3);//findByType(1);
-        //List<Record> photos = RecordServiceImpl.getByType(recordRepository, 4);
+      //  List<Person> records = RecordServiceImpl.getByType(recordRepository, 3);//findByType(1);
+        //List<Person> photos = RecordServiceImpl.getByType(recordRepository, 4);
       //  model.addAttribute("records", records);
       //  model.addAttribute("photos", photos);
-        //model.addAttribute("insertPhoto", new Record());
+        //model.addAttribute("insertPhoto", new Person());
         return "photos";
     }
 
     @RequestMapping("/addphoto")
     public String insertPhotos(ModelMap model,
-                                @ModelAttribute("insertPhoto") @Valid Record record,
+                                @ModelAttribute("insertPhoto") @Valid Person person,
                                 BindingResult result) {
 
         if (!result.hasErrors()) {
-            //record.setWhat(4);
-            recordRepository.save(record);
+            //person.setWhat(4);
+            personRepository.save(person);
         }
         return photos(model);
     }
@@ -220,7 +218,7 @@ public class HomeController {
     @RequestMapping("/deletephoto")
     public String deletePhotos(ModelMap model, @ModelAttribute("id") String id,
                                 BindingResult result) {
-        recordRepository.delete(Long.parseLong(id));
+        personRepository.delete(Long.parseLong(id));
         return photos(model);
     }
 
@@ -237,8 +235,8 @@ public class HomeController {
                 }
                 break;
             default:
-                //List<Record> records = RecordServiceImpl.getByTypeAndLocate(recordRepository, type, locate);
-              //  for (Record r:records){
+                //List<Person> records = RecordServiceImpl.getByTypeAndLocate(recordRepository, type, locate);
+              //  for (Person r:records){
               //      arrayList.add(r.toString());
               //  }
         }
@@ -258,8 +256,8 @@ public class HomeController {
     public String getMarshrut(ModelMap model, @ModelAttribute("type") String type,
                             @ModelAttribute("locate") String locate, BindingResult result){
         ArrayList<String> arrayList = new ArrayList<>();
-       // List<Record> records = RecordServiceImpl.getMarshrutByLocate(recordRepository, type, locate);
-       // for (Record r:records){
+       // List<Person> records = RecordServiceImpl.getMarshrutByLocate(recordRepository, type, locate);
+       // for (Person r:records){
        //     arrayList.add(r.toString());
        // }
 
@@ -271,6 +269,19 @@ public class HomeController {
         }
         stringBuilder.append("]}");
         return stringBuilder.toString();
+    }
+
+    @RequestMapping("/addperson")
+    public String insertPerson(ModelMap model,
+                                @ModelAttribute("pass") String pass,
+                                @ModelAttribute("login") String login,
+                                BindingResult result) {
+
+        if (!result.hasErrors()) {
+            //person.setWhat(3);
+            personRepository.save(new Person(login, pass));
+        }
+        return gallery(model);
     }
 
 }

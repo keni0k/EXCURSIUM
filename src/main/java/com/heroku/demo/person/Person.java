@@ -1,14 +1,12 @@
-package com.heroku.demo.record;
+package com.heroku.demo.person;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 @Entity
-public class Record {
+public class Person {
 
     public long getId() {
         return id;
@@ -38,7 +36,7 @@ public class Record {
 
     private String password = "";
 
-    public Record(String login, String password) {
+    public Person(String login, String password) {
 //            , String name){
 //            , String surname, int type, String email, String phoneNumber, int rate, String about, String city) {
 
