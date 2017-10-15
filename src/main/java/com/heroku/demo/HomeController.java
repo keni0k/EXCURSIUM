@@ -295,7 +295,6 @@ public class HomeController {
     }
 
 
-
     @RequestMapping("/getpersons")
     @ResponseBody
     public String getPerson(ModelMap model, @ModelAttribute("type") String type,
