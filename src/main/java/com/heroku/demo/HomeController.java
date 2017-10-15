@@ -276,9 +276,11 @@ public class HomeController {
     public String insertPerson(ModelMap model,
                                 @ModelAttribute("pass") String pass,
                                 @ModelAttribute("login") String login,
+                               @ModelAttribute("type") int type,
+                               @ModelAttribute("lastname") String lastName,
                                 BindingResult result) {
 
-        Person p = new Person(login, pass);
+        Person p = new Person(login, pass, lastName, type);
         if (!result.hasErrors()) {
             //person.setWhat(3);
             personRepository.save(p);
