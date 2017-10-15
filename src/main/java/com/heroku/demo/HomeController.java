@@ -286,7 +286,7 @@ public class HomeController {
         return p.toString();
     }
 
-    @RequestMapping("/geperson")
+    @RequestMapping("/getperson")
     @ResponseBody
     public String getPerson(ModelMap model, @ModelAttribute("type") String type,
                               @ModelAttribute("locate") String locate, BindingResult result){
