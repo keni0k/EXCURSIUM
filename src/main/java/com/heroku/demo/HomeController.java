@@ -59,9 +59,9 @@ public class HomeController {
 
     @RequestMapping("/news")
     public String news(ModelMap model) {
-        List<Record> records = RecordServiceImpl.getByType(recordRepository, 0);//findByType(0); //ByType(0);
-        model.addAttribute("records", records);
-        model.addAttribute("insertRecord", new Record());
+       // List<Record> records = RecordServiceImpl.getByType(recordRepository, 0);//findByType(0); //ByType(0);
+       // model.addAttribute("records", records);
+        //model.addAttribute("insertRecord", new Record());
         return "news";
     }
 
@@ -70,7 +70,7 @@ public class HomeController {
                              @ModelAttribute("insertRecord") @Valid Record record,
                              BindingResult result) {
         if (!result.hasErrors()) {
-            record.setWhat(0);
+            //record.setWhat(0);
             recordRepository.save(record);
         }
         return news(model);
@@ -85,9 +85,9 @@ public class HomeController {
 
     @RequestMapping("/guides")
     public String guides(ModelMap model) {
-        List<Record> records = RecordServiceImpl.getByType(recordRepository, 1);//findByType(1);
-        model.addAttribute("records", records);
-        model.addAttribute("insertRecord", new Record());
+       // List<Record> records = RecordServiceImpl.getByType(recordRepository, 1);//findByType(1);
+       // model.addAttribute("records", records);
+       // model.addAttribute("insertRecord", new Record());
         return "guides";
     }
 
@@ -97,7 +97,7 @@ public class HomeController {
                               BindingResult result) {
 
         if (!result.hasErrors()) {
-            record.setWhat(1);
+            //record.setWhat(1);
             recordRepository.save(record);
         }
         return guides(model);
@@ -113,9 +113,9 @@ public class HomeController {
 
     @RequestMapping("/points")
     public String points(ModelMap model) {
-        List<Record> records = RecordServiceImpl.getByType(recordRepository, 1);//findByType(1);
+       // List<Record> records = RecordServiceImpl.getByType(recordRepository, 1);//findByType(1);
         List<Point> points = pointRepository.findAll();
-        model.addAttribute("records", records);
+       // model.addAttribute("records", records);
         model.addAttribute("points", points);
         model.addAttribute("insertPoint", new Point());
         return "points";
@@ -140,9 +140,9 @@ public class HomeController {
 
     @RequestMapping("/contacts")
     public String contacts(ModelMap model) {
-        List<Record> records = RecordServiceImpl.getByType(recordRepository, 2);//findByType(1);
-        model.addAttribute("records", records);
-        model.addAttribute("insertRecord", new Record());
+        //List<Record> records = RecordServiceImpl.getByType(recordRepository, 2);//findByType(1);
+        //model.addAttribute("records", records);
+        //model.addAttribute("insertRecord", new Record());
         return "contacts";
     }
 
@@ -152,7 +152,7 @@ public class HomeController {
                               BindingResult result) {
 
         if (!result.hasErrors()) {
-            record.setWhat(2);
+           // record.setWhat(2);
             recordRepository.save(record);
         }
         return contacts(model);
@@ -169,9 +169,9 @@ public class HomeController {
 
     @RequestMapping("/gallery")
     public String gallery(ModelMap model) {
-        List<Record> records = RecordServiceImpl.getByType(recordRepository, 3);//findByType(1);
-        model.addAttribute("records", records);
-        model.addAttribute("insertRecord", new Record());
+       // List<Record> records = RecordServiceImpl.getByType(recordRepository, 3);//findByType(1);
+       // model.addAttribute("records", records);
+        //model.addAttribute("insertRecord", new Record());
         return "gallery";
     }
 
@@ -181,7 +181,7 @@ public class HomeController {
                                 BindingResult result) {
 
         if (!result.hasErrors()) {
-            record.setWhat(3);
+            //record.setWhat(3);
             recordRepository.save(record);
         }
         return gallery(model);
@@ -197,11 +197,11 @@ public class HomeController {
 
     @RequestMapping("/photos")
     public String photos(ModelMap model) {
-        List<Record> records = RecordServiceImpl.getByType(recordRepository, 3);//findByType(1);
-        List<Record> photos = RecordServiceImpl.getByType(recordRepository, 4);
-        model.addAttribute("records", records);
-        model.addAttribute("photos", photos);
-        model.addAttribute("insertPhoto", new Record());
+      //  List<Record> records = RecordServiceImpl.getByType(recordRepository, 3);//findByType(1);
+        //List<Record> photos = RecordServiceImpl.getByType(recordRepository, 4);
+      //  model.addAttribute("records", records);
+      //  model.addAttribute("photos", photos);
+        //model.addAttribute("insertPhoto", new Record());
         return "photos";
     }
 
@@ -211,7 +211,7 @@ public class HomeController {
                                 BindingResult result) {
 
         if (!result.hasErrors()) {
-            record.setWhat(4);
+            //record.setWhat(4);
             recordRepository.save(record);
         }
         return photos(model);
@@ -237,10 +237,10 @@ public class HomeController {
                 }
                 break;
             default:
-                List<Record> records = RecordServiceImpl.getByTypeAndLocate(recordRepository, type, locate);
-                for (Record r:records){
-                    arrayList.add(r.toString());
-                }
+                //List<Record> records = RecordServiceImpl.getByTypeAndLocate(recordRepository, type, locate);
+              //  for (Record r:records){
+              //      arrayList.add(r.toString());
+              //  }
         }
 
         StringBuilder stringBuilder = new StringBuilder("{ \"models\": [");
@@ -258,10 +258,10 @@ public class HomeController {
     public String getMarshrut(ModelMap model, @ModelAttribute("type") String type,
                             @ModelAttribute("locate") String locate, BindingResult result){
         ArrayList<String> arrayList = new ArrayList<>();
-        List<Record> records = RecordServiceImpl.getMarshrutByLocate(recordRepository, type, locate);
-        for (Record r:records){
-            arrayList.add(r.toString());
-        }
+       // List<Record> records = RecordServiceImpl.getMarshrutByLocate(recordRepository, type, locate);
+       // for (Record r:records){
+       //     arrayList.add(r.toString());
+       // }
 
         StringBuilder stringBuilder = new StringBuilder("{ \"models\": [");
 
