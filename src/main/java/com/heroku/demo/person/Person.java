@@ -36,6 +36,8 @@ public class Person {
 
     private String password = "";
 
+    public Person(){}
+
     public Person(String login, String password) {
 //            , String name){
 //            , String surname, int type, String email, String phoneNumber, int rate, String about, String city) {
