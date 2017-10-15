@@ -40,3 +40,18 @@ databaseChangeLog:
                     type: varchar(255)
                     constraints:
                       nullable: false
+  - changeSet:
+          id: 3
+          author: keni0k
+          changes:
+            - addcolumn:
+                tableName: person
+                columns:
+                  - column:
+                      name: last_name
+                      type: varchar(255)
+                      constraints:
+                        nullable: false
+            - dropcolumn:
+                tableName: person
+                columnname: lastName
