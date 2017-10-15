@@ -272,16 +272,38 @@ public class HomeController {
     }
 
     @RequestMapping("/addperson")
+    @ResponseBody
     public String insertPerson(ModelMap model,
                                 @ModelAttribute("pass") String pass,
                                 @ModelAttribute("login") String login,
                                 BindingResult result) {
 
+        Person p = new Person(login, pass);
         if (!result.hasErrors()) {
             //person.setWhat(3);
-            personRepository.save(new Person(login, pass));
+            personRepository.save(p);
         }
-        return gallery(model);
+        return p.toString();
+    }
+
+    @RequestMapping("/geperson")
+    @ResponseBody
+    public String getPerson(ModelMap model, @ModelAttribute("type") String type,
+                              @ModelAttribute("locate") String locate, BindingResult result){
+        ArrayList<String> arrayList = new ArrayList<>();
+         List<Person> persons = personRepository.findAll();
+        for (Person p:persons){
+             arrayList.add(p.toString());
+        }
+
+        StringBuilder stringBuilder = new StringBuilder("{ \"persons\": [");
+
+        for (int i = 0; i<arrayList.size(); i++) {
+            stringBuilder.append(arrayList.get(i));
+            if (arrayList.size()-i>1) stringBuilder.append(",\n");
+        }
+        stringBuilder.append("]}");
+        return stringBuilder.toString();
     }
 
 }
