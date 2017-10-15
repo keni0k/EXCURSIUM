@@ -15,9 +15,9 @@
  */
 package com.heroku.demo;
 
-import com.heroku.demo.point.Point;
-import com.heroku.demo.point.PointRepository;
-import com.heroku.demo.point.PointServiceImpl;
+import com.heroku.demo.message.Message;
+import com.heroku.demo.message.MessageRepository;
+import com.heroku.demo.message.MessageServiceImpl;
 import com.heroku.demo.person.Person;
 import com.heroku.demo.person.PersonRepository;
 
@@ -41,13 +41,13 @@ public class HomeController {
 
 
     private PersonRepository personRepository;
-    private PointRepository pointRepository;
-    PointServiceImpl pointService;
+    private MessageRepository messageRepository;
+    MessageServiceImpl pointService;
 
     @Autowired
-    public HomeController(PersonRepository repository, PointRepository pRepository) {
+    public HomeController(PersonRepository repository, MessageRepository pRepository) {
         this.personRepository = repository;
-        this.pointRepository = pRepository;
+        this.messageRepository = pRepository;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -57,7 +57,7 @@ public class HomeController {
 
     @RequestMapping("/news")
     public String news(ModelMap model) {
-       // List<Person> records = RecordServiceImpl.getByType(recordRepository, 0);//findByType(0); //ByType(0);
+       // List<Person> records = PersonServiceImpl.getByType(recordRepository, 0);//findByType(0); //ByType(0);
        // model.addAttribute("records", records);
         //model.addAttribute("insertRecord", new Person());
         return "news";
@@ -83,7 +83,7 @@ public class HomeController {
 
     @RequestMapping("/guides")
     public String guides(ModelMap model) {
-       // List<Person> records = RecordServiceImpl.getByType(recordRepository, 1);//findByType(1);
+       // List<Person> records = PersonServiceImpl.getByType(recordRepository, 1);//findByType(1);
        // model.addAttribute("records", records);
        // model.addAttribute("insertRecord", new Person());
         return "guides";
@@ -111,20 +111,20 @@ public class HomeController {
 
     @RequestMapping("/points")
     public String points(ModelMap model) {
-       // List<Person> records = RecordServiceImpl.getByType(recordRepository, 1);//findByType(1);
-        List<Point> points = pointRepository.findAll();
+       // List<Person> records = PersonServiceImpl.getByType(recordRepository, 1);//findByType(1);
+        List<Message> messages = messageRepository.findAll();
        // model.addAttribute("records", records);
-        model.addAttribute("points", points);
-        model.addAttribute("insertPoint", new Point());
-        return "points";
+        model.addAttribute("messages", messages);
+        model.addAttribute("insertPoint", new Message());
+        return "messages";
     }
 
     @RequestMapping("/addpoint")
     public String insertPoint(ModelMap model,
-                              @ModelAttribute("insertPoint") @Valid Point point,
+                              @ModelAttribute("insertPoint") @Valid Message message,
                               BindingResult result) {
         if (!result.hasErrors()) {
-            pointRepository.save(point);
+            messageRepository.save(message);
         }
         return points(model);
     }
@@ -132,13 +132,13 @@ public class HomeController {
     @RequestMapping("/deletepoint")
     public String deletePoint(ModelMap model, @ModelAttribute("id") String id,
                               BindingResult result) {
-        pointRepository.delete(Long.parseLong(id));
+        messageRepository.delete(Long.parseLong(id));
         return points(model);
     }
 
     @RequestMapping("/contacts")
     public String contacts(ModelMap model) {
-        //List<Person> records = RecordServiceImpl.getByType(recordRepository, 2);//findByType(1);
+        //List<Person> records = PersonServiceImpl.getByType(recordRepository, 2);//findByType(1);
         //model.addAttribute("records", records);
         //model.addAttribute("insertRecord", new Person());
         return "contacts";
@@ -167,7 +167,7 @@ public class HomeController {
 
     @RequestMapping("/gallery")
     public String gallery(ModelMap model) {
-       // List<Person> records = RecordServiceImpl.getByType(recordRepository, 3);//findByType(1);
+       // List<Person> records = PersonServiceImpl.getByType(recordRepository, 3);//findByType(1);
        // model.addAttribute("records", records);
         //model.addAttribute("insertRecord", new Person());
         return "gallery";
@@ -195,8 +195,8 @@ public class HomeController {
 
     @RequestMapping("/photos")
     public String photos(ModelMap model) {
-      //  List<Person> records = RecordServiceImpl.getByType(recordRepository, 3);//findByType(1);
-        //List<Person> photos = RecordServiceImpl.getByType(recordRepository, 4);
+      //  List<Person> records = PersonServiceImpl.getByType(recordRepository, 3);//findByType(1);
+        //List<Person> photos = PersonServiceImpl.getByType(recordRepository, 4);
       //  model.addAttribute("records", records);
       //  model.addAttribute("photos", photos);
         //model.addAttribute("insertPhoto", new Person());
@@ -229,13 +229,13 @@ public class HomeController {
         ArrayList<String> arrayList = new ArrayList<>();
         switch (type){
             case 5:
-                List<Point> points = pointRepository.findAll();
-                for (Point p:points){
+                List<Message> messages = messageRepository.findAll();
+                for (Message p: messages){
                     arrayList.add(p.toString());
                 }
                 break;
             default:
-                //List<Person> records = RecordServiceImpl.getByTypeAndLocate(recordRepository, type, locate);
+                //List<Person> records = PersonServiceImpl.getByTypeAndLocate(recordRepository, type, locate);
               //  for (Person r:records){
               //      arrayList.add(r.toString());
               //  }
@@ -256,7 +256,7 @@ public class HomeController {
     public String getMarshrut(ModelMap model, @ModelAttribute("type") String type,
                             @ModelAttribute("locate") String locate, BindingResult result){
         ArrayList<String> arrayList = new ArrayList<>();
-       // List<Person> records = RecordServiceImpl.getMarshrutByLocate(recordRepository, type, locate);
+       // List<Person> records = PersonServiceImpl.getMarshrutByLocate(recordRepository, type, locate);
        // for (Person r:records){
        //     arrayList.add(r.toString());
        // }
@@ -277,10 +277,16 @@ public class HomeController {
                                 @ModelAttribute("pass") String pass,
                                 @ModelAttribute("login") String login,
                                @ModelAttribute("type") int type,
-                               @ModelAttribute("lastname") String lastName,
+                               @ModelAttribute("last_name") String lastName,
+                               @ModelAttribute("first_name") String firstName,
+                               @ModelAttribute("phone_number") String phoneNumber,
+                               @ModelAttribute("rate") int rate,
+                               @ModelAttribute("city") String city,
+                               @ModelAttribute("email") String email,
+                               @ModelAttribute("about") String about,
                                 BindingResult result) {
 
-        Person p = new Person(login, pass, lastName, type);
+        Person p = new Person(login, pass, lastName, type, firstName, email, phoneNumber, rate, about, city);
         if (!result.hasErrors()) {
             //person.setWhat(3);
             personRepository.save(p);
@@ -289,7 +295,7 @@ public class HomeController {
     }
 
 
-    @RequestMapping("/getperson")
+    @RequestMapping("/getpersons")
     @ResponseBody
     public String getPerson(ModelMap model, @ModelAttribute("type") String type,
                               @ModelAttribute("locate") String locate, BindingResult result){
@@ -298,7 +304,6 @@ public class HomeController {
         for (Person p:persons){
              arrayList.add(p.toString());
         }
-
 
         StringBuilder stringBuilder = new StringBuilder("{ \"persons\": [");
 

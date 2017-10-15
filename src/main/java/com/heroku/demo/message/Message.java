@@ -1,15 +1,13 @@
-package com.heroku.demo.point;
+package com.heroku.demo.message;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 @Entity
-public class Point {
+public class Message {
 
-    public Point(String p1, String p2, int id_of_guide, String data) {
+    public Message(String p1, String p2, int id_of_guide, String data) {
         this.p1 = p1;
         this.p2 = p2;
         this.id_of_guide = id_of_guide;
@@ -22,16 +20,20 @@ public class Point {
                 "\" , \"id_of_guide\":\"" + id_of_guide + "\" , \"data\":\"" + data + "\"}";
     }
 
-    public Point() {
-    }
-
-    public long getId() {
-        return id;
+    public Message() {
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    private String p1 = "";
+    private String p2 = "";
+    private int id_of_guide = -1;
+    private String data = "";
+
+    public long getId() {
+        return id;
+    }
 
     public String getP1() {
         return p1;
@@ -57,15 +59,12 @@ public class Point {
         this.id_of_guide = id_of_guide;
     }
 
-    private String p1 = "";
-    private String p2 = "";
-    private int id_of_guide = -1;
     public String getData() {
         return data;
     }
     public void setData(String data) {
         this.data = data;
     }
-    private String data = "";
+
 
 }

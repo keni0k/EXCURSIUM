@@ -6,7 +6,7 @@ import java.util.List;
  * Created by Keni0k on 25.07.2017.
  */
 
-public interface RecordService {
+public interface PersonService {
     Person addRecord(Person person);
     void delete(long id);
     List<Person> getByType(int type);

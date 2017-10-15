@@ -19,17 +19,33 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: password
+                  name: pass
                   type: varchar(255)
                   constraints:
                     nullable: false
               - column:
-                  name: type
+                  name: rate
                   type: int
                   constraints:
                     nullable: false
               - column:
-                  name: last_name
+                  name: phone_number
                   type: varchar(255)
                   constraints:
                     nullable: false
+              - column:
+                  name: city
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: about
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+

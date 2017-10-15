@@ -121,12 +121,12 @@
                 <td>Долгота</td>
                 <td>Описание</td>
             </tr>
-            <tr th:each="point : ${points}">
-                <td th:text="${point.id}">Some text</td>
-                <td th:text="${point.id_of_guide}">Some text</td>
-                <td th:text="${point.p1}">Some text</td>
-                <td th:text="${point.p2}">Some text</td>
-                <td th:text="${point.data}">Some text</td>
+            <tr th:each="message : ${messages}">
+                <td th:text="${message.id}">Some text</td>
+                <td th:text="${message.id_of_guide}">Some text</td>
+                <td th:text="${message.p1}">Some text</td>
+                <td th:text="${message.p2}">Some text</td>
+                <td th:text="${message.data}">Some text</td>
             </tr>
             </tbody>
         </table>

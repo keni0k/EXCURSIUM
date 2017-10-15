@@ -1,4 +1,4 @@
-package com.heroku.demo.person;
+package com.heroku.demo.review;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Person {
+public class Review {
 
     public long getId() {
         return id;
@@ -15,16 +15,14 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String login = "";
+
     private String pass = "";
+
     private String lastName = "";
+
     private int type = 0;
-    private String email = "";
-    private String firstName = "";
-    private int rate = 0;
-    private String phoneNumber = "";
-    private String about = "";
-    private String city = "";
 
     public String getLogin() {
         return login;
@@ -58,21 +56,18 @@ public class Person {
         this.type = type;
     }
 
-    public Person(){}
+    public Review(){}
 
-    public Person(String login, String pass
-            , String lastName, int type, String firstName
-            , String email, String phoneNumber, int rate, String about, String city) {
+    public Review(String login, String pass
+            , String lastName, int type){
+//            , String surname, int type, String email, String phoneNumber, int rate, String about, String city) {
 
-        this.email = email;
-        this.firstName = firstName;
-        this.phoneNumber = phoneNumber;
-        this.rate = rate;
-        this.about = about;
-        this.city = city;
         this.login = login;
+
         this.pass = pass;
+
         this.type = type;
+
         this.lastName = lastName;
     }
 
@@ -83,14 +78,13 @@ public class Person {
                 "\t\"id\":\"" + id + "\",\n" +
                 "\t\"login\":\"" + login + "\",\n" +
                 "\t\"pass\":\"" + pass + "\",\n" +
-                "\t\"lastName\":\"" + lastName + "\",\n" +
-                "\t\"firstName\":\"" + firstName + "\",\n" +
+                "\t\"last_name\":\"" + lastName + "\",\n" +
+//                "\t\"surname\":" + surname + ",\n" +
                 "\t\"type\":\"" + type + "\",\n" +
-                "\t\"email\":\"" + email + "\",\n" +
-                "\t\"phoneNumber\":\"" + phoneNumber + "\",\n" +
-                "\t\"rate\":\"" + rate + "\",\n" +
-                "\t\"about\":\"" + about + "\",\n" +
-                "\t\"city\":\"" + city + "\"\n" +
+//                "\t\"email\":" + email + ",\n" +
+//                "\t\"phoneNumber\":" + phoneNumber + ",\n" +
+//                "\t\"rate\":" + rate + ",\n" +
+//                "\t\"about\":" + about + "\n" +
                 "}";
     }
 

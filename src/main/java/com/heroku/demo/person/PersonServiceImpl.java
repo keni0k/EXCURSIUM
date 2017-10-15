@@ -4,7 +4,7 @@ package com.heroku.demo.person;
  * Created by Keni0k on 25.07.2017.
  */
 
-public class RecordServiceImpl {
+public class PersonServiceImpl {
 
 //    public static List<Person> getByType(RecordRepository recordRepository, int type) {
 //        List<Person> list = recordRepository.findAll();
