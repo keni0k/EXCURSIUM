@@ -453,9 +453,9 @@ public class HomeController {
     @ResponseBody
     public String getOrders(){
         ArrayList<String> arrayList = new ArrayList<>();
-        List<Review> persons = reviewRepository.findAll();
-        for(Review r:persons){
-            arrayList.add(r.toString());
+        List<Order> orders = orderRepository.findAll();
+        for(Order o:orders){
+            arrayList.add(o.toString());
         }
 
         StringBuilder stringBuilder = new StringBuilder("{ \"orders\": [");
