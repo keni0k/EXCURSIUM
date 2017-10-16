@@ -205,18 +205,6 @@ public class HomeController {
         return "photos";
     }
 
-    @RequestMapping("/addphoto")
-    public String insertPhotos(ModelMap model,
-                                @ModelAttribute("insertPhoto") @Valid Person person,
-                                BindingResult result) {
-
-        if (!result.hasErrors()) {
-            //person.setWhat(4);
-            personRepository.save(person);
-        }
-        return photos(model);
-    }
-
     @RequestMapping("/deletephoto")
     public String deletePhotos(ModelMap model, @ModelAttribute("id") String id,
                                 BindingResult result) {
