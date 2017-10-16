@@ -127,33 +127,3 @@ databaseChangeLog:
                    type: varchar(255)
                    constraints:
                       nullable: false
-        - createTable:
-            tableName: messages
-            columns:
-              -column:
-                 name: id
-                 type: int
-                 autoIncrement: true
-                 constraints:
-                   primaryKey: true
-                   nullable: false
-              -column:
-                  name: event_id
-                  type: int
-                  constraints:
-                     nullable: false
-              -column:
-                name: user_id
-                type: int
-                constraints:
-                   nullable: false
-              -column:
-                  name: msg
-                  type: varchar(255)
-                  constraints:
-                    nullable: false
-              -column:
-                  name: date
-                  type: varchar(10)
-                  constraints:
-                    nullable: false
