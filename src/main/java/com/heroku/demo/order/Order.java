@@ -15,13 +15,13 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private long eventId = 0;
+    private int eventId = 0;
 
-    public long getEventId() {
+    public int getEventId() {
         return eventId;
     }
 
-    public void setEventId(long eventId) {
+    public void setEventId(int eventId) {
         this.eventId = eventId;
     }
 
@@ -29,7 +29,7 @@ public class Order {
         return touristId;
     }
 
-    public void setTouristId(long touristId) {
+    public void setTouristId(int touristId) {
         this.touristId = touristId;
     }
 
@@ -37,7 +37,7 @@ public class Order {
         return price;
     }
 
-    public void setPrice(long price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
@@ -49,15 +49,15 @@ public class Order {
         this.orderDate = orderDate;
     }
 
-    private long touristId = 0;
+    private int touristId = 0;
 
-    public Order(long eventId, long touristId, long price, String orderDate) {
+    public Order(int eventId, int touristId, int price, String orderDate) {
         this.eventId = eventId;
         this.touristId = touristId;
         this.price = price;
         this.orderDate = orderDate;
     }
 
-    private long price = 0;
+    private int price = 0;
     private String orderDate = "";
 }

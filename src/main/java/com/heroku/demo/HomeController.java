@@ -397,24 +397,19 @@ public class HomeController {
     @RequestMapping("/addreview")
     @ResponseBody
     public String insertReview(ModelMap model,
-                               @ModelAttribute("pass") String pass,
-                               @ModelAttribute("login") String login,
-                               @ModelAttribute("type") int type,
-                               @ModelAttribute("last_name") String lastName,
-                               @ModelAttribute("first_name") String firstName,
-                               @ModelAttribute("phone_number") String phoneNumber,
+                               @ModelAttribute("data") String data,
+                               @ModelAttribute("image_url") String imageUrl,
+                               @ModelAttribute("user_id") int userId,
+                               @ModelAttribute("event_id") int eventId,
                                @ModelAttribute("rate") int rate,
-                               @ModelAttribute("city") String city,
-                               @ModelAttribute("email") String email,
-                               @ModelAttribute("about") String about,
                                BindingResult result) {
 
-        Person p = new Person(login, pass, lastName, type, firstName, email, phoneNumber, rate, about, city);
+        Review review = new Review(data, "TIME", imageUrl, userId, eventId, rate);
         if (!result.hasErrors()) {
             //person.setWhat(3);
-            personRepository.save(p);
+            reviewRepository.save(review);
         }
-        return p.toString();
+        return review.toString();
     }
 
 
