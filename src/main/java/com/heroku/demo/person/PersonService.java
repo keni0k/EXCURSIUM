@@ -7,9 +7,10 @@ import java.util.List;
  */
 
 public interface PersonService {
-    Person addRecord(Person person);
+    Person addPerson(Person person);
     void delete(long id);
     List<Person> getByType(int type);
-    Person editRecord(Person person);
+    Person editPerson(Person person);
+    Boolean authorization(String login, String pass);
     List<Person> getAll();
 }
