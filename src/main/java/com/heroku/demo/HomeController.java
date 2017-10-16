@@ -463,7 +463,7 @@ public class HomeController {
             arrayList.add(r.toString());
         }
 
-        StringBuilder stringBuilder = new StringBuilder("{ \"reviews\": [");
+        StringBuilder stringBuilder = new StringBuilder("{ \"orders\": [");
 
         for (int i = 0; i<arrayList.size(); i++) {
             stringBuilder.append(arrayList.get(i));
