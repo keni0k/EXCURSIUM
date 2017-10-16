@@ -26,6 +26,7 @@ public class Person {
     private String about = "";
     private String city = "";
 
+
     public String getLogin() {
         return login;
     }
