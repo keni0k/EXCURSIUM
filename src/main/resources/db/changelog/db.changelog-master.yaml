@@ -8,59 +8,59 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  userId: int
+                  type: int
                   autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
               - column:
                   name: date
-                  userId: varchar(255)
+                  type: varchar(255)
                   constraints:
                     nullable: false
               - column:
                   name: imageUrl
-                  userId: varchar(255)
+                  type: varchar(255)
                   constraints:
                     nullable: false
               - column:
                   name: rate
-                  userId: int
+                  type: int
                   constraints:
                     nullable: false
               - column:
                   name: phone_number
-                  userId: varchar(255)
+                  type: varchar(255)
                   constraints:
                     nullable: false
               - column:
                   name: city
-                  userId: varchar(255)
+                  type: varchar(255)
                   constraints:
                     nullable: false
               - column:
                   name: email
-                  userId: varchar(255)
+                  type: varchar(255)
                   constraints:
                     nullable: false
               - column:
                   name: about
-                  userId: varchar(255)
+                  type: varchar(255)
                   constraints:
                     nullable: false
               - column:
                   name: first_name
-                  userId: varchar(255)
+                  type: varchar(255)
                   constraints:
                     nullable: false
               - column:
-                  name: userId
-                  userId: int
+                  name: type
+                  type: int
                   constraints:
                     nullable: false
               - column:
                   name: last_name
-                  userId: varchar(255)
+                  type: varchar(255)
                   constraints:
                     nullable: false
   - changeSet:
