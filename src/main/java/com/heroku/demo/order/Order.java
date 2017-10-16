@@ -51,6 +51,8 @@ public class Order {
 
     private int touristId = 0;
 
+    public Order(){}
+
     public Order(int eventId, int touristId, int price, String orderDate) {
         this.eventId = eventId;
         this.touristId = touristId;
