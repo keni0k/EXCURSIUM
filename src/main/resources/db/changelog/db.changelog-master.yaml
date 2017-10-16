@@ -139,14 +139,14 @@ databaseChangeLog:
                    nullable: false
               -column:
                   name: event_id
-                  type: varchar(30)
+                  type: int
                   constraints:
                      nullable: false
               -column:
-                  name: user_id
-                  type: varchar(30)
-                  constraints:
-                    nullable: false
+                name: user_id
+                type: int
+                constraints:
+                   nullable: false
               -column:
                   name: msg
                   type: varchar(255)

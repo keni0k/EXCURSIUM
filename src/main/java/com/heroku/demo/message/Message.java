@@ -7,18 +7,18 @@ import javax.persistence.Id;
 @Entity
 public class Message {
 
-    public Message(int userId, int eventId, String date, String time) {
+    public Message(int userId, int eventId, String date, String msg) {
         this.userId = userId;
         this.eventId = eventId;
         this.date = date;
-        this.time = time;
+        this.msg = msg;
     }
 
     @Override
     public String toString() {
         return "{\"id\":\"" + id + "\", \"userId\":\"" + userId +
                 "\" , \"eventId\":\"" + eventId + "\" , \"date\":\"" +
-                date + "\", \"time\":\"" + time + "\"}";
+                date + "\", \"msg\":\"" + msg + "\"}";
     }
 
     public Message() {
@@ -40,16 +40,6 @@ public class Message {
     }
 
     private String msg = "";
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    private String time = "";
 
 
     public int getUserId() {
