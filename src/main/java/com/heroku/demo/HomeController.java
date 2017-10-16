@@ -320,7 +320,7 @@ public class HomeController {
 
     @RequestMapping("/getmsgs")
     @ResponseBody
-    public String getMsgs(ModelMap model, BindingResult result){
+    public String getMsgs(){
         ArrayList<String> arrayList = new ArrayList<>();
         List<Message> messages = messageRepository.findAll();
         for (Message m:messages){
