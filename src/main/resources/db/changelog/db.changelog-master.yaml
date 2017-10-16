@@ -70,59 +70,59 @@ databaseChangeLog:
         - createTable:
             tableName: events
             columns:
-               -column:
+               - column:
                    name: id
                    type: int
                    autoIncrement: true
                    constraints:
                      primaryKey: true
                      nullable: false
-               -column:
+               - column:
                     name: guide_id
                     type: int
                     constraints:
                        nullable: false
-               -column:
+               - column:
                    name: name
                    type: varchar(30)
                    constraints:
                       nullable: false
-               -column:
+               - column:
                    name: category
                    type: int
                    constraints:
                       nullable: false
-               -column:
+               - column:
                    name: place
                    type: varchar(30)
                    constraints:
                       nullable: false
-               -column:
+               - column:
                    name: time
                    type: varchar(30)
                    constraints:
                       nullable: false
-               -column:
+               - column:
                    name: duration
                    type: varchar(30)
                    constraints:
                       nullable: false
-               -column:
+               - column:
                    name: price
                    type: int
                    constraints:
                       nullable: false
-               -column:
+               - column:
                    name: description
                    type: varchar(255)
                    constraints:
                       nullable: false
-               -column:
+               - column:
                    name: rate
                    type: int
                    constraints:
                       nullable: false
-               -column:
+               - column:
                    name: photo
                    type: varchar(255)
                    constraints:
