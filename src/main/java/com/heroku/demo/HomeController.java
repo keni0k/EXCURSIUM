@@ -1,6 +1,8 @@
 
 package com.heroku.demo;
 
+import com.heroku.demo.event.Event;
+import com.heroku.demo.event.EventRepository;
 import com.heroku.demo.message.Message;
 import com.heroku.demo.message.MessageRepository;
 import com.heroku.demo.message.MessageServiceImpl;
@@ -12,6 +14,8 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.heroku.demo.review.Review;
+import com.heroku.demo.review.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -28,12 +32,16 @@ public class HomeController {
 
     private PersonRepository personRepository;
     private MessageRepository messageRepository;
-    MessageServiceImpl messageService;
+    private EventRepository eventRepository;
+    private ReviewRepository reviewRepository;
 
     @Autowired
-    public HomeController(PersonRepository repository, MessageRepository pRepository) {
+    public HomeController(PersonRepository repository, MessageRepository pRepository,
+                          ReviewRepository reviewRepository, EventRepository eventRepository) {
         this.personRepository = repository;
         this.messageRepository = pRepository;
+        this.eventRepository = eventRepository;
+        this.reviewRepository = reviewRepository;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -328,6 +336,93 @@ public class HomeController {
         }
 
         StringBuilder stringBuilder = new StringBuilder("{ \"messages\": [");
+
+        for (int i = 0; i<arrayList.size(); i++) {
+            stringBuilder.append(arrayList.get(i));
+            if (arrayList.size()-i>1) stringBuilder.append(",\n");
+        }
+        stringBuilder.append("]}");
+        return stringBuilder.toString();
+    }
+
+
+    @RequestMapping("/addevent")
+    @ResponseBody
+    public String insertEvent(ModelMap model,
+                               @ModelAttribute("name") String name,
+                               @ModelAttribute("category") String category,
+                               @ModelAttribute("guide_id") int guideId,
+                               @ModelAttribute("place") String place,
+                               @ModelAttribute("duration") String duration,
+                               @ModelAttribute("description") String description,
+                               @ModelAttribute("rate") int rate,
+                               @ModelAttribute("photo") int photo,
+                               @ModelAttribute("price") int price,
+                               BindingResult result) {
+
+        Event e = new Event(place, category, "TIME", duration, price, description, rate, photo, guideId, name);
+        if (!result.hasErrors()) {
+            //person.setWhat(3);
+            eventRepository.save(e);
+        }
+        return e.toString();
+    }
+
+
+    @RequestMapping("/getevents")
+    @ResponseBody
+    public String getEvents(){
+        ArrayList<String> arrayList = new ArrayList<>();
+        List<Event> events = eventRepository.findAll();
+        for (Event e:events){
+            arrayList.add(e.toString());
+        }
+
+        StringBuilder stringBuilder = new StringBuilder("{ \"events\": [");
+
+        for (int i = 0; i<arrayList.size(); i++) {
+            stringBuilder.append(arrayList.get(i));
+            if (arrayList.size()-i>1) stringBuilder.append(",\n");
+        }
+        stringBuilder.append("]}");
+        return stringBuilder.toString();
+    }
+
+
+    @RequestMapping("/addreview")
+    @ResponseBody
+    public String insertReview(ModelMap model,
+                               @ModelAttribute("pass") String pass,
+                               @ModelAttribute("login") String login,
+                               @ModelAttribute("type") int type,
+                               @ModelAttribute("last_name") String lastName,
+                               @ModelAttribute("first_name") String firstName,
+                               @ModelAttribute("phone_number") String phoneNumber,
+                               @ModelAttribute("rate") int rate,
+                               @ModelAttribute("city") String city,
+                               @ModelAttribute("email") String email,
+                               @ModelAttribute("about") String about,
+                               BindingResult result) {
+
+        Person p = new Person(login, pass, lastName, type, firstName, email, phoneNumber, rate, about, city);
+        if (!result.hasErrors()) {
+            //person.setWhat(3);
+            personRepository.save(p);
+        }
+        return p.toString();
+    }
+
+
+    @RequestMapping("/getreviews")
+    @ResponseBody
+    public String getReviews(){
+        ArrayList<String> arrayList = new ArrayList<>();
+        List<Review> persons = reviewRepository.findAll();
+        for(Review r:persons){
+            arrayList.add(r.toString());
+        }
+
+        StringBuilder stringBuilder = new StringBuilder("{ \"reviews\": [");
 
         for (int i = 0; i<arrayList.size(); i++) {
             stringBuilder.append(arrayList.get(i));

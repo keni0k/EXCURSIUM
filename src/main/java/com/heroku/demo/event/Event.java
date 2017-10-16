@@ -7,12 +7,12 @@ import javax.persistence.Id;
 @Entity
 public class Event {
 
-    public Event(String name, String category, int guideId, String time) {
-        this.name = name;
-        this.category = category;
-        this.guideId = guideId;
-        this.time = time;
-    }
+//    public Event(String name, String category, int guideId, String time) {
+//        this.name = name;
+//        this.category = category;
+//        this.guideId = guideId;
+//        this.time = time;
+//    }
 
     @Override
     public String toString() {
@@ -23,9 +23,38 @@ public class Event {
     public Event() {
     }
 
+    public Event(String place, String category, String time, String duration, int price, String description, int rate, int photo, long guideId, String name) {
+        this.place = place;
+        this.category = category;
+        this.time = time;
+        this.duration = duration;
+        this.price = price;
+        this.description = description;
+        this.rate = rate;
+        this.photo = photo;
+        this.guideId = guideId;
+        this.name = name;
+    }
+
     public long getId() {
         return id;
     }
+
+    private String place = "";
+
+    private String category = "";
+
+    private String time = "";
+
+    private String duration = "";
+
+    private int price = 0;
+
+    private String description = "";
+
+    private int rate = 0;
+
+    private int photo = 0;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -107,28 +136,12 @@ public class Event {
         this.rate = rate;
     }
 
-    public String getPhoto() {
+    public int getPhoto() {
         return photo;
     }
 
-    public void setPhoto(String photo) {
+    public void setPhoto(int photo) {
         this.photo = photo;
     }
-
-    private String place;
-
-    private String category = "";
-
-    private String time = "";
-
-    private String duration = "";
-
-    private int price = 0;
-
-    private String description = "";
-
-    private int rate = 0;
-
-    private String photo = "";
 
 }

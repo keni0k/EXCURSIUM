@@ -120,7 +120,7 @@ databaseChangeLog:
                       nullable: false
                - column:
                    name: photo
-                   type: varchar(255)
+                   type: int
                    constraints:
                       nullable: false
         - createTable:
