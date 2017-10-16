@@ -186,39 +186,39 @@ databaseChangeLog:
         - createTable:
             tableName: review
             columns:
-                -column:
+                - column:
                    name: id
                    type: int
                    autoIncrement: true
                    constraints:
                      primaryKey: true
                      nullable: false
-                -column:
+                - column:
                     name: event_id
                     type: int
                     constraints:
                        nullable: false
-                -column:
+                - column:
                     name: user_id
                     type: int
                     constraints:
                       nullable: false
-                -column:
+                - column:
                     name: rate
                     type: int
                     constraints:
                       nullable: false
-                -column:
+                - column:
                     name: data
                     type: varchar(255)
                     constraints:
                       nullable: false
-                -column:
+                - column:
                     name: time
                     type: varchar(20)
                     constraints:
                       nullable: false
-                -column:
+                - column:
                     name: image_url
                     type: varchar(10)
                     constraints:
