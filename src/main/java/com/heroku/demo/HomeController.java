@@ -476,7 +476,6 @@ public class HomeController {
         return photo.toString();
     }
 
-
     @RequestMapping("/getphotos")
     @ResponseBody
     public String getPhotos(){
