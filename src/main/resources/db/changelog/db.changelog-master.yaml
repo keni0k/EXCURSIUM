@@ -138,12 +138,12 @@ databaseChangeLog:
                    primaryKey: true
                    nullable: false
               -column:
-                  name: eventId
+                  name: event_id
                   type: varchar(30)
                   constraints:
                      nullable: false
               -column:
-                  name: userId
+                  name: user_id
                   type: varchar(30)
                   constraints:
                     nullable: false
