@@ -6,6 +6,8 @@ import com.heroku.demo.event.EventRepository;
 import com.heroku.demo.message.Message;
 import com.heroku.demo.message.MessageRepository;
 import com.heroku.demo.message.MessageServiceImpl;
+import com.heroku.demo.order.Order;
+import com.heroku.demo.order.OrderRepository;
 import com.heroku.demo.person.Person;
 import com.heroku.demo.person.PersonRepository;
 
@@ -34,10 +36,13 @@ public class HomeController {
     private MessageRepository messageRepository;
     private EventRepository eventRepository;
     private ReviewRepository reviewRepository;
+    private OrderRepository orderRepository;
 
     @Autowired
     public HomeController(PersonRepository repository, MessageRepository pRepository,
-                          ReviewRepository reviewRepository, EventRepository eventRepository) {
+                          ReviewRepository reviewRepository, EventRepository eventRepository,
+                          OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
         this.personRepository = repository;
         this.messageRepository = pRepository;
         this.eventRepository = eventRepository;
@@ -416,6 +421,42 @@ public class HomeController {
     @RequestMapping("/getreviews")
     @ResponseBody
     public String getReviews(){
+        ArrayList<String> arrayList = new ArrayList<>();
+        List<Review> persons = reviewRepository.findAll();
+        for(Review r:persons){
+            arrayList.add(r.toString());
+        }
+
+        StringBuilder stringBuilder = new StringBuilder("{ \"reviews\": [");
+
+        for (int i = 0; i<arrayList.size(); i++) {
+            stringBuilder.append(arrayList.get(i));
+            if (arrayList.size()-i>1) stringBuilder.append(",\n");
+        }
+        stringBuilder.append("]}");
+        return stringBuilder.toString();
+    }
+
+    @RequestMapping("/addorder")
+    @ResponseBody
+    public String insertOrder(ModelMap model,
+                               @ModelAttribute("price") int price,
+                               @ModelAttribute("tourist_id") int touristId,
+                               @ModelAttribute("event_id") int eventId,
+                               BindingResult result) {
+
+        Order order = new Order(eventId, touristId, price, "TIME");
+        if (!result.hasErrors()) {
+            //person.setWhat(3);
+            orderRepository.save(order);
+        }
+        return order.toString();
+    }
+
+
+    @RequestMapping("/getorders")
+    @ResponseBody
+    public String getOrders(){
         ArrayList<String> arrayList = new ArrayList<>();
         List<Review> persons = reviewRepository.findAll();
         for(Review r:persons){
