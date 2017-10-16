@@ -25,6 +25,8 @@ public class Person {
     private String phoneNumber = "";
     private String about = "";
     private String city = "";
+    private String date = "";
+    private String imageUrl = "";
 
 
     public String getLogin() {
@@ -61,26 +63,90 @@ public class Person {
 
     public Person(){}
 
-    public Person(String login, String pass
-            , String lastName, int type, String firstName
-            , String email, String phoneNumber, int rate, String about, String city) {
+    public String getEmail() {
+        return email;
+    }
 
+    public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
-        this.phoneNumber = phoneNumber;
+    }
+
+    public int getRate() {
+        return rate;
+    }
+
+    public void setRate(int rate) {
         this.rate = rate;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String about) {
         this.about = about;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public Person(String login, String pass, String lastName, int type, String email, String firstName, int rate, String phoneNumber, String about, String city, String date, String imageUrl) {
         this.login = login;
         this.pass = pass;
-        this.type = type;
         this.lastName = lastName;
+        this.type = type;
+        this.email = email;
+        this.firstName = firstName;
+        this.rate = rate;
+        this.phoneNumber = phoneNumber;
+        this.about = about;
+        this.city = city;
+        this.date = date;
+        this.imageUrl = imageUrl;
     }
 
     @Override
     public String toString() {
 
         return "{\n" +
+
                 "\t\"id\":\"" + id + "\",\n" +
                 "\t\"login\":\"" + login + "\",\n" +
                 "\t\"pass\":\"" + pass + "\",\n" +
@@ -92,6 +158,8 @@ public class Person {
                 "\t\"rate\":\"" + rate + "\",\n" +
                 "\t\"about\":\"" + about + "\",\n" +
                 "\t\"city\":\"" + city + "\"\n" +
+                "\t\"date\":\"" + date + "\",\n" +
+                "\t\"imageUrl\":\"" + imageUrl + "\"\n" +
                 "}";
     }
 

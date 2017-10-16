@@ -291,9 +291,11 @@ public class HomeController {
                                @ModelAttribute("city") String city,
                                @ModelAttribute("email") String email,
                                @ModelAttribute("about") String about,
+                               @ModelAttribute("date") String date,
+                               @ModelAttribute("imageurl") String imageUrl,
                                 BindingResult result) {
 
-        Person p = new Person(login, pass, lastName, type, firstName, email, phoneNumber, rate, about, city);
+        Person p = new Person(login, pass, lastName, type, email, firstName, rate, phoneNumber,  about, city, date, imageUrl);
         if (!result.hasErrors()) {
             //person.setWhat(3);
             personRepository.save(p);
