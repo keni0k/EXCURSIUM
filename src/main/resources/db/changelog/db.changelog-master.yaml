@@ -14,6 +14,16 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
+                  name: login
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: pass
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
                   name: date
                   type: varchar(255)
                   constraints:
