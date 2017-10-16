@@ -22,6 +22,8 @@ public class Photo {
         this.data = data;
     }
 
+    public Photo(){}
+
     public int getEventId() {
         return eventId;
     }
