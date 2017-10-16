@@ -23,7 +23,7 @@ public class Event {
     public Event() {
     }
 
-    public Event(String place, String category, String time, String duration, int price, String description, int rate, int photo, long guideId, String name) {
+    public Event(String place, int category, String time, String duration, int price, String description, int rate, int photo, long guideId, String name) {
         this.place = place;
         this.category = category;
         this.time = time;
@@ -42,7 +42,7 @@ public class Event {
 
     private String place = "";
 
-    private String category = "";
+    private int category = 0;
 
     private String time = "";
 
@@ -88,11 +88,11 @@ public class Event {
         this.place = place;
     }
 
-    public String getCategory() {
+    public int getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(int category) {
         this.category = category;
     }
 

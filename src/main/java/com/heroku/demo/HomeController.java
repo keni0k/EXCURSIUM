@@ -355,7 +355,7 @@ public class HomeController {
     @ResponseBody
     public String insertEvent(ModelMap model,
                                @ModelAttribute("name") String name,
-                               @ModelAttribute("category") String category,
+                               @ModelAttribute("category") int category,
                                @ModelAttribute("guide_id") int guideId,
                                @ModelAttribute("place") String place,
                                @ModelAttribute("duration") String duration,
