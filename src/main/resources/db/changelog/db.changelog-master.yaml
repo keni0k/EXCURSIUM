@@ -139,10 +139,10 @@ databaseChangeLog:
                   constraints:
                      nullable: false
               - column:
-                name: user_id
-                type: int
-                constraints:
-                   nullable: false
+                  name: user_id
+                  type: int
+                  constraints:
+                     nullable: false
               - column:
                   name: msg
                   type: varchar(255)
