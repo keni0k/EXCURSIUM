@@ -64,7 +64,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
         - createTable:
-            tableName: events
+            tableName: event
             columns:
                - column:
                    name: id
@@ -124,7 +124,7 @@ databaseChangeLog:
                    constraints:
                       nullable: false
         - createTable:
-            tableName: messages
+            tableName: message
             columns:
               - column:
                  name: id
@@ -153,3 +153,73 @@ databaseChangeLog:
                   type: varchar(10)
                   constraints:
                     nullable: false
+        - createTable:
+            tableName: order
+            columns:
+              - column:
+                 name: id
+                 type: int
+                 autoIncrement: true
+                 constraints:
+                   primaryKey: true
+                   nullable: false
+              - column:
+                  name: event_id
+                  type: int
+                  constraints:
+                     nullable: false
+              - column:
+                  name: tourist_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: price
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: order_date
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: review
+            columns:
+                -column:
+                   name: id
+                   type: int
+                   autoIncrement: true
+                   constraints:
+                     primaryKey: true
+                     nullable: false
+                -column:
+                    name: event_id
+                    type: int
+                    constraints:
+                       nullable: false
+                -column:
+                    name: user_id
+                    type: int
+                    constraints:
+                      nullable: false
+                -column:
+                    name: rate
+                    type: int
+                    constraints:
+                      nullable: false
+                -column:
+                    name: data
+                    type: varchar(255)
+                    constraints:
+                      nullable: false
+                -column:
+                    name: time
+                    type: varchar(20)
+                    constraints:
+                      nullable: false
+                -column:
+                    name: image_url
+                    type: varchar(10)
+                    constraints:
+                      nullable: false

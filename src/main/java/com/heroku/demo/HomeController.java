@@ -299,7 +299,7 @@ public class HomeController {
 
     @RequestMapping("/getpersons")
     @ResponseBody
-    public String getPerson(ModelMap model, BindingResult result){
+    public String getPersons(){
         ArrayList<String> arrayList = new ArrayList<>();
          List<Person> persons = personRepository.findAll();
         for (Person p:persons){
