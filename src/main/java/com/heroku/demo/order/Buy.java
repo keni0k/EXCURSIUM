@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Order {
+public class Buy {
 
     public long getId() {
         return id;
@@ -51,9 +51,9 @@ public class Order {
 
     private int touristId = 0;
 
-    public Order(){}
+    public Buy(){}
 
-    public Order(int eventId, int touristId, int price, String orderDate) {
+    public Buy(int eventId, int touristId, int price, String orderDate) {
         this.eventId = eventId;
         this.touristId = touristId;
         this.price = price;

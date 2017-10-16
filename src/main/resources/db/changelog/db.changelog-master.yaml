@@ -154,7 +154,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
         - createTable:
-            tableName: order
+            tableName: buy
             columns:
               - column:
                  name: id

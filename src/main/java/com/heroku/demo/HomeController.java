@@ -5,9 +5,8 @@ import com.heroku.demo.event.Event;
 import com.heroku.demo.event.EventRepository;
 import com.heroku.demo.message.Message;
 import com.heroku.demo.message.MessageRepository;
-import com.heroku.demo.message.MessageServiceImpl;
-import com.heroku.demo.order.Order;
-import com.heroku.demo.order.OrderRepository;
+import com.heroku.demo.order.Buy;
+import com.heroku.demo.order.BuyRepository;
 import com.heroku.demo.person.Person;
 import com.heroku.demo.person.PersonRepository;
 
@@ -36,13 +35,13 @@ public class HomeController {
     private MessageRepository messageRepository;
     private EventRepository eventRepository;
     private ReviewRepository reviewRepository;
-    private OrderRepository orderRepository;
+    private BuyRepository buyRepository;
 
     @Autowired
     public HomeController(PersonRepository repository, MessageRepository pRepository,
                           ReviewRepository reviewRepository, EventRepository eventRepository,
-                          OrderRepository orderRepository) {
-        this.orderRepository = orderRepository;
+                          BuyRepository buyRepository) {
+        this.buyRepository = buyRepository;
         this.personRepository = repository;
         this.messageRepository = pRepository;
         this.eventRepository = eventRepository;
@@ -273,12 +272,12 @@ public class HomeController {
     @RequestMapping("/addmsg")
     @ResponseBody
     public String insertMsg(ModelMap model,
-                               @ModelAttribute("data") String data,
+                               @ModelAttribute("msg") String message,
                                @ModelAttribute("time") String time,
                                @ModelAttribute("event_id") int eventId,
                                @ModelAttribute("user_id") int userId,
                                BindingResult result) {
-        Message msg = new Message(userId, eventId, data, time);
+        Message msg = new Message(userId, eventId, time, message);
         if (!result.hasErrors()) {
             //person.setWhat(3);
             messageRepository.save(msg);
@@ -404,7 +403,7 @@ public class HomeController {
                                @ModelAttribute("rate") int rate,
                                BindingResult result) {
 
-        Review review = new Review(data, "TIME", imageUrl, userId, eventId, rate);
+        Review review = new Review(data, imageUrl, "TIME", userId, eventId, rate);
         if (!result.hasErrors()) {
             //person.setWhat(3);
             reviewRepository.save(review);
@@ -440,12 +439,12 @@ public class HomeController {
                                @ModelAttribute("event_id") int eventId,
                                BindingResult result) {
 
-        Order order = new Order(eventId, touristId, price, "TIME");
+        Buy buy = new Buy(eventId, touristId, price, "TIME");
         if (!result.hasErrors()) {
             //person.setWhat(3);
-            orderRepository.save(order);
+            buyRepository.save(buy);
         }
-        return order.toString();
+        return buy.toString();
     }
 
 
@@ -453,12 +452,12 @@ public class HomeController {
     @ResponseBody
     public String getOrders(){
         ArrayList<String> arrayList = new ArrayList<>();
-        List<Order> orders = orderRepository.findAll();
-        for(Order o:orders){
+        List<Buy> buys = buyRepository.findAll();
+        for(Buy o: buys){
             arrayList.add(o.toString());
         }
 
-        StringBuilder stringBuilder = new StringBuilder("{ \"orders\": [");
+        StringBuilder stringBuilder = new StringBuilder("{ \"buys\": [");
 
         for (int i = 0; i<arrayList.size(); i++) {
             stringBuilder.append(arrayList.get(i));
