@@ -105,9 +105,6 @@ public class Review {
                 "\t\"rate\":" + rate + ",\n" +
                 "\t\"userId\":\"" + userId + "\",\n" +
                 "\t\"eventId\":" + eventId + ",\n" +
-//                "\t\"phoneNumber\":" + phoneNumber + ",\n" +
-//                "\t\"rate\":" + rate + ",\n" +
-//                "\t\"about\":" + about + "\n" +
                 "}";
     }
 

@@ -15,6 +15,8 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.heroku.demo.photo.Photo;
+import com.heroku.demo.photo.PhotoRepository;
 import com.heroku.demo.review.Review;
 import com.heroku.demo.review.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,16 +38,18 @@ public class HomeController {
     private EventRepository eventRepository;
     private ReviewRepository reviewRepository;
     private BuyRepository buyRepository;
+    private PhotoRepository photoRepository;
 
     @Autowired
     public HomeController(PersonRepository repository, MessageRepository pRepository,
                           ReviewRepository reviewRepository, EventRepository eventRepository,
-                          BuyRepository buyRepository) {
+                          BuyRepository buyRepository, PhotoRepository photoRepository) {
         this.buyRepository = buyRepository;
         this.personRepository = repository;
         this.messageRepository = pRepository;
         this.eventRepository = eventRepository;
         this.reviewRepository = reviewRepository;
+        this.photoRepository = photoRepository;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -458,6 +462,42 @@ public class HomeController {
         }
 
         StringBuilder stringBuilder = new StringBuilder("{ \"buys\": [");
+
+        for (int i = 0; i<arrayList.size(); i++) {
+            stringBuilder.append(arrayList.get(i));
+            if (arrayList.size()-i>1) stringBuilder.append(",\n");
+        }
+        stringBuilder.append("]}");
+        return stringBuilder.toString();
+    }
+
+
+    @RequestMapping("/addphoto")
+    @ResponseBody
+    public String insertPhoto(ModelMap model,
+                              @ModelAttribute("data") String data,
+                              @ModelAttribute("event_id") int eventId,
+                              BindingResult result) {
+
+        Photo photo = new Photo(eventId, data);
+        if (!result.hasErrors()) {
+            //person.setWhat(3);
+            photoRepository.save(photo);
+        }
+        return photo.toString();
+    }
+
+
+    @RequestMapping("/getphotos")
+    @ResponseBody
+    public String getPhotos(){
+        ArrayList<String> arrayList = new ArrayList<>();
+        List<Photo> buys = photoRepository.findAll();
+        for(Photo o: buys){
+            arrayList.add(o.toString());
+        }
+
+        StringBuilder stringBuilder = new StringBuilder("{ \"photos\": [");
 
         for (int i = 0; i<arrayList.size(); i++) {
             stringBuilder.append(arrayList.get(i));

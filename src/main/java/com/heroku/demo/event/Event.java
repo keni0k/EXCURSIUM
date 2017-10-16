@@ -16,8 +16,20 @@ public class Event {
 
     @Override
     public String toString() {
-        return "{\"id\":\"" + id + "\", \"name\":\"" + name + "\", \"category\":\"" + category +
-                "\" , \"guideId\":\"" + guideId + "\" , \"time\":\"" + time + "\"}";
+
+        return "{\n" +
+                "\t\"id\":\"" + id + "\",\n" +
+                "\t\"place\":\"" + place + "\",\n" +
+                "\t\"category\":\"" + category + "\",\n" +
+                "\t\"time\":\"" + time + "\",\n" +
+                "\t\"duration\":\"" + duration + "\",\n" +
+                "\t\"price\":\"" + price + "\",\n" +
+                "\t\"description\":\"" + description + "\",\n" +
+                "\t\"photo\":\"" + photo + "\",\n" +
+                "\t\"rate\":\"" + rate + "\",\n" +
+                "\t\"guide_id\":\"" + guideId + "\",\n" +
+                "\t\"name\":\"" + name + "\"\n" +
+                "}";
     }
 
     public Event() {

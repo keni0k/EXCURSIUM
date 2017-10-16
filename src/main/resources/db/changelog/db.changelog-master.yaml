@@ -223,3 +223,23 @@ databaseChangeLog:
                     type: varchar(10)
                     constraints:
                       nullable: false
+        - createTable:
+            tableName: photo
+            columns:
+                - column:
+                   name: id
+                   type: int
+                   autoIncrement: true
+                   constraints:
+                     primaryKey: true
+                     nullable: false
+                - column:
+                    name: event_id
+                    type: int
+                    constraints:
+                       nullable: false
+                - column:
+                    name: data
+                    type: varchar(255)
+                    constraints:
+                      nullable: false

@@ -62,4 +62,17 @@ public class Buy {
 
     private int price = 0;
     private String orderDate = "";
+
+    @Override
+    public String toString() {
+
+        return "{\n" +
+                "\t\"id\":\"" + id + "\",\n" +
+                "\t\"event_id\":\"" + eventId + "\",\n" +
+                "\t\"tourist_id\":\"" + touristId + "\",\n" +
+                "\t\"price\":\"" + price + "\",\n" +
+                "\t\"order_date\":\"" + orderDate + "\",\n" +
+                "}";
+    }
+
 }
