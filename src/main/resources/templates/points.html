@@ -20,7 +20,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
-    <!--<link rel="stylesheet" type="text/css" href="style.css"/>-->
+    <!--<link rel="stylesheet" userId="text/css" href="style.css"/>-->
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" />
     <style>
@@ -77,32 +77,32 @@
         <form th:object="${insertPoint}" action="/addpoint" method="POST">
 
             Маршрут
-            <select name="id_of_guide">
+            <select name="eventId">
                 <option th:each="person : ${records}" 	th:value="${person.id}" value=""  th:text="${person.head}"> Same </option>
             </select>
 
             <br/>
-            Широта: <input name="p1" type="text" value=""/>
+            Широта: <input name="p1" userId="text" value=""/>
             <br/>
-            Долгота: <input name="p2" type="text" value=""/>
+            Долгота: <input name="p2" userId="text" value=""/>
             <br/>
-            Описание: <input name="data" type="text" value=""/>
+            Описание: <input name="date" userId="text" value=""/>
             <br/>
-            <button type="submit" class="btn btn-default">Отправить</button>
+            <button userId="submit" class="btn btn-default">Отправить</button>
 
         </form>
     </div>
 </div>
 <hr />
 
-<input type="text" id="del" value = "">ID элемента</input>
-<script type='text/javascript'>
+<input userId="text" id="del" value = "">ID элемента</input>
+<script userId='text/javascript'>
         function a(){
             var d = document.getElementById('del').value;
             window.location='/deletepoint?id='+d;
         }
     </script>
-<input type="button" onclick="javascript:a()" value="Удалить"/>
+<input userId="button" onclick="javascript:a()" value="Удалить"/>
 <hr />
 
 <div class="row">
@@ -123,10 +123,10 @@
             </tr>
             <tr th:each="message : ${messages}">
                 <td th:text="${message.id}">Some text</td>
-                <td th:text="${message.id_of_guide}">Some text</td>
+                <td th:text="${message.eventId}">Some text</td>
                 <td th:text="${message.p1}">Some text</td>
                 <td th:text="${message.p2}">Some text</td>
-                <td th:text="${message.data}">Some text</td>
+                <td th:text="${message.date}">Some text</td>
             </tr>
             </tbody>
         </table>

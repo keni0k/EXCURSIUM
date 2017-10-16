@@ -8,58 +8,152 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: int
+                  userId: int
                   autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: login
-                  type: varchar(255)
+                  name: date
+                  userId: varchar(255)
                   constraints:
                     nullable: false
               - column:
-                  name: pass
-                  type: varchar(255)
+                  name: imageUrl
+                  userId: varchar(255)
                   constraints:
                     nullable: false
               - column:
                   name: rate
-                  type: int
+                  userId: int
                   constraints:
                     nullable: false
               - column:
                   name: phone_number
-                  type: varchar(255)
+                  userId: varchar(255)
                   constraints:
                     nullable: false
               - column:
                   name: city
-                  type: varchar(255)
+                  userId: varchar(255)
                   constraints:
                     nullable: false
               - column:
                   name: email
-                  type: varchar(255)
+                  userId: varchar(255)
                   constraints:
                     nullable: false
               - column:
                   name: about
-                  type: varchar(255)
+                  userId: varchar(255)
                   constraints:
                     nullable: false
               - column:
                   name: first_name
-                  type: varchar(255)
+                  userId: varchar(255)
                   constraints:
                     nullable: false
               - column:
-                  name: type
-                  type: int
+                  name: userId
+                  userId: int
                   constraints:
                     nullable: false
               - column:
                   name: last_name
+                  userId: varchar(255)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 2
+      author: keni0k
+      changes:
+        - createTable:
+            tableName: events
+            columns:
+               -column:
+                   name: id
+                   type: int
+                   autoIncrement: true
+                   constraints:
+                     primaryKey: true
+                     nullable: false
+               -column:
+                    name: guide_id
+                    type: int
+                    constraints:
+                       nullable: false
+               -column:
+                   name: name
+                   type: varchar(30)
+                   constraints:
+                      nullable: false
+               -column:
+                   name: category
+                   type: int
+                   constraints:
+                      nullable: false
+               -column:
+                   name: place
+                   type: varchar(30)
+                   constraints:
+                      nullable: false
+               -column:
+                   name: time
+                   type: varchar(30)
+                   constraints:
+                      nullable: false
+               -column:
+                   name: duration
+                   type: varchar(30)
+                   constraints:
+                      nullable: false
+               -column:
+                   name: price
+                   type: int
+                   constraints:
+                      nullable: false
+               -column:
+                   name: description
+                   type: varchar(255)
+                   constraints:
+                      nullable: false
+               -column:
+                   name: rate
+                   type: int
+                   constraints:
+                      nullable: false
+               -column:
+                   name: photo
+                   type: varchar(255)
+                   constraints:
+                      nullable: false
+        - createTable:
+            tableName: messages
+            columns:
+              -column:
+                 name: id
+                 type: int
+                 autoIncrement: true
+                 constraints:
+                   primaryKey: true
+                   nullable: false
+              -column:
+                  name: eventId
+                  type: varchar(30)
+                  constraints:
+                     nullable: false
+              -column:
+                  name: userId
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+              -column:
+                  name: msg
                   type: varchar(255)
+                  constraints:
+                    nullable: false
+              -column:
+                  name: date
+                  type: varchar(10)
                   constraints:
                     nullable: false

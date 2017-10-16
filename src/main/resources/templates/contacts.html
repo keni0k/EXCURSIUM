@@ -20,7 +20,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
-    <!--<link rel="stylesheet" type="text/css" href="style.css"/>-->
+    <!--<link rel="stylesheet" userId="text/css" href="style.css"/>-->
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" />
     <style>
@@ -84,32 +84,32 @@
             </select>
 
             <br/>
-            Название контакта: <input name="head" type="text" value=""/>
+            Название контакта: <input name="head" userId="text" value=""/>
             <br/>
             Сайт:
-            <input name="data" type="text" value=""/>
+            <input name="date" userId="text" value=""/>
             <br/>
             Телефон:
-            <input name="phone" type="text" value=""/>
+            <input name="phone" userId="text" value=""/>
             <br/>
             Ссылка на изображение:
-            <input name="img_link" type="text" value=""/>
+            <input name="img_link" userId="text" value=""/>
             <br/>
-            <button type="submit" class="btn btn-default">Отправить</button>
+            <button userId="submit" class="btn btn-default">Отправить</button>
 
         </form>
     </div>
 </div>
 <hr />
 
-<input type="text" id="del" value = "">ID элемента</input>
-<script type='text/javascript'>
+<input userId="text" id="del" value = "">ID элемента</input>
+<script userId='text/javascript'>
         function a(){
             var d = document.getElementById('del').value;
             window.location='/deletecontact?id='+d;
         }
     </script>
-<input type="button" onclick="javascript:a()" value="Удалить"/>
+<input userId="button" onclick="javascript:a()" value="Удалить"/>
 <hr />
 
 <div class="row">
@@ -132,7 +132,7 @@
             <tr th:each="person : ${records}">
                 <td th:text="${person.id}">Some text</td>
                 <td th:text="${person.head}">Some text</td>
-                <td th:text="${person.data}">Some text</td>
+                <td th:text="${person.date}">Some text</td>
                 <td th:text="${person.phone}">Some text</td>
                 <td th:text="${person.img_link}">Some text</td>
                 <td th:text="${person.locate}">Some text</td>

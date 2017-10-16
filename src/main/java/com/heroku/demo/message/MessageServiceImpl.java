@@ -35,7 +35,7 @@ public class MessageServiceImpl implements MessageService {
         List<Message> copy = new ArrayList<>();
         copy.addAll(list);
         for (int i = 0; i<copy.size(); i++)
-            if (copy.get(i).getId_of_guide()!=guide) list.remove(i);
+            if (copy.get(i).getEventId()!=guide) list.remove(i);
         return list;
     }
 

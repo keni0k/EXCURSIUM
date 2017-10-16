@@ -89,11 +89,11 @@ public class Users {
 //
 //    private String surname = "";
 //
-//    public int getType() {
+//    public int getUserId() {
 //        return type;
 //    }
 //
-//    public void setType(int type) {
+//    public void setUserId(int type) {
 //        this.type = type;
 //    }
 //

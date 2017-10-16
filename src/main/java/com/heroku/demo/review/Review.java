@@ -16,59 +16,82 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String login = "";
+    private String data = "";
 
-    private String pass = "";
+    private String imageUrl = "";
 
-    private String lastName = "";
+    private String time = "";
 
-    private int type = 0;
+    private int userId = 0;
 
-    public String getLogin() {
-        return login;
+    public int getRate() {
+        return rate;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setRate(int rate) {
+        this.rate = rate;
     }
 
-    public String getPass() {
-        return pass;
+    public int getEventId() {
+        return eventId;
     }
 
-    public void setPass(String pass) {
-        this.pass = pass;
+    public void setEventId(int eventId) {
+        this.eventId = eventId;
     }
 
-    public String getLastName() {
-        return lastName;
+    private int rate = -1;
+
+    private int eventId = -1;
+
+
+    public String getData() {
+        return data;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setData(String data) {
+        this.data = data;
     }
 
-    public int getType() {
-        return type;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setType(int type) {
-        this.type = type;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public Review(){}
 
-    public Review(String login, String pass
-            , String lastName, int type){
-//            , String surname, int type, String email, String phoneNumber, int rate, String about, String city) {
+    public Review(String data, String imageUrl
+            , String time, int userId, int rate, int eventId){
+//            , String surname, int userId, String email, String phoneNumber, int rate, String about, String city) {
 
-        this.login = login;
+        this.data = data;
 
-        this.pass = pass;
+        this.imageUrl = imageUrl;
 
-        this.type = type;
+        this.userId = userId;
 
-        this.lastName = lastName;
+        this.time = time;
+        this.rate = rate;
+        this.eventId = eventId;
     }
 
     @Override
@@ -76,12 +99,12 @@ public class Review {
 
         return "{\n" +
                 "\t\"id\":\"" + id + "\",\n" +
-                "\t\"login\":\"" + login + "\",\n" +
-                "\t\"pass\":\"" + pass + "\",\n" +
-                "\t\"last_name\":\"" + lastName + "\",\n" +
-//                "\t\"surname\":" + surname + ",\n" +
-                "\t\"type\":\"" + type + "\",\n" +
-//                "\t\"email\":" + email + ",\n" +
+                "\t\"data\":\"" + data + "\",\n" +
+                "\t\"imageUrl\":\"" + imageUrl + "\",\n" +
+                "\t\"time\":\"" + time + "\",\n" +
+                "\t\"rate\":" + rate + ",\n" +
+                "\t\"userId\":\"" + userId + "\",\n" +
+                "\t\"eventId\":" + eventId + ",\n" +
 //                "\t\"phoneNumber\":" + phoneNumber + ",\n" +
 //                "\t\"rate\":" + rate + ",\n" +
 //                "\t\"about\":" + about + "\n" +

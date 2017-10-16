@@ -1,18 +1,4 @@
-/*
- * Copyright 2015 Benedikt Ritter
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+
 package com.heroku.demo;
 
 import com.heroku.demo.message.Message;
@@ -42,7 +28,7 @@ public class HomeController {
 
     private PersonRepository personRepository;
     private MessageRepository messageRepository;
-    MessageServiceImpl pointService;
+    MessageServiceImpl messageService;
 
     @Autowired
     public HomeController(PersonRepository repository, MessageRepository pRepository) {
@@ -271,11 +257,27 @@ public class HomeController {
         return stringBuilder.toString();
     }
 
+    @RequestMapping("/addmsg")
+    @ResponseBody
+    public String insertMsg(ModelMap model,
+                               @ModelAttribute("data") String data,
+                               @ModelAttribute("time") String time,
+                               @ModelAttribute("event_id") int eventId,
+                               @ModelAttribute("user_id") int userId,
+                               BindingResult result) {
+        Message msg = new Message(userId, eventId, data, time);
+        if (!result.hasErrors()) {
+            //person.setWhat(3);
+            messageRepository.save(msg);
+        }
+        return msg.toString();
+    }
+
     @RequestMapping("/addperson")
     @ResponseBody
     public String insertPerson(ModelMap model,
-                                @ModelAttribute("pass") String pass,
-                                @ModelAttribute("login") String login,
+                               @ModelAttribute("pass") String pass,
+                               @ModelAttribute("login") String login,
                                @ModelAttribute("type") int type,
                                @ModelAttribute("last_name") String lastName,
                                @ModelAttribute("first_name") String firstName,
@@ -295,11 +297,9 @@ public class HomeController {
     }
 
 
-
     @RequestMapping("/getpersons")
     @ResponseBody
-    public String getPerson(ModelMap model, @ModelAttribute("type") String type,
-                              @ModelAttribute("locate") String locate, BindingResult result){
+    public String getPerson(ModelMap model, BindingResult result){
         ArrayList<String> arrayList = new ArrayList<>();
          List<Person> persons = personRepository.findAll();
         for (Person p:persons){
@@ -307,6 +307,25 @@ public class HomeController {
         }
 
         StringBuilder stringBuilder = new StringBuilder("{ \"persons\": [");
+
+        for (int i = 0; i<arrayList.size(); i++) {
+            stringBuilder.append(arrayList.get(i));
+            if (arrayList.size()-i>1) stringBuilder.append(",\n");
+        }
+        stringBuilder.append("]}");
+        return stringBuilder.toString();
+    }
+
+    @RequestMapping("/getmsgs")
+    @ResponseBody
+    public String getMsgs(ModelMap model, BindingResult result){
+        ArrayList<String> arrayList = new ArrayList<>();
+        List<Message> messages = messageRepository.findAll();
+        for (Message m:messages){
+            arrayList.add(m.toString());
+        }
+
+        StringBuilder stringBuilder = new StringBuilder("{ \"messages\": [");
 
         for (int i = 0; i<arrayList.size(); i++) {
             stringBuilder.append(arrayList.get(i));
