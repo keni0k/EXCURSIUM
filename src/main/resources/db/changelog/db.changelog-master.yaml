@@ -29,7 +29,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: imageUrl
+                  name: image_url
                   type: varchar(255)
                   constraints:
                     nullable: false
