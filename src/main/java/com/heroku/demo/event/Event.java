@@ -108,6 +108,7 @@ public class Event {
         this.category = category;
     }
 
+
     public String getTime() {
         return time;
     }
