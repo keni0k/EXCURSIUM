@@ -317,6 +317,7 @@ public class HomeController {
     }
 
 
+
     @RequestMapping("/getmsgs")
     @ResponseBody
     public String getMsgs(ModelMap model, BindingResult result){
