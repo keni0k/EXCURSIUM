@@ -65,7 +65,7 @@ public class HomeController {
         return "persons";
     }
 
-    @RequestMapping("/addperson")
+    @RequestMapping("/addpersonhttp")
     public String insertContact(ModelMap model,
                               @ModelAttribute("insertPerson") @Valid Person person,
                               BindingResult result) {
