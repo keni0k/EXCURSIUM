@@ -15,10 +15,12 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.heroku.demo.person.PersonServiceImpl;
 import com.heroku.demo.photo.Photo;
 import com.heroku.demo.photo.PhotoRepository;
 import com.heroku.demo.review.Review;
 import com.heroku.demo.review.ReviewRepository;
+import org.omg.CORBA.PRIVATE_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -40,6 +42,8 @@ public class HomeController {
     private BuyRepository buyRepository;
     private PhotoRepository photoRepository;
 
+    private PersonServiceImpl personService;
+
     @Autowired
     public HomeController(PersonRepository repository, MessageRepository pRepository,
                           ReviewRepository reviewRepository, EventRepository eventRepository,
@@ -50,6 +54,8 @@ public class HomeController {
         this.eventRepository = eventRepository;
         this.reviewRepository = reviewRepository;
         this.photoRepository = photoRepository;
+
+        personService = new PersonServiceImpl(personRepository);
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -78,7 +84,10 @@ public class HomeController {
         person.setEmail("mail@mail.ru");
         person.setPhoneNumber("79996826826");
 
-
+        if (!personService.isLoginFree(person.getLogin())) {
+            model.addAttribute("error_data", "LOGIN IS NOT FREE");
+            return "error";
+        }
         if (!result.hasErrors()) {
            // person.setWhat(2);
             personRepository.save(person);

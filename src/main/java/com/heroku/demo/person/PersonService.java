@@ -11,6 +11,7 @@ public interface PersonService {
     void delete(long id);
     List<Person> getByType(int type);
     Person editPerson(Person person);
+    Boolean isLoginFree(String login);
     Boolean authorization(String login, String pass);
     List<Person> getAll();
 }
