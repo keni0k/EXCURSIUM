@@ -155,7 +155,6 @@ public class HomeController {
 
         for (Person p:persons){
              arrayList.add(p.toString());
-             stringBuilder.append(personService.isLoginFree(p.getLogin()).toString());
         }
 
         for (int i = 0; i<arrayList.size(); i++) {

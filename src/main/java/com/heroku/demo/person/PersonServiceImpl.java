@@ -38,7 +38,7 @@ public class PersonServiceImpl implements PersonService{
 
     @Override
     public Boolean isLoginFree(String login) {
-        List<Person> list = new ArrayList<Person>();
+        List<Person> list = personRepository.findAll();
         boolean isLog = true;
         for (Person p:list)
             if (p.getLogin().equals(login))
