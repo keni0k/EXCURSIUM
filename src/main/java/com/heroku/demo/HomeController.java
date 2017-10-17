@@ -59,8 +59,8 @@ public class HomeController {
 
     @RequestMapping("/persons")
     public String persons(ModelMap model) {
-        List<Person> records = personRepository.findAll();
-        model.addAttribute("persons", records);
+        List<Person> persons = personRepository.findAll();
+        model.addAttribute("persons", persons);
         model.addAttribute("insertPerson", new Person());
         return "persons";
     }

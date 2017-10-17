@@ -60,11 +60,7 @@
 <nav class="four">
     <ul>
         <li><a href="/"><i class="fa fa-home fa-fw"></i>Главная</a></li>
-        <li><a href="/news">Новости</a></li>
-        <li><a href="/guides">Маршруты</a></li>
-        <li><a href="/messages">Точки маршрутов</a></li>
-        <li><a href="/gallery">Галереи</a></li>
-        <li><a href="/photos">Фотографии</a></li>
+        <li><a href="/persons">Новости</a></li>
         <li><a href="/#">Контакты</a></li>
     </ul>
 </nav>
@@ -106,7 +102,7 @@
 <script type='text/javascript'>
         function a(){
             var d = document.getElementById('del').value;
-            window.location='/deletecontact?id='+d;
+            window.location='/deleteperson?id='+d;
         }
     </script>
 <input type="button" onclick="javascript:a()" value="Удалить"/>
@@ -129,7 +125,7 @@
                 <td>Type</td>
                 <td>Rate</td>
             </tr>
-            <tr th:each="person : ${records}">
+            <tr th:each="person : ${persons}">
                 <td th:text="${person.id}">Some text</td>
                 <td th:text="${person.login}">Some text</td>
                 <td th:text="${person.pass}">Some text</td>
