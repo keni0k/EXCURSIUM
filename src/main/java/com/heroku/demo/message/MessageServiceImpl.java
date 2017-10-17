@@ -16,7 +16,7 @@ public class MessageServiceImpl implements MessageService {
     private MessageRepository messageRepository;
 
     @Override
-    public Message addPoint(Message message) {
+    public Message addMessage(Message message) {
 
         return messageRepository.saveAndFlush(message);
     }
@@ -30,22 +30,28 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public List<Message> getByGuide(int guide) {
+    public List<Message> getByEvent(int event) {
         List<Message> list = messageRepository.findAll();
         List<Message> copy = new ArrayList<>();
         copy.addAll(list);
         for (int i = 0; i<copy.size(); i++)
-            if (copy.get(i).getEventId()!=guide) list.remove(i);
+            if (copy.get(i).getEventId()!=event) list.remove(i);
         return list;
     }
 
+    public MessageServiceImpl(MessageRepository reviewRepository) {
+        this.messageRepository = reviewRepository;
+    }
+
     @Override
-    public Message editPoint(Message message) {
+    public Message editMessage(Message message)
+    {
         return messageRepository.saveAndFlush(message);
     }
 
     @Override
-    public List<Message> getAll() {
+    public List<Message> getAll()
+    {
         return messageRepository.findAll();
     }
 }

@@ -57,32 +57,40 @@ public class HomeController {
         return "index";
     }
 
-    @RequestMapping("/contacts")
-    public String contacts(ModelMap model) {
-        //List<Person> records = PersonServiceImpl.getByType(recordRepository, 2);//findByType(1);
-        //model.addAttribute("records", records);
-        //model.addAttribute("insertRecord", new Person());
-        return "contacts";
+    @RequestMapping("/persons")
+    public String persons(ModelMap model) {
+        List<Person> records = personRepository.findAll();
+        model.addAttribute("persons", records);
+        model.addAttribute("insertPerson", new Person());
+        return "persons";
     }
 
-    @RequestMapping("/addcontact")
+    @RequestMapping("/addperson")
     public String insertContact(ModelMap model,
-                              @ModelAttribute("insertRecord") @Valid Person person,
+                              @ModelAttribute("insertPerson") @Valid Person person,
                               BindingResult result) {
+
+        person.setLastName("LAST");
+        person.setDate("DATE");
+        person.setImageUrl("HTTP://imgs.ru/img.jpg");
+        person.setAbout("ABOUTME");
+        person.setCity("MYCITY");
+        person.setEmail("mail@mail.ru");
+        person.setPhoneNumber("79996826826");
 
         if (!result.hasErrors()) {
            // person.setWhat(2);
             personRepository.save(person);
         }
-        return contacts(model);
+        return persons(model);
     }
 
 
-    @RequestMapping("/deletecontact")
+    @RequestMapping("/deleteperson")
     public String deleteContact(ModelMap model, @ModelAttribute("id") String id,
                               BindingResult result) {
         personRepository.delete(Long.parseLong(id));
-        return contacts(model);
+        return persons(model);
     }
 
     @RequestMapping("/addmsg")

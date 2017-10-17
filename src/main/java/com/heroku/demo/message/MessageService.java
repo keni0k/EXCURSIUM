@@ -8,10 +8,10 @@ import java.util.List;
 
 public interface MessageService {
 
-    Message addPoint(Message message);
+    Message addMessage(Message message);
     void delete(long id);
-    List<Message> getByGuide(int guide);
-    Message editPoint(Message message);
+    List<Message> getByEvent(int guide);
+    Message editMessage(Message message);
     List<Message> getAll();
 
 }

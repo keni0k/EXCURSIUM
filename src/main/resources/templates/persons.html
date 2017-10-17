@@ -20,7 +20,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
-    <!--<link rel="stylesheet" userId="text/css" href="style.css"/>-->
+    <!--<link rel="stylesheet" type="text/css" href="style.css"/>-->
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" />
     <style>
@@ -73,43 +73,43 @@
 <hr />
 <div class="row">
     <div class="col-md-12 col-lg-6">
-        <form th:object="${insertRecord}" action="/addcontact" method="POST">
+        <form th:object="${insertPersons}" action="/addperson" method="POST">
 
-            Туристический портал:
-            <select name="locate">
-                <option value="ra"> Республика Алтай </option>
-                <option value="rk"> Республика Крым </option>
-                <option value="no"> Новосибирская область </option>
-                <option value="io"> Иркутская область </option>
+            Тип пользователя:
+            <select name="type">
+                <option value="0"> Неактив </option>
+                <option value="1"> Турист </option>
+                <option value="2"> Экскурсовод </option>
+                <option value="3"> Заблокированный </option>
             </select>
 
             <br/>
-            Название контакта: <input name="head" userId="text" value=""/>
+            Login: <input name="login" type="text" value=""/>
             <br/>
-            Сайт:
-            <input name="date" userId="text" value=""/>
+            Password:
+            <input name="pass" type="text" value=""/>
             <br/>
-            Телефон:
-            <input name="phone" userId="text" value=""/>
+            Name:
+            <input name="first_name" type="text" value=""/>
             <br/>
             Ссылка на изображение:
-            <input name="img_link" userId="text" value=""/>
+            <input name="rate" type="number" value=""/>
             <br/>
-            <button userId="submit" class="btn btn-default">Отправить</button>
+            <button type="submit" class="btn btn-default">Отправить</button>
 
         </form>
     </div>
 </div>
 <hr />
 
-<input userId="text" id="del" value = "">ID элемента</input>
-<script userId='text/javascript'>
+<input type="text" id="del" value = "">ID элемента</input>
+<script type='text/javascript'>
         function a(){
             var d = document.getElementById('del').value;
             window.location='/deletecontact?id='+d;
         }
     </script>
-<input userId="button" onclick="javascript:a()" value="Удалить"/>
+<input type="button" onclick="javascript:a()" value="Удалить"/>
 <hr />
 
 <div class="row">
@@ -117,25 +117,25 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>Контакты</th>
+                <th>Users</th>
             </tr>
             </thead>
             <tbody>
             <tr>
                 <td>ID</td>
-                <td>Название</td>
-                <td>Сайт</td>
-                <td>Телефон</td>
-                <td>Ссылка на изобраэение</td>
-                <td>Локализация</td>
+                <td>Login</td>
+                <td>Pass</td>
+                <td>Name</td>
+                <td>Type</td>
+                <td>Rate</td>
             </tr>
             <tr th:each="person : ${records}">
                 <td th:text="${person.id}">Some text</td>
-                <td th:text="${person.head}">Some text</td>
-                <td th:text="${person.date}">Some text</td>
-                <td th:text="${person.phone}">Some text</td>
-                <td th:text="${person.img_link}">Some text</td>
-                <td th:text="${person.locate}">Some text</td>
+                <td th:text="${person.login}">Some text</td>
+                <td th:text="${person.pass}">Some text</td>
+                <td th:text="${person.first_name}">Some text</td>
+                <td th:text="${person.type}">Some text</td>
+                <td th:text="${person.rate}">Some text</td>
             </tr>
             </tbody>
         </table>
