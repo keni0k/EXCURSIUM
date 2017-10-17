@@ -69,27 +69,42 @@
 <hr />
 <div class="row">
     <div class="col-md-12 col-lg-6">
-        <form th:object="${insertPersons}" action="/addpersonhttp" method="POST">
+        <form th:object="${insertEvent}" action="/addeventhttp" method="POST">
 
-            Тип пользователя:
-            <select name="type">
-                <option value="0"> Неактив </option>
-                <option value="1"> Турист </option>
-                <option value="2"> Экскурсовод </option>
-                <option value="3"> Заблокированный </option>
+            Категория:
+            <select name="category">
+                <option value="0"> Природа </option>
+                <option value="1"> Архитектура </option>
+                <option value="2"> Досуг </option>
+                <option value="3"> Музеи </option>
+            </select>
+            <br/>
+            Город:
+            <select name="place">
+                <option value="moscow"> Москва </option>
+                <option value="spb"> Санкт Петербург </option>
             </select>
 
             <br/>
-            Login: <input name="login" type="text" value=""/>
+            Продолжительность: <input name="duration" type="text" value=""/>
             <br/>
-            Password:
-            <input name="pass" type="text" value=""/>
+            Описание:
+            <input name="description" type="text" value=""/>
             <br/>
-            Name:
-            <input name="firstName" type="text" value=""/>
+            Фото ID:
+            <input name="photo" type="number" value=""/>
             <br/>
-            Rate:
+            Рейтинг:
             <input name="rate" type="number" value=""/>
+            <br/>
+            Название:
+            <input name="name" type="text" value=""/>
+            <br/>
+            Гид ID:
+            <input name="guideId" type="number" value=""/>
+            <br/>
+            Цена:
+            <input name="price" type="number" value=""/>
             <br/>
             <button type="submit" class="btn btn-default">Отправить</button>
 
@@ -119,19 +134,27 @@
             <tbody>
             <tr>
                 <td>ID</td>
-                <td>Login</td>
-                <td>Pass</td>
-                <td>Name</td>
-                <td>Type</td>
-                <td>Rate</td>
+                <td>Город</td>
+                <td>Категория</td>
+                <td>Продолжительность</td>
+                <td>Стоимость</td>
+                <td>Описание</td>
+                <td>Рейтинг</td>
+                <td>Фото</td>
+                <td>ID гида</td>
+                <td>Название</td>
             </tr>
-            <tr th:each="person : ${persons}">
-                <td th:text="${person.id}">Some text</td>
-                <td th:text="${person.login}">Some text</td>
-                <td th:text="${person.pass}">Some text</td>
-                <td th:text="${person.firstName}">Some text</td>
-                <td th:text="${person.type}">Some text</td>
-                <td th:text="${person.rate}">Some text</td>
+            <tr th:each="event : ${events}">
+                <td th:text="${event.id}">Some text</td>
+                <td th:text="${event.place}">Some text</td>
+                <td th:text="${event.category}">Some text</td>
+                <td th:text="${event.duration}">Some text</td>
+                <td th:text="${event.price}">Some text</td>
+                <td th:text="${event.description}">Some text</td>
+                <td th:text="${event.rate}">Some text</td>
+                <td th:text="${event.photo}">Some text</td>
+                <td th:text="${event.guideId}">Some text</td>
+                <td th:text="${event.name}">Some text</td>
             </tr>
             </tbody>
         </table>

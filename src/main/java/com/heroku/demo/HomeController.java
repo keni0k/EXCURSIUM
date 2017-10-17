@@ -73,8 +73,8 @@ public class HomeController {
 
     @RequestMapping("/addpersonhttp")
     public String insertContact(ModelMap model,
-                              @ModelAttribute("insertPerson") @Valid Person person,
-                              BindingResult result) {
+                                @ModelAttribute("insertPerson") @Valid Person person,
+                                BindingResult result) {
         person.setDate("DATE");
 
         if (!personService.throwsErrors(person)) {
@@ -89,12 +89,31 @@ public class HomeController {
             return "error";
         }
         if (!result.hasErrors()) {
-           // person.setWhat(2);
+            // person.setWhat(2);
             personRepository.save(person);
         }
         return persons(model);
     }
 
+    @RequestMapping("/events")
+    public String events(ModelMap model) {
+        List<Person> persons = personRepository.findAll();
+        model.addAttribute("events", persons);
+        model.addAttribute("insertEvent", new Person());
+        return "persons";
+    }
+
+    @RequestMapping("/addeventhttp")
+    public String insertEvent(ModelMap model,
+                                @ModelAttribute("insertEvent") @Valid Event event,
+                                BindingResult result) {
+        event.setTime("DATE");
+
+        if (!result.hasErrors()) {
+            eventRepository.save(event);
+        }
+        return events(model);
+    }
 
     @RequestMapping("/deleteperson")
     public String deleteContact(ModelMap model, @ModelAttribute("id") String id,
