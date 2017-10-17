@@ -97,10 +97,10 @@ public class HomeController {
 
     @RequestMapping("/events")
     public String events(ModelMap model) {
-        List<Person> persons = personRepository.findAll();
-        model.addAttribute("events", persons);
+        List<Event> events = eventRepository.findAll();
+        model.addAttribute("events", events);
         model.addAttribute("insertEvent", new Person());
-        return "persons";
+        return "events";
     }
 
     @RequestMapping("/addeventhttp")
