@@ -36,6 +36,15 @@ public class PersonServiceImpl implements PersonService{
     }
 
     @Override
+    public Person getByEmail(String email) {
+        List<Person> list = personRepository.findAll();
+        for (Person p:list)
+            if (p.getEmail().equals(email))
+                return p;
+        return null;
+    }
+
+    @Override
     public Person editPerson(Person person) {
         return null;
     }

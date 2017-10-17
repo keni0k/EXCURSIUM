@@ -10,6 +10,7 @@ public interface PersonService {
     Person addPerson(Person person);
     void delete(long id);
     Person getByToken(String token);
+    Person getByEmail(String email);
     Person editPerson(Person person);
     Boolean isLoginFree(String login);
     Boolean isEmailFree(String login);

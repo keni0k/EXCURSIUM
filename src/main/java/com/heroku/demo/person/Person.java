@@ -157,7 +157,7 @@ public class Person {
                 "\t\"phoneNumber\":\"" + phoneNumber + "\",\n" +
                 "\t\"rate\":\"" + rate + "\",\n" +
                 "\t\"about\":\"" + about + "\",\n" +
-                "\t\"city\":\"" + city + "\"\n" +
+                "\t\"city\":\"" + city + "\",\n" +
                 "\t\"token\":\"" + date + "\",\n" +
                 "\t\"imageUrl\":\"" + imageUrl + "\"\n" +
                 "}";
