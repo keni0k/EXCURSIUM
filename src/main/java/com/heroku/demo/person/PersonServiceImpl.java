@@ -27,7 +27,11 @@ public class PersonServiceImpl implements PersonService{
     }
 
     @Override
-    public List<Person> getByType(int type) {
+    public Person getByToken(String token) {
+        List<Person> list = personRepository.findAll();
+        for (Person p:list)
+            if (p.getDate().equals(token))
+                return p;
         return null;
     }
 
@@ -90,7 +94,7 @@ public class PersonServiceImpl implements PersonService{
         return null;
     }
 
-//    public static List<Person> getByType(RecordRepository recordRepository, int type) {
+//    public static List<Person> getByToken(RecordRepository recordRepository, int type) {
 //        List<Person> list = recordRepository.findAll();
 //        List<Person> list1 = new ArrayList<Person>();
 //        for (Person r:list)

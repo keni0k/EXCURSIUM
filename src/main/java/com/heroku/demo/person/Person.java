@@ -158,7 +158,7 @@ public class Person {
                 "\t\"rate\":\"" + rate + "\",\n" +
                 "\t\"about\":\"" + about + "\",\n" +
                 "\t\"city\":\"" + city + "\"\n" +
-                "\t\"date\":\"" + date + "\",\n" +
+                "\t\"token\":\"" + date + "\",\n" +
                 "\t\"imageUrl\":\"" + imageUrl + "\"\n" +
                 "}";
     }

@@ -9,7 +9,7 @@ import java.util.List;
 public interface PersonService {
     Person addPerson(Person person);
     void delete(long id);
-    List<Person> getByType(int type);
+    Person getByToken(String token);
     Person editPerson(Person person);
     Boolean isLoginFree(String login);
     Boolean isEmailFree(String login);

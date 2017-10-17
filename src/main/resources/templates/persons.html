@@ -148,6 +148,7 @@
                 <td>Телефон</td>
                 <td>Тип</td>
                 <td>Рейтинг</td>
+                <td>Токен</td>
             </tr>
             <tr th:each="person : ${persons}">
                 <td th:text="${person.id}">Some text</td>
@@ -160,6 +161,7 @@
                 <td th:text="${person.phoneNumber}">Some text</td>
                 <td th:text="${person.type}">Some text</td>
                 <td th:text="${person.rate}">Some text</td>
+                <td th:text="${person.date}">Some text</td>
             </tr>
             </tbody>
         </table>

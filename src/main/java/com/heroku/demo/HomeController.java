@@ -14,6 +14,7 @@ import javax.validation.Valid;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import com.heroku.demo.person.PersonServiceImpl;
 import com.heroku.demo.photo.Photo;
@@ -71,11 +72,34 @@ public class HomeController {
         return "persons";
     }
 
+    @RequestMapping("/getperson")
+    @ResponseBody
+    public String getPerson(ModelMap model,
+                             @ModelAttribute("token") String token,
+                             BindingResult result){
+        Person p = personService.getByToken(token);
+        return p==null?"{}":p.toString();
+    }
+
+    String randomToken(){
+        final String mCHAR = "qwertyuioplkjhgfdsazxcvbnmABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        final int STR_LENGTH = 32; // длина генерируемой строки
+
+        Random random = new Random();
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < STR_LENGTH; i++) {
+            int number = random.nextInt(mCHAR.length());
+            char ch = mCHAR.charAt(number);
+            builder.append(ch);
+        }
+        return builder.toString();
+    }
+
     @RequestMapping("/addpersonhttp")
     public String insertContact(ModelMap model,
                                 @ModelAttribute("insertPerson") @Valid Person person,
                                 BindingResult result) {
-        person.setDate("DATE");
+        person.setDate(randomToken());
 
         if (!personService.throwsErrors(person)) {
             if (!personService.isEmailFree(person.getEmail()))
