@@ -36,14 +36,47 @@ public class PersonServiceImpl implements PersonService{
         return null;
     }
 
+
+
     @Override
     public Boolean isLoginFree(String login) {
         List<Person> list = personRepository.findAll();
-        boolean isLog = true;
+        boolean isFree = true;
         for (Person p:list)
             if (p.getLogin().equals(login))
-                isLog = false;
-        return isLog;
+                isFree = false;
+        return isFree;
+    }
+
+    @Override
+    public Boolean isEmailFree(String email) {
+        List<Person> list = personRepository.findAll();
+        boolean isFree = true;
+        for (Person p:list)
+            if (p.getEmail().equals(email))
+                isFree = false;
+        return isFree;
+    }
+
+    @Override
+    public Boolean isEmailCorrect(String target) {
+            return target.contains("@")&&target.contains(".");
+    }
+
+    @Override
+    public Boolean throwsErrors(Person person) {
+        return isEmailCorrect(person.getEmail()) && isLoginFree(person.getLogin()) && isPhoneFree(person.getPhoneNumber())
+                && isEmailFree(person.getEmail());
+    }
+
+    @Override
+    public Boolean isPhoneFree(String phone) {
+        List<Person> list = personRepository.findAll();
+        boolean isFree = true;
+        for (Person p:list)
+            if (p.getPhoneNumber().equals(phone))
+                isFree = false;
+        return isFree;
     }
 
 

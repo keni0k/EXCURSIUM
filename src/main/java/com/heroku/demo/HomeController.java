@@ -75,17 +75,17 @@ public class HomeController {
     public String insertContact(ModelMap model,
                               @ModelAttribute("insertPerson") @Valid Person person,
                               BindingResult result) {
-
-        person.setLastName("LAST");
         person.setDate("DATE");
-        person.setImageUrl("HTTP://imgs.ru/img.jpg");
-        person.setAbout("ABOUTME");
-        person.setCity("MYCITY");
-        person.setEmail("mail@mail.ru");
-        person.setPhoneNumber("79996826826");
 
-        if (!personService.isLoginFree(person.getLogin())) {
-            model.addAttribute("error_data", "LOGIN IS NOT FREE");
+        if (!personService.throwsErrors(person)) {
+            if (!personService.isEmailFree(person.getEmail()))
+                model.addAttribute("error_data", "EMAIL IS NOT FREE");
+            if (!personService.isLoginFree(person.getLogin()))
+                model.addAttribute("error_data1", "LOGIN IS NOT FREE");
+            if (!personService.isEmailCorrect(person.getEmail()))
+                model.addAttribute("error_data2", "EMAIL IS NOT VALID");
+            if (!personService.isPhoneFree(person.getPhoneNumber()))
+                model.addAttribute("error_data3", "PHONE NUMBER IS NOT FREE");
             return "error";
         }
         if (!result.hasErrors()) {

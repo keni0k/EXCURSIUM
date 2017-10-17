@@ -12,6 +12,10 @@ public interface PersonService {
     List<Person> getByType(int type);
     Person editPerson(Person person);
     Boolean isLoginFree(String login);
+    Boolean isEmailFree(String login);
+    Boolean isEmailCorrect(String login);
+    Boolean throwsErrors(Person person);
+    Boolean isPhoneFree(String login);
     Boolean authorization(String login, String pass);
     List<Person> getAll();
 }
