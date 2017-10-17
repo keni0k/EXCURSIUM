@@ -85,7 +85,7 @@ public class HomeController {
         person.setPhoneNumber("79996826826");
 
         if (!personService.isLoginFree(person.getLogin())) {
-            // model.addAttribute("error_data", "LOGIN IS NOT FREE");
+            model.addAttribute("error_data", "LOGIN IS NOT FREE");
             return "error";
         }
         if (!result.hasErrors()) {
