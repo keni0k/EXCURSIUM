@@ -80,17 +80,17 @@
             </select>
 
             <br/>
-            Login: <input name="login" type="text" value=""/>
+            Логин: <input name="login" type="text" value=""/>
             <br/>
-            Password:
+            Пароль:
             <input name="pass" type="text" value=""/>
             <br/>
-            Name:
+            Имя:
             <input name="firstName" type="text" value=""/>
             <br/>
-            Surname: <input name="lastName" type="text" value=""/>
+            Фамилия: <input name="lastName" type="text" value=""/>
             <br/>
-            Image URL:
+            Фото URL:
             <input name="imageUrl" type="text" value=""/>
             <br/>
             E-mail:
@@ -139,15 +139,15 @@
             <tbody>
             <tr>
                 <td>ID</td>
-                <td>Login</td>
-                <td>Pass</td>
-                <td>Name</td>
-                <td>Surname</td>
-                <td>City</td>
+                <td>Логин</td>
+                <td>Пароль</td>
+                <td>Имя</td>
+                <td>Фамилия</td>
+                <td>Город</td>
                 <td>Email</td>
-                <td>Phone</td>
-                <td>Type</td>
-                <td>Rate</td>
+                <td>Телефон</td>
+                <td>Тип</td>
+                <td>Рейтинг</td>
             </tr>
             <tr th:each="person : ${persons}">
                 <td th:text="${person.id}">Some text</td>
