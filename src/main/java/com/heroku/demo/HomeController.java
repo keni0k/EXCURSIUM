@@ -150,11 +150,13 @@ public class HomeController {
     public String getPersons(){
         ArrayList<String> arrayList = new ArrayList<>();
          List<Person> persons = personRepository.findAll();
-        for (Person p:persons){
-             arrayList.add(p.toString());
-        }
 
         StringBuilder stringBuilder = new StringBuilder("{ \"persons\": [");
+
+        for (Person p:persons){
+             arrayList.add(p.toString());
+             stringBuilder.append(personService.isLoginFree(p.getLogin()).toString());
+        }
 
         for (int i = 0; i<arrayList.size(); i++) {
             stringBuilder.append(arrayList.get(i));
