@@ -94,7 +94,7 @@
             <input name="imageUrl" type="text" value=""/>
             <br/>
             E-mail:
-            <input name="email" type="number" value=""/>
+            <input name="email" type="text" value=""/>
             <br/>
             Номер телефона:
             <input name="phoneNumber" type="text" value=""/>
@@ -142,6 +142,10 @@
                 <td>Login</td>
                 <td>Pass</td>
                 <td>Name</td>
+                <td>Surname</td>
+                <td>City</td>
+                <td>Email</td>
+                <td>Phone</td>
                 <td>Type</td>
                 <td>Rate</td>
             </tr>
@@ -150,6 +154,10 @@
                 <td th:text="${person.login}">Some text</td>
                 <td th:text="${person.pass}">Some text</td>
                 <td th:text="${person.firstName}">Some text</td>
+                <td th:text="${person.lastName}">Some text</td>
+                <td th:text="${person.city}">Some text</td>
+                <td th:text="${person.email}">Some text</td>
+                <td th:text="${person.phone}">Some text</td>
                 <td th:text="${person.type}">Some text</td>
                 <td th:text="${person.rate}">Some text</td>
             </tr>
