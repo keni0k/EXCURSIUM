@@ -12,6 +12,7 @@ import com.heroku.demo.person.PersonRepository;
 
 import javax.validation.Valid;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -21,8 +22,10 @@ import com.heroku.demo.photo.Photo;
 import com.heroku.demo.photo.PhotoRepository;
 import com.heroku.demo.review.Review;
 import com.heroku.demo.review.ReviewRepository;
+import com.sun.org.apache.regexp.internal.RE;
 import org.omg.CORBA.PRIVATE_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -72,7 +75,7 @@ public class HomeController {
         return "persons";
     }
 
-    @RequestMapping("/getperson")
+    @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET, value = "/getperson")
     @ResponseBody
     public String getPerson(ModelMap model,
                              @ModelAttribute("token") String token,
