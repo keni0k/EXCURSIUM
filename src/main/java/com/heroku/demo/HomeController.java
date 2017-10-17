@@ -78,6 +78,7 @@ public class HomeController {
         person.setEmail("mail@mail.ru");
         person.setPhoneNumber("79996826826");
 
+
         if (!result.hasErrors()) {
            // person.setWhat(2);
             personRepository.save(person);
