@@ -19,7 +19,7 @@
         <property name="redirectHttp10Compatible" value="false" />
     </bean>
 
-    <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <bean id="jspViewResolver2" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
         <property name="prefix" value="/" />
         <property name="suffix" value=".html" />
