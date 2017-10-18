@@ -9,22 +9,22 @@
 	<meta name="keywords" content="excursium" />
 
 
-	<link rel="stylesheet" type="text/css" href="../resources/css/styles.css" />
-	<link rel="stylesheet" href="../resources/css/media.css" />
-	<link rel="stylesheet" type="text/css" href="../resources/css/footer.css" />
+	<link rel="stylesheet" type="text/css" href="../../resources/css/styles.css" />
+	<link rel="stylesheet" href="../../resources/css/media.css" />
+	<link rel="stylesheet" type="text/css" href="../../resources/css/footer.css" />
 	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" />
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-	<link rel="stylesheet" href="../resources/libs/bootstrap-select/css/bootstrap-select.css"/>
-	<script type="text/javascript" src="../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
+	<link rel="stylesheet" href="../../resources/libs/bootstrap-select/css/bootstrap-select.css"/>
+	<script type="text/javascript" src="../../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
 
-	<link rel="stylesheet" href="../resources/css/segoe_ui.css" />
+	<link rel="stylesheet" href="../../resources/css/segoe_ui.css" />
 
-	<link rel="stylesheet" href="../resources/libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>
-	<script type="text/javascript" src="../resources/libs/bootstrapformhelpers/js/bootstrap-formhelpers.min.js"></script>
+	<link rel="stylesheet" href="../../resources/libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>
+	<script type="text/javascript" src="../../resources/libs/bootstrapformhelpers/js/bootstrap-formhelpers.min.js"></script>
 
 	<title>Добавить экскурсию</title>
 </head>
@@ -88,7 +88,7 @@
 				</button>
 
 				<a class="navbar-brand" href="index.html">
-					<img id="brand-image" alt="Website Logo" src="../resources/images/logo.png" />
+					<img id="brand-image" alt="Website Logo" src="../../resources/images/logo.png" />
 				</a>
 			</div>
 
@@ -97,11 +97,11 @@
 
 				<!-- Содержимое основной части -->
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="../download.html">Скачать</a></li>
-					<li><a href="../features.html">Функции</a></li>
+					<li><a href="../../download.html">Скачать</a></li>
+					<li><a href="../../features.html">Функции</a></li>
 					<li><a href="#">FAQ</a></li>
-					<li><a href="../contact.html">Контакты</a></li>
-					<li><a href="../registration.html">Регистрация</a></li>
+					<li><a href="../../contact.html">Контакты</a></li>
+					<li><a href="../../registration.html">Регистрация</a></li>
 				</ul>
 
 			</div><!-- navbar collapse end -->
@@ -199,15 +199,15 @@
 			<div class="col-sm-3">
 				<h5>Excursium</h5>
 				<ul>
-					<li><a href="../download.html">Скачать</a></li>
-					<li><a href="../features.html">Функции</a></li>
+					<li><a href="../../download.html">Скачать</a></li>
+					<li><a href="../../features.html">Функции</a></li>
 				</ul>
 			</div>
 			<div class="col-sm-3">
 				<h5>Контакты</h5>
 				<ul>
-					<li><a href="../about.html">О нас</a></li>
-					<li><a href="../contact.html">Контакты</a></li>
+					<li><a href="../../about.html">О нас</a></li>
+					<li><a href="../../contact.html">Контакты</a></li>
 				</ul>
 			</div>
 			<div class="col-sm-3">
