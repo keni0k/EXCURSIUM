@@ -74,7 +74,7 @@ public class HomeController {
     @RequestMapping("/events_andrey")
     public String eventAdd(ModelMap model) {
         model.addAttribute("insertEvent", new Event());
-        return "resources/event_add";
+        return "event_add";
     }
 
     @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET, value = "/getperson")
