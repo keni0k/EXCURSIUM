@@ -60,6 +60,12 @@
             <artifactId>liquibase-core</artifactId>
             <version>3.4.1</version>
         </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>${jstl.version}</version>
+        </dependency>
+
     </dependencies>
 
     <properties>
