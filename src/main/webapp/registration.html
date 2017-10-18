@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="description" content="" />
@@ -8,25 +8,25 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 	<meta name="keywords" content="excursium" />
 
-
-	<link rel="stylesheet" type="text/css" href="css/styles.css" />
+	<link rel="stylesheet" type="text/css" href="resources/css/styles.css" />
 	<link rel="stylesheet" href="css/media.css" />
-	<link rel="stylesheet" type="text/css" href="css/footer.css" />
+	<link rel="stylesheet" type="text/css" href="resources/css/footer.css" />
 	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" />
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-	<link rel="stylesheet" href="libs/bootstrap-select/css/bootstrap-select.css"/>
+	<link rel="stylesheet" href="libs/bootstrap-select/css/bootstrap-select.css">
 	<script type="text/javascript" src="libs/bootstrap-select/js/bootstrap-select.js"></script>
 
-	<link rel="stylesheet" href="css/segoe_ui.css" />
+	<link rel="stylesheet" href="resources/css/segoe_ui.css" />
 
-	<link rel="stylesheet" href="libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>
+	<link rel="stylesheet" href="libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css">
 	<script type="text/javascript" src="libs/bootstrapformhelpers/js/bootstrap-formhelpers.min.js"></script>
 
-	<title>Добавить экскурсию</title>
+
+	<title>Скачать</title>
 </head>
 <body style="background-color: #f9f9f9;">
 	<style type="text/css">
@@ -88,7 +88,7 @@
 				</button>
 
 				<a class="navbar-brand" href="index.html">
-					<img id="brand-image" alt="Website Logo" src="images/logo.png" />
+					<img id="brand-image" alt="Website Logo" src="resources/images/logo.png" />
 				</a>
 			</div>
 
@@ -109,81 +109,63 @@
 	</nav>
 	<div class="container">
 		<div class="page-header">
-			<h2>Добавление экскурсии</h2>
+			<h2>Регистрация</h2>      
 		</div>
 		<div class="row">
 			<div class="col-md-12 col-lg-6">
-
-				<form th:object="${insertEvent}" action="/addeventhttp" method="POST">
+				<form th:object="${insertPersons}" action="/addpersonhttp" method="POST">
 					<br/>
 					<div class="input-group">
-						<span class="input-group-addon" id="basic-addon1">ФИ</span>
-						<input name="time" type="text" class="form-control" placeholder="ФИ" aria-label="ФИ" aria-describedby="basic-addon1"/>
+						<span class="input-group-addon" id="basic-addon1">Логин</span>
+						<input name="login" type="text" class="form-control" placeholder="Логин" aria-label="Логин" aria-describedby="basic-addon1">
 					</div>
 					<br />
 					<div class="input-group">
-						<span class="input-group-addon" id="basic-addon1">Название</span>
-						<input name="name" type="text" class="form-control" placeholder="Название" aria-label="Название" aria-describedby="basic-addon1"/>
+						<span class="input-group-addon" id="basic-addon1">Пароль</span>
+						<input name="pass" type="text" class="form-control" placeholder="Пароль" aria-label="Пароль" aria-describedby="basic-addon1">
 					</div>
 					<br />
 					<div class="input-group">
-						<span class="input-group-addon" id="basic-addon1">Описание</span>
-						<input name="description" type="text" class="form-control" placeholder="Описание" aria-label="Описание" aria-describedby="basic-addon1"/>
-					</div>
-					<br/>
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							Тип экскурсии
-						</div>
-						<div class="panel-body">
-							<div class="input-group">
-								<select name="category" class="form-control selectpicker">
-									<option value="avto">Авто</option>
-									<option value="pesh">Пешеходная</option>
-									<option value="kvest">Квест</option>
-									<option value="extrime">Экстремальная</option>
-									<option value="other">Другое</option>
-								</select>
-							</div>
-						</div>
-					</div>
-					<div class="input-group">
-						<span class="input-group-addon" id="basic-addon1">Количество участников</span>
-						<input name="photo" type="number" class="form-control" placeholder="Количество участников" aria-label="Количество участников" aria-describedby="basic-addon1"/>
+						<span class="input-group-addon" id="basic-addon1">Имя</span>
+						<input name="firstName" type="text" class="form-control" placeholder="Имя" aria-label="Имя" aria-describedby="basic-addon1">
 					</div>
 					<br />
 					<div class="input-group">
-						<span class="input-group-addon" id="basic-addon1">Продолжительность</span>
-						<input name="duration" type="text" class="form-control" placeholder="Продолжительность" aria-label="Продолжительность" aria-describedby="basic-addon1"/>
+						<span class="input-group-addon" id="basic-addon1">Фамилия</span>
+						<input name="lastName" type="text" class="form-control" placeholder="Фамилия" aria-label="Фамилия" aria-describedby="basic-addon1">
 					</div>
 					<br />
 					<div class="input-group">
-						<span class="input-group-addon" id="basic-addon1">Место встречи</span>
-						<input name="place" type="text" class="form-control" placeholder="Место встречи" aria-label="Место встречи" aria-describedby="basic-addon1"/>
+						<span class="input-group-addon" id="basic-addon1">Фото URL</span>
+						<input name="imageUrl" type="text" class="form-control" placeholder="Фото URL" aria-label="Фото URL" aria-describedby="basic-addon1">
 					</div>
 					<br />
 					<div class="input-group">
-						<span class="input-group-addon" id="basic-addon1">Цена</span>
-						<input name="price" type="number" class="form-control" placeholder="Цена" aria-label="Цена" aria-describedby="basic-addon1"/>
-						<span class="input-group-addon" id="basic-addon1">&#8381;</span>
+						<span class="input-group-addon" id="basic-addon1">Email</span>
+						<input name="email" type="text" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">
 					</div>
 					<br />
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1">Телефон</span>
-						<input name="guideId" type="text" class="form-control bfh-phone" placeholder="Телефон" aria-label="Телефон" aria-describedby="basic-addon1" data-format="+7 (ddd) ddd-dddd"/>
+						<input name="phoneNumber" type="text" class="form-control bfh-phone" placeholder="Телефон" aria-label="Телефон" aria-describedby="basic-addon1" data-format="+7 (ddd) ddd-dddd">
 					</div>
 					<br />
-
 					<div class="input-group">
-						<span class="input-group-addon">Доступные интервалы времени</span>
-					<select id="done" class="form-control selectpicker" multiple="multiple" data-done-button="true">
-						<option value="1">До 9 утра</option>
-						<option value="2">С 9 до 12</option>
-						<option value="3">С 12 до 15</option>
-						<option value="4">С 15 до 18</option>
-						<option value="5">С 18 до 21</option>
-						<option value="6">С 21 до 24</option>
-					</select>
+						<span class="input-group-addon" id="basic-addon1">О себе</span>
+						<input name="about" type="text" class="form-control" placeholder="О себе" aria-label="О себе" aria-describedby="basic-addon1">
+					</div>
+					<br />
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon1">Имя</span>
+						<input name="firstName" type="text" class="form-control" placeholder="Имя" aria-label="Имя" aria-describedby="basic-addon1">
+					</div>
+					<br/>
+					<div class="input-group">
+						<span class="input-group-addon">Город</span>
+						<select name="city" class="form-control selectpicker">
+							<option value="moscow">Москва</option>
+							<option value="spb">Санкт Петербург</option>
+						</select>
 					</div>
 					<br />
 					<button type="submit" class="btn btn-default">Отправить</button>
