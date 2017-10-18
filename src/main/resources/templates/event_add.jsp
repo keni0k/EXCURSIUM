@@ -1,5 +1,5 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-
 <html xmlns:th="http://www.w3.org/1999/xhtml"
 	  xmlns:wicket="http://wicket.apache.org/"
 	  xmlns:c="http://java.sun.com/jstl/core">
@@ -12,7 +12,7 @@
 	<meta name="keywords" content="excursium" />
 
 
-	<link rel="stylesheet" type="text/css" href="/**/css/styles.css" />
+	<link rel="stylesheet" type="text/css" href="<c:url value="/css/styles.css" />" />
 	<link rel="stylesheet" href="css/media.css" />
 	<link rel="stylesheet" type="text/css" href="/**/css/footer.css" />
 	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" />
