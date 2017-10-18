@@ -9,21 +9,12 @@ import com.heroku.demo.order.Buy;
 import com.heroku.demo.order.BuyRepository;
 import com.heroku.demo.person.Person;
 import com.heroku.demo.person.PersonRepository;
-
-import javax.validation.Valid;
-
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import com.heroku.demo.person.PersonServiceImpl;
 import com.heroku.demo.photo.Photo;
 import com.heroku.demo.photo.PhotoRepository;
 import com.heroku.demo.review.Review;
 import com.heroku.demo.review.ReviewRepository;
-import com.sun.org.apache.regexp.internal.RE;
-import org.omg.CORBA.PRIVATE_MEMBER;
+import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -33,6 +24,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
+import java.util.Random;
 
 @Controller
 @RequestMapping("/")
@@ -75,6 +72,12 @@ public class HomeController {
         return "persons";
     }
 
+    @RequestMapping("/events_andrey")
+    public String eventAdd(ModelMap model) {
+        model.addAttribute("insertPerson", new Person());
+        return "event_add";
+    }
+
     @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET, value = "/getperson")
     @ResponseBody
     public String getPerson(ModelMap model,
@@ -93,7 +96,7 @@ public class HomeController {
         return p==null?"{}":p.toString();
     }
 
-    String randomToken(){
+    private String randomToken(){
         final String mCHAR = "qwertyuioplkjhgfdsazxcvbnmABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         final int STR_LENGTH = 32; // длина генерируемой строки
 
@@ -105,6 +108,47 @@ public class HomeController {
             builder.append(ch);
         }
         return builder.toString();
+    }
+
+    private void sendMail(){
+//        final String APIKey = "your Mailjet API Key";
+//        final String SecretKey = "your Mailjet Secret Key";
+//        String From = "you@example.com";
+//        String To = "recipient@example.com";
+//
+//        Properties props = new Properties ();
+//
+//        props.put ("mail.smtp.host", "in.mailjet.com");
+//        props.put ("mail.smtp.socketFactory.port", "465");
+//        props.put ("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+//        props.put ("mail.smtp.auth", "true");
+//        props.put ("mail.smtp.port", "465");
+//
+//        Session session = Session.getDefaultInstance (props,
+//                new javax.mail.Authenticator ()
+//                {
+//                    protected PasswordAuthentication getPasswordAuthentication ()
+//                    {
+//                        return new PasswordAuthentication (APIKey, SecretKey);
+//                    }
+//                });
+//
+//        try
+//        {
+//
+//            Message message = new MimeMessage (session);
+//            message.setFrom (new InternetAddress (From));
+//            message.setRecipients (Message.RecipientType.TO, InternetAddress.parse(To));
+//            message.setSubject ("Your mail from Mailjet");
+//            message.setText ("Your mail from Mailjet, sent by Java.");
+//
+//            Transport.send (message);
+//
+//        }
+//        catch (MessagingException e)
+//        {
+//            throw new RuntimeException (e);
+//        }
     }
 
     @RequestMapping("/addpersonhttp")
