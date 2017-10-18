@@ -19,6 +19,14 @@
         <property name="redirectHttp10Compatible" value="false" />
     </bean>
 
+
+    <bean id="templateResolver" class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+        <property name="prefix" value="/WEB-INF/" />
+        <property name="suffix" value=".html" />
+        <property name="templateMode" value="HTML5" />
+        <property name="cacheable" value="false" /> <!-- Development only -->
+    </bean>
+
     <!--suppress SpringModelInspection -->
     <mvc:resources mapping="/resources/**" location="/resources/" />
 
