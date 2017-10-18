@@ -73,7 +73,7 @@ public class HomeController {
 
     @RequestMapping("/events_andrey")
     public String eventAdd(ModelMap model) {
-        model.addAttribute("insertPerson", new Person());
+        model.addAttribute("insertEvent", new Event());
         return "event_add";
     }
 
@@ -186,7 +186,7 @@ public class HomeController {
     public String insertEvent(ModelMap model,
                                 @ModelAttribute("insertEvent") @Valid Event event,
                                 BindingResult result) {
-        event.setTime("DATE");
+        //event.setTime("DATE");
 
         if (!result.hasErrors()) {
             eventRepository.save(event);

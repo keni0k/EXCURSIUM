@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="description" content="" />
@@ -113,11 +113,11 @@
 		<div class="row">
 			<div class="col-md-12 col-lg-6">
 
-				<form th:object="${insertPersons}" action="/addpersonhttp" method="POST">
+				<form th:object="${insertEvent}" action="/addeventhttp" method="POST">
 					<br/>
 					<div class="input-group">
-						<span class="input-group-addon" id="basic-addon1">Email</span>
-						<input name="email" type="text" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1"/>
+						<span class="input-group-addon" id="basic-addon1">ФИ</span>
+						<input name="time" type="text" class="form-control" placeholder="ФИ" aria-label="ФИ" aria-describedby="basic-addon1"/>
 					</div>
 					<br />
 					<div class="input-group">
@@ -136,7 +136,7 @@
 						</div>
 						<div class="panel-body">
 							<div class="input-group">
-								<select name="type" class="form-control selectpicker">
+								<select name="category" class="form-control selectpicker">
 									<option value="avto">Авто</option>
 									<option value="pesh">Пешеходная</option>
 									<option value="kvest">Квест</option>
@@ -144,16 +144,11 @@
 									<option value="other">Другое</option>
 								</select>
 							</div>
-							<br />
-							<div class="input-group">
-								<span class="input-group-addon" id="basic-addon1">Другое</span>
-								<input name="other_descr" type="text" class="form-control" placeholder="Другое" aria-label="Другое" aria-describedby="basic-addon1"/>
-							</div>
 						</div>
 					</div>
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1">Количество участников</span>
-						<input name="part_count" type="number" class="form-control" placeholder="Количество участников" aria-label="Количество участников" aria-describedby="basic-addon1"/>
+						<input name="photo" type="number" class="form-control" placeholder="Количество участников" aria-label="Количество участников" aria-describedby="basic-addon1"/>
 					</div>
 					<br />
 					<div class="input-group">
@@ -174,12 +169,12 @@
 					<br />
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1">Телефон</span>
-						<input name="phoneNumber" type="text" class="form-control bfh-phone" placeholder="Телефон" aria-label="Телефон" aria-describedby="basic-addon1" data-format="+7 (ddd) ddd-dddd"/>
+						<input name="guideId" type="text" class="form-control bfh-phone" placeholder="Телефон" aria-label="Телефон" aria-describedby="basic-addon1" data-format="+7 (ddd) ddd-dddd"/>
 					</div>
 					<br />
 
 					<div class="input-group">
-						<span class="input-group-addon">Город</span>
+						<span class="input-group-addon">Доступные интервалы времени</span>
 					<select id="done" class="form-control selectpicker" multiple="multiple" data-done-button="true">
 						<option value="1">До 9 утра</option>
 						<option value="2">С 9 до 12</option>
