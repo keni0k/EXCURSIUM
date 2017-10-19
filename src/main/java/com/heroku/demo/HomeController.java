@@ -60,7 +60,7 @@ public class HomeController {
         return "index";
     }
 
-    @RequestMapping("/persons")
+    @RequestMapping("/registration")
     public String persons(ModelMap model) {
         List<Person> persons = personRepository.findAll();
         model.addAttribute("persons", persons);
@@ -68,7 +68,7 @@ public class HomeController {
         return "registration";
     }
 
-    @RequestMapping("/events_andrey")
+    @RequestMapping("/event_add")
     public String eventAdd(ModelMap model) {
         model.addAttribute("insertEvent", new Event());
         return "event_add";
