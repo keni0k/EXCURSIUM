@@ -28,6 +28,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("org.springframework.boot:spring-boot-starter-data-mongodb")
+    compile 'org.thymeleaf:thymeleaf-spring4:3.0.0.ALPHA03'
     compile("org.postgresql:postgresql:9.4-1201-jdbc4");
     testCompile("junit:junit")
 }
