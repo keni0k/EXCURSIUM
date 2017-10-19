@@ -20,12 +20,23 @@
     </bean>
 
 
-    <bean
-            id="templateResolver"
-            class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver"
-            p:prefix="/WEB-INF/"
-            p:suffix=".html"
-            p:templateMode="HTML5">
+    <bean id="viewResolver" class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+        <property name="order" value="1"/>
+        <property name="characterEncoding" value="UTF-8"/>
+        <property name="templateEngine" ref="templateEngine"/> <!-- THIS -->
+    </bean>
+
+    <bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
+        <property name="templateResolvers">
+            <set>
+                <ref bean="webTemplateResolver"/>
+            </set>
+        </property>
+        <property name="additionalDialects">
+            <set>
+                <bean class="org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect"/>
+            </set>
+        </property>
     </bean>
 
 
