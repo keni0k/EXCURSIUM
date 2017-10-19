@@ -16,7 +16,10 @@ import com.heroku.demo.photo.PhotoRepository;
 import com.heroku.demo.review.Review;
 import com.heroku.demo.review.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -25,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.*;
 
@@ -95,10 +99,18 @@ public class HomeController {
         return p==null?"{}":p.toString();
     }
 
+   // @RequestMapping(method = RequestMethod.GET, value = "/getcategories")
+   // @ResponseBody
+  //  public String getCategories(){
+  //      return "[\"Авто\",\"Пешеходная\",\"Квест\",\"Экстримальная\"]";
+   // }
+
     @RequestMapping(method = RequestMethod.GET, value = "/getcategories")
     @ResponseBody
-    public String getCategories(){
-        return "[\"Авто\",\"Пешеходная\",\"Квест\",\"Экстримальная\"]";
+    public ResponseEntity<String> preview(HttpServletResponse response) {
+        HttpHeaders h = new HttpHeaders();
+        h.add("Content-type", "text/json;charset=UTF-8");
+        return new ResponseEntity<String>("[\"Авто\",\"Пешеходная\",\"Квест\",\"Экстримальная\"]",h , HttpStatus.OK);
     }
 
     @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET, value = "/getexcursions")
