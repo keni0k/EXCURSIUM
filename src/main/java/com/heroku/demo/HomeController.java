@@ -69,8 +69,6 @@ public class HomeController {
 
     @RequestMapping("/registration")
     public String persons(ModelMap model) {
-        List<Person> persons = personRepository.findAll();
-        model.addAttribute("persons", persons);
         model.addAttribute("insertPerson", new Person());
         return "registration";
     }
@@ -345,17 +343,18 @@ public class HomeController {
     @ResponseBody
     public String insertEvent(ModelMap model,
                                @ModelAttribute("name") String name,
+                               @ModelAttribute("full_name") String time,
                                @ModelAttribute("category") int category,
-                               @ModelAttribute("guide_id") int guideId,
+                               @ModelAttribute("duration") int guideId,
                                @ModelAttribute("place") String place,
-                               @ModelAttribute("duration") String duration,
+                               @ModelAttribute("phone") String duration,
                                @ModelAttribute("description") String description,
-                               @ModelAttribute("rate") int rate,
-                               @ModelAttribute("photo") int photo,
+                               @ModelAttribute("language") int rate,
+                               @ModelAttribute("users_count") int photo,
                                @ModelAttribute("price") int price,
                                BindingResult result) {
 
-        Event e = new Event(place, category, "TIME", duration, price, description, rate, photo, guideId, name);
+        Event e = new Event(place, category, time, duration, price, description, rate, photo, guideId, name);
         if (!result.hasErrors()) {
             //person.setWhat(3);
             eventRepository.save(e);
