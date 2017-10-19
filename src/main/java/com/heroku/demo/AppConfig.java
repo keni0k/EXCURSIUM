@@ -36,12 +36,12 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         templateEngine.setTemplateResolver(getTemplateResolver());
         return templateEngine;
     }
-//    @Bean(name="viewResolver")
-//    public ThymeleafViewResolver getViewResolver(){
-//        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-//        viewResolver.setTemplateEngine(getTemplateEngine());
-//        return viewResolver;
-//    }
+    @Bean(name="viewResolver")
+    public ThymeleafViewResolver getViewResolver(){
+        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+        viewResolver.setTemplateEngine(getTemplateEngine());
+        return viewResolver;
+    }
     //end Thymeleaf specific configuration
     @Bean(name ="messageSource")
     public MessageSource getMessageSource() {
