@@ -56,7 +56,7 @@ public class EventServiceImpl implements EventService {
         List<Event> copy = new ArrayList<>();
         if (priceUp == -1) priceUp = Integer.MAX_VALUE;
         for (Event aList : list)
-            if ((aList.getPrice() >= priceDown) && (aList.getPrice() <= priceUp) && (aList.getCategory() == category) && (aList.getRate()==language))
+            if ((aList.getPrice() >= priceDown) && (aList.getPrice() <= priceUp) && ((aList.getCategory() == category)||(category==-1)) && (aList.getRate()==language))
                 copy.add(aList);
         return copy;
     }
