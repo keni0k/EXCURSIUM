@@ -65,7 +65,7 @@ public class HomeController {
         List<Person> persons = personRepository.findAll();
         model.addAttribute("persons", persons);
         model.addAttribute("insertPerson", new Person());
-        return "persons";
+        return "registration";
     }
 
     @RequestMapping("/events_andrey")
