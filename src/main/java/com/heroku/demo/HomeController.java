@@ -25,10 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
-import java.util.Random;
+import java.util.*;
 
 @Controller
 @RequestMapping("/")
@@ -178,11 +175,12 @@ public class HomeController {
     public String events(ModelMap model) {
         List<Event> events = eventRepository.findAll();
         model.addAttribute("events", events);
-        model.addAttribute("insertEvent", new Person());
+        model.addAttribute("insertEvent", new Event());
         return "events";
     }
 
     @RequestMapping("/addeventhttp")
+    @ResponseBody
     public String insertEvent(ModelMap model,
                                 @ModelAttribute("insertEvent") @Valid Event event,
                                 BindingResult result) {
@@ -191,7 +189,7 @@ public class HomeController {
         if (!result.hasErrors()) {
             eventRepository.save(event);
         }
-        return events(model);
+        return event.toString();
     }
 
     @RequestMapping("/deleteperson")
@@ -199,6 +197,13 @@ public class HomeController {
                               BindingResult result) {
         personRepository.delete(Long.parseLong(id));
         return persons(model);
+    }
+
+    @RequestMapping("/deleteevent")
+    public String deleteEvent(ModelMap model, @ModelAttribute("id") String id,
+                                BindingResult result) {
+        eventRepository.delete(Long.parseLong(id));
+        return events(model);
     }
 
     @RequestMapping("/addmsg")
