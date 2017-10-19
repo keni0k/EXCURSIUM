@@ -20,26 +20,6 @@
     </bean>
 
 
-    <bean id="viewResolver" class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
-        <property name="order" value="1"/>
-        <property name="characterEncoding" value="UTF-8"/>
-        <property name="templateEngine" ref="templateEngine"/> <!-- THIS -->
-    </bean>
-
-    <bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
-        <property name="templateResolvers">
-            <set>
-                <ref bean="webTemplateResolver"/>
-            </set>
-        </property>
-        <property name="additionalDialects">
-            <set>
-                <bean class="org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect"/>
-            </set>
-        </property>
-    </bean>
-
-
     <!--suppress SpringModelInspection -->
     <mvc:resources mapping="/resources/**" location="/resources/" />
 
