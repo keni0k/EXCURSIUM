@@ -1,5 +1,5 @@
 #myFooter {
-    background-color: #bfd9e3;
+    background: linear-gradient(to left, #68b3bd, #00ae6f);
     color: white;
 }
 
@@ -40,6 +40,7 @@
 }
 
 #myFooter a {
+    font-family: SegoeUIRegular;
     color: #000000;
     text-decoration: none;
 }
@@ -52,11 +53,12 @@
 
 #myFooter .second-bar {
     text-align: center;
-    background-color: #bfd9e3;
+    background: linear-gradient(to left, #68b3bd, #00ae6f);
     text-align: center;
 }
 
 #myFooter .second-bar a {
+    font-family: SegoeUIRegular;
     font-size: 22px;
     color: #9fa3a9;
     padding: 10px;
@@ -112,13 +114,13 @@ body{
 }
 
 .content{
-   flex: 1 0 auto;
-   -webkit-flex: 1 0 auto;
-   min-height: 720px;
-   margin-bottom: 30px;
+ flex: 1 0 auto;
+ -webkit-flex: 1 0 auto;
+ min-height: 720px;
+ margin-bottom: 30px;
 }
 
 #myFooter{
-   flex: 0 0 auto;
-   -webkit-flex: 0 0 auto;
+ flex: 0 0 auto;
+ -webkit-flex: 0 0 auto;
 }

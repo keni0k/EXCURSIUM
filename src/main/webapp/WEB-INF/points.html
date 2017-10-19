@@ -74,7 +74,8 @@
 
             Маршрут
             <select name="eventId">
-                <option th:each="person : ${records}" 	th:value="${person.id}" value=""  th:text="${person.head}"> Same </option>
+                <option th:each="person : ${records}" 	th:value="${person.id}" value=""
+                        th:text="${person.head}"> Same </option>
             </select>
 
             <br/>
