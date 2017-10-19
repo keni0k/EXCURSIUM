@@ -95,10 +95,11 @@ public class HomeController {
     @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET, value = "/geteventsbyfilter")
     @ResponseBody
     public String getEventsByFilter(ModelMap model,
-                                   @ModelAttribute("email") String email,
+                                   @ModelAttribute("price")int price,
                                    BindingResult result){
-        Person p = personService.getByEmail(email);
-        return p==null?"{}":p.toString();
+//        Person p = personService.getByEmail(price);
+//        return p==null?"{}":p.toString();
+        return "";
     }
 
     private String randomToken(){

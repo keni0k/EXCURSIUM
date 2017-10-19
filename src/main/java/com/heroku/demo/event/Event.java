@@ -21,13 +21,13 @@ public class Event {
                 "\t\"id\":\"" + id + "\",\n" +
                 "\t\"place\":\"" + place + "\",\n" +
                 "\t\"category\":\"" + category + "\",\n" +
-                "\t\"time\":\"" + time + "\",\n" +
-                "\t\"duration\":\"" + duration + "\",\n" +
+                "\t\"full_name\":\"" + time + "\",\n" +
+                "\t\"phone\":\"" + duration + "\",\n" +
                 "\t\"price\":\"" + price + "\",\n" +
                 "\t\"description\":\"" + description + "\",\n" +
-                "\t\"photo\":\"" + photo + "\",\n" +
-                "\t\"rate\":\"" + rate + "\",\n" +
-                "\t\"guide_id\":\"" + guideId + "\",\n" +
+                "\t\"users_count\":\"" + photo + "\",\n" +
+                "\t\"free_time\":\"" + rate + "\",\n" +
+                "\t\"duration\":\"" + guideId + "\",\n" +
                 "\t\"name\":\"" + name + "\"\n" +
                 "}";
     }
