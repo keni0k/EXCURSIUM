@@ -95,7 +95,7 @@ public class HomeController {
         return p==null?"{}":p.toString();
     }
 
-    @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET, value = "/getcategories")
+    @RequestMapping(method = RequestMethod.GET, value = "/getcategories")
     @ResponseBody
     public String getCategories(){
         return "[\"Авто\",\"Пешеходная\",\"Квест\",\"Экстримальная\"]";
