@@ -49,4 +49,15 @@ public class EventServiceImpl implements EventService {
     {
         return eventRepository.findAll();
     }
+
+    @Override
+    public List<Event> getByFilter(int priceUp, int priceDown, int category) {
+        List<Event> list = eventRepository.findAll();
+        List<Event> copy = new ArrayList<>();
+        if (priceUp == -1) priceUp = Integer.MAX_VALUE;
+        for (Event aList : list)
+            if ((aList.getPrice() >= priceDown) && (aList.getPrice() <= priceUp) && (aList.getCategory() == category))
+                copy.add(aList);
+        return copy;
+    }
 }

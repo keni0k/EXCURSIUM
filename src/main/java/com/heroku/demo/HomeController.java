@@ -3,6 +3,7 @@ package com.heroku.demo;
 
 import com.heroku.demo.event.Event;
 import com.heroku.demo.event.EventRepository;
+import com.heroku.demo.event.EventServiceImpl;
 import com.heroku.demo.message.Message;
 import com.heroku.demo.message.MessageRepository;
 import com.heroku.demo.order.Buy;
@@ -40,6 +41,7 @@ public class HomeController {
     private PhotoRepository photoRepository;
 
     private PersonServiceImpl personService;
+    private EventServiceImpl eventService;
 
     @Autowired
     public HomeController(PersonRepository repository, MessageRepository pRepository,
@@ -53,6 +55,7 @@ public class HomeController {
         this.photoRepository = photoRepository;
 
         personService = new PersonServiceImpl(personRepository);
+        eventService = new EventServiceImpl(eventRepository);
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -92,14 +95,34 @@ public class HomeController {
         return p==null?"{}":p.toString();
     }
 
-    @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET, value = "/geteventsbyfilter")
+    @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET, value = "/getcategories")
+    @ResponseBody
+    public String getCategories(){
+        return "[\"Авто\",\"Пешеходная\",\"Квест\",\"Экстримальная\"]";
+    }
+
+    @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET, value = "/getexcursions")
     @ResponseBody
     public String getEventsByFilter(ModelMap model,
-                                   @ModelAttribute("price")int price,
+                                   @ModelAttribute("price_down")int priceDown,
+                                    @ModelAttribute("price_up")int priceUp,
+                                    @ModelAttribute("category")int category,
                                    BindingResult result){
-//        Person p = personService.getByEmail(price);
-//        return p==null?"{}":p.toString();
-        return "";
+
+        ArrayList<String> arrayList = new ArrayList<>();
+        List<Event> events = eventService.getByFilter(priceUp, priceDown, category);
+        for (Event e:events){
+            arrayList.add(e.toString());
+        }
+
+        StringBuilder stringBuilder = new StringBuilder("{ \"events\": [");
+
+        for (int i = 0; i<arrayList.size(); i++) {
+            stringBuilder.append(arrayList.get(i));
+            if (arrayList.size()-i>1) stringBuilder.append(",\n");
+        }
+        stringBuilder.append("]}");
+        return stringBuilder.toString();
     }
 
     private String randomToken(){
