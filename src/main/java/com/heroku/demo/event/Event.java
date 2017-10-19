@@ -18,17 +18,17 @@ public class Event {
     public String toString() {
 
         return "{\n" +
-                "\t\"id\":\"" + id + "\",\n" +
-                "\t\"place\":\"" + place + "\",\n" +
-                "\t\"category\":\"" + category + "\",\n" +
-                "\t\"full_name\":\"" + time + "\",\n" +
-                "\t\"phone\":\"" + duration + "\",\n" +
-                "\t\"price\":\"" + price + "\",\n" +
-                "\t\"description\":\"" + description + "\",\n" +
-                "\t\"users_count\":\"" + photo + "\",\n" +
-                "\t\"language\":\"" + rate + "\",\n" +
-                "\t\"duration\":\"" + guideId + "\",\n" +
-                "\t\"name\":\"" + name + "\"\n" +
+                "\t\'id\':\'" + id + "\',\n" +
+                "\t\'place\':\'" + place + "\',\n" +
+                "\t\'category\':\'" + category + "\',\n" +
+                "\t\'full_name\':\'" + time + "\',\n" +
+                "\t\'phone\':\'" + duration + "\',\n" +
+                "\t\'price\':\'" + price + "\',\n" +
+                "\t\'description\':\'" + description + "\',\n" +
+                "\t\'users_count\':\'" + photo + "\',\n" +
+                "\t\'language\':\'" + rate + "\',\n" +
+                "\t\'duration\':\'" + guideId + "\',\n" +
+                "\t\'name\':\'" + name + "\'\n" +
                 "}";
     }
 
