@@ -199,7 +199,7 @@ public class HomeController {
         if (!result.hasErrors()) {
             eventRepository.save(event);
         }
-        return event.toString();
+        return eventAdd(model);
     }
 
     @RequestMapping("/deleteperson")
