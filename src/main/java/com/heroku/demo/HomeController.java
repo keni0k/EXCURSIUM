@@ -113,9 +113,9 @@ public class HomeController {
         return new ResponseEntity<String>("[\"Авто\",\"Пешеходная\",\"Квест\",\"Экстримальная\"]",h , HttpStatus.OK);
     }
 
-    @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET, value = "/getexcursions")
+    @RequestMapping(method = RequestMethod.GET, value = "/getexcursions")
     @ResponseBody
-    public String getEventsByFilter(ModelMap model,
+    public ResponseEntity<String> getEventsByFilter(ModelMap model,
                                    @ModelAttribute("price_down")int priceDown,
                                     @ModelAttribute("price_up")int priceUp,
                                     @ModelAttribute("category")int category,
@@ -134,7 +134,9 @@ public class HomeController {
             if (arrayList.size()-i>1) stringBuilder.append(",\n");
         }
         stringBuilder.append("]}");
-        return stringBuilder.toString();
+        HttpHeaders h = new HttpHeaders();
+        h.add("Content-type", "text/json;charset=UTF-8");
+        return new ResponseEntity<String>(stringBuilder.toString(),h , HttpStatus.OK);
     }
 
     private String randomToken(){
