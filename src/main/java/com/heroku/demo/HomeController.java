@@ -92,6 +92,15 @@ public class HomeController {
         return p==null?"{}":p.toString();
     }
 
+    @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET, value = "/geteventsbyfilter")
+    @ResponseBody
+    public String getEventsByFilter(ModelMap model,
+                                   @ModelAttribute("email") String email,
+                                   BindingResult result){
+        Person p = personService.getByEmail(email);
+        return p==null?"{}":p.toString();
+    }
+
     private String randomToken(){
         final String mCHAR = "qwertyuioplkjhgfdsazxcvbnmABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         final int STR_LENGTH = 32; // длина генерируемой строки
