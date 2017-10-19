@@ -107,10 +107,12 @@ public class HomeController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/getcategories")
     @ResponseBody
-    public ResponseEntity<String> preview(HttpServletResponse response) {
+    public ResponseEntity<String> preview(HttpServletResponse response, @ModelAttribute("language")int language) {
         HttpHeaders h = new HttpHeaders();
         h.add("Content-type", "text/json;charset=UTF-8");
-        return new ResponseEntity<String>("[\"Авто\",\"Пешеходная\",\"Квест\",\"Экстримальная\"]",h , HttpStatus.OK);
+        String ru = "[\"Развлечения\",\"Наука\",\"История\",\"Искусство\",\"Производство\",\"Гастрономия\",\"Квесты\",\"Экстрим\"]";
+        String en = "[\"Entertainment\",\"Science\",\"History\",\"Art\",\"Manufacture\",\"Gastronomy\",\"Quests\",\"Extreme\"]";
+        return new ResponseEntity<String>(language==0?ru:en,h , HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/getexcursions")
@@ -119,10 +121,11 @@ public class HomeController {
                                    @ModelAttribute("price_down")int priceDown,
                                     @ModelAttribute("price_up")int priceUp,
                                     @ModelAttribute("category")int category,
+                                                    @ModelAttribute("language")int language,
                                    BindingResult result){
 
         ArrayList<String> arrayList = new ArrayList<>();
-        List<Event> events = eventService.getByFilter(priceUp, priceDown, category);
+        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, language);
         for (Event e:events){
             arrayList.add(e.toString());
         }

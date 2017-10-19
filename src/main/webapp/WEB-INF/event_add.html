@@ -133,10 +133,14 @@
 						<div class="panel-body">
 							<div class="input-group">
 								<select name="category" class="form-control selectpicker">
-									<option value="0">Авто</option>
-									<option value="1">Пешеходная</option>
-									<option value="2">Квест</option>
-									<option value="3">Экстремальная</option>
+									<option value="0">Развлечения</option>
+									<option value="1">Наука</option>
+									<option value="2">История</option>
+									<option value="3">Искусство</option>
+									<option value="4">Производство</option>
+									<option value="5">Гастрономия</option>
+									<option value="6">Квесты</option>
+									<option value="7">Экстрим</option>
 								</select>
 							</div>
 						</div>
@@ -169,16 +173,18 @@
 					</div>
 					<br />
 
-					<div class="input-group">
-						<span class="input-group-addon">Доступные интервалы времени</span>
-						<select id="rate" class="form-control selectpicker" multiple="multiple" data-done-button="true">
-							<option value="1">До 9 утра</option>
-							<option value="2">С 9 до 12</option>
-							<option value="3">С 12 до 15</option>
-							<option value="4">С 15 до 18</option>
-							<option value="5">С 18 до 21</option>
-							<option value="6">С 21 до 24</option>
-						</select>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							Язык (language)
+						</div>
+						<div class="panel-body">
+							<div class="input-group">
+								<select name="rate" class="form-control selectpicker">
+									<option value="0">Русский</option>
+									<option value="1">English</option>
+								</select>
+							</div>
+						</div>
 					</div>
 					<br />
 					<button type="submit" class="btn btn-default">Отправить</button>

@@ -8,5 +8,5 @@ public interface EventService {
     List<Event> getByEvent(int guide);
     Event editEvent(Event event);
     List<Event> getAll();
-    List<Event> getByFilter(int priceUp, int priceDown, int category);
+    List<Event> getByFilter(int priceUp, int priceDown, int category, int language);
 }
