@@ -26,7 +26,7 @@ public class Event {
                 "\t\"price\":\"" + price + "\",\n" +
                 "\t\"description\":\"" + description + "\",\n" +
                 "\t\"users_count\":\"" + photo + "\",\n" +
-                "\t\"free_time\":\"" + rate + "\",\n" +
+                "\t\"language\":\"" + rate + "\",\n" +
                 "\t\"duration\":\"" + guideId + "\",\n" +
                 "\t\"name\":\"" + name + "\"\n" +
                 "}";
