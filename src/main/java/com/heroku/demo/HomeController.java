@@ -142,6 +142,7 @@ public class HomeController {
         return new ResponseEntity<String>(stringBuilder.toString(),h , HttpStatus.OK);
     }
 
+
     private String randomToken(){
         final String mCHAR = "qwertyuioplkjhgfdsazxcvbnmABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         final int STR_LENGTH = 32; // длина генерируемой строки
