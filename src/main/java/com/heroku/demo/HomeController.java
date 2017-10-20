@@ -83,15 +83,13 @@ public class HomeController {
     public String event(ModelMap model, @ModelAttribute("id") int id) {
         switch (id){
             case 0:
-                model.addAttribute("event", eventService.getById(37));
                 model.addAttribute("category", "Искусство"); break;
             case 1:
-                model.addAttribute("event", eventService.getById(41));
                 model.addAttribute("category", "Развлечения");break;
             case 2:
-                model.addAttribute("event", eventService.getById(38));
                 model.addAttribute("category", "История");break;
         }
+        model.addAttribute("event", eventService.getById(id));
         //model.addAttribute("insertEvent", new Event());
         return "event";
     }
