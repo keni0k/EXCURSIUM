@@ -88,6 +88,8 @@ public class HomeController {
                 model.addAttribute("category", "Развлечения");break;
             case 38:
                 model.addAttribute("category", "История");break;
+            case 40:
+                model.addAttribute("category", "Наука");break;
         }
         model.addAttribute("event", eventService.getById(id));
         //model.addAttribute("insertEvent", new Event());
@@ -117,6 +119,10 @@ public class HomeController {
                 model.addAttribute("name", "Миша");
                 model.addAttribute("city", "Москва");
                 model.addAttribute("about", "Я сделал презентацию");break;
+            case 40:
+                model.addAttribute("name", "Дима");
+                model.addAttribute("city", "Иркутск");
+                model.addAttribute("about", "Я сделал сервер и только я могу поменять описания Миши, Леши и Андрея");break;
         }
         //model.addAttribute("insertEvent", new Event());
         return "profile";
