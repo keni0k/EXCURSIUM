@@ -15,6 +15,9 @@ html *
 body {
   font-family: 'SegoeUIRegular', 'Helvetica', 'Arial', 'sans-serif'; }
 
+b {
+  font-family: 'SegoeUISemiBold', 'Helvetica', 'Arial', 'sans-serif';
+}
 a {
   color: #fdcc52;
   -webkit-transition: all .35s;
@@ -44,6 +47,7 @@ h6 {
 
 p {
   font-size: 18px;
+  font-family: 'SegoeUIRegular', 'Helvetica', 'Arial', 'sans-serif';
   line-height: 1.5;
   margin-bottom: 20px; }
 

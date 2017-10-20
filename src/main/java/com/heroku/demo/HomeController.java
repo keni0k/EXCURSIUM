@@ -79,6 +79,24 @@ public class HomeController {
         return "event_add";
     }
 
+    @RequestMapping("/event")
+    public String event(ModelMap model) {
+        //model.addAttribute("insertEvent", new Event());
+        return "event";
+    }
+
+    @RequestMapping("/event_list")
+    public String eventList(ModelMap model) {
+        //model.addAttribute("insertEvent", new Event());
+        return "event_list";
+    }
+
+    @RequestMapping("/profile")
+    public String profile(ModelMap model) {
+        //model.addAttribute("insertEvent", new Event());
+        return "profile";
+    }
+
     @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET, value = "/getperson")
     @ResponseBody
     public String getPerson(ModelMap model,
