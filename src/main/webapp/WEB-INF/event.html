@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="description" content="" />
@@ -118,7 +119,7 @@
 					</div>
 					<!--/.Card image-->
 					<!--Button-->
-					<a class="btn-floating btn-action waves-effect waves-light" th:href="@{/profile?id={event.id}">
+					<a class="btn-floating btn-action waves-effect waves-light" th:href="@{/profile(id={event.id})}">
 						<div class="avatar">
 							<img src="../resources/img/user.png" class="rounded-circle img-responsive" alt="Аватар" />
 						</div>
