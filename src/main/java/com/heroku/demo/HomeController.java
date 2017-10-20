@@ -103,7 +103,21 @@ public class HomeController {
     }
 
     @RequestMapping("/profile")
-    public String profile(ModelMap model) {
+    public String profile(ModelMap model, @ModelAttribute("id") int id) {
+        switch (id){
+            case 0:
+                model.addAttribute("name", "Андрей");
+                model.addAttribute("city", "Москва");
+                model.addAttribute("about", "Я сделал сайт");break;
+            case 1:
+                model.addAttribute("name", "Леша");
+                model.addAttribute("city", "Москва");
+                model.addAttribute("about", "Я сделал telegram бота");break;
+            case 2:
+                model.addAttribute("name", "Миша");
+                model.addAttribute("city", "Москва");
+                model.addAttribute("about", "Я сделал презентацию");break;
+        }
         //model.addAttribute("insertEvent", new Event());
         return "profile";
     }

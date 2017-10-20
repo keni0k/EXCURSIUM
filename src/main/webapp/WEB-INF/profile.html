@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="description" content="" />
@@ -143,10 +143,10 @@
                                             <i class="fa fa-star-o"></i>
                                         </li>
                                     </ul>
-                                    <h3 class="mt-1">Имя</h3>
-                                    <p class="font-bold">Город</p>
+                                    <h3 class="mt-1" th:text="${name}">Имя</h3>
+                                    <p class="font-bold" th:text="${city}">Город</p>
                                     <!--Triggering button-->
-                                    <a class="rotate-btn" data-card="card-3">
+                                    <a class="rotate-btn" data-card="card-3" th:text="${about}">
                                         <i class="fa fa-repeat"></i>&nbsp;&nbsp;О себе</a>
                                     </div>
 
