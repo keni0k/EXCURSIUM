@@ -146,7 +146,7 @@
                                     <h3 class="mt-1" th:text="${name}">Имя</h3>
                                     <p class="font-bold" th:text="${city}">Город</p>
                                     <!--Triggering button-->
-                                    <a class="rotate-btn" data-card="card-3" th:text="${about}">
+                                    <a class="rotate-btn" data-card="card-3">
                                         <i class="fa fa-repeat"></i>&nbsp;&nbsp;О себе</a>
                                     </div>
 
@@ -159,7 +159,7 @@
                                     <!--Content-->
                                     <h4 class="mt-2 mb-2">О себе</h4>
                                     <hr/>
-                                    <p>текст о себе</p>
+                                    <p th:text="${about}">текст о себе</p>
                                     <hr/>
                                     <!--Social Icons-->
                                     <ul class="rating">

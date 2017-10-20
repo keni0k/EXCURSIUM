@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="description" content="" />
@@ -112,7 +113,7 @@
 		<div class="row">
 
 			<!--Grid column-->
-			<div class="col-lg-4 col-md-12 mb-r">
+			<div class="col-lg-4 col-md-12 mb-r" th:each="event : ${events}">
 				<div class="card">
 					<!--Card image-->
 					<div class="view overlay hm-white-slight z-depth-1">
