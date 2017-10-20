@@ -29,12 +29,12 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<Event> getByEvent(int event) {
+    public List<Event> getById(int id) {
         List<Event> list = eventRepository.findAll();
         List<Event> copy = new ArrayList<>();
         copy.addAll(list);
         for (int i = 0; i<copy.size(); i++)
-            if (copy.get(i).getId()!=event) list.remove(i);
+            if (copy.get(i).getId()!=id) list.remove(i);
         return list;
     }
 

@@ -81,6 +81,17 @@ public class HomeController {
 
     @RequestMapping("/event")
     public String event(ModelMap model, @ModelAttribute("id") int id) {
+        switch (id){
+            case 0:
+                model.addAttribute("event", eventService.getById(37));
+                model.addAttribute("category", "Искусство"); break;
+            case 1:
+                model.addAttribute("event", eventService.getById(41));
+                model.addAttribute("category", "Развлечения");break;
+            case 2:
+                model.addAttribute("event", eventService.getById(38));
+                model.addAttribute("category", "История");break;
+        }
         //model.addAttribute("insertEvent", new Event());
         return "event";
     }
@@ -139,8 +150,7 @@ public class HomeController {
                                    @ModelAttribute("price_down")int priceDown,
                                     @ModelAttribute("price_up")int priceUp,
                                     @ModelAttribute("category")int category,
-                                                    @ModelAttribute("language")int language,
-                                   BindingResult result){
+                                                    @ModelAttribute("language")int language){
 
         ArrayList<String> arrayList = new ArrayList<>();
         List<Event> events = eventService.getByFilter(priceUp, priceDown, category, language);

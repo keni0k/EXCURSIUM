@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="description" content="" />
@@ -127,10 +127,10 @@
 					<!--Card content-->
 					<div class="card-body no-padding text-center">
 						<!--Category & Title-->
-						<h5>Категория</h5>
+						<h5 th:text="${category}">Категория</h5>
 						<h4 class="card-title">
 							<strong>
-								<h3><a href="">Название</a></h3>
+								<h3 th:text="${event.name}"><a href="">Название</a></h3>
 							</strong>
 						</h4>
 
@@ -154,12 +154,12 @@
 						</ul>
 
 						<!--Description-->
-						<p class="card-text" style="font-size: medium; color: #000000">Описание</p>
+						<p class="card-text" style="font-size: medium; color: #000000" th:text="${event.description}">Описание</p>
 
 						<!--Card footer-->
 						<div class="card-footer">
 							<span class="left" style="color:#4285F4; font-size: large;">
-								<strong>999&#8381;</strong>
+								<strong th:text="${event.price}">999&#8381;</strong>
 							</span>
 							<span class="right">
 								<a href="event.html" class="btn btn-primary waves-effect waves-light">Заказать</a>
