@@ -87,6 +87,8 @@ public class HomeController {
 
     @RequestMapping("/event_list")
     public String eventList(ModelMap model) {
+        List<Event> events = eventRepository.findAll();
+        model.addAttribute("events", events);
         //model.addAttribute("insertEvent", new Event());
         return "event_list";
     }
