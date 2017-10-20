@@ -80,7 +80,7 @@ public class HomeController {
     }
 
     @RequestMapping("/event")
-    public String event(ModelMap model) {
+    public String event(ModelMap model, @ModelAttribute("id") int id) {
         //model.addAttribute("insertEvent", new Event());
         return "event";
     }
