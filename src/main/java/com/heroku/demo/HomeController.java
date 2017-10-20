@@ -82,11 +82,11 @@ public class HomeController {
     @RequestMapping("/event")
     public String event(ModelMap model, @ModelAttribute("id") int id) {
         switch (id){
-            case 0:
+            case 37:
                 model.addAttribute("category", "Искусство"); break;
-            case 1:
+            case 41:
                 model.addAttribute("category", "Развлечения");break;
-            case 2:
+            case 38:
                 model.addAttribute("category", "История");break;
         }
         model.addAttribute("event", eventService.getById(id));
@@ -105,15 +105,15 @@ public class HomeController {
     @RequestMapping("/profile")
     public String profile(ModelMap model, @ModelAttribute("id") int id) {
         switch (id){
-            case 0:
+            case 37:
                 model.addAttribute("name", "Андрей");
                 model.addAttribute("city", "Москва");
                 model.addAttribute("about", "Я сделал сайт");break;
-            case 1:
+            case 38:
                 model.addAttribute("name", "Леша");
                 model.addAttribute("city", "Москва");
                 model.addAttribute("about", "Я сделал telegram бота");break;
-            case 2:
+            case 41:
                 model.addAttribute("name", "Миша");
                 model.addAttribute("city", "Москва");
                 model.addAttribute("about", "Я сделал презентацию");break;
