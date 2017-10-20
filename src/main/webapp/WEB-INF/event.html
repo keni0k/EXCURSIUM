@@ -118,7 +118,7 @@
 					</div>
 					<!--/.Card image-->
 					<!--Button-->
-					<a class="btn-floating btn-action waves-effect waves-light" href="profile.html">
+					<a class="btn-floating btn-action waves-effect waves-light" th:href="@{/profile?id={event.id}">
 						<div class="avatar">
 							<img src="../resources/img/user.png" class="rounded-circle img-responsive" alt="Аватар" />
 						</div>
@@ -160,6 +160,7 @@
 						<div class="card-footer">
 							<span class="left" style="color:#4285F4; font-size: large;">
 								<strong th:text="${event.price}">999&#8381;</strong>
+								<strong>&#8381;</strong>
 							</span>
 							<span class="right">
 								<a href="event.html" class="btn btn-primary waves-effect waves-light">Заказать</a>
