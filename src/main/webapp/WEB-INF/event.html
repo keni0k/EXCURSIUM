@@ -112,7 +112,7 @@
 				<div class="card">
 					<!--Card image-->
 					<div class="view overlay hm-white-slight z-depth-1">
-						<img th:src="${photo}" class="img-fluid" alt="" />
+						<img th:src="${event.getPhotoUrl()}" class="img-fluid" alt="" />
 						<a>
 							<div class="mask waves-effect waves-light"></div>
 						</a>
@@ -128,7 +128,7 @@
 					<!--Card content-->
 					<div class="card-body no-padding text-center">
 						<!--Category & Title-->
-						<h5 th:text="${category}">Категория</h5>
+						<h5 th:text="${event.getCategoryString(0, event.getCategory())}">Категория</h5>
 						<h4 class="card-title">
 							<strong>
 								<h3 th:text="${event.name}"><a href="">Название</a></h3>

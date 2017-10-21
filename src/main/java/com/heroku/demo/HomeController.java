@@ -108,9 +108,11 @@ public class HomeController {
                 "../resources/img/vslepuu.jpg","../resources/img/chainaut.jpg","../resources/img/remote_moscow",
                 "../resources/img/gastronom.jpg", "../resources/img/kontrasts.jpg","../img/resources/img/multymediaart.jpg",
                 "../resources/img/keramika.jpg", "../resources/img/plarus.jpg","../img/resources/img/rot_front.jpg",
-                "../resources/img/without_potfel.jpg"};
-        for (int i = 0; i<photos.length; i++)
+                "../resources/img/without_portfel.jpg"};
+        for (int i = 0; i<photos.length; i++) {
             events.get(i).setPhotoUrl(photos[i]);
+            eventService.editEvent(events.get(i));
+        }
         model.addAttribute("events", events);
         return "event_list";
     }
