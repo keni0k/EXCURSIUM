@@ -69,7 +69,7 @@ public class Event {
     private int photo = 0;
 
     public String getSmallDescription() {
-        return description.substring(0,255).concat("...");
+        return description.substring(0,251).concat("...");
     }
 
     @Id
