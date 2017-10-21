@@ -92,7 +92,7 @@ public class HomeController {
 
     @RequestMapping("/event_list")
     public String eventList(ModelMap model) {
-        List<Event> events = eventService.getByFilter(-1,-1,-1,0);
+        List<Event> events = eventService.getByFilter(-1,-1,-1,0, "");
         int size = events.size()/3;
         model.addAttribute("row", size);
         model.addAttribute("events", events);
@@ -160,13 +160,14 @@ public class HomeController {
     @RequestMapping(method = RequestMethod.GET, value = "/getexcursions")
     @ResponseBody
     public ResponseEntity<String> getEventsByFilter(ModelMap model,
-                                   @ModelAttribute("price_down")int priceDown,
-                                    @ModelAttribute("price_up")int priceUp,
-                                    @ModelAttribute("category")int category,
+                                                    @ModelAttribute("price_down")int priceDown,
+                                                    @ModelAttribute("price_up")int priceUp,
+                                                    @ModelAttribute("category")int category,
+                                                    @ModelAttribute("words")String words,
                                                     @ModelAttribute("language")int language){
 
         ArrayList<String> arrayList = new ArrayList<>();
-        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, language);
+        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, language, words);
         for (Event e:events){
             arrayList.add(e.toString());
         }

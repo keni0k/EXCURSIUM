@@ -78,7 +78,7 @@ public class Event implements Comparable {
 
     private int rate = 0;
 
-
+    public static int cnt = 0;
 
     private int photo = 0;
 
