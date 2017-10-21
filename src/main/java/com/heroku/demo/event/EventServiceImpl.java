@@ -67,9 +67,9 @@ public class EventServiceImpl implements EventService {
                     ((aList.getCategory() == category)||(category==-1)) && ((aList.getRate()==language)||bool)) {
                 if (!words.equals("")) {
                     for (String word : wds) {
-                        if (aList.getName().contains(word))
+                        if (aList.getName().toLowerCase().contains(word.toLowerCase()))
                             aList.cnt += 7;
-                        if (aList.getDescription().contains(word))
+                        if (aList.getDescription().toLowerCase().contains(word.toLowerCase()))
                             aList.cnt += 3;
                     }
                     if (aList.cnt>0) copy.add(aList);
@@ -80,7 +80,7 @@ public class EventServiceImpl implements EventService {
         copy.sort(new Comparator<Event>() {
             @Override
             public int compare(Event o1, Event o2) {
-                return Integer.compare(o2.cnt, o1.cnt);
+                return -Integer.compare(o2.cnt, o1.cnt);
             }
         });
         return copy;
