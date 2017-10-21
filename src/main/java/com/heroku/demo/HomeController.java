@@ -108,7 +108,8 @@ public class HomeController {
                 "../resources/img/vslepuu.jpg","../resources/img/chainaut.jpg","../resources/img/remote_moscow",
                 "../resources/img/gastronom.jpg", "../resources/img/kontrasts.jpg","../resources/img/multymediaart.jpg",
                 "../resources/img/keramika.jpg", "../resources/img/plarus.jpg","../resources/img/rot_front.jpg",
-                "../resources/img/without_portfel.jpg"};
+                "../resources/img/without_portfel.jpg","../resources/img/doshik.jpg","../resources/img/2007.jpg",
+                "", "../resources/img/speceffects.jpg"};
         for (int i = 0; i<photos.length; i++) {
             events.get(i).setPhotoUrl(photos[i]);
             eventService.editEvent(events.get(i));
