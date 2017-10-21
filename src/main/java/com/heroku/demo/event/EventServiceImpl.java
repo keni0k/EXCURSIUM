@@ -57,8 +57,8 @@ public class EventServiceImpl implements EventService {
         for (Event aList : list)
             if ((aList.getPrice() >= priceDown) && (aList.getPrice() <= priceUp) &&
                     ((aList.getCategory() == category)||(category==-1)) && ((aList.getRate()==language)||bool)) {
-//                aList.setDescription(aList.getDescription().replace("\"", "\\\""));
-//                aList.setDescription(aList.getDescription().replace("\\", "\\\\"));
+                aList.setDescription(aList.getDescription().replace("\\", "\\\\"));
+                aList.setDescription(aList.getDescription().replace("\"", "\\\""));
                 copy.add(aList);
             }
         return copy;
