@@ -1,8 +1,5 @@
 package com.heroku.demo.event;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
@@ -78,7 +75,8 @@ public class Event implements Comparable {
 
     private int rate = 0;
 
-    public static int cnt = 0;
+    @Transient
+    public int cnt = 0;
 
     private int photo = 0;
 
