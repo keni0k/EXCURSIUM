@@ -66,8 +66,6 @@ public class HomeController {
     public String index(ModelMap model) {
         return "index";
     }
-
-    @RequestMapping("/registration")
     public String persons(ModelMap model) {
         model.addAttribute("insertPerson", new Person());
         return "registration";
@@ -83,12 +81,16 @@ public class HomeController {
     public String event(ModelMap model, @ModelAttribute("id") int id) {
         switch (id){
             case 37:
+//                model.addAttribute("category", "Искусство");
                 model.addAttribute("category", "Искусство"); break;
             case 41:
+//                model.addAttribute("category", "Искусство");
                 model.addAttribute("category", "Развлечения");break;
             case 38:
+//                model.addAttribute("category", "Искусство");
                 model.addAttribute("category", "История");break;
             case 40:
+//                model.addAttribute("category", "Искусство");
                 model.addAttribute("category", "Наука");break;
         }
         model.addAttribute("event", eventService.getById(id));
