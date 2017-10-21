@@ -110,10 +110,10 @@
 		<div class="page-header">
 			<h2>Экскурсии</h2>      
 		</div>
-		<div class="row" th:each="event:${events}">
+		<div class="row" th:each="i:${row}">
 
 			<!--Grid column-->
-			<div class="col-lg-4 col-md-12 mb-r">
+			<div class="col-lg-4 col-md-12 mb-r" th:each="event:${events}">
 				<div class="card">
 					<!--Card image-->
 					<div class="view overlay hm-white-slight z-depth-1">

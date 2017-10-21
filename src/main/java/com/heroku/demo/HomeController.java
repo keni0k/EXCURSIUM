@@ -93,6 +93,8 @@ public class HomeController {
     @RequestMapping("/event_list")
     public String eventList(ModelMap model) {
         List<Event> events = eventService.getByFilter(-1,-1,-1,0);
+        int size = events.size()/3;
+        model.addAttribute("row", size);
         model.addAttribute("events", events);
         return "event_list";
     }
