@@ -3,6 +3,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 
 @Entity
 public class Event {
@@ -140,6 +142,10 @@ public class Event {
 
     public int getPrice() {
         return price;
+    }
+
+    public String getPriceString() throws UnsupportedEncodingException {
+        return ""+price+ URLDecoder.decode("\u0584", "UTF-8");
     }
 
     public void setPrice(int price) {

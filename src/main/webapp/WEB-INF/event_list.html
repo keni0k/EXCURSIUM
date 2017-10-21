@@ -130,7 +130,7 @@
 						<h5 th:text="${event.getCategoryString(event.rate, event.category)}">CATEGORY</h5>
 						<h4 class="card-title">
 							<strong>
-								<h3><a th:href="@{/event(id=${event.getId()})}">Открыть</a></h3>
+								<h3><a th:href="@{/event(id=${event.getId()})}" th:text="${event.name}">NAME</a></h3>
 							</strong>
 						</h4>
 
@@ -159,10 +159,10 @@
 						<!--Card footer-->
 						<div class="card-footer">
 							<span class="left" style="color:#4285F4; font-size: large;">
-								<strong th:text="${event.getPrice()}">2500&#8381;</strong>
+								<strong th:text="${event.getPriceString()}">2500&#8381;</strong>
 							</span>
 							<span class="right">
-								<a th:href="@{/event(id=${event.getId()})}" th:text="${event.name}" class="btn btn-primary waves-effect waves-light">Открыть</a>
+								<a th:href="@{/event(id=${event.getId()})}" class="btn btn-primary waves-effect waves-light">Открыть</a>
 							</span>
 						</div>
 
