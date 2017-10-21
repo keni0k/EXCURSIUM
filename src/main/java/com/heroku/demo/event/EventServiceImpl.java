@@ -52,11 +52,13 @@ public class EventServiceImpl implements EventService {
         List<Event> list = eventRepository.findAll();
         List<Event> copy = new ArrayList<>();
         if (priceUp == -1) priceUp = Integer.MAX_VALUE;
+        boolean bool = false;
+        if (language==-1) bool = true;
         for (Event aList : list)
             if ((aList.getPrice() >= priceDown) && (aList.getPrice() <= priceUp) &&
-                    ((aList.getCategory() == category)||(category==-1)) && (aList.getRate()==language)) {
-                aList.setDescription(aList.getDescription().replace("\"", "\\\""));
-                aList.setDescription(aList.getDescription().replace("\\", "\\\\"));
+                    ((aList.getCategory() == category)||(category==-1)) && ((aList.getRate()==language)||bool)) {
+//                aList.setDescription(aList.getDescription().replace("\"", "\\\""));
+//                aList.setDescription(aList.getDescription().replace("\\", "\\\\"));
                 copy.add(aList);
             }
         return copy;
