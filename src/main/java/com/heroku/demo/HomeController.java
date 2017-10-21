@@ -81,16 +81,16 @@ public class HomeController {
     public String event(ModelMap model, @ModelAttribute("id") int id) {
         switch (id){
             case 37:
-//                model.addAttribute("category", "Искусство");
+                model.addAttribute("photo", "doshik.jpg");
                 model.addAttribute("category", "Искусство"); break;
             case 41:
-//                model.addAttribute("category", "Искусство");
+                model.addAttribute("photo", "poets.jpg");
                 model.addAttribute("category", "Развлечения");break;
             case 38:
-//                model.addAttribute("category", "Искусство");
+                model.addAttribute("photo", "2007.jpg");
                 model.addAttribute("category", "История");break;
             case 40:
-//                model.addAttribute("category", "Искусство");
+                model.addAttribute("photo", "speceffects.jpg");
                 model.addAttribute("category", "Наука");break;
         }
         model.addAttribute("event", eventService.getById(id));
