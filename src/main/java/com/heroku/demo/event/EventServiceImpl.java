@@ -65,19 +65,22 @@ public class EventServiceImpl implements EventService {
         for (Event aList : list)
             if ((aList.getPrice() >= priceDown) && (aList.getPrice() <= priceUp) &&
                     ((aList.getCategory() == category)||(category==-1)) && ((aList.getRate()==language)||bool)) {
-                if (!words.equals(""))
-                    for (String word:wds) {
+                if (!words.equals("")) {
+                    for (String word : wds) {
                         if (aList.getName().contains(word))
                             aList.cnt += 7;
                         if (aList.getDescription().contains(word))
                             aList.cnt += 3;
                     }
-                copy.add(aList);
+                    if (aList.cnt>0) copy.add(aList);
+                }
+                else
+                    copy.add(aList);
             }
         copy.sort(new Comparator<Event>() {
             @Override
             public int compare(Event o1, Event o2) {
-                return Integer.compare(o1.cnt, o2.cnt);
+                return Integer.compare(o2.cnt, o1.cnt);
             }
         });
         return copy;
