@@ -112,13 +112,12 @@
 		</div>
 		<div class="row">
 
-
 			<!--Grid column-->
-			<div class="col-lg-4 col-md-12 mb-r">
+			<div class="col-lg-4 col-md-12 mb-r" th:each="event:${events}">
 				<div class="card">
 					<!--Card image-->
 					<div class="view overlay hm-white-slight z-depth-1">
-						<img src="../resources/img/speceffects.jpg" class="img-fluid" alt="" />
+						<img th:src="${event.getPhotoUrl()}" class="img-fluid" alt="" />
 						<a>
 							<div class="mask waves-effect waves-light"></div>
 						</a>
@@ -128,10 +127,10 @@
 					<!--Card content-->
 					<div class="card-body no-padding text-center">
 						<!--Category & Title-->
-						<h5>Наука</h5>
+						<h5 th:text="${event.getCategory()}">CATEGORY</h5>
 						<h4 class="card-title">
 							<strong>
-								<h3><a href="/event?id=40">Спецэффекты</a></h3>
+								<h3><a th:href="@{/event(id=${event.getId()})}" th:text="${event.name}">NAME</a></h3>
 							</strong>
 						</h4>
 
@@ -155,194 +154,15 @@
 						</ul>
 
 						<!--Description-->
-						<p class="card-text" style="font-size: medium; color: #000000">Что делает фильм ярче,круче и лучше?Конечно же, спецэффекты! Хотите узнать, как ни создаются? Тогда приходите к нам!Мы покажем вам, как создаются спецэффекты,а в конце вы сможете сами добавить их в фильм! Конечно же, ваше произведение искусства мы о...</p>
+						<p class="card-text" style="font-size: medium; color: #000000" th:text="${event.getSmallDescription()}">DESC</p>
 
 						<!--Card footer-->
 						<div class="card-footer">
 							<span class="left" style="color:#4285F4; font-size: large;">
-								<strong>3000&#8381;</strong>
+								<strong th:text="${event.getPrice()}">2500&#8381;</strong>
 							</span>
 							<span class="right">
-								<a href="/event?id=40" class="btn btn-primary waves-effect waves-light">Открыть</a>
-							</span>
-						</div>
-
-					</div>
-					<!--/.Card content-->
-				</div>
-			</div>
-
-			<!--Grid column-->
-			<div class="col-lg-4 col-md-12 mb-r">
-				<div class="card">
-					<!--Card image-->
-					<div class="view overlay hm-white-slight z-depth-1">
-						<img src="../resources/img/doshik.jpg" class="img-fluid" alt="" />
-						<a>
-							<div class="mask waves-effect waves-light"></div>
-						</a>
-					</div>
-					<!--/.Card image-->
-
-					<!--Card content-->
-					<div class="card-body no-padding text-center">
-						<!--Category & Title-->
-						<h5>Искусство</h5>
-						<h4 class="card-title">
-							<strong>
-								<h3><a href="/event?id=37">Дом из "Доширака"</a></h3>
-							</strong>
-						</h4>
-
-						<!--Rating-->
-						<ul class="rating">
-							<li>
-								<i class="fa fa-star"></i>
-							</li>
-							<li>
-								<i class="fa fa-star"></i>
-							</li>
-							<li>
-								<i class="fa fa-star"></i>
-							</li>
-							<li>
-								<i class="fa fa-star"></i>
-							</li>
-							<li>
-								<i class="fa fa-star-o"></i>
-							</li>
-						</ul>
-
-						<!--Description-->
-						<p class="card-text" style="font-size: medium; color: #000000">Посетите дом из настоящей лапши ,быстрого приготовления "Доширак". На этой экскурсии вы увидите то,что еще никто не делал-настоящий дом из знаменитого по всей России "Доширака"!Конечно же, в конце экскурсии вас ждет дегустация этой самой лапши и пода...</p>
-
-						<!--Card footer-->
-						<div class="card-footer">
-							<span class="left" style="color:#4285F4; font-size: large;">
-								<strong>1000&#8381;</strong>
-							</span>
-							<span class="right">
-								<a href="/event?id=37" class="btn btn-primary waves-effect waves-light">Открыть</a>
-							</span>
-						</div>
-
-					</div>
-					<!--/.Card content-->
-				</div>
-			</div>
-			<!--Grid column-->
-
-			<!--Grid column-->
-			<div class="col-lg-4 col-md-12 mb-r">
-				<div class="card">
-					<!--Card image-->
-					<div class="view overlay hm-white-slight z-depth-1">
-						<img src="../resources/img/poets.jpg" class="img-fluid" alt="" />
-						<a>
-							<div class="mask waves-effect waves-light"></div>
-						</a>
-					</div>
-					<!--/.Card image-->
-
-					<!--Card content-->
-					<div class="card-body no-padding text-center">
-						<!--Category & Title-->
-						<h5>Развлечения</h5>
-						<h4 class="card-title">
-							<strong>
-								<h3><a href="/event?id=41">"Общество мертвых поэтов"</a></h3>
-							</strong>
-						</h4>
-
-						<!--Rating-->
-						<ul class="rating">
-							<li>
-								<i class="fa fa-star"></i>
-							</li>
-							<li>
-								<i class="fa fa-star"></i>
-							</li>
-							<li>
-								<i class="fa fa-star"></i>
-							</li>
-							<li>
-								<i class="fa fa-star"></i>
-							</li>
-							<li>
-								<i class="fa fa-star-o"></i>
-							</li>
-						</ul>
-
-						<!--Description-->
-						<p class="card-text" style="font-size: medium; color: #000000">Смотрели фильм, схожий по названию с этой экскурсией?Нет? Очень жаль.. Тогда посмотрите его и бегите к нам! На этой экскурсии вы окунетесь в мир 20 века, услышите интересные истории и стихи, озвученные в фильме и не только!...</p>
-
-						<!--Card footer-->
-						<div class="card-footer">
-							<span class="left" style="color:#4285F4; font-size: large;">
-								<strong>2500&#8381;</strong>
-							</span>
-							<span class="right">
-								<a href="/event?id=41" class="btn btn-primary waves-effect waves-light">Открыть</a>
-							</span>
-						</div>
-
-					</div>
-					<!--/.Card content-->
-				</div>
-			</div>
-			<!--Grid column-->
-
-			<!--Grid column-->
-			<div class="col-lg-4 col-md-12 mb-r">
-				<div class="card">
-					<!--Card image-->
-					<div class="view overlay hm-white-slight z-depth-1">
-						<img src="../resources/img/2007.jpg" class="img-fluid" alt="" />
-						<a>
-							<div class="mask waves-effect waves-light"></div>
-						</a>
-					</div>
-					<!--/.Card image-->
-
-					<!--Card content-->
-					<div class="card-body no-padding text-center">
-						<!--Category & Title-->
-						<h5>История</h5>
-						<h4 class="card-title">
-							<strong>
-								<h3><a href="/event?id=38">Экскурсия в 2007</a></h3>
-							</strong>
-						</h4>
-
-						<!--Rating-->
-						<ul class="rating">
-							<li>
-								<i class="fa fa-star"></i>
-							</li>
-							<li>
-								<i class="fa fa-star"></i>
-							</li>
-							<li>
-								<i class="fa fa-star"></i>
-							</li>
-							<li>
-								<i class="fa fa-star"></i>
-							</li>
-							<li>
-								<i class="fa fa-star-o"></i>
-							</li>
-						</ul>
-
-						<!--Description-->
-						<p class="card-text" style="font-size: medium; color: #000000">2007 год...Год "эмо"-культуры,разноцветных волос и черной помады.Почуствуйте ностальгию по тем временам с помощью этой экскурсии!На всей ее протяжении вас будет сопровождать экскурсовод-эмо,одетый в необычную одежду того времени. ...</p>
-
-						<!--Card footer-->
-						<div class="card-footer">
-							<span class="left" style="color:#4285F4; font-size: large;">
-								<strong>1000&#8381;</strong>
-							</span>
-							<span class="right">
-								<a href="/event?id=38" class="btn btn-primary waves-effect waves-light">Открыть</a>
+								<a th:href="@{/event(id=${event.getId()})}" th:text="${event.name}" class="btn btn-primary waves-effect waves-light">Открыть</a>
 							</span>
 						</div>
 

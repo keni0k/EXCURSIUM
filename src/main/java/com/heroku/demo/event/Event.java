@@ -68,6 +68,20 @@ public class Event {
 
     private int photo = 0;
 
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
+    }
+
+    public String getSmallDescription() {
+        return description.substring(0,255).concat("...");
+    }
+
+    private String photoUrl = "";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

@@ -102,7 +102,11 @@ public class HomeController {
     public String eventList(ModelMap model) {
         List<Event> events = eventRepository.findAll();
         model.addAttribute("events", events);
-        //model.addAttribute("insertEvent", new Event());
+        String [] photos = {"","",""};
+        int max = Integer.max(events.size(),photos.length);
+        for (int i = 0; i<max; i++){
+            events.get(i).setPhotoUrl(photos[i]);
+        }
         return "event_list";
     }
 
