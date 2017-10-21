@@ -7,7 +7,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
 @Entity
-public class Event {
+public class Event implements Comparable {
 
 //    public Event(String name, String category, int guideId, String time) {
 //        this.name = name;
@@ -78,10 +78,13 @@ public class Event {
 
     private int rate = 0;
 
+
+
     private int photo = 0;
 
     public String getSmallDescription() {
         String smallDesc = description.substring(0,description.length()>251?251:description.length());
+        smallDesc.replace("\\\"", "\"");
         if (smallDesc.length()!=description.length()) smallDesc+="...";
         return smallDesc;
     }
@@ -182,4 +185,9 @@ public class Event {
         this.photo = photo;
     }
 
+    @Override
+    public int compareTo(Object o) {
+        Event e = (Event) o;
+        return Long.compare(getId(), e.getId());
+    }
 }

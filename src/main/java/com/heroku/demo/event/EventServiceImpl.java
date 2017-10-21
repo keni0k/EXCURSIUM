@@ -3,6 +3,7 @@ package com.heroku.demo.event;
 import com.heroku.demo.message.MessageRepository;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class EventServiceImpl implements EventService {
@@ -50,6 +51,12 @@ public class EventServiceImpl implements EventService {
     @Override
     public List<Event> getByFilter(int priceUp, int priceDown, int category, int language) {
         List<Event> list = eventRepository.findAll();
+        list.sort(new Comparator<Event>() {
+            @Override
+            public int compare(Event o1, Event o2) {
+                return Long.compare(o1.getId(),o2.getId());
+            }
+        });
         List<Event> copy = new ArrayList<>();
         if (priceUp == -1) priceUp = Integer.MAX_VALUE;
         boolean bool = false;
@@ -57,8 +64,8 @@ public class EventServiceImpl implements EventService {
         for (Event aList : list)
             if ((aList.getPrice() >= priceDown) && (aList.getPrice() <= priceUp) &&
                     ((aList.getCategory() == category)||(category==-1)) && ((aList.getRate()==language)||bool)) {
-                aList.setDescription(aList.getDescription().replace("\\", "\\\\"));
-                aList.setDescription(aList.getDescription().replace("\"", "\\\""));
+//                aList.setDescription(aList.getDescription().replace("\\", "\\\\"));
+//                aList.setDescription(aList.getDescription().replace("\"", "\\\""));
                 copy.add(aList);
             }
         return copy;
