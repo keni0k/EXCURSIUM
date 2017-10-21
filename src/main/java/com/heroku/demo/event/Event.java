@@ -145,7 +145,7 @@ public class Event {
     }
 
     public String getPriceString() throws UnsupportedEncodingException {
-        return ""+price+ URLDecoder.decode("\u0584", "UTF-8");
+        return ""+price+ URLDecoder.decode("0x20BD", "UTF-16");
     }
 
     public void setPrice(int price) {
