@@ -144,10 +144,6 @@ public class Event {
         return price;
     }
 
-    public String getPriceString() throws UnsupportedEncodingException {
-        return ""+price+ URLDecoder.decode("0x20BD", "UTF-16");
-    }
-
     public void setPrice(int price) {
         this.price = price;
     }

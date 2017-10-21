@@ -159,7 +159,8 @@
 						<!--Card footer-->
 						<div class="card-footer">
 							<span class="left" style="color:#4285F4; font-size: large;">
-								<strong th:text="${event.getPriceString()}">2500&#8381;</strong>
+								<strong th:text="${event.getPrice()}">2500&#8381;</strong>
+								<strong>&#8381;</strong>
 							</span>
 							<span class="right">
 								<a th:href="@{/event(id=${event.getId()})}" class="btn btn-primary waves-effect waves-light">Открыть</a>

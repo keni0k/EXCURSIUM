@@ -80,18 +80,14 @@ public class HomeController {
     @RequestMapping("/event")
     public String event(ModelMap model, @ModelAttribute("id") int id) {
         switch (id){
-            case 37:
-                model.addAttribute("photo", "../resources/img/doshik.jpg");
-                model.addAttribute("category", "Искусство"); break;
-            case 41:
-                model.addAttribute("photo", "../resources/img/poets.jpg");
-                model.addAttribute("category", "Развлечения");break;
-            case 38:
-                model.addAttribute("photo", "../resources/img/2007.jpg");
-                model.addAttribute("category", "История");break;
-            case 40:
-                model.addAttribute("photo", "../resources/img/speceffects.jpg");
-                model.addAttribute("category", "Наука");break;
+            case 74:
+                model.addAttribute("photo", "../resources/img/doshik.jpg");break;
+            case 78:
+                model.addAttribute("photo", "../resources/img/poets.jpg");break;
+            case 75:
+                model.addAttribute("photo", "../resources/img/2007.jpg");break;
+            case 77:
+                model.addAttribute("photo", "../resources/img/speceffects.jpg");break;
         }
         model.addAttribute("event", eventService.getById(id));
         //model.addAttribute("insertEvent", new Event());
@@ -113,19 +109,19 @@ public class HomeController {
     @RequestMapping("/profile")
     public String profile(ModelMap model, @ModelAttribute("id") int id) {
         switch (id){
-            case 37:
+            case 74:
                 model.addAttribute("name", "Андрей");
                 model.addAttribute("city", "Москва");
                 model.addAttribute("about", "Я сделал сайт");break;
-            case 38:
+            case 78:
                 model.addAttribute("name", "Леша");
                 model.addAttribute("city", "Москва");
                 model.addAttribute("about", "Я сделал telegram бота");break;
-            case 41:
+            case 75:
                 model.addAttribute("name", "Миша");
                 model.addAttribute("city", "Москва");
                 model.addAttribute("about", "Я сделал презентацию");break;
-            case 40:
+            case 77:
                 model.addAttribute("name", "Дима");
                 model.addAttribute("city", "Иркутск");
                 model.addAttribute("about", "Я сделал сервер и только я могу поменять описания Миши, Леши и Андрея");break;
@@ -165,7 +161,7 @@ public class HomeController {
         h.add("Content-type", "text/json;charset=UTF-8");
         String ru = "[\"Развлечения\",\"Наука\",\"История\",\"Искусство\",\"Производство\",\"Гастрономия\",\"Квесты\",\"Экстрим\"]";
         String en = "[\"Entertainment\",\"Science\",\"History\",\"Art\",\"Manufacture\",\"Gastronomy\",\"Quests\",\"Extreme\"]";
-        return new ResponseEntity<String>(language==0?ru:en,h , HttpStatus.OK);
+        return new ResponseEntity<>(language==0?ru:en,h , HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/getexcursions")
