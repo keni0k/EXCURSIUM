@@ -103,8 +103,9 @@ public class HomeController {
     @RequestMapping("/event_list")
     public String eventList(ModelMap model) {
         List<Event> events = eventService.getByFilter(-1,-1,-1,0);
-        String [] photos = {"../resources/metro.jpg","../resources/bezdomnie.jpg","../resources/kafedra_norm.jpg","../resources/multymediaart.jpg",
-                "../resources/bezdomnie.jpg","../resources/bezdomnie.jpg","../resources/bezdomnie.jpg","../resources/bezdomnie.jpg","","","",""};
+        String [] photos = {"../resources/img/metro.jpg","../resources/img/bezdomnie.jpg","../resources/img/kafedra_norm.jpg",
+                "../resources/img/multymediaart.jpg", "../resources/img/bezdomnie.jpg","../img/resources/img/bezdomnie.jpg",
+                "../resources/img/bezdomnie.jpg","../resources/img/bezdomnie.jpg","","","",""};
         for (int i = 0; i<photos.length; i++)
             events.get(i).setPhotoUrl(photos[i]);
         model.addAttribute("events", events);
