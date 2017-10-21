@@ -66,6 +66,12 @@ public class HomeController {
     public String index(ModelMap model) {
         return "index";
     }
+
+    @RequestMapping("index")
+    public String index2(ModelMap model) {
+        return "index";
+    }
+
     public String persons(ModelMap model) {
         model.addAttribute("insertPerson", new Person());
         return "registration";
@@ -97,12 +103,10 @@ public class HomeController {
     @RequestMapping("/event_list")
     public String eventList(ModelMap model) {
         List<Event> events = eventService.getByFilter(-1,-1,-1,0);
+        String [] photos = {"","","","",""};
+        for (int i = 0; i<photos.length; i++)
+            events.get(i).setDuration(photos[i]);
         model.addAttribute("events", events);
-//        String [] photos = {"","",""};
-//        int max = Integer.max(events.size(),photos.length);
-//        for (int i = 0; i<max; i++){
-//            events.get(i).setPhotoUrl(photos[i]);
-//        }
         return "event_list";
     }
 
