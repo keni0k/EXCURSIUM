@@ -85,16 +85,6 @@ public class HomeController {
 
     @RequestMapping("/event")
     public String event(ModelMap model, @ModelAttribute("id") int id) {
-        switch (id){
-            case 74:
-                model.addAttribute("photo", "../resources/img/doshik.jpg");break;
-            case 78:
-                model.addAttribute("photo", "../resources/img/poets.jpg");break;
-            case 75:
-                model.addAttribute("photo", "../resources/img/2007.jpg");break;
-            case 77:
-                model.addAttribute("photo", "../resources/img/speceffects.jpg");break;
-        }
         model.addAttribute("event", eventService.getById(id));
         //model.addAttribute("insertEvent", new Event());
         return "event";
@@ -103,17 +93,6 @@ public class HomeController {
     @RequestMapping("/event_list")
     public String eventList(ModelMap model) {
         List<Event> events = eventService.getByFilter(-1,-1,-1,0);
-        String [] photos = {"../resources/img/metro.jpg","../resources/img/bezdomnie.jpg","../resources/img/kafedra_norm.jpg"
-                , "../resources/img/evolution.jpg","../resources/img/podpolie.jpg",
-                "../resources/img/vslepuu.jpg","../resources/img/chainaut.jpg","../resources/img/remote_moscow",
-                "../resources/img/gastronom.jpg", "../resources/img/kontrasts.jpg","../resources/img/multymediaart.jpg",
-                "../resources/img/keramika.jpg", "../resources/img/plarus.jpg","../resources/img/rot_front.jpg",
-                "../resources/img/without_portfel.jpg","../resources/img/doshik.jpg","../resources/img/2007.jpg",
-                "", "../resources/img/speceffects.jpg"};
-        for (int i = 0; i<photos.length; i++) {
-            events.get(i).setPhotoUrl(photos[i]);
-            eventService.editEvent(events.get(i));
-        }
         model.addAttribute("events", events);
         return "event_list";
     }
@@ -121,19 +100,19 @@ public class HomeController {
     @RequestMapping("/profile")
     public String profile(ModelMap model, @ModelAttribute("id") int id) {
         switch (id){
-            case 74:
+            case 61:
                 model.addAttribute("name", "Андрей");
                 model.addAttribute("city", "Москва");
                 model.addAttribute("about", "Я сделал сайт");break;
-            case 78:
+            case 60:
                 model.addAttribute("name", "Леша");
                 model.addAttribute("city", "Москва");
                 model.addAttribute("about", "Я сделал telegram бота");break;
-            case 75:
+            case 62:
                 model.addAttribute("name", "Миша");
                 model.addAttribute("city", "Москва");
                 model.addAttribute("about", "Я сделал презентацию");break;
-            case 77:
+            case 59:
                 model.addAttribute("name", "Дима");
                 model.addAttribute("city", "Иркутск");
                 model.addAttribute("about", "Я сделал сервер и только я могу поменять описания Миши, Леши и Андрея");break;
