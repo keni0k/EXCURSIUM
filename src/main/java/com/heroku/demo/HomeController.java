@@ -100,7 +100,7 @@ public class HomeController {
 
     @RequestMapping("/event_list")
     public String eventList(ModelMap model) {
-        List<Event> events = eventRepository.findAll();
+        List<Event> events = eventService.getByFilter(-1,-1,-1,0);
         model.addAttribute("events", events);
 //        String [] photos = {"","",""};
 //        int max = Integer.max(events.size(),photos.length);

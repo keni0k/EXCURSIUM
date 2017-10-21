@@ -69,7 +69,9 @@ public class Event {
     private int photo = 0;
 
     public String getSmallDescription() {
-        return description.substring(0,description.length()>251?251:description.length()).concat("...");
+        String smallDesc = description.substring(0,description.length()>251?251:description.length());
+        if (smallDesc.length()!=description.length()) smallDesc+="...";
+        return smallDesc;
     }
 
     @Id
@@ -108,9 +110,17 @@ public class Event {
         return category;
     }
 
+    public String getCategoryString(int language, int category) {
+        String[] ru = {"Развлечения","Наука","История","Искусство","Производство","Гастрономия","Квесты","Экстрим"};
+        String[] en = {"Entertainment","Science","History","Art","Manufacture","Gastronomy","Quests","Extreme"};
+        if (language==0) return ru[category];
+        else return en[category];
+    }
+
     public void setCategory(int category) {
         this.category = category;
     }
+
 
     public String getTime() {
         return time;
