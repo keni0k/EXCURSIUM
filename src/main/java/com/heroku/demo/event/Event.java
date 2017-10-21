@@ -60,6 +60,16 @@ public class Event {
 
     private String time = "";
 
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
+    }
+
+    private String photoUrl = "";
+
     private String duration = "";
 
     private int price = 0;
