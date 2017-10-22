@@ -114,6 +114,14 @@ public class HomeController {
                 model.addAttribute("name", "Саша");
                 model.addAttribute("city", "Горно-Алтайск");
                 model.addAttribute("about", "Я занималась дизайном");break;
+            case 66:
+                model.addAttribute("name", "Аскар");
+                model.addAttribute("city", "Санкт-Петербург");
+                model.addAttribute("about", "Я - один из руководителей лаборатории IT и за все время помог с доменом и правильным отображением иконок. УРА!");break;
+            case 67:
+                model.addAttribute("name", "Анна");
+                model.addAttribute("city", "Неизвестен");
+                model.addAttribute("about", "Я - руководитель лаборатории IT и помогала с проектной частью и всем остальным, кроме кода.");break;
             case 64:
                 model.addAttribute("name", "Юля");
                 model.addAttribute("city", "Неизвестен");
@@ -124,11 +132,11 @@ public class HomeController {
                 model.addAttribute("about", "Я сделал сайт");break;
             case 60:
                 model.addAttribute("name", "Леша");
-                model.addAttribute("city", "Москва");
+                model.addAttribute("city", "Неизвестен");
                 model.addAttribute("about", "Я сделал telegram бота");break;
             case 62:
                 model.addAttribute("name", "Миша");
-                model.addAttribute("city", "Москва");
+                model.addAttribute("city", "Неизвестен");
                 model.addAttribute("about", "Я сделал презентацию");break;
             case 59:
                 model.addAttribute("name", "Дима");
