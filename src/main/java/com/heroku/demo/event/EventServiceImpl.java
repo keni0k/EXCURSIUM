@@ -80,7 +80,7 @@ public class EventServiceImpl implements EventService {
         copy.sort(new Comparator<Event>() {
             @Override
             public int compare(Event o1, Event o2) {
-                return -Integer.compare(o2.cnt, o1.cnt);
+                return -1*Integer.compare(o2.cnt, o1.cnt);
             }
         });
         return copy;
