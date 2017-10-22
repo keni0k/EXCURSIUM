@@ -77,7 +77,7 @@ public class EventServiceImpl implements EventService {
                 else
                     copy.add(aList);
             }
-        copy.sort(new Comparator<Event>() {
+        if (!words.equals("")) copy.sort(new Comparator<Event>() {
             @Override
             public int compare(Event o1, Event o2) {
                 return Integer.compare(o2.cnt, o1.cnt);
