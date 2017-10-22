@@ -141,7 +141,7 @@ public class HomeController {
             case 59:
                 model.addAttribute("name", "Дима");
                 model.addAttribute("city", "Иркутск");
-                model.addAttribute("about", "Я сделал сервер и только я могу поменять описания Миши, Леши и Андрея");break;
+                model.addAttribute("about", "Я сделал сервер и только я могу изменить описания всех на подобных страничках экскурсоводов.");break;
         }
         //model.addAttribute("insertEvent", new Event());
         return "profile";
