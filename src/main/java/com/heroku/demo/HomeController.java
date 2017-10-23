@@ -104,50 +104,6 @@ public class HomeController {
         return "event_list";
     }
 
-    @RequestMapping("/profile")
-    public String profile(ModelMap model, @ModelAttribute("id") int id) {
-        switch (id){
-            case 65:
-                model.addAttribute("name", "Егор");
-                model.addAttribute("city", "Горно-Алтайск");
-                model.addAttribute("about", "Я искал и структурировал экскурсии");break;
-            case 63:
-                model.addAttribute("name", "Принцесса Александра");
-                model.addAttribute("city", "Горно-Алтайск");
-                model.addAttribute("about", "Я занималась дизайном");break;
-            case 66:
-                model.addAttribute("name", "Аскар");
-                model.addAttribute("city", "Санкт-Петербург");
-                model.addAttribute("about", "Я - один из руководителей лаборатории IT и за все время помог с доменом и правильным отображением иконок. УРА!");break;
-            case 67:
-                model.addAttribute("name", "Анна");
-                model.addAttribute("city", "Город неизвестен");
-                model.addAttribute("about", "Я - руководитель лаборатории IT и помогала с проектной частью и всем остальным, кроме кода.");break;
-            case 64:
-                model.addAttribute("name", "Юля");
-                model.addAttribute("city", "Город неизвестен");
-                model.addAttribute("about", "Я работала над подсчетом финансов");break;
-            case 61:
-                model.addAttribute("name", "Андрей");
-                model.addAttribute("city", "Москва");
-                model.addAttribute("about", "Я сделал сайт");break;
-            case 60:
-                model.addAttribute("name", "Леша");
-                model.addAttribute("city", "Город неизвестен");
-                model.addAttribute("about", "Я сделал telegram бота");break;
-            case 62:
-                model.addAttribute("name", "Миша");
-                model.addAttribute("city", "Город неизвестен");
-                model.addAttribute("about", "Я сделал презентацию");break;
-            case 59:
-                model.addAttribute("name", "Дима");
-                model.addAttribute("city", "Иркутск");
-                model.addAttribute("about", "Я сделал сервер и только я могу изменить описания всех на подобных страничках экскурсоводов.");break;
-        }
-        //model.addAttribute("insertEvent", new Event());
-        return "profile";
-    }
-
     @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET, value = "/getperson")
     @ResponseBody
     public String getPerson(ModelMap model,
@@ -559,6 +515,50 @@ public class HomeController {
         }
         stringBuilder.append("]}");
         return stringBuilder.toString();
+    }
+
+    @RequestMapping("/profile")
+    public String profile(ModelMap model, @ModelAttribute("id") int id) {
+        switch (id){
+            case 65:
+                model.addAttribute("name", "Егор");
+                model.addAttribute("city", "Горно-Алтайск");
+                model.addAttribute("about", "Я искал и структурировал экскурсии");break;
+            case 63:
+                model.addAttribute("name", "Принцесса Александра");
+                model.addAttribute("city", "Горно-Алтайск");
+                model.addAttribute("about", "Я занималась дизайном");break;
+            case 66:
+                model.addAttribute("name", "Аскар");
+                model.addAttribute("city", "Санкт-Петербург");
+                model.addAttribute("about", "Я - один из руководителей лаборатории IT и за все время помог с доменом и правильным отображением иконок. УРА!");break;
+            case 67:
+                model.addAttribute("name", "Анна");
+                model.addAttribute("city", "Город неизвестен");
+                model.addAttribute("about", "Я - руководитель лаборатории IT и помогала с проектной частью и всем остальным, кроме кода.");break;
+            case 64:
+                model.addAttribute("name", "Юля");
+                model.addAttribute("city", "Город неизвестен");
+                model.addAttribute("about", "Я работала над подсчетом финансов");break;
+            case 61:
+                model.addAttribute("name", "Андрей");
+                model.addAttribute("city", "Москва");
+                model.addAttribute("about", "Я сделал сайт");break;
+            case 60:
+                model.addAttribute("name", "Леша");
+                model.addAttribute("city", "Город неизвестен");
+                model.addAttribute("about", "Я сделал telegram бота");break;
+            case 62:
+                model.addAttribute("name", "Миша");
+                model.addAttribute("city", "Город неизвестен");
+                model.addAttribute("about", "Я сделал презентацию");break;
+            case 59:
+                model.addAttribute("name", "Дима");
+                model.addAttribute("city", "Иркутск");
+                model.addAttribute("about", "Я сделал сервер и только я могу изменить описания всех на подобных страничках экскурсоводов.");break;
+        }
+        //model.addAttribute("insertEvent", new Event());
+        return "profile";
     }
 
 }
