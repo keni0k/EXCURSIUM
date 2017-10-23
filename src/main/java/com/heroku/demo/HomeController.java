@@ -111,7 +111,7 @@ public class HomeController {
                 model.addAttribute("city", "Горно-Алтайск");
                 model.addAttribute("about", "Я искал и структурировал экскурсии");break;
             case 63:
-                model.addAttribute("name", "Саша");
+                model.addAttribute("name", "Принцесса Александра Воронкова");
                 model.addAttribute("city", "Горно-Алтайск");
                 model.addAttribute("about", "Я занималась дизайном");break;
             case 66:
