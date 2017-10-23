@@ -72,6 +72,7 @@ public class HomeController {
         return "index";
     }
 
+    @RequestMapping("registration")
     public String persons(ModelMap model) {
         model.addAttribute("insertPerson", new Person());
         return "registration";
@@ -120,11 +121,11 @@ public class HomeController {
                 model.addAttribute("about", "Я - один из руководителей лаборатории IT и за все время помог с доменом и правильным отображением иконок. УРА!");break;
             case 67:
                 model.addAttribute("name", "Анна");
-                model.addAttribute("city", "Неизвестен");
+                model.addAttribute("city", "Город неизвестен");
                 model.addAttribute("about", "Я - руководитель лаборатории IT и помогала с проектной частью и всем остальным, кроме кода.");break;
             case 64:
                 model.addAttribute("name", "Юля");
-                model.addAttribute("city", "Неизвестен");
+                model.addAttribute("city", "Город неизвестен");
                 model.addAttribute("about", "Я работала над подсчетом финансов");break;
             case 61:
                 model.addAttribute("name", "Андрей");
@@ -132,11 +133,11 @@ public class HomeController {
                 model.addAttribute("about", "Я сделал сайт");break;
             case 60:
                 model.addAttribute("name", "Леша");
-                model.addAttribute("city", "Неизвестен");
+                model.addAttribute("city", "Город неизвестен");
                 model.addAttribute("about", "Я сделал telegram бота");break;
             case 62:
                 model.addAttribute("name", "Миша");
-                model.addAttribute("city", "Неизвестен");
+                model.addAttribute("city", "Город неизвестен");
                 model.addAttribute("about", "Я сделал презентацию");break;
             case 59:
                 model.addAttribute("name", "Дима");
