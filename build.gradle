@@ -21,8 +21,8 @@ repositories {
     mavenCentral()
 }
 
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
@@ -30,6 +30,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-data-mongodb")
     compile 'org.thymeleaf:thymeleaf-spring4:3.0.0.ALPHA03'
     compile("org.postgresql:postgresql:9.4-1201-jdbc4");
+    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.27'
     testCompile("junit:junit")
 }
 
