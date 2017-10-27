@@ -94,14 +94,13 @@ public class HomeController {
     @RequestMapping("/event_list")
     public String eventList(ModelMap model) {
         List<Event> events = eventService.getByFilter(-1, -1, -1, 0, "");
-        events.remove(eventService.getById(89));
         int size = events.size() % 3;
         for (int i = 0; i < size; i++) {
             events.remove(events.size() - 1);
         }
         model.addAttribute("row", size);
         model.addAttribute("events", events);
-        model.addAttribute("utils",new UtilsForWeb());
+        model.addAttribute("utils", new UtilsForWeb());
         return "event_list";
     }
 
@@ -252,6 +251,14 @@ public class HomeController {
         model.addAttribute("events", events);
         model.addAttribute("insertEvent", new Event());
         return "events";
+    }
+
+    @RequestMapping("/persons")
+    public String persons_last(ModelMap model) {
+        List<Person> persons = personRepository.findAll();
+        model.addAttribute("persons", persons);
+        model.addAttribute("insertPerson", new Person());
+        return "persons";
     }
 
     @RequestMapping("/addeventhttp")
