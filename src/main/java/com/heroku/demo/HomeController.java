@@ -101,6 +101,7 @@ public class HomeController {
         }
         model.addAttribute("row", size);
         model.addAttribute("events", events);
+        model.addAttribute("utils",new UtilsForWeb());
         return "event_list";
     }
 

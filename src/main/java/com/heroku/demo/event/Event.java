@@ -1,5 +1,7 @@
 package com.heroku.demo.event;
 
+import com.heroku.demo.UtilsForWeb;
+
 import javax.persistence.*;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -125,21 +127,7 @@ public class Event implements Comparable {
     }
 
     public String getCategoryString() {
-        String[] ru = {"Развлечения", "Наука", "История", "Искусство", "Производство", "Гастрономия", "Квесты", "Экстрим"};
-        String[] en = {"Entertainment", "Science", "History", "Art", "Manufacture", "Gastronomy", "Quests", "Extreme"};
-        if (rate == 0) return ru[category];
-        else return en[category];
-    }
-
-    public String getCategoryString(int category) {
-        String[] ru = {"Развлечения", "Наука", "История", "Искусство", "Производство", "Гастрономия", "Квесты", "Экстрим"};
-        String[] en = {"Entertainment", "Science", "History", "Art", "Manufacture", "Gastronomy", "Quests", "Extreme"};
-        if (rate == 0) return ru[category];
-        else return en[category];
-    }
-
-    public int getCategoriesCount(){
-        return 8;
+        return UtilsForWeb.getCategoryString(category, rate);
     }
 
     public void setCategory(int category) {
