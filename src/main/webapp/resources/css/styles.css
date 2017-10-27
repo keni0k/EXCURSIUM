@@ -322,5 +322,6 @@ footer {
 
 .img_crop img {
     min-height: 180px;
+    max-height: 400px;
     object-fit: cover;
   }
