@@ -62,7 +62,7 @@
     <ul>
         <li><a href="/"><i class="fa fa-home fa-fw"></i>Главная</a></li>
         <li><a href="/#">EVENTS</a></li>
-        <li><a href="//persons">USERS</a></li>
+        <li><a href="/persons">USERS</a></li>
     </ul>
 </nav>
 <hr />
@@ -70,7 +70,7 @@
 <hr />
 <div class="row">
     <div class="col-md-12 col-lg-6">
-        <form th:object="${insertEvent}" action="//addeventhttp" method="POST">
+        <form th:object="${insertEvent}" action="/addeventhttp" method="POST">
 
             Категория:
             <select name="category">
