@@ -321,7 +321,6 @@ footer {
     height: 180px; /* Высота блока */
    } 
 .img_crop img {
-    width: 360px;
     height: 180px;
     border: none;
     margin: 0;
