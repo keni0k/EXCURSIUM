@@ -124,7 +124,7 @@
 
         <div class="row">
             <div class="col-lg-6 col-md-6 col-md-6 mb-r">
-                <div class="chip" th:each="i : ${#numbers.sequence(0, utils.getCategoriesCount())}">
+                <div class="chip" th:each="i : ${#numbers.sequence(0, utils.getCategoriesCount()-1)}">
                     <img th:src="${utils.getCategoryUrl(i)}" alt=""/>
                     <span>&nbsp;</span>
                     <span th:text="${utils.getCategoryString(i, 0)}">%Категория%</span>
