@@ -314,3 +314,9 @@ footer {
 .btn-xl {
   font-size: 11px;
   padding: 15px 45px; }
+
+.img_crop {
+    overflow: hidden; /* Добавляем полосы прокрутки */
+    max_width: 400px; /* Ширина блока */
+    max_height: 150px; /* Высота блока */
+   } 
