@@ -128,9 +128,7 @@
                 <div class="card">
                     <!--Card image-->
                     <div class="view overlay hm-white-slight z-depth-1">
-                        <div class="img_crop">
-                            <img src="../resources/img/bg-cta.jpg" th:src="${events.get(i).getPhotoUrl()}" class="img-fluid" alt=""/>
-                        </div>
+                        <img src="../resources/img/bg-cta.jpg" th:src="${events.get(i).getPhotoUrl()}" class="img-fluid" alt=""/>
                         <a th:href="@{/event(id=${events.get(i).getId()})}">
                             <div class="mask waves-effect waves-light"></div>
                         </a>
