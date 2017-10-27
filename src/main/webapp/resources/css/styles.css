@@ -321,9 +321,7 @@ footer {
     max-height: 180px; /* Высота блока */
    } 
 .img_crop img {
-    max-width: 360px; /* Ширина блока */
-    max-height: 180px; /* Высота блока */
-    border: none;
-    margin: 0;
-    padding: 0;
+    object-fit: cover;
+    width: 360px; 
+    height: 180px; 
   }
