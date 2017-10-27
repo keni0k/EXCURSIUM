@@ -76,7 +76,7 @@ public class Event implements Comparable {
     private int rate = 0;
 
     @Transient
-    public int cnt = 0;
+    int cnt = 0;
 
     private int photo = 0;
 
@@ -123,10 +123,10 @@ public class Event implements Comparable {
         return category;
     }
 
-    public String getCategoryString(int language, int category) {
+    public String getCategoryString() {
         String[] ru = {"Развлечения","Наука","История","Искусство","Производство","Гастрономия","Квесты","Экстрим"};
         String[] en = {"Entertainment","Science","History","Art","Manufacture","Gastronomy","Quests","Extreme"};
-        if (language==0) return ru[category];
+        if (rate==0) return ru[category];
         else return en[category];
     }
 

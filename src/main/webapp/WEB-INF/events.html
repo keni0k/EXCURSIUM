@@ -147,7 +147,7 @@
             <tr th:each="event : ${events}">
                 <td th:text="${event.id}">Some text</td>
                 <td th:text="${event.place}">Some text</td>
-                <td th:text="${event.category}">Some text</td>
+                <td th:text="${event.getCategoryString()}">Some text</td>
                 <td th:text="${event.duration}">Some text</td>
                 <td th:text="${event.price}">Some text</td>
                 <td th:text="${event.description}">Some text</td>
