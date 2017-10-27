@@ -1,4 +1,5 @@
 package com.heroku.demo.event;
+
 import javax.persistence.*;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -81,9 +82,9 @@ public class Event implements Comparable {
     private int photo = 0;
 
     public String getSmallDescription() {
-        String smallDesc = description.substring(0,description.length()>251?251:description.length());
-        smallDesc.replace("\\\"", "\"");
-        if (smallDesc.length()!=description.length()) smallDesc+="...";
+        String smallDesc = description.substring(0, description.length() > 251 ? 251 : description.length());
+        smallDesc = smallDesc.replace("\\\"", "\"");
+        if (smallDesc.length() != description.length()) smallDesc += "...";
         return smallDesc;
     }
 
@@ -124,10 +125,21 @@ public class Event implements Comparable {
     }
 
     public String getCategoryString() {
-        String[] ru = {"Развлечения","Наука","История","Искусство","Производство","Гастрономия","Квесты","Экстрим"};
-        String[] en = {"Entertainment","Science","History","Art","Manufacture","Gastronomy","Quests","Extreme"};
-        if (rate==0) return ru[category];
+        String[] ru = {"Развлечения", "Наука", "История", "Искусство", "Производство", "Гастрономия", "Квесты", "Экстрим"};
+        String[] en = {"Entertainment", "Science", "History", "Art", "Manufacture", "Gastronomy", "Quests", "Extreme"};
+        if (rate == 0) return ru[category];
         else return en[category];
+    }
+
+    public String getCategoryString(int category) {
+        String[] ru = {"Развлечения", "Наука", "История", "Искусство", "Производство", "Гастрономия", "Квесты", "Экстрим"};
+        String[] en = {"Entertainment", "Science", "History", "Art", "Manufacture", "Gastronomy", "Quests", "Extreme"};
+        if (rate == 0) return ru[category];
+        else return en[category];
+    }
+
+    public int getCategoriesCount(){
+        return 8;
     }
 
     public void setCategory(int category) {

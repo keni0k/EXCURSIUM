@@ -17,12 +17,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Модерация контента</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
     <!--<link rel="stylesheet" type="text/css" href="style.css"/>-->
     <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"/>
     <style>
         ul {
             list-style: none; /*убираем маркеры списка*/
@@ -31,23 +31,26 @@
             /*делаем отступ сверху*/
             margin: 25px 0 0;
         }
+
         a {
             text-decoration: none; /*убираем подчеркивание текста ссылок*/
-            background:#30A8E6; /*добавляем фон к пункту меню*/
-            color:#fff; /*меняем цвет ссылок*/
-            padding:10px; /*добавляем отступ*/
-            font-family: arial,serif; /*меняем шрифт*/
-            border-radius:4px; /*добавляем скругление*/
+            background: #30A8E6; /*добавляем фон к пункту меню*/
+            color: #fff; /*меняем цвет ссылок*/
+            padding: 10px; /*добавляем отступ*/
+            font-family: arial, serif; /*меняем шрифт*/
+            border-radius: 4px; /*добавляем скругление*/
             -moz-transition: all 0.3s 0.01s ease; /*делаем плавный переход*/
             -o-transition: all 0.3s 0.01s ease;
             -webkit-transition: all 0.3s 0.01s ease;
         }
+
         a:hover {
-            background:#1C85BB;/*добавляем эффект при наведении*/
+            background: #1C85BB; /*добавляем эффект при наведении*/
         }
+
         li {
-            float:left; /*Размещаем список горизонтально для реализации меню*/
-            margin-right:5px; /*Добавляем отступ у пунктов меню*/
+            float: left; /*Размещаем список горизонтально для реализации меню*/
+            margin-right: 5px; /*Добавляем отступ у пунктов меню*/
 
         }
     </style>
@@ -65,9 +68,9 @@
         <li><a href="/persons">USERS</a></li>
     </ul>
 </nav>
-<hr />
-<hr />
-<hr />
+<hr/>
+<hr/>
+<hr/>
 <div class="row">
     <div class="col-md-12 col-lg-6">
         <form th:object="${insertEvent}" action="/addeventhttp" method="POST">
@@ -75,13 +78,13 @@
             Категория:
             <select name="category">
                 <option value="0">Развлечения</option>
-                <option value="1"> Наука </option>
-                <option value="2"> История </option>
-                <option value="3"> Искусство </option>
-                <option value="4"> Производство </option>
-                <option value="5"> Гастрономия </option>
-                <option value="6"> Квесты </option>
-                <option value="7"> Экстрим </option>
+                <option value="1"> Наука</option>
+                <option value="2"> История</option>
+                <option value="3"> Искусство</option>
+                <option value="4"> Производство</option>
+                <option value="5"> Гастрономия</option>
+                <option value="6"> Квесты</option>
+                <option value="7"> Экстрим</option>
 
             </select>
             <br/>
@@ -111,17 +114,17 @@
         </form>
     </div>
 </div>
-<hr />
+<hr/>
 
-<input type="text" id="del" value = "">ID элемента</input>
+<input type="text" id="del" value="">ID элемента</input>
 <script type='text/javascript'>
-    function a(){
+    function a() {
         var d = document.getElementById('del').value;
-        window.location='/deleteevent?id='+d;
+        window.location = '/deleteevent?id=' + d;
     }
 </script>
 <input type="button" onclick="javascript:a()" value="Удалить"/>
-<hr />
+<hr/>
 
 <div class="row">
     <div class="col-sm-12">

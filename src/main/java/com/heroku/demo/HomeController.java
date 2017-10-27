@@ -93,11 +93,11 @@ public class HomeController {
 
     @RequestMapping("/event_list")
     public String eventList(ModelMap model) {
-        List<Event> events = eventService.getByFilter(-1,-1,-1,0, "");
+        List<Event> events = eventService.getByFilter(-1, -1, -1, 0, "");
         events.remove(eventService.getById(89));
-        int size = events.size()%3;
-        for (int i = 0; i<size; i++) {
-            events.remove(events.size()-1);
+        int size = events.size() % 3;
+        for (int i = 0; i < size; i++) {
+            events.remove(events.size() - 1);
         }
         model.addAttribute("row", size);
         model.addAttribute("events", events);
@@ -107,66 +107,66 @@ public class HomeController {
     @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET, value = "/getperson")
     @ResponseBody
     public String getPerson(ModelMap model,
-                             @ModelAttribute("token") String token,
-                             BindingResult result){
+                            @ModelAttribute("token") String token,
+                            BindingResult result) {
         Person p = personService.getByToken(token);
-        return p==null?"{}":p.toString();
+        return p == null ? "{}" : p.toString();
     }
 
     @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET, value = "/getpersonbyemail")
     @ResponseBody
     public String getPersonByEmail(ModelMap model,
-                            @ModelAttribute("email") String email,
-                            BindingResult result){
+                                   @ModelAttribute("email") String email,
+                                   BindingResult result) {
         Person p = personService.getByEmail(email);
-        return p==null?"{}":p.toString();
+        return p == null ? "{}" : p.toString();
     }
 
-   // @RequestMapping(method = RequestMethod.GET, value = "/getcategories")
-   // @ResponseBody
-  //  public String getCategories(){
-  //      return "[\"Авто\",\"Пешеходная\",\"Квест\",\"Экстримальная\"]";
-   // }
+    // @RequestMapping(method = RequestMethod.GET, value = "/getcategories")
+    // @ResponseBody
+    //  public String getCategories(){
+    //      return "[\"Авто\",\"Пешеходная\",\"Квест\",\"Экстримальная\"]";
+    // }
 
     @RequestMapping(method = RequestMethod.GET, value = "/getcategories")
     @ResponseBody
-    public ResponseEntity<String> preview(HttpServletResponse response, @ModelAttribute("language")int language) {
+    public ResponseEntity<String> preview(HttpServletResponse response, @ModelAttribute("language") int language) {
         HttpHeaders h = new HttpHeaders();
         h.add("Content-type", "text/json;charset=UTF-8");
         String ru = "[\"Развлечения\",\"Наука\",\"История\",\"Искусство\",\"Производство\",\"Гастрономия\",\"Квесты\",\"Экстрим\"]";
         String en = "[\"Entertainment\",\"Science\",\"History\",\"Art\",\"Manufacture\",\"Gastronomy\",\"Quests\",\"Extreme\"]";
-        return new ResponseEntity<>(language==0?ru:en,h , HttpStatus.OK);
+        return new ResponseEntity<>(language == 0 ? ru : en, h, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/getexcursions")
     @ResponseBody
     public ResponseEntity<String> getEventsByFilter(ModelMap model,
-                                                    @ModelAttribute("price_down")int priceDown,
-                                                    @ModelAttribute("price_up")int priceUp,
-                                                    @ModelAttribute("category")int category,
-                                                    @ModelAttribute("words")String words,
-                                                    @ModelAttribute("language")int language){
+                                                    @ModelAttribute("price_down") int priceDown,
+                                                    @ModelAttribute("price_up") int priceUp,
+                                                    @ModelAttribute("category") int category,
+                                                    @ModelAttribute("words") String words,
+                                                    @ModelAttribute("language") int language) {
 
         ArrayList<String> arrayList = new ArrayList<>();
         List<Event> events = eventService.getByFilter(priceUp, priceDown, category, language, words);
-        for (Event e:events){
+        for (Event e : events) {
             arrayList.add(e.toString());
         }
 
         StringBuilder stringBuilder = new StringBuilder("{ \"events\": [");
 
-        for (int i = 0; i<arrayList.size(); i++) {
+        for (int i = 0; i < arrayList.size(); i++) {
             stringBuilder.append(arrayList.get(i));
-            if (arrayList.size()-i>1) stringBuilder.append(",\n");
+            if (arrayList.size() - i > 1) stringBuilder.append(",\n");
         }
         stringBuilder.append("]}");
         HttpHeaders h = new HttpHeaders();
         h.add("Content-type", "text/json;charset=UTF-8");
-        return new ResponseEntity<String>(stringBuilder.toString(),h , HttpStatus.OK);
+        return new ResponseEntity<String>(stringBuilder.toString(), h, HttpStatus.OK);
     }
 
 
-    private String randomToken(){
+    private String randomToken() {
         final String mCHAR = "qwertyuioplkjhgfdsazxcvbnmABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         final int STR_LENGTH = 32; // длина генерируемой строки
 
@@ -180,7 +180,7 @@ public class HomeController {
         return builder.toString();
     }
 
-    private void sendMail(){
+    private void sendMail() {
 //        final String APIKey = "your Mailjet API Key";
 //        final String SecretKey = "your Mailjet Secret Key";
 //        String From = "you@example.com";
@@ -256,8 +256,8 @@ public class HomeController {
     @RequestMapping("/addeventhttp")
     @ResponseBody
     public String insertEvent(ModelMap model,
-                                @ModelAttribute("insertEvent") @Valid Event event,
-                                BindingResult result) {
+                              @ModelAttribute("insertEvent") @Valid Event event,
+                              BindingResult result) {
         //event.setTime("DATE");
 
         if (!result.hasErrors()) {
@@ -268,14 +268,14 @@ public class HomeController {
 
     @RequestMapping("/deleteperson")
     public String deleteContact(ModelMap model, @ModelAttribute("id") String id,
-                              BindingResult result) {
+                                BindingResult result) {
         personRepository.delete(Long.parseLong(id));
         return persons(model);
     }
 
     @RequestMapping("/deleteevent")
     public String deleteEvent(ModelMap model, @ModelAttribute("id") String id,
-                                BindingResult result) {
+                              BindingResult result) {
         eventRepository.delete(Long.parseLong(id));
         return events(model);
     }
@@ -283,11 +283,11 @@ public class HomeController {
     @RequestMapping("/addmsg")
     @ResponseBody
     public String insertMsg(ModelMap model,
-                               @ModelAttribute("msg") String message,
-                               @ModelAttribute("time") String time,
-                               @ModelAttribute("event_id") int eventId,
-                               @ModelAttribute("user_id") int userId,
-                               BindingResult result) {
+                            @ModelAttribute("msg") String message,
+                            @ModelAttribute("time") String time,
+                            @ModelAttribute("event_id") int eventId,
+                            @ModelAttribute("user_id") int userId,
+                            BindingResult result) {
         Message msg = new Message(userId, eventId, time, message);
         if (!result.hasErrors()) {
             //person.setWhat(3);
@@ -311,9 +311,9 @@ public class HomeController {
                                @ModelAttribute("about") String about,
                                @ModelAttribute("date") String date,
                                @ModelAttribute("imageurl") String imageUrl,
-                                BindingResult result) {
+                               BindingResult result) {
 
-        Person p = new Person(login, pass, lastName, type, email, firstName, rate, phoneNumber,  about, city, date, imageUrl);
+        Person p = new Person(login, pass, lastName, type, email, firstName, rate, phoneNumber, about, city, date, imageUrl);
         if (!result.hasErrors()) {
             //person.setWhat(3);
             personRepository.save(p);
@@ -324,40 +324,39 @@ public class HomeController {
 
     @RequestMapping("/getpersons")
     @ResponseBody
-    public String getPersons(){
+    public String getPersons() {
         ArrayList<String> arrayList = new ArrayList<>();
-         List<Person> persons = personRepository.findAll();
+        List<Person> persons = personRepository.findAll();
 
         StringBuilder stringBuilder = new StringBuilder("{ \"persons\": [");
 
-        for (Person p:persons){
-             arrayList.add(p.toString());
+        for (Person p : persons) {
+            arrayList.add(p.toString());
         }
 
-        for (int i = 0; i<arrayList.size(); i++) {
+        for (int i = 0; i < arrayList.size(); i++) {
             stringBuilder.append(arrayList.get(i));
-            if (arrayList.size()-i>1) stringBuilder.append(",\n");
+            if (arrayList.size() - i > 1) stringBuilder.append(",\n");
         }
         stringBuilder.append("]}");
         return stringBuilder.toString();
     }
 
 
-
     @RequestMapping("/getmsgs")
     @ResponseBody
-    public String getMsgs(){
+    public String getMsgs() {
         ArrayList<String> arrayList = new ArrayList<>();
         List<Message> messages = messageRepository.findAll();
-        for (Message m:messages){
+        for (Message m : messages) {
             arrayList.add(m.toString());
         }
 
         StringBuilder stringBuilder = new StringBuilder("{ \"messages\": [");
 
-        for (int i = 0; i<arrayList.size(); i++) {
+        for (int i = 0; i < arrayList.size(); i++) {
             stringBuilder.append(arrayList.get(i));
-            if (arrayList.size()-i>1) stringBuilder.append(",\n");
+            if (arrayList.size() - i > 1) stringBuilder.append(",\n");
         }
         stringBuilder.append("]}");
         return stringBuilder.toString();
@@ -367,17 +366,17 @@ public class HomeController {
     @RequestMapping("/addevent")
     @ResponseBody
     public String insertEvent(ModelMap model,
-                               @ModelAttribute("name") String name,
-                               @ModelAttribute("full_name") String time,
-                               @ModelAttribute("category") int category,
-                               @ModelAttribute("duration") int guideId,
-                               @ModelAttribute("place") String place,
-                               @ModelAttribute("phone") String duration,
-                               @ModelAttribute("description") String description,
-                               @ModelAttribute("language") int rate,
-                               @ModelAttribute("users_count") int photo,
-                               @ModelAttribute("price") int price,
-                               BindingResult result) {
+                              @ModelAttribute("name") String name,
+                              @ModelAttribute("full_name") String time,
+                              @ModelAttribute("category") int category,
+                              @ModelAttribute("duration") int guideId,
+                              @ModelAttribute("place") String place,
+                              @ModelAttribute("phone") String duration,
+                              @ModelAttribute("description") String description,
+                              @ModelAttribute("language") int rate,
+                              @ModelAttribute("users_count") int photo,
+                              @ModelAttribute("price") int price,
+                              BindingResult result) {
 
         Event e = new Event(place, category, time, duration, price, description, rate, photo, guideId, name);
         if (!result.hasErrors()) {
@@ -390,18 +389,18 @@ public class HomeController {
 
     @RequestMapping("/getevents")
     @ResponseBody
-    public String getEvents(){
+    public String getEvents() {
         ArrayList<String> arrayList = new ArrayList<>();
         List<Event> events = eventRepository.findAll();
-        for (Event e:events){
+        for (Event e : events) {
             arrayList.add(e.toString());
         }
 
         StringBuilder stringBuilder = new StringBuilder("{ \"events\": [");
 
-        for (int i = 0; i<arrayList.size(); i++) {
+        for (int i = 0; i < arrayList.size(); i++) {
             stringBuilder.append(arrayList.get(i));
-            if (arrayList.size()-i>1) stringBuilder.append(",\n");
+            if (arrayList.size() - i > 1) stringBuilder.append(",\n");
         }
         stringBuilder.append("]}");
         return stringBuilder.toString();
@@ -429,18 +428,18 @@ public class HomeController {
 
     @RequestMapping("/getreviews")
     @ResponseBody
-    public String getReviews(){
+    public String getReviews() {
         ArrayList<String> arrayList = new ArrayList<>();
         List<Review> persons = reviewRepository.findAll();
-        for(Review r:persons){
+        for (Review r : persons) {
             arrayList.add(r.toString());
         }
 
         StringBuilder stringBuilder = new StringBuilder("{ \"reviews\": [");
 
-        for (int i = 0; i<arrayList.size(); i++) {
+        for (int i = 0; i < arrayList.size(); i++) {
             stringBuilder.append(arrayList.get(i));
-            if (arrayList.size()-i>1) stringBuilder.append(",\n");
+            if (arrayList.size() - i > 1) stringBuilder.append(",\n");
         }
         stringBuilder.append("]}");
         return stringBuilder.toString();
@@ -449,10 +448,10 @@ public class HomeController {
     @RequestMapping("/addorder")
     @ResponseBody
     public String insertOrder(ModelMap model,
-                               @ModelAttribute("price") int price,
-                               @ModelAttribute("tourist_id") int touristId,
-                               @ModelAttribute("event_id") int eventId,
-                               BindingResult result) {
+                              @ModelAttribute("price") int price,
+                              @ModelAttribute("tourist_id") int touristId,
+                              @ModelAttribute("event_id") int eventId,
+                              BindingResult result) {
 
         Buy buy = new Buy(eventId, touristId, price, "TIME");
         if (!result.hasErrors()) {
@@ -465,18 +464,18 @@ public class HomeController {
 
     @RequestMapping("/getorders")
     @ResponseBody
-    public String getOrders(){
+    public String getOrders() {
         ArrayList<String> arrayList = new ArrayList<>();
         List<Buy> buys = buyRepository.findAll();
-        for(Buy o: buys){
+        for (Buy o : buys) {
             arrayList.add(o.toString());
         }
 
         StringBuilder stringBuilder = new StringBuilder("{ \"buys\": [");
 
-        for (int i = 0; i<arrayList.size(); i++) {
+        for (int i = 0; i < arrayList.size(); i++) {
             stringBuilder.append(arrayList.get(i));
-            if (arrayList.size()-i>1) stringBuilder.append(",\n");
+            if (arrayList.size() - i > 1) stringBuilder.append(",\n");
         }
         stringBuilder.append("]}");
         return stringBuilder.toString();
@@ -500,18 +499,18 @@ public class HomeController {
 
     @RequestMapping("/getphotos")
     @ResponseBody
-    public String getPhotos(){
+    public String getPhotos() {
         ArrayList<String> arrayList = new ArrayList<>();
         List<Photo> buys = photoRepository.findAll();
-        for(Photo o: buys){
+        for (Photo o : buys) {
             arrayList.add(o.toString());
         }
 
         StringBuilder stringBuilder = new StringBuilder("{ \"photos\": [");
 
-        for (int i = 0; i<arrayList.size(); i++) {
+        for (int i = 0; i < arrayList.size(); i++) {
             stringBuilder.append(arrayList.get(i));
-            if (arrayList.size()-i>1) stringBuilder.append(",\n");
+            if (arrayList.size() - i > 1) stringBuilder.append(",\n");
         }
         stringBuilder.append("]}");
         return stringBuilder.toString();
@@ -519,43 +518,52 @@ public class HomeController {
 
     @RequestMapping("/profile")
     public String profile(ModelMap model, @ModelAttribute("id") int id) {
-        switch (id){
+        switch (id) {
             case 65:
                 model.addAttribute("name", "Егор");
                 model.addAttribute("city", "Горно-Алтайск");
-                model.addAttribute("about", "Я искал и структурировал экскурсии");break;
+                model.addAttribute("about", "Я искал и структурировал экскурсии");
+                break;
             case 63:
                 model.addAttribute("name", "Принцесса Александра");
                 model.addAttribute("city", "Горно-Алтайск");
-                model.addAttribute("about", "Я занималась дизайном");break;
+                model.addAttribute("about", "Я занималась дизайном");
+                break;
             case 66:
                 model.addAttribute("name", "Аскар");
                 model.addAttribute("city", "Санкт-Петербург");
-                model.addAttribute("about", "Я - один из руководителей лаборатории IT и за все время помог с доменом и правильным отображением иконок. УРА!");break;
+                model.addAttribute("about", "Я - один из руководителей лаборатории IT и за все время помог с доменом и правильным отображением иконок. УРА!");
+                break;
             case 67:
                 model.addAttribute("name", "Анна");
                 model.addAttribute("city", "Город неизвестен");
-                model.addAttribute("about", "Я - руководитель лаборатории IT и помогала с проектной частью и всем остальным, кроме кода.");break;
+                model.addAttribute("about", "Я - руководитель лаборатории IT и помогала с проектной частью и всем остальным, кроме кода.");
+                break;
             case 64:
                 model.addAttribute("name", "Юля");
                 model.addAttribute("city", "Город неизвестен");
-                model.addAttribute("about", "Я работала над подсчетом финансов");break;
+                model.addAttribute("about", "Я работала над подсчетом финансов");
+                break;
             case 61:
                 model.addAttribute("name", "Андрей");
                 model.addAttribute("city", "Москва");
-                model.addAttribute("about", "Я сделал сайт");break;
+                model.addAttribute("about", "Я сделал сайт");
+                break;
             case 60:
                 model.addAttribute("name", "Леша");
                 model.addAttribute("city", "Город неизвестен");
-                model.addAttribute("about", "Я сделал telegram бота");break;
+                model.addAttribute("about", "Я сделал telegram бота");
+                break;
             case 62:
                 model.addAttribute("name", "Миша");
                 model.addAttribute("city", "Город неизвестен");
-                model.addAttribute("about", "Я сделал презентацию");break;
+                model.addAttribute("about", "Я сделал презентацию");
+                break;
             case 59:
                 model.addAttribute("name", "Дима");
                 model.addAttribute("city", "Иркутск");
-                model.addAttribute("about", "Я сделал сервер и только я могу изменить описания всех на подобных страничках экскурсоводов.");break;
+                model.addAttribute("about", "Я сделал сервер и только я могу изменить описания всех на подобных страничках экскурсоводов.");
+                break;
         }
         //model.addAttribute("insertEvent", new Event());
         return "profile";
