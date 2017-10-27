@@ -98,7 +98,6 @@ public class HomeController {
         for (int i = 0; i < size; i++) {
             events.remove(events.size() - 1);
         }
-        model.addAttribute("row", size);
         model.addAttribute("events", events);
         model.addAttribute("utils", new UtilsForWeb());
         return "event_list";
@@ -257,8 +256,12 @@ public class HomeController {
     public String eventsByCategory(ModelMap model,
                                    @ModelAttribute("category") int categoty) {
         List<Event> events = eventService.getByFilter(-1,-1,categoty,0,"");
+        int size = events.size() % 3;
+        for (int i = 0; i < size; i++) {
+            events.remove(events.size() - 1);
+        }
         model.addAttribute("events", events);
-        model.addAttribute("insertEvent", new Event());
+        model.addAttribute("utils", new UtilsForWeb());
         return "event_list";
     }
 
