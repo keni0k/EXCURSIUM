@@ -317,6 +317,6 @@ footer {
 
 .img_crop {
     overflow: hidden; /* Добавляем полосы прокрутки */
-    max-width: 400px; /* Ширина блока */
-    max-height: 150px; /* Высота блока */
+    width: 400px; /* Ширина блока */
+    height: 200px; /* Высота блока */
    } 
