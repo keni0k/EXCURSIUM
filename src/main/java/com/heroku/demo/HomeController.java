@@ -121,12 +121,6 @@ public class HomeController {
         return p == null ? "{}" : p.toString();
     }
 
-    // @RequestMapping(method = RequestMethod.GET, value = "/getcategories")
-    // @ResponseBody
-    //  public String getCategories(){
-    //      return "[\"Авто\",\"Пешеходная\",\"Квест\",\"Экстримальная\"]";
-    // }
-
     @RequestMapping(method = RequestMethod.GET, value = "/getcategories")
     @ResponseBody
     public ResponseEntity<String> preview(HttpServletResponse response, @ModelAttribute("language") int language) {
@@ -252,14 +246,27 @@ public class HomeController {
         return "events";
     }
 
-    @RequestMapping(value = "/event_list", params = {"category", "language", "price_up", "price_down", "words"})
+    @RequestMapping(value = "/event_list", params = "category")
     public String eventsByCategory(ModelMap model,
-                                   @ModelAttribute("category") int categoty,
-                                   @ModelAttribute("language") int language,
-                                   @ModelAttribute("price_up") int priceUp,
-                                   @ModelAttribute("price_down") int priceDown,
-                                   @ModelAttribute("words") String words) {
-        List<Event> events = eventService.getByFilter(priceUp,priceDown,categoty,language,words);
+                                   @ModelAttribute("category") int category) {
+        List<Event> events = eventService.getByFilter(-1, -1, category, 0, "");
+        int size = events.size() % 3;
+        for (int i = 0; i < size; i++) {
+            events.remove(events.size() - 1);
+        }
+        model.addAttribute("events", events);
+        model.addAttribute("utils", new UtilsForWeb());
+        return "event_list";
+    }
+
+    @RequestMapping(value = "/event_list", params = {"category", "language", "price_up", "price_down", "words"})
+    public String eventsByFilter(ModelMap model,
+                                 @ModelAttribute("category") int categoty,
+                                 @ModelAttribute("language") int language,
+                                 @ModelAttribute("price_up") int priceUp,
+                                 @ModelAttribute("price_down") int priceDown,
+                                 @ModelAttribute("words") String words) {
+        List<Event> events = eventService.getByFilter(priceUp, priceDown, categoty, language, words);
         int size = events.size() % 3;
         for (int i = 0; i < size; i++) {
             events.remove(events.size() - 1);
