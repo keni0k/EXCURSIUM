@@ -315,7 +315,12 @@ footer {
   font-size: 11px;
   padding: 15px 45px; }
 
-.view overlay hm-white-slight z-depth-1 img {
+.img_crop {
+    overflow: hidden; /*скрываем все, что в блок не помещается по его размерам*/
     height: 360px;
+  }
+
+.img_crop img {
+    min-height: 360px;
     object-fit: cover;
   }
