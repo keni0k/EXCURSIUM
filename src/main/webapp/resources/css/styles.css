@@ -315,10 +315,7 @@ footer {
   font-size: 11px;
   padding: 15px 45px; }
 
-.img_crop {
-    overflow: hidden; /* Добавляем полосы прокрутки */
-    max-height: 180px; /* Высота блока */
-   } 
-.img_crop img {
+.view overlay hm-white-slight z-depth-1 img {
+    height: 360px;
     object-fit: cover;
   }
