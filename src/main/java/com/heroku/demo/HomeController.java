@@ -253,6 +253,15 @@ public class HomeController {
         return "events";
     }
 
+    @RequestMapping(value = "/events", params = "category")
+    public String eventsByCategory(ModelMap model,
+                                   @ModelAttribute("category") int categoty) {
+        List<Event> events = eventService.getByFilter(-1,-1,categoty,0,"");
+        model.addAttribute("events", events);
+        model.addAttribute("insertEvent", new Event());
+        return "events";
+    }
+
     @RequestMapping("/persons")
     public String persons_last(ModelMap model) {
         List<Person> persons = personRepository.findAll();
