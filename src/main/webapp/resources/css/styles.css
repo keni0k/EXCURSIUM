@@ -317,11 +317,8 @@ footer {
 
 .img_crop {
     overflow: hidden; /* Добавляем полосы прокрутки */
-    max-width: 360px; /* Ширина блока */
     max-height: 180px; /* Высота блока */
    } 
 .img_crop img {
     object-fit: cover;
-    width: 360px; 
-    height: 180px; 
   }
