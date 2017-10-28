@@ -23,14 +23,16 @@ public class Event implements Comparable {
                 "\t\"id\":\"" + id + "\",\n" +
                 "\t\"place\":\"" + place + "\",\n" +
                 "\t\"category\":\"" + category + "\",\n" +
-                "\t\"full_name\":\"" + time + "\",\n" +
-                "\t\"phone\":\"" + duration + "\",\n" +
                 "\t\"price\":\"" + price + "\",\n" +
                 "\t\"description\":\"" + description + "\",\n" +
-                "\t\"users_count\":\"" + photo + "\",\n" +
+                "\t\"name\":\"" + name + "\",\n" +
+                "\t\"photo_url\":\"" + photoUrl + "\",\n" +
+
+                "\t\"full_name\":\"" + time + "\",\n" +
+                "\t\"phone\":\"" + duration + "\",\n" +
                 "\t\"language\":\"" + rate + "\",\n" +
                 "\t\"duration\":\"" + guideId + "\",\n" +
-                "\t\"name\":\"" + name + "\"\n" +
+                "\t\"users_count\":\"" + photo + "\"\n" +
                 "}";
     }
 
@@ -71,6 +73,16 @@ public class Event implements Comparable {
     private String photoUrl = "";
 
     private String duration = "";
+
+    public int getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(int language) {
+        this.language = language;
+    }
+
+    private int language = 0;
 
     private int price = 0;
 

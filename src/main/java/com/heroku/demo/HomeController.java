@@ -246,6 +246,18 @@ public class HomeController {
         return "events";
     }
 
+    @RequestMapping("/setlang")
+    @ResponseBody
+    public String setLang() {
+        List<Event> events = eventRepository.findAll();
+        for (Event event:
+             events) {
+            event.setLanguage(event.getRate());
+            event.setRate(-1);
+        }
+        return "YES";
+    }
+
     @RequestMapping(value = "/event_list", params = "category")
     public String eventsByCategory(ModelMap model,
                                    @ModelAttribute("category") int category) {
