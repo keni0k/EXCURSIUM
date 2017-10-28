@@ -315,15 +315,13 @@ public class HomeController {
     }
 
     @RequestMapping("/deleteperson")
-    public String deleteContact(ModelMap model, @ModelAttribute("id") String id,
-                                BindingResult result) {
+    public String deleteContact(@ModelAttribute("id") String id) {
         personService.delete(Long.parseLong(id));
-        return persons(model);
+        return persons_last(new ModelMap());
     }
 
     @RequestMapping("/deleteevent")
-    public String deleteEvent(ModelMap model, @ModelAttribute("id") String id,
-                              BindingResult result) {
+    public String deleteEvent(ModelMap model, @ModelAttribute("id") String id) {
         eventService.delete(Long.parseLong(id));
         return events(model);
     }
