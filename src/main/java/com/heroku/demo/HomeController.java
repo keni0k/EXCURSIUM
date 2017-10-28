@@ -213,7 +213,7 @@ public class HomeController {
     public String insertContact(ModelMap model,
                                 @ModelAttribute("insertPerson") @Valid Person person,
                                 BindingResult result) {
-        person.setDate(randomToken());
+        person.setToken(randomToken());
 
         if (!personService.throwsErrors(person)) {
             if (!personService.isEmailFree(person.getEmail()))
@@ -241,14 +241,27 @@ public class HomeController {
         return "events";
     }
 
-    @RequestMapping("/updatedb")
+    @RequestMapping("/updatedbevents")
     @ResponseBody
-    public String updateDB() {
+    public String updateDBEvents() {
         List<Event> events = eventService.getAll();
         for (Event event :
                 events) {
             //DOIT
             //eventService.editEvent(event);
+        }
+        return "YES";
+    }
+
+    @RequestMapping("/updatedbpersons")
+    @ResponseBody
+    public String updateDBEpersons() {
+        List<Person> persons = personService.getAll();
+        for (Person person :
+                persons) {
+            //DOIT
+            person.setToken(randomToken());
+            personService.editPerson(person);
         }
         return "YES";
     }
@@ -554,7 +567,8 @@ public class HomeController {
 
     @RequestMapping("/profile")
     public String profile(ModelMap model, @ModelAttribute("id") long id) {
-        model.addAttribute("person", personService.getById(id));
+        Person p = personService.getById(id);
+        model.addAttribute("person", p!=null?p:new Person());
         /*switch (id) {
             case 65:
                 model.addAttribute("name", "Егор");

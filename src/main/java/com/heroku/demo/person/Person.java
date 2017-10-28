@@ -25,7 +25,7 @@ public class Person {
     private String phoneNumber = "";
     private String about = "";
     private String city = "";
-    private String date = "";
+    private String token = "";
     private String imageUrl = "";
 
 
@@ -116,12 +116,12 @@ public class Person {
         this.city = city;
     }
 
-    public String getDate() {
-        return date;
+    public String getToken() {
+        return token;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getImageUrl() {
@@ -132,7 +132,7 @@ public class Person {
         this.imageUrl = imageUrl;
     }
 
-    public Person(String login, String pass, String lastName, int type, String email, String firstName, int rate, String phoneNumber, String about, String city, String date, String imageUrl) {
+    public Person(String login, String pass, String lastName, int type, String email, String firstName, int rate, String phoneNumber, String about, String city, String token, String imageUrl) {
         this.login = login;
         this.pass = pass;
         this.lastName = lastName;
@@ -143,7 +143,7 @@ public class Person {
         this.phoneNumber = phoneNumber;
         this.about = about;
         this.city = city;
-        this.date = date;
+        this.token = token;
         this.imageUrl = imageUrl;
     }
 
@@ -163,7 +163,7 @@ public class Person {
                 "\t\"rate\":\"" + rate + "\",\n" +
                 "\t\"about\":\"" + about + "\",\n" +
                 "\t\"city\":\"" + city + "\",\n" +
-                "\t\"token\":\"" + date + "\",\n" +
+                "\t\"token\":\"" + token + "\",\n" +
                 "\t\"imageUrl\":\"" + imageUrl + "\"\n" +
                 "}";
     }

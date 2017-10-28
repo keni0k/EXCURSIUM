@@ -29,7 +29,7 @@ public class PersonServiceImpl implements PersonService {
     public Person getByToken(String token) {
         List<Person> list = personRepository.findAll();
         for (Person p : list)
-            if (p.getDate().equals(token))
+            if (p.getToken().equals(token))
                 return p;
         return null;
     }
