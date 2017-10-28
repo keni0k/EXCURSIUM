@@ -255,13 +255,14 @@ public class HomeController {
 
     @RequestMapping("/updatedbpersons")
     @ResponseBody
-    public String updateDBEpersons() {
+    public String updateDBPersons() {
         List<Person> persons = personService.getAll();
-        for (Person person :
-                persons) {
+        for (Person person : persons) {
             //DOIT
-            person.setToken(randomToken());
-            personService.editPerson(person);
+            if (person!=null) {
+                person.setToken(randomToken());
+                personService.editPerson(person);
+            }
         }
         return "YES";
     }
