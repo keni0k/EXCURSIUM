@@ -250,6 +250,14 @@ public class HomeController {
     @RequestMapping("/updatedb")
     @ResponseBody
     public String updateDB() {
+        List<Event> events = eventRepository.findAll();
+        for (Event event:
+                events) {
+            event.setType(0);
+            event.setUsersCount(event.getPhoto());
+            event.setPhoto(-1);
+            eventService.editEvent(event);
+        }
         return "YES";
     }
 
