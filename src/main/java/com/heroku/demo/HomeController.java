@@ -247,8 +247,8 @@ public class HomeController {
         List<Event> events = eventService.getAll();
         for (Event event :
                 events) {
-            event.setGuideId(new Random().nextInt(14) + 14);
-            eventService.editEvent(event);
+            //DOIT
+            //eventService.editEvent(event);
         }
         return "YES";
     }

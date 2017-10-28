@@ -130,7 +130,7 @@
                     </div>
                     <!--/.Card image-->
                     <!--Button-->
-                    <a class="btn-floating btn-action waves-effect waves-light" th:href="@{/profile(id=${event.id})}">
+                    <a class="btn-floating btn-action waves-effect waves-light" th:href="@{/profile(id=${event.getGuideId()})}">
                         <div class="avatar">
                             <img th:src="${event.photoOfGuide}" src="../resources/img/user.png" class="rounded-circle img-responsive" alt="Аватар"/>
                         </div>
