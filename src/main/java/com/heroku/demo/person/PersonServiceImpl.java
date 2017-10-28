@@ -1,17 +1,16 @@
 package com.heroku.demo.person;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Keni0k on 25.07.2017.
  */
 
-public class PersonServiceImpl implements PersonService{
+public class PersonServiceImpl implements PersonService {
 
     private PersonRepository personRepository;
 
-    public PersonServiceImpl(PersonRepository personRepository){
+    public PersonServiceImpl(PersonRepository personRepository) {
         this.personRepository = personRepository;
     }
 
@@ -29,7 +28,7 @@ public class PersonServiceImpl implements PersonService{
     @Override
     public Person getByToken(String token) {
         List<Person> list = personRepository.findAll();
-        for (Person p:list)
+        for (Person p : list)
             if (p.getDate().equals(token))
                 return p;
         return null;
@@ -38,7 +37,7 @@ public class PersonServiceImpl implements PersonService{
     @Override
     public Person getByEmail(String email) {
         List<Person> list = personRepository.findAll();
-        for (Person p:list)
+        for (Person p : list)
             if (p.getEmail().equals(email))
                 return p;
         return null;
@@ -50,12 +49,11 @@ public class PersonServiceImpl implements PersonService{
     }
 
 
-
     @Override
     public Boolean isLoginFree(String login) {
         List<Person> list = personRepository.findAll();
         boolean isFree = true;
-        for (Person p:list)
+        for (Person p : list)
             if (p.getLogin().equals(login))
                 isFree = false;
         return isFree;
@@ -65,7 +63,7 @@ public class PersonServiceImpl implements PersonService{
     public Boolean isEmailFree(String email) {
         List<Person> list = personRepository.findAll();
         boolean isFree = true;
-        for (Person p:list)
+        for (Person p : list)
             if (p.getEmail().equals(email))
                 isFree = false;
         return isFree;
@@ -73,7 +71,7 @@ public class PersonServiceImpl implements PersonService{
 
     @Override
     public Boolean isEmailCorrect(String target) {
-            return target.contains("@")&&target.contains(".");
+        return target.contains("@") && target.contains(".");
     }
 
     @Override
@@ -86,7 +84,7 @@ public class PersonServiceImpl implements PersonService{
     public Boolean isPhoneFree(String phone) {
         List<Person> list = personRepository.findAll();
         boolean isFree = true;
-        for (Person p:list)
+        for (Person p : list)
             if (p.getPhoneNumber().equals(phone))
                 isFree = false;
         return isFree;

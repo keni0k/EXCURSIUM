@@ -30,8 +30,8 @@ public class ReviewServiceImpl implements ReviewService {
         List<Review> list = reviewRepository.findAll();
         List<Review> copy = new ArrayList<>();
         copy.addAll(list);
-        for (int i = 0; i<copy.size(); i++)
-            if (copy.get(i).getEventId()!=event) list.remove(i);
+        for (int i = 0; i < copy.size(); i++)
+            if (copy.get(i).getEventId() != event) list.remove(i);
         return list;
     }
 

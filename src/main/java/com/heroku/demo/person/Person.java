@@ -61,7 +61,8 @@ public class Person {
         this.type = type;
     }
 
-    public Person(){}
+    public Person() {
+    }
 
     public String getEmail() {
         return email;

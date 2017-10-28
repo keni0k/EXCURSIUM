@@ -10,7 +10,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.thymeleaf.spring4.SpringTemplateEngine;
-import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
 @Configuration
@@ -22,8 +21,9 @@ public class AppConfig extends WebMvcConfigurerAdapter {
                 new TomcatEmbeddedServletContainerFactory();
         return factory;
     }
+
     //start Thymeleaf specific configuration
-    @Bean(name ="templateResolver")
+    @Bean(name = "templateResolver")
     public ServletContextTemplateResolver getTemplateResolver() {
         ServletContextTemplateResolver templateResolver = new ServletContextTemplateResolver();
         templateResolver.setPrefix("/WEB-INF/");
@@ -31,29 +31,31 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         templateResolver.setTemplateMode("HTML5");
         return templateResolver;
     }
-    @Bean(name ="templateEngine")
+
+    @Bean(name = "templateEngine")
     public SpringTemplateEngine getTemplateEngine() {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
         templateEngine.setTemplateResolver(getTemplateResolver());
         return templateEngine;
     }
-//    @Bean(name="viewResolver")
+
+    //    @Bean(name="viewResolver")
 //    public ThymeleafViewResolver getViewResolver(){
 //        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
 //        viewResolver.setTemplateEngine(getTemplateEngine());
 //        return viewResolver;
 //    }
     //end Thymeleaf specific configuration
-    @Bean(name ="messageSource")
+    @Bean(name = "messageSource")
     public MessageSource getMessageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
         messageSource.setBasename("/WEB-INF/i18/blogmsg");
         messageSource.setDefaultEncoding("UTF-8");
         return messageSource;
     }
+
     @Override
-    public void addResourceHandlers(final ResourceHandlerRegistry registry)
-    {
+    public void addResourceHandlers(final ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
     }

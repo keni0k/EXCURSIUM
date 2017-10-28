@@ -1,4 +1,5 @@
 package com.heroku.demo.message;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -45,6 +46,7 @@ public class Message {
     public int getUserId() {
         return userId;
     }
+
     public void setUserId(int userId) {
         this.userId = userId;
     }
@@ -57,6 +59,7 @@ public class Message {
     public int getEventId() {
         return eventId;
     }
+
     public void setEventId(int eventId) {
         this.eventId = eventId;
     }
@@ -64,6 +67,7 @@ public class Message {
     public String getDate() {
         return date;
     }
+
     public void setDate(String date) {
         this.date = date;
     }

@@ -51,7 +51,8 @@ public class Buy {
 
     private int touristId = 0;
 
-    public Buy(){}
+    public Buy() {
+    }
 
     public Buy(int eventId, int touristId, int price, String orderDate) {
         this.eventId = eventId;

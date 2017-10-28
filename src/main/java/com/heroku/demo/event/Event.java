@@ -3,8 +3,6 @@ package com.heroku.demo.event;
 import com.heroku.demo.UtilsForWeb;
 
 import javax.persistence.*;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 
 @Entity
 public class Event implements Comparable {

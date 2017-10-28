@@ -1,9 +1,5 @@
 package com.heroku.demo.photo;
 
-import com.heroku.demo.photo.Photo;
-import com.heroku.demo.photo.PhotoRepository;
-import com.heroku.demo.photo.PhotoService;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,8 +31,8 @@ public class PhotoServiceImpl implements PhotoService {
         List<Photo> list = photoRepository.findAll();
         List<Photo> copy = new ArrayList<>();
         copy.addAll(list);
-        for (int i = 0; i<copy.size(); i++)
-            if (copy.get(i).getEventId()!=event) list.remove(i);
+        for (int i = 0; i < copy.size(); i++)
+            if (copy.get(i).getEventId() != event) list.remove(i);
         return list;
     }
 

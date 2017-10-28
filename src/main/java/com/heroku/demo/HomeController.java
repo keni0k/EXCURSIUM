@@ -1,4 +1,3 @@
-
 package com.heroku.demo;
 
 import com.heroku.demo.event.Event;
@@ -248,16 +247,9 @@ public class HomeController {
         return "events";
     }
 
-    @RequestMapping("/setlang")
+    @RequestMapping("/updatedb")
     @ResponseBody
-    public String setLang() {
-        List<Event> events = eventRepository.findAll();
-        for (Event event:
-             events) {
-            event.setLanguage(event.getRate());
-            event.setRate(-1);
-            eventService.editEvent(event);
-        }
+    public String updateDB() {
         return "YES";
     }
 

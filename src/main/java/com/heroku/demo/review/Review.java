@@ -77,10 +77,11 @@ public class Review {
         this.userId = userId;
     }
 
-    public Review(){}
+    public Review() {
+    }
 
     public Review(String data, String imageUrl
-            , String time, int userId, int rate, int eventId){
+            , String time, int userId, int rate, int eventId) {
 //            , String surname, int userId, String email, String phoneNumber, int rate, String about, String city) {
 
         this.data = data;

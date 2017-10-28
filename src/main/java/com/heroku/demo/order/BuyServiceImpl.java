@@ -1,7 +1,5 @@
 package com.heroku.demo.order;
 
-import com.heroku.demo.photo.PhotoRepository;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,8 +34,8 @@ public class BuyServiceImpl implements BuyService {
         List<Buy> list = buyRepository.findAll();
         List<Buy> copy = new ArrayList<>();
         copy.addAll(list);
-        for (int i = 0; i<copy.size(); i++)
-            if (copy.get(i).getEventId()!=event) list.remove(i);
+        for (int i = 0; i < copy.size(); i++)
+            if (copy.get(i).getEventId() != event) list.remove(i);
         return list;
     }
 

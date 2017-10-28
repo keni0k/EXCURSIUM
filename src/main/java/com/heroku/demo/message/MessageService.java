@@ -9,9 +9,13 @@ import java.util.List;
 public interface MessageService {
 
     Message addMessage(Message message);
+
     void delete(long id);
+
     List<Message> getByEvent(int guide);
+
     Message editMessage(Message message);
+
     List<Message> getAll();
 
 }

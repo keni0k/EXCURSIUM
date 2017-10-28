@@ -34,8 +34,8 @@ public class MessageServiceImpl implements MessageService {
         List<Message> list = messageRepository.findAll();
         List<Message> copy = new ArrayList<>();
         copy.addAll(list);
-        for (int i = 0; i<copy.size(); i++)
-            if (copy.get(i).getEventId()!=event) list.remove(i);
+        for (int i = 0; i < copy.size(); i++)
+            if (copy.get(i).getEventId() != event) list.remove(i);
         return list;
     }
 
@@ -44,14 +44,12 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public Message editMessage(Message message)
-    {
+    public Message editMessage(Message message) {
         return messageRepository.saveAndFlush(message);
     }
 
     @Override
-    public List<Message> getAll()
-    {
+    public List<Message> getAll() {
         return messageRepository.findAll();
     }
 }
