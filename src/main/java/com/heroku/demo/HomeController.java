@@ -259,8 +259,7 @@ public class HomeController {
         List<Person> persons = personService.getAll();
         for (Person person : persons) {
             //DOIT
-            person.setToken(randomToken());
-            personService.editPerson(person);
+            //personService.editPerson(person);
         }
         return "YES";
     }
