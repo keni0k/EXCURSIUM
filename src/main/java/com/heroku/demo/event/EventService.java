@@ -7,7 +7,7 @@ public interface EventService {
 
     void delete(long id);
 
-    Event getById(int guide);
+    Event getById(long id);
 
     Event editEvent(Event event);
 

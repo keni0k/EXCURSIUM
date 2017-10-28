@@ -132,47 +132,41 @@
                     <!--Button-->
                     <a class="btn-floating btn-action waves-effect waves-light" th:href="@{/profile(id=${event.id})}">
                         <div class="avatar">
-                            <img src="../resources/img/user.png" class="rounded-circle img-responsive" alt="Аватар"/>
+                            <img th:src="${event.photoOfGuide}" src="../resources/img/user.png" class="rounded-circle img-responsive" alt="Аватар"/>
                         </div>
+                        <span th:text="${event.fullNameOfGuide}">%FULL_NAME%</span>
                     </a>
 
                     <!--Card content-->
                     <div class="card-body no-padding text-center">
                         <!--Category & Title-->
-                        <h5 th:text="${event.getCategoryString()}">Категория</h5>
+                        <h5 th:text="${event.getCategoryString()}">%Категория%</h5>
                         <h4 class="card-title">
                             <strong>
-                                <h3 th:text="${event.name}"><a href="">Название</a></h3>
+                                <h3 th:text="${event.name}"><a href="">%Название%</a></h3>
                             </strong>
                         </h4>
 
                         <!--Rating-->
                         <ul class="rating">
-                            <li>
+                            <li th:if="${event.getRate()!=-1 and event.getRate()!=0}" th:each="i : ${#numbers.sequence(0, event.getRate()-1)}">
                                 <i class="fa fa-star"></i>
                             </li>
-                            <li>
-                                <i class="fa fa-star"></i>
+                            <li th:if="${event.getRate()!=-1 and event.getRate()!=5}" th:each="i : ${#numbers.sequence(event.getRate(), 4)}" >
+                                <i class="fa fa-star-o"></i>
                             </li>
-                            <li>
-                                <i class="fa fa-star"></i>
-                            </li>
-                            <li>
-                                <i class="fa fa-star"></i>
-                            </li>
-                            <li>
+                            <li th:if="${event.getRate()==-1}" th:each="i : ${#numbers.sequence(0, 4)}" >
                                 <i class="fa fa-star-o"></i>
                             </li>
                         </ul>
 
                         <!--Description-->
-                        <p class="card-text" style="font-size: medium; color: #000000" th:text="${event.description}">
-                            Описание</p>
+                        <p class="card-text" style="font-size: medium; color: #000000" th:text="${event.description}">%Описание%</p>
 
                         <!--Card footer-->
                         <div class="card-footer">
 							<span class="left" style="color:#4285F4; font-size: large;">
-								<strong th:text="${event.price}"></strong>
+								<strong th:text="${event.price}">%Цена%</strong>
 								<strong>&#8381;</strong>
 							</span>
                             <span class="right">

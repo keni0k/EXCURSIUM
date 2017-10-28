@@ -33,10 +33,12 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Event getById(int id) {
-        List<Event> list = eventRepository.findAll();
-        for (Event aList : list) if (aList.getId() == id) return aList;
-        return null;
+    public Event getById(long id) {
+        Event e = eventRepository.findOne(id);
+        Person p = personService.getById(e.getGuideId());
+        e.photoOfGuide = p.getImageUrl();
+        e.fullNameOfGuide = p.getFirstName() + " " + p.getLastName();
+        return e;
     }
 
     @Override

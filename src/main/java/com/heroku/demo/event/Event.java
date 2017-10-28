@@ -58,7 +58,7 @@ public class Event implements Comparable {
         this.type = type;
     }
 
-    public int type = -1;
+    private int type = -1;
 
     public long getId() {
         return id;
@@ -116,10 +116,10 @@ public class Event implements Comparable {
     int cnt = 0;
 
     @Transient
-    String photoOfGuide = "";
+    public String photoOfGuide = "";
 
     @Transient
-    String fullNameOfGuide = "";
+    public String fullNameOfGuide = "";
 
     private int photo = 0;
 

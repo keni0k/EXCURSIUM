@@ -88,7 +88,6 @@ public class HomeController {
     @RequestMapping("/event")
     public String event(ModelMap model, @ModelAttribute("id") int id) {
         model.addAttribute("event", eventService.getById(id));
-        //model.addAttribute("insertEvent", new Event());
         return "event";
     }
 
