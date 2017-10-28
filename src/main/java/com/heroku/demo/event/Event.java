@@ -28,7 +28,7 @@ public class Event implements Comparable {
 
                 "\t\"full_name\":\"" + time + "\",\n" +
                 "\t\"phone\":\"" + duration + "\",\n" +
-                "\t\"language\":\"" + rate + "\",\n" +
+                "\t\"language\":\"" + language + "\",\n" +
                 "\t\"duration\":\"" + guideId + "\",\n" +
                 "\t\"users_count\":\"" + photo + "\"\n" +
                 "}";
@@ -137,7 +137,7 @@ public class Event implements Comparable {
     }
 
     public String getCategoryString() {
-        return UtilsForWeb.getCategoryString(category, rate);
+        return UtilsForWeb.getCategoryString(category, language);
     }
 
     public void setCategory(int category) {

@@ -292,7 +292,6 @@ public class HomeController {
     }
 
     @RequestMapping("/addeventhttp")
-    @ResponseBody
     public String insertEvent(ModelMap model,
                               @ModelAttribute("insertEvent") @Valid Event event,
                               BindingResult result) {
@@ -300,7 +299,7 @@ public class HomeController {
 
         if (!result.hasErrors()) {
             eventRepository.save(event);
-        }
+        } else return events(model);
         return eventAdd(model);
     }
 
