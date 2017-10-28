@@ -26,12 +26,12 @@ public class Event implements Comparable {
                 "\t\"name\":\"" + name + "\",\n" +
                 "\t\"photo_url\":\"" + photoUrl + "\",\n" +
 
-                "\t\"full_name\":\"" + time + "\",\n" +
-                "\t\"phone\":\"" + duration + "\",\n" +
+//                "\t\"full_name\":\"" + time + "\",\n" +
+//                "\t\"phone\":\"" + duration + "\",\n" +
                 "\t\"language\":\"" + language + "\",\n" +
-                "\t\"duration\":\"" + guideId + "\",\n" +
-                "\t\"users_count\":\"" + photo + "\"\n" +
-                "\t\"type\":\"" + type + "\",\n" +
+                "\t\"duration\":\"" + duration + "\",\n" +
+                "\t\"users_count\":\"" + usersCount + "\",\n" +
+                "\t\"type\":\"" + type + "\"\n" +
                 "}";
     }
 
