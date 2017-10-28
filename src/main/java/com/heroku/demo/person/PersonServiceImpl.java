@@ -103,7 +103,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public List<Person> getAll() {
-        return null;
+        return personRepository.findAll();
     }
 
 //    public static List<Person> getByToken(RecordRepository recordRepository, int type) {
