@@ -253,8 +253,7 @@ public class HomeController {
         List<Event> events = eventRepository.findAll();
         for (Event event:
                 events) {
-            event.setDuration((int)event.getGuideId());
-            event.setGuideId(-1);
+            event.setDuration(new Random().nextInt(8));
             eventService.editEvent(event);
         }
         return "YES";
