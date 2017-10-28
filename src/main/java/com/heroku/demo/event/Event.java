@@ -38,7 +38,7 @@ public class Event implements Comparable {
     public Event() {
     }
 
-    public Event(String place, int category, String time, String duration, int price, String description, int rate, int photo, long guideId, String name) {
+    public Event(String place, int category, String time, int duration, int price, String description, int rate, int photo, String name) {
         this.place = place;
         this.category = category;
         this.time = time;
@@ -47,7 +47,6 @@ public class Event implements Comparable {
         this.description = description;
         this.rate = rate;
         this.photo = photo;
-        this.guideId = guideId;
         this.name = name;
     }
 
@@ -81,7 +80,7 @@ public class Event implements Comparable {
 
     private String photoUrl = "";
 
-    private String duration = "";
+    private int duration = -1;
 
     public int getLanguage() {
         return language;
@@ -174,11 +173,11 @@ public class Event implements Comparable {
         this.time = time;
     }
 
-    public String getDuration() {
+    public int getDuration() {
         return duration;
     }
 
-    public void setDuration(String duration) {
+    public void setDuration(int duration) {
         this.duration = duration;
     }
 

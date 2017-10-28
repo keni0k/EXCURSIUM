@@ -253,9 +253,8 @@ public class HomeController {
         List<Event> events = eventRepository.findAll();
         for (Event event:
                 events) {
-            event.setType(0);
-            event.setUsersCount(event.getPhoto());
-            event.setPhoto(-1);
+            event.setDuration((int)event.getGuideId());
+            event.setGuideId(-1);
             eventService.editEvent(event);
         }
         return "YES";
@@ -414,16 +413,15 @@ public class HomeController {
                               @ModelAttribute("name") String name,
                               @ModelAttribute("full_name") String time,
                               @ModelAttribute("category") int category,
-                              @ModelAttribute("duration") int guideId,
                               @ModelAttribute("place") String place,
-                              @ModelAttribute("phone") String duration,
+                              @ModelAttribute("duration") int duration,
                               @ModelAttribute("description") String description,
-                              @ModelAttribute("language") int rate,
-                              @ModelAttribute("users_count") int photo,
+                              @ModelAttribute("language") int language,
+                              @ModelAttribute("users_count") int usersCount,
                               @ModelAttribute("price") int price,
                               BindingResult result) {
 
-        Event e = new Event(place, category, time, duration, price, description, rate, photo, guideId, name);
+        Event e = new Event(place, category, time, duration, price, description, language, usersCount, name);
         if (!result.hasErrors()) {
             //person.setWhat(3);
             eventRepository.save(e);
