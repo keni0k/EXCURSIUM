@@ -139,7 +139,7 @@
                 <td>ID</td>
                 <td>Место</td>
                 <td>Категория</td>
-                <td>Номер телефона</td>
+                <td>ID гида</td>
                 <td>Стоимость</td>
                 <td>Описание</td>
                 <td>Язык</td>
@@ -151,12 +151,12 @@
                 <td th:text="${event.id}">Some text</td>
                 <td th:text="${event.place}">Some text</td>
                 <td th:text="${event.getCategoryString()}">Some text</td>
-                <td th:text="${event.duration}">Some text</td>
+                <td th:text="${event.guideId}">Some text</td>
                 <td th:text="${event.price}">Some text</td>
                 <td th:text="${event.description}">Some text</td>
-                <td th:text="${event.language}">Some text</td>
+                <td th:text="${event.getLanguageString()}">Some text</td>
                 <td th:text="${event.usersCount}">Some text</td>
-                <td th:text="${event.guideId}">Some text</td>
+                <td th:text="${event.duration}">Some text</td>
                 <td th:text="${event.name}">Some text</td>
             </tr>
             </tbody>

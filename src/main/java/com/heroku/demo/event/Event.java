@@ -100,6 +100,10 @@ public class Event implements Comparable {
         this.usersCount = usersCount;
     }
 
+    public String getLanguageString(){
+        return language==0?"RU":"EN";
+    }
+
     private int usersCount = 1;
 
     private int price = 0;
