@@ -37,10 +37,7 @@ import java.util.Random;
 @RequestMapping("/")
 public class HomeController {
 
-
-    private PersonRepository personRepository;
     private MessageRepository messageRepository;
-    private EventRepository eventRepository;
     private ReviewRepository reviewRepository;
     private BuyRepository buyRepository;
     private PhotoRepository photoRepository;
@@ -49,13 +46,11 @@ public class HomeController {
     private EventServiceImpl eventService;
 
     @Autowired
-    public HomeController(PersonRepository repository, MessageRepository pRepository,
+    public HomeController(PersonRepository personRepository, MessageRepository pRepository,
                           ReviewRepository reviewRepository, EventRepository eventRepository,
                           BuyRepository buyRepository, PhotoRepository photoRepository) {
         this.buyRepository = buyRepository;
-        this.personRepository = repository;
         this.messageRepository = pRepository;
-        this.eventRepository = eventRepository;
         this.reviewRepository = reviewRepository;
         this.photoRepository = photoRepository;
 
@@ -233,14 +228,14 @@ public class HomeController {
         }
         if (!result.hasErrors()) {
             // person.setWhat(2);
-            personRepository.save(person);
+            personService.addPerson(person);
         }
         return persons(model);
     }
 
     @RequestMapping("/events")
     public String events(ModelMap model) {
-        List<Event> events = eventRepository.findAll();
+        List<Event> events = eventService.getAll();
         model.addAttribute("events", events);
         model.addAttribute("insertEvent", new Event());
         return "events";
@@ -249,10 +244,10 @@ public class HomeController {
     @RequestMapping("/updatedb")
     @ResponseBody
     public String updateDB() {
-        List<Event> events = eventRepository.findAll();
-        for (Event event:
+        List<Event> events = eventService.getAll();
+        for (Event event :
                 events) {
-            //LOOP
+            event.setGuideId(new Random().nextInt(14) + 14);
         }
         return "YES";
     }
@@ -289,7 +284,7 @@ public class HomeController {
 
     @RequestMapping("/persons")
     public String persons_last(ModelMap model) {
-        List<Person> persons = personRepository.findAll();
+        List<Person> persons = personService.getAll();
         model.addAttribute("persons", persons);
         model.addAttribute("insertPerson", new Person());
         return "persons";
@@ -302,7 +297,7 @@ public class HomeController {
         //event.setTime("DATE");
 
         if (!result.hasErrors()) {
-            eventRepository.save(event);
+            eventService.addEvent(event);
         } else return events(model);
         return eventAdd(model);
     }
@@ -310,14 +305,14 @@ public class HomeController {
     @RequestMapping("/deleteperson")
     public String deleteContact(ModelMap model, @ModelAttribute("id") String id,
                                 BindingResult result) {
-        personRepository.delete(Long.parseLong(id));
+        personService.delete(Long.parseLong(id));
         return persons(model);
     }
 
     @RequestMapping("/deleteevent")
     public String deleteEvent(ModelMap model, @ModelAttribute("id") String id,
                               BindingResult result) {
-        eventRepository.delete(Long.parseLong(id));
+        eventService.delete(Long.parseLong(id));
         return events(model);
     }
 
@@ -357,7 +352,7 @@ public class HomeController {
         Person p = new Person(login, pass, lastName, type, email, firstName, rate, phoneNumber, about, city, date, imageUrl);
         if (!result.hasErrors()) {
             //person.setWhat(3);
-            personRepository.save(p);
+            personService.addPerson(p);
         }
         return p.toString();
     }
@@ -367,7 +362,7 @@ public class HomeController {
     @ResponseBody
     public String getPersons() {
         ArrayList<String> arrayList = new ArrayList<>();
-        List<Person> persons = personRepository.findAll();
+        List<Person> persons = personService.getAll();
 
         StringBuilder stringBuilder = new StringBuilder("{ \"persons\": [");
 
@@ -421,7 +416,7 @@ public class HomeController {
         Event e = new Event(place, category, time, duration, price, description, language, usersCount, name);
         if (!result.hasErrors()) {
             //person.setWhat(3);
-            eventRepository.save(e);
+            eventService.addEvent(e);
         }
         return e.toString();
     }
@@ -431,7 +426,7 @@ public class HomeController {
     @ResponseBody
     public String getEvents() {
         ArrayList<String> arrayList = new ArrayList<>();
-        List<Event> events = eventRepository.findAll();
+        List<Event> events = eventService.getAll();
         for (Event e : events) {
             arrayList.add(e.toString());
         }
@@ -557,8 +552,9 @@ public class HomeController {
     }
 
     @RequestMapping("/profile")
-    public String profile(ModelMap model, @ModelAttribute("id") int id) {
-        switch (id) {
+    public String profile(ModelMap model, @ModelAttribute("id") long id) {
+        model.addAttribute("person", personService.getById(id));
+        /*switch (id) {
             case 65:
                 model.addAttribute("name", "Егор");
                 model.addAttribute("city", "Горно-Алтайск");
@@ -604,7 +600,7 @@ public class HomeController {
                 model.addAttribute("city", "Иркутск");
                 model.addAttribute("about", "Я сделал сервер и только я могу изменить описания всех на подобных страничках экскурсоводов.");
                 break;
-        }
+        }*/
         //model.addAttribute("insertEvent", new Event());
         return "profile";
     }

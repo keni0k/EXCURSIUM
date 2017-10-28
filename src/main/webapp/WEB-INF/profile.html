@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="description" content=""/>
@@ -140,24 +141,18 @@
                             <div class="card-body">
                                 <!--Rating-->
                                 <ul class="rating">
-                                    <li>
+                                    <li th:if="${person.getRate()!=-1 and person.getRate()!=0}" th:each="i : ${#numbers.sequence(0, person.getRate()-1)}">
                                         <i class="fa fa-star"></i>
                                     </li>
-                                    <li>
-                                        <i class="fa fa-star"></i>
+                                    <li th:if="${person.getRate()!=-1 and person.getRate()!=5}" th:each="i : ${#numbers.sequence(person.getRate(), 4)}" >
+                                        <i class="fa fa-star-o"></i>
                                     </li>
-                                    <li>
-                                        <i class="fa fa-star"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-star"></i>
-                                    </li>
-                                    <li>
+                                    <li th:if="${person.getRate()==-1}" th:each="i : ${#numbers.sequence(0, 4)}" >
                                         <i class="fa fa-star-o"></i>
                                     </li>
                                 </ul>
-                                <h3 class="mt-1" th:text="${name}">Имя</h3>
-                                <p class="font-bold" th:text="${city}">Город</p>
+                                <h3 class="mt-1" th:text="${person.getFullName()}">Имя</h3>
+                                <p class="font-bold" th:text="${person.getCity()}">Город</p>
                                 <!--Triggering button-->
                                 <a class="rotate-btn" data-card="card-3">
                                     <i class="fa fa-repeat"></i>&nbsp;&nbsp;О себе</a>
@@ -172,7 +167,7 @@
                             <!--Content-->
                             <h4 class="mt-2 mb-2">О себе</h4>
                             <hr/>
-                            <p th:text="${about}">текст о себе</p>
+                            <p th:text="${person.getAbout()}">текст о себе</p>
                             <hr/>
                             <!--Social Icons-->
                             <ul class="rating">

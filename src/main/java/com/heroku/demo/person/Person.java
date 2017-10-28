@@ -64,6 +64,10 @@ public class Person {
     public Person() {
     }
 
+    public String getFullName(){
+        return firstName+" "+lastName;
+    }
+
     public String getEmail() {
         return email;
     }
