@@ -67,8 +67,10 @@ public class EventServiceImpl implements EventService {
             if ((aList.getPrice() >= priceDown) && (aList.getPrice() <= priceUp) &&
                     ((aList.getCategory() == category) || (category == -1)) && ((aList.getLanguage() == language) || bool) && aList.getType()==0) {
                 Person p = personService.getById(aList.getGuideId());
-                aList.fullNameOfGuide = p.getFirstName()+" "+p.getLastName();
-                aList.photoOfGuide = p.getImageUrl();
+                if (p!=null) {
+                    aList.fullNameOfGuide = p.getFirstName() + " " + p.getLastName();
+                    aList.photoOfGuide = p.getImageUrl();
+                }
                 if (!words.equals("")) {
                     for (String word : wds) {
                         if (aList.getName().toLowerCase().contains(word.toLowerCase()))
