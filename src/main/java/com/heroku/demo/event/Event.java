@@ -1,6 +1,6 @@
 package com.heroku.demo.event;
 
-import com.heroku.demo.UtilsForWeb;
+import com.heroku.demo.utils.UtilsForWeb;
 
 import javax.persistence.*;
 

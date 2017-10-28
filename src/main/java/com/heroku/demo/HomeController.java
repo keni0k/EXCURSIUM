@@ -14,6 +14,16 @@ import com.heroku.demo.photo.Photo;
 import com.heroku.demo.photo.PhotoRepository;
 import com.heroku.demo.review.Review;
 import com.heroku.demo.review.ReviewRepository;
+import com.heroku.demo.utils.UtilsForWeb;
+import com.mailjet.client.MailjetClient;
+import com.mailjet.client.MailjetRequest;
+import com.mailjet.client.MailjetResponse;
+import com.mailjet.client.errors.MailjetException;
+import com.mailjet.client.errors.MailjetSocketTimeoutException;
+import com.mailjet.client.resource.Contact;
+import com.mailjet.client.resource.Email;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -167,46 +177,27 @@ public class HomeController {
         }
         return builder.toString();
     }
+    @RequestMapping("/sendemail")
+    @ResponseBody
+    private String sendMail() throws MailjetSocketTimeoutException, MailjetException {
+        MailjetRequest email;
+        JSONArray recipients;
+        MailjetResponse response;
+        MailjetClient client = new MailjetClient(System.getenv("MJ_APIKEY_PUBLIC"), System.getenv("MJ_APIKEY_PRIVATE"));
 
-    private void sendMail() {
-//        final String APIKey = "your Mailjet API Key";
-//        final String SecretKey = "your Mailjet Secret Key";
-//        String From = "you@example.com";
-//        String To = "recipient@example.com";
-//
-//        Properties props = new Properties ();
-//
-//        props.put ("mail.smtp.host", "in.mailjet.com");
-//        props.put ("mail.smtp.socketFactory.port", "465");
-//        props.put ("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-//        props.put ("mail.smtp.auth", "true");
-//        props.put ("mail.smtp.port", "465");
-//
-//        Session session = Session.getDefaultInstance (props,
-//                new javax.mail.Authenticator ()
-//                {
-//                    protected PasswordAuthentication getPasswordAuthentication ()
-//                    {
-//                        return new PasswordAuthentication (APIKey, SecretKey);
-//                    }
-//                });
-//
-//        try
-//        {
-//
-//            Message message = new MimeMessage (session);
-//            message.setFrom (new InternetAddress (From));
-//            message.setRecipients (Message.RecipientType.TO, InternetAddress.parse(To));
-//            message.setSubject ("Your mail from Mailjet");
-//            message.setText ("Your mail from Mailjet, sent by Java.");
-//
-//            Transport.send (message);
-//
-//        }
-//        catch (MessagingException e)
-//        {
-//            throw new RuntimeException (e);
-//        }
+        recipients = new JSONArray()
+                .put(new JSONObject().put(Contact.EMAIL, "dima-vers0@rambler.ru"));
+
+        email = new MailjetRequest(Email.resource)
+                .property(Email.FROMNAME, "Excursium")
+                .property(Email.FROMEMAIL, "support@excursium.me")
+                .property(Email.SUBJECT, "Subject")
+                .property(Email.TEXTPART, "Java is coming!...")
+                .property(Email.RECIPIENTS, recipients)
+                .property(Email.MJCUSTOMID, "JAVA-Email");
+
+        response = client.post(email);
+        return response.getData() + " " + response.getStatus();
     }
 
     @RequestMapping("/addpersonhttp")

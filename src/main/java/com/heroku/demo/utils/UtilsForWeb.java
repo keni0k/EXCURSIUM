@@ -1,4 +1,4 @@
-package com.heroku.demo;
+package com.heroku.demo.utils;
 
 public class UtilsForWeb {
     public static String getCategoryString(int category, int language) {
