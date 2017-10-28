@@ -248,6 +248,7 @@ public class HomeController {
         for (Event event :
                 events) {
             event.setGuideId(new Random().nextInt(14) + 14);
+            eventService.editEvent(event);
         }
         return "YES";
     }
