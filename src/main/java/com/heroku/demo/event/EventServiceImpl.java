@@ -1,5 +1,8 @@
 package com.heroku.demo.event;
 
+import com.heroku.demo.person.Person;
+import com.heroku.demo.person.PersonServiceImpl;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -11,6 +14,7 @@ public class EventServiceImpl implements EventService {
     }
 
     private EventRepository eventRepository;
+    private PersonServiceImpl personService;
 
     @Override
     public Event addEvent(Event message) {
@@ -23,7 +27,8 @@ public class EventServiceImpl implements EventService {
         eventRepository.delete(id);
     }
 
-    public EventServiceImpl(EventRepository reviewRepository) {
+    public EventServiceImpl(EventRepository reviewRepository, PersonServiceImpl personService) {
+        this.personService = personService;
         this.eventRepository = reviewRepository;
     }
 
@@ -61,6 +66,9 @@ public class EventServiceImpl implements EventService {
         for (Event aList : list)
             if ((aList.getPrice() >= priceDown) && (aList.getPrice() <= priceUp) &&
                     ((aList.getCategory() == category) || (category == -1)) && ((aList.getLanguage() == language) || bool) && aList.getType()==0) {
+                Person p = personService.getById(aList.getGuideId());
+                aList.fullNameOfGuide = p.getFirstName()+" "+p.getLastName();
+                aList.photoOfGuide = p.getImageUrl();
                 if (!words.equals("")) {
                     for (String word : wds) {
                         if (aList.getName().toLowerCase().contains(word.toLowerCase()))

@@ -44,6 +44,11 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    public Person getById(long id) {
+        return personRepository.findOne(id);
+    }
+
+    @Override
     public Person editPerson(Person person) {
         return null;
     }

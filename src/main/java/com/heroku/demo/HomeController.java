@@ -60,7 +60,7 @@ public class HomeController {
         this.photoRepository = photoRepository;
 
         personService = new PersonServiceImpl(personRepository);
-        eventService = new EventServiceImpl(eventRepository);
+        eventService = new EventServiceImpl(eventRepository, personService);
     }
 
     @RequestMapping(method = RequestMethod.GET)

@@ -15,6 +15,8 @@ public interface PersonService {
 
     Person getByEmail(String email);
 
+    Person getById(long id);
+
     Person editPerson(Person person);
 
     Boolean isLoginFree(String login);

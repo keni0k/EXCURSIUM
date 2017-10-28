@@ -115,6 +115,12 @@ public class Event implements Comparable {
     @Transient
     int cnt = 0;
 
+    @Transient
+    String photoOfGuide = "";
+
+    @Transient
+    String fullNameOfGuide = "";
+
     private int photo = 0;
 
     public String getSmallDescription() {
