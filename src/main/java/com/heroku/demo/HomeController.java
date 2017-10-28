@@ -261,12 +261,12 @@ public class HomeController {
 
     @RequestMapping(value = "/event_list", params = {"category", "language", "price_up", "price_down", "words"})
     public String eventsByFilter(ModelMap model,
-                                 @ModelAttribute("category") int categoty,
+                                 @ModelAttribute("category") int category,
                                  @ModelAttribute("language") int language,
                                  @ModelAttribute("price_up") int priceUp,
                                  @ModelAttribute("price_down") int priceDown,
                                  @ModelAttribute("words") String words) {
-        List<Event> events = eventService.getByFilter(priceUp, priceDown, categoty, language, words);
+        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, language, words);
         int size = events.size() % 3;
         for (int i = 0; i < size; i++) {
             events.remove(events.size() - 1);
