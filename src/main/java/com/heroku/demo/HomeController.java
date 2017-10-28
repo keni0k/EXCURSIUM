@@ -30,7 +30,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 @Controller
 @RequestMapping("/")
@@ -254,6 +256,7 @@ public class HomeController {
              events) {
             event.setLanguage(event.getRate());
             event.setRate(-1);
+            eventService.editEvent(event);
         }
         return "YES";
     }
