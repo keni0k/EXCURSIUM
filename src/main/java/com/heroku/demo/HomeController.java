@@ -253,8 +253,7 @@ public class HomeController {
         List<Event> events = eventRepository.findAll();
         for (Event event:
                 events) {
-            event.setDuration(new Random().nextInt(5)+1);
-            eventService.editEvent(event);
+            //LOOP
         }
         return "YES";
     }
