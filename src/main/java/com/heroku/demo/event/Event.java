@@ -31,6 +31,7 @@ public class Event implements Comparable {
                 "\t\"language\":\"" + language + "\",\n" +
                 "\t\"duration\":\"" + guideId + "\",\n" +
                 "\t\"users_count\":\"" + photo + "\"\n" +
+                "\t\"type\":\"" + type + "\",\n" +
                 "}";
     }
 
@@ -49,6 +50,16 @@ public class Event implements Comparable {
         this.guideId = guideId;
         this.name = name;
     }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public int type = -1;
 
     public long getId() {
         return id;
@@ -82,11 +93,21 @@ public class Event implements Comparable {
 
     private int language = 0;
 
+    public int getUsersCount() {
+        return usersCount;
+    }
+
+    public void setUsersCount(int usersCount) {
+        this.usersCount = usersCount;
+    }
+
+    private int usersCount = 1;
+
     private int price = 0;
 
     private String description = "";
 
-    private int rate = 0;
+    private int rate = -1;
 
     @Transient
     int cnt = 0;

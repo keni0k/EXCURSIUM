@@ -60,7 +60,7 @@ public class EventServiceImpl implements EventService {
         if (language == -1) bool = true;
         for (Event aList : list)
             if ((aList.getPrice() >= priceDown) && (aList.getPrice() <= priceUp) &&
-                    ((aList.getCategory() == category) || (category == -1)) && ((aList.getLanguage() == language) || bool)) {
+                    ((aList.getCategory() == category) || (category == -1)) && ((aList.getLanguage() == language) || bool) && aList.getType()==0) {
                 if (!words.equals("")) {
                     for (String word : wds) {
                         if (aList.getName().toLowerCase().contains(word.toLowerCase()))
