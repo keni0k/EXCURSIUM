@@ -259,10 +259,8 @@ public class HomeController {
         List<Person> persons = personService.getAll();
         for (Person person : persons) {
             //DOIT
-            if (person!=null) {
-                person.setToken(randomToken());
-                personService.editPerson(person);
-            }
+            person.setToken(randomToken());
+            personService.editPerson(person);
         }
         return "YES";
     }
@@ -569,7 +567,7 @@ public class HomeController {
     @RequestMapping("/profile")
     public String profile(ModelMap model, @ModelAttribute("id") long id) {
         Person p = personService.getById(id);
-        model.addAttribute("person", p!=null?p:new Person());
+        model.addAttribute("person", p != null ? p : new Person());
         /*switch (id) {
             case 65:
                 model.addAttribute("name", "Егор");

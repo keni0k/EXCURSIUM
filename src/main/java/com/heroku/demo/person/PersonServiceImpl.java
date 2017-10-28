@@ -50,7 +50,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Person editPerson(Person person) {
-        return null;
+        return personRepository.saveAndFlush(person);
     }
 
 
