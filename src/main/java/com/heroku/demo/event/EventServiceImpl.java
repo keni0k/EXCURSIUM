@@ -36,8 +36,10 @@ public class EventServiceImpl implements EventService {
     public Event getById(long id) {
         Event e = eventRepository.findOne(id);
         Person p = personService.getById(e.getGuideId());
-        e.photoOfGuide = p.getImageUrl();
-        e.fullNameOfGuide = p.getFirstName() + " " + p.getLastName();
+        if (p!=null) {
+            e.photoOfGuide = p.getImageUrl();
+            e.fullNameOfGuide = p.getFirstName() + " " + p.getLastName();
+        }
         return e;
     }
 
