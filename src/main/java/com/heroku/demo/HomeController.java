@@ -73,6 +73,11 @@ public class HomeController {
         eventService = new EventServiceImpl(eventRepository, personService);
     }
 
+    @RequestMapping("upload")
+    public String upload(ModelMap model) {
+        return "upload";
+    }
+
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public @ResponseBody
     String uploadFileHandler(@RequestParam("name") String name,
