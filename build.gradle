@@ -4,7 +4,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.0")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.8.RELEASE")
     }
 }
 
@@ -31,6 +31,8 @@ dependencies {
     compile 'org.thymeleaf:thymeleaf-spring4:3.0.0.ALPHA03'
     compile("org.postgresql:postgresql:9.4-1201-jdbc4");
     compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.27'
+    compile('com.mailjet:mailjet-client:4.0.5')
+    compile('joda-time:joda-time:2.9.2')
     testCompile("junit:junit")
 }
 

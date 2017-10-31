@@ -84,7 +84,7 @@ public class HomeController {
 
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public @ResponseBody
-    String uploadFileHandler(@RequestParam("file") MultipartFile file) {
+    void uploadFileHandler(@RequestParam("file") MultipartFile file) {
 
         if (!file.isEmpty()) {
             try {
@@ -107,12 +107,9 @@ public class HomeController {
                         + serverFile.getAbsolutePath());
 
                 putImg(serverFile.getName(), serverFile);
-                return "You successfully uploaded file! " + serverFile.getAbsolutePath();
             } catch (Exception e) {
-                return "You failed to upload file => " + e.getMessage();
+                logger.error("You failed to upload file => " + e.getMessage());
             }
-        } else {
-            return "You failed to upload file, because the file was empty.";
         }
     }
 
