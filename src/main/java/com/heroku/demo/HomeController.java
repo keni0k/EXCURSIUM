@@ -37,8 +37,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import sun.net.www.protocol.http.HttpURLConnection;
 
-import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.*;
@@ -116,10 +116,21 @@ public class HomeController {
 
     @ResponseBody
     public String putImg(String name, byte[] bytes) throws IOException {
-        String url = "https://excursium.blob.core.windows.net/img/"+name;
+//        String url = "https://excursium.blob.core.windows.net/img/"+name;
 
+        String url = "http://excursium.me/";
         URL obj = new URL(url);
-        HttpsURLConnection connection = (HttpsURLConnection) obj.openConnection();
+        HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
+
+        /*
+        HttpRequest<String> httpRequest = HttpRequestBuilder.createGet(uri, String.class)
+                .responseDeserializer(ResponseDeserializer.ignorableDeserializer()).build();
+
+
+        ResponseHandler<String> response = httpRequest.execute(someParamsYouWant);
+        System.out.println(response.getStatusCode());
+        System.out.println(response.get()); //retuns response body
+        */
 
         connection.setDoOutput(true);
         connection.setRequestMethod("PUT");
