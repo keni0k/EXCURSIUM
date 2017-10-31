@@ -24,7 +24,11 @@ import com.mailjet.client.resource.Contact;
 import com.mailjet.client.resource.Email;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -36,9 +40,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartResolver;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -54,6 +63,9 @@ public class HomeController {
 
     private PersonServiceImpl personService;
     private EventServiceImpl eventService;
+    private MultipartResolver multipartResolver;
+    private static final Logger logger = LoggerFactory
+            .getLogger(HomeController.class);
 
     @Autowired
     public HomeController(PersonRepository personRepository, MessageRepository pRepository,
@@ -66,6 +78,23 @@ public class HomeController {
 
         personService = new PersonServiceImpl(personRepository);
         eventService = new EventServiceImpl(eventRepository, personService);
+    }
+
+    private void initMultipartResolver(ApplicationContext context)
+    {
+        try
+        {
+            this.multipartResolver = ((MultipartResolver)context.getBean("multipartResolver", MultipartResolver.class));
+            if (logger.isDebugEnabled()) {
+                logger.debug("Using MultipartResolver [" + this.multipartResolver + "]");
+            }
+        }
+        catch (NoSuchBeanDefinitionException ex)
+        {
+            this.multipartResolver = null;
+            if (logger.isDebugEnabled())
+                logger.debug("Unable to locate MultipartResolver with name 'multipartResolver': no multipart request handling provided");
+        }
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -164,13 +193,12 @@ public class HomeController {
     }
 
 
-    private String randomToken() {
+    private String randomToken(int length) {
         final String mCHAR = "qwertyuioplkjhgfdsazxcvbnmABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-        final int STR_LENGTH = 32; // длина генерируемой строки
 
         Random random = new Random();
         StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < STR_LENGTH; i++) {
+        for (int i = 0; i < length; i++) {
             int number = random.nextInt(mCHAR.length());
             char ch = mCHAR.charAt(number);
             builder.append(ch);
@@ -204,7 +232,7 @@ public class HomeController {
     public String insertContact(ModelMap model,
                                 @ModelAttribute("insertPerson") @Valid Person person,
                                 BindingResult result) {
-        person.setToken(randomToken());
+        person.setToken(randomToken(32));
 
         if (!personService.throwsErrors(person)) {
             if (!personService.isEmailFree(person.getEmail()))
@@ -294,15 +322,47 @@ public class HomeController {
     }
 
     @RequestMapping("/addeventhttp")
+    @ResponseBody
     public String insertEvent(ModelMap model,
                               @ModelAttribute("insertEvent") @Valid Event event,
+                              @ModelAttribute("photofile") MultipartFile file,
                               BindingResult result) {
         //event.setTime("DATE");
 
         if (!result.hasErrors()) {
             eventService.addEvent(event);
-        } else return events(model);
-        return eventAdd(model);
+        } //else return events(model);
+
+        if (!file.isEmpty()) {
+            try {
+                byte[] bytes = file.getBytes();
+
+                // Creating the directory to store file
+                String rootPath = System.getProperty("catalina.home");
+                File dir = new File(rootPath + File.separator + "tmpFiles");
+                if (!dir.exists())
+                    dir.mkdirs();
+
+                // Create the file on server
+                File serverFile = new File(dir.getAbsolutePath()
+                        + File.separator + event.getName() + randomToken(6));
+                BufferedOutputStream stream = new BufferedOutputStream(
+                        new FileOutputStream(serverFile));
+                stream.write(bytes);
+                stream.close();
+
+                logger.info("Server File Location="
+                        + serverFile.getAbsolutePath());
+
+                return "You successfully uploaded file=" + event.getName() + randomToken(6);
+            } catch (Exception e) {
+                return "You failed to upload " + event.getName() + randomToken(6) + " => " + e.getMessage();
+            }
+        } else {
+            return "You failed to upload " + event.getName() + randomToken(6)
+                    + " because the file was empty.";
+        }
+        //eventAdd(model);
     }
 
     @RequestMapping("/deleteperson")
