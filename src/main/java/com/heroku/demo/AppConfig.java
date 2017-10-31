@@ -1,8 +1,6 @@
 package com.heroku.demo;
 
-import org.apache.catalina.Context;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
-import org.springframework.boot.context.embedded.ServletContextInitializer;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -18,15 +16,9 @@ import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 @Configuration
 @EnableWebMvc
 public class AppConfig extends WebMvcConfigurerAdapter {
-
-    public @Bean EmbeddedServletContainerFactory embeddedServletContainerFactory() {
-        return new TomcatEmbeddedServletContainerFactory() {
-            @Override
-            protected void configureContext(Context context, ServletContextInitializer[] initializers) {
-                context.setDocBase("/img");
-                super.configureContext(context, initializers);
-            }
-        };
+    @Bean
+    public EmbeddedServletContainerFactory servletContainer() {
+        return new TomcatEmbeddedServletContainerFactory();
     }
 
     //start Thymeleaf specific configuration
