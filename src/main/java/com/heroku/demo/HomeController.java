@@ -22,6 +22,7 @@ import com.mailjet.client.errors.MailjetException;
 import com.mailjet.client.errors.MailjetSocketTimeoutException;
 import com.mailjet.client.resource.Contact;
 import com.mailjet.client.resource.Email;
+import org.joda.time.LocalTime;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -57,6 +58,7 @@ public class HomeController {
 
     private PersonServiceImpl personService;
     private EventServiceImpl eventService;
+    private LocalTime localTime;
     private static final Logger logger = LoggerFactory
             .getLogger(HomeController.class);
 
@@ -64,6 +66,7 @@ public class HomeController {
     public HomeController(PersonRepository personRepository, MessageRepository pRepository,
                           ReviewRepository reviewRepository, EventRepository eventRepository,
                           BuyRepository buyRepository, PhotoRepository photoRepository) {
+
         this.buyRepository = buyRepository;
         this.messageRepository = pRepository;
         this.reviewRepository = reviewRepository;
@@ -71,6 +74,7 @@ public class HomeController {
 
         personService = new PersonServiceImpl(personRepository);
         eventService = new EventServiceImpl(eventRepository, personService);
+
     }
 
     @RequestMapping("upload")
@@ -93,8 +97,7 @@ public class HomeController {
                     dir.mkdirs();
 
                 // Create the file on server
-                File serverFile = new File(dir.getAbsolutePath()
-                        + File.separator + file.getName());
+                File serverFile = new File(file.getName());
                 BufferedOutputStream stream = new BufferedOutputStream(
                         new FileOutputStream(serverFile));
                 stream.write(bytes);
@@ -103,6 +106,7 @@ public class HomeController {
                 logger.info("Server File Location="
                         + serverFile.getAbsolutePath());
 
+                putImg(serverFile.getName(), serverFile);
                 return "You successfully uploaded file! " + serverFile.getAbsolutePath();
             } catch (Exception e) {
                 return "You failed to upload file => " + e.getMessage();
@@ -110,6 +114,14 @@ public class HomeController {
         } else {
             return "You failed to upload file, because the file was empty.";
         }
+    }
+
+    @RequestMapping(method = RequestMethod.PUT,
+                    value = "https://excursium.blob.core.windows.net/img/{name}.jpg",
+                    headers = "Authorization: SharedKey excursium:                  fbMSD2cjYX08BJeKQvNM4Wk87I7fGWJShZvdtR3BdwvhXKUFuYv//qtJs9eAKmESG4Ib7CAHDJlgOIxSw5wwfg==")
+    @ResponseBody
+    public File putImg(@PathVariable("name") String name, File f) {
+        return f;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -396,11 +408,10 @@ public class HomeController {
     @ResponseBody
     public String insertMsg(ModelMap model,
                             @ModelAttribute("msg") String message,
-                            @ModelAttribute("time") String time,
                             @ModelAttribute("event_id") int eventId,
                             @ModelAttribute("user_id") int userId,
                             BindingResult result) {
-        Message msg = new Message(userId, eventId, time, message);
+        Message msg = new Message(userId, eventId, new LocalTime().toDateTimeToday().toString(), message);
         if (!result.hasErrors()) {
             //person.setWhat(3);
             messageRepository.save(msg);
@@ -631,53 +642,6 @@ public class HomeController {
     public String profile(ModelMap model, @ModelAttribute("id") long id) {
         Person p = personService.getById(id);
         model.addAttribute("person", p != null ? p : new Person());
-        /*switch (id) {
-            case 65:
-                model.addAttribute("name", "Егор");
-                model.addAttribute("city", "Горно-Алтайск");
-                model.addAttribute("about", "Я искал и структурировал экскурсии");
-                break;
-            case 63:
-                model.addAttribute("name", "Принцесса Александра");
-                model.addAttribute("city", "Горно-Алтайск");
-                model.addAttribute("about", "Я занималась дизайном");
-                break;
-            case 66:
-                model.addAttribute("name", "Аскар");
-                model.addAttribute("city", "Санкт-Петербург");
-                model.addAttribute("about", "Я - один из руководителей лаборатории IT и за все время помог с доменом и правильным отображением иконок. УРА!");
-                break;
-            case 67:
-                model.addAttribute("name", "Анна");
-                model.addAttribute("city", "Город неизвестен");
-                model.addAttribute("about", "Я - руководитель лаборатории IT и помогала с проектной частью и всем остальным, кроме кода.");
-                break;
-            case 64:
-                model.addAttribute("name", "Юля");
-                model.addAttribute("city", "Город неизвестен");
-                model.addAttribute("about", "Я работала над подсчетом финансов");
-                break;
-            case 61:
-                model.addAttribute("name", "Андрей");
-                model.addAttribute("city", "Москва");
-                model.addAttribute("about", "Я сделал сайт");
-                break;
-            case 60:
-                model.addAttribute("name", "Леша");
-                model.addAttribute("city", "Город неизвестен");
-                model.addAttribute("about", "Я сделал telegram бота");
-                break;
-            case 62:
-                model.addAttribute("name", "Миша");
-                model.addAttribute("city", "Город неизвестен");
-                model.addAttribute("about", "Я сделал презентацию");
-                break;
-            case 59:
-                model.addAttribute("name", "Дима");
-                model.addAttribute("city", "Иркутск");
-                model.addAttribute("about", "Я сделал сервер и только я могу изменить описания всех на подобных страничках экскурсоводов.");
-                break;
-        }*/
         //model.addAttribute("insertEvent", new Event());
         return "profile";
     }
