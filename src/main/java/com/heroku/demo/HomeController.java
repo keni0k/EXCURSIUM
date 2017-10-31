@@ -78,6 +78,7 @@ public class HomeController {
 
         personService = new PersonServiceImpl(personRepository);
         eventService = new EventServiceImpl(eventRepository, personService);
+        initMultipartResolver((ApplicationContext) this);
     }
 
     private void initMultipartResolver(ApplicationContext context)
