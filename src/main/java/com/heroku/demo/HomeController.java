@@ -104,7 +104,7 @@ public class HomeController {
                 logger.info("Server File Location="
                         + serverFile.getAbsolutePath());
 
-                return "You successfully uploaded file=" + name;
+                return "You successfully uploaded file! " + serverFile.getAbsolutePath();
             } catch (Exception e) {
                 return "You failed to upload " + name + " => " + e.getMessage();
             }
