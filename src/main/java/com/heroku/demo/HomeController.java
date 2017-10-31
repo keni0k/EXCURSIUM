@@ -37,13 +37,14 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import sun.net.www.protocol.http.HttpURLConnection;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
+import java.io.*;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -90,35 +91,55 @@ public class HomeController {
             try {
                 byte[] bytes = file.getBytes();
 
-                // Creating the directory to store file
-                String rootPath = System.getProperty("catalina.home");
-                File dir = new File(rootPath + File.separator + "tmpFiles");
-                if (!dir.exists())
-                    dir.mkdirs();
+//                // Creating the directory to store file
+//                String rootPath = System.getProperty("catalina.home");
+//                File dir = new File(rootPath + File.separator + "tmpFiles");
+//                if (!dir.exists())
+//                    dir.mkdirs();
+//
+//                // Create the file on server
+//                File serverFile = new File(file.getName());
+//                BufferedOutputStream stream = new BufferedOutputStream(
+//                        new FileOutputStream(serverFile));
+//                stream.write(bytes);
+//                stream.close();
+//
+//                logger.info("Server File Location="
+//                        + serverFile.getAbsolutePath());
 
-                // Create the file on server
-                File serverFile = new File(file.getName());
-                BufferedOutputStream stream = new BufferedOutputStream(
-                        new FileOutputStream(serverFile));
-                stream.write(bytes);
-                stream.close();
-
-                logger.info("Server File Location="
-                        + serverFile.getAbsolutePath());
-
-                putImg(serverFile.getName(), serverFile);
+                putImg(randomToken(32), bytes);
             } catch (Exception e) {
                 logger.error("You failed to upload file => " + e.getMessage());
             }
         }
     }
 
-    @RequestMapping(method = RequestMethod.PUT,
-                    value = "https://excursium.blob.core.windows.net/img/{name}.jpg",
-                    headers = "Authorization: SharedKey excursium:                  fbMSD2cjYX08BJeKQvNM4Wk87I7fGWJShZvdtR3BdwvhXKUFuYv//qtJs9eAKmESG4Ib7CAHDJlgOIxSw5wwfg==")
     @ResponseBody
-    public File putImg(@PathVariable("name") String name, File f) {
-        return f;
+    private String putImg(String name, byte[] bytes) throws IOException {
+        String url = "https://excursium.blob.core.windows.net/img/"+name;
+
+        URL obj = new URL(url);
+        HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
+
+        connection.setRequestMethod("PUT");
+        OutputStreamWriter out = new OutputStreamWriter(
+                connection.getOutputStream());
+        out.write("Authorization: SharedKey excursium:                  fbMSD2cjYX08BJeKQvNM4Wk87I7fGWJShZvdtR3BdwvhXKUFuYv//qtJs9eAKmESG4Ib7CAHDJlgOIxSw5wwfg==");
+        out.write(Arrays.toString(bytes));
+        out.close();
+
+
+        connection.getInputStream();
+
+        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        String inputLine;
+        StringBuilder response = new StringBuilder();
+
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
+        }
+        in.close();
+        return response.toString();
     }
 
     @RequestMapping(method = RequestMethod.GET)
