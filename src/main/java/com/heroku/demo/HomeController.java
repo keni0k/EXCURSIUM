@@ -121,13 +121,13 @@ public class HomeController {
         URL obj = new URL(url);
         HttpsURLConnection connection = (HttpsURLConnection) obj.openConnection();
 
+        connection.setDoOutput(true);
         connection.setRequestMethod("PUT");
         OutputStreamWriter out = new OutputStreamWriter(
                 connection.getOutputStream());
         out.write("Authorization: SharedKey excursium:                  fbMSD2cjYX08BJeKQvNM4Wk87I7fGWJShZvdtR3BdwvhXKUFuYv//qtJs9eAKmESG4Ib7CAHDJlgOIxSw5wwfg==");
         out.write(Arrays.toString(bytes));
         out.close();
-
 
         connection.getInputStream();
 
