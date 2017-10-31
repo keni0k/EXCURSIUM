@@ -20,7 +20,7 @@ import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 public class AppConfig extends WebMvcConfigurerAdapter {
 
     public @Bean EmbeddedServletContainerFactory embeddedServletContainerFactory() {
-        return new TomcatEmbeddedServletContainerFactory("/app", 8080) {
+        return new TomcatEmbeddedServletContainerFactory() {
             @Override
             protected void configureContext(Context context, ServletContextInitializer[] initializers) {
                 context.setDocBase("/img");
