@@ -9,6 +9,7 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
@@ -29,6 +30,15 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         templateResolver.setPrefix("/WEB-INF/");
         templateResolver.setSuffix(".html");
         templateResolver.setTemplateMode("HTML5");
+        return templateResolver;
+    }
+
+    @Bean(name = "jspViewResolver")
+    public InternalResourceViewResolver getJspResolver() {
+        InternalResourceViewResolver templateResolver = new InternalResourceViewResolver();
+        templateResolver.setPrefix("/WEB-INF/jsp/");
+        templateResolver.setSuffix(".jsp");
+//        templateResolver.setRedirectContextRelative(false);
         return templateResolver;
     }
 
