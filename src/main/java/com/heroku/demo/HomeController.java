@@ -80,8 +80,7 @@ public class HomeController {
 
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public @ResponseBody
-    String uploadFileHandler(@RequestParam("name") String name,
-                             @RequestParam("file") MultipartFile file) {
+    String uploadFileHandler(@RequestParam("file") MultipartFile file) {
 
         if (!file.isEmpty()) {
             try {
@@ -95,7 +94,7 @@ public class HomeController {
 
                 // Create the file on server
                 File serverFile = new File(dir.getAbsolutePath()
-                        + File.separator + name);
+                        + File.separator + file.getName());
                 BufferedOutputStream stream = new BufferedOutputStream(
                         new FileOutputStream(serverFile));
                 stream.write(bytes);
@@ -106,11 +105,10 @@ public class HomeController {
 
                 return "You successfully uploaded file! " + serverFile.getAbsolutePath();
             } catch (Exception e) {
-                return "You failed to upload " + name + " => " + e.getMessage();
+                return "You failed to upload file => " + e.getMessage();
             }
         } else {
-            return "You failed to upload " + name
-                    + " because the file was empty.";
+            return "You failed to upload file, because the file was empty.";
         }
     }
 
