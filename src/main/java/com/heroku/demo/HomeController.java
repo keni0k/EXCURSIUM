@@ -92,7 +92,8 @@ public class HomeController {
 
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public @ResponseBody
-    void uploadFileHandler(@RequestParam("file") MultipartFile file) {
+    void uploadFileHandler(@RequestParam("file") MultipartFile file,
+                           @RequestParam("eventId") int eventId) {
 
         if (!file.isEmpty()) {
             try {
@@ -114,7 +115,7 @@ public class HomeController {
                 logger.info("Server File Location="
                         + serverFile.getAbsolutePath());
 
-                putImg(randomToken(32), serverFile.getAbsolutePath());
+                putImg(eventId, serverFile.getAbsolutePath());
             } catch (Exception e) {
                 logger.error("You failed to upload file => " + e.getMessage());
             }
@@ -122,12 +123,14 @@ public class HomeController {
     }
 
     @ResponseBody
-    public String putImg(String name, String path) throws StorageException, URISyntaxException, IOException, InvalidKeyException {
+    public String putImg(int eventId, String path) throws StorageException, URISyntaxException, IOException, InvalidKeyException {
 
+        String photoToken = randomToken(32);
+        photoRepository.save(new Photo(eventId, photoToken));
         CloudStorageAccount account = CloudStorageAccount.parse("DefaultEndpointsProtocol=https;AccountName=excursium;AccountKey=fbMSD2cjYX08BJeKQvNM4Wk87I7fGWJShZvdtR3BdwvhXKUFuYv//qtJs9eAKmESG4Ib7CAHDJlgOIxSw5wwfg==;EndpointSuffix=core.windows.net");
         CloudBlobClient client = account.createCloudBlobClient();
         CloudBlobContainer container = client.getContainerReference("img");
-        CloudBlockBlob blob1 = container.getBlockBlobReference("newblob");
+        CloudBlockBlob blob1 = container.getBlockBlobReference(photoToken);
         blob1.uploadFromFile(path);
         return "RESPONSE";
     }
