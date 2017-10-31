@@ -22,6 +22,11 @@ import com.mailjet.client.errors.MailjetException;
 import com.mailjet.client.errors.MailjetSocketTimeoutException;
 import com.mailjet.client.resource.Contact;
 import com.mailjet.client.resource.Email;
+import com.microsoft.azure.storage.CloudStorageAccount;
+import com.microsoft.azure.storage.StorageException;
+import com.microsoft.azure.storage.blob.CloudBlobClient;
+import com.microsoft.azure.storage.blob.CloudBlobContainer;
+import com.microsoft.azure.storage.blob.CloudBlockBlob;
 import org.joda.time.LocalTime;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -37,14 +42,16 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import sun.net.www.protocol.http.HttpURLConnection;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.io.*;
-import java.net.URL;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.security.InvalidKeyException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -91,23 +98,23 @@ public class HomeController {
             try {
                 byte[] bytes = file.getBytes();
 
-//                // Creating the directory to store file
-//                String rootPath = System.getProperty("catalina.home");
-//                File dir = new File(rootPath + File.separator + "tmpFiles");
-//                if (!dir.exists())
-//                    dir.mkdirs();
-//
-//                // Create the file on server
-//                File serverFile = new File(file.getName());
-//                BufferedOutputStream stream = new BufferedOutputStream(
-//                        new FileOutputStream(serverFile));
-//                stream.write(bytes);
-//                stream.close();
-//
-//                logger.info("Server File Location="
-//                        + serverFile.getAbsolutePath());
+                // Creating the directory to store file
+                String rootPath = System.getProperty("catalina.home");
+                File dir = new File(rootPath + File.separator + "tmpFiles");
+                if (!dir.exists())
+                    dir.mkdirs();
 
-                putImg(randomToken(32), bytes);
+                // Create the file on server
+                File serverFile = new File(file.getName());
+                BufferedOutputStream stream = new BufferedOutputStream(
+                        new FileOutputStream(serverFile));
+                stream.write(bytes);
+                stream.close();
+
+                logger.info("Server File Location="
+                        + serverFile.getAbsolutePath());
+
+                putImg(randomToken(32), serverFile.getAbsolutePath());
             } catch (Exception e) {
                 logger.error("You failed to upload file => " + e.getMessage());
             }
@@ -115,42 +122,14 @@ public class HomeController {
     }
 
     @ResponseBody
-    public String putImg(String name, byte[] bytes) throws IOException {
-//        String url = "https://excursium.blob.core.windows.net/img/"+name;
+    public String putImg(String name, String path) throws StorageException, URISyntaxException, IOException, InvalidKeyException {
 
-        String url = "http://excursium.me/";
-        URL obj = new URL(url);
-        HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
-
-        /*
-        HttpRequest<String> httpRequest = HttpRequestBuilder.createGet(uri, String.class)
-                .responseDeserializer(ResponseDeserializer.ignorableDeserializer()).build();
-
-
-        ResponseHandler<String> response = httpRequest.execute(someParamsYouWant);
-        System.out.println(response.getStatusCode());
-        System.out.println(response.get()); //retuns response body
-        */
-
-        connection.setDoOutput(true);
-        connection.setRequestMethod("PUT");
-        OutputStreamWriter out = new OutputStreamWriter(
-                connection.getOutputStream());
-        out.write("Authorization: SharedKey excursium:                  fbMSD2cjYX08BJeKQvNM4Wk87I7fGWJShZvdtR3BdwvhXKUFuYv//qtJs9eAKmESG4Ib7CAHDJlgOIxSw5wwfg==");
-        out.write(Arrays.toString(bytes));
-        out.close();
-
-        connection.getInputStream();
-
-        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-        String inputLine;
-        StringBuilder response = new StringBuilder();
-
-        while ((inputLine = in.readLine()) != null) {
-            response.append(inputLine);
-        }
-        in.close();
-        return response.toString();
+        CloudStorageAccount account = CloudStorageAccount.parse("DefaultEndpointsProtocol=https;AccountName=excursium;AccountKey=fbMSD2cjYX08BJeKQvNM4Wk87I7fGWJShZvdtR3BdwvhXKUFuYv//qtJs9eAKmESG4Ib7CAHDJlgOIxSw5wwfg==;EndpointSuffix=core.windows.net");
+        CloudBlobClient client = account.createCloudBlobClient();
+        CloudBlobContainer container = client.getContainerReference("img");
+        CloudBlockBlob blob1 = container.getBlockBlobReference("newblob");
+        blob1.uploadFromFile(path);
+        return "RESPONSE";
     }
 
     @RequestMapping(method = RequestMethod.GET)

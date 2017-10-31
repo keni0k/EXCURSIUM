@@ -33,6 +33,7 @@ dependencies {
     compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.27'
     compile('com.mailjet:mailjet-client:4.0.5')
     compile('joda-time:joda-time:2.9.2')
+    compile('com.microsoft.azure:azure-storage:6.0.0')
     testCompile("junit:junit")
 }
 
