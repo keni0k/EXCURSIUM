@@ -75,7 +75,7 @@ public class HomeController {
 
     @RequestMapping("upload")
     public String upload(ModelMap model) {
-        return "/upload.jsp";
+        return "/upload";
     }
 
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
