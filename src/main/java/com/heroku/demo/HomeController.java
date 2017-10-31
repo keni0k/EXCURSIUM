@@ -37,8 +37,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import sun.net.www.protocol.http.HttpURLConnection;
 
+import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.*;
@@ -115,11 +115,11 @@ public class HomeController {
     }
 
     @ResponseBody
-    private String putImg(String name, byte[] bytes) throws IOException {
+    public String putImg(String name, byte[] bytes) throws IOException {
         String url = "https://excursium.blob.core.windows.net/img/"+name;
 
         URL obj = new URL(url);
-        HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
+        HttpsURLConnection connection = (HttpsURLConnection) obj.openConnection();
 
         connection.setRequestMethod("PUT");
         OutputStreamWriter out = new OutputStreamWriter(
