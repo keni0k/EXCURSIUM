@@ -25,7 +25,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.2.6.RELEASE</version>
+        <version>1.5.6.RELEASE</version>
     </parent>
 
 
@@ -93,35 +93,6 @@
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.8.0-beta0</version>
         </dependency>
-
-        <!--<dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.6</version>
-        </dependency>-->
-        <!--<dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>5.0.11.Final</version>
-            <scope>compile</scope>
-        </dependency>     -->
-        <!--<dependency>-->
-            <!--<groupId>org.thymeleaf</groupId>-->
-            <!--<artifactId>thymeleaf</artifactId>-->
-            <!--<version>2.0.13</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.thymeleaf</groupId>-->
-            <!--<artifactId>thymeleaf-spring3</artifactId>-->
-            <!--<version>2.0.13</version>-->
-            <!--<exclusions>-->
-                <!--<exclusion>-->
-                    <!--<groupId>org.slf4j</groupId>-->
-                    <!--<artifactId>slf4j-api</artifactId>-->
-                <!--</exclusion>-->
-            <!--</exclusions>-->
-            <!--<scope>compile</scope>-->
-        <!--</dependency>-->
 
 
     </dependencies>
