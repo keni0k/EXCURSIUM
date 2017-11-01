@@ -326,10 +326,9 @@ public class HomeController {
         blob1.uploadFromFile(path);
     }
 
-    @RequestMapping(value = "/addeventhttp", method = RequestMethod.POST, headers = ("content-type=multipart/*"))
+    @RequestMapping(value = "/addeventhttp", method = RequestMethod.POST)
     @ResponseBody
-    public String insertEvent(ModelMap model,
-                              @ModelAttribute("insertEvent") @Valid Event event,
+    public String insertEvent(@ModelAttribute("insertEvent") @Valid Event event,
                               @RequestParam("file") MultipartFile file,
                               BindingResult result) {
         event.setType(-1);
@@ -341,7 +340,7 @@ public class HomeController {
 
         if (!result.hasErrors() && eventService!=null) {
             eventService.addEvent(event);
-        } else return events(model);
+        } else return "ERROR";
 
         if (file != null && !file.isEmpty()) {
             try {
