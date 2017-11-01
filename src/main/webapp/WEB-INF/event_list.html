@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns="">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="description" content=""/>
@@ -165,17 +165,21 @@
 
                         <!--Rating-->
                         <ul class="rating">
-                            <li th:if="${(event.getRate()!=-1)and(event.getRate()!=0)}"
-                                th:each="i : ${#numbers.sequence(0, event.getRate()-1)}">
+                            <span th:if="${(event.getRate()!=-1)and(event.getRate()!=0)}">
+                            <li th:each="i : ${#numbers.sequence(0, event.getRate()-1)}">
                                 <i class="fa fa-star"></i>
                             </li>
-                            <li th:if="${(event.getRate()!=-1)and(event.getRate()!=5)}"
-                                th:each="i : ${#numbers.sequence(event.getRate(), 4)}">
+                            </span>
+                            <span th:if="${(event.getRate()!=-1)and(event.getRate()!=5)}">
+                            <li th:each="i : ${#numbers.sequence(event.getRate(), 4)}">
                                 <i class="fa fa-star-o"></i>
                             </li>
-                            <li th:if="${(event.getRate()==-1)}" th:each="i : ${#numbers.sequence(0, 4)}">
+                            </span>
+                            <span th:if="${(event.getRate()==-1)}" >
+                            <li th:each="i : ${#numbers.sequence(0, 4)}">
                                 <i class="fa fa-star-o"></i>
                             </li>
+                            </span>
                         </ul>
 
                         <!--Description-->
