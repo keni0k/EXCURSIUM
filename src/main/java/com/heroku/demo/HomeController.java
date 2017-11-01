@@ -108,8 +108,6 @@ public class HomeController {
 
     @RequestMapping("/event_add")
     public String eventAdd(ModelMap model) {
-        Event e = new Event();
-        model.addAttribute("insertEvent", e);
         return "event_add";
     }
 
@@ -328,14 +326,18 @@ public class HomeController {
 
     @RequestMapping(value = "/addeventhttp", method = RequestMethod.POST)
     @ResponseBody
-    public String insertEvent(@ModelAttribute("insertEvent") @Valid Event event,
+    public String insertEvent(@RequestParam("name") String name,
+                              @RequestParam("category") int category,
+                              @RequestParam("place") String place,
+                              @RequestParam("duration") int duration,
+                              @RequestParam("description") String description,
+                              @RequestParam("language") int language,
+                              @RequestParam("usersCount") int usersCount,
+                              @RequestParam("price") int price,
                               @RequestParam("file") MultipartFile file,
-                              BindingResult result) {
-        event.setType(-1);
-        event.setRate(-1);
-        event.setTime("TIME");
+                              BindingResult result) throws IOException {
+        Event event = new Event(place, category, new LocalTime().toString(), duration, price, description,-1,-1,name,-1,usersCount,language);
         event.setGuideId(-1);
-        event.setPhoto(-1);
         event.setPhotoUrl("URL");
 
         if (!result.hasErrors() && eventService!=null) {
