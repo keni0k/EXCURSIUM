@@ -44,13 +44,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.security.InvalidKeyException;
@@ -340,41 +336,42 @@ public class HomeController {
         event.setPhoto(-1);
         event.setPhotoUrl("URL");
 
-        if (!result.hasErrors()) {
+        if (!result.hasErrors() && eventService!=null) {
             eventService.addEvent(event);
         } else return events(model);
 
-        MultipartFile file = event.file;
-        if (!file.isEmpty()) {
-            try {
-                byte[] bytes = file.getBytes();
-
-                // Creating the directory to store file
-                String rootPath = System.getProperty("catalina.home");
-                File dir = new File(rootPath + File.separator + "tmpFiles");
-                if (!dir.exists())
-                    dir.mkdirs();
-
-                // Create the file on server
-                File serverFile = new File(file.getName());
-                BufferedOutputStream stream = new BufferedOutputStream(
-                        new FileOutputStream(serverFile));
-                stream.write(bytes);
-                stream.close();
-
-                logger.info("Server File Location="
-                        + serverFile.getAbsolutePath());
-
-                putImg(event.getId(), serverFile.getAbsolutePath());
-            } catch (Exception e) {
-                logger.error("You failed to upload file => " + e.getMessage());
-                return "ERROR UPLOAD FILE";
-            }
-            return "SUCCESFULL";
-        } else {
-            return "You failed to upload " + event.getName() + randomToken(6)
-                    + " because the file was empty.";
-        }
+//        MultipartFile file = event.file;
+//        if (!file.isEmpty()) {
+//            try {
+//                byte[] bytes = file.getBytes();
+//
+//                // Creating the directory to store file
+//                String rootPath = System.getProperty("catalina.home");
+//                File dir = new File(rootPath + File.separator + "tmpFiles");
+//                if (!dir.exists())
+//                    dir.mkdirs();
+//
+//                // Create the file on server
+//                File serverFile = new File(file.getName());
+//                BufferedOutputStream stream = new BufferedOutputStream(
+//                        new FileOutputStream(serverFile));
+//                stream.write(bytes);
+//                stream.close();
+//
+//                logger.info("Server File Location="
+//                        + serverFile.getAbsolutePath());
+//
+//                putImg(event.getId(), serverFile.getAbsolutePath());
+//            } catch (Exception e) {
+//                logger.error("You failed to upload file => " + e.getMessage());
+//                return "ERROR UPLOAD FILE";
+//            }
+//            return "SUCCESFULL";
+//        } else {
+//            return "You failed to upload " + event.getName() + randomToken(6)
+//                    + " because the file was empty.";
+//        }
+        return "SUCCESSEDED";
         //eventAdd(model);
     }
 
