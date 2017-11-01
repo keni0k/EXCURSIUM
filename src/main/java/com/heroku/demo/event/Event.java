@@ -117,7 +117,7 @@ public class Event implements Comparable {
     private int rate = -1;
 
     @Transient
-    public MultipartFile file = null;
+    public MultipartFile file;
 
     @Transient
     int cnt = 0;
