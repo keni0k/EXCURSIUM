@@ -14,7 +14,8 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<html xmlns:th="http://www.thymeleaf.org">
+<html  xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Модерация контента</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -76,7 +77,7 @@
         <form th:object="${insertEvent}" action="/addeventhttp" method="POST">
 
             Категория:
-            <select name="category">
+            <select name="category" th:value="insertEvent.category">
                 <option value="0">Развлечения</option>
                 <option value="1"> Наука</option>
                 <option value="2"> История</option>
@@ -146,6 +147,7 @@
                 <td>Кол-во человек</td>
                 <td>Продолжительность</td>
                 <td>Название</td>
+                <td>Редактировать</td>
             </tr>
             <tr th:each="event : ${events}">
                 <td th:text="${event.id}">Some text</td>
@@ -158,6 +160,7 @@
                 <td th:text="${event.usersCount}">Some text</td>
                 <td th:text="${event.duration}">Some text</td>
                 <td th:text="${event.name}">Some text</td>
+                <td><a th:href="@{/events(id = ${event.id})}">Редактировать</a></td>
             </tr>
             </tbody>
         </table>

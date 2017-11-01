@@ -263,6 +263,16 @@ public class HomeController {
         return "events";
     }
 
+    @RequestMapping(value = "/events", params = "id")
+    public String eventEdit(ModelMap model,
+                            @RequestParam long id) {
+        List<Event> events = eventService.getAll();
+        Event editEvent = eventService.getById(id);
+        model.addAttribute("events", events);
+        model.addAttribute("insertEvent", editEvent);
+        return "events";
+    }
+
     @RequestMapping("/updatedbevents")
     @ResponseBody
     public String updateDBEvents() {
