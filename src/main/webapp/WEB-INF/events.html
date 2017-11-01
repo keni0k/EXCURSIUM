@@ -14,11 +14,10 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<html  xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Модерация контента</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
     <!--<link rel="stylesheet" type="text/css" href="style.css"/>-->
@@ -33,7 +32,7 @@
             margin: 25px 0 0;
         }
 
-        .btn > a{
+        .btn > a {
             text-decoration: none; /*убираем подчеркивание текста ссылок*/
             background: #30A8E6; /*добавляем фон к пункту меню*/
             color: #fff; /*меняем цвет ссылок*/
@@ -76,6 +75,16 @@
     <div class="col-md-12 col-lg-6">
         <form th:object="${insertEvent}" action="/addeventhttp" method="POST" enctype="multipart/form-data">
 
+            Тип:
+            <select name="type" th:selected="${insertEvent.getType()}">
+                <option value="-3">Не прошел модерацию</option>
+                <option value="-2">На перемодерации</option>
+                <option value="-1">Не активен</option>
+                <option value="1">Активен</option>
+            </select>
+
+            <br/>
+
             Название: <input name="name" type="text" th:value="${insertEvent.name}"/>
             <br/>
             ID гида: <input name="guideId" type="number" th:value="${insertEvent.guideId}"/>
@@ -84,7 +93,7 @@
             <br/>
 
             Категория:
-            <select name="category" th:value="${insertEvent.getCategoryString()}">
+            <select name="category" th:selected="${insertEvent.getCategory()}">
                 <option value="0">Развлечения</option>
                 <option value="1"> Наука</option>
                 <option value="2"> История</option>
