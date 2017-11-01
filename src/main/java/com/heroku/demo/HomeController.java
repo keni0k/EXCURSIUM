@@ -331,7 +331,8 @@ public class HomeController {
     @RequestMapping("/addeventhttp")
     @ResponseBody
     public String insertEvent(ModelMap model,
-                              @ModelAttribute("insertEvent") Event event,
+                              @ModelAttribute("insertEvent") @Valid Event event,
+                              @ModelAttribute("file") MultipartFile file,
                               BindingResult result) {
         event.setType(-1);
         event.setRate(-1);
@@ -344,7 +345,6 @@ public class HomeController {
             eventService.addEvent(event);
         } else return events(model);
 
-        MultipartFile file = event.file;
         if (file != null && !file.isEmpty()) {
             try {
                 byte[] bytes = file.getBytes();
