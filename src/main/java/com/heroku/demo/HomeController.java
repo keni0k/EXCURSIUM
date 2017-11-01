@@ -333,7 +333,9 @@ public class HomeController {
     public String insertEvent(ModelMap model,
                               @ModelAttribute("insertEvent") @Valid Event event,
                               BindingResult result) {
-        //event.setTime("DATE");
+        event.setType(-1);
+        event.setRate(-1);
+        event.setTime("TIME");
 
         if (!result.hasErrors()) {
             eventService.addEvent(event);
@@ -472,7 +474,6 @@ public class HomeController {
     @ResponseBody
     public String insertEvent(ModelMap model,
                               @ModelAttribute("name") String name,
-                              @ModelAttribute("full_name") String time,
                               @ModelAttribute("category") int category,
                               @ModelAttribute("place") String place,
                               @ModelAttribute("duration") int duration,
@@ -480,14 +481,15 @@ public class HomeController {
                               @ModelAttribute("language") int language,
                               @ModelAttribute("users_count") int usersCount,
                               @ModelAttribute("price") int price,
+                              @ModelAttribute("photo") int photo,
                               BindingResult result) {
 
-//        Event e = new Event(place, category, time, duration, price, description, language, usersCount, name);
+        Event e = new Event(place, category, "TIME", duration, price, description, -1, photo, name, -1, usersCount, language);
         if (!result.hasErrors()) {
             //person.setWhat(3);
-//            eventService.addEvent(e);
+            eventService.addEvent(e);
         }
-        return "add";
+        return e.toString();
     }
 
 
