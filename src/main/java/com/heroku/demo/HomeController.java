@@ -90,17 +90,6 @@ public class HomeController {
         return "/upload";
     }
 
-    private void putImg(long eventId, String path) throws StorageException, URISyntaxException, IOException, InvalidKeyException {
-
-        String photoToken = randomToken(32);
-        photoRepository.save(new Photo((int)eventId, photoToken));//todo
-        CloudStorageAccount account = CloudStorageAccount.parse("DefaultEndpointsProtocol=https;AccountName=excursium;AccountKey=fbMSD2cjYX08BJeKQvNM4Wk87I7fGWJShZvdtR3BdwvhXKUFuYv//qtJs9eAKmESG4Ib7CAHDJlgOIxSw5wwfg==;EndpointSuffix=core.windows.net");
-        CloudBlobClient client = account.createCloudBlobClient();
-        CloudBlobContainer container = client.getContainerReference("img");
-        CloudBlockBlob blob1 = container.getBlockBlobReference(photoToken);
-        blob1.uploadFromFile(path);
-    }
-
     @RequestMapping(method = RequestMethod.GET)
     public String index(ModelMap model) {
         return "index";
@@ -325,11 +314,21 @@ public class HomeController {
         return "persons";
     }
 
+    private void putImg(long eventId, String path) throws StorageException, URISyntaxException, IOException, InvalidKeyException {
+
+        String photoToken = randomToken(32);
+        photoRepository.save(new Photo((int)eventId, photoToken));//todo
+        CloudStorageAccount account = CloudStorageAccount.parse("DefaultEndpointsProtocol=https;AccountName=excursium;AccountKey=fbMSD2cjYX08BJeKQvNM4Wk87I7fGWJShZvdtR3BdwvhXKUFuYv//qtJs9eAKmESG4Ib7CAHDJlgOIxSw5wwfg==;EndpointSuffix=core.windows.net");
+        CloudBlobClient client = account.createCloudBlobClient();
+        CloudBlobContainer container = client.getContainerReference("img");
+        CloudBlockBlob blob1 = container.getBlockBlobReference(photoToken);
+        blob1.uploadFromFile(path);
+    }
+
     @RequestMapping("/addeventhttp")
     @ResponseBody
     public String insertEvent(ModelMap model,
                               @ModelAttribute("insertEvent") @Valid Event event,
-                              @ModelAttribute("photofile") MultipartFile file,
                               BindingResult result) {
         //event.setTime("DATE");
 
@@ -337,6 +336,7 @@ public class HomeController {
             eventService.addEvent(event);
         } //else return events(model);
 
+        MultipartFile file = event.file;
         if (!file.isEmpty()) {
             try {
                 byte[] bytes = file.getBytes();

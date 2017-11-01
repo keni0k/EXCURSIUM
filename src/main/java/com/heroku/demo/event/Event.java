@@ -1,6 +1,7 @@
 package com.heroku.demo.event;
 
 import com.heroku.demo.utils.UtilsForWeb;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 
@@ -111,6 +112,9 @@ public class Event implements Comparable {
     private String description = "";
 
     private int rate = -1;
+
+    @Transient
+    public MultipartFile file = null;
 
     @Transient
     int cnt = 0;
