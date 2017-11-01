@@ -39,7 +39,7 @@ public class Event implements Comparable {
     public Event() {
     }
 
-    public Event(String place, int category, String time, int duration, int price, String description, int rate, int photo, String name) {
+    public Event(String place, int category, String time, int duration, int price, String description, int rate, int photo, String name, int type, int usersCount, int language) {
         this.place = place;
         this.category = category;
         this.time = time;
@@ -49,6 +49,9 @@ public class Event implements Comparable {
         this.rate = rate;
         this.photo = photo;
         this.name = name;
+        this.language = language;
+        this.usersCount = usersCount;
+        this.type = type;
     }
 
     public int getType() {

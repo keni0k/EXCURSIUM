@@ -40,7 +40,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -87,7 +90,7 @@ public class HomeController {
 
     @RequestMapping("upload")
     public String upload(ModelMap model) {
-        return "/upload";
+        return "upload";
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -371,15 +374,6 @@ public class HomeController {
     }
 
 
-    @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
-    public @ResponseBody
-    void uploadFileHandler(@RequestParam("file") MultipartFile file,
-                           @RequestParam("eventId") int eventId) {
-
-
-    }
-
-
     @RequestMapping("/deleteperson")
     public String deleteContact(@ModelAttribute("id") String id) {
         personService.delete(Long.parseLong(id));
@@ -488,12 +482,12 @@ public class HomeController {
                               @ModelAttribute("price") int price,
                               BindingResult result) {
 
-        Event e = new Event(place, category, time, duration, price, description, language, usersCount, name);
+//        Event e = new Event(place, category, time, duration, price, description, language, usersCount, name);
         if (!result.hasErrors()) {
             //person.setWhat(3);
-            eventService.addEvent(e);
+//            eventService.addEvent(e);
         }
-        return e.toString();
+        return "add";
     }
 
 
