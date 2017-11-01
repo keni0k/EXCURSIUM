@@ -45,7 +45,7 @@ public class EventServiceImpl implements EventService {
         }
         Photo img = photoService.getByEventId(id);
         if (img!=null)
-            e.pathToPhoto="https://excursium.blob.core.windows.net/img/"+img.getData()+".jpg";
+            e.pathToPhoto="https://excursium.blob.core.windows.net/img/"+img.getData();
         return e;
     }
 
@@ -85,7 +85,7 @@ public class EventServiceImpl implements EventService {
 
                 Photo img = photoService.getByEventId(aList.getId());
                 if (img!=null)
-                    aList.pathToPhoto="https://excursium.blob.core.windows.net/img/"+img.getData()+".jpg";
+                    aList.pathToPhoto="https://excursium.blob.core.windows.net/img/"+img.getData();
 
                 if (!words.equals("")) {
                     for (String word : wds) {

@@ -322,7 +322,7 @@ public class HomeController {
 
     private void putImg(long eventId, String path) throws StorageException, URISyntaxException, IOException, InvalidKeyException {
 
-        String photoToken = randomToken(32);
+        String photoToken = randomToken(32)+".jpg";
         photoRepository.save(new Photo((int)eventId, photoToken));//todo
         CloudStorageAccount account = CloudStorageAccount.parse("DefaultEndpointsProtocol=https;AccountName=excursium;AccountKey=fbMSD2cjYX08BJeKQvNM4Wk87I7fGWJShZvdtR3BdwvhXKUFuYv//qtJs9eAKmESG4Ib7CAHDJlgOIxSw5wwfg==;EndpointSuffix=core.windows.net");
         CloudBlobClient client = account.createCloudBlobClient();
