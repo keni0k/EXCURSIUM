@@ -336,10 +336,13 @@ public class HomeController {
         event.setType(-1);
         event.setRate(-1);
         event.setTime("TIME");
+        event.setGuideId(-1);
+        event.setPhoto(-1);
+        event.setPhotoUrl("URL");
 
-        if (!result.hasErrors()) {
+        if (!result.hasErrors() && eventService!=null) {
             eventService.addEvent(event);
-        } //else return events(model);
+        } else return events(model);
 
         MultipartFile file = event.file;
         if (!file.isEmpty()) {
