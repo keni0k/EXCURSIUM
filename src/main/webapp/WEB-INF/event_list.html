@@ -142,7 +142,7 @@
                     <!--Card image-->
                     <div class="view overlay hm-white-slight z-depth-1">
                         <div class="img_crop">
-                            <img src="../resources/img/bg-cta.jpg" th:src="${event.getPhotoUrl()}"
+                            <img src="../resources/img/bg-cta.jpg" th:src="${event.pathToPhoto}"
                                  class="img-fluid" alt=""/>
                         </div>
                         <a th:href="@{/event(id=${event.getId()})}">

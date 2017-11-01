@@ -1,6 +1,5 @@
 package com.heroku.demo.photo;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PhotoServiceImpl implements PhotoService {
@@ -12,9 +11,9 @@ public class PhotoServiceImpl implements PhotoService {
     private PhotoRepository photoRepository;
 
     @Override
-    public Photo addPhoto(Photo phot) {
+    public Photo addPhoto(Photo photo) {
 
-        return photoRepository.saveAndFlush(phot);
+        return photoRepository.saveAndFlush(photo);
     }
 
     @Override
@@ -22,18 +21,17 @@ public class PhotoServiceImpl implements PhotoService {
         photoRepository.delete(id);
     }
 
-    public PhotoServiceImpl(PhotoRepository reviewRepository) {
-        this.photoRepository = reviewRepository;
+    public PhotoServiceImpl(PhotoRepository photoRepository) {
+        this.photoRepository = photoRepository;
     }
 
     @Override
-    public List<Photo> getByType(int event) {
+    public Photo getByEventId(long eventId) {
         List<Photo> list = photoRepository.findAll();
-        List<Photo> copy = new ArrayList<>();
-        copy.addAll(list);
-        for (int i = 0; i < copy.size(); i++)
-            if (copy.get(i).getEventId() != event) list.remove(i);
-        return list;
+        for (Photo photo: list) {
+            if (photo.getEventId()==eventId) return photo;
+        }
+        return null;
     }
 
     @Override

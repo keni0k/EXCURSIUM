@@ -12,6 +12,7 @@ import com.heroku.demo.person.PersonRepository;
 import com.heroku.demo.person.PersonServiceImpl;
 import com.heroku.demo.photo.Photo;
 import com.heroku.demo.photo.PhotoRepository;
+import com.heroku.demo.photo.PhotoServiceImpl;
 import com.heroku.demo.review.Review;
 import com.heroku.demo.review.ReviewRepository;
 import com.heroku.demo.utils.UtilsForWeb;
@@ -66,6 +67,8 @@ public class HomeController {
 
     private PersonServiceImpl personService;
     private EventServiceImpl eventService;
+    private PhotoServiceImpl photoService;
+
     private LocalTime localTime;
     private static final Logger logger = LoggerFactory
             .getLogger(HomeController.class);
@@ -80,8 +83,9 @@ public class HomeController {
         this.reviewRepository = reviewRepository;
         this.photoRepository = photoRepository;
 
+        photoService = new PhotoServiceImpl(photoRepository);
         personService = new PersonServiceImpl(personRepository);
-        eventService = new EventServiceImpl(eventRepository, personService);
+        eventService = new EventServiceImpl(eventRepository, personService, photoService);
 
     }
 
@@ -228,14 +232,16 @@ public class HomeController {
         person.setToken(randomToken(32));
 
         if (!personService.throwsErrors(person)) {
+            String errorData = "";
             if (!personService.isEmailFree(person.getEmail()))
-                model.addAttribute("error_data", "EMAIL IS NOT FREE");
+                errorData = errorData.concat("EMAIL IS NOT FREE\n");
             if (!personService.isLoginFree(person.getLogin()))
-                model.addAttribute("error_data1", "LOGIN IS NOT FREE");
+                errorData = errorData.concat("LOGIN IS NOT FREE\n");
             if (!personService.isEmailCorrect(person.getEmail()))
-                model.addAttribute("error_data2", "EMAIL IS NOT VALID");
+                errorData = errorData.concat("EMAIL IS NOT VALID\n");
             if (!personService.isPhoneFree(person.getPhoneNumber()))
-                model.addAttribute("error_data3", "PHONE NUMBER IS NOT FREE");
+                errorData = errorData.concat("PHONE NUMBER IS NOT FREE");
+            model.addAttribute("error_data", errorData);
             return "error";
         }
         if (!result.hasErrors()) {
@@ -326,7 +332,6 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/addeventhttp", method = RequestMethod.POST)
-    @ResponseBody
     public String insertEvent(@ModelAttribute("inputEvent") @Valid Event event,
                               @RequestParam("file") MultipartFile file) {
         event.setTime(new LocalTime().toString());

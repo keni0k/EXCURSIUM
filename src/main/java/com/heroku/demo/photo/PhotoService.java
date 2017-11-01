@@ -7,7 +7,7 @@ public interface PhotoService {
 
     void delete(long id);
 
-    List<Photo> getByType(int type);
+    Photo getByEventId(long eventId);
 
     Photo editPhoto(Photo photo);
 
