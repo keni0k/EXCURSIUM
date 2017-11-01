@@ -334,13 +334,12 @@ public class HomeController {
                               @RequestParam("language") int language,
                               @RequestParam("usersCount") int usersCount,
                               @RequestParam("price") int price,
-                              @RequestParam("file") MultipartFile file,
-                              BindingResult result) throws IOException {
+                              @RequestParam("file") MultipartFile file) throws IOException {
         Event event = new Event(place, category, new LocalTime().toString(), duration, price, description,-1,-1,name,-1,usersCount,language);
         event.setGuideId(-1);
         event.setPhotoUrl("URL");
 
-        if (!result.hasErrors() && eventService!=null) {
+        if (eventService!=null) {
             eventService.addEvent(event);
         } else return "ERROR";
 
