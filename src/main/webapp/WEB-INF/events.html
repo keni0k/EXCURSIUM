@@ -33,7 +33,7 @@
             margin: 25px 0 0;
         }
 
-        a {
+        .btn > a{
             text-decoration: none; /*убираем подчеркивание текста ссылок*/
             background: #30A8E6; /*добавляем фон к пункту меню*/
             color: #fff; /*меняем цвет ссылок*/
@@ -64,9 +64,9 @@
 
 <nav class="four">
     <ul>
-        <li><a href="/"><i class="fa fa-home fa-fw"></i>Главная</a></li>
-        <li><a href="/#">EVENTS</a></li>
-        <li><a href="/persons">USERS</a></li>
+        <li><a class="btn" href="/"><i class="fa fa-home fa-fw"></i>Главная</a></li>
+        <li><a class="btn" href="/#">EVENTS</a></li>
+        <li><a class="btn" href="/persons">USERS</a></li>
     </ul>
 </nav>
 <hr/>
@@ -74,10 +74,17 @@
 <hr/>
 <div class="row">
     <div class="col-md-12 col-lg-6">
-        <form th:object="${insertEvent}" action="/addeventhttp" method="POST">
+        <form th:object="${insertEvent}" action="/addeventhttp" method="POST" enctype="multipart/form-data">
+
+            Название: <input name="name" type="text" th:value="${insertEvent.name}"/>
+            <br/>
+            ID гида: <input name="guideId" type="number" th:value="${insertEvent.guideId}"/>
+            <br/>
+            Фото azure: <input name="file" accept="image/jpeg,image/png" type="file"/>
+            <br/>
 
             Категория:
-            <select name="category" th:value="${insertEvent.category}">
+            <select name="category" th:value="${insertEvent.getCategoryString()}">
                 <option value="0">Развлечения</option>
                 <option value="1"> Наука</option>
                 <option value="2"> История</option>
