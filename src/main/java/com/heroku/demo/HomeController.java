@@ -90,49 +90,15 @@ public class HomeController {
         return "/upload";
     }
 
-    @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
-    public @ResponseBody
-    void uploadFileHandler(@RequestParam("file") MultipartFile file,
-                           @RequestParam("eventId") int eventId) {
-
-        if (!file.isEmpty()) {
-            try {
-                byte[] bytes = file.getBytes();
-
-                // Creating the directory to store file
-                String rootPath = System.getProperty("catalina.home");
-                File dir = new File(rootPath + File.separator + "tmpFiles");
-                if (!dir.exists())
-                    dir.mkdirs();
-
-                // Create the file on server
-                File serverFile = new File(file.getName());
-                BufferedOutputStream stream = new BufferedOutputStream(
-                        new FileOutputStream(serverFile));
-                stream.write(bytes);
-                stream.close();
-
-                logger.info("Server File Location="
-                        + serverFile.getAbsolutePath());
-
-                putImg(eventId, serverFile.getAbsolutePath());
-            } catch (Exception e) {
-                logger.error("You failed to upload file => " + e.getMessage());
-            }
-        }
-    }
-
-    @ResponseBody
-    public String putImg(int eventId, String path) throws StorageException, URISyntaxException, IOException, InvalidKeyException {
+    private void putImg(long eventId, String path) throws StorageException, URISyntaxException, IOException, InvalidKeyException {
 
         String photoToken = randomToken(32);
-        photoRepository.save(new Photo(eventId, photoToken));
+        photoRepository.save(new Photo((int)eventId, photoToken));//todo
         CloudStorageAccount account = CloudStorageAccount.parse("DefaultEndpointsProtocol=https;AccountName=excursium;AccountKey=fbMSD2cjYX08BJeKQvNM4Wk87I7fGWJShZvdtR3BdwvhXKUFuYv//qtJs9eAKmESG4Ib7CAHDJlgOIxSw5wwfg==;EndpointSuffix=core.windows.net");
         CloudBlobClient client = account.createCloudBlobClient();
         CloudBlobContainer container = client.getContainerReference("img");
         CloudBlockBlob blob1 = container.getBlockBlobReference(photoToken);
         blob1.uploadFromFile(path);
-        return "RESPONSE";
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -382,8 +348,7 @@ public class HomeController {
                     dir.mkdirs();
 
                 // Create the file on server
-                File serverFile = new File(dir.getAbsolutePath()
-                        + File.separator + event.getName() + randomToken(6));
+                File serverFile = new File(file.getName());
                 BufferedOutputStream stream = new BufferedOutputStream(
                         new FileOutputStream(serverFile));
                 stream.write(bytes);
@@ -392,16 +357,28 @@ public class HomeController {
                 logger.info("Server File Location="
                         + serverFile.getAbsolutePath());
 
-                return "You successfully uploaded file=" + event.getName() + randomToken(6);
+                putImg(event.getId(), serverFile.getAbsolutePath());
             } catch (Exception e) {
-                return "You failed to upload " + event.getName() + randomToken(6) + " => " + e.getMessage();
+                logger.error("You failed to upload file => " + e.getMessage());
+                return "ERROR UPLOAD FILE";
             }
+            return "SUCCESFULL";
         } else {
             return "You failed to upload " + event.getName() + randomToken(6)
                     + " because the file was empty.";
         }
         //eventAdd(model);
     }
+
+
+    @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
+    public @ResponseBody
+    void uploadFileHandler(@RequestParam("file") MultipartFile file,
+                           @RequestParam("eventId") int eventId) {
+
+
+    }
+
 
     @RequestMapping("/deleteperson")
     public String deleteContact(@ModelAttribute("id") String id) {
