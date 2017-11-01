@@ -393,7 +393,7 @@ public class HomeController {
         event.setPhotoUrl("URL");
 
         if (eventService!=null) {
-            eventService.addEvent(event);
+            eventService.editEvent(event);
         } else return "ERROR";
 
         if (file != null && !file.isEmpty()) {
