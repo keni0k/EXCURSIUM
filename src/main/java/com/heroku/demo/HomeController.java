@@ -44,15 +44,19 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.IIOImage;
+import javax.imageio.ImageIO;
+import javax.imageio.ImageWriteParam;
+import javax.imageio.ImageWriter;
+import javax.imageio.stream.ImageOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.net.URISyntaxException;
 import java.security.InvalidKeyException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -331,6 +335,45 @@ public class HomeController {
         blob1.uploadFromFile(path);
     }
 
+    private String getFileExtension(String fileName){
+        if(fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
+            return fileName.substring(fileName.lastIndexOf(".")+1);
+        else return "jpg";
+    }
+
+    private File compress(File file, String extension, double fileSize) throws IOException {
+
+        BufferedImage image = ImageIO.read(file);
+
+        File compressedImageFile = new File("compress.jpg");
+        OutputStream os =new FileOutputStream(compressedImageFile);
+
+        Iterator<ImageWriter> writers =  ImageIO.getImageWritersByFormatName(extension);
+        ImageWriter writer = writers.next();
+
+        ImageOutputStream ios = ImageIO.createImageOutputStream(os);
+        writer.setOutput(ios);
+
+        ImageWriteParam param = writer.getDefaultWriteParam();
+
+        param.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
+        param.setCompressionQuality((float) (3f/fileSize));
+        writer.write(null, new IIOImage(image, null, null), param);
+
+        os.close();
+        ios.close();
+        writer.dispose();
+
+        File outputfile = new File("image.jpg");
+        ImageIO.write(image, "jpg", outputfile);
+
+        return outputfile;
+    }
+
+    private static double getFileSizeMegaBytes(File file) {
+        return (double) file.length()/(1024*1024);
+    }
+
     @RequestMapping(value = "/addeventhttp", method = RequestMethod.POST)
     public String insertEvent(@ModelAttribute("inputEvent") @Valid Event event,
                               @RequestParam("file") MultipartFile file,
@@ -353,12 +396,17 @@ public class HomeController {
                 if (!dir.exists())
                     dir.mkdirs();
 
+                String fileName = file.getOriginalFilename();
+
                 // Create the file on server
-                File serverFile = new File(file.getName());
+                File serverFile = new File(fileName);
                 BufferedOutputStream stream = new BufferedOutputStream(
                         new FileOutputStream(serverFile));
                 stream.write(bytes);
                 stream.close();
+
+                if (getFileSizeMegaBytes(serverFile)>3)
+                    serverFile = compress(serverFile, getFileExtension(fileName), getFileSizeMegaBytes(serverFile));
 
                 logger.info("Server File Location="
                         + serverFile.getAbsolutePath());
