@@ -212,7 +212,7 @@ public class HomeController {
         MailjetRequest email;
         JSONArray recipients;
         MailjetResponse response;
-        MailjetClient client = new MailjetClient(System.getenv("MJ_APIKEY_PUBLIC"), System.getenv("MJ_APIKEY_PRIVATE"));
+        MailjetClient client = new MailjetClient(System.getenv("489ff3e95ebe1a6a3303dbd79ec3777f"), System.getenv("0be4f9f8ede6f035f85fd4393875f32d"));
 
         recipients = new JSONArray()
                 .put(new JSONObject().put(Contact.EMAIL, "dima-vers0@rambler.ru"));
