@@ -371,9 +371,13 @@ public class HomeController {
                 return "ERROR UPLOAD FILE";
             }
             return "SUCCESFULL";
-        } else {
+        } else if (file==null){
             return "You failed to upload " + event.getName() + randomToken(6)
-                    + " because the file was empty.";
+                    + " because the file is null.";
+        }
+        else {
+            return "You failed to upload " + event.getName() + randomToken(6)
+                    + " because the file is empty.";
         }
         //eventAdd(model);
     }
