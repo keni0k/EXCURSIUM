@@ -40,10 +40,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -111,7 +108,8 @@ public class HomeController {
 
     @RequestMapping("/event_add")
     public String eventAdd(ModelMap model) {
-        model.addAttribute("insertEvent", new Event());
+        Event e = new Event();
+        model.addAttribute("insertEvent", e);
         return "event_add";
     }
 
@@ -332,7 +330,7 @@ public class HomeController {
     @ResponseBody
     public String insertEvent(ModelMap model,
                               @ModelAttribute("insertEvent") @Valid Event event,
-                              @ModelAttribute("file") MultipartFile file,
+                              @RequestParam("file") MultipartFile file,
                               BindingResult result) {
         event.setType(-1);
         event.setRate(-1);
