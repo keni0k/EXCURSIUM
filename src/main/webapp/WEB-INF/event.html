@@ -130,15 +130,18 @@
                     </div>
                     <!--/.Card image-->
                     <!--Button-->
-                    <a class="btn-floating btn-action waves-effect waves-light" th:href="@{/profile(id=${event.getGuideId()})}">
+                    <a class="btn-floating btn-action waves-effect waves-light"
+                       th:href="@{/profile(id=${event.getGuideId()})}">
                         <div class="avatar">
-                            <img th:src="${event.photoOfGuide}" src="../resources/img/user.png" class="rounded-circle img-responsive" alt="Аватар"/>
+                            <img th:src="${event.photoOfGuide}" src="../resources/img/user.png"
+                                 class="rounded-circle img-responsive" alt="Аватар"/>
                         </div>
                     </a>
                     <span></span>
-                    <p> </p>
-                    <p> </p>
-                    <p style="font-size: medium; color: #000000; text-align:right" th:text="${event.fullNameOfGuide}">%FULL_NAME%</p>
+                    <p></p>
+                    <p></p>
+                    <p style="font-size: medium; color: #000000; text-align:right" th:text="${event.fullNameOfGuide}">
+                        %FULL_NAME%</p>
 
                     <!--Card content-->
                     <div class="card-body no-padding text-center">
@@ -152,19 +155,22 @@
 
                         <!--Rating-->
                         <ul class="rating">
-                            <li th:if="${event.getRate()!=-1 and event.getRate()!=0}" th:each="i : ${#numbers.sequence(0, event.getRate()-1)}">
+                            <li th:if="${event.getRate()!=-1 and event.getRate()!=0}"
+                                th:each="i : ${#numbers.sequence(0, event.getRate()-1)}">
                                 <i class="fa fa-star"></i>
                             </li>
-                            <li th:if="${event.getRate()!=-1 and event.getRate()!=5}" th:each="i : ${#numbers.sequence(event.getRate(), 4)}" >
+                            <li th:if="${event.getRate()!=-1 and event.getRate()!=5}"
+                                th:each="i : ${#numbers.sequence(event.getRate(), 4)}">
                                 <i class="fa fa-star-o"></i>
                             </li>
-                            <li th:if="${event.getRate()==-1}" th:each="i : ${#numbers.sequence(0, 4)}" >
+                            <li th:if="${event.getRate()==-1}" th:each="i : ${#numbers.sequence(0, 4)}">
                                 <i class="fa fa-star-o"></i>
                             </li>
                         </ul>
 
                         <!--Description-->
-                        <p class="card-text" style="font-size: medium; color: #000000" th:text="${event.description}">%Описание%</p>
+                        <p class="card-text" style="font-size: medium; color: #000000" th:text="${event.description}">
+                            %Описание%</p>
 
                         <!--Card footer-->
                         <div class="card-footer">

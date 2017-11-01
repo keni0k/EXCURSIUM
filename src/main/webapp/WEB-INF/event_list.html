@@ -165,13 +165,15 @@
 
                         <!--Rating-->
                         <ul class="rating">
-                            <li th:if="${event.getRate()!=-1 and event.getRate()!=0}" th:each="i : ${#numbers.sequence(0, event.getRate()-1)}">
+                            <li th:if="${(event.getRate()!=-1)and(event.getRate()!=0)}"
+                                th:each="i : ${#numbers.sequence(0, event.getRate()-1)}">
                                 <i class="fa fa-star"></i>
                             </li>
-                            <li th:if="${event.getRate()!=-1 and event.getRate()!=5}" th:each="i : ${#numbers.sequence(event.getRate(), 4)}" >
+                            <li th:if="${(event.getRate()!=-1)and(event.getRate()!=5)}"
+                                th:each="i : ${#numbers.sequence(event.getRate(), 4)}">
                                 <i class="fa fa-star-o"></i>
                             </li>
-                            <li th:if="${event.getRate()==-1}" th:each="i : ${#numbers.sequence(0, 4)}" >
+                            <li th:if="${(event.getRate()==-1)}" th:each="i : ${#numbers.sequence(0, 4)}">
                                 <i class="fa fa-star-o"></i>
                             </li>
                         </ul>

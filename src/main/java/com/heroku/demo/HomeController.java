@@ -333,8 +333,9 @@ public class HomeController {
 
     @RequestMapping(value = "/addeventhttp", method = RequestMethod.POST)
     public String insertEvent(@ModelAttribute("inputEvent") @Valid Event event,
-                              @RequestParam("file") MultipartFile file) {
-        event.setTime(new LocalTime().toString());
+                              @RequestParam("file") MultipartFile file,
+                              ModelMap modelMap) {
+        event.setTime(new LocalTime().toDateTimeToday().toString());
         event.setGuideId(-1);
         event.setPhotoUrl("URL");
 
@@ -365,16 +366,18 @@ public class HomeController {
                 putImg(event.getId(), serverFile.getAbsolutePath());
             } catch (Exception e) {
                 logger.error("You failed to upload file => " + e.getMessage());
-                return "ERROR UPLOAD FILE";
+                modelMap.addAttribute("error_data", "ERROR UPLOAD FILE");
+                return "error";
             }
-            return "SUCCESFULL";
+            return event(modelMap, (int) event.getId());
         } else if (file==null){
-            return "You failed to upload file because the file is null.";
+            modelMap.addAttribute("error_data", "You failed to upload file because the file is null.");
+            return "error";
         }
         else {
-            return "You failed to upload file because the file is empty.";
+            modelMap.addAttribute("error_data", "You failed to upload file because the file is empty.");
+            return "error";
         }
-        //eventAdd(model);
     }
 
 
