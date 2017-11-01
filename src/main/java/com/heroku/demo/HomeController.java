@@ -685,6 +685,11 @@ public class HomeController {
         return "profile";
     }
 
+    @RequestMapping("/upload")
+    public String upload(){
+        return "upload";
+    }
+
     @RequestMapping(value = "/uploadMultipleFile", method = RequestMethod.POST)
     public @ResponseBody
     String uploadMultipleFileHandler(@RequestParam("file") MultipartFile[] files) {
