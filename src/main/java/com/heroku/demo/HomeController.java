@@ -357,7 +357,7 @@ public class HomeController {
         ImageWriteParam param = writer.getDefaultWriteParam();
 
         param.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
-        param.setCompressionQuality((float) (3f/fileSize));
+        param.setCompressionQuality((float) (2f/fileSize));
         writer.write(null, new IIOImage(image, null, null), param);
 
         os.close();
@@ -405,7 +405,7 @@ public class HomeController {
                 stream.write(bytes);
                 stream.close();
 
-                if (getFileSizeMegaBytes(serverFile)>3)
+                if (getFileSizeMegaBytes(serverFile)>1)
                     serverFile = compress(serverFile, getFileExtension(fileName), getFileSizeMegaBytes(serverFile));
 
                 logger.info("Server File Location="
@@ -414,6 +414,7 @@ public class HomeController {
                 putImg(event.getId(), serverFile.getAbsolutePath());
             } catch (Exception e) {
                 logger.error("You failed to upload file => " + e.getMessage());
+                eventService.delete(event.getId());
                 modelMap.addAttribute("error_data", "ERROR UPLOAD FILE");
                 return "error";
             }
