@@ -340,7 +340,7 @@ public class HomeController {
         event.setPhoto(-1);
         event.setPhotoUrl("URL");
 
-        if (!result.hasErrors() && eventService!=null) {
+        if (!result.hasErrors()) {
             eventService.addEvent(event);
         } else return events(model);
 

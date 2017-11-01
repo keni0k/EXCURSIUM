@@ -17,9 +17,8 @@ public class EventServiceImpl implements EventService {
     private PersonServiceImpl personService;
 
     @Override
-    public Event addEvent(Event message) {
-
-        return eventRepository.saveAndFlush(message);
+    public Event addEvent(Event event) {
+        return eventRepository.save(event);
     }
 
     @Override
