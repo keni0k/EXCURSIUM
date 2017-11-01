@@ -334,7 +334,7 @@ public class HomeController {
                               @RequestParam("language") int language,
                               @RequestParam("usersCount") int usersCount,
                               @RequestParam("price") int price,
-                              @RequestParam("file") MultipartFile file) throws IOException {
+                              @RequestParam("file") MultipartFile file) {
         Event event = new Event(place, category, new LocalTime().toString(), duration, price, description,-1,-1,name,-1,usersCount,language);
         event.setGuideId(-1);
         event.setPhotoUrl("URL");
@@ -370,12 +370,10 @@ public class HomeController {
             }
             return "SUCCESFULL";
         } else if (file==null){
-            return "You failed to upload " + event.getName() + randomToken(6)
-                    + " because the file is null.";
+            return "You failed to upload file because the file is null.";
         }
         else {
-            return "You failed to upload " + event.getName() + randomToken(6)
-                    + " because the file is empty.";
+            return "You failed to upload file because the file is empty.";
         }
         //eventAdd(model);
     }
