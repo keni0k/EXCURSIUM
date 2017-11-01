@@ -77,7 +77,7 @@
         <form th:object="${insertEvent}" action="/addeventhttp" method="POST">
 
             Категория:
-            <select name="category" th:value="insertEvent.category">
+            <select name="category" th:value="${insertEvent.category}">
                 <option value="0">Развлечения</option>
                 <option value="1"> Наука</option>
                 <option value="2"> История</option>
@@ -89,26 +89,22 @@
 
             </select>
             <br/>
-            Место проведения: <input name="place" type="text" value=""/>
+            Место проведения: <input name="place" type="text" th:value="${insertEvent.place}"/>
 
             <br/>
-            Продолжительность: <input name="guideId" type="number" value=""/>
+            Продолжительность: <input name="duration" type="number" th:value="${insertEvent.duration}"/>
             <br/>
-            Описание: <input name="description" type="text" value=""/>
+            Описание: <input name="description" type="text" th:value="${insertEvent.description}"/>
             <br/>
-            Кол-во туристов: <input name="photo" type="number" value=""/>
+            Кол-во туристов: <input name="usersCount" type="number" th:value="${insertEvent.usersCount}"/>
             <br/>
             Язык:
-            <select name="rate">
+            <select name="language" th:value="${insertEvent.language}">
                 <option value="0">Русский</option>
                 <option value="1">English</option>
             </select>
             <br/>
-            ФИО: <input name="time" type="text" value=""/>
-            <br/>
-            Номер телефона: <input name="duration" type="text" value="" data-format="+79ddddddddd"/>
-            <br/>
-            Цена: <input name="price" type="number" value=""/>
+            Цена: <input name="price" type="number" th:value="${insertEvent.price}"/>
             <br/>
             <button type="submit" class="btn btn-default">Отправить</button>
 
@@ -138,29 +134,31 @@
             <tbody>
             <tr>
                 <td>ID</td>
-                <td>Место</td>
+                <td>Название</td>
                 <td>Категория</td>
                 <td>ID гида</td>
                 <td>Стоимость</td>
-                <td>Описание</td>
+                <td>Место</td>
                 <td>Язык</td>
                 <td>Кол-во человек</td>
                 <td>Продолжительность</td>
-                <td>Название</td>
-                <td>Редактировать</td>
+                <td>Описание</td>
+                <td></td>
+                <td></td>
             </tr>
             <tr th:each="event : ${events}">
                 <td th:text="${event.id}">Some text</td>
-                <td th:text="${event.place}">Some text</td>
+                <td th:text="${event.name}">Some text</td>
                 <td th:text="${event.getCategoryString()}">Some text</td>
                 <td th:text="${event.guideId}">Some text</td>
                 <td th:text="${event.price}">Some text</td>
-                <td th:text="${event.description}">Some text</td>
+                <td th:text="${event.place}">Some text</td>
                 <td th:text="${event.getLanguageString()}">Some text</td>
                 <td th:text="${event.usersCount}">Some text</td>
                 <td th:text="${event.duration}">Some text</td>
-                <td th:text="${event.name}">Some text</td>
-                <td><a th:href="@{/events(id = ${event.id})}">Редактировать</a></td>
+                <td th:text="${event.description}">Some text</td>
+                <td><a th:href="@{/events(id = ${event.id})}"><img src="../resources/img/icons/edit.png"></a></td>
+                <td><a th:href="@{/events(id = ${event.id})}"><img src="../resources/img/icons/del.png"></a></td>
             </tr>
             </tbody>
         </table>
