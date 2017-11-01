@@ -326,7 +326,7 @@ public class HomeController {
         blob1.uploadFromFile(path);
     }
 
-    @RequestMapping(value = "/addeventhttp", method = RequestMethod.POST, headers = "content-type=multipart/*")
+    @RequestMapping(value = "/addeventhttp", method = RequestMethod.POST, headers = ("content-type=multipart/*"))
     @ResponseBody
     public String insertEvent(ModelMap model,
                               @ModelAttribute("insertEvent") @Valid Event event,
