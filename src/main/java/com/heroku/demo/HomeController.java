@@ -73,7 +73,6 @@ public class HomeController {
     private EventServiceImpl eventService;
     private PhotoServiceImpl photoService;
 
-    private LocalTime localTime;
     private static final Logger logger = LoggerFactory
             .getLogger(HomeController.class);
 
@@ -206,6 +205,7 @@ public class HomeController {
         }
         return builder.toString();
     }
+
     @RequestMapping("/sendemail")
     @ResponseBody
     private String sendMail() throws MailjetSocketTimeoutException, MailjetException {
@@ -535,13 +535,14 @@ public class HomeController {
                               @ModelAttribute("language") int language,
                               @ModelAttribute("users_count") int usersCount,
                               @ModelAttribute("price") int price,
-                              @ModelAttribute("photo") int photo,
+                              @ModelAttribute("photo") String photo,
                               BindingResult result) {
-
-        Event e = new Event(place, category, "TIME", duration, price, description, -1, photo, name, -1, usersCount, language);
+        Event e = new Event(place, category, new LocalTime().toDateTimeToday().toString(), duration, price, description, -1, -1, name, -1, usersCount, language);
         if (!result.hasErrors()) {
             //person.setWhat(3);
             eventService.addEvent(e);
+            if (photo!=null)
+            photoService.addPhoto(new Photo((int) e.getId(), photo));
         }
         return e.toString();
     }
