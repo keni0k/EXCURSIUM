@@ -331,7 +331,7 @@ public class HomeController {
     @RequestMapping("/addeventhttp")
     @ResponseBody
     public String insertEvent(ModelMap model,
-                              @ModelAttribute("insertEvent") @Valid Event event,
+                              @ModelAttribute("insertEvent") Event event,
                               BindingResult result) {
         event.setType(-1);
         event.setRate(-1);
