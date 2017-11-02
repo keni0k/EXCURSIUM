@@ -17,7 +17,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="#{title.events('en')}">
+    <title th:text="${#messages.msg(#{title.events})}">
         Модерация попробуем
     </title>
     <!-- Latest compiled and minified CSS -->
