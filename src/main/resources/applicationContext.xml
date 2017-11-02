@@ -7,28 +7,51 @@
                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
                            http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
 
-    <context:annotation-config />
-    <context:component-scan base-package="com.heroku.demo" />
+    <context:annotation-config/>
+    <context:component-scan base-package="com.heroku.demo"/>
 
     <mvc:annotation-driven/>
 
     <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
-        <property name="prefix" value="/WEB-INF/jsp/" />
-        <property name="suffix" value=".jsp" />
-        <property name="redirectHttp10Compatible" value="false" />
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+        <property name="redirectHttp10Compatible" value="false"/>
     </bean>
 
 
     <!--suppress SpringModelInspection -->
-    <mvc:resources mapping="/resources/**" location="/resources/" />
+    <mvc:resources mapping="/resources/**" location="/resources/"/>
 
     <bean id="multipartResolver"
-                class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 
         <!-- setting maximum upload size -->
-        <property name="maxUploadSize" value="10000000" />
+        <property name="maxUploadSize" value="10000000"/>
 
+    </bean>
+
+
+    <bean class="org.springframework.web.servlet.i18n.SessionLocaleResolver" id="localeResolver">
+        <property value="ru" name="defaultLocale"/>
+    </bean>
+
+    <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" id="localeChangeInterceptor">
+        <property value="language" name="paramName"/>
+    </bean>
+
+
+    <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">
+        <property name="interceptors">
+            <list>
+                <ref bean="localeChangeInterceptor"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Register the welcome.properties -->
+    <bean class="org.springframework.context.support.ResourceBundleMessageSource" id="messageSource">
+        <property value="languages.title" name="basename"/>
     </bean>
 
 </beans>
