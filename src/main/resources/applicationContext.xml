@@ -32,14 +32,6 @@
     </bean>
 
 
-    <bean class="org.springframework.web.servlet.i18n.SessionLocaleResolver" id="localeResolver">
-        <property value="ru" name="defaultLocale"/>
-    </bean>
-
-    <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" id="localeChangeInterceptor">
-        <property value="language" name="paramName"/>
-    </bean>
-
 
     <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">
         <property name="interceptors">
@@ -47,11 +39,6 @@
                 <ref bean="localeChangeInterceptor"/>
             </list>
         </property>
-    </bean>
-
-    <!-- Register the welcome.properties -->
-    <bean class="org.springframework.context.support.ResourceBundleMessageSource" id="messageSource">
-        <property value="languages.title" name="basename"/>
     </bean>
 
 </beans>
