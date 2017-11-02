@@ -31,14 +31,4 @@
 
     </bean>
 
-
-
-    <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">
-        <property name="interceptors">
-            <list>
-                <ref bean="localeChangeInterceptor"/>
-            </list>
-        </property>
-    </bean>
-
 </beans>
