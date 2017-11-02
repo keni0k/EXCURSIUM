@@ -12,13 +12,10 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
-import org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Locale;
 
 @Configuration
@@ -84,12 +81,12 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         return messageSource;
     }
 
-    @Bean
-    public ControllerClassNameHandlerMapping controllerClassNameHandlerMapping(){
-        ControllerClassNameHandlerMapping handlerMapping = new ControllerClassNameHandlerMapping();
-        handlerMapping.setInterceptors(new ArrayList<LocaleChangeInterceptor>().addAll((Collection<? extends LocaleChangeInterceptor>) localeChangeInterceptor()));
-        return handlerMapping;
-    }
+//    @Bean
+//    public ControllerClassNameHandlerMapping controllerClassNameHandlerMapping(){
+//        ControllerClassNameHandlerMapping handlerMapping = new ControllerClassNameHandlerMapping();
+//        handlerMapping.setInterceptors(localeChangeInterceptor());
+//        return handlerMapping;
+//    }
 
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
