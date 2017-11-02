@@ -387,12 +387,13 @@ public class HomeController {
     @RequestMapping(value = "/addeventhttp", method = RequestMethod.POST)
     public String insertEvent(@ModelAttribute("inputEvent") @Valid Event event,
                               @RequestParam("file") MultipartFile file,
-                              ModelMap modelMap) {
+                              ModelMap modelMap,
+                              BindingResult result) {
         event.setTime(new LocalTime().toDateTimeToday().toString());
         event.setGuideId(-1);
         event.setPhotoUrl("URL");
 
-        if (eventService!=null) {
+        if (!result.hasErrors()) {
             eventService.editEvent(event);
         } else return "ERROR";
 
