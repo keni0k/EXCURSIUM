@@ -17,7 +17,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="${#messages.msg('titles.events', #locale.getLanguage())}">
+    <title th:text="${#messages.msg('titles.events')}">
         Модерация попробуем
     </title>
     <!-- Latest compiled and minified CSS -->
@@ -94,18 +94,20 @@
             Фото azure: <input name="file" accept="image/jpeg,image/png" type="file"/>
             <br/>
 
-            Категория:
-            <select name="category" th:selected="${insertEvent.getCategory()}">
-                <option value="0">Развлечения</option>
-                <option value="1"> Наука</option>
-                <option value="2"> История</option>
-                <option value="3"> Искусство</option>
-                <option value="4"> Производство</option>
-                <option value="5"> Гастрономия</option>
-                <option value="6"> Квесты</option>
-                <option value="7"> Экстрим</option>
+            <!--Категория:-->
+            <label th:text="${#messages.msg('words.category')}">
+                <select name="category" th:selected="${insertEvent.getCategory()}">
+                    <option value="0" th:text="${#messages.msg('categories.0')}">Развлечения</option>
+                    <option value="1" th:text="${#messages.msg('categories.1')}">Наука</option>
+                    <option value="2" th:text="${#messages.msg('categories.2')}">История</option>
+                    <option value="3" th:text="${#messages.msg('categories.3')}">Искусство</option>
+                    <option value="4" th:text="${#messages.msg('categories.4')}">Производство</option>
+                    <option value="5" th:text="${#messages.msg('categories.5')}">Гастрономия</option>
+                    <option value="6" th:text="${#messages.msg('categories.6')}">Квесты</option>
+                    <option value="7" th:text="${#messages.msg('categories.7')}">Экстрим</option>
 
-            </select>
+                </select>
+            </label>
             <br/>
             Место проведения: <input name="place" type="text" th:value="${insertEvent.place}"/>
 
