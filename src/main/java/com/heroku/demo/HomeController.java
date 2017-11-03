@@ -270,7 +270,7 @@ public class HomeController {
         Event editEvent = eventService.getById(id);
         model.addAttribute("events", events);
         model.addAttribute("insertEvent", editEvent);
-        return "events";
+        return "events.jsp";
     }
 
     @RequestMapping("/updatedbevents")
@@ -395,7 +395,7 @@ public class HomeController {
 
         if (!result.hasErrors()) {
             eventService.editEvent(event);
-        } else return "ERROR";
+        } else return "error";
 
         if (file != null && !file.isEmpty()) {
             try {

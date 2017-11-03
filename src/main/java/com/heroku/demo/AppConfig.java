@@ -41,8 +41,8 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     public InternalResourceViewResolver getJspResolver() {
         InternalResourceViewResolver templateResolver = new InternalResourceViewResolver();
         templateResolver.setPrefix("/WEB-INF/jsp/");
-        templateResolver.setSuffix(".jsp");
-//        templateResolver.setRedirectContextRelative(false);
+//        templateResolver.setSuffix(".jsp");
+        templateResolver.setRedirectContextRelative(false);
         return templateResolver;
     }
 
