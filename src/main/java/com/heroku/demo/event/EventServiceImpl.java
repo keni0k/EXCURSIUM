@@ -60,7 +60,14 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<Event> getByFilter(int priceUp, int priceDown, int category, int language, String words) {
+    public List<Event> getByFilter(Integer priceUp, Integer priceDown, Integer category, Integer language, String words) {
+
+        if (words==null) words = "";
+        if (priceUp==null) priceDown = -1;
+        if (priceUp==null) priceUp = -1;
+        if (category==null) category = -1;
+        if (language==null) language = -1;
+
         String[] wds = words.split(",");
         List<Event> list = eventRepository.findAll();
         list.sort(new Comparator<Event>() {

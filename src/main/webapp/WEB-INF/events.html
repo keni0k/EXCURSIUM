@@ -75,7 +75,7 @@
 
         <form th:object="${insertEvent}" action="/addeventhttp" method="POST" enctype="multipart/form-data">
 
-            <label th:text="${#messages.msg('words.type')}" for="type">:</label>
+            <label th:text="${#messages.msg('words.type')}" for="type"></label>:
             <select name="type" id = "type" th:selected="${insertEvent.getType()}">
                 <option value="-3">Не прошел модерацию</option>
                 <option value="-2">На перемодерации</option>
@@ -85,22 +85,22 @@
 
             <br/>
 
-            <label th:text="${#messages.msg('words.name')}" for="name">:</label>
-            <input name="name" type="text" id = "name" th:value="${insertEvent.name}"/>
+            <label th:text="${#messages.msg('words.name')}" for="name"></label>:
+            <textarea name="name" type="text" id = "name" th:value="${insertEvent.name}"></textarea>
 
             <br/>
 
-            <label th:text="${#messages.msg('words.guide_id')}" for="guide_id">:</label>
+            <label th:text="${#messages.msg('words.guide_id')}" for="guide_id"></label>:
             <input name="guideId" id = "guide_id" type="number" th:value="${insertEvent.guideId}"/>
 
             <br/>
 
-            <label th:text="${#messages.msg('words.photo')}" for="photo"> Azure:</label>
+            <label th:text="${#messages.msg('words.photo')}" for="photo"></label> Azure:
             <input name="file" id = "photo" accept="image/jpeg,image/png" type="file"/>
 
             <br/>
 
-            <label th:text="${#messages.msg('words.category')}" for="category">:</label>
+            <label th:text="${#messages.msg('words.category')}" for="category"></label>:
             <select name="category" id='category' th:selected="${insertEvent.getCategory()}">
                 <option value="0" th:text="${#messages.msg('category.0')}">Развлечения</option>
                 <option value="1" th:text="${#messages.msg('category.1')}">Наука</option>
@@ -114,27 +114,27 @@
 
             <br/>
 
-            <label th:text="${#messages.msg('words.place')}" for="place">:</label>
+            <label th:text="${#messages.msg('words.place')}" for="place"></label>:
             <input name="place" id = "place" type="text" th:value="${insertEvent.place}"/>
 
             <br/>
 
-            <label th:text="${#messages.msg('words.duration')}" for="duration">:</label>
+            <label th:text="${#messages.msg('words.duration')}" for="duration"></label>:
             <input name="duration" id = "duration" type="number" th:value="${insertEvent.duration}"/>
 
             <br/>
 
-            <label th:text="${#messages.msg('words.description')}" for="description">:</label>
+            <label th:text="${#messages.msg('words.description')}" for="description"></label>:
             <input name="description" type="text" id = "description" th:value="${insertEvent.description}"/>
 
             <br/>
 
-            <label th:text="${#messages.msg('words.usersCount')}" for="usersCount">:</label>
-            <input name="usersCount" id = "usersCount" type="number" th:value="${insertEvent.usersCount}"/>
+            <label th:text="${#messages.msg('words.users_count')}" for="users_count"></label>:
+            <textarea name="usersCount" id = "users_count" type="number" th:value="${insertEvent.usersCount}"></textarea>
 
             <br/>
 
-            <label th:text="${#messages.msg('words.language')}" for="language">:</label>
+            <label th:text="${#messages.msg('words.language')}" for="language"></label>:
             <select name="language" id="language" th:value="${insertEvent.language}">
                 <option value="0">Русский</option>
                 <option value="1">English</option>
@@ -142,7 +142,7 @@
 
             <br/>
 
-            <label th:text="${#messages.msg('words.price')}" for="price">:</label>
+            <label th:text="${#messages.msg('words.price')}" for="price"></label>:
             <input name="price" id = "price" type="number" th:value="${insertEvent.price}"/>
 
             <br/>

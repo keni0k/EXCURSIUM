@@ -255,21 +255,20 @@ public class HomeController {
         return persons(model);
     }
 
-    @RequestMapping("/events")
-    public String events(ModelMap model) {
-        List<Event> events = eventService.getAll();
+    @RequestMapping(value = "/events")
+    public String events(ModelMap model,
+                            @RequestParam(value = "id", required = false) Long id,
+                            @RequestParam(value = "price_up", required = false) Integer priceUp,
+                            @RequestParam(value = "price_down", required = false) Integer priceDown,
+                            @RequestParam(value = "category", required = false) Integer category,
+                            @RequestParam(value = "language", required = false) Integer language,
+                            @RequestParam(value = "words", required = false) String words) {
+        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, language, words);
+        if (id != null) {
+            Event editEvent = eventService.getById(id);
+            model.addAttribute("insertEvent", editEvent);
+        } else model.addAttribute("insertEvent", new Event());
         model.addAttribute("events", events);
-        model.addAttribute("insertEvent", new Event());
-        return "events";
-    }
-
-    @RequestMapping(value = "/events", params = "id")
-    public String eventEdit(ModelMap model,
-                            @RequestParam long id) {
-        List<Event> events = eventService.getAll();
-        Event editEvent = eventService.getById(id);
-        model.addAttribute("events", events);
-        model.addAttribute("insertEvent", editEvent);
         return "events";
     }
 
@@ -336,8 +335,8 @@ public class HomeController {
 
     private void putImg(long eventId, String path) throws StorageException, URISyntaxException, IOException, InvalidKeyException {
 
-        String photoToken = randomToken(32)+".jpg";
-        photoRepository.save(new Photo((int)eventId, photoToken));//todo
+        String photoToken = randomToken(32) + ".jpg";
+        photoRepository.save(new Photo((int) eventId, photoToken));//todo
         CloudStorageAccount account = CloudStorageAccount.parse("DefaultEndpointsProtocol=https;AccountName=excursium;AccountKey=fbMSD2cjYX08BJeKQvNM4Wk87I7fGWJShZvdtR3BdwvhXKUFuYv//qtJs9eAKmESG4Ib7CAHDJlgOIxSw5wwfg==;EndpointSuffix=core.windows.net");
         CloudBlobClient client = account.createCloudBlobClient();
         CloudBlobContainer container = client.getContainerReference("img");
@@ -345,9 +344,9 @@ public class HomeController {
         blob1.uploadFromFile(path);
     }
 
-    private String getFileExtension(String fileName){
-        if(fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
-            return fileName.substring(fileName.lastIndexOf(".")+1);
+    private String getFileExtension(String fileName) {
+        if (fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
+            return fileName.substring(fileName.lastIndexOf(".") + 1);
         else return "jpg";
     }
 
@@ -356,9 +355,9 @@ public class HomeController {
         BufferedImage image = ImageIO.read(file);
 
         File compressedImageFile = new File("compress.jpg");
-        OutputStream os =new FileOutputStream(compressedImageFile);
+        OutputStream os = new FileOutputStream(compressedImageFile);
 
-        Iterator<ImageWriter> writers =  ImageIO.getImageWritersByFormatName(extension);
+        Iterator<ImageWriter> writers = ImageIO.getImageWritersByFormatName(extension);
         ImageWriter writer = writers.next();
 
         ImageOutputStream ios = ImageIO.createImageOutputStream(os);
@@ -367,7 +366,7 @@ public class HomeController {
         ImageWriteParam param = writer.getDefaultWriteParam();
 
         param.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
-        param.setCompressionQuality((float) (2f/fileSize));
+        param.setCompressionQuality((float) (2f / fileSize));
         writer.write(null, new IIOImage(image, null, null), param);
 
         os.close();
@@ -381,7 +380,7 @@ public class HomeController {
     }
 
     private static double getFileSizeMegaBytes(File file) {
-        return (double) file.length()/(1024*1024);
+        return (double) file.length() / (1024 * 1024);
     }
 
     @RequestMapping(value = "/addeventhttp", method = RequestMethod.POST)
@@ -416,7 +415,7 @@ public class HomeController {
                 stream.write(bytes);
                 stream.close();
 
-                if (getFileSizeMegaBytes(serverFile)>1)
+                if (getFileSizeMegaBytes(serverFile) > 1)
                     serverFile = compress(serverFile, getFileExtension(fileName), getFileSizeMegaBytes(serverFile));
 
                 logger.info("Server File Location="
@@ -430,11 +429,10 @@ public class HomeController {
                 return "error";
             }
             return event(modelMap, (int) event.getId());
-        } else if (file==null){
+        } else if (file == null) {
             modelMap.addAttribute("error_data", "You failed to upload file because the file is null.");
             return "error";
-        }
-        else {
+        } else {
             modelMap.addAttribute("error_data", "You failed to upload file because the file is empty.");
             return "error";
         }
@@ -448,9 +446,14 @@ public class HomeController {
     }
 
     @RequestMapping("/deleteevent")
-    public String deleteEvent(ModelMap model, @ModelAttribute("id") String id) {
-        eventService.delete(Long.parseLong(id));
-        return events(model);
+    public String deleteEvent(ModelMap model, @ModelAttribute("id") Long id,
+                              @RequestParam(value = "price_up", required = false) Integer priceUp,
+                              @RequestParam(value = "price_down", required = false) Integer priceDown,
+                              @RequestParam(value = "category", required = false) Integer category,
+                              @RequestParam(value = "language", required = false) Integer language,
+                              @RequestParam(value = "words", required = false) String words) {
+        eventService.delete(id);
+        return events(model, null, priceUp, priceDown, category, language, words);
     }
 
     @RequestMapping("/addmsg")
@@ -552,8 +555,8 @@ public class HomeController {
         if (!result.hasErrors()) {
             //person.setWhat(3);
             eventService.addEvent(e);
-            if (photo!=null)
-            photoService.addPhoto(new Photo((int) e.getId(), photo));
+            if (photo != null)
+                photoService.addPhoto(new Photo((int) e.getId(), photo));
         }
         return e.toString();
     }
