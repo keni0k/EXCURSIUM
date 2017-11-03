@@ -41,7 +41,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     public InternalResourceViewResolver getJspResolver() {
         InternalResourceViewResolver templateResolver = new InternalResourceViewResolver();
         templateResolver.setPrefix("/WEB-INF/jsp/");
-//        templateResolver.setSuffix(".jsp");
+        templateResolver.setSuffix(".jsp");
         templateResolver.setRedirectContextRelative(false);
         return templateResolver;
     }
@@ -84,7 +84,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     @Bean(name = "messageSource")
     public MessageSource getMessageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-        messageSource.setBasename("classpath*:messages");
+        messageSource.setBasename("WEB-INF/messages");
         messageSource.setUseCodeAsDefaultMessage(true);
         messageSource.setDefaultEncoding("UTF-8");
         return messageSource;
