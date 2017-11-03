@@ -77,8 +77,8 @@
 
         <form th:object="${insertEvent}" action="/addeventhttp" method="POST" enctype="multipart/form-data">
 
-            Тип:
-            <select name="type" th:selected="${insertEvent.getType()}">
+            <label th:text="${#messages.msg('words.type')}" for="type">:</label>
+            <select name="type" id = "type" th:selected="${insertEvent.getType()}">
                 <option value="-3">Не прошел модерацию</option>
                 <option value="-2">На перемодерации</option>
                 <option value="-1">Не активен</option>
@@ -86,12 +86,13 @@
             </select>
 
             <br/>
-
-            Название: <input name="name" type="text" th:value="${insertEvent.name}"/>
+            <label th:text="${#messages.msg('words.name')}" for="name">:</label>
+            <input name="name" type="text" id = "name" th:value="${insertEvent.name}"/>
             <br/>
             ID гида: <input name="guideId" type="number" th:value="${insertEvent.guideId}"/>
             <br/>
-            Фото azure: <input name="file" accept="image/jpeg,image/png" type="file"/>
+            <label th:text="${#messages.msg('words.photo')}" for="photo"> Azure:</label>
+            <input name="file" id = "photo" accept="image/jpeg,image/png" type="file"/>
             <br/>
 
             <!--Категория:-->
@@ -121,7 +122,7 @@
             <label th:text="${#messages.msg('words.usersCount')}" for="usersCount">:</label>
             <input name="usersCount" id = "usersCount" type="number" th:value="${insertEvent.usersCount}"/>
             <br/>
-
+            <label th:text="${#messages.msg('words.language')}" for="language">:</label>
             <select name="language" id="language" th:value="${insertEvent.language}">
                 <option value="0">Русский</option>
                 <option value="1">English</option>
