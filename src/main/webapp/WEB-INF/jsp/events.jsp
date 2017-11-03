@@ -100,7 +100,7 @@
                 </div>
 
                 <div>
-                    <label for="guideId">ID <s:message code="words.of_guide"/>: </label>
+                    <label for="guideId"><s:message code="words.guide_id"/>: </label>
                     <sf:input path="guideId"/>
                 </div>
 
@@ -142,7 +142,7 @@
                 </div>
 
                 <div>
-                    <label for="usersCount"><s:message code="words.usersCount"/>: </label>
+                    <label for="usersCount"><s:message code="words.users_count"/>: </label>
                     <sf:input path="usersCount"/>
                 </div>
 

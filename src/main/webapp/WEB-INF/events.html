@@ -17,9 +17,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="${#messages.msg('titles.events')}">
-        Модерация попробуем
-    </title>
+    <title th:text="${#messages.msg('titles.events')}"></title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
     <!--<link rel="stylesheet" type="text/css" href="style.css"/>-->
@@ -59,14 +57,14 @@
 </head>
 <body>
 <div class="page-header">
-    <h1>Контакты</h1>
+    <h1 th:text="${#messages.msg('titles.events')}">Контакты</h1>
 </div>
 
 <nav class="four">
     <ul>
-        <li><a class="btn" href="/"><i class="fa fa-home fa-fw"></i>Главная</a></li>
-        <li><a class="btn" href="/#">EVENTS</a></li>
-        <li><a class="btn" href="/persons">USERS</a></li>
+        <li><a class="btn" href="/" th:text="${#messages.msg('words.home')}"><i class="fa fa-home fa-fw"></i>Главная</a></li>
+        <li><a class="btn" href="/#" th:text="${#messages.msg('words.events')}">EVENTS</a></li>
+        <li><a class="btn" href="/persons" th:text="${#messages.msg('words.users')}">USERS</a></li>
     </ul>
 </nav>
 <hr/>
@@ -86,16 +84,22 @@
             </select>
 
             <br/>
+
             <label th:text="${#messages.msg('words.name')}" for="name">:</label>
             <input name="name" type="text" id = "name" th:value="${insertEvent.name}"/>
-            <br/>
-            ID гида: <input name="guideId" type="number" th:value="${insertEvent.guideId}"/>
-            <br/>
-            <label th:text="${#messages.msg('words.photo')}" for="photo"> Azure:</label>
-            <input name="file" id = "photo" accept="image/jpeg,image/png" type="file"/>
+
             <br/>
 
-            <!--Категория:-->
+            <label th:text="${#messages.msg('words.guide_id')}" for="guide_id">:</label>
+            <input name="guideId" id = "guide_id" type="number" th:value="${insertEvent.guideId}"/>
+
+            <br/>
+
+            <label th:text="${#messages.msg('words.photo')}" for="photo"> Azure:</label>
+            <input name="file" id = "photo" accept="image/jpeg,image/png" type="file"/>
+
+            <br/>
+
             <label th:text="${#messages.msg('words.category')}" for="category">:</label>
             <select name="category" id='category' th:selected="${insertEvent.getCategory()}">
                 <option value="0" th:text="${#messages.msg('category.0')}">Развлечения</option>
@@ -109,31 +113,45 @@
             </select>
 
             <br/>
+
             <label th:text="${#messages.msg('words.place')}" for="place">:</label>
             <input name="place" id = "place" type="text" th:value="${insertEvent.place}"/>
 
             <br/>
+
             <label th:text="${#messages.msg('words.duration')}" for="duration">:</label>
             <input name="duration" id = "duration" type="number" th:value="${insertEvent.duration}"/>
+
             <br/>
+
             <label th:text="${#messages.msg('words.description')}" for="description">:</label>
             <input name="description" type="text" id = "description" th:value="${insertEvent.description}"/>
+
             <br/>
+
             <label th:text="${#messages.msg('words.usersCount')}" for="usersCount">:</label>
             <input name="usersCount" id = "usersCount" type="number" th:value="${insertEvent.usersCount}"/>
+
             <br/>
+
             <label th:text="${#messages.msg('words.language')}" for="language">:</label>
             <select name="language" id="language" th:value="${insertEvent.language}">
                 <option value="0">Русский</option>
                 <option value="1">English</option>
             </select>
+
             <br/>
+
             <label th:text="${#messages.msg('words.price')}" for="price">:</label>
             <input name="price" id = "price" type="number" th:value="${insertEvent.price}"/>
+
             <br/>
+
             <label for="id">ID:</label>
             <input type="number" name="id" id= "id" th:value="${insertEvent.id}"/>
-            <button type="submit" class="btn btn-default">Отправить</button>
+            <br/>
+            <button type="reset" class="btn btn-default" th:text="${#messages.msg('words.reset')}">Отмена</button>
+            <button type="submit" class="btn btn-default" th:text="${#messages.msg('words.submit')}">Сохранить</button>
 
 
         </form>
@@ -141,36 +159,26 @@
 </div>
 <hr/>
 
-<input type="text" id="del" value="">ID элемента</input>
-<script type='text/javascript'>
-    function a() {
-        var d = document.getElementById('del').value;
-        window.location = '/deleteevent?id=' + d;
-    }
-</script>
-<input type="button" onclick="javascript:a()" value="Удалить"/>
-<hr/>
-
 <div class="row">
     <div class="col-sm-12">
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>Users</th>
+                <th th:text="${#messages.msg('words.users')}">Users</th>
             </tr>
             </thead>
             <tbody>
             <tr>
                 <td>ID</td>
-                <td>Название</td>
-                <td>Категория</td>
-                <td>ID гида</td>
-                <td>Стоимость</td>
-                <td>Место</td>
-                <td>Язык</td>
-                <td>Кол-во человек</td>
-                <td>Продолжительность</td>
-                <td>Описание</td>
+                <td th:text="${#messages.msg('words.name')}">Название</td>
+                <td th:text="${#messages.msg('words.category')}">Категория</td>
+                <td th:text="${#messages.msg('words.guide_id')}">ID гида</td>
+                <td th:text="${#messages.msg('words.price')}">Стоимость</td>
+                <td th:text="${#messages.msg('words.place')}">Место</td>
+                <td th:text="${#messages.msg('words.language')}">Язык</td>
+                <td th:text="${#messages.msg('words.users_count')}">Кол-во человек</td>
+                <td th:text="${#messages.msg('words.duration')}">Продолжительность</td>
+                <td th:text="${#messages.msg('words.description')}">Описание</td>
                 <td></td>
                 <td></td>
             </tr>
