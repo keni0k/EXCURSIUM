@@ -270,7 +270,7 @@ public class HomeController {
         Event editEvent = eventService.getById(id);
         model.addAttribute("events", events);
         model.addAttribute("insertEvent", editEvent);
-        return "events.jsp";
+        return "events";
     }
 
     @RequestMapping("/updatedbevents")
