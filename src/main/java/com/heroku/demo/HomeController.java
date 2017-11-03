@@ -125,18 +125,6 @@ public class HomeController {
         return "event";
     }
 
-    @RequestMapping("/event_list")
-    public String eventList(ModelMap model) {
-        List<Event> events = eventService.getByFilter(-1, -1, -1, 0, "");
-        int size = events.size() % 3;
-        for (int i = 0; i < size; i++) {
-            events.remove(events.size() - 1);
-        }
-        model.addAttribute("events", events);
-        model.addAttribute("utils", new UtilsForWeb());
-        return "event_list";
-    }
-
     @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET, value = "/getperson")
     @ResponseBody
     public String getPerson(ModelMap model,
@@ -168,14 +156,14 @@ public class HomeController {
     @RequestMapping(method = RequestMethod.GET, value = "/getexcursions")
     @ResponseBody
     public ResponseEntity<String> getEventsByFilter(ModelMap model,
-                                                    @ModelAttribute("price_down") int priceDown,
-                                                    @ModelAttribute("price_up") int priceUp,
-                                                    @ModelAttribute("category") int category,
-                                                    @ModelAttribute("words") String words,
-                                                    @ModelAttribute("language") int language) {
+                                                    @RequestParam(value = "price_down", required = false) Integer priceDown,
+                                                    @RequestParam(value = "price_up", required = false) Integer priceUp,
+                                                    @RequestParam(value = "category", required = false) Integer category,
+                                                    @RequestParam(value = "words", required = false) String words,
+                                                    @RequestParam(value = "language", required = false) Integer language) {
 
         ArrayList<String> arrayList = new ArrayList<>();
-        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, language, words);
+        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, language, words, false);
         for (Event e : events) {
             arrayList.add(e.toString());
         }
@@ -262,8 +250,9 @@ public class HomeController {
                             @RequestParam(value = "price_down", required = false) Integer priceDown,
                             @RequestParam(value = "category", required = false) Integer category,
                             @RequestParam(value = "language", required = false) Integer language,
-                            @RequestParam(value = "words", required = false) String words) {
-        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, language, words);
+                            @RequestParam(value = "words", required = false) String words,
+                            @RequestParam(value = "sort_by", required = false) Integer sortBy) {
+        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, language, words, sortBy);
         if (id != null) {
             Event editEvent = eventService.getById(id);
             model.addAttribute("insertEvent", editEvent);
@@ -295,27 +284,14 @@ public class HomeController {
         return "YES";
     }
 
-    @RequestMapping(value = "/event_list", params = "category")
-    public String eventsByCategory(ModelMap model,
-                                   @ModelAttribute("category") int category) {
-        List<Event> events = eventService.getByFilter(-1, -1, category, 0, "");
-        int size = events.size() % 3;
-        for (int i = 0; i < size; i++) {
-            events.remove(events.size() - 1);
-        }
-        model.addAttribute("events", events);
-        model.addAttribute("utils", new UtilsForWeb());
-        return "event_list";
-    }
-
     @RequestMapping(value = "/event_list", params = {"category", "language", "price_up", "price_down", "words"})
     public String eventsByFilter(ModelMap model,
-                                 @ModelAttribute("category") int category,
-                                 @ModelAttribute("language") int language,
-                                 @ModelAttribute("price_up") int priceUp,
-                                 @ModelAttribute("price_down") int priceDown,
-                                 @ModelAttribute("words") String words) {
-        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, language, words);
+                                 @RequestParam(value = "category", required = false) Integer category,
+                                 @RequestParam(value = "language", required = false) Integer language,
+                                 @RequestParam(value = "price_up", required = false) Integer priceUp,
+                                 @RequestParam(value = "price_down", required = false) Integer priceDown,
+                                 @RequestParam(value = "words", required = false) String words) {
+        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, language, words, true);
         int size = events.size() % 3;
         for (int i = 0; i < size; i++) {
             events.remove(events.size() - 1);
@@ -453,7 +429,7 @@ public class HomeController {
                               @RequestParam(value = "language", required = false) Integer language,
                               @RequestParam(value = "words", required = false) String words) {
         eventService.delete(id);
-        return events(model, null, priceUp, priceDown, category, language, words);
+        return events(model, null, priceUp, priceDown, category, language, words, null);
     }
 
     @RequestMapping("/addmsg")

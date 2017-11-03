@@ -60,7 +60,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<Event> getByFilter(Integer priceUp, Integer priceDown, Integer category, Integer language, String words) {
+    public List<Event> getByFilter(Integer priceUp, Integer priceDown, Integer category, Integer language, String words, boolean isSort) {
 
         if (words==null) words = "";
         if (priceUp==null) priceDown = -1;
@@ -70,12 +70,14 @@ public class EventServiceImpl implements EventService {
 
         String[] wds = words.split(",");
         List<Event> list = eventRepository.findAll();
-        list.sort(new Comparator<Event>() {
-            @Override
-            public int compare(Event o1, Event o2) {
-                return Long.compare(o1.getId(), o2.getId());
-            }
-        });
+
+        if (words.equals("") && isSort)
+            list.sort(new Comparator<Event>() {
+                @Override
+                public int compare(Event o1, Event o2) {
+                    return Long.compare(o1.getId(), o2.getId());
+                }
+            });
         List<Event> copy = new ArrayList<>();
         if (priceUp == -1) priceUp = Integer.MAX_VALUE;
         boolean bool = false;
@@ -112,5 +114,25 @@ public class EventServiceImpl implements EventService {
             }
         });
         return copy;
+    }
+
+    public List<Event> getByFilter(Integer priceUp, Integer priceDown, Integer category, Integer language, String words, Integer sortBy) {
+
+        List<Event> events = getByFilter(priceUp, priceDown, category, language, words, false);
+        if (sortBy==null) return events;
+        switch (sortBy){
+            case 1:break;
+            case 2:break;
+        }
+        events.sort(new Comparator<Event>() {
+            @Override
+            public int compare(Event o1, Event o2) {
+                switch (sortBy) {
+                    case 1: return Integer.compare(o2.cnt, o1.cnt);
+                }
+                return Long.compare(o1.getId(), o2.getId());
+            }
+        });
+        return events;
     }
 }
