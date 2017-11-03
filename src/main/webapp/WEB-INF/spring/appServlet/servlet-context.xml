@@ -24,6 +24,9 @@
         <property name="defaultEncoding" value="UTF-8" />
     </bean>
 
+    <bean class="org.springframework.web.servlet.i18n.SessionLocaleResolver" id="localeResolver">
+        <property value="ru" name="defaultLocale"/>
+    </bean>
 
     <!--suppress SpringModelInspection -->
     <mvc:resources mapping="/resources/**" location="/resources/"/>
