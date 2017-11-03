@@ -57,7 +57,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     @Bean(name = "localeChangeInterceptor")
     public LocaleChangeInterceptor localeChangeInterceptor() {
         LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
-        lci.setParamName("lang");
+        lci.setParamName("language");
         return lci;
     }
 
@@ -67,7 +67,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     }
 
 
-    @Bean(name = "locateResolver")
+    @Bean(name = "localeResolver")
     public SessionLocaleResolver localeResolver(){
         SessionLocaleResolver localeResolver = new SessionLocaleResolver();
         localeResolver.setDefaultLocale(new Locale("ru", "RU"));
