@@ -75,9 +75,6 @@
 <div class="row">
     <div class="col-md-12 col-lg-6">
 
-        <p th:text="${#locale.language}"> language</p>
-        <p th:text="${#locale.country}"> country</p>
-
         <form th:object="${insertEvent}" action="/addeventhttp" method="POST" enctype="multipart/form-data">
 
             Тип:
@@ -115,7 +112,7 @@
             <br/>
             Продолжительность: <input name="duration" type="number" th:value="${insertEvent.duration}"/>
             <br/>
-            Описание: <input name="description" type="text" th:value="${insertEvent.description}"/>
+            <span th:text="#{words.description}">Описание</span>: <input name="description" type="text" th:value="${insertEvent.description}"/>
             <br/>
             Кол-во туристов: <input name="usersCount" type="number" th:value="${insertEvent.usersCount}"/>
             <br/>
