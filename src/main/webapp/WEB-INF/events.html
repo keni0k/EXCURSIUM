@@ -86,7 +86,7 @@
             <br/>
 
             <label th:text="${#messages.msg('words.name')}" for="name"></label>:
-            <textarea name="name" type="text" id = "name" th:value="${insertEvent.name}"></textarea>
+            <textarea name="name" type="text" id = "name" th:text="${insertEvent.name}"></textarea>
 
             <br/>
 
@@ -125,12 +125,12 @@
             <br/>
 
             <label th:text="${#messages.msg('words.description')}" for="description"></label>:
-            <input name="description" type="text" id = "description" th:value="${insertEvent.description}"/>
+            <textarea name="description" type="text" id = "description" th:text="${insertEvent.description}"></textarea>
 
             <br/>
 
             <label th:text="${#messages.msg('words.users_count')}" for="users_count"></label>:
-            <textarea name="usersCount" id = "users_count" type="number" th:value="${insertEvent.usersCount}"></textarea>
+            <input name="usersCount" id = "users_count" type="number" th:value="${insertEvent.usersCount}"/>
 
             <br/>
 
