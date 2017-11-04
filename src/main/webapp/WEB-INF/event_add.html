@@ -144,7 +144,7 @@
                         </div>
                         <div class="panel-body">
                             <div class="input-group">
-                                <select name="category" class="form-control selectpicker" th:selected="${inputEvent.getCategory() != null} ? ${insertEvent.getCategory()}">
+                                <select name="category" class="form-control selectpicker" th:selected="${inputEvent.getCategory()!=null}?${insertEvent.getCategory()}:0">
                                     <option value="0">Развлечения</option>
                                     <option value="1">Наука</option>
                                     <option value="2">История</option>
