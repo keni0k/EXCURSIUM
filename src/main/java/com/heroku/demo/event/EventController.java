@@ -1,6 +1,7 @@
 package com.heroku.demo.event;
 
 import com.heroku.demo.HomeController;
+import com.heroku.demo.person.PersonController;
 import com.heroku.demo.person.PersonRepository;
 import com.heroku.demo.person.PersonServiceImpl;
 import com.heroku.demo.photo.Photo;
@@ -34,7 +35,7 @@ import static com.heroku.demo.utils.Utils.*;
 @RequestMapping("/events")
 public class EventController {
 
-    private static String AUTH_KEY = "jP7xwaj12EYohNabYr1r6ewMeVJa8Jkf";
+    public static String AUTH_KEY = "jP7xwaj12EYohNabYr1r6ewMeVJa8Jkf";
 
     private ReviewRepository reviewRepository;
     private PhotoRepository photoRepository;
@@ -219,6 +220,7 @@ public class EventController {
             if (sortBy == null) model.addAttribute("inc", 0);
             else if (sortBy % 2 == 0) model.addAttribute("inc", 1);
             else model.addAttribute("inc", 0);
+            model.addAttribute("auth_persons", PersonController.AUTH_KEY);
             model.addAttribute("auth", authKey);
         } else {
             model.addAttribute("insertEvent", new Event());

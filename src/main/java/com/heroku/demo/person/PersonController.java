@@ -1,5 +1,6 @@
 package com.heroku.demo.person;
 
+import com.heroku.demo.event.EventController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -18,7 +19,7 @@ import static com.heroku.demo.utils.Utils.randomToken;
 @RequestMapping("/users")
 public class PersonController {
 
-    private static String AUTH_KEY = "DGgttMjxGUuuLvr49LnEWVFBbkxSNXnH";
+    public static String AUTH_KEY = "DGgttMjxGUuuLvr49LnEWVFBbkxSNXnH";
 
     private PersonServiceImpl personService;
 
@@ -96,6 +97,8 @@ public class PersonController {
             persons = personService.getAll();
         model.addAttribute("persons", persons);
         model.addAttribute("insertPerson", new Person());
+        model.addAttribute("auth", AUTH_KEY);
+        model.addAttribute("auth_events", EventController.AUTH_KEY);
         return "persons";
     }
 

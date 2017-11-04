@@ -62,7 +62,7 @@
 <nav class="four">
     <ul>
         <li><a class="btn" href="/" th:text="${#messages.msg('words.home')}"><i class="fa fa-home fa-fw"></i>Главная</a></li>
-        <li><a class="btn" th:href="@{/events/moderation(auth = ${auth})}" th:text="${#messages.msg('words.events')}">EVENTS</a></li>
+        <li><a class="btn" th:href="@{/events/moderation(auth = ${auth_events})}" th:text="${#messages.msg('words.events')}">EVENTS</a></li>
         <li><a class="btn" th:href="@{/users/moderation(auth = ${auth})}" th:text="${#messages.msg('words.users')}">USERS</a></li>
     </ul>
 </nav>
