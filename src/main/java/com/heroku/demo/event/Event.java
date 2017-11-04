@@ -109,6 +109,7 @@ public class Event {
 
     private int price = 0;
 
+    @Size(min=150, max=1000)
     private String description = "";
 
     private int rate = -1;
