@@ -116,7 +116,13 @@ public class HomeController {
     @RequestMapping("/event_add")
     public String eventAdd(ModelMap model) {
         model.addAttribute("inputEvent", new Event());
-        model.addAttribute("file", null);
+        return "event_add";
+    }
+
+    private String eventAddAgain(ModelMap model,
+                                Event event, String errorData) {
+        model.addAttribute("inputEvent", event);
+        model.addAttribute("error_data", errorData);
         return "event_add";
     }
 
@@ -407,18 +413,13 @@ public class HomeController {
             } catch (Exception e) {
                 logger.error("You failed to upload file => " + e.getMessage());
                 eventService.delete(event.getId());
-                modelMap.addAttribute("error_data", "ERROR UPLOAD FILE");
-                return "error";
+                return eventAddAgain(modelMap, event, "You failed to upload file. Please, try again.");
             }
             return event(modelMap, (int) event.getId());
         } else if (file == null) {
-            modelMap.addAttribute("error_data", "You failed to upload file because the file is null.");
-            return "error";
+            return eventAddAgain(modelMap, event, "You failed to upload file because the file is null.");
         } else {
-            modelMap.addAttribute("file", file);
-            modelMap.addAttribute("insertEvent", event);
-            modelMap.addAttribute("error_data", "You failed to upload file because the file is empty.");
-            return "event_add";
+            return eventAddAgain(modelMap, event, "You failed to upload file because the file is empty.");
         }
     }
 
