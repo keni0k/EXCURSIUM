@@ -193,8 +193,8 @@
                 <td th:text="${event.usersCount}">Some text</td>
                 <td th:text="${event.duration}">Some text</td>
                 <td th:text="${event.description}">Some text</td>
-                <td th:text="${event.getType()}">Some text</td>
-                <td th:text="${event.getRate()}">Some text</td>
+                <td th:text="${event.type}">Some text</td>
+                <td th:text="${event.rate}">Some text</td>
                 <td><a th:href="@{/events/moderation(id = ${event.id})}"><img src="../resources/img/icons/edit.png"/></a></td>
                 <td><a data-th-method="delete" th:href="@{/events/(id = ${event.id})}"><img src="../resources/img/icons/del.png"/></a></td>
             </tr>
