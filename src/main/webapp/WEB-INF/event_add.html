@@ -127,14 +127,14 @@
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon1">Название</span>
                         <input name="name" type="text" class="form-control" id = "name" placeholder="Название" aria-label="Название"
-                               aria-describedby="basic-addon1" th:value="${inputEvent.getName()}?${insertEvent.getName()}:''"/>
+                               aria-describedby="basic-addon1" th:value="${inputEvent.getName()}"/>
                         <label for="name" th:if="${#fields.hasErrors('name')}" th:text="${#messages.msg('error.event.name')}" th:class="'error'">Name Error</label>
                     </div>
                     <br/>
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon1">Описание</span>
                         <textarea name="description" type="text" id = "description" class="form-control" placeholder="Описание"
-                                  aria-label="Описание" aria-describedby="basic-addon1" th:text="${inputEvent.getDescription()}?${insertEvent.getDescription()}"></textarea>
+                                  aria-label="Описание" aria-describedby="basic-addon1" th:text="${inputEvent.getDescription()}"></textarea>
                         <label for="description" th:if="${#fields.hasErrors('description')}" th:text="${#messages.msg('error.event.description')}" th:class="'error'">Description Error</label>
                     </div>
                     <br/>
