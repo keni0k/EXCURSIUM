@@ -361,9 +361,9 @@ public class HomeController {
 
     @RequestMapping(value = "/addeventhttp", method = RequestMethod.POST)
     public String insertEvent(@ModelAttribute("inputEvent") @Valid Event event,
+                              BindingResult result,
                               @RequestParam("file") MultipartFile file,
-                              ModelMap modelMap,
-                              BindingResult result) {
+                              ModelMap modelMap) {
         event.setTime(new LocalTime().toDateTimeToday().toString());
         event.setGuideId(-1);
         event.setPhotoUrl("URL");
