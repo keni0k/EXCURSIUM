@@ -25,9 +25,6 @@ public class Event implements Comparable {
                 "\t\"description\":\"" + description + "\",\n" +
                 "\t\"name\":\"" + name + "\",\n" +
                 "\t\"photo_url\":\"" + photoUrl + "\",\n" +
-
-//                "\t\"full_name\":\"" + time + "\",\n" +
-//                "\t\"phone\":\"" + duration + "\",\n" +
                 "\t\"language\":\"" + language + "\",\n" +
                 "\t\"duration\":\"" + duration + "\",\n" +
                 "\t\"users_count\":\"" + usersCount + "\",\n" +

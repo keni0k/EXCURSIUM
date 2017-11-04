@@ -11,7 +11,7 @@ import java.util.List;
 
 public class EventServiceImpl implements EventService {
 
-    public EventRepository getMessageRepository() {
+    public EventRepository getEventRepository() {
         return eventRepository;
     }
 
@@ -62,29 +62,22 @@ public class EventServiceImpl implements EventService {
     @Override
     public List<Event> getByFilter(Integer priceUp, Integer priceDown, Integer category, Integer language, String words, boolean isSort) {
 
+        boolean isAllLang = false;
         if (words==null) words = "";
-        if (priceUp==null) priceDown = -1;
+        if (priceDown==null) priceDown = -1;
         if (priceUp==null) priceUp = -1;
         if (category==null) category = -1;
         if (language==null) language = -1;
+        if (priceUp == -1) priceUp = Integer.MAX_VALUE;
+        if (language == -1) isAllLang = true;
 
         String[] wds = words.split(",");
         List<Event> list = eventRepository.findAll();
 
-        if (words.equals("") && isSort)
-            list.sort(new Comparator<Event>() {
-                @Override
-                public int compare(Event o1, Event o2) {
-                    return Long.compare(o1.getId(), o2.getId());
-                }
-            });
         List<Event> copy = new ArrayList<>();
-        if (priceUp == -1) priceUp = Integer.MAX_VALUE;
-        boolean bool = false;
-        if (language == -1) bool = true;
         for (Event aList : list)
             if ((aList.getPrice() >= priceDown) && (aList.getPrice() <= priceUp) &&
-                    ((aList.getCategory() == category) || (category == -1)) && ((aList.getLanguage() == language) || bool) && aList.getType()==0) {
+                    ((aList.getCategory() == category) || (category == -1)) && ((aList.getLanguage() == language) || isAllLang) && aList.getType()==0) {
 
                 Person p = personService.getById(aList.getGuideId());
                 if (p!=null) {
@@ -107,6 +100,14 @@ public class EventServiceImpl implements EventService {
                 } else
                     copy.add(aList);
             }
+        if (words.equals("") && isSort)
+            list.sort(new Comparator<Event>() {
+                @Override
+                public int compare(Event o1, Event o2) {
+                    return Long.compare(o1.getId(), o2.getId());
+                }
+            });
+        else
         if (!words.equals("")) copy.sort(new Comparator<Event>() {
             @Override
             public int compare(Event o1, Event o2) {
@@ -128,8 +129,8 @@ public class EventServiceImpl implements EventService {
             @Override
             public int compare(Event o1, Event o2) {
                 switch (sortBy) {
-                    case 0: return Long.compare(o1.getId(), o1.getId());
-                    case 1: return Long.compare(o1.getId(), o1.getId());
+                    case 0: return Long.compare(o1.getId(), o2.getId());
+                    case 1: return Long.compare(o2.getId(), o1.getId());
                     case 2: return Long.compare(o1.getId(), o1.getId());
                     case 3: return Long.compare(o1.getId(), o1.getId());
                     case 4: return Long.compare(o1.getId(), o1.getId());
