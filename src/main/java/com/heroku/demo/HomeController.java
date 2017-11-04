@@ -116,6 +116,7 @@ public class HomeController {
     @RequestMapping("/event_add")
     public String eventAdd(ModelMap model) {
         model.addAttribute("inputEvent", new Event());
+        model.addAttribute("file", null);
         return "event_add";
     }
 
@@ -367,12 +368,10 @@ public class HomeController {
         event.setTime(new LocalTime().toDateTimeToday().toString());
         event.setGuideId(-1);
         event.setPhotoUrl("URL");
-        logger.error("Error1");
         if (!result.hasErrors()) {
-            logger.error("Error2");
             eventService.editEvent(event);
         } else {
-            logger.error("Error3");
+            modelMap.addAttribute("file", file);
             modelMap.addAttribute("insertEvent", event);
             return "event_add";
         }
