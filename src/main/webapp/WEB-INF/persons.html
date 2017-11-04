@@ -31,7 +31,7 @@
             margin-top: 25px; /*делаем отступ сверху*/
         }
 
-        a {
+        .btn {
             text-decoration: none; /*убираем подчеркивание текста ссылок*/
             background: #30A8E6; /*добавляем фон к пункту меню*/
             color: #fff; /*меняем цвет ссылок*/
@@ -43,7 +43,7 @@
             -webkit-transition: all 0.3s 0.01s ease;
         }
 
-        a:hover {
+        .btn:hover {
             background: #1C85BB; /*добавляем эффект при наведении*/
         }
 
@@ -157,8 +157,8 @@
                 <td th:text="${person.type}">Some text</td>
                 <td th:text="${person.rate}">Some text</td>
                 <td th:text="${person.token}">Some text</td>
-                <td><a th:href="@{/persons/${person.id}}"><img src="../resources/img/icons/edit.png"/></a></td>
-                <td><a th:href="@{/persons/${person.id}}"><img src="../resources/img/icons/del.png"/></a></td>
+                <td><a th:href="@{/persons/moderation(id = ${person.id}, auth = ${auth})}"><img src="../resources/img/icons/edit.png"/></a></td>
+                <td><a data-th-method="delete" th:href="@{/persons/${person.id}(auth = ${auth})}"><img src="../resources/img/icons/del.png"/></a></td>
             </tr>
             </tbody>
         </table>
