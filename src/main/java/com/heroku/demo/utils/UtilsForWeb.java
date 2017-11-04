@@ -1,6 +1,7 @@
 package com.heroku.demo.utils;
 
 public class UtilsForWeb {
+
     public static String getCategoryString(int category, int language) {
         String[] ru = {"Развлечения", "Наука", "История", "Искусство", "Производство", "Гастрономия", "Квесты", "Экстрим"};
         String[] en = {"Entertainment", "Science", "History", "Art", "Manufacture", "Gastronomy", "Quests", "Extreme"};

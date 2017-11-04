@@ -63,8 +63,8 @@
 <nav class="four">
     <ul>
         <li><a class="btn" href="/" th:text="${#messages.msg('words.home')}"><i class="fa fa-home fa-fw"></i>Главная</a></li>
-        <li><a class="btn" href="/#" th:text="${#messages.msg('words.events')}">EVENTS</a></li>
-        <li><a class="btn" href="/persons" th:text="${#messages.msg('words.users')}">USERS</a></li>
+        <li><a class="btn" href="/events/moderation" th:text="${#messages.msg('words.events')}">EVENTS</a></li>
+        <li><a class="btn" href="/users/moderation" th:text="${#messages.msg('words.users')}">USERS</a></li>
     </ul>
 </nav>
 <hr/>
@@ -73,7 +73,7 @@
 <div class="row">
     <div class="col-md-12 col-lg-6">
 
-        <form th:object="${insertEvent}" action="/addeventhttp" method="POST" enctype="multipart/form-data">
+        <form th:object="${insertEvent}" action="/events/add" method="POST" enctype="multipart/form-data">
 
             <label th:text="${#messages.msg('words.type')}" for="type"></label>:
             <select name="type" id = "type" th:selected="${insertEvent.getType()}">
@@ -86,17 +86,17 @@
             <br/>
 
             <label th:text="${#messages.msg('words.name')}" for="name"></label>:
-            <textarea name="name" type="text" id = "name" th:text="${insertEvent.name}"></textarea>
+            <textarea name="name" type="text" id = "name" th:text="${insertEvent.name}" required=""></textarea>
 
             <br/>
 
             <label th:text="${#messages.msg('words.guide_id')}" for="guide_id"></label>:
-            <input name="guideId" id = "guide_id" type="number" th:value="${insertEvent.guideId}"/>
+            <input name="guideId" id = "guide_id" type="number" required="" th:value="${insertEvent.guideId}"/>
 
             <br/>
 
             <label th:text="${#messages.msg('words.photo')}" for="photo"></label> Azure:
-            <input name="file" id = "photo" accept="image/jpeg,image/png" type="file"/>
+            <input name="file" id = "photo" accept="image/jpeg,image/png" required="" type="file"/>
 
             <br/>
 
@@ -115,22 +115,22 @@
             <br/>
 
             <label th:text="${#messages.msg('words.place')}" for="place"></label>:
-            <input name="place" id = "place" type="text" th:value="${insertEvent.place}"/>
+            <input name="place" id = "place" type="text" th:value="${insertEvent.place}" required=""/>
 
             <br/>
 
             <label th:text="${#messages.msg('words.duration')}" for="duration"></label>:
-            <input name="duration" id = "duration" type="number" th:value="${insertEvent.duration}"/>
+            <input name="duration" id = "duration" type="number" th:value="${insertEvent.duration}" required=""/>
 
             <br/>
 
             <label th:text="${#messages.msg('words.description')}" for="description"></label>:
-            <textarea name="description" type="text" id = "description" th:text="${insertEvent.description}"></textarea>
+            <textarea name="description" type="text" id = "description" th:text="${insertEvent.description}" required=""></textarea>
 
             <br/>
 
             <label th:text="${#messages.msg('words.users_count')}" for="users_count"></label>:
-            <input name="usersCount" id = "users_count" type="number" th:value="${insertEvent.usersCount}"/>
+            <input name="usersCount" id = "users_count" type="number" th:value="${insertEvent.usersCount}" required=""/>
 
             <br/>
 
@@ -143,14 +143,14 @@
             <br/>
 
             <label th:text="${#messages.msg('words.price')}" for="price"></label>:
-            <input name="price" id = "price" type="number" th:value="${insertEvent.price}"/>
+            <input name="price" id = "price" type="number" th:value="${insertEvent.price}" required=""/>
 
             <br/>
 
             <label for="id">ID:</label>
-            <input type="number" name="id" id= "id" th:value="${insertEvent.id}"/>
+            <input type="number" name="id" id= "id" th:value="${insertEvent.id}" required=""/>
             <br/>
-            <button type="reset" class="btn btn-default" th:text="${#messages.msg('words.reset')}">Отмена</button>
+            <button type="reset" class="btn btn-default" th:text="${#messages.msg('words.reset')}">Сброс</button>
             <button type="submit" class="btn btn-default" th:text="${#messages.msg('words.submit')}">Сохранить</button>
 
 
@@ -195,8 +195,8 @@
                 <td th:text="${event.description}">Some text</td>
                 <td th:text="${event.getType()}">Some text</td>
                 <td th:text="${event.getRate()}">Some text</td>
-                <td><a th:href="@{/events(id = ${event.id})}"><img src="../resources/img/icons/edit.png"/></a></td>
-                <td><a th:href="@{/deleteevent(id = ${event.id})}"><img src="../resources/img/icons/del.png"/></a></td>
+                <td><a th:href="@{/events/moderation(id = ${event.id})}"><img src="../resources/img/icons/edit.png"/></a></td>
+                <td><a data-th-method="delete" th:href="@{/events/(id = ${event.id})}"><img src="../resources/img/icons/del.png"/></a></td>
             </tr>
             </tbody>
         </table>

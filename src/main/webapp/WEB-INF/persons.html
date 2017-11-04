@@ -16,7 +16,7 @@
 -->
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Модерация контента</title>
+    <title th:text="${#messages.msg('titles.persons')}">Модерация контента</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
@@ -55,16 +55,15 @@
     </style>
 </head>
 <body>
-<input class="container">
 <div class="page-header">
-    <h1>Контакты</h1>
+    <h1 th:text="${#messages.msg('titles.persons')}">Контакты</h1>
 </div>
 
 <nav class="four">
     <ul>
-        <li><a href="/"><i class="fa fa-home fa-fw"></i>Главная</a></li>
-        <li><a href="/events">EVENTS</a></li>
-        <li><a href="#">USERS</a></li>
+        <li><a class="btn" href="/" th:text="${#messages.msg('words.home')}"><i class="fa fa-home fa-fw"></i>Главная</a></li>
+        <li><a class="btn" href="/events/moderation" th:text="${#messages.msg('words.events')}">EVENTS</a></li>
+        <li><a class="btn" href="/users/moderation" th:text="${#messages.msg('words.users')}">USERS</a></li>
     </ul>
 </nav>
 <hr/>
@@ -72,7 +71,7 @@
 <hr/>
 <div class="row">
     <div class="col-md-12 col-lg-6">
-        <form th:object="${insertPerson}" action="//addpersonhttp" method="POST">
+        <form th:object="${insertPerson}" action="/users/add" method="POST">
 
             Тип пользователя:
             <select name="type">
@@ -86,7 +85,7 @@
             Логин: <input name="login" type="text" value=""/>
             <br/>
             Пароль:
-            <input name="pass" type="text" value=""/>
+            <input name="pass" type="password" value=""/>
             <br/>
             Имя:
             <input name="firstName" type="text" value=""/>
@@ -97,10 +96,10 @@
             <input name="imageUrl" type="text" value=""/>
             <br/>
             E-mail:
-            <input name="email" type="text" value=""/>
+            <input name="email" type="email" value=""/>
             <br/>
             Номер телефона:
-            <input name="phoneNumber" type="text" value=""/>
+            <input name="phoneNumber" type="tel" value=""/>
             <br/>
             О себе:
             <input name="about" type="text" value=""/>
@@ -119,16 +118,7 @@
         </form>
     </div>
 </div>
-<hr/>
 
-<input type="text" id="del" value="">ID элемента</input>
-<script type='text/javascript'>
-    function a() {
-        var d = document.getElementById('del').value;
-        window.location = '/deleteperson?id=' + d;
-    }
-</script>
-<input type="button" onclick="javascript:a()" value="Удалить"/>
 <hr/>
 
 <div class="row">
@@ -152,6 +142,8 @@
                 <td>Тип</td>
                 <td>Рейтинг</td>
                 <td>Токен</td>
+                <td>Изменить</td>
+                <td>Удалить</td>
             </tr>
             <tr th:each="person : ${persons}">
                 <td th:text="${person.id}">Some text</td>
@@ -165,6 +157,8 @@
                 <td th:text="${person.type}">Some text</td>
                 <td th:text="${person.rate}">Some text</td>
                 <td th:text="${person.token}">Some text</td>
+                <td><a th:href="@{/persons/${person.id}}"><img src="../resources/img/icons/edit.png"/></a></td>
+                <td><a th:href="@{/persons/${person.id}}"><img src="../resources/img/icons/del.png"/></a></td>
             </tr>
             </tbody>
         </table>
@@ -172,6 +166,5 @@
 </div>
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-</input>
 </body>
 </html>

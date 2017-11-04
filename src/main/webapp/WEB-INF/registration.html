@@ -42,8 +42,8 @@
 
     .navbar-nav > li > a {
         font-family: SegoeUIRegular;
-        padding-top: 0px;
-        padding-bottom: 0px;
+        padding-top: 0;
+        padding-bottom: 0;
         line-height: 95px;
     }
 
@@ -106,10 +106,10 @@
 
                 <!-- Содержимое основной части -->
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="event_list.html">Экскурсии</a></li>
+                    <li><a href="/events/list">Экскурсии</a></li>
                     <li><a href="#">FAQ</a></li>
                     <li><a href="index.html#contact">Контакты</a></li>
-                    <li><a href="registration.html">Регистрация</a></li>
+                    <li><a href="/users/add">Регистрация</a></li>
                 </ul>
 
             </div><!-- navbar collapse end -->
@@ -121,54 +121,49 @@
         </div>
         <div class="row">
             <div class="col-md-12 col-lg-6">
-                <form th:object="${insertPersons}" action="/addpersonhttp" method="POST">
+                <form th:object="${insertPersons}" action="/users/add" method="POST">
                     <br/>
                     <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1">Логин</span>
-                        <input name="login" type="text" class="form-control" placeholder="Логин" aria-label="Логин"
-                               aria-describedby="basic-addon1"/>
+                        <span class="input-group-addon">Логин</span>
+                        <input name="login" type="text" class="form-control" placeholder="Логин" aria-label="Логин"/>
                     </div>
                     <br/>
                     <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1">Пароль</span>
-                        <input name="pass" type="password" class="form-control" placeholder="Пароль" aria-label="Пароль"
-                               aria-describedby="basic-addon1"/>
+                        <span class="input-group-addon">Пароль</span>
+                        <input name="pass" type="password" class="form-control" placeholder="Пароль" aria-label="Пароль"/>
                     </div>
                     <br/>
                     <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1">Имя</span>
-                        <input name="firstName" type="text" class="form-control" placeholder="Имя" aria-label="Имя"
-                               aria-describedby="basic-addon1"/>
+                        <span class="input-group-addon">Имя</span>
+                        <input name="firstName" type="text" class="form-control" placeholder="Имя" aria-label="Имя"/>
                     </div>
                     <br/>
                     <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1">Фамилия</span>
+                        <span class="input-group-addon">Фамилия</span>
                         <input name="lastName" type="text" class="form-control" placeholder="Фамилия"
-                               aria-label="Фамилия" aria-describedby="basic-addon1"/>
+                               aria-label="Фамилия"/>
                     </div>
                     <br/>
                     <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1">Фото URL</span>
+                        <span class="input-group-addon">Фото URL</span>
                         <input name="imageUrl" type="text" class="form-control" placeholder="Фото URL"
-                               aria-label="Фото URL" aria-describedby="basic-addon1"/>
+                               aria-label="Фото URL"/>
                     </div>
                     <br/>
                     <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1">Email</span>
-                        <input name="email" type="text" class="form-control" placeholder="Email" aria-label="Email"
-                               aria-describedby="basic-addon1"/>
+                        <span class="input-group-addon">Email</span>
+                        <input name="email" type="email" class="form-control" placeholder="Email" aria-label="Email"/>
                     </div>
                     <br/>
                     <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1">Телефон</span>
+                        <span class="input-group-addon">Телефон</span>
                         <input name="phoneNumber" type="text" class="form-control bfh-phone" placeholder="Телефон"
-                               aria-label="Телефон" aria-describedby="basic-addon1" data-format="+7 (ddd) ddd-dddd"/>
+                               aria-label="Телефон" data-format="+7 (ddd) ddd-dddd"/>
                     </div>
                     <br/>
                     <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1">О себе</span>
-                        <input name="about" type="text" class="form-control" placeholder="О себе" aria-label="О себе"
-                               aria-describedby="basic-addon1"/>
+                        <span class="input-group-addon">О себе</span>
+                        <input name="about" type="text" class="form-control" placeholder="О себе" aria-label="О себе"/>
                     </div>
                     <br/>
                     <div class="input-group">
