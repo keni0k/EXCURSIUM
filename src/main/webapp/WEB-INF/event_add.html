@@ -125,14 +125,14 @@
                 <form th:object="${inputEvent}" method="POST" action="/addeventhttp" enctype="multipart/form-data">
                     <br/>
                     <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1">Название</span>
+                        <span class="input-group-addon">Название</span>
                         <input name="name" type="text" class="form-control" id = "name" placeholder="Название" aria-label="Название"
                                aria-describedby="basic-addon1" th:value="${inputEvent.getName()}"/>
                         <label for="name" th:if="${#fields.hasErrors('name')}" th:text="${#messages.msg('error.event.name')}" th:class="'error'">Name Error</label>
                     </div>
                     <br/>
                     <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1">Описание</span>
+                        <span class="input-group-addon">Описание</span>
                         <textarea name="description" type="text" id = "description" class="form-control" placeholder="Описание"
                                   aria-label="Описание" aria-describedby="basic-addon1" th:text="${inputEvent.getDescription()}"></textarea>
                         <label for="description" th:if="${#fields.hasErrors('description')}" th:text="${#messages.msg('error.event.description')}" th:class="'error'">Description Error</label>
@@ -158,37 +158,37 @@
                         </div>
                     </div>
                     <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1">Количество участников</span>
+                        <span class="input-group-addon">Количество участников</span>
                         <input name="usersCount" id = "users_count" type="number" class="form-control" placeholder="Количество участников"
                                aria-label="Количество участников" aria-describedby="basic-addon1" th:value="${inputEvent.getUsersCount()}?${insertEvent.getUsersCount()}"/>
                         <label for="users_count" th:if="${#fields.hasErrors('usersCount')}" th:text="${#messages.msg('error.event.users_count')}" th:class="'error'">UsersCount Error</label>
                     </div>
                     <br/>
                     <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1">Длительность:</span>
+                        <span class="input-group-addon">Длительность:</span>
                         <input name="duration" id = "duration" type="number" class="form-control" placeholder="Длительность:"
                                aria-label="Длительность:" aria-describedby="basic-addon1" th:value="${inputEvent.getDuration()}?${insertEvent.getDuration()}"/>
-                        <span class="input-group-addon" id="basic-addon1">часов</span>
+                        <span class="input-group-addon">часов</span>
                         <label for="duration" th:if="${#fields.hasErrors('duration')}" th:text="${#messages.msg('error.event.duration')}" th:class="'error'">Duration Error</label>
                     </div>
                     <br/>
                     <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1">Место встречи</span>
+                        <span class="input-group-addon">Место встречи</span>
                         <input name="place" id = "place" type="text" class="form-control" placeholder="Место встречи"
                                aria-label="Место встречи" aria-describedby="basic-addon1" th:value="${inputEvent.getPlace()}?${insertEvent.getPlace()}"/>
                         <label for="place" th:if="${#fields.hasErrors('place')}" th:text="${#messages.msg('error.event.place')}" th:class="'error'">Place Error</label>
                     </div>
                     <br/>
                     <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1">Цена</span>
+                        <span class="input-group-addon">Цена</span>
                         <input name="price" id = "price" type="number" class="form-control" placeholder="Цена" aria-label="Цена"
                                aria-describedby="basic-addon1" th:value="${inputEvent.getPrice()}?${insertEvent.getPrice()}"/>
-                        <span class="input-group-addon" id="basic-addon1">&#8381;</span>
+                        <span class="input-group-addon">&#8381;</span>
                         <label for="price" th:if="${#fields.hasErrors('price')}" th:text="${#messages.msg('error.event.price')}" th:class="'error'">Price Error</label>
                     </div>
                     <br/>
                     <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1">Фотографии</span>
+                        <span class="input-group-addon">Фотографии</span>
                         <input name="file" type="file" class="form-control" placeholder="Фотографии" th:value="${file}?${file}"
                                accept="image/jpeg,image/png" aria-label="Фотографии" aria-describedby="basic-addon1"/>
                     </div>
