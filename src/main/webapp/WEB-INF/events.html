@@ -169,18 +169,18 @@
             </thead>
             <tbody>
             <tr>
-                <td>ID</td>
+                <td th:href="@{/(sort_by=${0+inc})}">ID</td>
                 <td th:text="${#messages.msg('words.name')}">Название</td>
                 <td th:text="${#messages.msg('words.category')}">Категория</td>
                 <td th:text="${#messages.msg('words.guide_id')}">ID гида</td>
-                <td th:text="${#messages.msg('words.price')}">Стоимость</td>
+                <td th:text="${#messages.msg('words.price')}" th:href="@{/(sort_by=${2+inc})}">Стоимость</td>
                 <td th:text="${#messages.msg('words.place')}">Место</td>
                 <td th:text="${#messages.msg('words.language')}">Язык</td>
-                <td th:text="${#messages.msg('words.users_count')}">Кол-во человек</td>
-                <td th:text="${#messages.msg('words.duration')}">Продолжительность</td>
+                <td th:text="${#messages.msg('words.users_count')}" th:href="@{/(sort_by=${10+inc})}">Кол-во человек</td>
+                <td th:text="${#messages.msg('words.duration')}" th:href="@{/(sort_by=${8+inc})}">Продолжительность</td>
                 <td th:text="${#messages.msg('words.description')}">Описание</td>
-                <td></td>
-                <td></td>
+                <td th:text="${#messages.msg('words.type')}" th:href="@{/(sort_by=${6+inc})}"></td>
+                <td th:text="${#messages.msg('words.rate')}" th:href="@{/(sort_by=${4+inc})}"></td>
             </tr>
             <tr th:each="event : ${events}">
                 <td th:text="${event.id}">Some text</td>
@@ -191,6 +191,10 @@
                 <td th:text="${event.place}">Some text</td>
                 <td th:text="${event.getLanguageString()}">Some text</td>
                 <td th:text="${event.usersCount}">Some text</td>
+
+                <td th:text="${event.duration}">Some text</td>
+                <td th:text="${event.description}">Some text</td>
+
                 <td th:text="${event.duration}">Some text</td>
                 <td th:text="${event.description}">Some text</td>
                 <td><a th:href="@{/events(id = ${event.id})}"><img src="../resources/img/icons/edit.png"/></a></td>

@@ -101,7 +101,7 @@ public class EventServiceImpl implements EventService {
                     copy.add(aList);
             }
         if (words.equals("") && isSort)
-            list.sort(new Comparator<Event>() {
+            copy.sort(new Comparator<Event>() {
                 @Override
                 public int compare(Event o1, Event o2) {
                     return Long.compare(o1.getId(), o2.getId());
@@ -127,9 +127,16 @@ public class EventServiceImpl implements EventService {
                 switch (sortBy) {
                     case 0: return Long.compare(o1.getId(), o2.getId());
                     case 1: return Long.compare(o2.getId(), o1.getId());
-                    case 2: return Long.compare(o1.getId(), o1.getId());
-                    case 3: return Long.compare(o1.getId(), o1.getId());
-                    case 4: return Long.compare(o1.getId(), o1.getId());
+                    case 2: return Integer.compare(o1.getPrice(), o2.getPrice());
+                    case 3: return Integer.compare(o2.getPrice(), o1.getPrice());
+                    case 4: return Integer.compare(o1.getRate(), o2.getRate());
+                    case 5: return Integer.compare(o2.getRate(), o1.getRate());
+                    case 6: return Integer.compare(o1.getType(), o2.getType());
+                    case 7: return Integer.compare(o2.getType(), o1.getType());
+                    case 8: return Integer.compare(o1.getDuration(), o2.getDuration());
+                    case 9: return Integer.compare(o2.getDuration(), o1.getDuration());
+                    case 10: return Integer.compare(o1.getUsersCount(), o2.getUsersCount());
+                    case 11: return Integer.compare(o2.getUsersCount(), o1.getUsersCount());
                 }
                 return Long.compare(o1.getId(), o2.getId());
             }

@@ -265,6 +265,9 @@ public class HomeController {
             model.addAttribute("insertEvent", editEvent);
         } else model.addAttribute("insertEvent", new Event());
         model.addAttribute("events", events);
+        if (sortBy!=null)
+            if (sortBy%2==0) model.addAttribute("inc", 1);
+        else model.addAttribute("inc", 0);
         return "events";
     }
 
