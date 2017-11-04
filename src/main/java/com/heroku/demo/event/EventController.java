@@ -219,7 +219,12 @@ public class EventController {
             if (sortBy == null) model.addAttribute("inc", 0);
             else if (sortBy % 2 == 0) model.addAttribute("inc", 1);
             else model.addAttribute("inc", 0);
+            model.addAttribute("auth", authKey);
+        } else {
+            model.addAttribute("insertEvent", new Event());
+            model.addAttribute("error", "CHECK YOUR AUTH KEY");
         }
+
         return "events";
     }
 

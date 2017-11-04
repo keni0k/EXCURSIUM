@@ -131,7 +131,7 @@
                     <!--/.Card image-->
                     <!--Button-->
                     <a class="btn-floating btn-action waves-effect waves-light"
-                       th:href="@{/profile(id=${event.getGuideId()})}">
+                       th:href="@{/users/${event.getGuideId()}}">
                         <div class="avatar">
                             <img th:src="${event.photoOfGuide}" src="../resources/img/user.png"
                                  class="rounded-circle img-responsive" alt="Аватар"/>
@@ -183,7 +183,7 @@
 								<strong>&#8381;</strong>
 							</span>
                             <span class="right">
-								<a href="event.html" class="btn btn-primary waves-effect waves-light">Заказать</a>
+								<a href="#" class="btn btn-primary waves-effect waves-light">Заказать</a>
 							</span>
                         </div>
 

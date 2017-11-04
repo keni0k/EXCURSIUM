@@ -63,8 +63,8 @@
 <nav class="four">
     <ul>
         <li><a class="btn" href="/" th:text="${#messages.msg('words.home')}"><i class="fa fa-home fa-fw"></i>Главная</a></li>
-        <li><a class="btn" href="/events/moderation" th:text="${#messages.msg('words.events')}">EVENTS</a></li>
-        <li><a class="btn" href="/users/moderation" th:text="${#messages.msg('words.users')}">USERS</a></li>
+        <li><a class="btn" th:href="@{/events/moderation(auth = ${auth})}" th:text="${#messages.msg('words.events')}">EVENTS</a></li>
+        <li><a class="btn" th:href="@{/users/moderation(auth = ${auth})}" th:text="${#messages.msg('words.users')}">USERS</a></li>
     </ul>
 </nav>
 <hr/>
@@ -76,7 +76,7 @@
         <form th:object="${insertEvent}" action="/events/add" method="POST" enctype="multipart/form-data">
 
             <label th:text="${#messages.msg('words.type')}" for="type"></label>:
-            <select name="type" id = "type" th:selected="${insertEvent.type}?${insertEvent.type}:0">
+            <select name="type" id = "type" th:selected="${insertEvent.getType()}">
                 <option value="-3">Не прошел модерацию</option>
                 <option value="-2">На перемодерации</option>
                 <option value="-1">Не активен</option>
@@ -86,22 +86,22 @@
             <br/>
 
             <label th:text="${#messages.msg('words.name')}" for="name"></label>:
-            <textarea name="name" type="text" id = "name" th:text="${insertEvent.name}" required=""></textarea>
+            <textarea name="name" type="text" id = "name" th:text="${insertEvent.getName()}" required=""></textarea>
 
             <br/>
 
             <label th:text="${#messages.msg('words.guide_id')}" for="guide_id"></label>:
-            <input name="guideId" id = "guide_id" type="number" required="" th:value="${insertEvent.guideId}"/>
+            <input name="guideId" id = "guide_id" type="number" required="" th:value="${insertEvent.getGuideId()}"/>
 
             <br/>
 
-            <label th:text="${#messages.msg('words.photo')}" for="photo"></label> Azure:
+            <label th:text="${#messages.msg('words.photo')}" for="photo"></label>:
             <input name="file" id = "photo" accept="image/jpeg,image/png" required="" type="file"/>
 
             <br/>
 
             <label th:text="${#messages.msg('words.category')}" for="category"></label>:
-            <select name="category" id='category' th:selected="${insertEvent.category}">
+            <select name="category" id='category' th:selected="${insertEvent.getCategory()}">
                 <option value="0" th:text="${#messages.msg('category.0')}">Развлечения</option>
                 <option value="1" th:text="${#messages.msg('category.1')}">Наука</option>
                 <option value="2" th:text="${#messages.msg('category.2')}">История</option>
@@ -169,18 +169,18 @@
             </thead>
             <tbody>
             <tr>
-                <td><a th:href="@{/(sort_by=${inc})}">ID</a></td>
+                <td><a th:href="@{/events/moderation(sort_by=${inc}, auth = ${auth})}">ID</a></td>
                 <td th:text="${#messages.msg('words.name')}">Название</td>
                 <td th:text="${#messages.msg('words.category')}">Категория</td>
                 <td th:text="${#messages.msg('words.guide_id')}">ID гида</td>
-                <td><a th:text="${#messages.msg('words.price')}" th:href="@{/events(sort_by=${inc}+2)}">Стоимость</a></td>
+                <td><a th:text="${#messages.msg('words.price')}" th:href="@{/events/moderation(sort_by=${inc}+2, auth = ${auth})}">Стоимость</a></td>
                 <td th:text="${#messages.msg('words.place')}">Место</td>
                 <td th:text="${#messages.msg('words.language')}">Язык</td>
-                <td><a th:text="${#messages.msg('words.users_count')}" th:href="@{/events(sort_by=${inc}+10)}">Кол-во человек</a></td>
-                <td><a th:text="${#messages.msg('words.duration')}" th:href="@{/events(sort_by=${inc}+8)}">Продолжительность</a></td>
+                <td><a th:text="${#messages.msg('words.users_count')}" th:href="@{/events/moderation(sort_by=${inc}+10, auth = ${auth})}">Кол-во человек</a></td>
+                <td><a th:text="${#messages.msg('words.duration')}" th:href="@{/events/moderation(sort_by=${inc}+8, auth = ${auth})}">Продолжительность</a></td>
                 <td th:text="${#messages.msg('words.description')}">Описание</td>
-                <td><a th:text="${#messages.msg('words.type')}" th:href="@{/events(sort_by=${inc}+6)}">Тип</a></td>
-                <td><a th:text="${#messages.msg('words.rate')}" th:href="@{/events(sort_by=${inc}+4)}">Рейтинг</a></td>
+                <td><a th:text="${#messages.msg('words.type')}" th:href="@{/events/moderation(sort_by=${inc}+6, auth = ${auth})}">Тип</a></td>
+                <td><a th:text="${#messages.msg('words.rate')}" th:href="@{/events/moderation(sort_by=${inc}+4, auth = ${auth})}">Рейтинг</a></td>
             </tr>
             <tr th:each="event : ${events}">
                 <td th:text="${event.id}">Some text</td>
@@ -195,8 +195,8 @@
                 <td th:text="${event.description}">Some text</td>
                 <td th:text="${event.type}">Some text</td>
                 <td th:text="${event.rate}">Some text</td>
-                <td><a th:href="@{/events/moderation(id = ${event.id})}"><img src="../resources/img/icons/edit.png"/></a></td>
-                <td><a data-th-method="delete" th:href="@{/events/(id = ${event.id})}"><img src="../resources/img/icons/del.png"/></a></td>
+                <td><a th:href="@{/events/moderation(id = ${event.id}, auth = ${auth})}"><img src="../resources/img/icons/edit.png"/></a></td>
+                <td><a data-th-method="delete" th:href="@{/events/(id = ${event.id}, auth = ${auth})}"><img src="../resources/img/icons/del.png"/></a></td>
             </tr>
             </tbody>
         </table>

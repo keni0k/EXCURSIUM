@@ -145,7 +145,7 @@
                             <img src="../resources/img/bg-cta.jpg" th:src="${event.pathToPhoto}"
                                  class="img-fluid" alt=""/>
                         </div>
-                        <a th:href="@{/event(id=${event.getId()})}">
+                        <a th:href="@{/events/${event.getId()}}">
                             <div class="mask waves-effect waves-light"></div>
                         </a>
                     </div>
@@ -193,7 +193,7 @@
 								<strong>&#8381;</strong>
 							</span>
                             <span class="right">
-								<a th:href="@{/event(id=${event.getId()})}"
+								<a th:href="@{/events/${event.getId()}}"
                                    class="btn btn-primary waves-effect waves-light">Открыть</a>
 							</span>
                         </div>
