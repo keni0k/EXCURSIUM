@@ -413,8 +413,10 @@ public class HomeController {
             modelMap.addAttribute("error_data", "You failed to upload file because the file is null.");
             return "error";
         } else {
+            modelMap.addAttribute("file", file);
+            modelMap.addAttribute("insertEvent", event);
             modelMap.addAttribute("error_data", "You failed to upload file because the file is empty.");
-            return "error";
+            return "event_add";
         }
     }
 
