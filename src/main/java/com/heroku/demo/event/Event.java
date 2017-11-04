@@ -8,13 +8,6 @@ import javax.validation.constraints.Size;
 @Entity
 public class Event {
 
-//    public Event(String name, String category, int guideId, String time) {
-//        this.name = name;
-//        this.category = category;
-//        this.guideId = guideId;
-//        this.time = time;
-//    }
-
     @Override
     public String toString() {
 
@@ -36,7 +29,7 @@ public class Event {
     public Event() {
     }
 
-    public Event(String place, int category, String time, int duration, int price, String description, int rate, int photo, String name, int type, int usersCount, int language) {
+    public Event(String place, int category, String time, int duration, int price, String description, int rate, String name, int type, int usersCount, int language) {
         this.place = place;
         this.category = category;
         this.time = time;
@@ -44,18 +37,9 @@ public class Event {
         this.price = price;
         this.description = description;
         this.rate = rate;
-        this.photo = photo;
         this.name = name;
         this.language = language;
         this.usersCount = usersCount;
-        this.type = type;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
         this.type = type;
     }
 
@@ -65,23 +49,18 @@ public class Event {
         return id;
     }
 
-    private String place = "";
+    @Size(min=5, max=100)
+    private String place;
 
-    private int category = 0;
+    private int category;
 
-    private String time = "";
+    private String time;
 
-    public String getPhotoUrl() {
-        return photoUrl;
-    }
+    @Transient
+    private String photoUrl;
 
-    public void setPhotoUrl(String photoUrl) {
-        this.photoUrl = photoUrl;
-    }
-
-    private String photoUrl = "";
-
-    private int duration = -1;
+    @Size(min=1, max=240)
+    private int duration;
 
     public int getLanguage() {
         return language;
@@ -91,23 +70,13 @@ public class Event {
         this.language = language;
     }
 
-    private int language = 0;
+    private int language;
 
-    public int getUsersCount() {
-        return usersCount;
-    }
+    @Size(min=1, max=100)
+    private int usersCount;
 
-    public void setUsersCount(int usersCount) {
-        this.usersCount = usersCount;
-    }
-
-    public String getLanguageString(){
-        return language==0?"RU":"EN";
-    }
-
-    private int usersCount = 1;
-
-    private int price = 0;
+    @Size(min=1, max=100000)
+    private int price;
 
     @Size(min=150, max=1000)
     private String description = "";
@@ -126,7 +95,18 @@ public class Event {
     @Transient
     public String pathToPhoto = "";
 
-    private int photo = 0;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    private long guideId = -1;
+
+    @Size(min=10, max=60)
+    private String name = "";
+
+    public String getLanguageString(){
+        return language==0?"RU":"EN";
+    }
 
     public String getSmallDescription() {
         String smallDesc = description.substring(0, description.length() > 251 ? 251 : description.length());
@@ -135,14 +115,21 @@ public class Event {
         return smallDesc;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    public int getType() {
+        return type;
+    }
 
-    private long guideId = -1;
+    public void setType(int type) {
+        this.type = type;
+    }
 
-    @Size(min=5, max=60)
-    private String name = "";
+    public int getUsersCount() {
+        return usersCount;
+    }
+
+    public void setUsersCount(int usersCount) {
+        this.usersCount = usersCount;
+    }
 
     public long getGuideId() {
         return guideId;
@@ -179,7 +166,6 @@ public class Event {
     public void setCategory(int category) {
         this.category = category;
     }
-
 
     public String getTime() {
         return time;
@@ -221,12 +207,12 @@ public class Event {
         this.rate = rate;
     }
 
-    public int getPhoto() {
-        return photo;
+    public String getPhotoUrl() {
+        return photoUrl;
     }
 
-    public void setPhoto(int photo) {
-        this.photo = photo;
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
     }
 
 }

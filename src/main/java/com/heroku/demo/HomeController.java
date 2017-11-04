@@ -520,8 +520,7 @@ public class HomeController {
 
     @RequestMapping("/addevent")
     @ResponseBody
-    public String insertEvent(ModelMap model,
-                              @ModelAttribute("name") String name,
+    public String insertEvent(@ModelAttribute("name") String name,
                               @ModelAttribute("category") int category,
                               @ModelAttribute("place") String place,
                               @ModelAttribute("duration") int duration,
@@ -531,8 +530,8 @@ public class HomeController {
                               @ModelAttribute("price") int price,
                               @ModelAttribute("photo") String photo,
                               BindingResult result) {
-        Event e = new Event(place, category, new LocalTime().toDateTimeToday().toString(), duration, price, description, -1, -1, name, -1, usersCount, language);
-        if (!result.hasErrors()) {
+        Event e = new Event(place, category, new LocalTime().toDateTimeToday().toString(), duration, price, description, -1, name, -1, usersCount, language);
+        if (!result.hasErrors()) {//todo
             //person.setWhat(3);
             eventService.addEvent(e);
             if (photo != null)
