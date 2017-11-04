@@ -128,7 +128,11 @@ public class EventServiceImpl implements EventService {
             @Override
             public int compare(Event o1, Event o2) {
                 switch (sortBy) {
-                    case 1: return Integer.compare(o2.cnt, o1.cnt);
+                    case 0: return Long.compare(o1.getId(), o1.getId());
+                    case 1: return Long.compare(o1.getId(), o1.getId());
+                    case 2: return Long.compare(o1.getId(), o1.getId());
+                    case 3: return Long.compare(o1.getId(), o1.getId());
+                    case 4: return Long.compare(o1.getId(), o1.getId());
                 }
                 return Long.compare(o1.getId(), o2.getId());
             }

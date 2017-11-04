@@ -284,7 +284,7 @@ public class HomeController {
         return "YES";
     }
 
-    @RequestMapping(value = "/event_list", params = {"category", "language", "price_up", "price_down", "words"})
+    @RequestMapping(value = "/event_list")
     public String eventsByFilter(ModelMap model,
                                  @RequestParam(value = "category", required = false) Integer category,
                                  @RequestParam(value = "language", required = false) Integer language,
