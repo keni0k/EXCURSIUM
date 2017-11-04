@@ -178,8 +178,8 @@
                 <td th:text="${#messages.msg('words.language')}">Язык</td>
                 <td th:text="${#messages.msg('words.users_count')}" th:href="@{/(sort_by=${inc}+10)}">Кол-во человек</td>
                 <td th:text="${#messages.msg('words.duration')}" th:href="@{/(sort_by=${inc}+8)}">Продолжительность</td>
-                <td th:text="${#messages.msg('words.description')}">Описание</td>
-                <td th:text="${#messages.msg('words.type')}" th:href="@{/(sort_by=${inc}+6)}">Тип</td>
+                <td><a th:text="${#messages.msg('words.description')}">Описание</a></td>
+                <td><a th:text="${#messages.msg('words.type')}" th:href="@{/(sort_by=${inc}+6)}">Тип</a></td>
                 <td th:text="${#messages.msg('words.rate')}" th:href="@{/(sort_by=${inc}+4)}">Рейтинг</td>
             </tr>
             <tr th:each="event : ${events}">
@@ -191,12 +191,10 @@
                 <td th:text="${event.place}">Some text</td>
                 <td th:text="${event.getLanguageString()}">Some text</td>
                 <td th:text="${event.usersCount}">Some text</td>
-
-                <td th:text="${event.getType()}">Some text</td>
-                <td th:text="${event.getRate()}">Some text</td>
-
                 <td th:text="${event.duration}">Some text</td>
                 <td th:text="${event.description}">Some text</td>
+                <td th:text="${event.getType()}">Some text</td>
+                <td th:text="${event.getRate()}">Some text</td>
                 <td><a th:href="@{/events(id = ${event.id})}"><img src="../resources/img/icons/edit.png"/></a></td>
                 <td><a th:href="@{/deleteevent(id = ${event.id})}"><img src="../resources/img/icons/del.png"/></a></td>
             </tr>
