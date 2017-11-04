@@ -23,6 +23,7 @@
           class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <property name="defaultEncoding" value="UTF-8" />
     </bean>
+    <mvc:default-servlet-handler/>
 
     <bean class="org.springframework.web.servlet.i18n.SessionLocaleResolver" id="localeResolver">
         <property value="ru" name="defaultLocale"/>
