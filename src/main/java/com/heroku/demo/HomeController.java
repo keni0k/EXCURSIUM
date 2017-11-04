@@ -301,7 +301,7 @@ public class HomeController {
                                  @RequestParam(value = "price_up", required = false) Integer priceUp,
                                  @RequestParam(value = "price_down", required = false) Integer priceDown,
                                  @RequestParam(value = "words", required = false) String words) {
-        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, language, words, true);
+        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, language==null?0:language, words, true);
         int size = events.size() % 3;
         for (int i = 0; i < size; i++) {
             events.remove(events.size() - 1);
