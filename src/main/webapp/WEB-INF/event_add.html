@@ -127,7 +127,7 @@
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon1">Название</span>
                         <input name="name" type="text" class="form-control" id = "name" placeholder="Название" aria-label="Название"
-                               aria-describedby="basic-addon1" th:value="${inputEvent.getName()}?${insertEvent.getName()}"/>
+                               aria-describedby="basic-addon1" th:value="${inputEvent.getName()}?${insertEvent.getName()}:''"/>
                         <label for="name" th:if="${#fields.hasErrors('name')}" th:text="${#messages.msg('error.event.name')}" th:class="'error'">Name Error</label>
                     </div>
                     <br/>
