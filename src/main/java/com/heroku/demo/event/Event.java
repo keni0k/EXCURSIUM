@@ -3,9 +3,10 @@ package com.heroku.demo.event;
 import com.heroku.demo.utils.UtilsForWeb;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity
-public class Event implements Comparable {
+public class Event {
 
 //    public Event(String name, String category, int guideId, String time) {
 //        this.name = name;
@@ -139,6 +140,7 @@ public class Event implements Comparable {
 
     private long guideId = -1;
 
+    @Size(min=5, max=60)
     private String name = "";
 
     public long getGuideId() {
@@ -226,9 +228,4 @@ public class Event implements Comparable {
         this.photo = photo;
     }
 
-    @Override
-    public int compareTo(Object o) {
-        Event e = (Event) o;
-        return Long.compare(getId(), e.getId());
-    }
 }

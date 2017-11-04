@@ -121,10 +121,6 @@ public class EventServiceImpl implements EventService {
 
         List<Event> events = getByFilter(priceUp, priceDown, category, language, words, false);
         if (sortBy==null) return events;
-        switch (sortBy){
-            case 1:break;
-            case 2:break;
-        }
         events.sort(new Comparator<Event>() {
             @Override
             public int compare(Event o1, Event o2) {

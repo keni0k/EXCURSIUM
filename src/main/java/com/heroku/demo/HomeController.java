@@ -161,7 +161,7 @@ public class HomeController {
                                                     @RequestParam(value = "category", required = false) Integer category,
                                                     @RequestParam(value = "words", required = false) String words,
                                                     @RequestParam(value = "language", required = false) Integer language) {
-
+        if (language==null) language = 0;
         ArrayList<String> arrayList = new ArrayList<>();
         List<Event> events = eventService.getByFilter(priceUp, priceDown, category, language, words, false);
         for (Event e : events) {
@@ -370,7 +370,10 @@ public class HomeController {
 
         if (!result.hasErrors()) {
             eventService.editEvent(event);
-        } else return "error";
+        } else {
+            modelMap.addAttribute("insertEvent", event);
+            return "event_add";
+        }
 
         if (file != null && !file.isEmpty()) {
             try {
