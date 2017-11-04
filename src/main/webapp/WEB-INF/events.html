@@ -76,7 +76,7 @@
         <form th:object="${insertEvent}" action="/events/add" method="POST" enctype="multipart/form-data">
 
             <label th:text="${#messages.msg('words.type')}" for="type"></label>:
-            <select name="type" id = "type" th:selected="${insertEvent.getType()}">
+            <select name="type" id = "type" th:selected="${insertEvent.type}?${insertEvent.type}:0">
                 <option value="-3">Не прошел модерацию</option>
                 <option value="-2">На перемодерации</option>
                 <option value="-1">Не активен</option>
@@ -101,7 +101,7 @@
             <br/>
 
             <label th:text="${#messages.msg('words.category')}" for="category"></label>:
-            <select name="category" id='category' th:selected="${insertEvent.getCategory()}">
+            <select name="category" id='category' th:selected="${insertEvent.category}">
                 <option value="0" th:text="${#messages.msg('category.0')}">Развлечения</option>
                 <option value="1" th:text="${#messages.msg('category.1')}">Наука</option>
                 <option value="2" th:text="${#messages.msg('category.2')}">История</option>
