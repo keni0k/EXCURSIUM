@@ -343,7 +343,9 @@ public class HomeController {
         ImageWriteParam param = writer.getDefaultWriteParam();
 
         param.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
-        param.setCompressionQuality((float) (2f / fileSize));
+        float quality = (float) (1f / fileSize);
+        quality = quality>1?1:quality;
+        param.setCompressionQuality(quality);
         writer.write(null, new IIOImage(image, null, null), param);
 
         os.close();
