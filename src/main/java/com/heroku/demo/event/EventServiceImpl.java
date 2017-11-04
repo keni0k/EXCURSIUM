@@ -60,7 +60,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<Event> getByFilter(Integer priceUp, Integer priceDown, Integer category, Integer language, String words, boolean isSort) {
+    public List<Event> getByFilter(Integer priceUp, Integer priceDown, Integer category, Integer language, String words) {
 
         boolean isAllLang = false;
         if (words==null) words = "";
@@ -100,14 +100,6 @@ public class EventServiceImpl implements EventService {
                 } else
                     copy.add(aList);
             }
-        if (words.equals("") && isSort)
-            copy.sort(new Comparator<Event>() {
-                @Override
-                public int compare(Event o1, Event o2) {
-                    return Long.compare(o1.getId(), o2.getId());
-                }
-            });
-        else
         if (!words.equals("")) copy.sort(new Comparator<Event>() {
             @Override
             public int compare(Event o1, Event o2) {
@@ -119,7 +111,7 @@ public class EventServiceImpl implements EventService {
 
     public List<Event> getByFilter(Integer priceUp, Integer priceDown, Integer category, Integer language, String words, Integer sortBy) {
 
-        List<Event> events = getByFilter(priceUp, priceDown, category, language, words, false);
+        List<Event> events = getByFilter(priceUp, priceDown, category, language, words);
         if (sortBy==null) return events;
         events.sort(new Comparator<Event>() {
             @Override

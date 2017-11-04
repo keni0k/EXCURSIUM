@@ -167,10 +167,11 @@ public class HomeController {
                                                     @RequestParam(value = "price_up", required = false) Integer priceUp,
                                                     @RequestParam(value = "category", required = false) Integer category,
                                                     @RequestParam(value = "words", required = false) String words,
-                                                    @RequestParam(value = "language", required = false) Integer language) {
+                                                    @RequestParam(value = "language", required = false) Integer language,
+                                                    @RequestParam(value = "sort_by", required = false) Integer sortBy) {
         if (language==null) language = 0;
         ArrayList<String> arrayList = new ArrayList<>();
-        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, language, words, false);
+        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, language, words, sortBy);
         for (Event e : events) {
             arrayList.add(e.toString());
         }
@@ -300,8 +301,9 @@ public class HomeController {
                                  @RequestParam(value = "language", required = false) Integer language,
                                  @RequestParam(value = "price_up", required = false) Integer priceUp,
                                  @RequestParam(value = "price_down", required = false) Integer priceDown,
+                                 @RequestParam(value = "sort_by", required = false) Integer sortBy,
                                  @RequestParam(value = "words", required = false) String words) {
-        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, language==null?0:language, words, true);
+        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, language==null?0:language, words, sortBy==null?0:sortBy);
         int size = events.size() % 3;
         for (int i = 0; i < size; i++) {
             events.remove(events.size() - 1);

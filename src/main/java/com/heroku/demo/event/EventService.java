@@ -13,5 +13,5 @@ public interface EventService {
 
     List<Event> getAll();
 
-    List<Event> getByFilter(Integer priceUp, Integer priceDown, Integer category, Integer language, String words, boolean isSort);
+    List<Event> getByFilter(Integer priceUp, Integer priceDown, Integer category, Integer language, String words);
 }
