@@ -41,16 +41,20 @@ public class PersonController {
         person.setToken(randomToken(32));
 
         if (!personService.throwsErrors(person)) {
-            String errorData = "";
+            String errorEmail = "";
+
             if (!personService.isEmailFree(person.getEmail()))
-                errorData = errorData.concat("EMAIL IS NOT FREE\n");
-            if (!personService.isLoginFree(person.getLogin()))
-                errorData = errorData.concat("LOGIN IS NOT FREE\n");
+                errorEmail = errorEmail.concat("EMAIL IS NOT FREE\n");
             if (!personService.isEmailCorrect(person.getEmail()))
-                errorData = errorData.concat("EMAIL IS NOT VALID\n");
-            if (!personService.isPhoneFree(person.getPhoneNumber()))
-                errorData = errorData.concat("PHONE NUMBER IS NOT FREE");
-            model.addAttribute("error_data", errorData);
+                errorEmail = errorEmail.concat("EMAIL IS NOT VALID");
+
+            if (!personService.isLoginFree(person.getLogin()))
+                model.addAttribute("error_login","LOGIN IS NOT FREE");
+            if (!personService.isPhoneFree(person.getPhoneNumber())) {
+                model.addAttribute("error_phone","PHONE NUMBER IS NOT FREE");
+            }
+            if (!errorEmail.equals(""))
+                model.addAttribute("error_email", errorEmail);
             return persons(model);
         }
         if (!result.hasErrors()) {

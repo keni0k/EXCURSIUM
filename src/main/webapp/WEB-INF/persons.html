@@ -31,7 +31,7 @@
             margin-top: 25px; /*делаем отступ сверху*/
         }
 
-        .btn {
+        .my-btn {
             text-decoration: none; /*убираем подчеркивание текста ссылок*/
             background: #30A8E6; /*добавляем фон к пункту меню*/
             color: #fff; /*меняем цвет ссылок*/
@@ -43,7 +43,7 @@
             -webkit-transition: all 0.3s 0.01s ease;
         }
 
-        .btn:hover {
+        .my-btn:hover {
             background: #1C85BB; /*добавляем эффект при наведении*/
         }
 
@@ -61,9 +61,9 @@
 
 <nav class="four">
     <ul>
-        <li><a class="btn" href="/" th:text="${#messages.msg('words.home')}"><i class="fa fa-home fa-fw"></i>Главная</a></li>
-        <li><a class="btn" th:href="@{/events/moderation(auth = ${auth_events})}" th:text="${#messages.msg('words.events')}">EVENTS</a></li>
-        <li><a class="btn" th:href="@{/users/moderation(auth = ${auth})}" th:text="${#messages.msg('words.users')}">USERS</a></li>
+        <li><a class="my-btn" href="/" th:text="${#messages.msg('words.home')}"><i class="fa fa-home fa-fw"></i>Главная</a></li>
+        <li><a class="my-btn" th:href="@{/events/moderation(auth = ${auth_events})}" th:text="${#messages.msg('words.events')}">EVENTS</a></li>
+        <li><a class="my-btn" th:href="@{/users/moderation(auth = ${auth})}" th:text="${#messages.msg('words.users')}">USERS</a></li>
     </ul>
 </nav>
 <hr/>
