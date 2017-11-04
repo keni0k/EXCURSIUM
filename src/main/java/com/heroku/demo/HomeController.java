@@ -367,10 +367,12 @@ public class HomeController {
         event.setTime(new LocalTime().toDateTimeToday().toString());
         event.setGuideId(-1);
         event.setPhotoUrl("URL");
-
+        logger.error("Error1");
         if (!result.hasErrors()) {
+            logger.error("Error2");
             eventService.editEvent(event);
         } else {
+            logger.error("Error3");
             modelMap.addAttribute("insertEvent", event);
             return "event_add";
         }
