@@ -1,6 +1,7 @@
 package com.heroku.demo.person;
 
 import com.heroku.demo.event.EventController;
+import com.heroku.demo.utils.MessageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -56,7 +57,7 @@ public class PersonController {
         person.setLogin(person.getLogin().toLowerCase());
         person.setImageUrl(file.getOriginalFilename());
         personService.addPerson(person);
-        model.addAttribute("message","Успех!");
+        model.addAttribute("message", new MessageUtil("success", "Sign up success!"));
         return persons(model);
     }
 

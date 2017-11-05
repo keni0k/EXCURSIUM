@@ -34,15 +34,6 @@
 
     <title th:text="${#messages.msg('titles.registration')}">Регистрация</title>
 
-    <script th:inline="javascript">
-        /*<![CDATA[*/
-
-        var message = [[${message}]];
-        console.log(message);
-
-        /*]]>*/
-    </script>
-
 </head>
 <body style="background-color: #f9f9f9;">
 <style type="text/css">
@@ -132,6 +123,12 @@
         </div>
         <div class="row">
             <div class="col-md-12 col-lg-6">
+
+                <!-- /* Handling the flash message */-->
+                <th:block th:if="${message != null}">
+                    <div th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message.type)}, message=${message.message})">&nbsp;</div>
+                </th:block>
+
                 <form th:object="${insertPerson}" method="POST" action="/users/registration" enctype="multipart/form-data">
                     <br/>
                     <div class="input-group">
