@@ -141,15 +141,21 @@
                             <div class="card-body">
                                 <!--Rating-->
                                 <ul class="rating">
-                                    <li th:if="${person.getRate()!=-1 and person.getRate()!=0}" th:each="i : ${#numbers.sequence(0, person.getRate()-1)}">
-                                        <i class="fa fa-star"></i>
-                                    </li>
-                                    <li th:if="${person.getRate()!=-1 and person.getRate()!=5}" th:each="i : ${#numbers.sequence(person.getRate(), 4)}" >
-                                        <i class="fa fa-star-o"></i>
-                                    </li>
-                                    <li th:if="${person.getRate()==-1}" th:each="i : ${#numbers.sequence(0, 4)}" >
-                                        <i class="fa fa-star-o"></i>
-                                    </li>
+                                     <span th:if="${(person.getRate()!=-1)and(person.getRate()!=0)}">
+                                         <li th:each="i : ${#numbers.sequence(0, person.getRate()-1)}">
+                                             <i class="fa fa-star"></i>
+                                         </li>
+                                     </span>
+                                    <span th:if="${(person.getRate()!=-1)and(person.getRate()!=5)}">
+                                        <li th:each="i : ${#numbers.sequence(person.getRate(), 4)}">
+                                            <i class="fa fa-star-o"></i>
+                                        </li>
+                                    </span>
+                                    <span th:if="${(person.getRate()==-1)}">
+                                        <li th:each="i : ${#numbers.sequence(0, 4)}">
+                                            <i class="fa fa-star-o"></i>
+                                        </li>
+                                    </span>
                                 </ul>
                                 <h3 class="mt-1" th:text="${person.getFullName()}">Имя</h3>
                                 <p class="font-bold" th:text="${person.getCity()}">Город</p>

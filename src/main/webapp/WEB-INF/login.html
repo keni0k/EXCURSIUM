@@ -126,7 +126,7 @@
         <div class="row">
             <div class="col-md-12 col-lg-6">
 
-                <th:block th:if="${error}">
+                <th:block th:if="${#httpServletRequest.getParameter('error')}">
                     <div th:replace="fragments/alert :: alert (type='danger', message='Неправильный логин или пароль')">&nbsp;</div>
                 </th:block>
 
