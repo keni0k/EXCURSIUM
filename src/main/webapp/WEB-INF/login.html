@@ -131,7 +131,7 @@
                 </th:block>
 
                 <div th:if="${#httpServletRequest.isUserInRole('ADMIN')}">Show ROLE_ADMIN</div>
-                <div th:if="${#httpServletRequest.isUserInRole('USER')}">Show ROLE_ADMIN</div>
+                <div th:if="${#httpServletRequest.isUserInRole('USER')}">Show ROLE_USER</div>
 
                 <form method="POST" action="/users/login">
                     <br/>
