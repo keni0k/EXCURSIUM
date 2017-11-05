@@ -1,6 +1,9 @@
 package com.heroku.demo;
 
 
+import com.heroku.demo.person.Person;
+import com.heroku.demo.person.PersonRepository;
+import com.heroku.demo.person.PersonServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -10,16 +13,19 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 import javax.sql.DataSource;
+import java.util.List;
 
 @Configuration
 @EnableAutoConfiguration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final DataSource dataSource;
+    private PersonServiceImpl personService;
 
     @Autowired
-    public SecurityConfig(@Qualifier("dataSource") DataSource dataSource) {
+    public SecurityConfig(@Qualifier("dataSource") DataSource dataSource, PersonRepository personRepository) {
         this.dataSource = dataSource;
+        personService = new PersonServiceImpl(personRepository);
     }
 
     @Autowired
@@ -31,8 +37,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN", "USER");
-        auth.inMemoryAuthentication().withUser("test").password("test").roles("USER");
+        List<Person> users = personService.getAll();
+        for (Person user:users) {
+            auth.inMemoryAuthentication().withUser(user.getLogin()).password(user.getPass()).roles("USER");
+            auth.inMemoryAuthentication().withUser(user.getEmail()).password(user.getPass()).roles("USER");
+        }
     }
 
     @Override
