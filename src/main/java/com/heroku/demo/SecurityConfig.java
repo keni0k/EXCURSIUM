@@ -39,13 +39,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/index", "/resources/**", "/users/registration", "/events/list", "/users/updatedb").permitAll()
                 .antMatchers("/users/moderation","/events/moderation").hasRole("ADMIN")
                 .antMatchers("/events/add").hasRole("USER")
-
-
-                .anyRequest().authenticated().and().formLogin().defaultSuccessUrl("/", false)
+                .anyRequest().authenticated()
+                .and()
+                .formLogin().defaultSuccessUrl("/", false)
                 .loginPage("/users/login").failureUrl("/users/login?error=true").permitAll()
-
-                .and().logout()
-
+                .and()
+                .logout()
                 .and()
                 .rememberMe().key("remember_me").tokenValiditySeconds(1209600);
         http.csrf().disable();
