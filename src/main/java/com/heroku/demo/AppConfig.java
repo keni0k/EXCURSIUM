@@ -4,8 +4,11 @@ import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -22,6 +25,9 @@ import java.util.Locale;
 
 @Configuration
 @EnableWebMvc
+@ComponentScan({"com.heroku.demo.*"})
+@EnableTransactionManagement
+@Import({ SecurityConfig.class })
 public class AppConfig extends WebMvcConfigurerAdapter {
     @Bean
     public EmbeddedServletContainerFactory servletContainer() {

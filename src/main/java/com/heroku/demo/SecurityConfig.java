@@ -31,14 +31,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
 
                 .antMatchers("/", "/index", "/resources/**", "/users/registration", "/events/list", "/users/updatedb").permitAll()
-                .antMatchers("/users/moderation","/events/moderation").hasRole("ADMIN")
-                .antMatchers("/logout").hasRole("USER")
+                .antMatchers("/users/moderation","/events/moderation").hasRole("ROLE_ADMIN")
+                .antMatchers("/events/add").hasRole("ROLE_USER")
+
 
                 .anyRequest().authenticated().and().formLogin().defaultSuccessUrl("/", false)
-                .loginProcessingUrl("/security_check").loginPage("/users/login").passwordParameter("pass").usernameParameter("login")
+                .loginPage("/users/login").passwordParameter("pass").usernameParameter("login")
                 .failureUrl("/users/login?error=true").permitAll()
 
                 .and().logout();
+        http.csrf().disable();
         http.exceptionHandling().accessDeniedPage("/403");
     }
 
