@@ -36,10 +36,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
                 .anyRequest().authenticated().and().formLogin().defaultSuccessUrl("/", false)
-                .loginPage("/users/login").passwordParameter("pass").usernameParameter("login")
+                .loginPage("/users/login").passwordParameter("password").usernameParameter("username")
                 .failureUrl("/users/login?error=true").permitAll()
 
-                .and().logout();
+                .and().logout()
+
+                .and()
+                .rememberMe().key("remember_me").tokenValiditySeconds(1209600);
         http.csrf().disable();
         http.exceptionHandling().accessDeniedPage("/403");
     }

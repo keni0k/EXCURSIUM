@@ -129,16 +129,16 @@
                     <div th:replace="fragments/alert :: alert (type='danger', message='Неправильный логин или пароль')">&nbsp;</div>
                 </th:block>
 
-                <form method="POST" action="#">
+                <form method="POST" action="j_spring_security_check">
                     <br/>
                     <div class="input-group">
                         <span class="input-group-addon">Логин</span>
-                        <input name="login" id = "login" type="text" class="form-control" placeholder="Логин" aria-label="Логин" required=""/>
+                        <input name="username" id = "login" type="text" class="form-control" placeholder="Логин" aria-label="Логин" required=""/>
                     </div>
                     <br/>
                     <div class="input-group">
                         <span class="input-group-addon">Пароль</span>
-                        <input name="pass" id = "pass" type="password" class="form-control" placeholder="Пароль" aria-label="Пароль" required=""/>
+                        <input name="password" id = "pass" type="password" class="form-control" placeholder="Пароль" aria-label="Пароль" required=""/>
                     </div>
                     <br/>
                     <div class="checkbox">
