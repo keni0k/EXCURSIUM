@@ -134,13 +134,11 @@
                     <div class="input-group">
                         <span class="input-group-addon">Логин</span>
                         <input name="login" id = "login" type="text" class="form-control" placeholder="Логин" aria-label="Логин" required=""/>
-                        <label for="login" th:if="${#fields.hasErrors('login')}" th:text="${#messages.msg('error.user.login.size')}" th:class="'error'">Name Error</label>
                     </div>
                     <br/>
                     <div class="input-group">
                         <span class="input-group-addon">Пароль</span>
                         <input name="pass" id = "pass" type="password" class="form-control" placeholder="Пароль" aria-label="Пароль" required=""/>
-                        <label for="pass" th:if="${#fields.hasErrors('pass')}" th:text="${#messages.msg('error.user.pass')}" th:class="'error'">Name Error</label>
                     </div>
                     <br/>
                     <button type="submit" class="btn btn-default">Войти</button>
