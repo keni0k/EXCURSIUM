@@ -51,13 +51,14 @@ public class PersonController {
             model.addAttribute("error_email_free", !personService.isEmailFree(person.getEmail()));
             model.addAttribute("error_email_valid", !personService.isEmailCorrect(person.getEmail()));
             model.addAttribute("insertPerson", person);
+            model.addAttribute("message", new MessageUtil("danger", "During registration, errors occurred. Fix them to complete it."));
             return "registration";
         }
         person.setEmail(person.getEmail().toLowerCase());
         person.setLogin(person.getLogin().toLowerCase());
         person.setImageUrl(file.getOriginalFilename());
         personService.addPerson(person);
-        model.addAttribute("message", new MessageUtil("success", "Sign up success!"));
+        model.addAttribute("message", new MessageUtil("success", "Registration completed successfully! Check your email."));
         return persons(model);
     }
 
