@@ -25,7 +25,7 @@ public interface PersonService {
 
     Boolean isEmailCorrect(String login);
 
-    Boolean throwsErrors(Person person);
+    Boolean throwsErrors(Person person, String pass2);
 
     Boolean isPhoneFree(String login);
 

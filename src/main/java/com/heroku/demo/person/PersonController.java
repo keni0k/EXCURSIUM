@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -37,24 +38,17 @@ public class PersonController {
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String insertContact(ModelMap model,
                                 @ModelAttribute("insertPerson") @Valid Person person,
-                                BindingResult result) {
+                                BindingResult result,
+                                @ModelAttribute("pass2") String pass2,
+                                @RequestParam("file") MultipartFile file) {
         person.setToken(randomToken(32));
 
-        if (!personService.throwsErrors(person)) {
-            String errorEmail = "";
-
-            if (!personService.isEmailFree(person.getEmail()))
-                errorEmail = errorEmail.concat("EMAIL IS NOT FREE");
-            else
-            if (!personService.isEmailCorrect(person.getEmail()))
-                errorEmail = errorEmail.concat("EMAIL IS NOT VALID");
-
-            model.addAttribute("error_login",!personService.isLoginFree(person.getLogin()));
-            if (!personService.isPhoneFree(person.getPhoneNumber())) {
-                model.addAttribute("error_phone","PHONE NUMBER IS NOT FREE");
-            }
-            if (!errorEmail.equals(""))
-                model.addAttribute("error_email", errorEmail);
+        if (!personService.throwsErrors(person, pass2)) {
+            model.addAttribute("error_login", !personService.isLoginFree(person.getLogin()));
+            model.addAttribute("error_phone", !personService.isPhoneFree(person.getPhoneNumber()));
+            model.addAttribute("error_pass", !person.getPass().equals(pass2));
+            model.addAttribute("error_email_free", !personService.isEmailFree(person.getEmail()));
+            model.addAttribute("error_email_valid", !personService.isEmailCorrect(person.getEmail()));
             return persons(model);
         }
         if (!result.hasErrors()) {

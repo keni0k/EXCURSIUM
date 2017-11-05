@@ -80,9 +80,9 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Boolean throwsErrors(Person person) {
+    public Boolean throwsErrors(Person person, String pass2) {
         return isEmailCorrect(person.getEmail()) && isLoginFree(person.getLogin()) && isPhoneFree(person.getPhoneNumber())
-                && isEmailFree(person.getEmail());
+                && isEmailFree(person.getEmail()) && person.getPass().equals(pass2);
     }
 
     @Override
