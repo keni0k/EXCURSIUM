@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="description" content=""/>
@@ -109,7 +110,7 @@
                     <li><a href="/events/list">Экскурсии</a></li>
                     <li><a href="#">FAQ</a></li>
                     <li><a href="index.html#contact">Контакты</a></li>
-                    <li><a href="/users/add">Регистрация</a></li>
+                    <li><a href="/users/registration">Регистрация</a></li>
                 </ul>
 
             </div><!-- navbar collapse end -->
@@ -121,11 +122,12 @@
         </div>
         <div class="row">
             <div class="col-md-12 col-lg-6">
-                <form th:object="${insertPersons}" action="/users/add" method="POST">
+                <form th:object="${insertPerson}" action="/users/add" method="POST">
                     <br/>
                     <div class="input-group">
                         <span class="input-group-addon">Логин</span>
-                        <input name="login" type="text" class="form-control" placeholder="Логин" aria-label="Логин" required=""/>
+                        <input name="login" id = "login" type="text" class="form-control" placeholder="Логин" aria-label="Логин" required=""/>
+                        <label for="login" th:if="${error_login}" th:text="${#messages.msg('error.user.login')}" th:class="'error'">Name Error</label>
                     </div>
                     <br/>
                     <div class="input-group">

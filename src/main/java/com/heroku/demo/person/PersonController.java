@@ -28,13 +28,13 @@ public class PersonController {
         personService = new PersonServiceImpl(personRepository);
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String persons(ModelMap model) {
         model.addAttribute("insertPerson", new Person());
         return "registration";
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String insertContact(ModelMap model,
                                 @ModelAttribute("insertPerson") @Valid Person person,
                                 BindingResult result) {
@@ -44,12 +44,12 @@ public class PersonController {
             String errorEmail = "";
 
             if (!personService.isEmailFree(person.getEmail()))
-                errorEmail = errorEmail.concat("EMAIL IS NOT FREE\n");
+                errorEmail = errorEmail.concat("EMAIL IS NOT FREE");
+            else
             if (!personService.isEmailCorrect(person.getEmail()))
                 errorEmail = errorEmail.concat("EMAIL IS NOT VALID");
 
-            if (!personService.isLoginFree(person.getLogin()))
-                model.addAttribute("error_login","LOGIN IS NOT FREE");
+            model.addAttribute("error_login",!personService.isLoginFree(person.getLogin()));
             if (!personService.isPhoneFree(person.getPhoneNumber())) {
                 model.addAttribute("error_phone","PHONE NUMBER IS NOT FREE");
             }

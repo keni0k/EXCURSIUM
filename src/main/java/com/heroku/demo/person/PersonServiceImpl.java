@@ -87,7 +87,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Boolean isPhoneFree(String phone) {
-        List<Person> list = personRepository.findAll();
+        List<Person> list = getAll();
         boolean isFree = true;
         for (Person p : list)
             if (p.getPhoneNumber().equals(phone))
@@ -98,7 +98,13 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Boolean authorization(String login, String pass) {
-        return null;
+        List<Person> list = personRepository.findAll();
+        boolean isFree = true;
+        for (Person p : list)
+            if (p.getLogin().equals(login))
+                if (p.getPass().equals(pass))
+                    return true;
+        return false;
     }
 
     @Override

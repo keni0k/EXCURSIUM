@@ -72,7 +72,7 @@ public class HomeController {
         return index();
     }
 
-    @RequestMapping("/sendemail")
+    @RequestMapping("sendemail")
     @ResponseBody
     private String sendMail() throws MailjetSocketTimeoutException, MailjetException {
         MailjetRequest email;
@@ -95,7 +95,7 @@ public class HomeController {
         return response.getData() + " " + response.getStatus();
     }
 
-    @RequestMapping("/addmsg")
+    @RequestMapping("addmsg")
     @ResponseBody
     public String insertMsg(ModelMap model,
                             @ModelAttribute("msg") String message,
@@ -207,7 +207,7 @@ public class HomeController {
     }
 
 
-    @RequestMapping("/addphoto")
+    @RequestMapping("addphoto")
     @ResponseBody
     public String insertPhoto(ModelMap model,
                               @ModelAttribute("data") String data,
@@ -222,7 +222,7 @@ public class HomeController {
         return photo.toString();
     }
 
-    @RequestMapping("/getphotos")
+    @RequestMapping("getphotos")
     @ResponseBody
     public String getPhotos() {
         ArrayList<String> arrayList = new ArrayList<>();
@@ -241,7 +241,7 @@ public class HomeController {
         return stringBuilder.toString();
     }
 
-    @RequestMapping(value = "/uploadMultipleFile", method = RequestMethod.POST)
+    @RequestMapping(value = "uploadMultipleFile", method = RequestMethod.POST)
     public @ResponseBody
     String uploadMultipleFileHandler(@RequestParam("file") MultipartFile[] files) {
 
