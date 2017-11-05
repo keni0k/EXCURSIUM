@@ -140,8 +140,8 @@ public class EventController {
         return events(model, null, priceUp, priceDown, category, language, words, 0, AUTH_KEY);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String event(ModelMap model, @PathVariable int id) {
+    @RequestMapping(value = "/event", method = RequestMethod.GET)
+    public String event(ModelMap model, @RequestParam("id") int id) {
         model.addAttribute("event", eventService.getById(id));
         return "event";
     }

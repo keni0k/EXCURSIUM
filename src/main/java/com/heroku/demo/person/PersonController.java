@@ -168,8 +168,8 @@ public class PersonController {
         return stringBuilder.toString();
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String profile(ModelMap model, @PathVariable("id") long id) {
+    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    public String profile(ModelMap model, @RequestParam("id") long id) {
         Person p = personService.getById(id);
         model.addAttribute("person", p != null ? p : new Person());
         //model.addAttribute("insertEvent", new Event());

@@ -145,7 +145,7 @@
                             <img src="../resources/img/bg-cta.jpg" th:src="${event.pathToPhoto}"
                                  class="img-fluid" alt=""/>
                         </div>
-                        <a th:href="@{/events/{id}/(id = ${event.getId()})}">
+                        <a th:href="@{/events/event(id = ${event.getId()})}">
                             <div class="mask waves-effect waves-light"></div>
                         </a>
                     </div>
@@ -158,7 +158,7 @@
                         <h4 class="card-title">
                             <strong>
                                 <h3>
-                                    <a th:href="@{/event(id=${event.getId()})}" th:text="${event.name}">%NAME%</a>
+                                    <a th:href="@{/events/event(id=${event.getId()})}" th:text="${event.name}">%NAME%</a>
                                 </h3>
                             </strong>
                         </h4>
@@ -193,7 +193,7 @@
 								<strong>&#8381;</strong>
 							</span>
                             <span class="right">
-								<a th:href="@{/events/{id}/(id = ${event.getId()})}"
+								<a th:href="@{/events/event(id=${event.getId()})}"
                                    class="btn btn-primary waves-effect waves-light">Открыть</a>
 							</span>
                         </div>
