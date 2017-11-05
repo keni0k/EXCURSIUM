@@ -29,10 +29,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+
                 .antMatchers("/", "/index", "/resources/**", "/users/registration", "/events/list", "/users/updatedb").permitAll()
                 .antMatchers("/users/moderation","/events/moderation").hasRole("ADMIN")
                 .antMatchers("/logout").hasRole("USER")
-                .anyRequest().authenticated().and().formLogin().defaultSuccessUrl("/", false).loginProcessingUrl("/users/registration").loginPage("/users/login").permitAll()
+
+                .anyRequest().authenticated().and().formLogin().defaultSuccessUrl("/", false)
+                .loginProcessingUrl("/users/registration").loginPage("/users/login").passwordParameter("pass").usernameParameter("login")
+                .failureUrl("/users/login?error=true").permitAll()
+
                 .and().logout();
         http.exceptionHandling().accessDeniedPage("/403");
     }
