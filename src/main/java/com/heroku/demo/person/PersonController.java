@@ -43,7 +43,7 @@ public class PersonController {
                                 ModelMap model) {
         person.setToken(randomToken(32));
 
-        if (!personService.throwsErrors(person, pass2)) {
+        if (!personService.throwsErrors(person, pass2) || result.hasErrors()) {
             model.addAttribute("error_login", !personService.isLoginFree(person.getLogin()));
             model.addAttribute("error_phone", !personService.isPhoneFree(person.getPhoneNumber()));
             model.addAttribute("error_pass", !person.getPass().equals(pass2));
@@ -52,10 +52,9 @@ public class PersonController {
             model.addAttribute("insertPerson", person);
             return "registration";
         }
+
         person.setImageUrl(file.getOriginalFilename());
-        if (!result.hasErrors()) {
-            personService.addPerson(person);
-        }
+        personService.addPerson(person);
         return persons(model);
     }
 
