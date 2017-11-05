@@ -15,9 +15,12 @@ import javax.sql.DataSource;
 @EnableAutoConfiguration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Qualifier("dataSource")
+    private final DataSource dataSource;
+
     @Autowired
-    DataSource dataSource;
+    public SecurityConfig(@Qualifier("dataSource") DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
@@ -43,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().defaultSuccessUrl("/", false)
                 .loginPage("/users/login").failureUrl("/users/login?error=true").permitAll()
                 .and()
-                .logout()
+                .logout().logoutUrl("/users/login?logout")
                 .and()
                 .rememberMe().key("_spring_security_remember_me").tokenValiditySeconds(1209600);
         http.csrf().disable();
