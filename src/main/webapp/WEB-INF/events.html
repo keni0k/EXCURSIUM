@@ -63,8 +63,8 @@
 <nav class="four">
     <ul>
         <li><a class="my-btn" href="/" th:text="${#messages.msg('words.home')}"><i class="fa fa-home fa-fw"></i>Главная</a></li>
-        <li><a class="my-btn" th:href="@{/events/moderation(auth = ${auth})}" th:text="${#messages.msg('words.events')}">EVENTS</a></li>
-        <li><a class="my-btn" th:href="@{/users/moderation(auth = ${auth_persons})}" th:text="${#messages.msg('words.users')}">USERS</a></li>
+        <li><a class="my-btn" th:href="@{/events/moderation}" th:text="${#messages.msg('words.events')}">EVENTS</a></li>
+        <li><a class="my-btn" th:href="@{/users/moderation}" th:text="${#messages.msg('words.users')}">USERS</a></li>
     </ul>
 </nav>
 <hr/>
@@ -169,18 +169,18 @@
             </thead>
             <tbody>
             <tr>
-                <td><a th:href="@{/events/moderation(sort_by=${inc}, auth = ${auth})}">ID</a></td>
+                <td><a th:href="@{/events/moderation(sort_by=${inc})}">ID</a></td>
                 <td th:text="${#messages.msg('words.name')}">Название</td>
                 <td th:text="${#messages.msg('words.category')}">Категория</td>
                 <td th:text="${#messages.msg('words.guide_id')}">ID гида</td>
-                <td><a th:text="${#messages.msg('words.price')}" th:href="@{/events/moderation(sort_by=${inc}+2, auth = ${auth})}">Стоимость</a></td>
+                <td><a th:text="${#messages.msg('words.price')}" th:href="@{/events/moderation(sort_by=${inc}+2)}">Стоимость</a></td>
                 <td th:text="${#messages.msg('words.place')}">Место</td>
                 <td th:text="${#messages.msg('words.language')}">Язык</td>
-                <td><a th:text="${#messages.msg('words.users_count')}" th:href="@{/events/moderation(sort_by=${inc}+10, auth = ${auth})}">Кол-во человек</a></td>
-                <td><a th:text="${#messages.msg('words.duration')}" th:href="@{/events/moderation(sort_by=${inc}+8, auth = ${auth})}">Продолжительность</a></td>
+                <td><a th:text="${#messages.msg('words.users_count')}" th:href="@{/events/moderation(sort_by=${inc}+10)}">Кол-во человек</a></td>
+                <td><a th:text="${#messages.msg('words.duration')}" th:href="@{/events/moderation(sort_by=${inc}+8)}">Продолжительность</a></td>
                 <td th:text="${#messages.msg('words.description')}">Описание</td>
-                <td><a th:text="${#messages.msg('words.type')}" th:href="@{/events/moderation(sort_by=${inc}+6, auth = ${auth})}">Тип</a></td>
-                <td><a th:text="${#messages.msg('words.rate')}" th:href="@{/events/moderation(sort_by=${inc}+4, auth = ${auth})}">Рейтинг</a></td>
+                <td><a th:text="${#messages.msg('words.type')}" th:href="@{/events/moderation(sort_by=${inc}+6)}">Тип</a></td>
+                <td><a th:text="${#messages.msg('words.rate')}" th:href="@{/events/moderation(sort_by=${inc}+4)}">Рейтинг</a></td>
             </tr>
             <tr th:each="event : ${events}">
                 <td th:text="${event.id}">Some text</td>
