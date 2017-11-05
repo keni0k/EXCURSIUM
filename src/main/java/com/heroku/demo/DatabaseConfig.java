@@ -10,7 +10,7 @@ import javax.sql.DataSource;
 
 @Configuration
 public class DatabaseConfig {
-    @Bean
+    @Bean (name = "dataSource")
     @Primary
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource dataSource() {

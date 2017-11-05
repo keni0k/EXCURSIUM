@@ -130,7 +130,7 @@
                     <div th:replace="fragments/alert :: alert (type='danger', message='Неправильный логин или пароль')">&nbsp;</div>
                 </th:block>
 
-                <div sec:authorize accesskey="hasRole('ROLE_ADMIN')">Show ROLE_ADMIN</div>
+                <div sec:authorize="hasRole('ROLE_ADMIN')">Show ROLE_ADMIN</div>
                 <div sec:authorize="hasAuthority('ROLE_USER')">Show ROLE_USER</div>
 
                 <form method="POST" action="/users/login">
