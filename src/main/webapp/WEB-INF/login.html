@@ -85,82 +85,19 @@
         background-color: #33aa33;
     }
 </style>
-<div class="content">
-    <nav class="navbar navbar-default navbar-custom" role="navigation">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                        data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle Navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+<th:block th:if="${error}">
+    <div th:replace="fragments/alert :: alert (type='danger', message='Неправильный логин или пароль')">&nbsp;</div>
+</th:block>
 
-                <a class="navbar-brand" href="index.html">
-                    <img id="brand-image" alt="Website Logo" src="../resources/img/logo.png"/>
-                </a>
-            </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form action="/j_spring_security_check" method="POST">
+        <label for="j_username">User Name:</label>
+        <input id="j_username" name="j_username" type="text"/>
+        <label for="j_password">Password:</label>
+        <input id="j_password" name="j_password" type="password"/>
+        <input type="submit" value="Log In"/>
+    </form>
 
-                <!-- Содержимое основной части -->
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/events/list">Экскурсии</a></li>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="index.html#contact">Контакты</a></li>
-                    <li><a href="/users/login" th:text="${#messages.msg('titles.login')}">Авторизация</a></li>
-                </ul>
-
-            </div><!-- navbar collapse end -->
-        </div><!-- container-fluid end -->
-    </nav>
-    <div class="container">
-        <div class="page-header">
-            <h2 th:text="${#messages.msg('titles.login')}">Авторизация</h2>
-        </div>
-        <div class="row">
-            <div class="col-md-12 col-lg-6">
-
-                <!-- /* Handling the flash message */-->
-                <th:block th:if="${error}">
-                    <div th:replace="fragments/alert :: alert (type='danger', message='Неправильный логин или пароль')">&nbsp;</div>
-                </th:block>
-
-                <form method="POST" action="j_spring_security_check">
-                    <br/>
-                    <div class="input-group">
-                        <span class="input-group-addon">Логин</span>
-                        <input name="username" id = "login" type="text" class="form-control" placeholder="Логин" aria-label="Логин" required=""/>
-                    </div>
-                    <br/>
-                    <div class="input-group">
-                        <span class="input-group-addon">Пароль</span>
-                        <input name="password" id = "pass" type="password" class="form-control" placeholder="Пароль" aria-label="Пароль" required=""/>
-                    </div>
-                    <br/>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" id="rememberme"  name="remember_me"/>Запомнить меня
-                        </label>
-                    </div>
-                    <button type="submit" value="Войти" class="btn btn-default">Войти</button>
-
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<footer id="myFooter">
-    <div class="container">
-        <h7 class="logo"><a href="#">&copy; 2017 Excursium</a></h7>
-        <div class="social-icons">
-            <a href="https://vk.com/excursium" class="twitter"><i class="fa fa-vk"></i></a>
-        </div>
-    </div>
-</footer>
 
 </body>
 </html>
