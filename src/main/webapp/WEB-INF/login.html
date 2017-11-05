@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+>
 <head>
     <!--<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>-->
     <meta name="description" content=""/>
@@ -130,8 +130,8 @@
                     <div th:replace="fragments/alert :: alert (type='danger', message='Неправильный логин или пароль')">&nbsp;</div>
                 </th:block>
 
-                <div sec:authorize="hasRole('ROLE_ADMIN')">Show ROLE_ADMIN</div>
-                <div sec:authorize="hasAuthority('ROLE_USER')">Show ROLE_USER</div>
+                <div th:if="${#httpServletRequest.isUserInRole('ADMIN')}">Show ROLE_ADMIN</div>
+                <div th:if="${#httpServletRequest.isUserInRole('USER')}">Show ROLE_ADMIN</div>
 
                 <form method="POST" action="/users/login">
                     <br/>
