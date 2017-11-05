@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/logout").hasRole("USER")
 
                 .anyRequest().authenticated().and().formLogin().defaultSuccessUrl("/", false)
-                .loginProcessingUrl("/users/registration").loginPage("/users/login").passwordParameter("pass").usernameParameter("login")
+                .loginProcessingUrl("/security_check").loginPage("/users/login").passwordParameter("pass").usernameParameter("login")
                 .failureUrl("/users/login?error=true").permitAll()
 
                 .and().logout();
