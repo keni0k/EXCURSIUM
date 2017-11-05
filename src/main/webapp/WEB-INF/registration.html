@@ -33,6 +33,16 @@
 
 
     <title th:text="${#messages.msg('titles.registration')}">Регистрация</title>
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+
+        var message = [[${message}]];
+        console.log(message);
+
+        /*]]>*/
+    </script>
+
 </head>
 <body style="background-color: #f9f9f9;">
 <style type="text/css">

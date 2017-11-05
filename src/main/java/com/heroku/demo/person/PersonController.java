@@ -56,6 +56,7 @@ public class PersonController {
         person.setLogin(person.getLogin().toLowerCase());
         person.setImageUrl(file.getOriginalFilename());
         personService.addPerson(person);
+        model.addAttribute("message","Успех!");
         return persons(model);
     }
 
