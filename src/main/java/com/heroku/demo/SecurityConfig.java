@@ -28,12 +28,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         personService = new PersonServiceImpl(personRepository);
     }
 
-    @Autowired
+    /*@Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource)
                 .usersByUsernameQuery("select login, pass from person where login=?")
                 .authoritiesByUsernameQuery("select login, role from person where login=?");
-    }
+    }*/
 
     @Autowired
     public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
@@ -48,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "/index", "/resources/**", "/users/registration", "/events/list", "/events/", "/users/").permitAll()
+                .antMatchers("/", "/index", "/resources/**", "/users/registration", "/events/list", "/events/*", "/users/*").permitAll()
                 .antMatchers("/**").hasRole("ADMIN")
                 .antMatchers("/events/add").hasRole("USER")
                 .anyRequest().authenticated()
