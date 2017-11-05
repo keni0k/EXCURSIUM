@@ -86,26 +86,87 @@
         background-color: #33aa33;
     }
 </style>
-<th:block th:if="${error}">
-    <div th:replace="fragments/alert :: alert (type='danger', message='Неправильный логин или пароль')">&nbsp;</div>
-</th:block>
 
-<div sec:authorize="hasRole('ROLE_ADMIN')">Show ROLE_ADMIN</div>
-<div sec:authorize="hasAuthority('ROLE_USER')">Show ROLE_USER</div>
+<div class="content">
+    <nav class="navbar navbar-default navbar-custom" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle Navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
 
+                <a class="navbar-brand" href="index.html">
+                    <img id="brand-image" alt="Website Logo" src="../resources/img/logo.png"/>
+                </a>
+            </div>
 
-    <form action="/users/login" method="POST" >
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-        <input id="inputEmail" class="form-control" name="username" required = "" autofocus="autofocus"/>
-        <input type="password" id="inputPassword" class="form-control" name="password" required=""/>
+                <!-- Содержимое основной части -->
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/events/list">Экскурсии</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="index.html#contact">Контакты</a></li>
+                    <li><a href="/users/registration" th:text="${#messages.msg('titles.registration')}">Регистрация</a></li>
+                </ul>
 
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" id="rememberme"  name="_spring_security_remember_me"/>Запомнить меня
-            </label>
+            </div><!-- navbar collapse end -->
+        </div><!-- container-fluid end -->
+    </nav>
+    <div class="container">
+        <div class="page-header">
+            <h2 th:text="${#messages.msg('titles.registration')}">Регистрация</h2>
         </div>
-        <input type="submit" value="Войти" class="btn btn-lg btn-primary btn-block" />
-    </form>
+        <div class="row">
+            <div class="col-md-12 col-lg-6">
+
+                <th:block th:if="${error}">
+                    <div th:replace="fragments/alert :: alert (type='danger', message='Неправильный логин или пароль')">&nbsp;</div>
+                </th:block>
+
+                <div sec:authorize accesskey="hasRole('ROLE_ADMIN')">Show ROLE_ADMIN</div>
+                <div sec:authorize="hasAuthority('ROLE_USER')">Show ROLE_USER</div>
+
+                <form method="POST" action="/users/login">
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon">Логин</span>
+                        <input name="username" id = "login" autofocus="autofocus" type="text" class="form-control" placeholder="Логин" aria-label="Логин" required=""/>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon">Пароль</span>
+                        <input name="password" id = "pass" type="password" class="form-control" placeholder="Пароль" aria-label="Пароль" required=""/>
+                        <label for="pass" th:if="${#fields.hasErrors('pass')}" th:text="${#messages.msg('error.user.pass')}" th:class="'error'">Name Error</label>
+                    </div>
+                    <br/>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" id="rememberme"  name="_spring_security_remember_me"/>Запомнить меня
+                        </label>
+                    </div>
+                    <br/>
+                    <input type="submit" value="Войти" class="btn btn-lg btn-primary btn-block"/>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<footer id="myFooter">
+    <div class="container">
+        <h7 class="logo"><a href="#">&copy; 2017 Excursium</a></h7>
+        <div class="social-icons">
+            <a href="https://vk.com/excursium" class="twitter"><i class="fa fa-vk"></i></a>
+        </div>
+    </div>
+</footer>
 
 </body>
 </html>
