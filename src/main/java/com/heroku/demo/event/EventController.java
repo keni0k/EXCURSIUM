@@ -8,6 +8,7 @@ import com.heroku.demo.photo.Photo;
 import com.heroku.demo.photo.PhotoRepository;
 import com.heroku.demo.photo.PhotoServiceImpl;
 import com.heroku.demo.review.ReviewRepository;
+import com.heroku.demo.utils.MessageUtil;
 import com.heroku.demo.utils.UtilsForWeb;
 import org.joda.time.LocalTime;
 import org.slf4j.Logger;
@@ -75,6 +76,7 @@ public class EventController {
         } else {
             modelMap.addAttribute("file", file);
             modelMap.addAttribute("insertEvent", event);
+            modelMap.addAttribute("message", new MessageUtil("danger", "During the addition of the tour any errors. Fix them to add it."));
             return "event_add";
         }
 

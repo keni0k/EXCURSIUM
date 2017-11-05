@@ -122,6 +122,12 @@
         </div>
         <div class="row">
             <div class="col-md-12 col-lg-6">
+
+                <!-- /* Handling the flash message */-->
+                <th:block th:if="${message != null}">
+                    <div th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message.type)}, message=${message.message})">&nbsp;</div>
+                </th:block>
+
                 <form th:object="${inputEvent}" method="POST" action="/events/add" enctype="multipart/form-data">
                     <br/>
                     <div class="input-group">

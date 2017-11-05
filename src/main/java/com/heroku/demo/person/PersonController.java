@@ -37,7 +37,7 @@ public class PersonController {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String insertContact(@ModelAttribute("insertPerson") @Valid Person person,
+    public String signUp(@ModelAttribute("insertPerson") @Valid Person person,
                                 BindingResult result,
                                 @RequestParam("file") MultipartFile file,
                                 @ModelAttribute("pass2") String pass2,
@@ -60,6 +60,11 @@ public class PersonController {
         personService.addPerson(person);
         model.addAttribute("message", new MessageUtil("success", "Registration completed successfully! Check your email."));
         return persons(model);
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String signIn(){
+        return "login";
     }
 
     @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET, value = "/getbytoken")
@@ -86,11 +91,12 @@ public class PersonController {
         if (Objects.equals(authKey, AUTH_KEY)) {
             List<Person> persons = personService.getAll();
             for (Person person : persons) {
-                //DOIT
-                //personService.editPerson(person);
+                person.setRole("ROLE_USER");
+                personService.editPerson(person);
             }
+            return "YES";
         }
-        return "YES";
+        return "NO";
     }
 
     @RequestMapping("/moderation")

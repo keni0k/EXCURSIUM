@@ -34,6 +34,7 @@ public class Person {
     private String city = "";
     private String token = "";
     private String imageUrl = "";
+    private String role = "";
 
 
     public String getLogin() {
@@ -175,4 +176,11 @@ public class Person {
                 "}";
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 }
