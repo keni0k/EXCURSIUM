@@ -98,10 +98,10 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Boolean authorization(String login, String pass) {
+        login = login.toLowerCase();
         List<Person> list = personRepository.findAll();
-        boolean isFree = true;
         for (Person p : list)
-            if (p.getLogin().equals(login))
+            if (p.getLogin().equals(login) || p.getEmail().equals(login))
                 if (p.getPass().equals(pass))
                     return true;
         return false;

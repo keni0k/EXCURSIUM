@@ -52,7 +52,8 @@ public class PersonController {
             model.addAttribute("insertPerson", person);
             return "registration";
         }
-
+        person.setEmail(person.getEmail().toLowerCase());
+        person.setLogin(person.getLogin().toLowerCase());
         person.setImageUrl(file.getOriginalFilename());
         personService.addPerson(person);
         return persons(model);
