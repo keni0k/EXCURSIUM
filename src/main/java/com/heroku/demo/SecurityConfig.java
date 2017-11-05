@@ -39,16 +39,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
         List<Person> users = personService.getAll();
         for (Person user:users) {
-            auth.inMemoryAuthentication().withUser(user.getLogin()).password(user.getPass()).roles("USER");
-            auth.inMemoryAuthentication().withUser(user.getEmail()).password(user.getPass()).roles("USER");
+            String role = user.getRole().substring(user.getRole().indexOf("_")+1);
+            auth.inMemoryAuthentication().withUser(user.getLogin()).password(user.getPass()).roles(role);
+            auth.inMemoryAuthentication().withUser(user.getEmail()).password(user.getPass()).roles(role);
         }
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "/index", "/resources/**", "/users/registration", "/events/list", "/users/updatedb").permitAll()
-                .antMatchers("/users/moderation","/events/moderation").hasRole("ADMIN")
+                .antMatchers("/", "/index", "/resources/**", "/users/registration", "/events/list", "/events/", "/users/").permitAll()
+                .antMatchers("/**").hasRole("ADMIN")
                 .antMatchers("/events/add").hasRole("USER")
                 .anyRequest().authenticated()
                 .and()
