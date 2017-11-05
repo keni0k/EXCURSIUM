@@ -36,11 +36,11 @@ public class PersonController {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String insertContact(ModelMap model,
-                                @ModelAttribute("insertPerson") @Valid Person person,
+    public String insertContact(@ModelAttribute("insertPerson") @Valid Person person,
                                 BindingResult result,
+                                @RequestParam("file") MultipartFile file,
                                 @ModelAttribute("pass2") String pass2,
-                                @RequestParam("file") MultipartFile file) {
+                                ModelMap model) {
         person.setToken(randomToken(32));
 
         if (!personService.throwsErrors(person, pass2)) {
@@ -51,6 +51,7 @@ public class PersonController {
             model.addAttribute("error_email_valid", !personService.isEmailCorrect(person.getEmail()));
             return persons(model);
         }
+        person.setImageUrl(file.getOriginalFilename());
         if (!result.hasErrors()) {
             personService.addPerson(person);
         }
