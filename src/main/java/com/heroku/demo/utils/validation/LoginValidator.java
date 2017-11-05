@@ -1,4 +1,4 @@
-package com.heroku.demo.utils;
+package com.heroku.demo.utils.validation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
