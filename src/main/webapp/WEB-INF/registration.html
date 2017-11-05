@@ -171,7 +171,8 @@
                         <span class="input-group-addon">Телефон</span>
                         <input name="phoneNumber" type="tel" class="form-control bfh-phone" th:value="${insertPerson.getPhoneNumber()}" placeholder="Телефон" required=""
                                aria-label="Телефон" data-format="+7 (ddd) ddd-dddd" id = "phone_number"/>
-                        <label for="phone_number" th:if="${error_phone}" th:text="${#messages.msg('error.user.phone_number')}" th:class="'error'">Name Error</label>
+                        <label for="phone_number" th:if="${error_phone}" th:text="${#messages.msg('error.user.phone_number.free')}" th:class="'error'">Name Error</label>
+                        <label for="phone_number" th:if="${#fields.hasErrors('phoneNumber')}" th:text="${#messages.msg('error.user.phone_number.invalid')}" th:class="'error'">Name Error</label>
                     </div>
                     <br/>
                     <div class="input-group">

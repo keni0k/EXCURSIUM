@@ -1,10 +1,9 @@
 package com.heroku.demo.event;
 
 import com.heroku.demo.utils.UtilsForWeb;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -61,7 +60,7 @@ public class Event {
     @Transient
     private String photoUrl;
 
-    @Min(1) @Max(240)
+    @Range(min = 1, max = 240)
     private int duration;
 
     public int getLanguage() {
@@ -74,10 +73,10 @@ public class Event {
 
     private int language;
 
-    @Min(1) @Max(100)
+    @Range(min = 1, max = 100)
     private int usersCount;
 
-    @Min(1) @Max(100000)
+    @Range(min = 1, max = 100000)
     private int price;
 
     @Size(min=150, max=1000)

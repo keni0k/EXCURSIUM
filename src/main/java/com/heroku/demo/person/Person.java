@@ -1,5 +1,7 @@
 package com.heroku.demo.person;
 
+import com.heroku.demo.utils.ContactNumberConstraint;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,12 +20,14 @@ public class Person {
     private long id;
     @Size(min = 5, max = 20)
     private String login = "";
+    @Size(min = 7, max = 100)
     private String pass = "";
     private String lastName = "";
     private int type = 0;
     private String email = "";
     private String firstName = "";
     private int rate = 0;
+    @ContactNumberConstraint
     private String phoneNumber = "";
     private String about = "";
     private String city = "";
