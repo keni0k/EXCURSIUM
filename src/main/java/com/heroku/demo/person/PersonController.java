@@ -106,8 +106,8 @@ public class PersonController {
     }
 
 
-    @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
-    public String deleteContact(@PathVariable("id") String id, @ModelAttribute("auth") String authKey) {
+    @RequestMapping(value = "/delete",method = RequestMethod.GET)
+    public String deleteContact(@ModelAttribute("id") String id, @ModelAttribute("auth") String authKey) {
         if (authKey.equals(AUTH_KEY))
             personService.delete(Long.parseLong(id));
         return persons_last(new ModelMap(), AUTH_KEY);

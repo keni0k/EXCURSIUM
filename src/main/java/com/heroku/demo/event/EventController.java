@@ -125,8 +125,8 @@ public class EventController {
         return "event_add";
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public String deleteEvent(ModelMap model, @PathVariable("id") Long id,
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public String deleteEvent(ModelMap model, @ModelAttribute("id") Long id,
                               @RequestParam(value = "price_up", required = false) Integer priceUp,
                               @RequestParam(value = "price_down", required = false) Integer priceDown,
                               @RequestParam(value = "category", required = false) Integer category,
