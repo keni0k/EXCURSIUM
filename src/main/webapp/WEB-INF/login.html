@@ -143,7 +143,6 @@
                     <div class="input-group">
                         <span class="input-group-addon">Пароль</span>
                         <input name="password" id = "pass" type="password" class="form-control" placeholder="Пароль" aria-label="Пароль" required=""/>
-                        <label for="pass" th:if="${#fields.hasErrors('pass')}" th:text="${#messages.msg('error.user.pass')}" th:class="'error'">Name Error</label>
                     </div>
                     <br/>
                     <div class="checkbox">
