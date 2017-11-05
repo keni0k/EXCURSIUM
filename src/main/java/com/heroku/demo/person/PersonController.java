@@ -49,7 +49,8 @@ public class PersonController {
             model.addAttribute("error_pass", !person.getPass().equals(pass2));
             model.addAttribute("error_email_free", !personService.isEmailFree(person.getEmail()));
             model.addAttribute("error_email_valid", !personService.isEmailCorrect(person.getEmail()));
-            return persons(model);
+            model.addAttribute("insertPerson", person);
+            return "registration";
         }
         person.setImageUrl(file.getOriginalFilename());
         if (!result.hasErrors()) {
