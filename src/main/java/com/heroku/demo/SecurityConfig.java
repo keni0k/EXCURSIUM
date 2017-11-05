@@ -19,11 +19,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     DataSource dataSource;
 
+//    @Autowired
+//    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.jdbcAuthentication().dataSource(dataSource)
+////                .usersByUsernameQuery("select login, pass from person where login=?")
+////                .authoritiesByUsernameQuery("select login, role from person where login=?");
+//    }
+
     @Autowired
-    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication().dataSource(dataSource)
-                .usersByUsernameQuery("select login, pass from person where login=?")
-                .authoritiesByUsernameQuery("select login, role from person where login=?");
+    public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN", "USER");
+        auth.inMemoryAuthentication().withUser("test").password("test").roles("USER");
     }
 
     @Override
