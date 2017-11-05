@@ -35,7 +35,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-
                 .antMatchers("/", "/index", "/resources/**", "/users/registration", "/events/list", "/users/updatedb").permitAll()
                 .antMatchers("/users/moderation","/events/moderation").hasRole("ADMIN")
                 .antMatchers("/events/add").hasRole("USER")
@@ -46,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .and()
-                .rememberMe().key("remember_me").tokenValiditySeconds(1209600);
+                .rememberMe().key("_spring_security_remember_me").tokenValiditySeconds(1209600);
         http.csrf().disable();
         http.exceptionHandling().accessDeniedPage("/403");
     }

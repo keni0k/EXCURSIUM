@@ -94,12 +94,17 @@
 <div sec:authorize="hasAuthority('ROLE_USER')">Show ROLE_USER</div>
 
 
-    <form action="#" method="POST">
-        <label for="username">User Name:</label>
-        <input id="username" name="j_username" type="text"/>
-        <label for="password">Password:</label>
-        <input id="password" name="j_password" type="password"/>
-        <input type="submit" value="Log In"/>
+    <form action="/j_spring_security_check" method="POST" >
+
+        <input id="inputEmail" class="form-control" name="j_username" value="admin@gmail.com" required autofocus/>
+        <input type="password" id="inputPassword" class="form-control" name="j_password" value="12345" required/>
+
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" id="rememberme"  name="_spring_security_remember_me"/>Запомнить меня
+            </label>
+        </div>
+        <input type="submit" value="Войти" class="btn btn-lg btn-primary btn-block" >
     </form>
 
 
