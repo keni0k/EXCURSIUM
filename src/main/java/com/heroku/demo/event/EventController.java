@@ -248,7 +248,6 @@ public class EventController {
         return event.toString();
     }
 
-
     @RequestMapping("/updatedb")
     @ResponseBody
     public String updateDBEvents() {

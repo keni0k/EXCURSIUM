@@ -85,7 +85,7 @@ public class PersonController {
         return p == null ? "{}" : p.toString();
     }
 
-    @RequestMapping("/updatedbpersons")
+    @RequestMapping("/updatedb")
     @ResponseBody
     public String updateDBPersons(@ModelAttribute("auth") String authKey) {
         if (Objects.equals(authKey, AUTH_KEY)) {
