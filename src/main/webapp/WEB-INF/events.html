@@ -196,7 +196,7 @@
                 <td th:text="${event.type}">Some text</td>
                 <td th:text="${event.rate}">Some text</td>
                 <td><a th:href="@{/events/moderation(id = ${event.id}, auth = ${auth})}"><img src="../resources/img/icons/edit.png"/></a></td>
-                <td><a data-th-method="delete" th:href="@{/events/${event.id}(auth = ${auth})}"><img src="../resources/img/icons/del.png"/></a></td>
+                <td><a data-th-method="delete" th:href="@{/events/{id}(id = ${event.id}, auth = ${auth})}"><img src="../resources/img/icons/del.png"/></a></td>
             </tr>
             </tbody>
         </table>
