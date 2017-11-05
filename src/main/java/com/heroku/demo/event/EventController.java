@@ -174,6 +174,7 @@ public class EventController {
         return new ResponseEntity<>(language == 0 ? ru : en, h, HttpStatus.OK);
     }
 
+
     @RequestMapping("/listjson")
     @ResponseBody
     public ResponseEntity<String> getEventsByFilter(@RequestParam(value = "price_down", required = false) Integer priceDown,
