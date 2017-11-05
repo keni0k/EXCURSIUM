@@ -1,6 +1,5 @@
 package com.heroku.demo.person;
 
-import com.heroku.demo.event.EventController;
 import com.heroku.demo.utils.MessageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -13,7 +12,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static com.heroku.demo.utils.Utils.randomToken;
 
@@ -21,7 +19,7 @@ import static com.heroku.demo.utils.Utils.randomToken;
 @RequestMapping("/users")
 public class PersonController {
 
-    public static String AUTH_KEY = "DGgttMjxGUuuLvr49LnEWVFBbkxSNXnH";
+    private static String AUTH_KEY = "DGgttMjxGUuuLvr49LnEWVFBbkxSNXnH";
 
     private PersonServiceImpl personService;
 
@@ -87,36 +85,28 @@ public class PersonController {
 
     @RequestMapping("/updatedb")
     @ResponseBody
-    public String updateDBPersons(@ModelAttribute("auth") String authKey) {
-        if (Objects.equals(authKey, AUTH_KEY)) {
-            List<Person> persons = personService.getAll();
-            for (Person person : persons) {
-                person.setRole("ROLE_USER");
-                personService.editPerson(person);
-            }
-            return "YES";
+    public String updateDBPersons() {
+        List<Person> persons = personService.getAll();
+        for (Person person : persons) {
+//                person.setRole("ROLE_USER");
+//                personService.editPerson(person);
         }
-        return "NO";
+        return "YES";
     }
 
     @RequestMapping("/moderation")
-    public String persons_last(ModelMap model, @ModelAttribute("auth") String authKey) {
-        List<Person> persons = new ArrayList<>();
-        if (authKey.equals(AUTH_KEY))
-            persons = personService.getAll();
+    public String persons_last(ModelMap model) {
+        List<Person> persons = personService.getAll();
         model.addAttribute("persons", persons);
         model.addAttribute("insertPerson", new Person());
-        model.addAttribute("auth", AUTH_KEY);
-        model.addAttribute("auth_events", EventController.AUTH_KEY);
         return "persons";
     }
 
 
     @RequestMapping(value = "/delete",method = RequestMethod.GET)
-    public String deleteContact(@ModelAttribute("id") String id, @ModelAttribute("auth") String authKey) {
-        if (authKey.equals(AUTH_KEY))
-            personService.delete(Long.parseLong(id));
-        return persons_last(new ModelMap(), AUTH_KEY);
+    public String deleteContact(@ModelAttribute("id") String id) {
+        personService.delete(Long.parseLong(id));
+        return persons_last(new ModelMap());
     }
 
   /*

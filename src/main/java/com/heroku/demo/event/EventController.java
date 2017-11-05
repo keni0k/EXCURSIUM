@@ -1,7 +1,6 @@
 package com.heroku.demo.event;
 
 import com.heroku.demo.HomeController;
-import com.heroku.demo.person.PersonController;
 import com.heroku.demo.person.PersonRepository;
 import com.heroku.demo.person.PersonServiceImpl;
 import com.heroku.demo.photo.Photo;
@@ -29,6 +28,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static com.heroku.demo.utils.Utils.*;
 
@@ -36,7 +36,7 @@ import static com.heroku.demo.utils.Utils.*;
 @RequestMapping("/events")
 public class EventController {
 
-    public static String AUTH_KEY = "jP7xwaj12EYohNabYr1r6ewMeVJa8Jkf";
+    private static String AUTH_KEY = "jP7xwaj12EYohNabYr1r6ewMeVJa8Jkf";
 
     private ReviewRepository reviewRepository;
     private PhotoRepository photoRepository;
@@ -133,11 +133,9 @@ public class EventController {
                               @RequestParam(value = "price_down", required = false) Integer priceDown,
                               @RequestParam(value = "category", required = false) Integer category,
                               @RequestParam(value = "language", required = false) Integer language,
-                              @RequestParam(value = "words", required = false) String words,
-                              @ModelAttribute("auth") String authKey) {
-        if (authKey.equals(AUTH_KEY))
-            eventService.delete(id);
-        return events(model, null, priceUp, priceDown, category, language, words, 0, AUTH_KEY);
+                              @RequestParam(value = "words", required = false) String words) {
+        eventService.delete(id);
+        return events(model, null, priceUp, priceDown, category, language, words, 0);
     }
 
     @RequestMapping(value = "/event", method = RequestMethod.GET)
@@ -182,7 +180,8 @@ public class EventController {
                                                     @RequestParam(value = "category", required = false) Integer category,
                                                     @RequestParam(value = "words", required = false) String words,
                                                     @RequestParam(value = "language", required = false) Integer language,
-                                                    @RequestParam(value = "sort_by", required = false) Integer sortBy) {
+                                                    @RequestParam(value = "sort_by", required = false) Integer sortBy,
+                                                    @RequestParam(value = "auth") String authKey){
         ArrayList<String> arrayList = new ArrayList<>();
         List<Event> events = eventService.getByFilter(priceUp, priceDown, category, language, words, sortBy);
         for (Event e : events) {
@@ -190,10 +189,11 @@ public class EventController {
         }
 
         StringBuilder stringBuilder = new StringBuilder("{ \"events\": [");
-
-        for (int i = 0; i < arrayList.size(); i++) {
-            stringBuilder.append(arrayList.get(i));
-            if (arrayList.size() - i > 1) stringBuilder.append(",\n");
+        if (authKey.equals(AUTH_KEY)) {
+            for (int i = 0; i < arrayList.size(); i++) {
+                stringBuilder.append(arrayList.get(i));
+                if (arrayList.size() - i > 1) stringBuilder.append(",\n");
+            }
         }
         stringBuilder.append("]}");
         HttpHeaders h = new HttpHeaders();
@@ -209,27 +209,18 @@ public class EventController {
                          @RequestParam(value = "category", required = false) Integer category,
                          @RequestParam(value = "language", required = false) Integer language,
                          @RequestParam(value = "words", required = false) String words,
-                         @RequestParam(value = "sort_by", required = false) Integer sortBy,
-                         @ModelAttribute("auth") String authKey) {
-        if (authKey.equals(AUTH_KEY)) {
-            List<Event> events = eventService.getByFilter(priceUp, priceDown, category, language, words, sortBy);
-            model.addAttribute("events", events);
+                         @RequestParam(value = "sort_by", required = false) Integer sortBy) {
+        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, language, words, sortBy);
+        model.addAttribute("events", events);
 
-            if (id != null) {
-                Event editEvent = eventService.getById(id);
-                model.addAttribute("insertEvent", editEvent);
-            } else model.addAttribute("insertEvent", new Event());
+        if (id != null) {
+            Event editEvent = eventService.getById(id);
+            model.addAttribute("insertEvent", editEvent);
+        } else model.addAttribute("insertEvent", new Event());
 
-            if (sortBy == null) model.addAttribute("inc", 0);
-            else if (sortBy % 2 == 0) model.addAttribute("inc", 1);
-            else model.addAttribute("inc", 0);
-            model.addAttribute("auth_persons", PersonController.AUTH_KEY);
-            model.addAttribute("auth", authKey);
-        } else {
-            model.addAttribute("insertEvent", new Event());
-            model.addAttribute("error", "CHECK YOUR AUTH KEY");
-        }
-
+        if (sortBy == null) model.addAttribute("inc", 0);
+        else if (sortBy % 2 == 0) model.addAttribute("inc", 1);
+        else model.addAttribute("inc", 0);
         return "events";
     }
 
@@ -252,10 +243,9 @@ public class EventController {
     @ResponseBody
     public String updateDBEvents() {
         List<Event> events = eventService.getAll();
-        for (Event event :
-                events) {
-            //DOIT
-            //eventService.editEvent(event);
+        for (Event event : events) {
+            event.setGuideId(new Random().nextInt(3)+37);
+            eventService.editEvent(event);
         }
         return "YES";
     }
