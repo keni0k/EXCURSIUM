@@ -43,6 +43,15 @@ public class PersonServiceImpl implements PersonService {
         return null;
     }
 
+    public Person getByLogin(String login) {
+        List<Person> list = personRepository.findAll();
+        for (Person p : list)
+            if (p.getLogin().equals(login))
+                return p;
+        return null;
+    }
+
+
     @Override
     public Person getById(long id) {
         return personRepository.findOne(id);
