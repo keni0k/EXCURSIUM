@@ -17,154 +17,227 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title th:text="${#messages.msg('titles.persons')}">Модерация контента</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
-    <!--<link rel="stylesheet" type="text/css" href="style.css"/>-->
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"/>
-    <style>
-        ul {
-            list-style: none; /*убираем маркеры списка*/
-            margin: 0; /*убираем отступы*/
-            padding-left: 0; /*убираем отступы*/
-            margin-top: 25px; /*делаем отступ сверху*/
-        }
+    <meta name="description" content=""/>
+    <meta name="title" content=""/>
+    <meta name="author" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta name="keywords" content="excursium"/>
 
-        .my-btn {
-            text-decoration: none; /*убираем подчеркивание текста ссылок*/
-            background: #30A8E6; /*добавляем фон к пункту меню*/
-            color: #fff; /*меняем цвет ссылок*/
-            padding: 10px; /*добавляем отступ*/
-            font-family: arial; /*меняем шрифт*/
-            border-radius: 4px; /*добавляем скругление*/
-            -moz-transition: all 0.3s 0.01s ease; /*делаем плавный переход*/
-            -o-transition: all 0.3s 0.01s ease;
-            -webkit-transition: all 0.3s 0.01s ease;
-        }
+    <link rel="stylesheet" type="text/css" href="../resources/css/styles.css"/>
+    <link rel="stylesheet" href="../resources/css/media.css"/>
+    <link rel="stylesheet" type="text/css" href="../resources/css/footer.css"/>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"/>
 
-        .my-btn:hover {
-            background: #1C85BB; /*добавляем эффект при наведении*/
-        }
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-        li {
-            float: left; /*Размещаем список горизонтально для реализации меню*/
-            margin-right: 5px; /*Добавляем отступ у пунктов меню*/
+    <!-- Icon -->
+    <link rel="icon" href="../resources/img/icon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="../resources/img/icon.ico" type="image/x-icon"/>
 
-        }
-    </style>
+    <link rel="stylesheet" href="../resources/libs/bootstrap-select/css/bootstrap-select.css"/>
+    <script type="text/javascript" src="../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
+
+    <link rel="stylesheet" href="../resources/css/segoe_ui.css"/>
+
+    <link rel="stylesheet" href="../resources/libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>
+    <script type="text/javascript"
+            src="../resources/libs/bootstrapformhelpers/js/bootstrap-formhelpers.min.js"></script>
 </head>
-<body>
-<div class="page-header">
-    <h1 th:text="${#messages.msg('titles.persons')}">Контакты</h1>
-</div>
+<body style="background-color: #f9f9f9;">
+<style type="text/css">
 
-<nav class="four">
-    <ul>
-        <li><a class="my-btn" href="/" th:text="${#messages.msg('words.home')}"><i class="fa fa-home fa-fw"></i>Главная</a></li>
-        <li><a class="my-btn" th:href="@{/events/moderation}" th:text="${#messages.msg('words.events')}">EVENTS</a></li>
-        <li><a class="my-btn" th:href="@{/users/moderation}" th:text="${#messages.msg('words.users')}">USERS</a></li>
-    </ul>
-</nav>
-<hr/>
-<hr/>
-<hr/>
-<div class="row">
-    <div class="col-md-12 col-lg-6">
-        <form th:object="${insertPerson}" action="/users/registration" method="POST">
+    .navbar-fixed-top {
+        min-height: 95px;
+    }
 
-            Тип пользователя:
-            <select name="type">
-                <option value="0"> Неактив</option>
-                <option value="1"> Турист</option>
-                <option value="2"> Экскурсовод</option>
-                <option value="3"> Заблокированный</option>
-            </select>
+    .navbar-nav > li > a {
+        font-family: SegoeUIRegular, serif;
+        padding-top: 0;
+        padding-bottom: 0;
+        line-height: 95px;
+    }
 
-            <br/>
-            Логин: <input name="login" type="text" value=""/>
-            <br/>
-            Пароль:
-            <input name="pass" type="password" value=""/>
-            <br/>
-            Имя:
-            <input name="firstName" type="text" value=""/>
-            <br/>
-            Фамилия: <input name="lastName" type="text" value=""/>
-            <br/>
-            Фото URL:
-            <input name="imageUrl" type="text" value=""/>
-            <br/>
-            E-mail:
-            <input name="email" type="email" value=""/>
-            <br/>
-            Номер телефона:
-            <input name="phoneNumber" type="tel" value=""/>
-            <br/>
-            О себе:
-            <input name="about" type="text" value=""/>
-            <br/>
-            Рейтинг:
-            <input name="rate" type="number" value=""/>
-            <br/>
-            Город:
-            <select name="city">
-                <option value="moscow"> Москва</option>
-                <option value="spb"> Санкт Петербург</option>
-            </select>
-            <br/>
-            <button type="submit" class="btn btn-default">Отправить</button>
+    .navbar-custom {
+        background: linear-gradient(to left, #68b3bd, #00ae6f);
+        color: #000000;
+        border-radius: 0;
+    }
 
-        </form>
+    .navbar-custom .navbar-nav > li > a {
+        color: #000000;
+    }
+
+    .navbar-custom .navbar-nav > .active > a {
+        color: #000000;
+        background-color: transparent;
+    }
+
+    .navbar-custom .navbar-nav > li > a:hover,
+    .navbar-custom .navbar-nav > li > a:focus,
+    .navbar-custom .navbar-nav > .active > a:hover,
+    .navbar-custom .navbar-nav > .active > a:focus,
+    .navbar-custom .navbar-nav > .open > a {
+        text-decoration: none;
+        background-color: #B2EBF2;
+    }
+
+    .navbar-custom .navbar-brand {
+        color: #eeeeee;
+    }
+
+    .navbar-custom .navbar-toggle {
+        background-color: #eeeeee;
+    }
+
+    .navbar-custom .icon-bar {
+        background-color: #33aa33;
+    }
+</style>
+<div class="content">
+    <nav class="navbar navbar-default navbar-custom" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle Navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <a class="navbar-brand" href="/">
+                    <img id="brand-image" alt="Website Logo" src="../resources/img/logo.png"/>
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                <!-- Содержимое основной части -->
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/events/moderation" th:text="${#messages.msg('titles.events')}">Модерация экскурсий</a>
+                    </li>
+                    <li><a href="/users/moderation" th:text="${#messages.msg('titles.events')}">Модерация
+                        пользователей</a></li>
+                </ul>
+
+            </div><!-- navbar collapse end -->
+        </div><!-- container-fluid end -->
+    </nav>
+    <div class="page-header">
+        <h1 th:text="${#messages.msg('titles.persons')}">Модерация пользователей</h1>
+    </div>
+    <hr/>
+    <hr/>
+    <div class="row">
+        <div class="col-md-12 col-lg-6">
+            <form th:object="${insertPerson}" action="/users/registration" method="POST">
+
+                Тип пользователя:
+                <select name="type">
+                    <option value="0"> Неактив</option>
+                    <option value="1"> Турист</option>
+                    <option value="2"> Экскурсовод</option>
+                    <option value="3"> Заблокированный</option>
+                </select>
+
+                <br/>
+                Логин: <input name="login" type="text" value=""/>
+                <br/>
+                Пароль:
+                <input name="pass" type="password" value=""/>
+                <br/>
+                Имя:
+                <input name="firstName" type="text" value=""/>
+                <br/>
+                Фамилия: <input name="lastName" type="text" value=""/>
+                <br/>
+                Фото URL:
+                <input name="imageUrl" type="text" value=""/>
+                <br/>
+                E-mail:
+                <input name="email" type="email" value=""/>
+                <br/>
+                Номер телефона:
+                <input name="phoneNumber" type="tel" value=""/>
+                <br/>
+                О себе:
+                <input name="about" type="text" value=""/>
+                <br/>
+                Рейтинг:
+                <input name="rate" type="number" value=""/>
+                <br/>
+                Город:
+                <select name="city">
+                    <option value="moscow"> Москва</option>
+                    <option value="spb"> Санкт Петербург</option>
+                </select>
+                <br/>
+                <button type="submit" class="btn btn-default">Отправить</button>
+
+            </form>
+        </div>
+    </div>
+
+    <hr/>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Users</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>ID</td>
+                    <td>Логин</td>
+                    <td>Пароль</td>
+                    <td>Имя</td>
+                    <td>Фамилия</td>
+                    <td>Город</td>
+                    <td>Email</td>
+                    <td>Телефон</td>
+                    <td>Тип</td>
+                    <td>Рейтинг</td>
+                    <td>Токен</td>
+                    <td>Изменить</td>
+                    <td>Удалить</td>
+                </tr>
+                <tr th:each="person : ${persons}">
+                    <td th:text="${person.id}">Some text</td>
+                    <td th:text="${person.login}">Some text</td>
+                    <td th:text="${person.pass}">Some text</td>
+                    <td th:text="${person.firstName}">Some text</td>
+                    <td th:text="${person.lastName}">Some text</td>
+                    <td th:text="${person.city}">Some text</td>
+                    <td th:text="${person.email}">Some text</td>
+                    <td th:text="${person.phoneNumber}">Some text</td>
+                    <td th:text="${person.type}">Some text</td>
+                    <td th:text="${person.rate}">Some text</td>
+                    <td th:text="${person.token}">Some text</td>
+                    <td><a th:href="@{/persons/moderation(id = ${person.id})}"><img
+                            src="../resources/img/icons/edit.png"/></a></td>
+                    <td><a th:href="@{/persons/delete(id = ${person.id})}"><img
+                            src="../resources/img/icons/del.png"/></a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
-<hr/>
-
-<div class="row">
-    <div class="col-sm-12">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>Users</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>ID</td>
-                <td>Логин</td>
-                <td>Пароль</td>
-                <td>Имя</td>
-                <td>Фамилия</td>
-                <td>Город</td>
-                <td>Email</td>
-                <td>Телефон</td>
-                <td>Тип</td>
-                <td>Рейтинг</td>
-                <td>Токен</td>
-                <td>Изменить</td>
-                <td>Удалить</td>
-            </tr>
-            <tr th:each="person : ${persons}">
-                <td th:text="${person.id}">Some text</td>
-                <td th:text="${person.login}">Some text</td>
-                <td th:text="${person.pass}">Some text</td>
-                <td th:text="${person.firstName}">Some text</td>
-                <td th:text="${person.lastName}">Some text</td>
-                <td th:text="${person.city}">Some text</td>
-                <td th:text="${person.email}">Some text</td>
-                <td th:text="${person.phoneNumber}">Some text</td>
-                <td th:text="${person.type}">Some text</td>
-                <td th:text="${person.rate}">Some text</td>
-                <td th:text="${person.token}">Some text</td>
-                <td><a th:href="@{/persons/moderation(id = ${person.id})}"><img src="../resources/img/icons/edit.png"/></a></td>
-                <td><a th:href="@{/persons/delete(id = ${person.id})}"><img src="../resources/img/icons/del.png"/></a></td>
-            </tr>
-            </tbody>
-        </table>
+<footer id="myFooter">
+    <div class="container">
+        <h7 class="logo"><a href="#">&copy; 2017 Excursium</a></h7>
+        <div class="social-icons">
+            <a href="https://vk.com/excursium" class="twitter"><i class="fa fa-vk"></i></a>
+        </div>
     </div>
-</div>
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</footer>
 </body>
 </html>

@@ -120,15 +120,17 @@
 
                 <!-- Содержимое основной части -->
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/events/moderation">Модерация экскурсий</a></li>
-                    <li><a href="/users/moderation">Модерация пользователей</a> </li>
+                    <li><a href="/events/moderation" th:text="${#messages.msg('titles.events')}">Модерация экскурсий</a>
+                    </li>
+                    <li><a href="/users/moderation" th:text="${#messages.msg('titles.events')}">Модерация
+                        пользователей</a></li>
                 </ul>
 
             </div><!-- navbar collapse end -->
         </div><!-- container-fluid end -->
     </nav>
     <div class="page-header">
-        <h1 th:text="${#messages.msg('titles.events')}">Контакты</h1>
+        <h1 th:text="${#messages.msg('titles.events')}">Модерация экскурсий</h1>
     </div>
 
     <hr/>
@@ -147,19 +149,23 @@
 
                 <br/>
 
-                <label th:text="${#messages.msg('words.name')}" for="name"></label>:
-                <textarea name="name" type="text" id="name" th:text="${insertEvent.getName()}" required=""></textarea>
-
+                <div class="input-group">
+                    <span class="input-group-addon" th:text="${#messages.msg('words.name')}"></span>:
+                    <textarea name="name" type="text" id="name" th:text="${insertEvent.getName()}"
+                              required=""></textarea>
+                </div>
                 <br/>
 
-                <label th:text="${#messages.msg('words.guide_id')}" for="guide_id"></label>:
-                <input name="guideId" id="guide_id" type="number" required="" th:value="${insertEvent.getGuideId()}"/>
-
+                <div class="input-group">
+                    <span class="input-group-addon" th:text="${#messages.msg('words.guide_id')}"></span>:
+                    <input class="form-control" name="guideId" id="guide_id" type="number" required=""
+                           th:value="${insertEvent.getGuideId()}"/>
+                </div>
                 <br/>
-
-                <label th:text="${#messages.msg('words.photo')}" for="photo"></label>:
-                <input name="file" id="photo" accept="image/jpeg,image/png" required="" type="file"/>
-
+                <div class="input-group">
+                    <span class="input-group-addon" th:text="${#messages.msg('words.photo')}"></span>:
+                    <input class="form-control" name="file" id="photo" accept="image/jpeg,image/png" required="" type="file"/>
+                </div>
                 <br/>
 
                 <label th:text="${#messages.msg('words.category')}" for="category"></label>:
@@ -175,27 +181,27 @@
                 </select>
 
                 <br/>
-
-                <label th:text="${#messages.msg('words.place')}" for="place"></label>:
-                <input name="place" id="place" type="text" th:value="${insertEvent.place}" required=""/>
-
+                <div class="input-group">
+                    <span class="input-group-addon" th:text="${#messages.msg('words.place')}"></span>:
+                    <input class="form-control" name="place" id="place" type="text" th:value="${insertEvent.place}" required=""/>
+                </div>
                 <br/>
-
-                <label th:text="${#messages.msg('words.duration')}" for="duration"></label>:
-                <input name="duration" id="duration" type="number" th:value="${insertEvent.duration}" required=""/>
-
+                <div class="input-group">
+                    <span class="input-group-addon" th:text="${#messages.msg('words.duration')}"></span>:
+                    <input class="form-control" name="duration" id="duration" type="number" th:value="${insertEvent.duration}" required=""/>
+                </div>
                 <br/>
-
-                <label th:text="${#messages.msg('words.description')}" for="description"></label>:
-                <textarea name="description" type="text" id="description" th:text="${insertEvent.description}"
-                          required=""></textarea>
-
+                <div class="input-group">
+                    <span class="input-group-addon" th:text="${#messages.msg('words.description')}"></span>:
+                    <textarea name="description" type="text" id="description" th:text="${insertEvent.description}"
+                              required=""></textarea>
+                </div>
                 <br/>
-
-                <label th:text="${#messages.msg('words.users_count')}" for="users_count"></label>:
-                <input name="usersCount" id="users_count" type="number" th:value="${insertEvent.usersCount}"
-                       required=""/>
-
+                <div class="input-group">
+                    <span class="input-group-addon" th:text="${#messages.msg('words.users_count')}"></span>:
+                    <input class="form-control" name="usersCount" id="users_count" type="number" th:value="${insertEvent.usersCount}"
+                           required=""/>
+                </div>
                 <br/>
 
                 <label th:text="${#messages.msg('words.language')}" for="language"></label>:
@@ -205,14 +211,15 @@
                 </select>
 
                 <br/>
-
-                <label th:text="${#messages.msg('words.price')}" for="price"></label>:
-                <input name="price" id="price" type="number" th:value="${insertEvent.price}" required=""/>
-
+                <div class="input-group">
+                    <span class="input-group-addon" th:text="${#messages.msg('words.price')}"></span>:
+                    <input class="form-control" name="price" id="price" type="number" th:value="${insertEvent.price}" required=""/>
+                </div>
                 <br/>
-
-                <label for="id">ID:</label>
-                <input type="number" name="id" id="id" th:value="${insertEvent.id}" required=""/>
+                <div class="input-group">
+                    <span class="input-group-addon">ID:</span>
+                    <input class="form-control" type="number" name="id" id="id" th:value="${insertEvent.id}" required=""/>
+                </div>
                 <br/>
                 <button type="reset" class="btn btn-default" th:text="${#messages.msg('words.reset')}">Сброс</button>
                 <button type="submit" class="btn btn-default" th:text="${#messages.msg('words.submit')}">Сохранить
@@ -229,7 +236,7 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th th:text="${#messages.msg('words.users')}">Users</th>
+                    <th th:text="${#messages.msg('words.events')}">Events</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -275,7 +282,13 @@
         </div>
     </div>
 </div>
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<footer id="myFooter">
+    <div class="container">
+        <h7 class="logo"><a href="#">&copy; 2017 Excursium</a></h7>
+        <div class="social-icons">
+            <a href="https://vk.com/excursium" class="twitter"><i class="fa fa-vk"></i></a>
+        </div>
+    </div>
+</footer>
 </body>
 </html>
