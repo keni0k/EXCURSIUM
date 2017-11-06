@@ -57,6 +57,12 @@ public class HomeController {
 
     }
 
+
+    @RequestMapping("403")
+    public String access403() {
+        return "403";
+    }
+
     @RequestMapping("upload")
     public String upload() {
         return "upload";
