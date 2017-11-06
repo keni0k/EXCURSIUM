@@ -44,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .rememberMe().key("_spring_security_remember_me").tokenValiditySeconds(1209600)
                 .and()
-                .exceptionHandling().accessDeniedPage("/403")
+                .exceptionHandling().accessDeniedPage("/errors/403")
                 .and()
                 .csrf().disable();
     }

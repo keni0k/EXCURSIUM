@@ -58,7 +58,7 @@ public class HomeController {
     }
 
 
-    @RequestMapping("403")
+    @RequestMapping("errors/403")
     public String access403() {
         return "403";
     }

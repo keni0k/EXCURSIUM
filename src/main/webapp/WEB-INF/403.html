@@ -1,12 +1,138 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="description" content=""/>
+    <meta name="title" content=""/>
+    <meta name="author" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta name="keywords" content="excursium"/>
+
+    <link rel="stylesheet" type="text/css" href="../resources/css/styles.css"/>
+    <link rel="stylesheet" href="../resources/css/media.css"/>
+    <link rel="stylesheet" type="text/css" href="../resources/css/footer.css"/>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"/>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="../resources/libs/bootstrap-select/css/bootstrap-select.css"/>
+    <script type="text/javascript" src="../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
+
+    <link rel="stylesheet" href="../resources/css/segoe_ui.css"/>
+
+    <!-- Icon -->
+    <link rel="icon" href="../resources/img/icon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="../resources/img/icon.ico" type="image/x-icon"/>
+
+    <link rel="stylesheet" href="../resources/libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>
+    <script type="text/javascript"
+            src="../resources/libs/bootstrapformhelpers/js/bootstrap-formhelpers.min.js"></script>
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" href="../resources/css/cards.css"/>
     <title>403</title>
 </head>
-<body>
+<body style="background-color: #f9f9f9;">
+<style type="text/css">
 
-<h1>Это фиаско, братан</h1>
+    .navbar-fixed-top {
+        min-height: 95px;
+    }
+
+    .navbar-nav > li > a {
+        font-family: SegoeUIRegular, serif;
+        padding-top: 0;
+        padding-bottom: 0;
+        line-height: 95px;
+    }
+
+    .navbar-custom {
+        background: linear-gradient(to left, #68b3bd, #00ae6f);
+        color: #000000;
+        border-radius: 0;
+    }
+
+    .navbar-custom .navbar-nav > li > a {
+        color: #000000;
+    }
+
+    .navbar-custom .navbar-nav > .active > a {
+        color: #000000;
+        background-color: transparent;
+    }
+
+    .navbar-custom .navbar-nav > li > a:hover,
+    .navbar-custom .navbar-nav > li > a:focus,
+    .navbar-custom .navbar-nav > .active > a:hover,
+    .navbar-custom .navbar-nav > .active > a:focus,
+    .navbar-custom .navbar-nav > .open > a {
+        text-decoration: none;
+        background-color: #B2EBF2;
+    }
+
+    .navbar-custom .navbar-brand {
+        color: #eeeeee;
+    }
+
+    .navbar-custom .navbar-toggle {
+        background-color: #eeeeee;
+    }
+
+    .navbar-custom .icon-bar {
+        background-color: #33aa33;
+    }
+</style>
+<div class="content">
+    <nav class="navbar navbar-default navbar-custom" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle Navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <a class="navbar-brand" href="/">
+                    <img id="brand-image" alt="Website Logo" src="../resources/img/logo.png"/>
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                <!-- Содержимое основной части -->
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/events/list">Экскурсии</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="/index#contact">Контакты</a></li>
+                    <li th:unless="${#httpServletRequest.isUserInRole('USER')}"><a href="/users/registration" th:text="${#messages.msg('titles.registration')}">Регистрация</a></li>
+                    <li th:unless="${#httpServletRequest.isUserInRole('USER')}"><a href="/users/login" th:text="${#messages.msg('titles.login')}">Войти</a></li>
+                    <li th:if="${#httpServletRequest.isUserInRole('USER')}"><a href="/users/logout" th:text="${#messages.msg('titles.logout')}">Выйти</a></li>
+                </ul>
+
+            </div><!-- navbar collapse end -->
+        </div><!-- container-fluid end -->
+    </nav>
+    <div class="container">
+            <h1 style="align-content: center; vertical-align: middle">Ошибка 403. Вы зашли на охраняемую территорию!!1!</h1>
+            <h2 style="align-content: center; vertical-align: middle"><a href="/users/logout">Уйти, перелогиниться и вернуться</a></h2>
+    </div>
+</div>
+<footer id="myFooter">
+    <div class="container">
+        <h7 class="logo"><a href="#">&copy; 2017 Excursium</a></h7>
+        <div class="social-icons">
+            <a href="https://vk.com/excursium" class="twitter"><i class="fa fa-vk"></i></a>
+        </div>
+    </div>
+</footer>
+
+<script type="text/javascript" src="../resources/js/compiled.min.js"></script>
 
 </body>
 </html>
