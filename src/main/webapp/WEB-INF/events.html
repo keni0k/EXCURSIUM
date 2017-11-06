@@ -47,9 +47,9 @@
     <script type="text/javascript"
             src="../resources/libs/bootstrapformhelpers/js/bootstrap-formhelpers.min.js"></script>
 </head>
-<body style="background-color: #f9f9f9;" th:with="price_up=#httpServletRequest.getParameter('price_up'),price_down=#httpServletRequest.getParameter('price_down'),
-id=#httpServletRequest.getParameter('id'),category=#httpServletRequest.getParameter('category'),language=#httpServletRequest.getParameter('language'),
-words=#httpServletRequest.getParameter('words')">
+<body style="background-color: #f9f9f9;" th:with="price_up=${#httpServletRequest.getParameter('price_up')},price_down=${#httpServletRequest.getParameter('price_down')},
+id=${#httpServletRequest.getParameter('id')},category=${#httpServletRequest.getParameter('category')},language=${#httpServletRequest.getParameter('language')},
+words=${#httpServletRequest.getParameter('words')}">
 <style type="text/css">
 
     .navbar-fixed-top {
@@ -296,7 +296,7 @@ words=#httpServletRequest.getParameter('words')">
                     <td th:text="${event.rate}">Some text</td>
                     <td><a th:href="@{/events/moderation(id = ${event.id})}"><img
                             src="../resources/img/icons/edit.png"/></a></td>
-                    <td><a th:href="@{/events/delete(id = ${event.id}, price_up=${price_up},price_down=${price_down},category=${category}, language=${language}, words=${words})}"><img src="../resources/img/icons/del.png"/></a>
+                    <td><a th:href="@{/events/delete(id=${event.id},price_up=${price_up},price_down=${price_down},category=${category}, language=${language}, words=${words})}"><img src="../resources/img/icons/del.png"/></a>
                     </td>
                 </tr>
                 </tbody>
