@@ -43,10 +43,12 @@ public class PersonServiceImpl implements PersonService {
         return null;
     }
 
-    public Person getByLogin(String login) {
+    public Person getByLoginOrEmail(String loginOrEmail) {
         List<Person> list = personRepository.findAll();
         for (Person p : list)
-            if (p.getLogin().equals(login))
+            if (p.getLogin().equals(loginOrEmail))
+                return p;
+            else if (p.getEmail().equals(loginOrEmail))
                 return p;
         return null;
     }

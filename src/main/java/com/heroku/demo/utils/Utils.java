@@ -5,7 +5,6 @@ import com.microsoft.azure.storage.StorageException;
 import com.microsoft.azure.storage.blob.CloudBlobClient;
 import com.microsoft.azure.storage.blob.CloudBlobContainer;
 import com.microsoft.azure.storage.blob.CloudBlockBlob;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.imageio.IIOImage;
@@ -21,7 +20,6 @@ import java.io.OutputStream;
 import java.net.URISyntaxException;
 import java.security.InvalidKeyException;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.Random;
 
 public class Utils {
@@ -88,23 +86,18 @@ public class Utils {
         blob1.uploadFromFile(path);
     }
 
-    public static LinkedList<GrantedAuthority> getUserAuthorities() {
+    public static String getUserName() {
         Object principals = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         //Тут нужна эта проверка тк если сразу получить principals без проверки
         //На анонимность пользавателя можем получим NullPointerException
         if (!principals.toString().equals("anonymousUser")) {
-            org.springframework.security.core.userdetails.User u =
-                    (org.springframework.security.core.userdetails.User)
-                            principals;
+            org.springframework.security.core.userdetails.User u = (org.springframework.security.core.userdetails.User) principals;
 
-            LinkedList<GrantedAuthority> authorities = new LinkedList<>();
-            authorities.addAll(u.getAuthorities());
-
-            return authorities;
+            return u.getUsername();
         }
 
-        return new LinkedList<>();
+        return "";
     }
 
 }

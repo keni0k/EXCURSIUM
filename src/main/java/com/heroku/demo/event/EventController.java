@@ -1,6 +1,7 @@
 package com.heroku.demo.event;
 
 import com.heroku.demo.HomeController;
+import com.heroku.demo.person.Person;
 import com.heroku.demo.person.PersonRepository;
 import com.heroku.demo.person.PersonServiceImpl;
 import com.heroku.demo.photo.Photo;
@@ -17,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -29,7 +29,6 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
@@ -46,6 +45,7 @@ public class EventController {
 
     private EventServiceImpl eventService;
     private PhotoServiceImpl photoService;
+    private PersonServiceImpl personService;
 
     private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
@@ -56,8 +56,9 @@ public class EventController {
         this.reviewRepository = reviewRepository;
         this.photoRepository = photoRepository;
 
+        personService = new PersonServiceImpl(personRepository);
         photoService = new PhotoServiceImpl(photoRepository);
-        eventService = new EventServiceImpl(eventRepository, new PersonServiceImpl(personRepository), photoService);
+        eventService = new EventServiceImpl(eventRepository, personService, photoService);
 
     }
 
@@ -73,11 +74,11 @@ public class EventController {
                               @RequestParam("file") MultipartFile file,
                               ModelMap modelMap) {
         event.setTime(new LocalTime().toDateTimeToday().toString());
-        LinkedList<GrantedAuthority> authorities = Utils.getUserAuthorities();
-        for (GrantedAuthority grantedAuthority:authorities) {
-            logger.info(grantedAuthority.getAuthority());
-        }
-        event.setGuideId(-1);
+        String loginOrEmail = Utils.getUserName();
+        if (!loginOrEmail.equals("")) {
+            Person p = personService.getByLoginOrEmail(loginOrEmail);
+            event.setGuideId(p.getId());
+        } else event.setGuideId(-1);
         if (!result.hasErrors()) {
             eventService.editEvent(event);
         } else {

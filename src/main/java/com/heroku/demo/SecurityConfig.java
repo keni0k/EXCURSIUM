@@ -26,27 +26,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         personService = new PersonServiceImpl(personRepository);
     }
 
-//    @Autowired
-//    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.jdbcAuthentication().dataSource(dataSource)
-//                .usersByUsernameQuery("select login, pass from person where login=?")
-//                .authoritiesByUsernameQuery("select login, role from person where login=?");
-//    }
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(new CustomAuthenticationProvider(personService));
     }
-
-//    @Autowired
-//    public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
-//        List<Person> users = personService.getAll();
-//        for (Person user:users) {
-//            String role = user.getRole().substring(user.getRole().indexOf("_")+1);
-//            auth.inMemoryAuthentication().withUser(user.getLogin()).password(user.getPass()).roles(role);
-//            auth.inMemoryAuthentication().withUser(user.getEmail()).password(user.getPass()).roles(role);
-//        }
-//    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
