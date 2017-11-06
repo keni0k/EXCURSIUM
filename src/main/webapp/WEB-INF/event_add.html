@@ -32,7 +32,7 @@
             src="../resources/libs/bootstrapformhelpers/js/bootstrap-formhelpers.min.js"></script>
 
 
-    <title>Добавить тур</title>
+    <title th:text="${#messages.msg('titles.add_event')}">Добавить тур</title>
 </head>
 <body style="background-color: #f9f9f9;">
 <style type="text/css">
@@ -120,7 +120,7 @@
     </nav>
     <div class="container">
         <div class="page-header">
-            <h2>Добавление экскурсии</h2>
+            <h2 th:text="${#messages.msg('titles.add_event')}">Добавление экскурсии</h2>
         </div>
         <div class="row">
             <div class="col-md-12 col-lg-6">
@@ -133,14 +133,14 @@
                 <form th:object="${inputEvent}" method="POST" action="/events/add" enctype="multipart/form-data">
                     <br/>
                     <div class="input-group">
-                        <span class="input-group-addon">Название</span>
+                        <span class="input-group-addon" th:text="${#messages.msg('words.name')}">Название</span>
                         <input name="name" type="text" class="form-control" id = "name" placeholder="Название" aria-label="Название"
                                th:value="${inputEvent.getName()}" required="" />
                         <label for="name" th:if="${#fields.hasErrors('name')}" th:text="${#messages.msg('error.event.name')}" th:class="'error'">Name Error</label>
                     </div>
                     <br/>
                     <div class="input-group">
-                        <span class="input-group-addon">Описание</span>
+                        <span class="input-group-addon" th:text="${#messages.msg('words.description')}">Описание</span>
                         <textarea name="description" type="text" id = "description" class="form-control" placeholder="Описание" required=""
                                   aria-label="Описание" th:text="${inputEvent.getDescription()}"></textarea>
                         <label for="description" th:if="${#fields.hasErrors('description')}" th:text="${#messages.msg('error.event.description')}" th:class="'error'">Description Error</label>
@@ -166,14 +166,14 @@
                         </div>
                     </div>
                     <div class="input-group">
-                        <span class="input-group-addon">Количество участников</span>
+                        <span class="input-group-addon" th:text="${#messages.msg('words.users_count')}">Количество участников</span>
                         <input name="usersCount" id = "users_count" type="number" class="form-control" placeholder="Количество участников" required=""
                                aria-label="Количество участников" th:value="${inputEvent.getUsersCount()}?${insertEvent.getUsersCount()}"/>
                         <label for="users_count" th:if="${#fields.hasErrors('usersCount')}" th:text="${#messages.msg('error.event.users_count')}" th:class="'error'">UsersCount Error</label>
                     </div>
                     <br/>
                     <div class="input-group">
-                        <span class="input-group-addon">Длительность:</span>
+                        <span class="input-group-addon" th:text="${#messages.msg('words.duration')}">Длительность</span>
                         <input name="duration" id = "duration" type="number" class="form-control" placeholder="Длительность:" required=""
                                aria-label="Длительность:" th:value="${inputEvent.getDuration()}?${insertEvent.getDuration()}"/>
                         <span class="input-group-addon">часов</span>
@@ -181,14 +181,14 @@
                     </div>
                     <br/>
                     <div class="input-group">
-                        <span class="input-group-addon">Место встречи</span>
+                        <span class="input-group-addon" th:text="${#messages.msg('words.place')}">Место встречи</span>
                         <input name="place" id = "place" type="text" class="form-control" placeholder="Место встречи" required=""
                                aria-label="Место встречи" th:value="${inputEvent.getPlace()}?${insertEvent.getPlace()}"/>
                         <label for="place" th:if="${#fields.hasErrors('place')}" th:text="${#messages.msg('error.event.place')}" th:class="'error'">Place Error</label>
                     </div>
                     <br/>
                     <div class="input-group">
-                        <span class="input-group-addon">Цена</span>
+                        <span class="input-group-addon" th:text="${#messages.msg('words.price')}">Цена</span>
                         <input name="price" id = "price" type="number" class="form-control" placeholder="Цена" aria-label="Цена" required=""
                                th:value="${inputEvent.getPrice()}?${insertEvent.getPrice()}"/>
                         <span class="input-group-addon">&#8381;</span>
@@ -196,7 +196,7 @@
                     </div>
                     <br/>
                     <div class="input-group">
-                        <span class="input-group-addon">Фотографии</span>
+                        <span class="input-group-addon" th:text="${#messages.msg('words.photos')}">Фотографии</span>
                         <input name="file" type="file" id = "file" class="form-control" placeholder="Фотографии" required=""
                                accept="image/jpeg,image/png" aria-label="Фотографии"/>
                         <label for="file" th:if="${error_data}" th:text="${#messages.msg('error.event.file')}" th:class="'error'">File Error</label>
@@ -204,14 +204,14 @@
                     <br/>
 
                     <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Язык (language)
+                        <div class="panel-heading" th:text="${#messages.msg('words.language')}">
+                            Язык экскурсии
                         </div>
                         <div class="panel-body">
                             <div class="input-group">
                                 <select name="language" class="form-control selectpicker" th:selected="${inputEvent.getLanguage()}?${insertEvent.getLanguage()}">
-                                    <option value="0">Русский</option>
-                                    <option value="1">English</option>
+                                    <option value="0" th:text="${#messages.msg('language.0')}">Русский</option>
+                                    <option value="1" th:text="${#messages.msg('language.1')}">Английский</option>
                                 </select>
                             </div>
                         </div>

@@ -108,7 +108,7 @@
 
                 <!-- Содержимое основной части -->
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/events/list">Экскурсии</a></li>
+                    <li><a href="/events/list" th:text="${#messages.msg('titles.registration')}">Экскурсии</a></li>
                     <li><a href="#">FAQ</a></li>
                     <li><a href="index.html#contact">Контакты</a></li>
                     <li th:unless="${#httpServletRequest.isUserInRole('USER')}"><a href="/users/registration" th:text="${#messages.msg('titles.registration')}">Регистрация</a></li>
