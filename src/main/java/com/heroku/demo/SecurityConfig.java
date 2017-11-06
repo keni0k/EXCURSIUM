@@ -4,25 +4,20 @@ import com.heroku.demo.person.PersonRepository;
 import com.heroku.demo.person.PersonServiceImpl;
 import com.heroku.demo.utils.CustomAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-import javax.sql.DataSource;
-
 @Configuration
 @EnableAutoConfiguration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final DataSource dataSource;
     private PersonServiceImpl personService;
 
     @Autowired
-    public SecurityConfig(@Qualifier("dataSource") DataSource dataSource, PersonRepository personRepository) {
-        this.dataSource = dataSource;
+    public SecurityConfig(PersonRepository personRepository) {
         personService = new PersonServiceImpl(personRepository);
     }
 
@@ -47,9 +42,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout().logoutUrl("/users/logout").logoutSuccessUrl("/users/login").permitAll()
                 .and()
-                .rememberMe().key("_spring_security_remember_me").tokenValiditySeconds(1209600);
-        http.csrf().disable();
-        http.exceptionHandling().accessDeniedPage("/403");
+                .rememberMe().key("_spring_security_remember_me").tokenValiditySeconds(1209600)
+                .and()
+                .exceptionHandling().accessDeniedPage("/403.html")
+                .and()
+                .csrf().disable();
     }
 
 }
