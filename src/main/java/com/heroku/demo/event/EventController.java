@@ -75,7 +75,7 @@ public class EventController {
         event.setTime(new LocalTime().toDateTimeToday().toString());
         LinkedList<GrantedAuthority> authorities = Utils.getUserAuthorities();
         for (GrantedAuthority grantedAuthority:authorities) {
-            logger.debug(grantedAuthority.getAuthority());
+            logger.info(grantedAuthority.getAuthority());
         }
         event.setGuideId(-1);
         if (!result.hasErrors()) {

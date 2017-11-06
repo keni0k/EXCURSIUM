@@ -29,9 +29,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.jdbcAuthentication().dataSource(dataSource)
-//                .usersByUsernameQuery("select login, pass from person where login=?")
-//                .authoritiesByUsernameQuery("select login, role from person where login=?");
+        auth.jdbcAuthentication().dataSource(dataSource)
+                .usersByUsernameQuery("select login, pass from person where login=?")
+                .authoritiesByUsernameQuery("select login, role from person where login=?");
     }
 
     @Autowired
