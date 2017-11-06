@@ -6,6 +6,7 @@ import com.microsoft.azure.storage.blob.CloudBlobClient;
 import com.microsoft.azure.storage.blob.CloudBlobContainer;
 import com.microsoft.azure.storage.blob.CloudBlockBlob;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 
 import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
@@ -91,9 +92,8 @@ public class Utils {
 
         //Тут нужна эта проверка тк если сразу получить principals без проверки
         //На анонимность пользавателя можем получим NullPointerException
-        if (!principals.toString().equals("anonymousUser")) {
-            org.springframework.security.core.userdetails.User u = (org.springframework.security.core.userdetails.User) principals;
-
+        User u = (User) principals;
+        if (u!=null) {
             return u.getUsername();
         }
 

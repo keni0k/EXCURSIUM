@@ -9,7 +9,6 @@ import com.heroku.demo.photo.PhotoRepository;
 import com.heroku.demo.photo.PhotoServiceImpl;
 import com.heroku.demo.review.ReviewRepository;
 import com.heroku.demo.utils.MessageUtil;
-import com.heroku.demo.utils.Utils;
 import com.heroku.demo.utils.UtilsForWeb;
 import org.joda.time.LocalTime;
 import org.slf4j.Logger;
@@ -28,6 +27,7 @@ import javax.validation.Valid;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -72,9 +72,9 @@ public class EventController {
     public String insertEvent(@ModelAttribute("inputEvent") @Valid Event event,
                               BindingResult result,
                               @RequestParam("file") MultipartFile file,
-                              ModelMap modelMap) {
+                              ModelMap modelMap, Principal principal) {
         event.setTime(new LocalTime().toDateTimeToday().toString());
-        String loginOrEmail = Utils.getUserName();
+        String loginOrEmail = principal.getName();
         if (!loginOrEmail.equals("")) {
             Person p = personService.getByLoginOrEmail(loginOrEmail);
             event.setGuideId(p.getId());
