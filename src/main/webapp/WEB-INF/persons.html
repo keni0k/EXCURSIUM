@@ -211,7 +211,8 @@
                     <input name="city" type="text" class="form-control" th:value="${insertPerson.getCity()}" placeholder="Город" required="" aria-label="Город"/>
                 </div>
                 <br/>
-                <button type="submit" class="btn btn-default">Отправить</button>
+                <button type="reset" class="btn btn-default" th:text="${#messages.msg('words.reset')}">Сброс</button>
+                <button type="submit" class="btn btn-default" th:text="${#messages.msg('words.submit')}">Сохранить</button>
 
             </form>
         </div>
