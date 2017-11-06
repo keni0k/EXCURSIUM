@@ -1,6 +1,5 @@
 package com.heroku.demo;
 
-
 import com.heroku.demo.person.Person;
 import com.heroku.demo.person.PersonRepository;
 import com.heroku.demo.person.PersonServiceImpl;
@@ -33,16 +32,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        auth.jdbcAuthentication().dataSource(dataSource)
 //                .usersByUsernameQuery("select login, pass from person where login=?")
 //                .authoritiesByUsernameQuery("select login, role from person where login=?");
-    }
-
-    @Autowired
-    public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
         List<Person> users = personService.getAll();
         for (Person user:users) {
             String role = user.getRole().substring(user.getRole().indexOf("_")+1);
             auth.inMemoryAuthentication().withUser(user.getLogin()).password(user.getPass()).roles(role);
             auth.inMemoryAuthentication().withUser(user.getEmail()).password(user.getPass()).roles(role);
         }
+    }
+
+    @Autowired
+    public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
+
     }
 
     @Override

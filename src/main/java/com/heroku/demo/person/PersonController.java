@@ -55,6 +55,7 @@ public class PersonController {
         person.setEmail(person.getEmail().toLowerCase());
         person.setLogin(person.getLogin().toLowerCase());
         person.setImageUrl(file.getOriginalFilename());
+        person.setRole("ROLE_USER");
         personService.addPerson(person);
         model.addAttribute("message", new MessageUtil("success", "Registration completed successfully! Check your email."));
         return persons(model);
