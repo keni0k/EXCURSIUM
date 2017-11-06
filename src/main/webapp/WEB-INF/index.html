@@ -45,7 +45,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="/events/list">Экскурсии</a>
+                    <a class="nav-link js-scroll-trigger" href="/events/list" th:text="${#messages.msg('titles.excursions')}">Экскурсии</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link js-scroll-trigger" href="#download">Скачать</a>
@@ -54,7 +54,7 @@
                     <a class="nav-link js-scroll-trigger" href="#features">Возможности</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="#contact">Контакты</a>
+                    <a class="nav-link js-scroll-trigger" href="#contact" th:text="${#messages.msg('titles.contacts')}">Контакты</a>
                 </li>
                 <li class="nav-item" th:unless="${#httpServletRequest.isUserInRole('USER')}">
                     <a class="nav-link js-scroll-trigger" href="/users/registration" th:text="${#messages.msg('titles.registration')}">Регистрация</a>

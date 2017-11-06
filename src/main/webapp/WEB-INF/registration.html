@@ -108,9 +108,9 @@
 
                 <!-- Содержимое основной части -->
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/events/list" th:text="${#messages.msg('titles.registration')}">Экскурсии</a></li>
+                    <li><a href="/events/list" th:text="${#messages.msg('titles.excursions')}">Экскурсии</a></li>
                     <li><a href="#">FAQ</a></li>
-                    <li><a href="index.html#contact">Контакты</a></li>
+                    <li><a href="/index#contact" th:text="${#messages.msg('titles.contacts')}">Контакты</a></li>
                     <li th:unless="${#httpServletRequest.isUserInRole('USER')}"><a href="/users/registration" th:text="${#messages.msg('titles.registration')}">Регистрация</a></li>
                     <li th:unless="${#httpServletRequest.isUserInRole('USER')}"><a href="/users/login" th:text="${#messages.msg('titles.login')}">Войти</a></li>
                     <li th:if="${#httpServletRequest.isUserInRole('USER')}"><a href="/users/logout" th:text="${#messages.msg('titles.logout')}">Выйти</a></li>
@@ -141,31 +141,31 @@
                     </div>
                     <br/>
                     <div class="input-group">
-                        <span class="input-group-addon" th:text="${#messages.msg('words.password')}>Пароль</span>
+                        <span class="input-group-addon" th:text="${#messages.msg('words.password')}">Пароль</span>
                         <input name="pass" id = "pass" type="password" class="form-control" minlength="6" placeholder="Пароль" aria-label="Пароль" required=""/>
                         <label for="pass" th:if="${error_pass}" th:text="${#messages.msg('error.user.pass2')}" th:class="'error'">Name Error</label>
                         <!--<label for="pass" th:if="${#fields.hasErrors('pass')}" th:text="${#messages.msg('error.user.pass')}" th:class="'error'">Name Error</label>-->
                     </div>
                     <br/>
                     <div class="input-group">
-                        <span class="input-group-addon" th:text="${#messages.msg('words.password_again')}>Повторите пароль</span>
+                        <span class="input-group-addon" th:text="${#messages.msg('words.password_again')}">Повторите пароль</span>
                         <input name="pass2" type="password" id = "pass2" class="form-control" placeholder="Повторите пароль" aria-label="Повторите пароль" required=""/>
                         <label for="pass2" th:if="${error_pass}" th:text="${#messages.msg('error.user.pass2')}" th:class="'error'">Name Error</label>
                     </div>
                     <br/>
                     <div class="input-group">
-                        <span class="input-group-addon" th:text="${#messages.msg('words.first_name')}>Имя</span>
+                        <span class="input-group-addon" th:text="${#messages.msg('words.first_name')}">Имя</span>
                         <input name="firstName" type="text" class="form-control" th:value="${insertPerson.getFirstName()}" placeholder="Имя" aria-label="Имя" required=""/>
                     </div>
                     <br/>
                     <div class="input-group">
-                        <span class="input-group-addon" th:text="${#messages.msg('words.last_name')}>Фамилия</span>
+                        <span class="input-group-addon" th:text="${#messages.msg('words.last_name')}">Фамилия</span>
                         <input name="lastName" type="text" class="form-control" th:value="${insertPerson.getLastName()}" placeholder="Фамилия" required=""
                                aria-label="Фамилия"/>
                     </div>
                     <br/>
                     <div class="input-group">
-                        <span class="input-group-addon" th:text="${#messages.msg('words.photo')}>Фотография</span>
+                        <span class="input-group-addon" th:text="${#messages.msg('words.photo')}">Фотография</span>
                         <input name="file" type="file" id = "file" class="form-control" placeholder="Фотография" required=""
                                accept="image/jpeg,image/png" aria-label="Фотография"/>
                     </div>
