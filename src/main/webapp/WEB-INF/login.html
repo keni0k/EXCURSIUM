@@ -132,8 +132,8 @@
                     <div th:replace="fragments/alert :: alert (type='danger', message='Неправильный логин или пароль')">&nbsp;</div>
                 </th:block>
 
-                <div th:if="${#httpServletRequest.isUserInRole('ADMIN')}">Show ROLE_ADMIN</div>
-                <div th:if="${#httpServletRequest.isUserInRole('USER')}">Show ROLE_USER</div>
+                <div th:if="${#httpServletRequest.isUserInRole('ADMIN')}">Вы авторизированы как Администратор</div>
+                <div th:if="${#httpServletRequest.isUserInRole('USER')}">Вы авторизированы как пользователь</div>
 
                 <form method="POST" action="/users/login">
                     <br/>
