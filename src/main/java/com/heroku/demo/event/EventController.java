@@ -42,8 +42,7 @@ public class EventController {
 
     private static String AUTH_KEY = "jP7xwaj12EYohNabYr1r6ewMeVJa8Jkf";
 
-    @Autowired
-    private MessageSource messageSource;
+    private final MessageSource messageSource;
 
     private ReviewRepository reviewRepository;
     private PhotoRepository photoRepository;
@@ -56,7 +55,7 @@ public class EventController {
 
     @Autowired
     public EventController(PersonRepository personRepository, ReviewRepository reviewRepository,
-                           EventRepository eventRepository, PhotoRepository photoRepository) {
+                           EventRepository eventRepository, PhotoRepository photoRepository, MessageSource messageSource) {
 
         this.reviewRepository = reviewRepository;
         this.photoRepository = photoRepository;
@@ -65,6 +64,7 @@ public class EventController {
         photoService = new PhotoServiceImpl(photoRepository);
         eventService = new EventServiceImpl(eventRepository, personService, photoService);
 
+        this.messageSource = messageSource;
     }
 
     @RequestMapping(value = "/add")

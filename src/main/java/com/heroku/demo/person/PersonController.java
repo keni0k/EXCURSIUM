@@ -2,6 +2,7 @@ package com.heroku.demo.person;
 
 import com.heroku.demo.utils.MessageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -12,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import static com.heroku.demo.utils.Utils.randomToken;
 
@@ -23,9 +25,12 @@ public class PersonController {
 
     private PersonServiceImpl personService;
 
+    private final MessageSource messageSource;
+
     @Autowired
-    public PersonController(PersonRepository personRepository){
+    public PersonController(PersonRepository personRepository, MessageSource messageSource){
         personService = new PersonServiceImpl(personRepository);
+        this.messageSource = messageSource;
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
@@ -36,10 +41,10 @@ public class PersonController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String signUp(@ModelAttribute("insertPerson") @Valid Person person,
-                                BindingResult result,
-                                @RequestParam("file") MultipartFile file,
-                                @ModelAttribute("pass2") String pass2,
-                                ModelMap model) {
+                         BindingResult result,
+                         @RequestParam("file") MultipartFile file,
+                         @ModelAttribute("pass2") String pass2,
+                         ModelMap model, Locale locale) {
         person.setToken(randomToken(32));
 
         if (!personService.throwsErrors(person, pass2) || result.hasErrors()) {
@@ -49,7 +54,7 @@ public class PersonController {
             model.addAttribute("error_email_free", !personService.isEmailFree(person.getEmail()));
             model.addAttribute("error_email_valid", !personService.isEmailCorrect(person.getEmail()));
             model.addAttribute("insertPerson", person);
-            model.addAttribute("message", new MessageUtil("danger", "During registration, errors occurred. Fix them to complete it."));
+            model.addAttribute("message", new MessageUtil("danger",  messageSource.getMessage("error.user.add",null, locale)));
             return "registration";
         }
         person.setEmail(person.getEmail().toLowerCase());
@@ -57,7 +62,7 @@ public class PersonController {
         person.setImageUrl(file.getOriginalFilename());
         person.setRole("ROLE_USER");
         personService.addPerson(person);
-        model.addAttribute("message", new MessageUtil("success", "Registration completed successfully! Check your email."));
+        model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.registration",null, locale)));
         return persons(model);
     }
 
