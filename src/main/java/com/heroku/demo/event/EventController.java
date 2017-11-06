@@ -146,10 +146,11 @@ public class EventController {
                               @RequestParam(value = "price_down", required = false) Integer priceDown,
                               @RequestParam(value = "category", required = false) Integer category,
                               @RequestParam(value = "language", required = false) Integer language,
-                              @RequestParam(value = "words", required = false) String words) {
+                              @RequestParam(value = "words", required = false) String words,
+                              @RequestParam(value = "sort_by", required = false) int sortBy) {
         eventService.delete(id);
-        return events(model, null, priceUp, priceDown, category, language, words, 0);
-    }
+        return events(model, null, priceUp, priceDown, category, language, words, sortBy);
+}
 
     @RequestMapping(value = "/event", method = RequestMethod.GET)
     public String event(ModelMap model, @RequestParam("id") int id) {

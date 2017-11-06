@@ -49,7 +49,7 @@
 </head>
 <body style="background-color: #f9f9f9;" th:with="price_up=${#httpServletRequest.getParameter('price_up')},price_down=${#httpServletRequest.getParameter('price_down')},
 id=${#httpServletRequest.getParameter('id')},category=${#httpServletRequest.getParameter('category')},language=${#httpServletRequest.getParameter('language')},
-words=${#httpServletRequest.getParameter('words')}">
+words=${#httpServletRequest.getParameter('words')},sort_by=${#httpServletRequest.getParameter('sort_by')}">
 <style type="text/css">
 
     .navbar-fixed-top {
@@ -263,11 +263,11 @@ words=${#httpServletRequest.getParameter('words')}">
                 </thead>
                 <tbody>
                 <tr>
-                    <td><a th:href="@{/events/moderation(sort_by=${inc})}">ID</a></td>
+                    <td><a th:href="@{/events/moderation(sort_by=${inc},id=${id},price_up=${price_up},price_down=${price_down},category=${category}, language=${language}, words=${words})}">ID</a></td>
                     <td th:text="${#messages.msg('words.name')}">Название</td>
                     <td th:text="${#messages.msg('words.category')}">Категория</td>
                     <td th:text="${#messages.msg('words.guide_id')}">ID гида</td>
-                    <td><a th:text="${#messages.msg('words.price')}" th:href="@{/events/moderation(sort_by=${inc}+2)}">Стоимость</a>
+                    <td><a th:text="${#messages.msg('words.price')}" th:href="@{/events/moderation(sort_by=${inc}+2,id=${id},price_up=${price_up},price_down=${price_down},category=${category}, language=${language}, words=${words})}">Стоимость</a>
                     </td>
                     <td th:text="${#messages.msg('words.place')}">Место</td>
                     <td th:text="${#messages.msg('words.language')}">Язык</td>
@@ -276,9 +276,9 @@ words=${#httpServletRequest.getParameter('words')}">
                     <td><a th:text="${#messages.msg('words.duration')}"
                            th:href="@{/events/moderation(sort_by=${inc}+8)}">Продолжительность</a></td>
                     <td th:text="${#messages.msg('words.description')}">Описание</td>
-                    <td><a th:text="${#messages.msg('words.type')}" th:href="@{/events/moderation(sort_by=${inc}+6)}">Тип</a>
+                    <td><a th:text="${#messages.msg('words.type')}" th:href="@{/events/moderation(sort_by=${inc}+6,id=${id},price_up=${price_up},price_down=${price_down},category=${category}, language=${language}, words=${words})}">Тип</a>
                     </td>
-                    <td><a th:text="${#messages.msg('words.rate')}" th:href="@{/events/moderation(sort_by=${inc}+4)}">Рейтинг</a>
+                    <td><a th:text="${#messages.msg('words.rate')}" th:href="@{/events/moderation(sort_by=${inc}+4,id=${id},price_up=${price_up},price_down=${price_down},category=${category}, language=${language}, words=${words})}">Рейтинг</a>
                     </td>
                 </tr>
                 <tr th:each="event : ${events}">
@@ -294,9 +294,9 @@ words=${#httpServletRequest.getParameter('words')}">
                     <td th:text="${event.description}">Some text</td>
                     <td th:text="${event.type}">Some text</td>
                     <td th:text="${event.rate}">Some text</td>
-                    <td><a th:href="@{/events/moderation(id = ${event.id})}"><img
+                    <td><a th:href="@{/events/moderation(id=${event.id},price_up=${price_up},price_down=${price_down},category=${category}, language=${language}, words=${words}, sort_by=${sort_by})}"><img
                             src="../resources/img/icons/edit.png"/></a></td>
-                    <td><a th:href="@{/events/delete(id=${event.id},price_up=${price_up},price_down=${price_down},category=${category}, language=${language}, words=${words})}"><img src="../resources/img/icons/del.png"/></a>
+                    <td><a th:href="@{/events/delete(id=${event.id},price_up=${price_up},price_down=${price_down},category=${category}, language=${language}, words=${words}, sort_by=${sort_by})}"><img src="../resources/img/icons/del.png"/></a>
                     </td>
                 </tr>
                 </tbody>
