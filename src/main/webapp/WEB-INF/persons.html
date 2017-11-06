@@ -157,31 +157,31 @@
 
                 <br/>
                 <div class="input-group">
-                    <span class="input-group-addon">Логин</span>
+                    <span class="input-group-addon" th:text="${#messages.msg('words.login')}">Логин</span>
                     <input name="login" id = "login" type="text" pattern="[a-zA-Z0-9._\-]{4,20}" class="form-control" placeholder="Логин" disabled = "disabled" aria-label="Логин" th:value="${insertPerson.getLogin()}" required=""/>
                     <label for="login" th:if="${error_login}" th:text="${#messages.msg('error.user.login.free')}" th:class="'error'">Name Error</label>
                     <label for="login" th:if="${#fields.hasErrors('login')}" th:text="${#messages.msg('error.user.login.size')}" th:class="'error'">Name Error</label>
                 </div>
                 <br/>
                 <div class="input-group">
-                    <span class="input-group-addon">Пароль</span>
+                    <span class="input-group-addon" th:text="${#messages.msg('words.password')}">Пароль</span>
                     <input name="pass" id = "pass" type="password" disabled = "disabled" pattern="^.*(?=.{7,})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$" class="form-control" placeholder="Пароль" aria-label="Пароль" required=""/>
                     <label for="pass" th:if="${#fields.hasErrors('pass')}" th:text="${#messages.msg('error.user.pass')}" th:class="'error'">Name Error</label>
                 </div>
                 <br/>
                 <div class="input-group">
-                    <span class="input-group-addon">Имя</span>
+                    <span class="input-group-addon" th:text="${#messages.msg('words.first_name')}">Имя</span>
                     <input name="firstName" type="text" class="form-control" th:value="${insertPerson.getFirstName()}" placeholder="Имя" aria-label="Имя" required=""/>
                 </div>
                 <br/>
                 <div class="input-group">
-                    <span class="input-group-addon">Фамилия</span>
+                    <span class="input-group-addon" th:text="${#messages.msg('words.last_name')}">Фамилия</span>
                     <input name="lastName" type="text" class="form-control" th:value="${insertPerson.getLastName()}" placeholder="Фамилия" required=""
                            aria-label="Фамилия"/>
                 </div>
                 <br/>
                 <div class="input-group">
-                    <span class="input-group-addon">Фотография</span>
+                    <span class="input-group-addon" th:text="${#messages.msg('words.photo')}">Фотография</span>
                     <input name="file" type="file" id = "file" class="form-control" placeholder="Фотография" required=""
                            accept="image/jpeg,image/png" aria-label="Фотография"/>
                 </div>
@@ -194,7 +194,7 @@
                 </div>
                 <br/>
                 <div class="input-group">
-                    <span class="input-group-addon">Телефон</span>
+                    <span class="input-group-addon" th:text="${#messages.msg('words.phone')}">Телефон</span>
                     <input name="phoneNumber" type="text" class="form-control bfh-phone" th:value="${insertPerson.getPhoneNumber()}" placeholder="Телефон" required="" minlength="17"
                            aria-label="Телефон" data-format="+7 (ddd) ddd-dddd" id = "phone_number"/>
                     <label for="phone_number" th:if="${error_phone}" th:text="${#messages.msg('error.user.phone_number.free')}" th:class="'error'">Name Error</label>
@@ -202,12 +202,12 @@
                 </div>
                 <br/>
                 <div class="input-group">
-                    <span class="input-group-addon">О себе</span>
+                    <span class="input-group-addon" th:text="${#messages.msg('words.about_me')}">О себе</span>
                     <textarea name="about" class="form-control" placeholder="О себе" aria-label="О себе" required="" th:text="${insertPerson.getAbout()}"></textarea>
                 </div>
                 <br/>
                 <div class="input-group">
-                    <span class="input-group-addon">Город</span>
+                    <span class="input-group-addon" th:text="${#messages.msg('words.city')}">Город</span>
                     <input name="city" type="text" class="form-control" th:value="${insertPerson.getCity()}" placeholder="Город" required="" aria-label="Город"/>
                 </div>
                 <br/>

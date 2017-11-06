@@ -1,7 +1,6 @@
 package com.heroku.demo.person;
 
 import com.heroku.demo.utils.validation.LoginConstraint;
-import com.heroku.demo.utils.validation.PasswordConstraint;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,7 +20,7 @@ public class Person {
     private long id;
     @LoginConstraint
     private String login = "";
-    @PasswordConstraint
+//    @PasswordConstraint
     private String pass = "";
     private String lastName = "";
     private int type = 0;
