@@ -180,20 +180,20 @@ words=${#httpServletRequest.getParameter('words')},sort_by=${#httpServletRequest
                 </div>
                 <br/>
                 <div class="panel panel-default">
-                    <div class="panel-heading">
+                    <div class="panel-heading" th:text="${#messages.msg('words.type_of_excursion')}">
                         Тип экскурсии
                     </div>
                     <div class="panel-body">
                         <div class="input-group">
                             <select name="category" id = "category" class="form-control selectpicker" th:selected="${insertEvent.getCategory()}?${insertEvent.getCategory()}:0">
-                                <option value="0">Развлечения</option>
-                                <option value="1">Наука</option>
-                                <option value="2">История</option>
-                                <option value="3">Искусство</option>
-                                <option value="4">Производство</option>
-                                <option value="5">Гастрономия</option>
-                                <option value="6">Квесты</option>
-                                <option value="7">Экстрим</option>
+                                <option value="0" th:text="${#messages.msg('category.0')}">Развлечения</option>
+                                <option value="1" th:text="${#messages.msg('category.1')}">Наука</option>
+                                <option value="2" th:text="${#messages.msg('category.2')}">История</option>
+                                <option value="3" th:text="${#messages.msg('category.3')}">Искусство</option>
+                                <option value="4" th:text="${#messages.msg('category.4')}">Производство</option>
+                                <option value="5" th:text="${#messages.msg('category.5')}">Гастрономия</option>
+                                <option value="6" th:text="${#messages.msg('category.6')}">Квесты</option>
+                                <option value="7" th:text="${#messages.msg('category.7')}">Экстрим</option>
                             </select>
                         </div>
                     </div>
