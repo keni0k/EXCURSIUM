@@ -19,187 +19,260 @@
 <head>
     <title th:text="${#messages.msg('titles.events')}"></title>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
-    <!--<link rel="stylesheet" type="text/css" href="style.css"/>-->
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"/>
-    <style>
-        ul {
-            list-style: none; /*убираем маркеры списка*/
-            /*убираем отступы*/
-            padding-left: 0; /*убираем отступы*/
-            /*делаем отступ сверху*/
-            margin: 25px 0 0;
-        }
+    <meta name="description" content=""/>
+    <meta name="title" content=""/>
+    <meta name="author" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta name="keywords" content="excursium"/>
 
-        .my-btn {
-            text-decoration: none; /*убираем подчеркивание текста ссылок*/
-            background: #30A8E6; /*добавляем фон к пункту меню*/
-            color: #fff; /*меняем цвет ссылок*/
-            padding: 10px; /*добавляем отступ*/
-            font-family: arial, serif; /*меняем шрифт*/
-            border-radius: 4px; /*добавляем скругление*/
-            -moz-transition: all 0.3s 0.01s ease; /*делаем плавный переход*/
-            -o-transition: all 0.3s 0.01s ease;
-            -webkit-transition: all 0.3s 0.01s ease;
-        }
+    <link rel="stylesheet" type="text/css" href="../resources/css/styles.css"/>
+    <link rel="stylesheet" href="../resources/css/media.css"/>
+    <link rel="stylesheet" type="text/css" href="../resources/css/footer.css"/>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"/>
 
-        .my-btn:hover {
-            background: #1C85BB; /*добавляем эффект при наведении*/
-        }
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-        li {
-            float: left; /*Размещаем список горизонтально для реализации меню*/
-            margin-right: 5px; /*Добавляем отступ у пунктов меню*/
+    <!-- Icon -->
+    <link rel="icon" href="../resources/img/icon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="../resources/img/icon.ico" type="image/x-icon"/>
 
-        }
-    </style>
+    <link rel="stylesheet" href="../resources/libs/bootstrap-select/css/bootstrap-select.css"/>
+    <script type="text/javascript" src="../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
+
+    <link rel="stylesheet" href="../resources/css/segoe_ui.css"/>
+
+    <link rel="stylesheet" href="../resources/libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>
+    <script type="text/javascript"
+            src="../resources/libs/bootstrapformhelpers/js/bootstrap-formhelpers.min.js"></script>
 </head>
-<body>
-<div class="page-header">
-    <h1 th:text="${#messages.msg('titles.events')}">Контакты</h1>
-</div>
+<body style="background-color: #f9f9f9;">
+<style type="text/css">
 
-<nav class="four">
-    <ul>
-        <li><a class="my-btn" href="/" th:text="${#messages.msg('words.home')}"><i class="fa fa-home fa-fw"></i>Главная</a></li>
-        <li><a class="my-btn" th:href="@{/events/moderation}" th:text="${#messages.msg('words.events')}">EVENTS</a></li>
-        <li><a class="my-btn" th:href="@{/users/moderation}" th:text="${#messages.msg('words.users')}">USERS</a></li>
-    </ul>
-</nav>
-<hr/>
-<hr/>
-<hr/>
-<div class="row">
-    <div class="col-md-12 col-lg-6">
+    .navbar-fixed-top {
+        min-height: 95px;
+    }
 
-        <form th:object="${insertEvent}" action="/events/add" method="POST" enctype="multipart/form-data">
+    .navbar-nav > li > a {
+        font-family: SegoeUIRegular, serif;
+        padding-top: 0;
+        padding-bottom: 0;
+        line-height: 95px;
+    }
 
-            <label th:text="${#messages.msg('words.type')}" for="type"></label>:
-            <select name="type" id = "type" th:selected="${insertEvent.getType()}">
-                <option value="-3">Не прошел модерацию</option>
-                <option value="-2">На перемодерации</option>
-                <option value="-1">Не активен</option>
-                <option value="1">Активен</option>
-            </select>
+    .navbar-custom {
+        background: linear-gradient(to left, #68b3bd, #00ae6f);
+        color: #000000;
+        border-radius: 0;
+    }
 
-            <br/>
+    .navbar-custom .navbar-nav > li > a {
+        color: #000000;
+    }
 
-            <label th:text="${#messages.msg('words.name')}" for="name"></label>:
-            <textarea name="name" type="text" id = "name" th:text="${insertEvent.getName()}" required=""></textarea>
+    .navbar-custom .navbar-nav > .active > a {
+        color: #000000;
+        background-color: transparent;
+    }
 
-            <br/>
+    .navbar-custom .navbar-nav > li > a:hover,
+    .navbar-custom .navbar-nav > li > a:focus,
+    .navbar-custom .navbar-nav > .active > a:hover,
+    .navbar-custom .navbar-nav > .active > a:focus,
+    .navbar-custom .navbar-nav > .open > a {
+        text-decoration: none;
+        background-color: #B2EBF2;
+    }
 
-            <label th:text="${#messages.msg('words.guide_id')}" for="guide_id"></label>:
-            <input name="guideId" id = "guide_id" type="number" required="" th:value="${insertEvent.getGuideId()}"/>
+    .navbar-custom .navbar-brand {
+        color: #eeeeee;
+    }
 
-            <br/>
+    .navbar-custom .navbar-toggle {
+        background-color: #eeeeee;
+    }
 
-            <label th:text="${#messages.msg('words.photo')}" for="photo"></label>:
-            <input name="file" id = "photo" accept="image/jpeg,image/png" required="" type="file"/>
+    .navbar-custom .icon-bar {
+        background-color: #33aa33;
+    }
+</style>
+<div class="content">
+    <nav class="navbar navbar-default navbar-custom" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle Navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
 
-            <br/>
+                <a class="navbar-brand" href="/">
+                    <img id="brand-image" alt="Website Logo" src="../resources/img/logo.png"/>
+                </a>
+            </div>
 
-            <label th:text="${#messages.msg('words.category')}" for="category"></label>:
-            <select name="category" id='category' th:selected="${insertEvent.getCategory()}">
-                <option value="0" th:text="${#messages.msg('category.0')}">Развлечения</option>
-                <option value="1" th:text="${#messages.msg('category.1')}">Наука</option>
-                <option value="2" th:text="${#messages.msg('category.2')}">История</option>
-                <option value="3" th:text="${#messages.msg('category.3')}">Искусство</option>
-                <option value="4" th:text="${#messages.msg('category.4')}">Производство</option>
-                <option value="5" th:text="${#messages.msg('category.5')}">Гастрономия</option>
-                <option value="6" th:text="${#messages.msg('category.6')}">Квесты</option>
-                <option value="7" th:text="${#messages.msg('category.7')}">Экстрим</option>
-            </select>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-            <br/>
+                <!-- Содержимое основной части -->
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/events/moderation">Модерация экскурсий</a></li>
+                    <li><a href="/users/moderation">Модерация пользователей</a> </li>
+                </ul>
 
-            <label th:text="${#messages.msg('words.place')}" for="place"></label>:
-            <input name="place" id = "place" type="text" th:value="${insertEvent.place}" required=""/>
-
-            <br/>
-
-            <label th:text="${#messages.msg('words.duration')}" for="duration"></label>:
-            <input name="duration" id = "duration" type="number" th:value="${insertEvent.duration}" required=""/>
-
-            <br/>
-
-            <label th:text="${#messages.msg('words.description')}" for="description"></label>:
-            <textarea name="description" type="text" id = "description" th:text="${insertEvent.description}" required=""></textarea>
-
-            <br/>
-
-            <label th:text="${#messages.msg('words.users_count')}" for="users_count"></label>:
-            <input name="usersCount" id = "users_count" type="number" th:value="${insertEvent.usersCount}" required=""/>
-
-            <br/>
-
-            <label th:text="${#messages.msg('words.language')}" for="language"></label>:
-            <select name="language" id="language" th:value="${insertEvent.language}">
-                <option value="0">Русский</option>
-                <option value="1">English</option>
-            </select>
-
-            <br/>
-
-            <label th:text="${#messages.msg('words.price')}" for="price"></label>:
-            <input name="price" id = "price" type="number" th:value="${insertEvent.price}" required=""/>
-
-            <br/>
-
-            <label for="id">ID:</label>
-            <input type="number" name="id" id= "id" th:value="${insertEvent.id}" required=""/>
-            <br/>
-            <button type="reset" class="btn btn-default" th:text="${#messages.msg('words.reset')}">Сброс</button>
-            <button type="submit" class="btn btn-default" th:text="${#messages.msg('words.submit')}">Сохранить</button>
-
-
-        </form>
+            </div><!-- navbar collapse end -->
+        </div><!-- container-fluid end -->
+    </nav>
+    <div class="page-header">
+        <h1 th:text="${#messages.msg('titles.events')}">Контакты</h1>
     </div>
-</div>
-<hr/>
 
-<div class="row">
-    <div class="col-sm-12">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th th:text="${#messages.msg('words.users')}">Users</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td><a th:href="@{/events/moderation(sort_by=${inc})}">ID</a></td>
-                <td th:text="${#messages.msg('words.name')}">Название</td>
-                <td th:text="${#messages.msg('words.category')}">Категория</td>
-                <td th:text="${#messages.msg('words.guide_id')}">ID гида</td>
-                <td><a th:text="${#messages.msg('words.price')}" th:href="@{/events/moderation(sort_by=${inc}+2)}">Стоимость</a></td>
-                <td th:text="${#messages.msg('words.place')}">Место</td>
-                <td th:text="${#messages.msg('words.language')}">Язык</td>
-                <td><a th:text="${#messages.msg('words.users_count')}" th:href="@{/events/moderation(sort_by=${inc}+10)}">Кол-во человек</a></td>
-                <td><a th:text="${#messages.msg('words.duration')}" th:href="@{/events/moderation(sort_by=${inc}+8)}">Продолжительность</a></td>
-                <td th:text="${#messages.msg('words.description')}">Описание</td>
-                <td><a th:text="${#messages.msg('words.type')}" th:href="@{/events/moderation(sort_by=${inc}+6)}">Тип</a></td>
-                <td><a th:text="${#messages.msg('words.rate')}" th:href="@{/events/moderation(sort_by=${inc}+4)}">Рейтинг</a></td>
-            </tr>
-            <tr th:each="event : ${events}">
-                <td th:text="${event.id}">Some text</td>
-                <td th:text="${event.name}">Some text</td>
-                <td th:text="${event.getCategoryString()}">Some text</td>
-                <td th:text="${event.guideId}">Some text</td>
-                <td th:text="${event.price}">Some text</td>
-                <td th:text="${event.place}">Some text</td>
-                <td th:text="${event.getLanguageString()}">Some text</td>
-                <td th:text="${event.usersCount}">Some text</td>
-                <td th:text="${event.duration}">Some text</td>
-                <td th:text="${event.description}">Some text</td>
-                <td th:text="${event.type}">Some text</td>
-                <td th:text="${event.rate}">Some text</td>
-                <td><a th:href="@{/events/moderation(id = ${event.id})}"><img src="../resources/img/icons/edit.png"/></a></td>
-                <td><a th:href="@{/events/delete(id = ${event.id})}"><img src="../resources/img/icons/del.png"/></a></td>
-            </tr>
-            </tbody>
-        </table>
+    <hr/>
+    <div class="row">
+        <div class="col-md-12 col-lg-6">
+
+            <form th:object="${insertEvent}" action="/events/add" method="POST" enctype="multipart/form-data">
+
+                <label th:text="${#messages.msg('words.type')}" for="type"></label>:
+                <select name="type" id="type" th:selected="${insertEvent.getType()}">
+                    <option value="-3">Не прошел модерацию</option>
+                    <option value="-2">На перемодерации</option>
+                    <option value="-1">Не активен</option>
+                    <option value="1">Активен</option>
+                </select>
+
+                <br/>
+
+                <label th:text="${#messages.msg('words.name')}" for="name"></label>:
+                <textarea name="name" type="text" id="name" th:text="${insertEvent.getName()}" required=""></textarea>
+
+                <br/>
+
+                <label th:text="${#messages.msg('words.guide_id')}" for="guide_id"></label>:
+                <input name="guideId" id="guide_id" type="number" required="" th:value="${insertEvent.getGuideId()}"/>
+
+                <br/>
+
+                <label th:text="${#messages.msg('words.photo')}" for="photo"></label>:
+                <input name="file" id="photo" accept="image/jpeg,image/png" required="" type="file"/>
+
+                <br/>
+
+                <label th:text="${#messages.msg('words.category')}" for="category"></label>:
+                <select name="category" id='category' th:selected="${insertEvent.getCategory()}">
+                    <option value="0" th:text="${#messages.msg('category.0')}">Развлечения</option>
+                    <option value="1" th:text="${#messages.msg('category.1')}">Наука</option>
+                    <option value="2" th:text="${#messages.msg('category.2')}">История</option>
+                    <option value="3" th:text="${#messages.msg('category.3')}">Искусство</option>
+                    <option value="4" th:text="${#messages.msg('category.4')}">Производство</option>
+                    <option value="5" th:text="${#messages.msg('category.5')}">Гастрономия</option>
+                    <option value="6" th:text="${#messages.msg('category.6')}">Квесты</option>
+                    <option value="7" th:text="${#messages.msg('category.7')}">Экстрим</option>
+                </select>
+
+                <br/>
+
+                <label th:text="${#messages.msg('words.place')}" for="place"></label>:
+                <input name="place" id="place" type="text" th:value="${insertEvent.place}" required=""/>
+
+                <br/>
+
+                <label th:text="${#messages.msg('words.duration')}" for="duration"></label>:
+                <input name="duration" id="duration" type="number" th:value="${insertEvent.duration}" required=""/>
+
+                <br/>
+
+                <label th:text="${#messages.msg('words.description')}" for="description"></label>:
+                <textarea name="description" type="text" id="description" th:text="${insertEvent.description}"
+                          required=""></textarea>
+
+                <br/>
+
+                <label th:text="${#messages.msg('words.users_count')}" for="users_count"></label>:
+                <input name="usersCount" id="users_count" type="number" th:value="${insertEvent.usersCount}"
+                       required=""/>
+
+                <br/>
+
+                <label th:text="${#messages.msg('words.language')}" for="language"></label>:
+                <select name="language" id="language" th:value="${insertEvent.language}">
+                    <option value="0">Русский</option>
+                    <option value="1">English</option>
+                </select>
+
+                <br/>
+
+                <label th:text="${#messages.msg('words.price')}" for="price"></label>:
+                <input name="price" id="price" type="number" th:value="${insertEvent.price}" required=""/>
+
+                <br/>
+
+                <label for="id">ID:</label>
+                <input type="number" name="id" id="id" th:value="${insertEvent.id}" required=""/>
+                <br/>
+                <button type="reset" class="btn btn-default" th:text="${#messages.msg('words.reset')}">Сброс</button>
+                <button type="submit" class="btn btn-default" th:text="${#messages.msg('words.submit')}">Сохранить
+                </button>
+
+
+            </form>
+        </div>
+    </div>
+    <hr/>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th th:text="${#messages.msg('words.users')}">Users</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><a th:href="@{/events/moderation(sort_by=${inc})}">ID</a></td>
+                    <td th:text="${#messages.msg('words.name')}">Название</td>
+                    <td th:text="${#messages.msg('words.category')}">Категория</td>
+                    <td th:text="${#messages.msg('words.guide_id')}">ID гида</td>
+                    <td><a th:text="${#messages.msg('words.price')}" th:href="@{/events/moderation(sort_by=${inc}+2)}">Стоимость</a>
+                    </td>
+                    <td th:text="${#messages.msg('words.place')}">Место</td>
+                    <td th:text="${#messages.msg('words.language')}">Язык</td>
+                    <td><a th:text="${#messages.msg('words.users_count')}"
+                           th:href="@{/events/moderation(sort_by=${inc}+10)}">Кол-во человек</a></td>
+                    <td><a th:text="${#messages.msg('words.duration')}"
+                           th:href="@{/events/moderation(sort_by=${inc}+8)}">Продолжительность</a></td>
+                    <td th:text="${#messages.msg('words.description')}">Описание</td>
+                    <td><a th:text="${#messages.msg('words.type')}" th:href="@{/events/moderation(sort_by=${inc}+6)}">Тип</a>
+                    </td>
+                    <td><a th:text="${#messages.msg('words.rate')}" th:href="@{/events/moderation(sort_by=${inc}+4)}">Рейтинг</a>
+                    </td>
+                </tr>
+                <tr th:each="event : ${events}">
+                    <td th:text="${event.id}">Some text</td>
+                    <td th:text="${event.name}">Some text</td>
+                    <td th:text="${event.getCategoryString()}">Some text</td>
+                    <td th:text="${event.guideId}">Some text</td>
+                    <td th:text="${event.price}">Some text</td>
+                    <td th:text="${event.place}">Some text</td>
+                    <td th:text="${event.getLanguageString()}">Some text</td>
+                    <td th:text="${event.usersCount}">Some text</td>
+                    <td th:text="${event.duration}">Some text</td>
+                    <td th:text="${event.description}">Some text</td>
+                    <td th:text="${event.type}">Some text</td>
+                    <td th:text="${event.rate}">Some text</td>
+                    <td><a th:href="@{/events/moderation(id = ${event.id})}"><img
+                            src="../resources/img/icons/edit.png"/></a></td>
+                    <td><a th:href="@{/events/delete(id = ${event.id})}"><img src="../resources/img/icons/del.png"/></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 <!-- Latest compiled and minified JavaScript -->
