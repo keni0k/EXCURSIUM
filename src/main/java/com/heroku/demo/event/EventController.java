@@ -29,6 +29,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
@@ -72,7 +73,7 @@ public class EventController {
                               @RequestParam("file") MultipartFile file,
                               ModelMap modelMap) {
         event.setTime(new LocalTime().toDateTimeToday().toString());
-        ArrayList<GrantedAuthority> authorities = Utils.getUserAuthorities();
+        LinkedList<GrantedAuthority> authorities = Utils.getUserAuthorities();
         for (GrantedAuthority grantedAuthority:authorities) {
             logger.debug(grantedAuthority.getAuthority());
         }

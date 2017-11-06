@@ -20,8 +20,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URISyntaxException;
 import java.security.InvalidKeyException;
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Random;
 
 public class Utils {
@@ -88,7 +88,7 @@ public class Utils {
         blob1.uploadFromFile(path);
     }
 
-    public static ArrayList<GrantedAuthority> getUserAuthorities() {
+    public static LinkedList<GrantedAuthority> getUserAuthorities() {
         Object principals = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         //Тут нужна эта проверка тк если сразу получить principals без проверки
@@ -98,10 +98,13 @@ public class Utils {
                     (org.springframework.security.core.userdetails.User)
                             principals;
 
-            return (ArrayList<GrantedAuthority>) u.getAuthorities();
+            LinkedList<GrantedAuthority> authorities = new LinkedList<>();
+            authorities.addAll(u.getAuthorities());
+
+            return authorities;
         }
 
-        return new ArrayList<>();
+        return new LinkedList<>();
     }
 
 }
