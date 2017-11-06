@@ -14,6 +14,7 @@ import org.joda.time.LocalTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,7 @@ import java.io.FileOutputStream;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 import static com.heroku.demo.utils.Utils.*;
@@ -39,6 +41,9 @@ import static com.heroku.demo.utils.Utils.*;
 public class EventController {
 
     private static String AUTH_KEY = "jP7xwaj12EYohNabYr1r6ewMeVJa8Jkf";
+
+    @Autowired
+    private MessageSource messageSource;
 
     private ReviewRepository reviewRepository;
     private PhotoRepository photoRepository;
@@ -72,7 +77,7 @@ public class EventController {
     public String insertEvent(@ModelAttribute("inputEvent") @Valid Event event,
                               BindingResult result,
                               @RequestParam("file") MultipartFile file,
-                              ModelMap modelMap, Principal principal) {
+                              ModelMap modelMap, Principal principal, Locale locale) {
         event.setTime(new LocalTime().toDateTimeToday().toString());
         String loginOrEmail = principal.getName();
         if (!loginOrEmail.equals("")) {
@@ -84,7 +89,7 @@ public class EventController {
         } else {
             modelMap.addAttribute("file", file);
             modelMap.addAttribute("insertEvent", event);
-            modelMap.addAttribute("message", new MessageUtil("danger", "During the addition of the tour any errors. Fix them to add it."));
+            modelMap.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("error.event.add",null, locale)));
             return "event_add";
         }
 
