@@ -7,6 +7,11 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
@@ -19,18 +24,23 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication)
             throws AuthenticationException {
-        String name = authentication.getName();
-        // You can get the password here
-        String password = authentication.getCredentials().toString();
+        if (authentication!=null) {
+            String name = authentication.getName();
+            // You can get the password here
+            String password = authentication.getCredentials().toString();
 
-        Person user = personService.getByEmail(name);
-        if (user==null) user = personService.getByLogin(name);
+            Person user = personService.getByEmail(name);
+            if (user == null) user = personService.getByLogin(name);
 
-        // Your custom authentication logic here
-        if (user!=null) {
-            if (user.getPass().equals(password))
-                return new UsernamePasswordAuthenticationToken(name, password);
-            else LoggerFactory.getLogger(CustomAuthenticationProvider.class).info(password);
+            // Your custom authentication logic here
+            if (user != null) {
+                if (user.getPass().equals(password)) {
+                    List<GrantedAuthority> grantedAuths = new ArrayList<>();
+                    grantedAuths.add(new SimpleGrantedAuthority(user.getRole()));
+                    return new UsernamePasswordAuthenticationToken(name, password, grantedAuths);
+                }
+                else LoggerFactory.getLogger(CustomAuthenticationProvider.class).info(password);
+            }
         }
 
         return null;
