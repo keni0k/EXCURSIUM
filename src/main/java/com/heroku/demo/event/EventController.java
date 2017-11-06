@@ -8,6 +8,7 @@ import com.heroku.demo.photo.PhotoRepository;
 import com.heroku.demo.photo.PhotoServiceImpl;
 import com.heroku.demo.review.ReviewRepository;
 import com.heroku.demo.utils.MessageUtil;
+import com.heroku.demo.utils.Utils;
 import com.heroku.demo.utils.UtilsForWeb;
 import org.joda.time.LocalTime;
 import org.slf4j.Logger;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -70,6 +72,10 @@ public class EventController {
                               @RequestParam("file") MultipartFile file,
                               ModelMap modelMap) {
         event.setTime(new LocalTime().toDateTimeToday().toString());
+        ArrayList<GrantedAuthority> authorities = Utils.getUserAuthorities();
+        for (GrantedAuthority grantedAuthority:authorities) {
+            logger.debug(grantedAuthority.getAuthority());
+        }
         event.setGuideId(-1);
         if (!result.hasErrors()) {
             eventService.editEvent(event);

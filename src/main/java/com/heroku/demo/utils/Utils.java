@@ -5,6 +5,8 @@ import com.microsoft.azure.storage.StorageException;
 import com.microsoft.azure.storage.blob.CloudBlobClient;
 import com.microsoft.azure.storage.blob.CloudBlobContainer;
 import com.microsoft.azure.storage.blob.CloudBlockBlob;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
@@ -18,6 +20,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URISyntaxException;
 import java.security.InvalidKeyException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
@@ -83,6 +86,22 @@ public class Utils {
         CloudBlobContainer container = client.getContainerReference("img");
         CloudBlockBlob blob1 = container.getBlockBlobReference(photoToken);
         blob1.uploadFromFile(path);
+    }
+
+    public static ArrayList<GrantedAuthority> getUserAuthorities() {
+        Object principals = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        //Тут нужна эта проверка тк если сразу получить principals без проверки
+        //На анонимность пользавателя можем получим NullPointerException
+        if (!principals.toString().equals("anonymousUser")) {
+            org.springframework.security.core.userdetails.User u =
+                    (org.springframework.security.core.userdetails.User)
+                            principals;
+
+            return (ArrayList<GrantedAuthority>) u.getAuthorities();
+        }
+
+        return new ArrayList<>();
     }
 
 }
