@@ -139,32 +139,34 @@
 
             <form th:object="${insertPerson}" action="/users/moderation" method="POST">
 
-                Тип пользователя:
-                <select name="type">
-                    <option value="0"> Неактив</option>
-                    <option value="1"> Турист</option>
-                    <option value="2"> Экскурсовод</option>
-                    <option value="3"> Заблокированный</option>
-                </select>
+                <div class="panel panel-default">
+                    <div class="panel-heading" th:text="${#messages.msg('words.type')}">
+                        Тип пользователя
+                    </div>
+                    <div class="panel-body">
+                        <div class="input-group">
+                            <select name="type" class="form-control selectpicker" th:selected="${insertPerson.getType()}?${insertPerson.getType()}:0">
+                                <option value="-3">Не активирован</option>
+                                <option value="-2">Заблокированный</option>
+                                <option value="1">Турист</option>
+                                <option value="2">Экскурсовод</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
 
                 <br/>
                 <div class="input-group">
                     <span class="input-group-addon">Логин</span>
-                    <input name="login" id = "login" type="text" class="form-control" placeholder="Логин" aria-label="Логин" th:value="${insertPerson.getLogin()}" required=""/>
+                    <input name="login" id = "login" type="text" class="form-control" placeholder="Логин" disabled = "disabled" aria-label="Логин" th:value="${insertPerson.getLogin()}" required=""/>
                     <label for="login" th:if="${error_login}" th:text="${#messages.msg('error.user.login.free')}" th:class="'error'">Name Error</label>
                     <label for="login" th:if="${#fields.hasErrors('login')}" th:text="${#messages.msg('error.user.login.size')}" th:class="'error'">Name Error</label>
                 </div>
                 <br/>
                 <div class="input-group">
                     <span class="input-group-addon">Пароль</span>
-                    <input name="pass" id = "pass" type="password" class="form-control" placeholder="Пароль" aria-label="Пароль" required=""/>
+                    <input name="pass" id = "pass" type="password" disabled = "disabled" class="form-control" placeholder="Пароль" aria-label="Пароль" required=""/>
                     <label for="pass" th:if="${#fields.hasErrors('pass')}" th:text="${#messages.msg('error.user.pass')}" th:class="'error'">Name Error</label>
-                </div>
-                <br/>
-                <div class="input-group">
-                    <span class="input-group-addon">Повторите пароль</span>
-                    <input name="pass2" type="password" id = "pass2" class="form-control" placeholder="Повторите пароль" aria-label="Повторите пароль" required=""/>
-                    <label for="pass2" th:if="${error_pass}" th:text="${#messages.msg('error.user.pass2')}" th:class="'error'">Name Error</label>
                 </div>
                 <br/>
                 <div class="input-group">
@@ -186,7 +188,7 @@
                 <br/>
                 <div class="input-group">
                     <span class="input-group-addon">Email</span>
-                    <input name="email" id = "email" type="email" class="form-control" th:value="${insertPerson.getEmail()}" placeholder="Email" aria-label="Email" required=""/>
+                    <input name="email" id = "email" type="email" class="form-control" disabled = "disabled" th:value="${insertPerson.getEmail()}" placeholder="Email" aria-label="Email" required=""/>
                     <label for="email" th:if="${error_email_free}" th:text="${#messages.msg('error.user.email.free')}" th:class="'error'">Name Error</label>
                     <label for="email" th:if="${error_email_valid}" th:text="${#messages.msg('error.user.email.valid')}" th:class="'error'">Name Error</label>
                 </div>
@@ -228,16 +230,16 @@
                 <tbody>
                 <tr>
                     <td>ID</td>
-                    <td>Логин</td>
-                    <td>Пароль</td>
-                    <td>Имя</td>
-                    <td>Фамилия</td>
-                    <td>Город</td>
+                    <td th:text="${#messages.msg('words.login')}">Логин</td>
+                    <td th:text="${#messages.msg('words.password')}">Пароль</td>
+                    <td th:text="${#messages.msg('words.first_name')}">Имя</td>
+                    <td th:text="${#messages.msg('words.last_name')}">Фамилия</td>
+                    <td th:text="${#messages.msg('words.city')}">Город</td>
                     <td>Email</td>
-                    <td>Телефон</td>
-                    <td>Тип</td>
-                    <td>Рейтинг</td>
-                    <td>Токен</td>
+                    <td th:text="${#messages.msg('words.phone')}">Телефон</td>
+                    <td th:text="${#messages.msg('words.type')}">Тип</td>
+                    <td th:text="${#messages.msg('words.rate')}">Рейтинг</td>
+                    <td th:text="${#messages.msg('words.token')}">Токен</td>
                     <td>Изменить</td>
                     <td>Удалить</td>
                 </tr>

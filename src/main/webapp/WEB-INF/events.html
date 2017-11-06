@@ -139,13 +139,22 @@ words=${#httpServletRequest.getParameter('words')},sort_by=${#httpServletRequest
 
             <form th:object="${insertEvent}" action="/events/add" method="POST" enctype="multipart/form-data">
 
-                <label th:text="${#messages.msg('words.type')}" for="type"></label>:
-                <select name="type" id="type" th:selected="${insertEvent.getType()}">
-                    <option value="-3">Не прошла модерацию</option>
-                    <option value="-2">На перемодерации</option>
-                    <option value="-1">Не активна</option>
-                    <option value="1">Активна</option>
-                </select>
+                <div class="panel panel-default">
+                    <div class="panel-heading" th:text="${#messages.msg('words.type')}">
+                        Тип экскурсии
+                    </div>
+                    <div class="panel-body">
+                        <div class="input-group">
+                            <select name="type" class="form-control selectpicker" th:selected="${insertEvent.getType()}?${insertEvent.getType()}:0">
+                                <option value="-3">Не прошла модерацию</option>
+                                <option value="-2">На перемодерации</option>
+                                <option value="-1">Не активна</option>
+                                <option value="1">Активна</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
                 <br/>
                 <div class="input-group">
                     <span class="input-group-addon" th:text="${#messages.msg('words.guide_id')}"></span>
@@ -272,9 +281,9 @@ words=${#httpServletRequest.getParameter('words')},sort_by=${#httpServletRequest
                     <td th:text="${#messages.msg('words.place')}">Место</td>
                     <td th:text="${#messages.msg('words.language')}">Язык</td>
                     <td><a th:text="${#messages.msg('words.users_count')}"
-                           th:href="@{/events/moderation(sort_by=${inc}+10)}">Кол-во человек</a></td>
+                           th:href="@{/events/moderation(sort_by=${inc}+10,id=${id},price_up=${price_up},price_down=${price_down},category=${category}, language=${language}, words=${words})}">Кол-во человек</a></td>
                     <td><a th:text="${#messages.msg('words.duration')}"
-                           th:href="@{/events/moderation(sort_by=${inc}+8)}">Продолжительность</a></td>
+                           th:href="@{/events/moderation(sort_by=${inc}+8,id=${id},price_up=${price_up},price_down=${price_down},category=${category}, language=${language}, words=${words})}">Продолжительность</a></td>
                     <td th:text="${#messages.msg('words.description')}">Описание</td>
                     <td><a th:text="${#messages.msg('words.type')}" th:href="@{/events/moderation(sort_by=${inc}+6,id=${id},price_up=${price_up},price_down=${price_down},category=${category}, language=${language}, words=${words})}">Тип</a>
                     </td>
