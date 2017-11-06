@@ -33,7 +33,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        auth.jdbcAuthentication().dataSource(dataSource)
 //                .usersByUsernameQuery("select login, pass from person where login=?")
 //                .authoritiesByUsernameQuery("select login, role from person where login=?");
-        globalUserDetails(auth);
     }
 
     @Autowired
