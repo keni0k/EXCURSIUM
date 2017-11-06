@@ -53,13 +53,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/users/user", "/users/getbytoken", "/users/getbyemail", "/users/listjson").permitAll()
                 .antMatchers("/users/registration").anonymous()
                 .antMatchers("/events/add").hasRole("USER")
-                .antMatchers("/**","/events/add").hasRole("ADMIN")
+                .antMatchers("/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().defaultSuccessUrl("/events/list", false)
                 .loginPage("/users/login").failureUrl("/users/login?error=true").permitAll()
                 .and()
-                .logout().logoutUrl("/users/login?logout=true").logoutSuccessUrl("/users/login").permitAll()
+                .logout().logoutUrl("/users/logout").logoutSuccessUrl("/users/login").permitAll()
                 .and()
                 .rememberMe().key("_spring_security_remember_me").tokenValiditySeconds(1209600);
         http.csrf().disable();

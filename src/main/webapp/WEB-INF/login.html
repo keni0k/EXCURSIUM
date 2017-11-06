@@ -115,7 +115,7 @@
                     <li><a href="index.html#contact">Контакты</a></li>
                     <li th:unless="${#httpServletRequest.isUserInRole('USER')}"><a href="/users/registration" th:text="${#messages.msg('titles.registration')}">Регистрация</a></li>
                     <li th:unless="${#httpServletRequest.isUserInRole('USER')}"><a href="/users/login" th:text="${#messages.msg('titles.login')}">Войти</a></li>
-                    <li th:if="${#httpServletRequest.isUserInRole('USER')}"><a href="/users/login?logout=true" th:text="${#messages.msg('titles.logout')}">Выйти</a></li>
+                    <li th:if="${#httpServletRequest.isUserInRole('USER')}"><a href="/users/logout" th:text="${#messages.msg('titles.logout')}">Выйти</a></li>
                 </ul>
 
             </div><!-- navbar collapse end -->
