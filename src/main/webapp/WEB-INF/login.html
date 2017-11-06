@@ -138,17 +138,17 @@
                 <form method="POST" action="/users/login">
                     <br/>
                     <div class="input-group">
-                        <span class="input-group-addon">Логин</span>
+                        <span class="input-group-addon" th:text="${#messages.msg('words.login')}">Логин</span>
                         <input name="username" id = "login" autofocus="autofocus" type="text" class="form-control" placeholder="Логин" aria-label="Логин" required=""/>
                     </div>
                     <br/>
                     <div class="input-group">
-                        <span class="input-group-addon">Пароль</span>
+                        <span class="input-group-addon" th:text="${#messages.msg('words.password')}">Пароль</span>
                         <input name="password" id = "pass" type="password" class="form-control" placeholder="Пароль" aria-label="Пароль" required=""/>
                     </div>
                     <br/>
                     <div class="checkbox">
-                        <label>
+                        <label th:text="${#messages.msg('words.remember_me')}">
                             <input type="checkbox" id="_spring_security_remember_me"  name="_spring_security_remember_me"/>Запомнить меня
                         </label>
                     </div>
