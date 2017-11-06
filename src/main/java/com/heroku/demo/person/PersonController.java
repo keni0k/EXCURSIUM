@@ -39,6 +39,33 @@ public class PersonController {
         return "registration";
     }
 
+    @RequestMapping(value = "/moderation", method = RequestMethod.POST)
+    public String signUpModer(@ModelAttribute("insertPerson") @Valid Person person,
+                         BindingResult result,
+                         @RequestParam("file") MultipartFile file,
+                         @ModelAttribute("pass2") String pass2,
+                         ModelMap model, Locale locale) {
+        person.setToken(randomToken(32));
+
+        if (!personService.throwsErrors(person, pass2) || result.hasErrors()) {
+            model.addAttribute("error_login", !personService.isLoginFree(person.getLogin()));
+            model.addAttribute("error_phone", !personService.isPhoneFree(person.getPhoneNumber()));
+            model.addAttribute("error_pass", !person.getPass().equals(pass2));
+            model.addAttribute("error_email_free", !personService.isEmailFree(person.getEmail()));
+            model.addAttribute("error_email_valid", !personService.isEmailCorrect(person.getEmail()));
+            model.addAttribute("insertPerson", person);
+            model.addAttribute("message", new MessageUtil("danger",  messageSource.getMessage("error.user.add",null, locale)));
+            return persons_last(model);
+        }
+        person.setEmail(person.getEmail().toLowerCase());
+        person.setLogin(person.getLogin().toLowerCase());
+        person.setImageUrl(file.getOriginalFilename());
+        person.setRole(person.getRole().equals("")?"ROLE_USER":person.getRole());
+        personService.editPerson(person);
+        model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.registration",null, locale)));
+        return persons_last(model);
+    }
+
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String signUp(@ModelAttribute("insertPerson") @Valid Person person,
                          BindingResult result,

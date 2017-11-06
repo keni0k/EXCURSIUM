@@ -118,10 +118,8 @@
 
                 <!-- Содержимое основной части -->
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/events/moderation" th:text="${#messages.msg('titles.events')}">Модерация экскурсий</a>
-                    </li>
-                    <li><a href="/users/moderation" th:text="${#messages.msg('titles.events')}">Модерация
-                        пользователей</a></li>
+                    <li><a href="/events/moderation" th:text="${#messages.msg('titles.events')}">Модерация экскурсий</a></li>
+                    <li><a href="/users/moderation" th:text="${#messages.msg('titles.persons')}">Модерация пользователей</a></li>
                 </ul>
 
             </div><!-- navbar collapse end -->
@@ -134,7 +132,12 @@
     <hr/>
     <div class="row">
         <div class="col-md-12 col-lg-6">
-            <form th:object="${insertPerson}" action="/users/registration" method="POST">
+
+            <th:block th:if="${message != null}">
+                <div th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message.type)}, message=${message.message})">&nbsp;</div>
+            </th:block>
+
+            <form th:object="${insertPerson}" action="/users/moderation" method="POST">
 
                 Тип пользователя:
                 <select name="type">
@@ -145,36 +148,66 @@
                 </select>
 
                 <br/>
-                Логин: <input name="login" type="text" value=""/>
+                <div class="input-group">
+                    <span class="input-group-addon">Логин</span>
+                    <input name="login" id = "login" type="text" class="form-control" placeholder="Логин" aria-label="Логин" th:value="${insertPerson.getLogin()}" required=""/>
+                    <label for="login" th:if="${error_login}" th:text="${#messages.msg('error.user.login.free')}" th:class="'error'">Name Error</label>
+                    <label for="login" th:if="${#fields.hasErrors('login')}" th:text="${#messages.msg('error.user.login.size')}" th:class="'error'">Name Error</label>
+                </div>
                 <br/>
-                Пароль:
-                <input name="pass" type="password" value=""/>
+                <div class="input-group">
+                    <span class="input-group-addon">Пароль</span>
+                    <input name="pass" id = "pass" type="password" class="form-control" placeholder="Пароль" aria-label="Пароль" required=""/>
+                    <label for="pass" th:if="${#fields.hasErrors('pass')}" th:text="${#messages.msg('error.user.pass')}" th:class="'error'">Name Error</label>
+                </div>
                 <br/>
-                Имя:
-                <input name="firstName" type="text" value=""/>
+                <div class="input-group">
+                    <span class="input-group-addon">Повторите пароль</span>
+                    <input name="pass2" type="password" id = "pass2" class="form-control" placeholder="Повторите пароль" aria-label="Повторите пароль" required=""/>
+                    <label for="pass2" th:if="${error_pass}" th:text="${#messages.msg('error.user.pass2')}" th:class="'error'">Name Error</label>
+                </div>
                 <br/>
-                Фамилия: <input name="lastName" type="text" value=""/>
+                <div class="input-group">
+                    <span class="input-group-addon">Имя</span>
+                    <input name="firstName" type="text" class="form-control" th:value="${insertPerson.getFirstName()}" placeholder="Имя" aria-label="Имя" required=""/>
+                </div>
                 <br/>
-                Фото URL:
-                <input name="imageUrl" type="text" value=""/>
+                <div class="input-group">
+                    <span class="input-group-addon">Фамилия</span>
+                    <input name="lastName" type="text" class="form-control" th:value="${insertPerson.getLastName()}" placeholder="Фамилия" required=""
+                           aria-label="Фамилия"/>
+                </div>
                 <br/>
-                E-mail:
-                <input name="email" type="email" value=""/>
+                <div class="input-group">
+                    <span class="input-group-addon">Фотография</span>
+                    <input name="file" type="file" id = "file" class="form-control" placeholder="Фотография" required=""
+                           accept="image/jpeg,image/png" aria-label="Фотография"/>
+                </div>
                 <br/>
-                Номер телефона:
-                <input name="phoneNumber" type="tel" value=""/>
+                <div class="input-group">
+                    <span class="input-group-addon">Email</span>
+                    <input name="email" id = "email" type="email" class="form-control" th:value="${insertPerson.getEmail()}" placeholder="Email" aria-label="Email" required=""/>
+                    <label for="email" th:if="${error_email_free}" th:text="${#messages.msg('error.user.email.free')}" th:class="'error'">Name Error</label>
+                    <label for="email" th:if="${error_email_valid}" th:text="${#messages.msg('error.user.email.valid')}" th:class="'error'">Name Error</label>
+                </div>
                 <br/>
-                О себе:
-                <input name="about" type="text" value=""/>
+                <div class="input-group">
+                    <span class="input-group-addon">Телефон</span>
+                    <input name="phoneNumber" type="tel" class="form-control bfh-phone" th:value="${insertPerson.getPhoneNumber()}" placeholder="Телефон" required=""
+                           aria-label="Телефон" data-format="+7 (ddd) ddd-dddd" id = "phone_number"/>
+                    <label for="phone_number" th:if="${error_phone}" th:text="${#messages.msg('error.user.phone_number.free')}" th:class="'error'">Name Error</label>
+                    <label for="phone_number" th:if="${#fields.hasErrors('phoneNumber')}" th:text="${#messages.msg('error.user.phone_number.invalid')}" th:class="'error'">Name Error</label>
+                </div>
                 <br/>
-                Рейтинг:
-                <input name="rate" type="number" value=""/>
+                <div class="input-group">
+                    <span class="input-group-addon">О себе</span>
+                    <textarea name="about" class="form-control" placeholder="О себе" aria-label="О себе" required="" th:text="${insertPerson.getAbout()}"></textarea>
+                </div>
                 <br/>
-                Город:
-                <select name="city">
-                    <option value="moscow"> Москва</option>
-                    <option value="spb"> Санкт Петербург</option>
-                </select>
+                <div class="input-group">
+                    <span class="input-group-addon">Город</span>
+                    <input name="city" type="text" class="form-control" th:value="${insertPerson.getCity()}" placeholder="Город" required="" aria-label="Город"/>
+                </div>
                 <br/>
                 <button type="submit" class="btn btn-default">Отправить</button>
 
