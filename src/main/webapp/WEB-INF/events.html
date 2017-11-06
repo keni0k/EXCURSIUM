@@ -209,7 +209,7 @@ words=${#httpServletRequest.getParameter('words')},sort_by=${#httpServletRequest
                     <span class="input-group-addon" th:text="${#messages.msg('words.duration')}">Длительность</span>
                     <input name="duration" id = "duration" type="number" class="form-control" placeholder="Длительность:" required=""
                            aria-label="Длительность:" th:value="${insertEvent.getDuration()}?${insertEvent.getDuration()}"/>
-                    <span class="input-group-addon">часов</span>
+                    <span class="input-group-addon" th:text="${#messages.msg('words.hours')}">часов</span>
                     <label for="duration" th:if="${#fields.hasErrors('duration')}" th:text="${#messages.msg('error.event.duration')}" th:class="'error'">Duration Error</label>
                 </div>
                 <br/>
@@ -287,6 +287,8 @@ words=${#httpServletRequest.getParameter('words')},sort_by=${#httpServletRequest
                     </td>
                     <td><a th:text="${#messages.msg('words.rate')}" th:href="@{/events/moderation(sort_by=${inc}+4,id=${id},price_up=${price_up},price_down=${price_down},category=${category}, language=${language}, words=${words})}">Рейтинг</a>
                     </td>
+                    <td th:text="${#messages.msg('words.change')}">Изменить</td>
+                    <td th:text="${#messages.msg('words.delete')}">Удалить</td>
                 </tr>
                 <tr th:each="event : ${events}">
                     <td th:text="${event.id}">Some text</td>

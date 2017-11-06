@@ -176,7 +176,7 @@
                         <span class="input-group-addon" th:text="${#messages.msg('words.duration')}">Длительность</span>
                         <input name="duration" id = "duration" type="number" class="form-control" placeholder="Длительность:" required=""
                                aria-label="Длительность:" th:value="${inputEvent.getDuration()}?${insertEvent.getDuration()}" min="1" max="240"/>
-                        <span class="input-group-addon">часов</span>
+                        <span class="input-group-addon" th:text="${#messages.msg('words.hours')}">часов</span>
                         <label for="duration" th:if="${#fields.hasErrors('duration')}" th:text="${#messages.msg('error.event.duration')}" th:class="'error'">Duration Error</label>
                     </div>
                     <br/>

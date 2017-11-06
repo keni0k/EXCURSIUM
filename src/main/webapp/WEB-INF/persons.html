@@ -240,8 +240,8 @@
                     <td th:text="${#messages.msg('words.type')}">Тип</td>
                     <td th:text="${#messages.msg('words.rate')}">Рейтинг</td>
                     <td th:text="${#messages.msg('words.token')}">Токен</td>
-                    <td>Изменить</td>
-                    <td>Удалить</td>
+                    <td th:text="${#messages.msg('words.change')}">Изменить</td>
+                    <td th:text="${#messages.msg('words.delete')}">Удалить</td>
                 </tr>
                 <tr th:each="person : ${persons}">
                     <td th:text="${person.id}">Some text</td>

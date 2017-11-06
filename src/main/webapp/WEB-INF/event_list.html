@@ -129,7 +129,7 @@
                 <div class="chip" th:each="i : ${#numbers.sequence(0, utils.getCategoriesCount()-1)}">
                     <a th:href="@{/events/list(category=${i})}">
                         <img th:src="${utils.getCategoryUrl(i)}" alt="" src="../resources/img/user.png"/>
-                        <span th:text="${utils.getCategoryString(i, 0)}">%Категория%</span>
+                        <span  th:text="${#messages.msg('category.'+i)}">%Категория%</span>
                     </a>
                 </div>
             </div>
