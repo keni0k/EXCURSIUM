@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -55,8 +56,14 @@
                 <li class="nav-item">
                     <a class="nav-link js-scroll-trigger" href="#contact">Контакты</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="/users/registration">Регистрация</a>
+                <li class="nav-item" th:unless="${#httpServletRequest.isUserInRole('USER')}">
+                    <a class="nav-link js-scroll-trigger" href="/users/registration" th:text="${#messages.msg('titles.registration')}">Регистрация</a>
+                </li>
+                <li class="nav-item" th:unless="${#httpServletRequest.isUserInRole('USER')}">
+                    <a class="nav-link js-scroll-trigger" href="/users/login" th:text="${#messages.msg('titles.login')}">Войти</a>
+                </li>
+                <li class="nav-item" th:if="${#httpServletRequest.isUserInRole('USER')}">
+                    <a class="nav-link js-scroll-trigger" href="/users/login?logout=true" th:text="${#messages.msg('titles.logout')}">Выйти</a>
                 </li>
             </ul>
         </div>

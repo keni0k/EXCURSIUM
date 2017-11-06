@@ -113,7 +113,9 @@
                     <li><a href="/events/list">Экскурсии</a></li>
                     <li><a href="#">FAQ</a></li>
                     <li><a href="index.html#contact">Контакты</a></li>
-                    <li><a href="/users/registration" th:text="${#messages.msg('titles.registration')}">Регистрация</a></li>
+                    <li th:unless="${#httpServletRequest.isUserInRole('USER')}"><a href="/users/registration" th:text="${#messages.msg('titles.registration')}">Регистрация</a></li>
+                    <li th:unless="${#httpServletRequest.isUserInRole('USER')}"><a href="/users/login" th:text="${#messages.msg('titles.login')}">Войти</a></li>
+                    <li th:if="${#httpServletRequest.isUserInRole('USER')}"><a href="/users/login?logout=true" th:text="${#messages.msg('titles.logout')}">Выйти</a></li>
                 </ul>
 
             </div><!-- navbar collapse end -->
@@ -121,7 +123,7 @@
     </nav>
     <div class="container">
         <div class="page-header">
-            <h2 th:text="${#messages.msg('titles.registration')}">Регистрация</h2>
+            <h2 th:text="${#messages.msg('titles.login')}">Авторизация</h2>
         </div>
         <div class="row">
             <div class="col-md-12 col-lg-6">
@@ -147,7 +149,7 @@
                     <br/>
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" id="rememberme"  name="_spring_security_remember_me"/>Запомнить меня
+                            <input type="checkbox" id="_spring_security_remember_me"  name="_spring_security_remember_me"/>Запомнить меня
                         </label>
                     </div>
                     <br/>
