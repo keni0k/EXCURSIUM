@@ -87,7 +87,7 @@
     }
 </style>
 
-<div class="content" name="content"
+<div class="content"
      th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
     <nav class="navbar navbar-default navbar-custom" role="navigation">
         <div class="container-fluid">
@@ -131,7 +131,10 @@
     </nav>
     <div class="container">
         <div class="page-header">
-            <h2><th:block th:text="${#messages.msg('titles.login')}"></th:block> / <th:block th:text="${#messages.msg('titles.registration')}" th:href="@{/users/registration}"></th:block></h2>
+            <h2>
+                <th:block th:text="${#messages.msg('titles.login')}"/> / <a href="/users/registration">
+                <th:block th:text="${#messages.msg('titles.registration')}"/></a>
+            </h2>
         </div>
         <div class="row">
             <div class="col-md-12 col-lg-6">
@@ -142,8 +145,11 @@
                     </div>
                 </th:block>
 
-                <div th:if="${isAdmin}" th:text="${#messages.msg('authorized.admin')}">Вы авторизованы как администратор</div>
-                <div th:if="${isUser}" th:text="${#messages.msg('authorized.user')}">Вы авторизованы как пользователь</div>
+                <div th:if="${isAdmin}" th:text="${#messages.msg('authorized.admin')}">Вы авторизованы как
+                    администратор
+                </div>
+                <div th:if="${isUser}" th:text="${#messages.msg('authorized.user')}">Вы авторизованы как пользователь
+                </div>
 
                 <form method="POST" action="/users/login">
                     <br/>

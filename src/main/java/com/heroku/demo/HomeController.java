@@ -68,14 +68,9 @@ public class HomeController {
         return "upload";
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping({"/", "index"})
     public String index() {
         return "index";
-    }
-
-    @RequestMapping("index")
-    public String index2() {
-        return index();
     }
 
     @RequestMapping("sendemail")
