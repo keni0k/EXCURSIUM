@@ -48,8 +48,8 @@
             src="../resources/libs/bootstrapformhelpers/js/bootstrap-formhelpers.min.js"></script>
 </head>
 <body style="background-color: #f9f9f9;" th:with="price_up=${#httpServletRequest.getParameter('price_up')},price_down=${#httpServletRequest.getParameter('price_down')},
-id=${#httpServletRequest.getParameter('id')},category=${#httpServletRequest.getParameter('category')},language=${#httpServletRequest.getParameter('language')},
-words=${#httpServletRequest.getParameter('words')},sort_by=${#httpServletRequest.getParameter('sort_by')}">
+                                                  id=${#httpServletRequest.getParameter('id')},category=${#httpServletRequest.getParameter('category')},
+                                                  words=${#httpServletRequest.getParameter('words')},sort_by=${#httpServletRequest.getParameter('sort_by')}">
 <style type="text/css">
 
     .navbar-fixed-top {
@@ -268,22 +268,22 @@ words=${#httpServletRequest.getParameter('words')},sort_by=${#httpServletRequest
                 </thead>
                 <tbody>
                 <tr>
-                    <td><a th:href="@{/events/moderation(sort_by=${inc},id=${id},price_up=${price_up},price_down=${price_down},category=${category}, language=${language}, words=${words})}">ID</a></td>
+                    <td><a th:href="@{/events/moderation(sort_by=${inc},id=${id},price_up=${price_up},price_down=${price_down},category=${category}, words=${words})}">ID</a></td>
                     <td th:text="${#messages.msg('words.name')}">Название</td>
                     <td th:text="${#messages.msg('words.category')}">Категория</td>
                     <td th:text="${#messages.msg('words.guide_id')}">ID гида</td>
-                    <td><a th:text="${#messages.msg('words.price')}" th:href="@{/events/moderation(sort_by=${inc}+2,id=${id},price_up=${price_up},price_down=${price_down},category=${category}, language=${language}, words=${words})}">Стоимость</a>
+                    <td><a th:text="${#messages.msg('words.price')}" th:href="@{/events/moderation(sort_by=${inc}+2,id=${id},price_up=${price_up},price_down=${price_down},category=${category}, words=${words})}">Стоимость</a>
                     </td>
                     <td th:text="${#messages.msg('words.place')}">Место</td>
                     <td th:text="${#messages.msg('words.language')}">Язык</td>
                     <td><a th:text="${#messages.msg('words.users_count')}"
-                           th:href="@{/events/moderation(sort_by=${inc}+10,id=${id},price_up=${price_up},price_down=${price_down},category=${category}, language=${language}, words=${words})}">Кол-во человек</a></td>
+                           th:href="@{/events/moderation(sort_by=${inc}+10,id=${id},price_up=${price_up},price_down=${price_down},category=${category}, words=${words})}">Кол-во человек</a></td>
                     <td><a th:text="${#messages.msg('words.duration')}"
-                           th:href="@{/events/moderation(sort_by=${inc}+8,id=${id},price_up=${price_up},price_down=${price_down},category=${category}, language=${language}, words=${words})}">Продолжительность</a></td>
+                           th:href="@{/events/moderation(sort_by=${inc}+8,id=${id},price_up=${price_up},price_down=${price_down},category=${category}, words=${words})}">Продолжительность</a></td>
                     <td th:text="${#messages.msg('words.description')}">Описание</td>
-                    <td><a th:text="${#messages.msg('words.type')}" th:href="@{/events/moderation(sort_by=${inc}+6,id=${id},price_up=${price_up},price_down=${price_down},category=${category}, language=${language}, words=${words})}">Тип</a>
+                    <td><a th:text="${#messages.msg('words.type')}" th:href="@{/events/moderation(sort_by=${inc}+6,id=${id},price_up=${price_up},price_down=${price_down},category=${category}, words=${words})}">Тип</a>
                     </td>
-                    <td><a th:text="${#messages.msg('words.rate')}" th:href="@{/events/moderation(sort_by=${inc}+4,id=${id},price_up=${price_up},price_down=${price_down},category=${category}, language=${language}, words=${words})}">Рейтинг</a>
+                    <td><a th:text="${#messages.msg('words.rate')}" th:href="@{/events/moderation(sort_by=${inc}+4,id=${id},price_up=${price_up},price_down=${price_down},category=${category}, words=${words})}">Рейтинг</a>
                     </td>
                     <td th:text="${#messages.msg('words.change')}">Изменить</td>
                     <td th:text="${#messages.msg('words.delete')}">Удалить</td>
@@ -301,9 +301,9 @@ words=${#httpServletRequest.getParameter('words')},sort_by=${#httpServletRequest
                     <td th:text="${event.description}">Some text</td>
                     <td th:text="${event.type}">Some text</td>
                     <td th:text="${event.rate}">Some text</td>
-                    <td><a th:href="@{/events/moderation(id=${event.id},price_up=${price_up},price_down=${price_down},category=${category}, language=${language}, words=${words}, sort_by=${sort_by})}"><img
+                    <td><a th:href="@{/events/moderation(id=${event.id},price_up=${price_up},price_down=${price_down},category=${category}, words=${words}, sort_by=${sort_by})}"><img
                             src="../resources/img/icons/edit.png"/></a></td>
-                    <td><a th:href="@{/events/delete(id=${event.id},price_up=${price_up},price_down=${price_down},category=${category}, language=${language}, words=${words}, sort_by=${sort_by})}"><img src="../resources/img/icons/del.png"/></a>
+                    <td><a th:href="@{/events/delete(id=${event.id},price_up=${price_up},price_down=${price_down},category=${category}, words=${words}, sort_by=${sort_by})}"><img src="../resources/img/icons/del.png"/></a>
                     </td>
                 </tr>
                 </tbody>

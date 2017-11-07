@@ -48,10 +48,10 @@
                     <a class="nav-link js-scroll-trigger" href="/events/list" th:text="${#messages.msg('titles.excursions')}">Экскурсии</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="#download">Скачать</a>
+                    <a class="nav-link js-scroll-trigger" href="#download" th:text="${#messages.msg('titles.download')}">Скачать</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="#features">Возможности</a>
+                    <a class="nav-link js-scroll-trigger" href="#features" th:text="${#messages.msg('titles.features')}">Особенности</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link js-scroll-trigger" href="#contact" th:text="${#messages.msg('titles.contacts')}">Контакты</a>
@@ -281,13 +281,13 @@
         <p>&copy; 2017 Excursium</p>
         <ul class="list-inline">
             <li class="list-inline-item">
-                <a href="#">О нас</a>
+                <a href="#" th:text="${#messages.msg('titles.registration')}">О нас</a>
             </li>
             <li class="list-inline-it">
                 <a href="#">FAQ</a>
             </li>
             <li class="list-inline-item">
-                <a href="/users/add">Регистрация</a>
+                <a href="/users/registration" th:text="${#messages.msg('titles.registration')}">Регистрация</a>
             </li>
         </ul>
     </div>

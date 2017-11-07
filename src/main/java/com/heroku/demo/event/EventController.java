@@ -145,11 +145,11 @@ public class EventController {
                               @RequestParam(value = "price_up", required = false) Integer priceUp,
                               @RequestParam(value = "price_down", required = false) Integer priceDown,
                               @RequestParam(value = "category", required = false) Integer category,
-                              @RequestParam(value = "language", required = false) Integer language,
                               @RequestParam(value = "words", required = false) String words,
-                              @RequestParam(value = "sort_by", required = false) int sortBy) {
+                              @RequestParam(value = "sort_by", required = false) int sortBy,
+                              Locale locale) {
         eventService.delete(id);
-        return events(model, null, priceUp, priceDown, category, language, words, sortBy);
+        return events(model, null, priceUp, priceDown, category, words, sortBy, locale);
 }
 
     @RequestMapping(value = "/event", method = RequestMethod.GET)
@@ -161,12 +161,12 @@ public class EventController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String eventsByFilter(ModelMap model,
                                  @RequestParam(value = "category", required = false) Integer category,
-                                 @RequestParam(value = "language", required = false) Integer language,
                                  @RequestParam(value = "price_up", required = false) Integer priceUp,
                                  @RequestParam(value = "price_down", required = false) Integer priceDown,
                                  @RequestParam(value = "sort_by", required = false) Integer sortBy,
-                                 @RequestParam(value = "words", required = false) String words) {
-        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, language==null?0:language, words, sortBy==null?0:sortBy);
+                                 @RequestParam(value = "words", required = false) String words,
+                                 Locale locale) {
+        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, locale.getLanguage().equals("ru")?0:1, words, sortBy==null?0:sortBy);
         int size = events.size() % 3;
         for (int i = 0; i < size; i++) {
             events.remove(events.size() - 1);
@@ -221,10 +221,10 @@ public class EventController {
                          @RequestParam(value = "price_up", required = false) Integer priceUp,
                          @RequestParam(value = "price_down", required = false) Integer priceDown,
                          @RequestParam(value = "category", required = false) Integer category,
-                         @RequestParam(value = "language", required = false) Integer language,
                          @RequestParam(value = "words", required = false) String words,
-                         @RequestParam(value = "sort_by", required = false) Integer sortBy) {
-        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, language, words, sortBy);
+                         @RequestParam(value = "sort_by", required = false) Integer sortBy,
+                         Locale locale) {
+        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, locale.getLanguage().equals("ru")?0:1, words, sortBy);
         model.addAttribute("events", events);
 
         if (id != null) {
