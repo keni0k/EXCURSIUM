@@ -132,8 +132,8 @@
                     <div th:replace="fragments/alert :: alert (type='danger', message=${#messages.msg('error.user.login')})">&nbsp;</div>
                 </th:block>
 
-                <div th:if="${#httpServletRequest.isUserInRole('ADMIN')}">Вы авторизированы как Администратор</div>
-                <div th:if="${#httpServletRequest.isUserInRole('USER')}">Вы авторизированы как пользователь</div>
+                <div th:if="${#httpServletRequest.isUserInRole('ADMIN')}">Вы авторизованы как администратор</div>
+                <div th:if="${#httpServletRequest.isUserInRole('USER')}">Вы авторизованы как пользователь</div>
 
                 <form method="POST" action="/users/login">
                     <br/>

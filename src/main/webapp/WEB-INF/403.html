@@ -84,7 +84,7 @@
         background-color: #33aa33;
     }
 </style>
-<div class="content">
+<div class="content" th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
     <nav class="navbar navbar-default navbar-custom" role="navigation">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -109,20 +109,21 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/events/list" th:text="${#messages.msg('titles.excursions')}">Экскурсии</a></li>
                     <li><a href="#">FAQ</a></li>
-                    <li><a href="/index#contact" th:text="${#messages.msg('titles.contacts')}">Контакты</a></li>
-                    <li th:unless="${#httpServletRequest.isUserInRole('USER')}"><a href="/users/registration" th:text="${#messages.msg('titles.registration')}">Регистрация</a></li>
-                    <li th:unless="${#httpServletRequest.isUserInRole('USER')}"><a href="/users/login" th:text="${#messages.msg('titles.login')}">Войти</a></li>
-                    <li th:if="${#httpServletRequest.isUserInRole('USER')}"><a href="/users/logout" th:text="${#messages.msg('titles.logout')}">Выйти</a></li>
+                    <li><a href="/index#contact" th:text="${#messages.msg('titles.contacts')}">Контакты</a>
+                    <li th:if="${isAdmin}"><a href="/users/moderation" th:text="${#messages.msg('titles.persons')}">Модерация пользователей</a></li>
+                    <li th:if="${isAdmin}"><a href="/events/moderation" th:text="${#messages.msg('titles.events')}">Модерация экскурсий</a></li>
+                    <li th:unless="${isUser}"><a href="/users/registration" th:text="${#messages.msg('titles.registration')}">Регистрация</a></li>
+                    <li th:unless="${isUser}"><a href="/users/login" th:text="${#messages.msg('titles.login')}">Войти</a></li>
+                    <li th:if="${isUser} or ${isAdmin}"><a href="/users/logout" th:text="${#messages.msg('titles.logout')}">Выйти</a></li>
                 </ul>
 
             </div><!-- navbar collapse end -->
         </div><!-- container-fluid end -->
     </nav>
     <div class="container">
-            <h1 style="align-content: center; vertical-align: middle">Ошибка 403. Вы зашли на охраняемую территорию!!1!</h1>
-            <h2 style="align-content: center; vertical-align: middle"><a href="/users/logout">Уйти, перелогиниться и вернуться</a></h2>
-        <h3 style="align-content: center; vertical-align: middle"><del>Это фиаско, братан</del></h3>
-
+            <h1 style="align-content: center; vertical-align: middle" th:text="${#messages.msg('error.403')}">Ошибка 403. Вы зашли на охраняемую территорию!!1!</h1>
+            <h2 style="align-content: center; vertical-align: middle"><a href="/users/logout" th:text="${#messages.msg('error.403.add.1')}">Выйти и перелогиниться, чтобы получить доступ</a></h2>
+            <h3 style="align-content: center; vertical-align: middle"><del th:text="${#messages.msg('error.403.add.2')}">Это фиаско</del></h3>
     </div>
 </div>
 <footer id="myFooter">
