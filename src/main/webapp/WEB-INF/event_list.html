@@ -196,7 +196,7 @@
 							</span>
                             <span class="right">
 								<a th:href="@{/events/event(id=${event.getId()})}"
-                                   class="btn btn-primary waves-effect waves-light">Открыть</a>
+                                   class="btn btn-primary waves-effect waves-light" th:text="${#messages.msg('words.open')}">Открыть</a>
 							</span>
                         </div>
 
