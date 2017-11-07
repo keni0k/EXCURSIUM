@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org"
 >
 <head>
-    <!--<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="description" content=""/>
     <meta name="title" content=""/>
     <meta name="author" content=""/>
@@ -131,7 +131,7 @@
     </nav>
     <div class="container">
         <div class="page-header">
-            <h2 th:text="${#messages.msg('titles.login')}">Авторизация</h2>
+            <h2><th:block th:text="${#messages.msg('titles.login')}"></th:block> / <th:block th:text="${#messages.msg('titles.registration')}" th:href="@{/users/registration}"></th:block></h2>
         </div>
         <div class="row">
             <div class="col-md-12 col-lg-6">
@@ -142,8 +142,8 @@
                     </div>
                 </th:block>
 
-                <div th:if="${#httpServletRequest.isUserInRole('ADMIN')}">Вы авторизованы как администратор</div>
-                <div th:if="${#httpServletRequest.isUserInRole('USER')}">Вы авторизованы как пользователь</div>
+                <div th:if="${isAdmin}" th:text="${#messages.msg('authorized.admin')}">Вы авторизованы как администратор</div>
+                <div th:if="${isUser}" th:text="${#messages.msg('authorized.user')}">Вы авторизованы как пользователь</div>
 
                 <form method="POST" action="/users/login">
                     <br/>
