@@ -87,7 +87,8 @@
     }
 </style>
 
-<div class="content" name = "content" th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
+<div class="content" name="content"
+     th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
     <nav class="navbar navbar-default navbar-custom" role="navigation">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -113,11 +114,16 @@
                     <li><a href="/events/list" th:text="${#messages.msg('titles.excursions')}">Экскурсии</a></li>
                     <li><a href="#">FAQ</a></li>
                     <li><a href="/index#contact" th:text="${#messages.msg('titles.contacts')}">Контакты</a></li>
-                    <li th:if="${isAdmin}"><a href="/users/moderation" th:text="${#messages.msg('titles.persons')}">Модерация пользователей</a></li>
-                    <li th:if="${isAdmin}"><a href="/events/moderation" th:text="${#messages.msg('titles.events')}">Модерация экскурсий</a></li>
-                    <li th:unless="${isUser}"><a href="/users/registration" th:text="${#messages.msg('titles.registration')}">Регистрация</a></li>
-                    <li th:unless="${isUser}"><a href="/users/login" th:text="${#messages.msg('titles.login')}">Войти</a></li>
-                    <li th:if="${isUser} or ${isAdmin}"><a href="/users/logout" th:text="${#messages.msg('titles.logout')}">Выйти</a></li>
+                    <li th:if="${isAdmin}"><a href="/users/moderation" th:text="${#messages.msg('titles.persons')}">Модерация
+                        пользователей</a></li>
+                    <li th:if="${isAdmin}"><a href="/events/moderation" th:text="${#messages.msg('titles.events')}">Модерация
+                        экскурсий</a></li>
+                    <li th:unless="${isUser}"><a href="/users/registration"
+                                                 th:text="${#messages.msg('titles.registration')}">Регистрация</a></li>
+                    <li th:unless="${isUser}"><a href="/users/login"
+                                                 th:text="${#messages.msg('titles.login')}">Войти</a></li>
+                    <li th:if="${isUser} or ${isAdmin}"><a href="/users/logout"
+                                                           th:text="${#messages.msg('titles.logout')}">Выйти</a></li>
                 </ul>
 
             </div><!-- navbar collapse end -->
@@ -131,7 +137,9 @@
             <div class="col-md-12 col-lg-6">
 
                 <th:block th:if="${#httpServletRequest.getParameter('error')}">
-                    <div th:replace="fragments/alert :: alert (type='danger', message=${#messages.msg('error.user.login')})">&nbsp;</div>
+                    <div th:replace="fragments/alert :: alert (type='danger', message=${#messages.msg('error.user.login')})">
+                        &nbsp;
+                    </div>
                 </th:block>
 
                 <div th:if="${#httpServletRequest.isUserInRole('ADMIN')}">Вы авторизованы как администратор</div>
@@ -141,21 +149,26 @@
                     <br/>
                     <div class="input-group">
                         <span class="input-group-addon" th:text="${#messages.msg('words.login')}">Логин</span>
-                        <input name="username" id = "login" autofocus="autofocus" type="text" class="form-control" placeholder="Логин" aria-label="Логин" required=""/>
+                        <input name="username" id="login" autofocus="autofocus" type="text" class="form-control"
+                               placeholder="Логин" aria-label="Логин" required=""/>
                     </div>
                     <br/>
                     <div class="input-group">
                         <span class="input-group-addon" th:text="${#messages.msg('words.password')}">Пароль</span>
-                        <input name="password" id = "pass" type="password" class="form-control" placeholder="Пароль" aria-label="Пароль" required=""/>
+                        <input name="password" id="pass" type="password" class="form-control" placeholder="Пароль"
+                               aria-label="Пароль" required=""/>
                     </div>
                     <br/>
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" id="_spring_security_remember_me"  name="_spring_security_remember_me"/><span th:text="${#messages.msg('words.remember_me')}">Запомнить меня</span>
+                            <input type="checkbox" id="_spring_security_remember_me"
+                                   name="_spring_security_remember_me"/><span
+                                th:text="${#messages.msg('words.remember_me')}">Запомнить меня</span>
                         </label>
                     </div>
                     <br/>
-                    <input type="submit" th:value="${#messages.msg('titles.login')}" class="btn btn-lg btn-primary btn-block"/>
+                    <input type="submit" th:value="${#messages.msg('titles.login')}"
+                           class="btn btn-lg btn-primary btn-block"/>
 
                 </form>
             </div>

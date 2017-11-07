@@ -95,7 +95,8 @@
         background-color: #33aa33;
     }
 </style>
-<div class="content" th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
+<div class="content"
+     th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
     <nav class="navbar navbar-default navbar-custom" role="navigation">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -121,146 +122,180 @@
                     <li><a href="/events/list" th:text="${#messages.msg('titles.excursions')}">Экскурсии</a></li>
                     <li><a href="#">FAQ</a></li>
                     <li><a href="/index#contact" th:text="${#messages.msg('titles.contacts')}">Контакты</a></li>
-                    <li th:if="${isAdmin}"><a href="/users/moderation" th:text="${#messages.msg('titles.persons')}">Модерация пользователей</a></li>
-                    <li th:if="${isAdmin}"><a href="/events/moderation" th:text="${#messages.msg('titles.events')}">Модерация экскурсий</a></li>
-                    <li th:unless="${isUser}"><a href="/users/registration" th:text="${#messages.msg('titles.registration')}">Регистрация</a></li>
-                    <li th:unless="${isUser}"><a href="/users/login" th:text="${#messages.msg('titles.login')}">Войти</a></li>
-                    <li th:if="${isUser} or ${isAdmin}"><a href="/users/logout" th:text="${#messages.msg('titles.logout')}">Выйти</a></li>
+                    <li th:if="${isAdmin}"><a href="/users/moderation" th:text="${#messages.msg('titles.persons')}">Модерация
+                        пользователей</a></li>
+                    <li th:if="${isAdmin}"><a href="/events/moderation" th:text="${#messages.msg('titles.events')}">Модерация
+                        экскурсий</a></li>
+                    <li th:unless="${isUser}"><a href="/users/registration"
+                                                 th:text="${#messages.msg('titles.registration')}">Регистрация</a></li>
+                    <li th:unless="${isUser}"><a href="/users/login"
+                                                 th:text="${#messages.msg('titles.login')}">Войти</a></li>
+                    <li th:if="${isUser} or ${isAdmin}"><a href="/users/logout"
+                                                           th:text="${#messages.msg('titles.logout')}">Выйти</a></li>
                 </ul>
 
             </div><!-- navbar collapse end -->
         </div><!-- container-fluid end -->
     </nav>
-    <div class="page-header">
-        <h1 th:text="${#messages.msg('titles.persons')}">Модерация пользователей</h1>
-    </div>
-    <hr/>
-    <hr/>
-    <div class="row">
-        <div class="col-md-12 col-lg-6">
+    <div class="container">
+        <div class="page-header">
+            <h1 th:text="${#messages.msg('titles.persons')}">Модерация пользователей</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-lg-6">
 
-            <th:block th:if="${message != null}">
-                <div th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message.type)}, message=${message.message})">&nbsp;</div>
-            </th:block>
-
-            <form th:object="${insertPerson}" action="/users/moderation" method="POST">
-
-                <div class="panel panel-default">
-                    <div class="panel-heading" th:text="${#messages.msg('words.type')}">
-                        Тип пользователя
+                <th:block th:if="${message != null}">
+                    <div th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message.type)}, message=${message.message})">
+                        &nbsp;
                     </div>
-                    <div class="panel-body">
-                        <div class="input-group">
-                            <select name="type" class="form-control selectpicker" th:selected="${insertPerson.getType()}?${insertPerson.getType()}:0">
-                                <option value="-3" th:text="${#messages.msg('user.type.unconfirmed')}">Не активирован</option>
-                                <option value="-2" th:text="${#messages.msg('user.type.blcked')}">Заблокированный</option>
-                                <option value="1" th:text="${#messages.msg('user.type.tourist')}">Турист</option>
-                                <option value="2" th:text="${#messages.msg('user.type.guide')}">Экскурсовод</option>
-                            </select>
+                </th:block>
+
+                <form th:object="${insertPerson}" action="/users/moderation" method="POST">
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading" th:text="${#messages.msg('words.type')}">
+                            Тип пользователя
+                        </div>
+                        <div class="panel-body">
+                            <div class="input-group">
+                                <select name="type" class="form-control selectpicker"
+                                        th:selected="${insertPerson.getType()}?${insertPerson.getType()}:0">
+                                    <option value="-3" th:text="${#messages.msg('user.type.unconfirmed')}">Не
+                                        активирован
+                                    </option>
+                                    <option value="-2" th:text="${#messages.msg('user.type.blocked')}">Заблокированный
+                                    </option>
+                                    <option value="1" th:text="${#messages.msg('user.type.tourist')}">Турист</option>
+                                    <option value="2" th:text="${#messages.msg('user.type.guide')}">Экскурсовод</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <br/>
-                <div class="input-group">
-                    <span class="input-group-addon" th:text="${#messages.msg('words.login')}">Логин</span>
-                    <input name="login" id = "login" type="text" pattern="[a-zA-Z0-9._\-]{4,20}" class="form-control" placeholder="Логин" disabled = "disabled" aria-label="Логин" th:value="${insertPerson.getLogin()}" required=""/>
-                    <label for="login" th:if="${error_login}" th:text="${#messages.msg('error.user.login.free')}" th:class="'error'">Name Error</label>
-                    <label for="login" th:if="${#fields.hasErrors('login')}" th:text="${#messages.msg('error.user.login.size')}" th:class="'error'">Name Error</label>
-                </div>
-                <br/>
-                <br/>
-                <div class="input-group">
-                    <span class="input-group-addon" th:text="${#messages.msg('words.first_name')}">Имя</span>
-                    <input name="firstName" type="text" class="form-control" th:value="${insertPerson.getFirstName()}" placeholder="Имя" aria-label="Имя" required=""/>
-                </div>
-                <br/>
-                <div class="input-group">
-                    <span class="input-group-addon" th:text="${#messages.msg('words.last_name')}">Фамилия</span>
-                    <input name="lastName" type="text" class="form-control" th:value="${insertPerson.getLastName()}" placeholder="Фамилия" required=""
-                           aria-label="Фамилия"/>
-                </div>
-                <br/>
-                <div class="input-group">
-                    <span class="input-group-addon" th:text="${#messages.msg('words.photo')}">Фотография</span>
-                    <input name="file" type="file" id = "file" class="form-control" placeholder="Фотография" required=""
-                           accept="image/jpeg,image/png" aria-label="Фотография"/>
-                </div>
-                <br/>
-                <div class="input-group">
-                    <span class="input-group-addon">Email</span>
-                    <input name="email" id = "email" type="email" class="form-control" disabled = "disabled" th:value="${insertPerson.getEmail()}" placeholder="Email" aria-label="Email" required=""/>
-                    <label for="email" th:if="${error_email_free}" th:text="${#messages.msg('error.user.email.free')}" th:class="'error'">Name Error</label>
-                    <label for="email" th:if="${error_email_valid}" th:text="${#messages.msg('error.user.email.valid')}" th:class="'error'">Name Error</label>
-                </div>
-                <br/>
-                <div class="input-group">
-                    <span class="input-group-addon" th:text="${#messages.msg('words.phone')}">Телефон</span>
-                    <input name="phoneNumber" type="text" class="form-control bfh-phone" th:value="${insertPerson.getPhoneNumber()}" placeholder="Телефон" required="" minlength="17" disabled="disabled"
-                           aria-label="Телефон" data-format="+7 (ddd) ddd-dddd" id = "phone_number"/>
-                    <label for="phone_number" th:if="${error_phone}" th:text="${#messages.msg('error.user.phone_number.free')}" th:class="'error'">Name Error</label>
-                    <label for="phone_number" th:if="${#fields.hasErrors('phoneNumber')}" th:text="${#messages.msg('error.user.phone_number.invalid')}" th:class="'error'">Name Error</label>
-                </div>
-                <br/>
-                <div class="input-group">
-                    <span class="input-group-addon" th:text="${#messages.msg('words.about_me')}">О себе</span>
-                    <textarea name="about" class="form-control" placeholder="О себе" aria-label="О себе" required="" th:text="${insertPerson.getAbout()}"></textarea>
-                </div>
-                <br/>
-                <div class="input-group">
-                    <span class="input-group-addon" th:text="${#messages.msg('words.city')}">Город</span>
-                    <input name="city" type="text" class="form-control" th:value="${insertPerson.getCity()}" placeholder="Город" required="" aria-label="Город"/>
-                </div>
-                <br/>
-                <button type="reset" class="btn btn-default" th:text="${#messages.msg('words.reset')}">Сброс</button>
-                <button type="submit" class="btn btn-default" th:text="${#messages.msg('words.submit')}">Сохранить</button>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon" th:text="${#messages.msg('words.login')}">Логин</span>
+                        <input name="login" id="login" type="text" pattern="[a-zA-Z0-9._\-]{4,20}" class="form-control"
+                               placeholder="Логин" disabled="disabled" aria-label="Логин"
+                               th:value="${insertPerson.getLogin()}" required=""/>
+                        <label for="login" th:if="${error_login}" th:text="${#messages.msg('error.user.login.free')}"
+                               th:class="'error'">Name Error</label>
+                        <label for="login" th:if="${#fields.hasErrors('login')}"
+                               th:text="${#messages.msg('error.user.login.size')}" th:class="'error'">Name Error</label>
+                    </div>
+                    <br/>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon" th:text="${#messages.msg('words.first_name')}">Имя</span>
+                        <input name="firstName" type="text" class="form-control"
+                               th:value="${insertPerson.getFirstName()}" placeholder="Имя" aria-label="Имя"
+                               required=""/>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon" th:text="${#messages.msg('words.last_name')}">Фамилия</span>
+                        <input name="lastName" type="text" class="form-control" th:value="${insertPerson.getLastName()}"
+                               placeholder="Фамилия" required=""
+                               aria-label="Фамилия"/>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon" th:text="${#messages.msg('words.photo')}">Фотография</span>
+                        <input name="file" type="file" id="file" class="form-control" placeholder="Фотография"
+                               required=""
+                               accept="image/jpeg,image/png" aria-label="Фотография"/>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon">Email</span>
+                        <input name="email" id="email" type="email" class="form-control" disabled="disabled"
+                               th:value="${insertPerson.getEmail()}" placeholder="Email" aria-label="Email"
+                               required=""/>
+                        <label for="email" th:if="${error_email_free}"
+                               th:text="${#messages.msg('error.user.email.free')}" th:class="'error'">Name Error</label>
+                        <label for="email" th:if="${error_email_valid}"
+                               th:text="${#messages.msg('error.user.email.valid')}" th:class="'error'">Name
+                            Error</label>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon" th:text="${#messages.msg('words.phone')}">Телефон</span>
+                        <input name="phoneNumber" type="text" class="form-control bfh-phone"
+                               th:value="${insertPerson.getPhoneNumber()}" placeholder="Телефон" required=""
+                               minlength="17" disabled="disabled"
+                               aria-label="Телефон" data-format="+7 (ddd) ddd-dddd" id="phone_number"/>
+                        <label for="phone_number" th:if="${error_phone}"
+                               th:text="${#messages.msg('error.user.phone_number.free')}" th:class="'error'">Name
+                            Error</label>
+                        <label for="phone_number" th:if="${#fields.hasErrors('phoneNumber')}"
+                               th:text="${#messages.msg('error.user.phone_number.invalid')}" th:class="'error'">Name
+                            Error</label>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon" th:text="${#messages.msg('words.about_me')}">О себе</span>
+                        <textarea name="about" class="form-control" placeholder="О себе" aria-label="О себе" required=""
+                                  th:text="${insertPerson.getAbout()}"></textarea>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon" th:text="${#messages.msg('words.city')}">Город</span>
+                        <input name="city" type="text" class="form-control" th:value="${insertPerson.getCity()}"
+                               placeholder="Город" required="" aria-label="Город"/>
+                    </div>
+                    <br/>
+                    <button type="reset" class="btn btn-default" th:text="${#messages.msg('words.reset')}">Сброс
+                    </button>
+                    <button type="submit" class="btn btn-default" th:text="${#messages.msg('words.submit')}">Сохранить
+                    </button>
 
-            </form>
+                </form>
+            </div>
         </div>
-    </div>
 
-    <hr/>
+        <hr/>
 
-    <div class="row">
-        <div class="col-sm-12">
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>Users</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>ID</td>
-                    <td th:text="${#messages.msg('words.login')}">Логин</td>
-                    <td th:text="${#messages.msg('words.first_name')}">Имя</td>
-                    <td th:text="${#messages.msg('words.last_name')}">Фамилия</td>
-                    <td th:text="${#messages.msg('words.city')}">Город</td>
-                    <td>Email</td>
-                    <td th:text="${#messages.msg('words.phone')}">Телефон</td>
-                    <td th:text="${#messages.msg('words.type')}">Тип</td>
-                    <td th:text="${#messages.msg('words.rate')}">Рейтинг</td>
-                    <td th:text="${#messages.msg('words.token')}">Токен</td>
-                    <td th:text="${#messages.msg('words.change')}">Изменить</td>
-                    <td th:text="${#messages.msg('words.delete')}">Удалить</td>
-                </tr>
-                <tr th:each="person : ${persons}">
-                    <td th:text="${person.id}">Some text</td>
-                    <td th:text="${person.login}">Some text</td>
-                    <td th:text="${person.firstName}">Some text</td>
-                    <td th:text="${person.lastName}">Some text</td>
-                    <td th:text="${person.city}">Some text</td>
-                    <td th:text="${person.email}">Some text</td>
-                    <td th:text="${person.phoneNumber}">Some text</td>
-                    <td th:text="${person.type}">Some text</td>
-                    <td th:text="${person.rate}">Some text</td>
-                    <td th:text="${person.token}">Some text</td>
-                    <td><a th:href="@{/users/moderation(id = ${person.id})}"><img
-                            src="../resources/img/icons/edit.png"/></a></td>
-                    <td><a th:href="@{/users/delete(id = ${person.id})}"><img
-                            src="../resources/img/icons/del.png"/></a></td>
-                </tr>
-                </tbody>
-            </table>
+        <div class="row">
+            <div class="col-sm-12">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Users</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>ID</td>
+                        <td th:text="${#messages.msg('words.login')}">Логин</td>
+                        <td th:text="${#messages.msg('words.first_name')}">Имя</td>
+                        <td th:text="${#messages.msg('words.last_name')}">Фамилия</td>
+                        <td th:text="${#messages.msg('words.city')}">Город</td>
+                        <td>Email</td>
+                        <td th:text="${#messages.msg('words.phone')}">Телефон</td>
+                        <td th:text="${#messages.msg('words.type')}">Тип</td>
+                        <td th:text="${#messages.msg('words.rate')}">Рейтинг</td>
+                        <td th:text="${#messages.msg('words.token')}">Токен</td>
+                        <td th:text="${#messages.msg('words.change')}">Изменить</td>
+                        <td th:text="${#messages.msg('words.delete')}">Удалить</td>
+                    </tr>
+                    <tr th:each="person : ${persons}">
+                        <td th:text="${person.id}">Some text</td>
+                        <td th:text="${person.login}">Some text</td>
+                        <td th:text="${person.firstName}">Some text</td>
+                        <td th:text="${person.lastName}">Some text</td>
+                        <td th:text="${person.city}">Some text</td>
+                        <td th:text="${person.email}">Some text</td>
+                        <td th:text="${person.phoneNumber}">Some text</td>
+                        <td th:text="${person.type}">Some text</td>
+                        <td th:text="${person.rate}">Some text</td>
+                        <td th:text="${person.token}">Some text</td>
+                        <td><a th:href="@{/users/moderation(id = ${person.id})}"><img
+                                src="../resources/img/icons/edit.png"/></a></td>
+                        <td><a th:href="@{/users/delete(id = ${person.id})}"><img
+                                src="../resources/img/icons/del.png"/></a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

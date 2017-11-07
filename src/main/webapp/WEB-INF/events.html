@@ -99,7 +99,8 @@
         background-color: #33aa33;
     }
 </style>
-<div class="content" th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
+<div class="content"
+     th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
     <nav class="navbar navbar-default navbar-custom" role="navigation">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -125,196 +126,242 @@
                     <li><a href="/events/list" th:text="${#messages.msg('titles.excursions')}">Экскурсии</a></li>
                     <li><a href="#">FAQ</a></li>
                     <li><a href="/index#contact" th:text="${#messages.msg('titles.contacts')}">Контакты</a></li>
-                    <li th:if="${isAdmin}"><a href="/users/moderation" th:text="${#messages.msg('titles.persons')}">Модерация пользователей</a></li>
-                    <li th:if="${isAdmin}"><a href="/events/moderation" th:text="${#messages.msg('titles.events')}">Модерация экскурсий</a></li>
-                    <li th:unless="${isUser}"><a href="/users/registration" th:text="${#messages.msg('titles.registration')}">Регистрация</a></li>
-                    <li th:unless="${isUser}"><a href="/users/login" th:text="${#messages.msg('titles.login')}">Войти</a></li>
-                    <li th:if="${isUser} or ${isAdmin}"><a href="/users/logout" th:text="${#messages.msg('titles.logout')}">Выйти</a></li>
+                    <li th:if="${isAdmin}"><a href="/users/moderation" th:text="${#messages.msg('titles.persons')}">Модерация
+                        пользователей</a></li>
+                    <li th:if="${isAdmin}"><a href="/events/moderation" th:text="${#messages.msg('titles.events')}">Модерация
+                        экскурсий</a></li>
+                    <li th:unless="${isUser}"><a href="/users/registration"
+                                                 th:text="${#messages.msg('titles.registration')}">Регистрация</a></li>
+                    <li th:unless="${isUser}"><a href="/users/login"
+                                                 th:text="${#messages.msg('titles.login')}">Войти</a></li>
+                    <li th:if="${isUser} or ${isAdmin}"><a href="/users/logout"
+                                                           th:text="${#messages.msg('titles.logout')}">Выйти</a></li>
                 </ul>
 
             </div><!-- navbar collapse end -->
         </div><!-- container-fluid end -->
     </nav>
-    <div class="page-header">
-        <h1 th:text="${#messages.msg('titles.events')}">Модерация экскурсий</h1>
-    </div>
-
-    <hr/>
-    <div class="row">
-        <div class="col-md-12 col-lg-6">
-
-            <form th:object="${insertEvent}" action="/events/add" method="POST" enctype="multipart/form-data">
-
-                <div class="panel panel-default">
-                    <div class="panel-heading" th:text="${#messages.msg('words.type')}">
-                        Тип экскурсии
-                    </div>
-                    <div class="panel-body">
-                        <div class="input-group">
-                            <select name="type" class="form-control selectpicker" th:selected="${insertEvent.getType()}?${insertEvent.getType()}:0">
-                                <option value="-4" th:text="${#messages.msg('event.type.blcked')}">Заблокирована</option>
-                                <option value="-3" th:text="${#messages.msg('event.type.moderation')}">На модерации</option>
-                                <option value="-2" th:text="${#messages.msg('event.type.moderation_was_failed')}">Не прошла модерацию</option>
-                                <option value="-1" th:text="${#messages.msg('event.type.no_active')}">Не активна</option>
-                                <option value="1" th:text="${#messages.msg('event.type.active')}">Активна</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="input-group">
-                    <span class="input-group-addon" th:text="${#messages.msg('words.guide_id')}"></span>
-                    <input class="form-control" name="guideId" id="guide_id" type="number" required=""
-                           th:value="${insertEvent.getGuideId()}"/>
-                </div>
-                <br/>
-                <div class="input-group">
-                    <span class="input-group-addon">ID</span>
-                    <input class="form-control" type="number" name="id" id="id" th:value="${insertEvent.id}" required=""/>
-                </div>
-                <br/>
-                <div class="input-group">
-                    <span class="input-group-addon" th:text="${#messages.msg('words.name')}">Название</span>
-                    <input name="name" type="text" class="form-control" id = "name" placeholder="Название" aria-label="Название"
-                           th:value="${insertEvent.getName()}" required="" />
-                    <label for="name" th:if="${#fields.hasErrors('name')}" th:text="${#messages.msg('error.event.name')}" th:class="'error'">Name Error</label>
-                </div>
-                <br/>
-                <div class="input-group">
-                    <span class="input-group-addon" th:text="${#messages.msg('words.description')}">Описание</span>
-                    <textarea name="description" type="text" id = "description" class="form-control" placeholder="Описание" required=""
-                              aria-label="Описание" th:text="${insertEvent.getDescription()}"></textarea>
-                    <label for="description" th:if="${#fields.hasErrors('description')}" th:text="${#messages.msg('error.event.description')}" th:class="'error'">Description Error</label>
-                </div>
-                <br/>
-                <div class="panel panel-default">
-                    <div class="panel-heading" th:text="${#messages.msg('words.type_of_excursion')}">
-                        Тип экскурсии
-                    </div>
-                    <div class="panel-body">
-                        <div class="input-group">
-                            <select name="category" id = "category" class="form-control selectpicker" th:selected="${insertEvent.getCategory()}?${insertEvent.getCategory()}:0">
-                                <option value="0" th:text="${#messages.msg('category.0')}">Развлечения</option>
-                                <option value="1" th:text="${#messages.msg('category.1')}">Наука</option>
-                                <option value="2" th:text="${#messages.msg('category.2')}">История</option>
-                                <option value="3" th:text="${#messages.msg('category.3')}">Искусство</option>
-                                <option value="4" th:text="${#messages.msg('category.4')}">Производство</option>
-                                <option value="5" th:text="${#messages.msg('category.5')}">Гастрономия</option>
-                                <option value="6" th:text="${#messages.msg('category.6')}">Квесты</option>
-                                <option value="7" th:text="${#messages.msg('category.7')}">Экстрим</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="input-group">
-                    <span class="input-group-addon" th:text="${#messages.msg('words.users_count')}">Количество участников</span>
-                    <input name="usersCount" id = "users_count" type="number" class="form-control" placeholder="Количество участников" required=""
-                           aria-label="Количество участников" th:value="${insertEvent.getUsersCount()}?${insertEvent.getUsersCount()}"/>
-                    <label for="users_count" th:if="${#fields.hasErrors('usersCount')}" th:text="${#messages.msg('error.event.users_count')}" th:class="'error'">UsersCount Error</label>
-                </div>
-                <br/>
-                <div class="input-group">
-                    <span class="input-group-addon" th:text="${#messages.msg('words.duration')}">Длительность</span>
-                    <input name="duration" id = "duration" type="number" class="form-control" placeholder="Длительность:" required=""
-                           aria-label="Длительность:" th:value="${insertEvent.getDuration()}?${insertEvent.getDuration()}"/>
-                    <span class="input-group-addon" th:text="${#messages.msg('words.hours')}">часов</span>
-                    <label for="duration" th:if="${#fields.hasErrors('duration')}" th:text="${#messages.msg('error.event.duration')}" th:class="'error'">Duration Error</label>
-                </div>
-                <br/>
-                <div class="input-group">
-                    <span class="input-group-addon" th:text="${#messages.msg('words.place')}">Место встречи</span>
-                    <input name="place" id = "place" type="text" class="form-control" placeholder="Место встречи" required=""
-                           aria-label="Место встречи" th:value="${insertEvent.getPlace()}?${insertEvent.getPlace()}"/>
-                    <label for="place" th:if="${#fields.hasErrors('place')}" th:text="${#messages.msg('error.event.place')}" th:class="'error'">Place Error</label>
-                </div>
-                <br/>
-                <div class="input-group">
-                    <span class="input-group-addon" th:text="${#messages.msg('words.price')}">Цена</span>
-                    <input name="price" id = "price" type="number" class="form-control" placeholder="Цена" aria-label="Цена" required=""
-                           th:value="${insertEvent.getPrice()}?${insertEvent.getPrice()}"/>
-                    <span class="input-group-addon">&#8381;</span>
-                    <label for="price" th:if="${#fields.hasErrors('price')}" th:text="${#messages.msg('error.event.price')}" th:class="'error'">Price Error</label>
-                </div>
-                <br/>
-                <div class="input-group">
-                    <span class="input-group-addon" th:text="${#messages.msg('words.photos')}">Фотографии</span>
-                    <input name="file" type="file" id = "file" class="form-control" placeholder="Фотографии" required=""
-                           accept="image/jpeg,image/png" aria-label="Фотографии"/>
-                    <!--<label for="file" th:if="${error_data}" th:text="${#messages.msg('error.event.file')}" th:class="'error'">File Error</label>-->
-                </div>
-                <br/>
-
-                <div class="panel panel-default">
-                    <div class="panel-heading" th:text="${#messages.msg('words.language')}">
-                        Язык экскурсии
-                    </div>
-                    <div class="panel-body">
-                        <div class="input-group">
-                            <select name="language" class="form-control selectpicker" th:selected="${insertEvent.getLanguage()}?${insertEvent.getLanguage()}">
-                                <option value="0" th:text="${#messages.msg('language.0')}">Русский</option>
-                                <option value="1" th:text="${#messages.msg('language.1')}">Английский</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <br/>
-                <button type="reset" class="btn btn-default" th:text="${#messages.msg('words.reset')}">Сброс</button>
-                <button type="submit" class="btn btn-default" th:text="${#messages.msg('words.submit')}">Сохранить</button>
-
-            </form>
+    <div class="container">
+        <div class="page-header">
+            <h1 th:text="${#messages.msg('titles.events')}">Модерация экскурсий</h1>
         </div>
-    </div>
-    <hr/>
+        <div class="row">
+            <div class="col-md-12 col-lg-6">
 
-    <div class="row">
-        <div class="col-sm-12">
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th th:text="${#messages.msg('words.events')}">Events</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td><a th:href="@{/events/moderation(sort_by=${inc},id=${id},price_up=${price_up},price_down=${price_down},category=${category}, words=${words})}">ID</a></td>
-                    <td th:text="${#messages.msg('words.name')}">Название</td>
-                    <td th:text="${#messages.msg('words.category')}">Категория</td>
-                    <td th:text="${#messages.msg('words.guide_id')}">ID гида</td>
-                    <td><a th:text="${#messages.msg('words.price')}" th:href="@{/events/moderation(sort_by=${inc}+2,id=${id},price_up=${price_up},price_down=${price_down},category=${category}, words=${words})}">Стоимость</a>
-                    </td>
-                    <td th:text="${#messages.msg('words.place')}">Место</td>
-                    <td th:text="${#messages.msg('words.language')}">Язык</td>
-                    <td><a th:text="${#messages.msg('words.users_count')}"
-                           th:href="@{/events/moderation(sort_by=${inc}+10,id=${id},price_up=${price_up},price_down=${price_down},category=${category}, words=${words})}">Кол-во человек</a></td>
-                    <td><a th:text="${#messages.msg('words.duration')}"
-                           th:href="@{/events/moderation(sort_by=${inc}+8,id=${id},price_up=${price_up},price_down=${price_down},category=${category}, words=${words})}">Продолжительность</a></td>
-                    <td th:text="${#messages.msg('words.description')}">Описание</td>
-                    <td><a th:text="${#messages.msg('words.type')}" th:href="@{/events/moderation(sort_by=${inc}+6,id=${id},price_up=${price_up},price_down=${price_down},category=${category}, words=${words})}">Тип</a>
-                    </td>
-                    <td><a th:text="${#messages.msg('words.rate')}" th:href="@{/events/moderation(sort_by=${inc}+4,id=${id},price_up=${price_up},price_down=${price_down},category=${category}, words=${words})}">Рейтинг</a>
-                    </td>
-                    <td th:text="${#messages.msg('words.change')}">Изменить</td>
-                    <td th:text="${#messages.msg('words.delete')}">Удалить</td>
-                </tr>
-                <tr th:each="event : ${events}">
-                    <td th:text="${event.id}">Some text</td>
-                    <td th:text="${event.name}">Some text</td>
-                    <td th:text="${event.getCategoryString()}">Some text</td>
-                    <td th:text="${event.guideId}">Some text</td>
-                    <td th:text="${event.price}">Some text</td>
-                    <td th:text="${event.place}">Some text</td>
-                    <td th:text="${event.getLanguageString()}">Some text</td>
-                    <td th:text="${event.usersCount}">Some text</td>
-                    <td th:text="${event.duration}">Some text</td>
-                    <td th:text="${event.description}">Some text</td>
-                    <td th:text="${event.type}">Some text</td>
-                    <td th:text="${event.rate}">Some text</td>
-                    <td><a th:href="@{/events/moderation(id=${event.id},price_up=${price_up},price_down=${price_down},category=${category}, words=${words}, sort_by=${sort_by})}"><img
-                            src="../resources/img/icons/edit.png"/></a></td>
-                    <td><a th:href="@{/events/delete(id=${event.id},price_up=${price_up},price_down=${price_down},category=${category}, words=${words}, sort_by=${sort_by})}"><img src="../resources/img/icons/del.png"/></a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+                <form th:object="${insertEvent}" action="/events/add" method="POST" enctype="multipart/form-data">
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading" th:text="${#messages.msg('words.type')}">
+                            Тип экскурсии
+                        </div>
+                        <div class="panel-body">
+                            <div class="input-group">
+                                <select name="type" class="form-control selectpicker"
+                                        th:selected="${insertEvent.getType()}?${insertEvent.getType()}:0">
+                                    <option value="-4" th:text="${#messages.msg('event.type.blocked')}">Заблокирована
+                                    </option>
+                                    <option value="-3" th:text="${#messages.msg('event.type.moderation')}">На
+                                        модерации
+                                    </option>
+                                    <option value="-2" th:text="${#messages.msg('event.type.moderation_was_failed')}">Не
+                                        прошла модерацию
+                                    </option>
+                                    <option value="-1" th:text="${#messages.msg('event.type.no_active')}">Не активна
+                                    </option>
+                                    <option value="1" th:text="${#messages.msg('event.type.active')}">Активна</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon" th:text="${#messages.msg('words.guide_id')}"></span>
+                        <input class="form-control" name="guideId" id="guide_id" type="number" required=""
+                               th:value="${insertEvent.getGuideId()}"/>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon">ID</span>
+                        <input class="form-control" type="number" name="id" id="id" th:value="${insertEvent.id}"
+                               required=""/>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon" th:text="${#messages.msg('words.name')}">Название</span>
+                        <input name="name" type="text" class="form-control" id="name" placeholder="Название"
+                               aria-label="Название"
+                               th:value="${insertEvent.getName()}" required=""/>
+                        <label for="name" th:if="${#fields.hasErrors('name')}"
+                               th:text="${#messages.msg('error.event.name')}" th:class="'error'">Name Error</label>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon" th:text="${#messages.msg('words.description')}">Описание</span>
+                        <textarea name="description" type="text" id="description" class="form-control"
+                                  placeholder="Описание" required=""
+                                  aria-label="Описание" th:text="${insertEvent.getDescription()}"></textarea>
+                        <label for="description" th:if="${#fields.hasErrors('description')}"
+                               th:text="${#messages.msg('error.event.description')}" th:class="'error'">Description
+                            Error</label>
+                    </div>
+                    <br/>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" th:text="${#messages.msg('words.type_of_excursion')}">
+                            Тип экскурсии
+                        </div>
+                        <div class="panel-body">
+                            <div class="input-group">
+                                <select name="category" id="category" class="form-control selectpicker"
+                                        th:selected="${insertEvent.getCategory()}?${insertEvent.getCategory()}:0">
+                                    <option value="0" th:text="${#messages.msg('category.0')}">Развлечения</option>
+                                    <option value="1" th:text="${#messages.msg('category.1')}">Наука</option>
+                                    <option value="2" th:text="${#messages.msg('category.2')}">История</option>
+                                    <option value="3" th:text="${#messages.msg('category.3')}">Искусство</option>
+                                    <option value="4" th:text="${#messages.msg('category.4')}">Производство</option>
+                                    <option value="5" th:text="${#messages.msg('category.5')}">Гастрономия</option>
+                                    <option value="6" th:text="${#messages.msg('category.6')}">Квесты</option>
+                                    <option value="7" th:text="${#messages.msg('category.7')}">Экстрим</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon" th:text="${#messages.msg('words.users_count')}">Количество участников</span>
+                        <input name="usersCount" id="users_count" type="number" class="form-control"
+                               placeholder="Количество участников" required=""
+                               aria-label="Количество участников"
+                               th:value="${insertEvent.getUsersCount()}?${insertEvent.getUsersCount()}"/>
+                        <label for="users_count" th:if="${#fields.hasErrors('usersCount')}"
+                               th:text="${#messages.msg('error.event.users_count')}" th:class="'error'">UsersCount
+                            Error</label>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon" th:text="${#messages.msg('words.duration')}">Длительность</span>
+                        <input name="duration" id="duration" type="number" class="form-control"
+                               placeholder="Длительность:" required=""
+                               aria-label="Длительность:"
+                               th:value="${insertEvent.getDuration()}?${insertEvent.getDuration()}"/>
+                        <span class="input-group-addon" th:text="${#messages.msg('words.hours')}">часов</span>
+                        <label for="duration" th:if="${#fields.hasErrors('duration')}"
+                               th:text="${#messages.msg('error.event.duration')}" th:class="'error'">Duration
+                            Error</label>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon" th:text="${#messages.msg('words.place')}">Место встречи</span>
+                        <input name="place" id="place" type="text" class="form-control" placeholder="Место встречи"
+                               required=""
+                               aria-label="Место встречи"
+                               th:value="${insertEvent.getPlace()}?${insertEvent.getPlace()}"/>
+                        <label for="place" th:if="${#fields.hasErrors('place')}"
+                               th:text="${#messages.msg('error.event.place')}" th:class="'error'">Place Error</label>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon" th:text="${#messages.msg('words.price')}">Цена</span>
+                        <input name="price" id="price" type="number" class="form-control" placeholder="Цена"
+                               aria-label="Цена" required=""
+                               th:value="${insertEvent.getPrice()}?${insertEvent.getPrice()}"/>
+                        <span class="input-group-addon">&#8381;</span>
+                        <label for="price" th:if="${#fields.hasErrors('price')}"
+                               th:text="${#messages.msg('error.event.price')}" th:class="'error'">Price Error</label>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon" th:text="${#messages.msg('words.photos')}">Фотографии</span>
+                        <input name="file" type="file" id="file" class="form-control" placeholder="Фотографии"
+                               required=""
+                               accept="image/jpeg,image/png" aria-label="Фотографии"/>
+                        <!--<label for="file" th:if="${error_data}" th:text="${#messages.msg('error.event.file')}" th:class="'error'">File Error</label>-->
+                    </div>
+                    <br/>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading" th:text="${#messages.msg('words.language')}">
+                            Язык экскурсии
+                        </div>
+                        <div class="panel-body">
+                            <div class="input-group">
+                                <select name="language" class="form-control selectpicker"
+                                        th:selected="${insertEvent.getLanguage()}?${insertEvent.getLanguage()}">
+                                    <option value="0" th:text="${#messages.msg('language.0')}">Русский</option>
+                                    <option value="1" th:text="${#messages.msg('language.1')}">Английский</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <button type="reset" class="btn btn-default" th:text="${#messages.msg('words.reset')}">Сброс
+                    </button>
+                    <button type="submit" class="btn btn-default" th:text="${#messages.msg('words.submit')}">Сохранить
+                    </button>
+
+                </form>
+            </div>
+        </div>
+        <hr/>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th th:text="${#messages.msg('words.events')}">Events</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <a th:href="@{/events/moderation(sort_by=${inc},id=${id},price_up=${price_up},price_down=${price_down},category=${category}, words=${words})}">ID</a>
+                        </td>
+                        <td th:text="${#messages.msg('words.name')}">Название</td>
+                        <td th:text="${#messages.msg('words.category')}">Категория</td>
+                        <td th:text="${#messages.msg('words.guide_id')}">ID гида</td>
+                        <td><a th:text="${#messages.msg('words.price')}"
+                               th:href="@{/events/moderation(sort_by=${inc}+2,id=${id},price_up=${price_up},price_down=${price_down},category=${category}, words=${words})}">Стоимость</a>
+                        </td>
+                        <td th:text="${#messages.msg('words.place')}">Место</td>
+                        <td th:text="${#messages.msg('words.language')}">Язык</td>
+                        <td><a th:text="${#messages.msg('words.users_count')}"
+                               th:href="@{/events/moderation(sort_by=${inc}+10,id=${id},price_up=${price_up},price_down=${price_down},category=${category}, words=${words})}">Кол-во
+                            человек</a></td>
+                        <td><a th:text="${#messages.msg('words.duration')}"
+                               th:href="@{/events/moderation(sort_by=${inc}+8,id=${id},price_up=${price_up},price_down=${price_down},category=${category}, words=${words})}">Продолжительность</a>
+                        </td>
+                        <td th:text="${#messages.msg('words.description')}">Описание</td>
+                        <td><a th:text="${#messages.msg('words.type')}"
+                               th:href="@{/events/moderation(sort_by=${inc}+6,id=${id},price_up=${price_up},price_down=${price_down},category=${category}, words=${words})}">Тип</a>
+                        </td>
+                        <td><a th:text="${#messages.msg('words.rate')}"
+                               th:href="@{/events/moderation(sort_by=${inc}+4,id=${id},price_up=${price_up},price_down=${price_down},category=${category}, words=${words})}">Рейтинг</a>
+                        </td>
+                        <td th:text="${#messages.msg('words.change')}">Изменить</td>
+                        <td th:text="${#messages.msg('words.delete')}">Удалить</td>
+                    </tr>
+                    <tr th:each="event : ${events}">
+                        <td th:text="${event.id}">Some text</td>
+                        <td th:text="${event.name}">Some text</td>
+                        <td th:text="${event.getCategoryString()}">Some text</td>
+                        <td th:text="${event.guideId}">Some text</td>
+                        <td th:text="${event.price}">Some text</td>
+                        <td th:text="${event.place}">Some text</td>
+                        <td th:text="${event.getLanguageString()}">Some text</td>
+                        <td th:text="${event.usersCount}">Some text</td>
+                        <td th:text="${event.duration}">Some text</td>
+                        <td th:text="${event.description}">Some text</td>
+                        <td th:text="${event.type}">Some text</td>
+                        <td th:text="${event.rate}">Some text</td>
+                        <td>
+                            <a th:href="@{/events/moderation(id=${event.id},price_up=${price_up},price_down=${price_down},category=${category}, words=${words}, sort_by=${sort_by})}"><img
+                                    src="../resources/img/icons/edit.png"/></a></td>
+                        <td>
+                            <a th:href="@{/events/delete(id=${event.id},price_up=${price_up},price_down=${price_down},category=${category}, words=${words}, sort_by=${sort_by})}"><img
+                                    src="../resources/img/icons/del.png"/></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
