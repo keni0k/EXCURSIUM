@@ -152,10 +152,11 @@
                     <div class="panel-body">
                         <div class="input-group">
                             <select name="type" class="form-control selectpicker" th:selected="${insertEvent.getType()}?${insertEvent.getType()}:0">
-                                <option value="-3">Не прошла модерацию</option>
-                                <option value="-2">На перемодерации</option>
-                                <option value="-1">Не активна</option>
-                                <option value="1">Активна</option>
+                                <option value="-4" th:text="${#messages.msg('event.type.blcked')}">Заблокирована</option>
+                                <option value="-3" th:text="${#messages.msg('event.type.moderation')}">На модерации</option>
+                                <option value="-2" th:text="${#messages.msg('event.type.moderation_was_failed')}">Не прошла модерацию</option>
+                                <option value="-1" th:text="${#messages.msg('event.type.no_active')}">Не активна</option>
+                                <option value="1" th:text="${#messages.msg('event.type.active')}">Активна</option>
                             </select>
                         </div>
                     </div>

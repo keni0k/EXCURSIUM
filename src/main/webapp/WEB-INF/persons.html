@@ -152,15 +152,14 @@
                     <div class="panel-body">
                         <div class="input-group">
                             <select name="type" class="form-control selectpicker" th:selected="${insertPerson.getType()}?${insertPerson.getType()}:0">
-                                <option value="-3">Не активирован</option>
-                                <option value="-2">Заблокированный</option>
-                                <option value="1">Турист</option>
-                                <option value="2">Экскурсовод</option>
+                                <option value="-3" th:text="${#messages.msg('user.type.unconfirmed')}">Не активирован</option>
+                                <option value="-2" th:text="${#messages.msg('user.type.blcked')}">Заблокированный</option>
+                                <option value="1" th:text="${#messages.msg('user.type.tourist')}">Турист</option>
+                                <option value="2" th:text="${#messages.msg('user.type.guide')}">Экскурсовод</option>
                             </select>
                         </div>
                     </div>
                 </div>
-
                 <br/>
                 <div class="input-group">
                     <span class="input-group-addon" th:text="${#messages.msg('words.login')}">Логин</span>
@@ -169,11 +168,6 @@
                     <label for="login" th:if="${#fields.hasErrors('login')}" th:text="${#messages.msg('error.user.login.size')}" th:class="'error'">Name Error</label>
                 </div>
                 <br/>
-                <div class="input-group">
-                    <span class="input-group-addon" th:text="${#messages.msg('words.password')}">Пароль</span>
-                    <input name="pass" id = "pass" type="password" disabled = "disabled" pattern="^.*(?=.{7,})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$" class="form-control" placeholder="Пароль" aria-label="Пароль" required=""/>
-                    <label for="pass" th:if="${#fields.hasErrors('pass')}" th:text="${#messages.msg('error.user.pass')}" th:class="'error'">Name Error</label>
-                </div>
                 <br/>
                 <div class="input-group">
                     <span class="input-group-addon" th:text="${#messages.msg('words.first_name')}">Имя</span>
@@ -201,7 +195,7 @@
                 <br/>
                 <div class="input-group">
                     <span class="input-group-addon" th:text="${#messages.msg('words.phone')}">Телефон</span>
-                    <input name="phoneNumber" type="text" class="form-control bfh-phone" th:value="${insertPerson.getPhoneNumber()}" placeholder="Телефон" required="" minlength="17"
+                    <input name="phoneNumber" type="text" class="form-control bfh-phone" th:value="${insertPerson.getPhoneNumber()}" placeholder="Телефон" required="" minlength="17" disabled="disabled"
                            aria-label="Телефон" data-format="+7 (ddd) ddd-dddd" id = "phone_number"/>
                     <label for="phone_number" th:if="${error_phone}" th:text="${#messages.msg('error.user.phone_number.free')}" th:class="'error'">Name Error</label>
                     <label for="phone_number" th:if="${#fields.hasErrors('phoneNumber')}" th:text="${#messages.msg('error.user.phone_number.invalid')}" th:class="'error'">Name Error</label>
@@ -238,7 +232,6 @@
                 <tr>
                     <td>ID</td>
                     <td th:text="${#messages.msg('words.login')}">Логин</td>
-                    <td th:text="${#messages.msg('words.password')}">Пароль</td>
                     <td th:text="${#messages.msg('words.first_name')}">Имя</td>
                     <td th:text="${#messages.msg('words.last_name')}">Фамилия</td>
                     <td th:text="${#messages.msg('words.city')}">Город</td>
@@ -253,7 +246,6 @@
                 <tr th:each="person : ${persons}">
                     <td th:text="${person.id}">Some text</td>
                     <td th:text="${person.login}">Some text</td>
-                    <td th:text="${person.pass}">Some text</td>
                     <td th:text="${person.firstName}">Some text</td>
                     <td th:text="${person.lastName}">Some text</td>
                     <td th:text="${person.city}">Some text</td>
