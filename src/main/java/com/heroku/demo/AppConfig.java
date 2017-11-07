@@ -27,7 +27,7 @@ import java.util.Locale;
 @EnableWebMvc
 @ComponentScan({"com.heroku.demo.*"})
 @EnableTransactionManagement
-@Import({ SecurityConfig.class })
+@Import({SecurityConfig.class})
 public class AppConfig extends WebMvcConfigurerAdapter {
     @Bean
     public EmbeddedServletContainerFactory servletContainer() {
@@ -75,7 +75,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 
 
     @Bean(name = "localeResolver")
-    public LocaleResolver localeResolver(){
+    public LocaleResolver localeResolver() {
         SessionLocaleResolver localeResolver = new SessionLocaleResolver();
         localeResolver.setDefaultLocale(new Locale("ru"));
         return localeResolver;

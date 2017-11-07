@@ -89,7 +89,7 @@ public class EventController {
         } else {
             modelMap.addAttribute("file", file);
             modelMap.addAttribute("insertEvent", event);
-            modelMap.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("error.event.add",null, locale)));
+            modelMap.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("error.event.add", null, locale)));
             return "event_add";
         }
 
@@ -150,7 +150,7 @@ public class EventController {
                               Locale locale) {
         eventService.delete(id);
         return events(model, null, priceUp, priceDown, category, words, sortBy, locale);
-}
+    }
 
     @RequestMapping(value = "/event", method = RequestMethod.GET)
     public String event(ModelMap model, @RequestParam("id") int id) {
@@ -166,7 +166,7 @@ public class EventController {
                                  @RequestParam(value = "sort_by", required = false) Integer sortBy,
                                  @RequestParam(value = "words", required = false) String words,
                                  Locale locale) {
-        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, locale.getLanguage().equals("ru")?0:1, words, sortBy==null?0:sortBy);
+        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, locale.getLanguage().equals("ru") ? 0 : 1, words, sortBy == null ? 0 : sortBy);
         int size = events.size() % 3;
         for (int i = 0; i < size; i++) {
             events.remove(events.size() - 1);
@@ -195,7 +195,7 @@ public class EventController {
                                                     @RequestParam(value = "words", required = false) String words,
                                                     @RequestParam(value = "language", required = false) Integer language,
                                                     @RequestParam(value = "sort_by", required = false) Integer sortBy,
-                                                    @RequestParam(value = "auth") String authKey){
+                                                    @RequestParam(value = "auth") String authKey) {
         ArrayList<String> arrayList = new ArrayList<>();
         List<Event> events = eventService.getByFilter(priceUp, priceDown, category, language, words, sortBy);
         for (Event e : events) {
@@ -224,7 +224,7 @@ public class EventController {
                          @RequestParam(value = "words", required = false) String words,
                          @RequestParam(value = "sort_by", required = false) Integer sortBy,
                          Locale locale) {
-        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, locale.getLanguage().equals("ru")?0:1, words, sortBy);
+        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, locale.getLanguage().equals("ru") ? 0 : 1, words, sortBy);
         model.addAttribute("events", events);
 
         if (id != null) {
@@ -258,7 +258,7 @@ public class EventController {
     public String updateDBEvents() {
         List<Event> events = eventService.getAll();
         for (Event event : events) {
-            event.setGuideId(new Random().nextInt(3)+37);
+            event.setGuideId(new Random().nextInt(3) + 37);
             eventService.editEvent(event);
         }
         return "YES";

@@ -85,7 +85,8 @@
         background-color: #33aa33;
     }
 </style>
-<div class="content" th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
+<div class="content"
+     th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
     <nav class="navbar navbar-default navbar-custom" role="navigation">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -111,11 +112,16 @@
                     <li><a href="/events/list" th:text="${#messages.msg('titles.excursions')}">Экскурсии</a></li>
                     <li><a href="#">FAQ</a></li>
                     <li><a href="/index#contact" th:text="${#messages.msg('titles.contacts')}">Контакты</a></li>
-                    <li th:if="${isAdmin}"><a href="/users/moderation" th:text="${#messages.msg('titles.persons')}">Модерация пользователей</a></li>
-                    <li th:if="${isAdmin}"><a href="/events/moderation" th:text="${#messages.msg('titles.events')}">Модерация экскурсий</a></li>
-                    <li th:unless="${isUser}"><a href="/users/registration" th:text="${#messages.msg('titles.registration')}">Регистрация</a></li>
-                    <li th:unless="${isUser}"><a href="/users/login" th:text="${#messages.msg('titles.login')}">Войти</a></li>
-                    <li th:if="${isUser} or ${isAdmin}"><a href="/users/logout" th:text="${#messages.msg('titles.logout')}">Выйти</a></li>
+                    <li th:if="${isAdmin}"><a href="/users/moderation" th:text="${#messages.msg('titles.persons')}">Модерация
+                        пользователей</a></li>
+                    <li th:if="${isAdmin}"><a href="/events/moderation" th:text="${#messages.msg('titles.events')}">Модерация
+                        экскурсий</a></li>
+                    <li th:unless="${isUser}"><a href="/users/registration"
+                                                 th:text="${#messages.msg('titles.registration')}">Регистрация</a></li>
+                    <li th:unless="${isUser}"><a href="/users/login"
+                                                 th:text="${#messages.msg('titles.login')}">Войти</a></li>
+                    <li th:if="${isUser} or ${isAdmin}"><a href="/users/logout"
+                                                           th:text="${#messages.msg('titles.logout')}">Выйти</a></li>
                 </ul>
 
             </div><!-- navbar collapse end -->
@@ -131,7 +137,7 @@
                 <div class="chip" th:each="i : ${#numbers.sequence(0, utils.getCategoriesCount()-1)}">
                     <a th:href="@{/events/list(category=${i})}">
                         <img th:src="${utils.getCategoryUrl(i)}" alt="" src="../resources/img/user.png"/>
-                        <span  th:text="${#messages.msg('category.'+i)}">%Категория%</span>
+                        <span th:text="${#messages.msg('category.'+i)}">%Категория%</span>
                     </a>
                 </div>
             </div>
@@ -162,7 +168,8 @@
                         <h4 class="card-title">
                             <strong>
                                 <h3>
-                                    <a th:href="@{/events/event(id=${event.getId()})}" th:text="${event.name}">%NAME%</a>
+                                    <a th:href="@{/events/event(id=${event.getId()})}"
+                                       th:text="${event.name}">%NAME%</a>
                                 </h3>
                             </strong>
                         </h4>
@@ -179,7 +186,7 @@
                                 <i class="fa fa-star-o"></i>
                             </li>
                             </span>
-                            <span th:if="${(event.getRate()==-1)}" >
+                            <span th:if="${(event.getRate()==-1)}">
                             <li th:each="i : ${#numbers.sequence(0, 4)}">
                                 <i class="fa fa-star-o"></i>
                             </li>
@@ -198,7 +205,8 @@
 							</span>
                             <span class="right">
 								<a th:href="@{/events/event(id=${event.getId()})}"
-                                   class="btn btn-primary waves-effect waves-light" th:text="${#messages.msg('words.open')}">Открыть</a>
+                                   class="btn btn-primary waves-effect waves-light"
+                                   th:text="${#messages.msg('words.open')}">Открыть</a>
 							</span>
                         </div>
 

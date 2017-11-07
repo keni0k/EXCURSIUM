@@ -28,7 +28,7 @@ public class PersonController {
     private final MessageSource messageSource;
 
     @Autowired
-    public PersonController(PersonRepository personRepository, MessageSource messageSource){
+    public PersonController(PersonRepository personRepository, MessageSource messageSource) {
         personService = new PersonServiceImpl(personRepository);
         this.messageSource = messageSource;
     }
@@ -54,7 +54,7 @@ public class PersonController {
             model.addAttribute("error_email_free", !personService.isEmailFree(person.getEmail()));
             model.addAttribute("error_email_valid", !personService.isEmailCorrect(person.getEmail()));
             model.addAttribute("insertPerson", person);
-            model.addAttribute("message", new MessageUtil("danger",  messageSource.getMessage("error.user.add",null, locale)));
+            model.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("error.user.add", null, locale)));
             return "registration";
         }
         person.setEmail(person.getEmail().toLowerCase());
@@ -62,12 +62,12 @@ public class PersonController {
         person.setImageUrl(file.getOriginalFilename());
         person.setRole("ROLE_USER");
         personService.addPerson(person);
-        model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.registration",null, locale)));
+        model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.registration", null, locale)));
         return persons(model);
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String signIn(){
+    public String signIn() {
         return "login";
     }
 
@@ -127,19 +127,19 @@ public class PersonController {
             model.addAttribute("error_email_free", !personService.isEmailFree(person.getEmail()));
             model.addAttribute("error_email_valid", !personService.isEmailCorrect(person.getEmail()));
             model.addAttribute("insertPerson", person);
-            model.addAttribute("message", new MessageUtil("danger",  messageSource.getMessage("error.user.add",null, locale)));
+            model.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("error.user.add", null, locale)));
             return persons_last(model, null);
         }
         person.setEmail(person.getEmail().toLowerCase());
         person.setLogin(person.getLogin().toLowerCase());
         person.setImageUrl(file.getOriginalFilename());
-        person.setRole(person.getRole().equals("")?"ROLE_USER":person.getRole());
+        person.setRole(person.getRole().equals("") ? "ROLE_USER" : person.getRole());
         personService.editPerson(person);
-        model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.registration",null, locale)));
+        model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.registration", null, locale)));
         return persons_last(model, null);
     }
 
-    @RequestMapping(value = "/delete",method = RequestMethod.GET)
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public String deleteContact(@ModelAttribute("id") String id) {
         personService.delete(Long.parseLong(id));
         return persons_last(new ModelMap(), null);
