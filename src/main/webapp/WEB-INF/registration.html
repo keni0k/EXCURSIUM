@@ -180,76 +180,80 @@
                                        th:class="'error'">Name Error</label>
                             </div>
                         </div>
-                        <br/>
-                        <div class="row">
-                            <div class="col-xs-6">
-                        <div class="input-group">
-                            <span class="input-group-addon" th:text="${#messages.msg('words.first_name')}">Имя</span>
-                            <input name="firstName" type="text" class="form-control"
-                                   th:value="${insertPerson.getFirstName()}" placeholder="Имя" aria-label="Имя"
-                                   required=""/>
-                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="input-group">
+                                <span class="input-group-addon"
+                                      th:text="${#messages.msg('words.first_name')}">Имя</span>
+                                <input name="firstName" type="text" class="form-control"
+                                       th:value="${insertPerson.getFirstName()}" placeholder="Имя" aria-label="Имя"
+                                       required=""/>
                             </div>
-                            <div class="col-xs-6">
-                        <div class="input-group">
-                            <span class="input-group-addon" th:text="${#messages.msg('words.last_name')}">Фамилия</span>
-                            <input name="lastName" type="text" class="form-control"
-                                   th:value="${insertPerson.getLastName()}"
-                                   placeholder="Фамилия" required=""
-                                   aria-label="Фамилия"/>
                         </div>
+                        <div class="col-xs-6">
+                            <div class="input-group">
+                                <span class="input-group-addon"
+                                      th:text="${#messages.msg('words.last_name')}">Фамилия</span>
+                                <input name="lastName" type="text" class="form-control"
+                                       th:value="${insertPerson.getLastName()}"
+                                       placeholder="Фамилия" required=""
+                                       aria-label="Фамилия"/>
                             </div>
-                        <br/>
-                        <div class="input-group">
-                            <span class="input-group-addon" th:text="${#messages.msg('words.photo')}">Фотография</span>
-                            <input name="file" type="file" id="file" class="form-control" placeholder="Фотография"
-                                   required=""
-                                   accept="image/jpeg,image/png" aria-label="Фотография"/>
                         </div>
-                        <br/>
-                        <div class="input-group">
-                            <span class="input-group-addon">Email</span>
-                            <input name="email" id="email" type="email" class="form-control"
-                                   th:value="${insertPerson.getEmail()}" placeholder="Email" aria-label="Email"
-                                   required=""/>
-                            <label for="email" th:if="${error_email_free}"
-                                   th:text="${#messages.msg('error.user.email.free')}" th:class="'error'">Name
-                                Error</label>
-                            <label for="email" th:if="${error_email_valid}"
-                                   th:text="${#messages.msg('error.user.email.valid')}" th:class="'error'">Name
-                                Error</label>
-                        </div>
-                        <br/>
-                        <div class="input-group">
-                            <span class="input-group-addon" th:text="${#messages.msg('words.phone')}">Телефон</span>
-                            <input name="phoneNumber" type="text" class="form-control bfh-phone"
-                                   th:value="${insertPerson.getPhoneNumber()}" placeholder="Телефон" required=""
-                                   minlength="17"
-                                   aria-label="Телефон" data-format="+7 (ddd) ddd-dddd" id="phone_number"/>
-                            <label for="phone_number" th:if="${error_phone}"
-                                   th:text="${#messages.msg('error.user.phone_number.free')}" th:class="'error'">Name
-                                Error</label>
-                            <label for="phone_number" th:if="${#fields.hasErrors('phoneNumber')}"
-                                   th:text="${#messages.msg('error.user.phone_number.invalid')}" th:class="'error'">Name
-                                Error</label>
-                        </div>
-                        <br/>
-                        <div class="input-group">
-                            <span class="input-group-addon" th:text="${#messages.msg('words.about_me')}">О себе</span>
-                            <textarea name="about" class="form-control" placeholder="О себе" aria-label="О себе"
-                                      required=""
-                                      th:text="${insertPerson.getAbout()}"></textarea>
-                        </div>
-                        <br/>
-                        <div class="input-group">
-                            <span class="input-group-addon" th:text="${#messages.msg('words.city')}">Город</span>
-                            <input name="city" type="text" class="form-control" th:value="${insertPerson.getCity()}"
-                                   placeholder="Город" required="" aria-label="Город"/>
-                        </div>
-                        <br/>
-                        <button type="submit" class="btn btn-default" th:text="${#messages.msg('words.submit')}">
-                            Отправить
-                        </button>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon" th:text="${#messages.msg('words.photo')}">Фотография</span>
+                        <input name="file" type="file" id="file" class="form-control" placeholder="Фотография"
+                               required=""
+                               accept="image/jpeg,image/png" aria-label="Фотография"/>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon">Email</span>
+                        <input name="email" id="email" type="email" class="form-control"
+                               th:value="${insertPerson.getEmail()}" placeholder="Email" aria-label="Email"
+                               required=""/>
+                        <label for="email" th:if="${error_email_free}"
+                               th:text="${#messages.msg('error.user.email.free')}" th:class="'error'">Name
+                            Error</label>
+                        <label for="email" th:if="${error_email_valid}"
+                               th:text="${#messages.msg('error.user.email.valid')}" th:class="'error'">Name
+                            Error</label>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon" th:text="${#messages.msg('words.phone')}">Телефон</span>
+                        <input name="phoneNumber" type="text" class="form-control bfh-phone"
+                               th:value="${insertPerson.getPhoneNumber()}" placeholder="Телефон" required=""
+                               minlength="17"
+                               aria-label="Телефон" data-format="+7 (ddd) ddd-dddd" id="phone_number"/>
+                        <label for="phone_number" th:if="${error_phone}"
+                               th:text="${#messages.msg('error.user.phone_number.free')}" th:class="'error'">Name
+                            Error</label>
+                        <label for="phone_number" th:if="${#fields.hasErrors('phoneNumber')}"
+                               th:text="${#messages.msg('error.user.phone_number.invalid')}" th:class="'error'">Name
+                            Error</label>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon" th:text="${#messages.msg('words.about_me')}">О себе</span>
+                        <textarea name="about" class="form-control" placeholder="О себе" aria-label="О себе"
+                                  required=""
+                                  th:text="${insertPerson.getAbout()}"></textarea>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon" th:text="${#messages.msg('words.city')}">Город</span>
+                        <input name="city" type="text" class="form-control" th:value="${insertPerson.getCity()}"
+                               placeholder="Город" required="" aria-label="Город"/>
+                    </div>
+                    <br/>
+                    <button type="submit" class="btn btn-default" th:text="${#messages.msg('words.submit')}">
+                        Отправить
+                    </button>
 
                 </form>
             </div>
