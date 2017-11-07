@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <!--<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="description" content=""/>
     <meta name="title" content=""/>
     <meta name="author" content=""/>
@@ -137,7 +137,7 @@
             </h2>
         </div>
         <div class="row">
-            <div class="col-md-12 col-lg-6">
+            <div class="col-md-12 col-lg-8">
 
                 <!-- /* Handling the flash message */-->
                 <th:block th:if="${message != null}">
@@ -160,7 +160,7 @@
                     </div>
                     <br/>
                     <div class="row">
-                        <div class="col-xs-6">
+                        <div class="col-md-12 col-lg-6">
                             <div class="input-group">
                                 <span class="input-group-addon"
                                       th:text="${#messages.msg('words.password')}">Пароль</span>
@@ -171,7 +171,10 @@
                                 <!--<label for="pass" th:if="${#fields.hasErrors('pass')}" th:text="${#messages.msg('error.user.pass')}" th:class="'error'">Name Error</label>-->
                             </div>
                         </div>
-                        <div class="col-xs-6">
+                        <div class="visible-sm-block visible-xs-block visible-md-block ">
+                            <br/>
+                        </div>
+                        <div class="col-md-12 col-lg-6">
                             <div class="input-group">
                                 <span class="input-group-addon" th:text="${#messages.msg('words.password_again')}">Повторите пароль</span>
                                 <input name="pass2" type="password" id="pass2" class="form-control"
@@ -183,7 +186,7 @@
                     </div>
                     <br/>
                     <div class="row">
-                        <div class="col-xs-6">
+                        <div class="col-md-12 col-lg-6">
                             <div class="input-group">
                                 <span class="input-group-addon"
                                       th:text="${#messages.msg('words.first_name')}">Имя</span>
@@ -192,7 +195,7 @@
                                        required=""/>
                             </div>
                         </div>
-                        <div class="col-xs-6">
+                        <div class="col-md-12 col-lg-6">
                             <div class="input-group">
                                 <span class="input-group-addon"
                                       th:text="${#messages.msg('words.last_name')}">Фамилия</span>
