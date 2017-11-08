@@ -63,6 +63,7 @@ public class PersonServiceImpl implements PersonService {
         if (type==null) type = -1;
         if (firstName==null) firstName = "";
         if (lastName==null) lastName = "";
+        if (city==null) city="";
         List<Person> list = getAll();
 
         List<Person> copy = new ArrayList<>();
@@ -75,6 +76,7 @@ public class PersonServiceImpl implements PersonService {
             if (rate && isEqualsType && isContainsFirstName && isContainsLastName && isContainsCity)
                 copy.add(aList);
         }
+        if(sortBy!=null)
         copy.sort(new Comparator<Person>() {
             @Override
             public int compare(Person o1, Person o2) {
