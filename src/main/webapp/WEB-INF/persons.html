@@ -158,7 +158,7 @@
         <div class="page-header">
             <h1 th:text="${#messages.msg('titles.persons')}">Модерация пользователей</h1>
         </div>
-        <div class="row">
+        <div id = "edit_row" style="display: none;" class="row">
             <div class="col-md-12 col-lg-6">
 
                 <th:block th:if="${message != null}">
@@ -335,6 +335,7 @@
 <script th:inline="javascript">
     var $table = $('#fresh-table'),
         $alertBtn = $('#alertBtn'),
+        $editRow = $('#edit_row'),
         full_screen = false;
 
     $().ready(function () {
@@ -377,15 +378,15 @@
                 console.log(value, row, index);
             },
             'click .edit': function (e, value, row, index) {
-                alert('You click edit icon, row: ' + JSON.stringify(row));
-                console.log(value, row, index);
+                $editRow.style.display="block";
+                document.location.href="http://excursium.me/users/moderation?id="+row.id;
             },
             'click .remove': function (e, value, row, index) {
                 $table.bootstrapTable('remove', {
                     field: 'id',
                     values: [row.id]
                 });
-
+                document.location.href="http://excursium.me/users/delete?id="+row.id;
             }
         };
 
