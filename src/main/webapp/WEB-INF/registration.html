@@ -149,6 +149,31 @@
                 <form th:object="${insertPerson}" method="POST" action="/users/registration"
                       enctype="multipart/form-data">
                     <br/>
+                    <div class="row">
+                        <div class="col-md-12 col-lg-6">
+                            <div class="input-group">
+                                <span class="input-group-addon"
+                                      th:text="${#messages.msg('words.first_name')}">Имя</span>
+                                <input name="firstName" type="text" class="form-control"
+                                       th:value="${insertPerson.getFirstName()}" placeholder="Имя" aria-label="Имя"
+                                       required=""/>
+                            </div>
+                        </div>
+                        <div class="visible-sm-block visible-xs-block visible-md-block ">
+                            <br/>
+                        </div>
+                        <div class="col-md-12 col-lg-6">
+                            <div class="input-group">
+                                <span class="input-group-addon"
+                                      th:text="${#messages.msg('words.last_name')}">Фамилия</span>
+                                <input name="lastName" type="text" class="form-control"
+                                       th:value="${insertPerson.getLastName()}"
+                                       placeholder="Фамилия" required=""
+                                       aria-label="Фамилия"/>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
                     <div class="input-group">
                         <span class="input-group-addon" th:text="${#messages.msg('words.login')}">Логин</span>
                         <input name="login" id="login" type="text" class="form-control" placeholder="Логин"
@@ -181,31 +206,6 @@
                                        placeholder="Повторите пароль" aria-label="Повторите пароль" required=""/>
                                 <label for="pass2" th:if="${error_pass}" th:text="${#messages.msg('error.user.pass2')}"
                                        th:class="'error'">Name Error</label>
-                            </div>
-                        </div>
-                    </div>
-                    <br/>
-                    <div class="row">
-                        <div class="col-md-12 col-lg-6">
-                            <div class="input-group">
-                                <span class="input-group-addon"
-                                      th:text="${#messages.msg('words.first_name')}">Имя</span>
-                                <input name="firstName" type="text" class="form-control"
-                                       th:value="${insertPerson.getFirstName()}" placeholder="Имя" aria-label="Имя"
-                                       required=""/>
-                            </div>
-                        </div>
-                        <div class="visible-sm-block visible-xs-block visible-md-block ">
-                            <br/>
-                        </div>
-                        <div class="col-md-12 col-lg-6">
-                            <div class="input-group">
-                                <span class="input-group-addon"
-                                      th:text="${#messages.msg('words.last_name')}">Фамилия</span>
-                                <input name="lastName" type="text" class="form-control"
-                                       th:value="${insertPerson.getLastName()}"
-                                       placeholder="Фамилия" required=""
-                                       aria-label="Фамилия"/>
                             </div>
                         </div>
                     </div>
