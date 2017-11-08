@@ -341,14 +341,14 @@
                         <th data-field="price" data-sortable="true" th:text="${#messages.msg('words.price')}">
                             Стоимость
                         </th>
-                        <th data-field="place" data-sortable="true" th:text="${#messages.msg('words.place')}">Место</th>
+                        <th data-field="place" data-sortable="true" data-hidden="true" th:text="${#messages.msg('words.place')}">Место</th>
                         <th data-field="users_count" data-sortable="true"
                             th:text="${#messages.msg('words.users_count')}">Кол-во человек
                         </th>
                         <th data-field="duration" data-sortable="true" th:text="${#messages.msg('words.duration')}">
                             Продолжительность
                         </th>
-                        <th data-field="description" data-sortable="false"
+                        <th data-field="description" data-hidden="true" data-sortable="false"
                             th:text="${#messages.msg('words.description')}">Описание
                         </th>
                         <th data-field="type" data-sortable="true" th:text="${#messages.msg('words.type')}">Тип</th>

@@ -110,10 +110,7 @@
 </style>
 <div class="content"
      th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')},
-              id = ${#httpServletRequest.getParameter('id')}, sortBy = ${#httpServletRequest.getParameter('sort_by')},
-              type = ${#httpServletRequest.getParameter('type')}, rateDown = ${#httpServletRequest.getParameter('rate_down')},
-              rateUp = ${#httpServletRequest.getParameter('rate_up')}, firstName = ${#httpServletRequest.getParameter('first_name')},
-              lastName = ${#httpServletRequest.getParameter('last_name')}, city = ${#httpServletRequest.getParameter('city')}">
+              id = ${#httpServletRequest.getParameter('id')}">
     <nav class="navbar navbar-default navbar-custom" role="navigation">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
