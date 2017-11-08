@@ -154,7 +154,164 @@
         </div><!-- container-fluid end -->
     </nav>
     <div class="container">
+        <div class="page-header">
+            <h1 th:text="${#messages.msg('titles.events')}">Модерация экскурсий</h1>
+        </div>
+        <div class="row" hidden="hidden" id="edit_row">
+            <div class="col-md-12 col-lg-8">
 
+                <form th:object="${insertEvent}" action="/events/add" method="POST" enctype="multipart/form-data">
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading" th:text="${#messages.msg('words.type')}">
+                            Тип экскурсии
+                        </div>
+                        <div class="panel-body">
+                            <div class="input-group">
+                                <select name="type" class="form-control selectpicker"
+                                        th:selected="${insertEvent.getType()}?${insertEvent.getType()}:0">
+                                    <option value="-4" th:text="${#messages.msg('event.type.blocked')}">Заблокирована
+                                    </option>
+                                    <option value="-3" th:text="${#messages.msg('event.type.moderation')}">На
+                                        модерации
+                                    </option>
+                                    <option value="-2" th:text="${#messages.msg('event.type.moderation_was_failed')}">Не
+                                        прошла модерацию
+                                    </option>
+                                    <option value="-1" th:text="${#messages.msg('event.type.no_active')}">Не активна
+                                    </option>
+                                    <option value="1" th:text="${#messages.msg('event.type.active')}">Активна</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon" th:text="${#messages.msg('words.guide_id')}"></span>
+                        <input class="form-control" name="guideId" id="guide_id" type="number" required=""
+                               th:value="${insertEvent.getGuideId()}"/>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon">ID</span>
+                        <input class="form-control" type="number" name="id" id="id" th:value="${insertEvent.id}"
+                               required=""/>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon" th:text="${#messages.msg('words.name')}">Название</span>
+                        <input name="name" type="text" class="form-control" id="name" placeholder="Название"
+                               aria-label="Название"
+                               th:value="${insertEvent.getName()}" required=""/>
+                        <label for="name" th:if="${#fields.hasErrors('name')}"
+                               th:text="${#messages.msg('error.event.name')}" th:class="'error'">Name Error</label>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon" th:text="${#messages.msg('words.description')}">Описание</span>
+                        <textarea name="description" type="text" id="description" class="form-control"
+                                  placeholder="Описание" required=""
+                                  aria-label="Описание" th:text="${insertEvent.getDescription()}"></textarea>
+                        <label for="description" th:if="${#fields.hasErrors('description')}"
+                               th:text="${#messages.msg('error.event.description')}" th:class="'error'">Description
+                            Error</label>
+                    </div>
+                    <br/>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" th:text="${#messages.msg('words.type_of_excursion')}">
+                            Тип экскурсии
+                        </div>
+                        <div class="panel-body">
+                            <div class="input-group">
+                                <select name="category" id="category" class="form-control selectpicker"
+                                        th:selected="${insertEvent.getCategory()}?${insertEvent.getCategory()}:0">
+                                    <option value="0" th:text="${#messages.msg('category.0')}">Развлечения</option>
+                                    <option value="1" th:text="${#messages.msg('category.1')}">Наука</option>
+                                    <option value="2" th:text="${#messages.msg('category.2')}">История</option>
+                                    <option value="3" th:text="${#messages.msg('category.3')}">Искусство</option>
+                                    <option value="4" th:text="${#messages.msg('category.4')}">Производство</option>
+                                    <option value="5" th:text="${#messages.msg('category.5')}">Гастрономия</option>
+                                    <option value="6" th:text="${#messages.msg('category.6')}">Квесты</option>
+                                    <option value="7" th:text="${#messages.msg('category.7')}">Экстрим</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon" th:text="${#messages.msg('words.users_count')}">Количество участников</span>
+                        <input name="usersCount" id="users_count" type="number" class="form-control"
+                               placeholder="Количество участников" required=""
+                               aria-label="Количество участников"
+                               th:value="${insertEvent.getUsersCount()}?${insertEvent.getUsersCount()}"/>
+                        <label for="users_count" th:if="${#fields.hasErrors('usersCount')}"
+                               th:text="${#messages.msg('error.event.users_count')}" th:class="'error'">UsersCount
+                            Error</label>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon" th:text="${#messages.msg('words.duration')}">Длительность</span>
+                        <input name="duration" id="duration" type="number" class="form-control"
+                               placeholder="Длительность:" required=""
+                               aria-label="Длительность:"
+                               th:value="${insertEvent.getDuration()}?${insertEvent.getDuration()}"/>
+                        <span class="input-group-addon" th:text="${#messages.msg('words.hours')}">часов</span>
+                        <label for="duration" th:if="${#fields.hasErrors('duration')}"
+                               th:text="${#messages.msg('error.event.duration')}" th:class="'error'">Duration
+                            Error</label>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon" th:text="${#messages.msg('words.place')}">Место встречи</span>
+                        <input name="place" id="place" type="text" class="form-control" placeholder="Место встречи"
+                               required=""
+                               aria-label="Место встречи"
+                               th:value="${insertEvent.getPlace()}?${insertEvent.getPlace()}"/>
+                        <label for="place" th:if="${#fields.hasErrors('place')}"
+                               th:text="${#messages.msg('error.event.place')}" th:class="'error'">Place Error</label>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon" th:text="${#messages.msg('words.price')}">Цена</span>
+                        <input name="price" id="price" type="number" class="form-control" placeholder="Цена"
+                               aria-label="Цена" required=""
+                               th:value="${insertEvent.getPrice()}?${insertEvent.getPrice()}"/>
+                        <span class="input-group-addon">&#8381;</span>
+                        <label for="price" th:if="${#fields.hasErrors('price')}"
+                               th:text="${#messages.msg('error.event.price')}" th:class="'error'">Price Error</label>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon" th:text="${#messages.msg('words.photos')}">Фотографии</span>
+                        <input name="file" type="file" id="file" class="form-control" placeholder="Фотографии"
+                               required=""
+                               accept="image/jpeg,image/png" aria-label="Фотографии"/>
+                        <!--<label for="file" th:if="${error_data}" th:text="${#messages.msg('error.event.file')}" th:class="'error'">File Error</label>-->
+                    </div>
+                    <br/>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading" th:text="${#messages.msg('words.language')}">
+                            Язык экскурсии
+                        </div>
+                        <div class="panel-body">
+                            <div class="input-group">
+                                <select name="language" class="form-control selectpicker"
+                                        th:selected="${insertEvent.getLanguage()}?${insertEvent.getLanguage()}">
+                                    <option value="0" th:text="${#messages.msg('language.0')}">Русский</option>
+                                    <option value="1" th:text="${#messages.msg('language.1')}">Английский</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <button type="reset" class="btn btn-default" th:text="${#messages.msg('words.reset')}">Сброс
+                    </button>
+                    <button type="submit" class="btn btn-default" th:text="${#messages.msg('words.submit')}">Сохранить
+                    </button>
+
+                </form>
+            </div>
+        </div>
+        <hr/>
 
         <div class="row">
             <div class="col-sm-12">
@@ -241,6 +398,7 @@
 <script th:inline="javascript">
     var $table = $('#fresh-table'),
         $alertBtn = $('#alertBtn'),
+        $editRow = $('#edit_row'),
         full_screen = false;
 
     $().ready(function () {
@@ -283,6 +441,7 @@
                 console.log(value, row, index);
             },
             'click .edit': function (e, value, row, index) {
+                $editRow.show();
                 alert('You click edit icon, row: ' + JSON.stringify(row));
                 console.log(value, row, index);
             },
