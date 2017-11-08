@@ -157,7 +157,7 @@
         <div class="page-header">
             <h1 th:text="${#messages.msg('titles.events')}">Модерация экскурсий</h1>
         </div>
-        <div class="row" hidden="hidden" id="edit_row">
+        <div class="row" th:if="${id}">
             <div class="col-md-12 col-lg-8">
 
                 <form th:object="${insertEvent}" action="/events/add" method="POST" enctype="multipart/form-data">
@@ -398,7 +398,6 @@
 <script th:inline="javascript">
     var $table = $('#fresh-table'),
         $alertBtn = $('#alertBtn'),
-        $editRow = $('#edit_row'),
         full_screen = false;
 
     $().ready(function () {
@@ -441,7 +440,6 @@
                 console.log(value, row, index);
             },
             'click .edit': function (e, value, row, index) {
-                $editRow.show();
                 document.location.href="http://excursium.me/events/moderation?id="+row.id;
             },
             'click .remove': function (e, value, row, index) {

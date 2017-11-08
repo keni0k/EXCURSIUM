@@ -158,7 +158,7 @@
         <div class="page-header">
             <h1 th:text="${#messages.msg('titles.persons')}">Модерация пользователей</h1>
         </div>
-        <div id="edit_row" hidden="hidden" class="row">
+        <div class="row" th:if="${id}">
             <div class="col-md-12 col-lg-6">
 
                 <th:block th:if="${message != null}">
@@ -317,13 +317,13 @@
                         <tr th:each="person : ${persons}">
                             <td th:text="${person.id}">Some text</td>
                             <td th:text="${person.login}">Some text</td>
-                            <td th:text="${person.firstName}+${person.lastName}">Some text</td>
+                            <td th:text="${person.getFullName()}">Some text</td>
                             <td th:text="${person.city}">Some text</td>
                             <td th:text="${person.email}">Some text</td>
                             <td th:text="${person.phoneNumber}">Some text</td>
                             <td th:text="${person.type}">Some text</td>
                             <td th:text="${person.rate}">Some text</td>
-                            <td th:text="${'...'+person.token.substring(23)}">Some text</td>
+                            <td th:text="${person.token}">Some text</td>
                             <!--<td>-->
                             <!--<a th:href="@{/users/moderation(id = ${person.id},sort_by=${sortBy},type=${type},rate_down=${rateDown},rate_up=${rateUp}, first_name=${firstName}, last_name=${lastName}, city=${city})}"><img-->
                             <!--src="../resources/img/icons/edit.png" width="40dp" height="40dp"/></a></td>-->
@@ -351,7 +351,6 @@
 <script th:inline="javascript">
     var $table = $('#fresh-table'),
         $alertBtn = $('#alertBtn'),
-        $editRow = $('#edit_row'),
         full_screen = false;
 
     $().ready(function () {
@@ -394,7 +393,6 @@
                 console.log(value, row, index);
             },
             'click .edit': function (e, value, row, index) {
-                $editRow.show();
                 document.location.href = "http://excursium.me/users/moderation?id=" + row.id;
             },
             'click .remove': function (e, value, row, index) {
