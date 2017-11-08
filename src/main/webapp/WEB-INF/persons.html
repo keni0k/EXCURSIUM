@@ -350,7 +350,7 @@
     </div>
 </footer>
 
-<script>
+<script th:inline="javascript">
     var $table = $('#fresh-table'),
         $alertBtn = $('#alertBtn'),
         full_screen = false;
@@ -417,13 +417,13 @@
 
     function operateFormatter(value, row, index) {
         return [
-            '<a rel="tooltip" title="Like" class="table-action like" href="javascript:void(0)" title="Like">',
+            '<a rel="tooltip" title="Like" class="table-action like" href="javascript:void(0)">',
             '<i class="fa fa-heart"></i>',
             '</a>',
-            '<a rel="tooltip" title="Edit" class="table-action edit" href="javascript:void(0)" title="Edit">',
+            '<a rel="tooltip" title="Edit" class="table-action edit" href="javascript:void(0)">',
             '<i class="fa fa-edit"></i>',
             '</a>',
-            '<a rel="tooltip" title="Remove" class="table-action remove" href="javascript:void(0)" title="Remove">',
+            '<a rel="tooltip" title="Remove" class="table-action remove" href="javascript:void(0)">',
             '<i class="fa fa-remove"></i>',
             '</a>'
         ].join('');
