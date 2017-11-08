@@ -1,5 +1,7 @@
 package com.heroku.demo.person;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -51,6 +53,62 @@ public class PersonServiceImpl implements PersonService {
             else if (p.getEmail().equals(loginOrEmail))
                 return p;
         return null;
+    }
+
+    @Override
+    public List<Person> getByFilter(Integer type, Long rateDown, Long rateUp, String firstName, String lastName, String city, Integer sortBy) {
+
+        if (rateDown==null) rateDown = -1L;
+        if (rateUp==null) rateUp = 5L;
+        if (type==null) type = -1;
+        if (firstName==null) firstName = "";
+        if (lastName==null) lastName = "";
+        List<Person> list = getAll();
+
+        List<Person> copy = new ArrayList<>();
+        for (Person aList : list) {
+            boolean rate = (aList.getRate() >= rateDown) && (aList.getRate() <= rateUp);
+            boolean isEqualsType = aList.getType() == type || type == -1;
+            boolean isContainsFirstName = aList.getFirstName().toLowerCase().contains(firstName.toLowerCase());
+            boolean isContainsLastName = aList.getLastName().toLowerCase().contains(lastName.toLowerCase());
+            boolean isContainsCity = aList.getCity().toLowerCase().contains(city.toLowerCase());
+            if (rate && isEqualsType && isContainsFirstName && isContainsLastName && isContainsCity)
+                copy.add(aList);
+        }
+        copy.sort(new Comparator<Person>() {
+            @Override
+            public int compare(Person o1, Person o2) {
+                switch (sortBy) {
+                    case 0:
+                        return Long.compare(o1.getId(), o2.getId());
+                    case 1:
+                        return Long.compare(o2.getId(), o1.getId());
+                    case 2:
+                        return Integer.compare(o1.getRate(), o2.getRate());
+                    case 3:
+                        return Integer.compare(o2.getRate(), o1.getRate());
+                    case 4:
+                        return Integer.compare(o1.getType(), o2.getType());
+                    case 5:
+                        return Integer.compare(o2.getType(), o1.getType());
+                    case 6:
+                        return o1.getFirstName().compareTo(o2.getFirstName());
+                    case 7:
+                        return o2.getFirstName().compareTo(o1.getFirstName());
+                    case 8:
+                        return o1.getLastName().compareTo(o2.getLastName());
+                    case 9:
+                        return o2.getLastName().compareTo(o1.getLastName());
+                    case 10:
+                        return o1.getCity().compareTo(o2.getCity());
+                    case 11:
+                        return o2.getCity().compareTo(o1.getCity());
+
+                }
+                return Long.compare(o1.getId(), o2.getId());
+            }
+        });
+        return copy;
     }
 
 

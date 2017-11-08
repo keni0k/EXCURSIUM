@@ -96,7 +96,11 @@
     }
 </style>
 <div class="content"
-     th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
+     th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')},
+              id = ${#httpServletRequest.getParameter('id')}, sortBy = ${#httpServletRequest.getParameter('sort_by')},
+              type = ${#httpServletRequest.getParameter('type')}, rateDown = ${#httpServletRequest.getParameter('rate_down')},
+              rateUp = ${#httpServletRequest.getParameter('rate_up')}, firstName = ${#httpServletRequest.getParameter('first_name')},
+              lastName = ${#httpServletRequest.getParameter('last_name')}, city = ${#httpServletRequest.getParameter('city')}">
     <nav class="navbar navbar-default navbar-custom" role="navigation">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -264,15 +268,20 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td>ID</td>
+                        <td th:href="@{/users/moderation(sort_by=${inc},id=${id},type=${type},rate_down=${rateDown},rate_up=${rateUp}, first_name=${firstName}, last_name=${lastName}, city=${city})}">ID</td>
                         <td th:text="${#messages.msg('words.login')}">Логин</td>
-                        <td th:text="${#messages.msg('words.first_name')}">Имя</td>
-                        <td th:text="${#messages.msg('words.last_name')}">Фамилия</td>
-                        <td th:text="${#messages.msg('words.city')}">Город</td>
+                        <td th:text="${#messages.msg('words.first_name')}"
+                            th:href="@{/users/moderation(sort_by=${inc}+6,id=${id},type=${type},rate_down=${rateDown},rate_up=${rateUp}, first_name=${firstName}, last_name=${lastName}, city=${city})}">Имя</td>
+                        <td th:text="${#messages.msg('words.last_name')}"
+                            th:href="@{/users/moderation(sort_by=${inc}+8,id=${id},type=${type},rate_down=${rateDown},rate_up=${rateUp}, first_name=${firstName}, last_name=${lastName}, city=${city})}">Фамилия</td>
+                        <td th:text="${#messages.msg('words.city')}"
+                            th:href="@{/users/moderation(sort_by=${inc}+10,id=${id},type=${type},rate_down=${rateDown},rate_up=${rateUp}, first_name=${firstName}, last_name=${lastName}, city=${city})}">Город</td>
                         <td>Email</td>
                         <td th:text="${#messages.msg('words.phone')}">Телефон</td>
-                        <td th:text="${#messages.msg('words.type')}">Тип</td>
-                        <td th:text="${#messages.msg('words.rate')}">Рейтинг</td>
+                        <td th:text="${#messages.msg('words.type')}"
+                            th:href="@{/users/moderation(sort_by=${inc}+4,id=${id},type=${type},rate_down=${rateDown},rate_up=${rateUp}, first_name=${firstName}, last_name=${lastName}, city=${city})}">Тип</td>
+                        <td th:text="${#messages.msg('words.rate')}"
+                            th:href="@{/users/moderation(sort_by=${inc}+2,id=${id},type=${type},rate_down=${rateDown},rate_up=${rateUp}, first_name=${firstName}, last_name=${lastName}, city=${city})}">Рейтинг</td>
                         <td th:text="${#messages.msg('words.token')}">Токен</td>
                         <td th:text="${#messages.msg('words.change')}">Изменить</td>
                         <td th:text="${#messages.msg('words.delete')}">Удалить</td>
@@ -288,9 +297,9 @@
                         <td th:text="${person.type}">Some text</td>
                         <td th:text="${person.rate}">Some text</td>
                         <td th:text="${person.token}">Some text</td>
-                        <td><a th:href="@{/users/moderation(id = ${person.id})}"><img
+                        <td><a th:href="@{/users/moderation(id = ${person.id},sort_by=${sortBy},type=${type},rate_down=${rateDown},rate_up=${rateUp}, first_name=${firstName}, last_name=${lastName}, city=${city})}"><img
                                 src="../resources/img/icons/edit.png"/></a></td>
-                        <td><a th:href="@{/users/delete(id = ${person.id})}"><img
+                        <td><a th:href="@{/users/delete(id = ${person.id},sort_by=${sortBy},type=${type},rate_down=${rateDown},rate_up=${rateUp}, first_name=${firstName}, last_name=${lastName}, city=${city})}"><img
                                 src="../resources/img/icons/del.png"/></a></td>
                     </tr>
                     </tbody>

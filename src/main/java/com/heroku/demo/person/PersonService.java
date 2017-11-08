@@ -32,4 +32,6 @@ public interface PersonService {
     Boolean authorization(String login, String pass);
 
     List<Person> getAll();
+
+    List<Person> getByFilter(Integer type, Long rateDown, Long rateUp, String firstName, String lastName, String city, Integer sortBy);
 }

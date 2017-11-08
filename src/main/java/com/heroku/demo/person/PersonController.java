@@ -102,13 +102,23 @@ public class PersonController {
 
     @RequestMapping("/moderation")
     public String persons_last(ModelMap model,
-                               @RequestParam(value = "id", required = false) Long id) {
-        List<Person> persons = personService.getAll();
+                               @RequestParam(value = "id", required = false) Long id,
+                               @RequestParam(value = "type", required = false) Integer type,
+                               @RequestParam(value = "rate_down", required = false) Long rateDown,
+                               @RequestParam(value = "rate_up", required = false) Long rateUp,
+                               @RequestParam(value = "first_name", required = false) String firstName,
+                               @RequestParam(value = "last_name", required = false) String lastName,
+                               @RequestParam(value = "city", required = false) String city,
+                               @RequestParam(value = "sort_by", required = false) Integer sortBy) {
+        List<Person> persons = personService.getByFilter(type, rateDown, rateUp, firstName, lastName, city, sortBy);
         model.addAttribute("persons", persons);
         if (id != null) {
             Person editPerson = personService.getById(id);
             model.addAttribute("insertPerson", editPerson);
         } else model.addAttribute("insertPerson", new Person());
+        if (sortBy == null) model.addAttribute("inc", 0);
+        else if (sortBy % 2 == 0) model.addAttribute("inc", 1);
+        else model.addAttribute("inc", 0);
         return "persons";
     }
 
@@ -117,7 +127,14 @@ public class PersonController {
                               BindingResult result,
                               @RequestParam("file") MultipartFile file,
                               @ModelAttribute("pass2") String pass2,
-                              ModelMap model, Locale locale) {
+                              ModelMap model, Locale locale,
+                              @RequestParam(value = "type", required = false) Integer type,
+                              @RequestParam(value = "rate_down", required = false) Long rateDown,
+                              @RequestParam(value = "rate_up", required = false) Long rateUp,
+                              @RequestParam(value = "first_name", required = false) String firstName,
+                              @RequestParam(value = "last_name", required = false) String lastName,
+                              @RequestParam(value = "city", required = false) String city,
+                              @RequestParam(value = "sort_by", required = false) Integer sortBy) {
         person.setToken(randomToken(32));
 
         if (!personService.throwsErrors(person, pass2) || result.hasErrors()) {
@@ -128,7 +145,7 @@ public class PersonController {
             model.addAttribute("error_email_valid", !personService.isEmailCorrect(person.getEmail()));
             model.addAttribute("insertPerson", person);
             model.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("error.user.add", null, locale)));
-            return persons_last(model, null);
+            return persons_last(model, person.getId(), type, rateDown, rateUp, firstName, lastName, city, sortBy);
         }
         person.setEmail(person.getEmail().toLowerCase());
         person.setLogin(person.getLogin().toLowerCase());
@@ -136,13 +153,21 @@ public class PersonController {
         person.setRole(person.getRole().equals("") ? "ROLE_USER" : person.getRole());
         personService.editPerson(person);
         model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.registration", null, locale)));
-        return persons_last(model, null);
+        return persons_last(model, person.getId(), type, rateDown, rateUp, firstName, lastName, city, sortBy);
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public String deleteContact(@ModelAttribute("id") String id) {
+    public String deleteContact(ModelMap model,
+                                @ModelAttribute("id") String id,
+                                @RequestParam(value = "type", required = false) Integer type,
+                                @RequestParam(value = "rate_down", required = false) Long rateDown,
+                                @RequestParam(value = "rate_up", required = false) Long rateUp,
+                                @RequestParam(value = "first_name", required = false) String firstName,
+                                @RequestParam(value = "last_name", required = false) String lastName,
+                                @RequestParam(value = "city", required = false) String city,
+                                @RequestParam(value = "sort_by", required = false) Integer sortBy) {
         personService.delete(Long.parseLong(id));
-        return persons_last(new ModelMap(), null);
+        return persons_last(model, null, type, rateDown, rateUp, firstName, lastName, city, sortBy);
     }
 
   /*
