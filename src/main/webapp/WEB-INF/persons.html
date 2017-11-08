@@ -46,13 +46,15 @@
             src="../resources/libs/bootstrapformhelpers/js/bootstrap-formhelpers.min.js"></script>
 
 
-    <link rel="stylesheet" href="http://bootstraptema.ru/plugins/2015/bootstrap3/bootstrap.min.css" />
-    <link rel="stylesheet" href="http://bootstraptema.ru/plugins/font-awesome/4-4-0/font-awesome.min.css" />
+    <link rel="stylesheet" href="http://bootstraptema.ru/plugins/2015/bootstrap3/bootstrap.min.css"/>
+    <link rel="stylesheet" href="http://bootstraptema.ru/plugins/font-awesome/4-4-0/font-awesome.min.css"/>
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'/>
-    <link href="http://demos.creative-tim.com/fresh-bootstrap-table/assets/css/fresh-bootstrap-table.css" rel="stylesheet" />
+    <link href="http://demos.creative-tim.com/fresh-bootstrap-table/assets/css/fresh-bootstrap-table.css"
+          rel="stylesheet"/>
     <script src="http://bootstraptema.ru/plugins/jquery/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="http://bootstraptema.ru/plugins/2015/b-v3-3-6/bootstrap.min.js"></script>
-    <script type="text/javascript" src="http://demos.creative-tim.com/fresh-bootstrap-table/assets/js/bootstrap-table.js"></script>
+    <script type="text/javascript"
+            src="http://demos.creative-tim.com/fresh-bootstrap-table/assets/js/bootstrap-table.js"></script>
 
 
 </head>
@@ -282,65 +284,36 @@
                         <button id="alertBtn" class="btn btn-default">Alert</button>
                     </div>
 
-                    <table id = "fresh-table" class="table">
+                    <table id="fresh-table" class="table">
                         <thead>
-                            <th data-field="id" data-sortable="true">ID</th>
-                            <th data-field="login" data-sortable="true">Login</th>
-                            <th data-field="first_name" data-sortable="true">First name</th>
-                            <th data-field="last_name" data-sortable="true">Last name</th>
-                            <th data-field="city" data-sortable="true">City</th>
-                            <th data-field="email" data-sortable="true">Email</th>
-                            <th data-field="phone" data-sortable="true">Phone</th>
-                            <th data-field="type" data-sortable="true">Type</th>
-                            <th data-field="rate" data-sortable="true">Rate</th>
-                            <th data-field="token" data-sortable="true">Token</th>
-                            <th data-field="actions" data-formatter="operateFormatter" data-events="operateEvents">Actions</th>
+                        <th data-field="id" data-sortable="true">ID</th>
+                        <th data-field="login" data-sortable="true" th:text="${#messages.msg('words.login')}">Login</th>
+                        <th data-field="name" data-sortable="true" th:text="${#messages.msg('words.name')}">Name</th>
+                        <th data-field="city" data-sortable="true" th:text="${#messages.msg('words.city')}">City</th>
+                        <th data-field="email" data-sortable="true" th:text="${#messages.msg('words.email')}">Email</th>
+                        <th data-field="phone" data-sortable="true" th:text="${#messages.msg('words.phone')}">Phone</th>
+                        <th data-field="type" data-sortable="true" th:text="${#messages.msg('words.type')}">Type</th>
+                        <th data-field="rate" data-sortable="true" th:text="${#messages.msg('words.rate')}">Rate</th>
+                        <th data-field="token" data-sortable="true" th:text="${#messages.msg('words.token')}">Token</th>
+                        <th data-field="actions" data-formatter="operateFormatter" data-events="operateEvents">Actions</th>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td th:href="@{/users/moderation(sort_by=${inc},id=${id},type=${type},rate_down=${rateDown},rate_up=${rateUp}, first_name=${firstName}, last_name=${lastName}, city=${city})}">
-                                ID
-                            </td>
-                            <td th:text="${#messages.msg('words.login')}">Логин</td>
-                            <td th:text="${#messages.msg('words.first_name')}">
-                                <a th:href="@{/users/moderation(sort_by=${inc}+6,id=${id},type=${type},rate_down=${rateDown},rate_up=${rateUp}, first_name=${firstName}, last_name=${lastName}, city=${city})}">Имя</a>
-                            </td>
-                            <td th:text="${#messages.msg('words.last_name')}">
-                                <a th:href="@{/users/moderation(sort_by=${inc}+8,id=${id},type=${type},rate_down=${rateDown},rate_up=${rateUp}, first_name=${firstName}, last_name=${lastName}, city=${city})}">Фамилия</a>
-                            </td>
-                            <td th:text="${#messages.msg('words.city')}">
-                                <a th:href="@{/users/moderation(sort_by=${inc}+10,id=${id},type=${type},rate_down=${rateDown},rate_up=${rateUp}, first_name=${firstName}, last_name=${lastName}, city=${city})}">Город</a>
-                            </td>
-                            <td>Email</td>
-                            <td th:text="${#messages.msg('words.phone')}">Телефон</td>
-                            <td th:text="${#messages.msg('words.type')}">
-                                <a th:href="@{/users/moderation(sort_by=${inc}+4,id=${id},type=${type},rate_down=${rateDown},rate_up=${rateUp}, first_name=${firstName}, last_name=${lastName}, city=${city})}">Тип</a>
-                            </td>
-                            <td th:text="${#messages.msg('words.rate')}">
-                                <a th:href="@{/users/moderation(sort_by=${inc}+2,id=${id},type=${type},rate_down=${rateDown},rate_up=${rateUp}, first_name=${firstName}, last_name=${lastName}, city=${city})}">Рейтинг</a>
-                            </td>
-                            <td th:text="${#messages.msg('words.token')}">Токен</td>
-                            <td></td>
-                            <!--<td th:text="${#messages.msg('words.change')}">Изменить</td>-->
-                            <!--<td th:text="${#messages.msg('words.delete')}">Удалить</td>-->
-                        </tr>
                         <tr th:each="person : ${persons}">
                             <td th:text="${person.id}">Some text</td>
                             <td th:text="${person.login}">Some text</td>
-                            <td th:text="${person.firstName}">Some text</td>
-                            <td th:text="${person.lastName}">Some text</td>
+                            <td th:text="${person.firstName}+${person.lastName}">Some text</td>
                             <td th:text="${person.city}">Some text</td>
                             <td th:text="${person.email}">Some text</td>
                             <td th:text="${person.phoneNumber}">Some text</td>
                             <td th:text="${person.type}">Some text</td>
                             <td th:text="${person.rate}">Some text</td>
-                            <td th:text="${person.token}">Some text</td>
+                            <td th:text="${'...'+person.token.substring(23)}">Some text</td>
                             <!--<td>-->
-                                <!--<a th:href="@{/users/moderation(id = ${person.id},sort_by=${sortBy},type=${type},rate_down=${rateDown},rate_up=${rateUp}, first_name=${firstName}, last_name=${lastName}, city=${city})}"><img-->
-                                        <!--src="../resources/img/icons/edit.png" width="40dp" height="40dp"/></a></td>-->
+                            <!--<a th:href="@{/users/moderation(id = ${person.id},sort_by=${sortBy},type=${type},rate_down=${rateDown},rate_up=${rateUp}, first_name=${firstName}, last_name=${lastName}, city=${city})}"><img-->
+                            <!--src="../resources/img/icons/edit.png" width="40dp" height="40dp"/></a></td>-->
                             <!--<td>-->
-                                <!--<a th:href="@{/users/delete(id = ${person.id},sort_by=${sortBy},type=${type},rate_down=${rateDown},rate_up=${rateUp}, first_name=${firstName}, last_name=${lastName}, city=${city})}"><img-->
-                                        <!--src="../resources/img/icons/del.png" width="40dp" height="40dp"/></a></td>-->
+                            <!--<a th:href="@{/users/delete(id = ${person.id},sort_by=${sortBy},type=${type},rate_down=${rateDown},rate_up=${rateUp}, first_name=${firstName}, last_name=${lastName}, city=${city})}"><img-->
+                            <!--src="../resources/img/icons/del.png" width="40dp" height="40dp"/></a></td>-->
                         </tr>
                         </tbody>
                     </table>
@@ -364,7 +337,7 @@
         $alertBtn = $('#alertBtn'),
         full_screen = false;
 
-    $().ready(function(){
+    $().ready(function () {
         $table.bootstrapTable({
             toolbar: ".toolbar",
 
@@ -375,12 +348,12 @@
             pagination: true,
             striped: true,
             pageSize: 8,
-            pageList: [8,10,25,50,100],
+            pageList: [8, 10, 25, 50, 100],
 
-            formatShowingRows: function(pageFrom, pageTo, totalRows){
+            formatShowingRows: function (pageFrom, pageTo, totalRows) {
                 //do nothing here, we don't want to show the text "showing x of y from..."
             },
-            formatRecordsPerPage: function(pageNumber){
+            formatRecordsPerPage: function (pageNumber) {
                 return pageNumber + " rows visible";
             },
             icons: {
@@ -391,7 +364,6 @@
                 detailClose: 'fa fa-minus-circle'
             }
         });
-
 
 
         $(window).resize(function () {
