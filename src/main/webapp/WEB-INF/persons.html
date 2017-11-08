@@ -284,9 +284,17 @@
 
                     <table id = "fresh-table" class="table">
                         <thead>
-                        <tr>
-                            <th>Users</th>
-                        </tr>
+                            <th data-field="id" data-sortable="true">ID</th>
+                            <th data-field="login" data-sortable="true">Login</th>
+                            <th data-field="first_name" data-sortable="true">First name</th>
+                            <th data-field="last_name" data-sortable="true">Last name</th>
+                            <th data-field="city" data-sortable="true">City</th>
+                            <th data-field="email" data-sortable="true">Email</th>
+                            <th data-field="phone" data-sortable="true">Phone</th>
+                            <th data-field="type" data-sortable="true">Type</th>
+                            <th data-field="rate" data-sortable="true">Rate</th>
+                            <th data-field="token" data-sortable="true">Token</th>
+                            <th data-field="actions" data-formatter="operateFormatter" data-events="operateEvents">Actions</th>
                         </thead>
                         <tbody>
                         <tr>
@@ -312,8 +320,9 @@
                                 <a th:href="@{/users/moderation(sort_by=${inc}+2,id=${id},type=${type},rate_down=${rateDown},rate_up=${rateUp}, first_name=${firstName}, last_name=${lastName}, city=${city})}">Рейтинг</a>
                             </td>
                             <td th:text="${#messages.msg('words.token')}">Токен</td>
-                            <td th:text="${#messages.msg('words.change')}">Изменить</td>
-                            <td th:text="${#messages.msg('words.delete')}">Удалить</td>
+                            <td></td>
+                            <!--<td th:text="${#messages.msg('words.change')}">Изменить</td>-->
+                            <!--<td th:text="${#messages.msg('words.delete')}">Удалить</td>-->
                         </tr>
                         <tr th:each="person : ${persons}">
                             <td th:text="${person.id}">Some text</td>
@@ -326,12 +335,12 @@
                             <td th:text="${person.type}">Some text</td>
                             <td th:text="${person.rate}">Some text</td>
                             <td th:text="${person.token}">Some text</td>
-                            <td>
-                                <a th:href="@{/users/moderation(id = ${person.id},sort_by=${sortBy},type=${type},rate_down=${rateDown},rate_up=${rateUp}, first_name=${firstName}, last_name=${lastName}, city=${city})}"><img
-                                        src="../resources/img/icons/edit.png" width="40dp" height="40dp"/></a></td>
-                            <td>
-                                <a th:href="@{/users/delete(id = ${person.id},sort_by=${sortBy},type=${type},rate_down=${rateDown},rate_up=${rateUp}, first_name=${firstName}, last_name=${lastName}, city=${city})}"><img
-                                        src="../resources/img/icons/del.png" width="40dp" height="40dp"/></a></td>
+                            <!--<td>-->
+                                <!--<a th:href="@{/users/moderation(id = ${person.id},sort_by=${sortBy},type=${type},rate_down=${rateDown},rate_up=${rateUp}, first_name=${firstName}, last_name=${lastName}, city=${city})}"><img-->
+                                        <!--src="../resources/img/icons/edit.png" width="40dp" height="40dp"/></a></td>-->
+                            <!--<td>-->
+                                <!--<a th:href="@{/users/delete(id = ${person.id},sort_by=${sortBy},type=${type},rate_down=${rateDown},rate_up=${rateUp}, first_name=${firstName}, last_name=${lastName}, city=${city})}"><img-->
+                                        <!--src="../resources/img/icons/del.png" width="40dp" height="40dp"/></a></td>-->
                         </tr>
                         </tbody>
                     </table>
