@@ -189,10 +189,6 @@
                         <input name="login" id="login" type="text" pattern="[a-zA-Z0-9._\-]{4,20}" class="form-control"
                                placeholder="Логин" disabled="disabled" aria-label="Логин"
                                th:value="${insertPerson.getLogin()}" required=""/>
-                        <label for="login" th:if="${error_login}" th:text="${#messages.msg('error.user.login.free')}"
-                               th:class="'error'">Name Error</label>
-                        <label for="login" th:if="${#fields.hasErrors('login')}"
-                               th:text="${#messages.msg('error.user.login.size')}" th:class="'error'">Name Error</label>
                     </div>
                     <br/>
                     <br/>
@@ -201,6 +197,9 @@
                         <input name="firstName" type="text" class="form-control"
                                th:value="${insertPerson.getFirstName()}" placeholder="Имя" aria-label="Имя"
                                required=""/>
+                    </div>
+                    <div class="input-group" style="display: none">
+                        <input name="id" type="number" class="form-control" th:value="${insertPerson.getId()}"/>
                     </div>
                     <br/>
                     <div class="input-group">
@@ -217,11 +216,6 @@
                         <input name="email" id="email" type="email" class="form-control" disabled="disabled"
                                th:value="${insertPerson.getEmail()}" placeholder="Email" aria-label="Email"
                                required=""/>
-                        <label for="email" th:if="${error_email_free}"
-                               th:text="${#messages.msg('error.user.email.free')}" th:class="'error'">Name Error</label>
-                        <label for="email" th:if="${error_email_valid}"
-                               th:text="${#messages.msg('error.user.email.valid')}" th:class="'error'">Name
-                            Error</label>
                     </div>
                     <br/>
                     <div class="input-group">
