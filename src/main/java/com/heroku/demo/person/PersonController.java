@@ -177,8 +177,6 @@ public class PersonController {
     @RequestMapping(value = "/moderation", method = RequestMethod.POST)
     public String signUpModer(@ModelAttribute("insertPerson") @Valid Person person,
                               BindingResult result,
-                              @RequestParam("file") MultipartFile file,
-                              @ModelAttribute("pass2") String pass2,
                               ModelMap model, Locale locale,
                               @RequestParam(value = "type", required = false) Integer type,
                               @RequestParam(value = "rate_down", required = false) Long rateDown,
@@ -188,10 +186,7 @@ public class PersonController {
                               @RequestParam(value = "city", required = false) String city,
                               @RequestParam(value = "sort_by", required = false) Integer sortBy) {
 
-        if (!personService.throwsErrors(person, pass2) || result.hasErrors()) {
-            model.addAttribute("error_login", !personService.isLoginFree(person.getLogin()));
-            model.addAttribute("error_phone", !personService.isPhoneFree(person.getPhoneNumber()));
-            model.addAttribute("error_pass", !person.getPass().equals(pass2));
+        if (!personService.throwsErrors(person, null) || result.hasErrors()) {
             model.addAttribute("error_email_free", !personService.isEmailFree(person.getEmail()));
             model.addAttribute("error_email_valid", !personService.isEmailCorrect(person.getEmail()));
             model.addAttribute("insertPerson", person);
@@ -200,11 +195,10 @@ public class PersonController {
         }
         Person personWithBD = personService.getById(person.getId());
 
-        person.setEmail(person.getEmail().toLowerCase());
-        person.setLogin(person.getLogin().toLowerCase());
-        person.setImageUrl(file.getOriginalFilename());
-        person.setRole(person.getRole().equals("") ? "ROLE_USER" : person.getRole());
-        personService.editPerson(person);
+        personWithBD.setType(person.getType());
+        personWithBD.setCity(person.getCity());
+        personWithBD.setRole(person.getRole().equals("") ? "ROLE_USER" : person.getRole());
+        personService.editPerson(personWithBD);
         model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.registration", null, locale)));
         return persons_last(model, person.getId(), type, rateDown, rateUp, firstName, lastName, city, sortBy);
     }
