@@ -185,12 +185,15 @@ public class PersonController {
             model.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("error.user.add", null, locale)));
             return persons_last(model, person.getId(), type, rateDown, rateUp, firstName, lastName, city);
         }
+        if (person==null) logger.info("ERROR PERSON IS NULL");
         Person personWithBD = personService.getById(person.getId());
-
-        personWithBD.setType(person.getType());
-        personWithBD.setCity(person.getCity());
-        personWithBD.setRole(person.getRole().equals("") ? "ROLE_USER" : person.getRole());
-        personService.editPerson(personWithBD);
+        if (personWithBD==null) logger.info("ERROR PERSONWITHBD IS NULL");
+        else {
+            personWithBD.setType(person.getType());
+            personWithBD.setCity(person.getCity());
+            personWithBD.setRole(person.getRole().equals("") ? "ROLE_USER" : person.getRole());
+            personService.editPerson(personWithBD);
+        }
         model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.registration", null, locale)));
         return persons_last(model, person.getId(), type, rateDown, rateUp, firstName, lastName, city);
     }
