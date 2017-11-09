@@ -85,7 +85,7 @@ public class EventController {
             event.setGuideId(p.getId());
         } else event.setGuideId(-1);
         if (!result.hasErrors()) {
-            eventService.editEvent(event);
+            eventService.addEvent(event);
         } else {
             modelMap.addAttribute("file", file);
             modelMap.addAttribute("insertEvent", event);
@@ -146,10 +146,9 @@ public class EventController {
                               @RequestParam(value = "price_down", required = false) Integer priceDown,
                               @RequestParam(value = "category", required = false) Integer category,
                               @RequestParam(value = "words", required = false) String words,
-                              @RequestParam(value = "sort_by", required = false) int sortBy,
                               Locale locale) {
         eventService.delete(id);
-        return events(model, null, priceUp, priceDown, category, words, sortBy, locale);
+        return events(model, null, priceUp, priceDown, category, words, locale);
     }
 
     @RequestMapping(value = "/event", method = RequestMethod.GET)
@@ -222,9 +221,8 @@ public class EventController {
                          @RequestParam(value = "price_down", required = false) Integer priceDown,
                          @RequestParam(value = "category", required = false) Integer category,
                          @RequestParam(value = "words", required = false) String words,
-                         @RequestParam(value = "sort_by", required = false) Integer sortBy,
                          Locale locale) {
-        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, locale.getLanguage().equals("ru") ? 0 : 1, words, sortBy);
+        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, locale.getLanguage().equals("ru") ? 0 : 1, words, null);
         model.addAttribute("events", events);
 
         if (id != null) {
@@ -232,10 +230,21 @@ public class EventController {
             model.addAttribute("insertEvent", editEvent);
         } else model.addAttribute("insertEvent", new Event());
 
-        if (sortBy == null) model.addAttribute("inc", 0);
-        else if (sortBy % 2 == 0) model.addAttribute("inc", 1);
-        else model.addAttribute("inc", 0);
         return "events";
+    }
+
+    @RequestMapping(value = "/moderation", method = RequestMethod.POST)
+    public String insertModeration(@ModelAttribute("inputEvent") Event event,
+                                   ModelMap modelMap) {
+        Event event1 = eventService.getById(event.getId());
+        event1.setType(event.getType());
+        event1.setCategory(event.getCategory());
+        event1.setName(event.getName());
+        event1.setDescription(event.getDescription());
+        event1.setPlace(event.getPlace());
+        eventService.editEvent(event1);
+        modelMap.addAttribute("insertEvent", event);
+        return "event_add";
     }
 
     @RequestMapping(value = "/addevent", method = RequestMethod.POST)

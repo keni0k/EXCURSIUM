@@ -160,38 +160,30 @@ public class PersonController {
                                @RequestParam(value = "rate_up", required = false) Long rateUp,
                                @RequestParam(value = "first_name", required = false) String firstName,
                                @RequestParam(value = "last_name", required = false) String lastName,
-                               @RequestParam(value = "city", required = false) String city,
-                               @RequestParam(value = "sort_by", required = false) Integer sortBy) {
-        List<Person> persons = personService.getByFilter(type, rateDown, rateUp, firstName, lastName, city, sortBy);
+                               @RequestParam(value = "city", required = false) String city) {
+        List<Person> persons = personService.getByFilter(type, rateDown, rateUp, firstName, lastName, city, null);
         model.addAttribute("persons", persons);
         if (id != null) {
             Person editPerson = personService.getById(id);
             model.addAttribute("insertPerson", editPerson);
         } else model.addAttribute("insertPerson", new Person());
-        if (sortBy == null) model.addAttribute("inc", 0);
-        else if (sortBy % 2 == 0) model.addAttribute("inc", 1);
-        else model.addAttribute("inc", 0);
         return "persons";
     }
 
     @RequestMapping(value = "/moderation", method = RequestMethod.POST)
-    public String signUpModer(@ModelAttribute("insertPerson") @Valid Person person,
-                              BindingResult result,
+    public String signUpModer(@ModelAttribute("insertPerson") Person person,
                               ModelMap model, Locale locale,
                               @RequestParam(value = "type", required = false) Integer type,
                               @RequestParam(value = "rate_down", required = false) Long rateDown,
                               @RequestParam(value = "rate_up", required = false) Long rateUp,
                               @RequestParam(value = "first_name", required = false) String firstName,
                               @RequestParam(value = "last_name", required = false) String lastName,
-                              @RequestParam(value = "city", required = false) String city,
-                              @RequestParam(value = "sort_by", required = false) Integer sortBy) {
+                              @RequestParam(value = "city", required = false) String city) {
 
-        if (!personService.throwsErrors(person, null) || result.hasErrors()) {
-            model.addAttribute("error_email_free", !personService.isEmailFree(person.getEmail()));
-            model.addAttribute("error_email_valid", !personService.isEmailCorrect(person.getEmail()));
+        if (!personService.throwsErrors(person, null)) {
             model.addAttribute("insertPerson", person);
             model.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("error.user.add", null, locale)));
-            return persons_last(model, person.getId(), type, rateDown, rateUp, firstName, lastName, city, sortBy);
+            return persons_last(model, person.getId(), type, rateDown, rateUp, firstName, lastName, city);
         }
         Person personWithBD = personService.getById(person.getId());
 
@@ -200,7 +192,7 @@ public class PersonController {
         personWithBD.setRole(person.getRole().equals("") ? "ROLE_USER" : person.getRole());
         personService.editPerson(personWithBD);
         model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.registration", null, locale)));
-        return persons_last(model, person.getId(), type, rateDown, rateUp, firstName, lastName, city, sortBy);
+        return persons_last(model, person.getId(), type, rateDown, rateUp, firstName, lastName, city);
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
@@ -211,10 +203,9 @@ public class PersonController {
                                 @RequestParam(value = "rate_up", required = false) Long rateUp,
                                 @RequestParam(value = "first_name", required = false) String firstName,
                                 @RequestParam(value = "last_name", required = false) String lastName,
-                                @RequestParam(value = "city", required = false) String city,
-                                @RequestParam(value = "sort_by", required = false) Integer sortBy) {
+                                @RequestParam(value = "city", required = false) String city) {
         personService.delete(Long.parseLong(id));
-        return persons_last(model, null, type, rateDown, rateUp, firstName, lastName, city, sortBy);
+        return persons_last(model, null, type, rateDown, rateUp, firstName, lastName, city);
     }
 
   /*

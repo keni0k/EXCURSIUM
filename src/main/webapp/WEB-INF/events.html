@@ -158,7 +158,7 @@
         <div class="row" th:if="${id}">
             <div class="col-md-12 col-lg-8">
 
-                <form th:object="${insertEvent}" action="/events/add" method="POST" enctype="multipart/form-data">
+                <form th:object="${insertEvent}" action="/events/moderation" method="POST" enctype="multipart/form-data">
 
                     <div class="panel panel-default">
                         <div class="panel-heading" th:text="${#messages.msg('words.type')}">
