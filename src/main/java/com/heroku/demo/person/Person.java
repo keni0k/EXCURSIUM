@@ -34,7 +34,15 @@ public class Person {
     private String token = "";
     private String imageUrl = "";
     private String role = "";
+    private String time = "";
 
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
 
     public String getLogin() {
         return login;

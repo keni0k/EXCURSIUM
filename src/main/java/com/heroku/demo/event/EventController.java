@@ -1,6 +1,5 @@
 package com.heroku.demo.event;
 
-import com.heroku.demo.HomeController;
 import com.heroku.demo.person.Person;
 import com.heroku.demo.person.PersonRepository;
 import com.heroku.demo.person.PersonServiceImpl;
@@ -51,7 +50,7 @@ public class EventController {
     private PhotoServiceImpl photoService;
     private PersonServiceImpl personService;
 
-    private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+    private static final Logger logger = LoggerFactory.getLogger(EventController.class);
 
     @Autowired
     public EventController(PersonRepository personRepository, ReviewRepository reviewRepository,
@@ -79,6 +78,7 @@ public class EventController {
                               @RequestParam("file") MultipartFile file,
                               ModelMap modelMap, Principal principal, Locale locale) {
         event.setTime(new LocalTime().toDateTimeToday().toString());
+        event.setType(-3);
         String loginOrEmail = principal.getName();
         if (!loginOrEmail.equals("")) {
             Person p = personService.getByLoginOrEmail(loginOrEmail);

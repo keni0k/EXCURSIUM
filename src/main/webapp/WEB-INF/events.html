@@ -190,12 +190,6 @@
                     </div>
                     <br/>
                     <div class="input-group">
-                        <span class="input-group-addon">ID</span>
-                        <input class="form-control" type="number" name="id" id="id" th:value="${insertEvent.id}"
-                               required=""/>
-                    </div>
-                    <br/>
-                    <div class="input-group">
                         <span class="input-group-addon" th:text="${#messages.msg('words.name')}">Название</span>
                         <input name="name" type="text" class="form-control" id="name" placeholder="Название"
                                aria-label="Название"
@@ -235,29 +229,6 @@
                         </div>
                     </div>
                     <div class="input-group">
-                        <span class="input-group-addon" th:text="${#messages.msg('words.users_count')}">Количество участников</span>
-                        <input name="usersCount" id="users_count" type="number" class="form-control"
-                               placeholder="Количество участников" required=""
-                               aria-label="Количество участников"
-                               th:value="${insertEvent.getUsersCount()}?${insertEvent.getUsersCount()}"/>
-                        <label for="users_count" th:if="${#fields.hasErrors('usersCount')}"
-                               th:text="${#messages.msg('error.event.users_count')}" th:class="'error'">UsersCount
-                            Error</label>
-                    </div>
-                    <br/>
-                    <div class="input-group">
-                        <span class="input-group-addon" th:text="${#messages.msg('words.duration')}">Длительность</span>
-                        <input name="duration" id="duration" type="number" class="form-control"
-                               placeholder="Длительность:" required=""
-                               aria-label="Длительность:"
-                               th:value="${insertEvent.getDuration()}?${insertEvent.getDuration()}"/>
-                        <span class="input-group-addon" th:text="${#messages.msg('words.hours')}">часов</span>
-                        <label for="duration" th:if="${#fields.hasErrors('duration')}"
-                               th:text="${#messages.msg('error.event.duration')}" th:class="'error'">Duration
-                            Error</label>
-                    </div>
-                    <br/>
-                    <div class="input-group">
                         <span class="input-group-addon" th:text="${#messages.msg('words.place')}">Место встречи</span>
                         <input name="place" id="place" type="text" class="form-control" placeholder="Место встречи"
                                required=""
@@ -267,23 +238,7 @@
                                th:text="${#messages.msg('error.event.place')}" th:class="'error'">Place Error</label>
                     </div>
                     <br/>
-                    <div class="input-group">
-                        <span class="input-group-addon" th:text="${#messages.msg('words.price')}">Цена</span>
-                        <input name="price" id="price" type="number" class="form-control" placeholder="Цена"
-                               aria-label="Цена" required=""
-                               th:value="${insertEvent.getPrice()}?${insertEvent.getPrice()}"/>
-                        <span class="input-group-addon">&#8381;</span>
-                        <label for="price" th:if="${#fields.hasErrors('price')}"
-                               th:text="${#messages.msg('error.event.price')}" th:class="'error'">Price Error</label>
-                    </div>
-                    <br/>
-                    <div class="input-group">
-                        <span class="input-group-addon" th:text="${#messages.msg('words.photos')}">Фотографии</span>
-                        <input name="file" type="file" id="file" class="form-control" placeholder="Фотографии"
-                               required=""
-                               accept="image/jpeg,image/png" aria-label="Фотографии"/>
-                        <!--<label for="file" th:if="${error_data}" th:text="${#messages.msg('error.event.file')}" th:class="'error'">File Error</label>-->
-                    </div>
+                    <img th:src="${insertEvent.getPhotoUrl()}">
                     <br/>
 
                     <div class="panel panel-default">

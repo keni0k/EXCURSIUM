@@ -86,7 +86,7 @@ public class HomeController {
 
         email = new MailjetRequest(Email.resource)
                 .property(Email.FROMNAME, "Excursium")
-                .property(Email.FROMEMAIL, "support@excursium.me")
+                .property(Email.FROMEMAIL, "elishanto@gmail.com")
                 .property(Email.SUBJECT, "Subject")
                 .property(Email.TEXTPART, "Java is coming!...")
                 .property(Email.RECIPIENTS, recipients)

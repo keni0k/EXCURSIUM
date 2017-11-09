@@ -1,6 +1,9 @@
 package com.heroku.demo.person;
 
 import com.heroku.demo.utils.MessageUtil;
+import org.joda.time.LocalTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.MediaType;
@@ -11,11 +14,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import static com.heroku.demo.utils.Utils.randomToken;
+import static com.heroku.demo.utils.Utils.*;
 
 @Controller
 @RequestMapping("/users")
@@ -26,6 +32,9 @@ public class PersonController {
     private PersonServiceImpl personService;
 
     private final MessageSource messageSource;
+
+    private static final Logger logger = LoggerFactory.getLogger(PersonController.class);
+
 
     @Autowired
     public PersonController(PersonRepository personRepository, MessageSource messageSource) {
@@ -59,11 +68,54 @@ public class PersonController {
         }
         person.setEmail(person.getEmail().toLowerCase());
         person.setLogin(person.getLogin().toLowerCase());
-        person.setImageUrl(file.getOriginalFilename());
+        if (file!=null)
+            person.setImageUrl(file.getOriginalFilename());
+        else {
+            model.addAttribute("message", new MessageUtil("danger", "You failed to upload file because the file is null."));// messageSource.getMessage("success.user.registration", null, locale)));
+            return persons(model);
+        }
         person.setRole("ROLE_USER");
-        personService.addPerson(person);
-        model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.registration", null, locale)));
-        return persons(model);
+        person.setType(-3);
+        person.setTime(new LocalTime().toDateTimeToday().toString());
+
+        if (!file.isEmpty()) {
+            try {
+                byte[] bytes = file.getBytes();
+
+                // Creating the directory to store file
+                String rootPath = System.getProperty("catalina.home");
+                File dir = new File(rootPath + File.separator + "tmpFiles");
+                if (!dir.exists())
+                    dir.mkdirs();
+
+                String fileName = file.getOriginalFilename();
+
+                // Create the file on server
+                File serverFile = new File(fileName);
+                BufferedOutputStream stream = new BufferedOutputStream(
+                        new FileOutputStream(serverFile));
+                stream.write(bytes);
+                stream.close();
+
+                if (getFileSizeMegaBytes(serverFile) > 1)
+                    serverFile = compress(serverFile, getFileExtension(fileName), getFileSizeMegaBytes(serverFile));
+
+                String photoToken = randomToken(32) + ".jpg";
+                putImg(serverFile.getAbsolutePath(), photoToken);
+                person.setImageUrl(photoToken);
+                personService.addPerson(person);
+                model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.registration", null, locale)));
+            } catch (Exception e) {
+                logger.error("You failed to upload file => " + e.getMessage());
+                personService.delete(person.getId());
+                model.addAttribute("message", new MessageUtil("danger", "You failed to upload file. Please, try again."));// messageSource.getMessage("success.user.registration", null, locale)));
+                return persons(model);
+            }
+            return persons(model);
+        } else {
+            model.addAttribute("message", new MessageUtil("danger", "You failed to upload file because the file is empty."));// messageSource.getMessage("success.user.registration", null, locale)));
+            return persons(model);
+        }
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -135,7 +187,6 @@ public class PersonController {
                               @RequestParam(value = "last_name", required = false) String lastName,
                               @RequestParam(value = "city", required = false) String city,
                               @RequestParam(value = "sort_by", required = false) Integer sortBy) {
-        person.setToken(randomToken(32));
 
         if (!personService.throwsErrors(person, pass2) || result.hasErrors()) {
             model.addAttribute("error_login", !personService.isLoginFree(person.getLogin()));
@@ -147,6 +198,8 @@ public class PersonController {
             model.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("error.user.add", null, locale)));
             return persons_last(model, person.getId(), type, rateDown, rateUp, firstName, lastName, city, sortBy);
         }
+        Person personWithBD = personService.getById(person.getId());
+
         person.setEmail(person.getEmail().toLowerCase());
         person.setLogin(person.getLogin().toLowerCase());
         person.setImageUrl(file.getOriginalFilename());
