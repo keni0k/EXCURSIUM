@@ -171,7 +171,9 @@ public class PersonController {
     }
 
     @RequestMapping(value = "/moderation", method = RequestMethod.POST)
-    public String signUpModer(@ModelAttribute("insertPerson") Person person,
+    public String signUpModer(@ModelAttribute("type") int typePerson,
+                              @ModelAttribute("city") String cityPerson,
+                              @ModelAttribute("id") long idPerson,
                               ModelMap model, Locale locale,
                               @RequestParam(value = "type", required = false) Integer type,
                               @RequestParam(value = "rate_down", required = false) Long rateDown,
@@ -179,23 +181,17 @@ public class PersonController {
                               @RequestParam(value = "first_name", required = false) String firstName,
                               @RequestParam(value = "last_name", required = false) String lastName,
                               @RequestParam(value = "city", required = false) String city) {
-
-        if (!personService.throwsErrors(person, null)) {
-            model.addAttribute("insertPerson", person);
-            model.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("error.user.add", null, locale)));
-            return persons_last(model, person.getId(), type, rateDown, rateUp, firstName, lastName, city);
-        }
-        logger.info("PERSONID:"+person.getId());
-        Person personWithBD = personService.getById(person.getId());
+        logger.info("PERSONID:"+idPerson);
+        Person personWithBD = personService.getById(idPerson);
         if (personWithBD==null) logger.info("ERROR PERSONWITHBD IS NULL");
         else {
-            personWithBD.setType(person.getType());
-            personWithBD.setCity(person.getCity());
-            personWithBD.setRole(person.getRole().equals("") ? "ROLE_USER" : person.getRole());
+            personWithBD.setType(typePerson);
+            personWithBD.setCity(cityPerson);
+//            personWithBD.setRole(person.getRole().equals("") ? "ROLE_USER" : person.getRole());
             personService.editPerson(personWithBD);
         }
         model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.registration", null, locale)));
-        return persons_last(model, person.getId(), type, rateDown, rateUp, firstName, lastName, city);
+        return persons_last(model, idPerson, type, rateDown, rateUp, firstName, lastName, city);
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
