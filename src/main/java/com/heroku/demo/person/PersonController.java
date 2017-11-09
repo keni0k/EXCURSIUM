@@ -102,7 +102,7 @@ public class PersonController {
 
                 String photoToken = randomToken(32) + ".jpg";
                 putImg(serverFile.getAbsolutePath(), photoToken);
-                person.setImageUrl(photoToken);
+                person.setImageUrl("https://excursium.blob.core.windows.net/img/"+photoToken);
                 personService.addPerson(person);
                 model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.registration", null, locale)));
             } catch (Exception e) {
@@ -181,7 +181,6 @@ public class PersonController {
                               @RequestParam(value = "first_name", required = false) String firstName,
                               @RequestParam(value = "last_name", required = false) String lastName,
                               @RequestParam(value = "city", required = false) String city) {
-        logger.info("PERSONID:"+idPerson);
         Person personWithBD = personService.getById(idPerson);
         if (personWithBD==null) logger.info("ERROR PERSONWITHBD IS NULL");
         else {
@@ -191,7 +190,7 @@ public class PersonController {
             personService.editPerson(personWithBD);
         }
         model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.registration", null, locale)));
-        return persons_last(model, idPerson, type, rateDown, rateUp, firstName, lastName, city);
+        return persons_last(model, null, type, rateDown, rateUp, firstName, lastName, city);
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.GET)

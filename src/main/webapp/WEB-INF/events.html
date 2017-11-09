@@ -238,9 +238,13 @@
                                th:text="${#messages.msg('error.event.place')}" th:class="'error'">Place Error</label>
                     </div>
                     <br/>
-                    <img th:src="${insertEvent.pathToPhoto}"/>
+                    <div class="view overlay hm-white-slight z-depth-1">
+                        <img th:src="${insertEvent.pathToPhoto}" class="img-fluid" alt=""/>
+                        <a>
+                            <div class="mask waves-effect waves-light"></div>
+                        </a>
+                    </div>
                     <br/>
-
                     <div class="panel panel-default">
                         <div class="panel-heading" th:text="${#messages.msg('words.language')}">
                             Язык экскурсии
