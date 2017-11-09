@@ -185,7 +185,7 @@ public class PersonController {
             model.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("error.user.add", null, locale)));
             return persons_last(model, person.getId(), type, rateDown, rateUp, firstName, lastName, city);
         }
-        if (person==null) logger.info("ERROR PERSON IS NULL");
+        logger.info("PERSONID:"+person.getId());
         Person personWithBD = personService.getById(person.getId());
         if (personWithBD==null) logger.info("ERROR PERSONWITHBD IS NULL");
         else {
