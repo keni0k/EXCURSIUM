@@ -21,6 +21,7 @@ import javax.validation.Valid;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -56,8 +57,12 @@ public class PersonController {
     }
 
     @RequestMapping(value = "/account", method = RequestMethod.GET)
-    public String account(ModelMap model, @ModelAttribute("id") long id) {
-        Person person = personService.getById(id);
+    public String account(ModelMap model, Principal principal) {
+        String loginOrEmail = principal.getName();
+        Person person = new Person();
+        if (!loginOrEmail.equals("")) {
+            person = personService.getByLoginOrEmail(loginOrEmail);
+        }
         model.addAttribute("person", person);
         model.addAttribute("events", eventService.getByGuideId(person.getId()));
         return "account";

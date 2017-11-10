@@ -184,10 +184,6 @@ public class EventController {
                                  @RequestParam(value = "words", required = false) String words,
                                  Locale locale) {
         List<Event> events = eventService.getByFilter(priceUp, priceDown, category, locale.getLanguage().equals("ru") ? 0 : 1, words, sortBy == null ? 0 : sortBy);
-        int size = events.size() % 3;
-        for (int i = 0; i < size; i++) {
-            events.remove(events.size() - 1);
-        }
         model.addAttribute("events", events);
         model.addAttribute("utils", new UtilsForWeb());
         return "event_list1";
@@ -263,7 +259,7 @@ public class EventController {
                                    @ModelAttribute("place") String place,
                                    @ModelAttribute("category") int category,
                                    @ModelAttribute("language") int language,
-                                   ModelMap modelMap) {
+                                   ModelMap modelMap, Locale locale) {
         Event event1 = eventService.getById(id);
         event1.setType(type);
         event1.setCategory(category);
@@ -272,8 +268,10 @@ public class EventController {
         event1.setPlace(place);
         event1.setLanguage(language);
         eventService.editEvent(event1);
+        List<Event> events = eventService.getByFilter(null, null, null, locale.getLanguage().equals("ru") ? 0 : 1, null, null);
+        modelMap.addAttribute("events", events);
         modelMap.addAttribute("insertEvent", event1);
-        return "event_add";
+        return "events";
     }
 
     @RequestMapping(value = "/addevent", method = RequestMethod.POST)
