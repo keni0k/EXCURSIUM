@@ -253,6 +253,9 @@
                             </div>
                         </div>
                     </div>
+                    <div class="input-group" style="display: none">
+                        <input name="id" type="number" class="form-control" th:value="${insertEvent.getId()}"/>
+                    </div>
                     <br/>
                     <button type="reset" class="btn btn-default" th:text="${#messages.msg('words.reset')}">Сброс
                     </button>
