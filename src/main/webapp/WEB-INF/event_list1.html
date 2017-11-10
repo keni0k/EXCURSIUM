@@ -227,8 +227,7 @@ th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#http
             <div class="col-sm-8">
                 <h2 class="title text-center" th:text="${#messages.msg('titles.excursions')}">Экскурсии</h2>
                 <!--Grid column-->
-                <div class="col-sm-6" th:each="i : ${#numbers.sequence( 0, ${events.size()})}"
-                th:with="event=${events.get(i)}">
+                <div class="col-sm-6" th:each="i : ${#numbers.sequence( 0, events.size())}" th:with="event=${events.get(i)}">
                 <div class="card">
                     <!--Card image-->
                     <div class="view overlay hm-white-slight z-depth-1">
