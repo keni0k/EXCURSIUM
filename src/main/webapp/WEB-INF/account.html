@@ -172,7 +172,8 @@
 
                                     <!--Text-->
                                     <p class="card-text mt-3">тел.
-                                    <th:block th:text="${person.getPhoneNumber()}"/></p>
+                                        <th:block th:text="${person.getPhoneNumber()}"/>
+                                    </p>
 
                                     <button type="button" class="btn btn-info waves-effect waves-light"
                                             data-toggle="modal" data-target="#modalContactUser">Связаться<i
@@ -245,153 +246,78 @@
                             <!-- Heading -->
 
                             <!-- Card row -->
-                            <div class="card-deck">
+                            <div class="card-deck" th:each="i : ${#numbers.sequence( 0, events.size()-1)}">
 
-                                <!--Card-->
-                                <div class="card card-cascade narrower mb-5">
+                                <th:block th:if="${i%2==0}" th:with="inc = ${i!=events.size()-1?1:0}">
+                                    <!--Card-->
+                                    <div class="card card-cascade narrower mb-5"  th:each="j : ${#numbers.sequence(i,i+inc)}" th:with="event=${events.get(j)}">
 
-                                    <!--Card image-->
-                                    <div class="view overlay hm-white-slight">
-                                        <img src="#" class="img-fluid" alt=""/>
-                                        <a href="#">
-                                            <div class="mask waves-effect waves-light"></div>
-                                        </a>
-                                    </div>
+                                        <!--Card image-->
+                                        <div class="view overlay hm-white-slight">
+                                            <img th:src="${event.getPhotoUrl()}" src="#" class="img-fluid" alt=""/>
+                                            <a href="#">
+                                                <div class="mask waves-effect waves-light"></div>
+                                            </a>
+                                        </div>
 
-                                    <!--Card content-->
-                                    <div class="card-body pb-0">
-                                        <!--Title-->
-                                        <h4 class="card-title">Название экскурсии</h4>
-                                        <!--Text-->
-                                        <p class="card-text">Описание
-                                        </p>
-                                    </div>
+                                        <!--Card content-->
+                                        <div class="card-body pb-0">
+                                            <!--Title-->
+                                            <h4 class="card-title" th:text="${event.getName()}">Название экскурсии</h4>
+                                            <!--Text-->
+                                            <p class="card-text" th:text="${event.getSmallDescription()}">Описание</p>
+                                        </div>
 
-                                    <!--Card footer-->
-                                    <div class="card-footer links-light">
+                                        <!--Card footer-->
+                                        <div class="card-footer links-light">
                                         <span class="left pt-2">
                                             <a><i class="fa fa-share-alt mr-2"></i></a>
                                             <a><i class="fa fa-heart-o mr-2"></i>10</a>
                                         </span>
-                                        <span class="right">
+                                            <span class="right">
                                             <a href="#" class="waves-effect p-2">Live Preview <i
                                                     class="fa fa-photo ml-1"></i></a>
                                         </span>
+                                        </div>
+
                                     </div>
+                                    <!--/.Card-->
 
-                                </div>
-                                <!--/.Card-->
+                                    <!--Card-->
+                                    <!--<div class="card card-cascade narrower d-flex mb-5">
 
-                                <!--Card-->
-                                <div class="card card-cascade narrower d-flex mb-5">
+                                        &lt;!&ndash;Card image&ndash;&gt;
+                                        <div class="view overlay hm-white-slight">
+                                            <img src="#" class="img-fluid" alt=""/>
+                                            <a href="#">
+                                                <div class="mask waves-effect waves-light"></div>
+                                            </a>
+                                        </div>
 
-                                    <!--Card image-->
-                                    <div class="view overlay hm-white-slight">
-                                        <img src="#" class="img-fluid" alt=""/>
-                                        <a href="#">
-                                            <div class="mask waves-effect waves-light"></div>
-                                        </a>
-                                    </div>
+                                        &lt;!&ndash;Card content&ndash;&gt;
+                                        <div class="card-body">
+                                            &lt;!&ndash;Title&ndash;&gt;
+                                            <h4 class="card-title">Название экскурсии</h4>
+                                            &lt;!&ndash;Text&ndash;&gt;
+                                            <p class="card-text">Описание
+                                            </p>
+                                        </div>
 
-                                    <!--Card content-->
-                                    <div class="card-body">
-                                        <!--Title-->
-                                        <h4 class="card-title">Название экскурсии</h4>
-                                        <!--Text-->
-                                        <p class="card-text">Описание
-                                        </p>
-                                    </div>
-
-                                    <!--Card footer-->
-                                    <div class="card-footer links-light">
+                                        &lt;!&ndash;Card footer&ndash;&gt;
+                                        <div class="card-footer links-light">
                                         <span class="left pt-2">
                                             <a><i class="fa fa-share-alt mr-2"></i></a>
                                             <a><i class="fa fa-heart-o mr-2"></i>10</a>
                                         </span>
-                                        <span class="right">
+                                            <span class="right">
                                             <a href="#" class="waves-effect p-2">Live Preview <i
                                                     class="fa fa-photo ml-1"></i></a>
                                         </span>
-                                    </div>
+                                        </div>
 
-                                </div>
-                                <!--/.Card-->
-
-                            </div>
-                            <!-- Card row -->
-
-                            <!-- Card row -->
-                            <div class="card-deck">
-
-                                <!--Card-->
-                                <div class="card card-cascade narrower d-flex mb-5">
-
-                                    <!--Card image-->
-                                    <div class="view overlay hm-white-slight">
-                                        <img src="#" class="img-fluid" alt=""/>
-                                        <a href="#">
-                                            <div class="mask waves-effect waves-light"></div>
-                                        </a>
-                                    </div>
-
-                                    <!--Card content-->
-                                    <div class="card-body">
-                                        <!--Title-->
-                                        <h4 class="card-title">Название экскурсии</h4>
-                                        <!--Text-->
-                                        <p class="card-text">Описание
-                                        </p>
-                                    </div>
-
-                                    <!--Card footer-->
-                                    <div class="card-footer links-light">
-                                        <span class="left pt-2">
-                                            <a><i class="fa fa-share-alt mr-2"></i></a>
-                                            <a><i class="fa fa-heart-o mr-2"></i>10</a>
-                                        </span>
-                                        <span class="right">
-                                            <a href="#" class="waves-effect p-2">Live Preview <i
-                                                    class="fa fa-photo ml-1"></i></a>
-                                        </span>
-                                    </div>
-
-                                </div>
-                                <!--/.Card-->
-
-                                <!--Card-->
-                                <div class="card card-cascade narrower d-flex mb-5">
-
-                                    <!--Card image-->
-                                    <div class="view overlay hm-white-slight">
-                                        <img src="#s" class="img-fluid" alt=""/>
-                                        <a href="#">
-                                            <div class="mask waves-effect waves-light"></div>
-                                        </a>
-                                    </div>
-
-                                    <!--Card content-->
-                                    <div class="card-body">
-                                        <!--Title-->
-                                        <h4 class="card-title">Название экскурсии</h4>
-                                        <!--Text-->
-                                        <p class="card-text">Описание
-                                        </p>
-                                    </div>
-
-                                    <!--Card footer-->
-                                    <div class="card-footer links-light">
-                                        <span class="left pt-2">
-                                            <a><i class="fa fa-share-alt mr-2"></i></a>
-                                            <a><i class="fa fa-heart-o mr-2"></i>10</a>
-                                        </span>
-                                        <span class="right">
-                                            <a href="#" class="waves-effect p-2">Live Preview <i
-                                                    class="fa fa-photo ml-1"></i></a>
-                                        </span>
-                                    </div>
-
-                                </div>
-                                <!--/.Card-->
+                                    </div>-->
+                                    <!--/.Card-->
+                                </th:block>
 
                             </div>
                             <!-- Card row -->
@@ -478,7 +404,7 @@
                                     <!-- Tab panels -->
                                     <div class="tab-content">
                                         <!--Panel 7-->
-                                        <div class="tab-pane fade in active show" id="panel77" role="tabpanel"
+                                        <div class="tab-pane fade in active" id="panel77" role="tabpanel"
                                              aria-expanded="true">
 
                                             <!--Body-->
