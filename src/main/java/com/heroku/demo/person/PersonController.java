@@ -123,6 +123,11 @@ public class PersonController {
         return "login";
     }
 
+    @RequestMapping(value = "/account", method = RequestMethod.GET)
+    public String myAccount(){
+        return "account";
+    }
+
     @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET, value = "/getbytoken")
     @ResponseBody
     public String getPerson(@ModelAttribute("token") String token, @ModelAttribute("auth") String authKey) {
