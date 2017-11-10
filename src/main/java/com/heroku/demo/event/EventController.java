@@ -256,16 +256,23 @@ public class EventController {
     }
 
     @RequestMapping(value = "/moderation", method = RequestMethod.POST)
-    public String insertModeration(@ModelAttribute("inputEvent") Event event,
+    public String insertModeration(@ModelAttribute("type") int type,
+                                   @ModelAttribute("name") String name,
+                                   @ModelAttribute("id") long id,
+                                   @ModelAttribute("description") String description,
+                                   @ModelAttribute("place") String place,
+                                   @ModelAttribute("category") int category,
+                                   @ModelAttribute("language") int language,
                                    ModelMap modelMap) {
-        Event event1 = eventService.getById(event.getId());
-        event1.setType(event.getType());
-        event1.setCategory(event.getCategory());
-        event1.setName(event.getName());
-        event1.setDescription(event.getDescription());
-        event1.setPlace(event.getPlace());
+        Event event1 = eventService.getById(id);
+        event1.setType(type);
+        event1.setCategory(category);
+        event1.setName(name);
+        event1.setDescription(description);
+        event1.setPlace(place);
+        event1.setLanguage(language);
         eventService.editEvent(event1);
-        modelMap.addAttribute("insertEvent", event);
+        modelMap.addAttribute("insertEvent", event1);
         return "event_add";
     }
 

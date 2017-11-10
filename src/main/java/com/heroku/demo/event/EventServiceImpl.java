@@ -72,7 +72,7 @@ public class EventServiceImpl implements EventService {
         if (language == -1) isAllLang = true;
 
         String[] wds = words.split(",");
-        List<Event> list = eventRepository.findAll();
+        List<Event> list = getAll();
 
         List<Event> copy = new ArrayList<>();
         for (Event aList : list)
@@ -107,6 +107,17 @@ public class EventServiceImpl implements EventService {
             }
         });
         return copy;
+    }
+
+    @Override
+    public List<Event> getByGuideId(long guideId) {
+        List<Event> eventList = new ArrayList<>();
+        List<Event> copy = getAll();
+        for (Event event:copy) {
+            if (event.getGuideId()==guideId)
+                eventList.add(event);
+        }
+        return eventList;
     }
 
     public List<Event> getByFilter(Integer priceUp, Integer priceDown, Integer category, Integer language, String words, Integer sortBy) {

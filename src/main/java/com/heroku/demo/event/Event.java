@@ -44,7 +44,7 @@ public class Event {
         this.type = type;
     }
 
-    private int type = -1;
+    private int type = -3;
 
     public long getId() {
         return id;
@@ -53,7 +53,7 @@ public class Event {
     @Size(min=5, max=100)
     private String place;
 
-    private int category;
+    private int category=0;
 
     private String time;
 
@@ -71,7 +71,7 @@ public class Event {
         this.language = language;
     }
 
-    private int language;
+    private int language=0;
 
     @Range(min = 1, max = 100)
     private int usersCount;

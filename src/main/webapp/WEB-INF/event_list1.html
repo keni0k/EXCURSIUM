@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="description" content=""/>
@@ -30,7 +30,7 @@ xmlns:th="http://www.thymeleaf.org">
 
     <link rel="stylesheet" href="../resources/libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>
     <script type="text/javascript"
-    src="../resources/libs/bootstrapformhelpers/js/bootstrap-formhelpers.min.js"></script>
+            src="../resources/libs/bootstrapformhelpers/js/bootstrap-formhelpers.min.js"></script>
     <!-- Plugin CSS -->
     <link rel="stylesheet" href="../resources/css/cards.css"/>
 
@@ -51,17 +51,17 @@ xmlns:th="http://www.thymeleaf.org">
     <!-- end -->
 
     <style type="text/css" media="screen">
-    .layout-slider {
-        margin-bottom: 60px;
-        width: 50%;
-    }
+        .layout-slider {
+            margin-bottom: 60px;
+            width: 50%;
+        }
     </style>
 
 
-<title th:text="${#messages.msg('titles.excursions')}">Экскурсии</title>
+    <title th:text="${#messages.msg('titles.excursions')}">Экскурсии</title>
 </head>
 <body style="background-color: #f9f9f9;">
-    <style type="text/css">
+<style type="text/css">
 
     .navbar-fixed-top {
         min-height: 95px;
@@ -111,49 +111,49 @@ xmlns:th="http://www.thymeleaf.org">
     }
 </style>
 <div class="content"
-th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
-<nav class="navbar navbar-default navbar-custom" role="navigation">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-            data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle Navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
+     th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
+    <nav class="navbar navbar-default navbar-custom" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle Navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
 
-        <a class="navbar-brand" href="/">
-            <img id="brand-image" alt="Website Logo" src="../resources/img/logo.png"/>
-        </a>
-    </div>
+                <a class="navbar-brand" href="/">
+                    <img id="brand-image" alt="Website Logo" src="../resources/img/logo.png"/>
+                </a>
+            </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-        <!-- Содержимое основной части -->
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="/events/list" th:text="${#messages.msg('titles.excursions')}">Экскурсии</a></li>
-            <li><a href="#">FAQ</a></li>
-            <li><a href="/index#contact" th:text="${#messages.msg('titles.contacts')}">Контакты</a></li>
-            <li th:if="${isAdmin}"><a href="/users/moderation" th:text="${#messages.msg('titles.persons')}">Модерация
-            пользователей</a></li>
-            <li th:if="${isAdmin}"><a href="/events/moderation" th:text="${#messages.msg('titles.events')}">Модерация
-            экскурсий</a></li>
-            <li th:unless="${isUser}"><a href="/users/registration"
-             th:text="${#messages.msg('titles.registration')}">Регистрация</a></li>
-             <li th:unless="${isUser}"><a href="/users/login"
-                 th:text="${#messages.msg('titles.login')}">Войти</a></li>
-                 <li th:if="${isUser} or ${isAdmin}"><a href="/users/logout"
-                   th:text="${#messages.msg('titles.logout')}">Выйти</a></li>
-               </ul>
+                <!-- Содержимое основной части -->
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/events/list" th:text="${#messages.msg('titles.excursions')}">Экскурсии</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="/index#contact" th:text="${#messages.msg('titles.contacts')}">Контакты</a></li>
+                    <li th:if="${isAdmin}"><a href="/users/moderation" th:text="${#messages.msg('titles.persons')}">Модерация
+                        пользователей</a></li>
+                    <li th:if="${isAdmin}"><a href="/events/moderation" th:text="${#messages.msg('titles.events')}">Модерация
+                        экскурсий</a></li>
+                    <li th:unless="${isUser}"><a href="/users/registration"
+                                                 th:text="${#messages.msg('titles.registration')}">Регистрация</a></li>
+                    <li th:unless="${isUser}"><a href="/users/login"
+                                                 th:text="${#messages.msg('titles.login')}">Войти</a></li>
+                    <li th:if="${isUser} or ${isAdmin}"><a href="/users/logout"
+                                                           th:text="${#messages.msg('titles.logout')}">Выйти</a></li>
+                </ul>
 
-           </div><!-- navbar collapse end -->
-       </div><!-- container-fluid end -->
-   </nav>
-   <div class="container">
-    <!--<div class="page-header">-->
+            </div><!-- navbar collapse end -->
+        </div><!-- container-fluid end -->
+    </nav>
+    <div class="container">
+        <!--<div class="page-header">-->
         <!--<a href="/events/list"><h2>Экскурсии</h2></a>-->
         <!--</div>-->
         <div class="container">
@@ -164,141 +164,146 @@ th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#http
                         <form method="get" action="/events/list">
                             <div class="panel-body">
                                 <div class="chip"
-                                th:each="i : ${#numbers.sequence(0, utils.getCategoriesCount()-1)}">
-                                <a th:href="@{/events/list(category=${i})}">
-                                    <img th:src="${utils.getCategoryUrl(i)}" alt=""
-                                    src="../resources/img/user.png"/>
-                                    <span th:text="${#messages.msg('category.'+i)}">%Категория%</span>
-                                </a>
-                            </div>
-                        </div>
-                        <br/>
-                        <div class="panel panel-default">
-                            <div class="panel-heading" th:text="${#messages.msg('words.type_of_excursion')}">
-                                Сортировка
-                            </div>
-                            <div class="panel-body">
-                                <div class="input-group">
-                                    <select name="sorting" class="selectpicker">
-                                        <option value="0">Стандартная</option>
-                                        <option value="1">Сначала дешевые</option>
-                                        <option value="2">Сначала дорогие</option>
-                                        <option value="3">По названию</option>
-                                    </select>
+                                     th:each="i : ${#numbers.sequence(0, utils.getCategoriesCount()-1)}">
+                                    <a th:href="@{/events/list(category=${i})}">
+                                        <img th:src="${utils.getCategoryUrl(i)}" alt=""
+                                             src="../resources/img/user.png"/>
+                                        <span th:text="${#messages.msg('category.'+i)}">%Категория%</span>
+                                    </a>
                                 </div>
                             </div>
-                        </div>
-                        <hr/>
-                        <div class="priceFilter">
-                            <div class="price-range">
-                                <div class="well">
-                                    <h5>Цена, ₽</h5>
-                                    <br />
-                                    <div class="layout-slider" style="width: 100%">
-                                        <span
-                                        style="display: inline-block; width: 100%; padding: 0 5px;">
-                                        <input id="Slider1" type="slider" name="price" value="30000.5;60000"/></span>
-                                    </div>
-                                    <script type="text/javascript" charset="utf-8">
-                                        jQuery("#Slider1").slider({
-                                            from: 1000,
-                                            to: 100000,
-                                            step: 500,
-                                            smooth: true,
-                                            round: 0,
-                                            dimension: "&nbsp;₽",
-                                            skin: "plastic"
-                                        });
-                                    </script>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-center">
                             <br/>
-                            <button name="filter" class="btn btn-default add-to-cart" type="submit"><i
-                                class="fa fa-filter"
-                                aria-hidden="true"></i>
-                                Фильтровать товары
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="col-sm-8">
-                <h2 class="title text-center" th:text="${#messages.msg('titles.excursions')}">Экскурсии</h2>
-                <!--Grid column-->
-                <div class="col-sm-6" th:each="i : ${#numbers.sequence( 0, events.size()-1)}" th:with="event=${events.get(i)}">
-                <div class="card">
-                    <!--Card image-->
-                    <div class="view overlay hm-white-slight z-depth-1">
-                        <div class="img_crop">
-                            <img src="../resources/img/bg-cta.jpg" th:src="${event.pathToPhoto}"
-                            class="img-fluid" alt=""/>
-                        </div>
-                        <a th:href="@{/events/event(id = ${event.getId()})}">
-                            <div class="mask waves-effect waves-light"></div>
-                        </a>
+                            <div class="panel panel-default">
+                                <div class="panel-heading" th:text="${#messages.msg('words.type_of_excursion')}">
+                                    Сортировка
+                                </div>
+                                <div class="panel-body">
+                                    <div class="input-group">
+                                        <select name="sorting" class="selectpicker">
+                                            <option value="0">Стандартная</option>
+                                            <option value="1">Сначала дешевые</option>
+                                            <option value="2">Сначала дорогие</option>
+                                            <option value="3">По названию</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="priceFilter">
+                                <div class="price-range">
+                                    <div class="well">
+                                        <h5>Цена, ₽</h5>
+                                        <br/>
+                                        <div class="layout-slider" style="width: 100%">
+                                        <span
+                                                style="display: inline-block; width: 100%; padding: 0 5px;">
+                                        <input id="Slider1" type="slider" name="price" value="30000.5;60000"/></span>
+                                        </div>
+                                        <script type="text/javascript" charset="utf-8">
+                                            jQuery("#Slider1").slider({
+                                                from: 1000,
+                                                to: 100000,
+                                                step: 500,
+                                                smooth: true,
+                                                round: 0,
+                                                dimension: "&nbsp;₽",
+                                                skin: "plastic"
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <br/>
+                                <button name="filter" class="btn btn-default add-to-cart" type="submit"><i
+                                        class="fa fa-filter"
+                                        aria-hidden="true"></i>
+                                    Фильтровать товары
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                    <!--/.Card image-->
+                </div>
+                <div class="col-sm-8">
+                    <h2 class="title text-center" th:text="${#messages.msg('titles.excursions')}">Экскурсии</h2>
+                    <!--Grid column-->
+                    <div class="row" th:each="i : ${#numbers.sequence( 0, events.size()-1)}">
+                        <th:block th:if="${i%2==0}" th:with="inc = ${i!=events.size()-1?1:0}">
+                            <div class="col-sm-6" th:each="j : ${#numbers.sequence(i,i+inc)}"
+                                 th:with="event=${events.get(j)}">
+                                <div class="card">
+                                    <!--Card image-->
+                                    <div class="view overlay hm-white-slight z-depth-1">
+                                        <div class="img_crop">
+                                            <img src="../resources/img/bg-cta.jpg" th:src="${event.pathToPhoto}"
+                                                 class="img-fluid" alt=""/>
+                                        </div>
+                                        <a th:href="@{/events/event(id = ${event.getId()})}">
+                                            <div class="mask waves-effect waves-light"></div>
+                                        </a>
+                                    </div>
+                                    <!--/.Card image-->
 
-                    <!--Card content-->
-                    <div class="card-body no-padding text-center">
-                        <!--Category & Title-->
-                        <h5 th:text="${{event.getCategoryString()}}">%CATEGORY%</h5>
-                        <h4 class="card-title">
-                            <strong>
-                                <h3>
-                                    <a th:href="@{/events/event(id=${event.getId()})}"
-                                    th:text="${event.name}">%NAME%</a>
-                                </h3>
-                            </strong>
-                        </h4>
+                                    <!--Card content-->
+                                    <div class="card-body no-padding text-center">
+                                        <!--Category & Title-->
+                                        <h5 th:text="${{event.getCategoryString()}}">%CATEGORY%</h5>
+                                        <h4 class="card-title">
+                                            <strong>
+                                                <h3>
+                                                    <a th:href="@{/events/event(id=${event.getId()})}"
+                                                       th:text="${event.name}">%NAME%</a>
+                                                </h3>
+                                            </strong>
+                                        </h4>
 
-                        <!--Rating-->
-                        <ul class="rating">
+                                        <!--Rating-->
+                                        <ul class="rating">
                             <span th:if="${(event.getRate()!=-1)and(event.getRate()!=0)}">
                                 <li th:each="i : ${#numbers.sequence(0, event.getRate()-1)}">
                                     <i class="fa fa-star"></i>
                                 </li>
                             </span>
-                            <span th:if="${(event.getRate()!=-1)and(event.getRate()!=5)}">
+                                            <span th:if="${(event.getRate()!=-1)and(event.getRate()!=5)}">
                                 <li th:each="i : ${#numbers.sequence(event.getRate(), 4)}">
                                     <i class="fa fa-star-o"></i>
                                 </li>
                             </span>
-                            <span th:if="${(event.getRate()==-1)}">
+                                            <span th:if="${(event.getRate()==-1)}">
                                 <li th:each="i : ${#numbers.sequence(0, 4)}">
                                     <i class="fa fa-star-o"></i>
                                 </li>
                             </span>
-                        </ul>
+                                        </ul>
 
-                        <!--Description-->
-                        <p class="card-text" style="font-size: medium; color: #000000"
-                        th:text="${event.getSmallDescription()}">%DESCRIPTION%</p>
+                                        <!--Description-->
+                                        <p class="card-text" style="font-size: medium; color: #000000"
+                                           th:text="${event.getSmallDescription()}">%DESCRIPTION%</p>
 
-                        <!--Card footer-->
-                        <div class="card-footer">
+                                        <!--Card footer-->
+                                        <div class="card-footer">
                            <span class="left" style="color:#4285F4; font-size: large;">
                             <strong th:text="${event.getPrice()}">%PRICE%</strong>
                             <strong>&#8381;</strong>
                         </span>
-                        <span class="right">
+                                            <span class="right">
                             <a th:href="@{/events/event(id=${event.getId()})}"
-                            class="btn btn-primary waves-effect waves-light"
-                            th:text="${#messages.msg('words.open')}">Открыть</a>
+                               class="btn btn-primary waves-effect waves-light"
+                               th:text="${#messages.msg('words.open')}">Открыть</a>
                         </span>
-                    </div>
+                                        </div>
 
+                                    </div>
+                                    <!--/.Card content-->
+                                </div>
+                            </div>
+                        </th:block>
+                    </div>
+                    <!--Grid column-->
                 </div>
-                <!--/.Card content-->
             </div>
         </div>
-        <!--Grid column-->
     </div>
-</div>
-</div>
-</div>
 </div>
 <footer id="myFooter">
     <div class="container">

@@ -1,5 +1,9 @@
 package com.heroku.demo.person;
 
+import com.heroku.demo.event.EventRepository;
+import com.heroku.demo.event.EventServiceImpl;
+import com.heroku.demo.photo.PhotoRepository;
+import com.heroku.demo.photo.PhotoServiceImpl;
 import com.heroku.demo.utils.MessageUtil;
 import org.joda.time.LocalTime;
 import org.slf4j.Logger;
@@ -30,6 +34,7 @@ public class PersonController {
     private static String AUTH_KEY = "DGgttMjxGUuuLvr49LnEWVFBbkxSNXnH";
 
     private PersonServiceImpl personService;
+    private EventServiceImpl eventService;
 
     private final MessageSource messageSource;
 
@@ -37,8 +42,10 @@ public class PersonController {
 
 
     @Autowired
-    public PersonController(PersonRepository personRepository, MessageSource messageSource) {
+    public PersonController(PersonRepository personRepository, MessageSource messageSource, EventRepository eventRepository,
+                            PhotoRepository photoRepository) {
         personService = new PersonServiceImpl(personRepository);
+        eventService = new EventServiceImpl(eventRepository,personService, new PhotoServiceImpl(photoRepository));
         this.messageSource = messageSource;
     }
 
@@ -46,6 +53,14 @@ public class PersonController {
     public String persons(ModelMap model) {
         model.addAttribute("insertPerson", new Person());
         return "registration";
+    }
+
+    @RequestMapping(value = "/account", method = RequestMethod.GET)
+    public String account(ModelMap model, @ModelAttribute("id") long id) {
+        Person person = personService.getById(id);
+        model.addAttribute("person", person);
+        model.addAttribute("events", eventService.getByGuideId(person.getId()));
+        return "account";
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
