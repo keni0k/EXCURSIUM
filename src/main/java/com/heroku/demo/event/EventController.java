@@ -175,6 +175,24 @@ public class EventController {
         return "event_list";
     }
 
+    @RequestMapping(value = "/list_test", method = RequestMethod.GET)
+    public String eventsTests(ModelMap model,
+                                 @RequestParam(value = "category", required = false) Integer category,
+                                 @RequestParam(value = "price_up", required = false) Integer priceUp,
+                                 @RequestParam(value = "price_down", required = false) Integer priceDown,
+                                 @RequestParam(value = "sort_by", required = false) Integer sortBy,
+                                 @RequestParam(value = "words", required = false) String words,
+                                 Locale locale) {
+        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, locale.getLanguage().equals("ru") ? 0 : 1, words, sortBy == null ? 0 : sortBy);
+        int size = events.size() % 3;
+        for (int i = 0; i < size; i++) {
+            events.remove(events.size() - 1);
+        }
+        model.addAttribute("events", events);
+        model.addAttribute("utils", new UtilsForWeb());
+        return "event_list1";
+    }
+
     @RequestMapping("/categories")
     @ResponseBody
     public ResponseEntity<String> preview(@ModelAttribute("language") int language) {

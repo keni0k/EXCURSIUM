@@ -85,11 +85,11 @@
         <div class="row h-100">
             <div class="col-lg-7 my-auto">
                 <div class="header-content mx-auto">
-                    <h1 class="mb-5">Путешествуйте без ограничений</h1>
-                    <p>Надежное бронирование интересных экскурсий.
+                    <h1 class="mb-5" th:text="${#messages.msg('taglines.main')}">Путешествуйте без ограничений</h1>
+                    <p th:text="${#messages.msg('words.service_description')}">Надежное бронирование интересных экскурсий.
                         Экскурсоводы покажут вам город с необычной стороны. Незабываемые впечатления, яркие эмоции,
                         хорошее настроение &mdash; все это он, Excursium!</p>
-                    <a href="#download" class="btn btn-outline btn-xl js-scroll-trigger">Вперед!</a>
+                    <a href="#download" class="btn btn-outline btn-xl js-scroll-trigger" th:text="${#messages.msg('words.buttons.next')}">Вперед!</a>
                 </div>
             </div>
             <div class="col-lg-5 my-auto">
@@ -115,8 +115,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 mx-auto">
-                <h2 class="section-heading">Попробуйте все возможности Excursium!</h2>
-                <p>Наше приложение доступно для Android!</p>
+                <h2 class="section-heading" th:text="${#messages.msg('taglines.opportunities')}">Попробуйте все возможности Excursium!</h2>
+                <p th:text="${#messages.msg('words.gp_app')}">Наше приложение доступно для Android!</p>
                 <div class="badges">
                     <a class="badge-link" href="#"><img src="../resources/img/google-play-badge.svg" alt=""/></a>
 
@@ -129,8 +129,8 @@
 <section class="features" id="features">
     <div class="container">
         <div class="section-heading text-center">
-            <h2>Просто и удобно</h2>
-            <p class="text-muted">Узнайте обо всех возможностях Excursium!</p>
+            <h2 th:text="${#messages.msg('taglines.easy')}">Просто и удобно</h2>
+            <p class="text-muted" th:text="${#messages.msg('taglines.check_out')}">Узнайте обо всех возможностях Excursium!</p>
             <hr/>
         </div>
 
@@ -158,15 +158,15 @@
                         <div class="col-lg-6">
                             <div class="feature-item">
                                 <i class="icon-compass text-primary"></i>
-                                <h3>Выберите экскурсию для себя</h3>
-                                <p class="text-muted">Подробное описание и возможность связаться с экскурсоводом</p>
+                                <h3 th:text="${#messages.msg('taglines.features.1')}">Выберите экскурсию для себя</h3>
+                                <p class="text-muted" th:text="${#messages.msg('taglines.features.1.descr')}">Подробное описание и возможность связаться с экскурсоводом</p>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="feature-item">
                                 <i class="icon-shield text-primary"></i>
-                                <h3>Безопасная оплата</h3>
-                                <p class="text-muted">Предоплата и возможность вернуть деньги</p>
+                                <h3 th:text="${#messages.msg('taglines.features.2')}">Безопасная оплата</h3>
+                                <p class="text-muted" th:text="${#messages.msg('taglines.features.2.descr')}">Предоплата и возможность вернуть деньги</p>
                             </div>
                         </div>
                     </div>
@@ -185,15 +185,15 @@
                         <div class="col-lg-6">
                             <div class="feature-item">
                                 <i class="icon-globe text-primary"></i>
-                                <h3>Огромный выбор</h3>
-                                <p class="text-muted">Потрясающее разнообразие экскурсий</p>
+                                <h3 th:text="${#messages.msg('taglines.features.3')}">Огромный выбор</h3>
+                                <p class="text-muted" th:text="${#messages.msg('taglines.features.3.descr')}">Потрясающее разнообразие экскурсий</p>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="feature-item">
                                 <i class="icon-equalizer text-primary"></i>
-                                <h3>Удобный поиск</h3>
-                                <p class="text-muted">Найдите идеальную экскурсию для себя</p>
+                                <h3 th:text="${#messages.msg('taglines.features.4')}">Удобный поиск</h3>
+                                <p class="text-muted" th:text="${#messages.msg('taglines.features.4.descr')}">Найдите идеальную экскурсию для себя</p>
                             </div>
                         </div>
                     </div>
@@ -242,15 +242,15 @@
                         <div class="col-lg-6">
                             <div class="feature-item">
                                 <i class="icon-user text-primary"></i>
-                                <h3>Личный кабинет</h3>
-                                <p class="text-muted">Настройте свой профиль как вам нравится</p>
+                                <h3 th:text="${#messages.msg('taglines.features.5')}">Личный кабинет</h3>
+                                <p class="text-muted" th:text="${#messages.msg('taglines.features.5.descr')}">Настройте свой профиль как вам нравится</p>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="feature-item">
                                 <i class="icon-arrow-up-circle text-primary"></i>
-                                <h3>Станьте экскурсоводом</h3>
-                                <p class="text-muted">Купите Pro-аккаунт и предлагайте свои экскурсии</p>
+                                <h3 th:text="${#messages.msg('taglines.features.6')}">Станьте экскурсоводом</h3>
+                                <p class="text-muted" th:text="${#messages.msg('taglines.features.6.descr')}">Купите Pro-аккаунт и предлагайте свои экскурсии</p>
                             </div>
                         </div>
                     </div>
@@ -265,8 +265,8 @@
 <section class="cta">
     <div class="cta-content">
         <div class="container">
-            <h2>Начните свое путешествие прямо сейчас!</h2>
-            <a href="#contact" class="btn btn-outline btn-xl js-scroll-trigger">Начать!</a>
+            <h2 th:text="${#messages.msg('taglines.start_journey')}">Начните свое путешествие прямо сейчас!</h2>
+            <a href="#contact" class="btn btn-outline btn-xl js-scroll-trigger" th:text="${#messages.msg('words.buttons.start_now')}">Начать!</a>
         </div>
     </div>
     <div class="overlay"></div>
@@ -274,9 +274,9 @@
 
 <section class="contact bg-primary" id="contact">
     <div class="container">
-        <h2>Мы
+        <h2 th:text="${#messages.msg('taglines.we_love.1')}">Мы</h2>
             <i class="fa fa-heart"></i>
-            новых друзей!</h2>
+            <span th:text="${#messages.msg('taglines.we_love.2')}">новых друзей!</span></h2>
         <ul class="list-inline list-social">
             <li class="list-inline-item social-facebook">
                 <a href="https://vk.com/excursium">

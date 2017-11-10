@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="description" content=""/>
+    <meta name="title" content=""/>
+    <meta name="author" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta name="keywords" content="excursium"/>
+
+    <link rel="stylesheet" type="text/css" href="../resources/css/styles.css"/>
+    <link rel="stylesheet" href="../resources/css/media.css"/>
+    <link rel="stylesheet" type="text/css" href="../resources/css/footer.css"/>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"/>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="../resources/libs/bootstrap-select/css/bootstrap-select.css"/>
+    <script type="text/javascript" src="../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
+
+    <link rel="stylesheet" href="../resources/css/segoe_ui.css"/>
+
+    <!-- Icon -->
+    <link rel="icon" href="../resources/img/icon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="../resources/img/icon.ico" type="image/x-icon"/>
+
+    <link rel="stylesheet" href="../resources/libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>
+    <script type="text/javascript"
+    src="../resources/libs/bootstrapformhelpers/js/bootstrap-formhelpers.min.js"></script>
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" href="../resources/css/cards.css"/>
+    <title>Экскурсии</title>
+</head>
+<body style="background-color: #f9f9f9;">
+    <style type="text/css">
+
+    .navbar-fixed-top {
+        min-height: 95px;
+    }
+
+    .navbar-nav > li > a {
+        font-family: SegoeUIRegular, serif;
+        padding-top: 0;
+        padding-bottom: 0;
+        line-height: 95px;
+    }
+
+    .navbar-custom {
+        background: linear-gradient(to left, #68b3bd, #00ae6f);
+        color: #000000;
+        border-radius: 0;
+    }
+
+    .navbar-custom .navbar-nav > li > a {
+        color: #000000;
+    }
+
+    .navbar-custom .navbar-nav > .active > a {
+        color: #000000;
+        background-color: transparent;
+    }
+
+    .navbar-custom .navbar-nav > li > a:hover,
+    .navbar-custom .navbar-nav > li > a:focus,
+    .navbar-custom .navbar-nav > .active > a:hover,
+    .navbar-custom .navbar-nav > .active > a:focus,
+    .navbar-custom .navbar-nav > .open > a {
+        text-decoration: none;
+        background-color: #B2EBF2;
+    }
+
+    .navbar-custom .navbar-brand {
+        color: #eeeeee;
+    }
+
+    .navbar-custom .navbar-toggle {
+        background-color: #eeeeee;
+    }
+
+    .navbar-custom .icon-bar {
+        background-color: #33aa33;
+    }
+</style>
+<div class="content"
+th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
+<nav class="navbar navbar-default navbar-custom" role="navigation">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+            data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle Navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+
+        <a class="navbar-brand" href="/">
+            <img id="brand-image" alt="Website Logo" src="../resources/img/logo.png"/>
+        </a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+        <!-- Содержимое основной части -->
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="/events/list" th:text="${#messages.msg('titles.excursions')}">Экскурсии</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="/index#contact" th:text="${#messages.msg('titles.contacts')}">Контакты</a></li>
+            <li th:if="${isAdmin}"><a href="/users/moderation" th:text="${#messages.msg('titles.persons')}">Модерация
+            пользователей</a></li>
+            <li th:if="${isAdmin}"><a href="/events/moderation" th:text="${#messages.msg('titles.events')}">Модерация
+            экскурсий</a></li>
+            <li th:unless="${isUser}"><a href="/users/registration"
+               th:text="${#messages.msg('titles.registration')}">Регистрация</a></li>
+               <li th:unless="${isUser}"><a href="/users/login"
+                   th:text="${#messages.msg('titles.login')}">Войти</a></li>
+                   <li th:if="${isUser} or ${isAdmin}"><a href="/users/logout"
+                     th:text="${#messages.msg('titles.logout')}">Выйти</a></li>
+                 </ul>
+
+             </div><!-- navbar collapse end -->
+         </div><!-- container-fluid end -->
+     </nav>
+     <div class="container">
+
+        <!--Main layout-->
+        <main>
+            <div class="container-fluid">
+
+                <!--Section: Modals-->
+                <section>
+
+                    <!--Modal: modalEditProfile-->
+                    <div class="modal fade" id="modalEditProfile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                        <div class="modal-dialog cascading-modal modal-lg" role="document">
+                            <!--Content-->
+                            <div class="modal-content">
+
+                                <!--Modal cascading tabs-->
+                                <div class="modal-c-tabs">
+
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs tabs-2 light-blue darken-3" role="tablist">
+                                        <li class="nav-item waves-effect waves-light">
+                                            <a class="nav-link active" data-toggle="tab" href="https://mdbootstrap.com/previews/templates/admin-dashboard/html/profile/extended.html#panel77" role="tab" aria-expanded="true"><i class="fa fa-user mr-1"></i> Public info</a>
+                                        </li>
+                                        <li class="nav-item waves-effect waves-light">
+                                            <a class="nav-link" data-toggle="tab" href="https://mdbootstrap.com/previews/templates/admin-dashboard/html/profile/extended.html#panel88" role="tab" aria-expanded="false"><i class="fa fa-lock mr-1"></i> Account</a>
+                                        </li>
+                                    </ul>
+
+                                    <!-- Tab panels -->
+                                    <div class="tab-content">
+                                        <!--Panel 7-->
+                                        <div class="tab-pane fade in active show" id="panel77" role="tabpanel" aria-expanded="true">
+
+                                            <!--Body-->
+                                            <div class="modal-body mb-1">
+
+                                                <!--Grid row-->
+                                                <div class="row">
+
+                                                    <!--Grid column-->
+                                                    <div class="col-md-6">
+
+                                                        <!--First Name-->
+                                                        <div class="md-form form-sm">
+                                                            <input type="text" id="editProfile1" class="form-control">
+                                                            <label for="editProfile1" class="">First name</label>
+                                                        </div>
+
+                                                    </div>
+                                                    <!--Grid column-->
+
+                                                    <!--Grid column-->
+                                                    <div class="col-md-6">
+
+                                                        <!--Last Name-->
+                                                        <div class="md-form form-sm">
+                                                            <input type="text" id="editProfile2" class="form-control">
+                                                            <label for="editProfile2" class="">Last name</label>
+                                                        </div>
+
+                                                    </div>
+                                                    <!--Grid column-->
+
+                                                    <!--Grid column-->
+                                                    <div class="col-md-6">
+
+                                                        <!--Position-->
+                                                        <div class="md-form form-sm">
+                                                            <input type="text" id="editProfile3" class="form-control">
+                                                            <label for="editProfile3" class="">Position</label>
+                                                        </div>
+
+                                                    </div>
+                                                    <!--Grid column-->
+
+                                                    <!--Grid column-->
+                                                    <div class="col-md-6">
+
+                                                        <!--Company Name-->
+                                                        <div class="md-form form-sm">
+                                                            <input type="text" id="editProfile4" class="form-control">
+                                                            <label for="editProfile4" class="">Company name</label>
+                                                        </div>
+
+                                                    </div>
+                                                    <!--Grid column-->
+
+                                                    <!--Grid column-->
+                                                    <div class="col-md-12">
+
+                                                        <!--Company website-->
+                                                        <div class="md-form form-sm">
+                                                            <input type="text" id="editProfile5" class="form-control">
+                                                            <label for="editProfile5" class="">Company website</label>
+                                                        </div>
+
+                                                    </div>
+                                                    <!--Grid column-->
+
+                                                    <!--Grid column-->
+                                                    <div class="col-md-6">
+
+                                                        <!--Country-->
+                                                        <select class="mdb-select colorful-select dropdown-primary" searchable="Search here..">
+                                                            <option value="" disabled="" selected="">Choose your country</option>
+                                                            <option value="1">USA</option>
+                                                            <option value="2">Germany</option>
+                                                            <option value="3">France</option>
+                                                            <option value="3">Poland</option>
+                                                            <option value="3">Japan</option>
+                                                        </select>
+
+                                                    </div>
+                                                    <!--Grid column-->
+
+                                                    <!--Grid column-->
+                                                    <div class="col-md-6">
+
+                                                        <!--City-->
+                                                        <div class="md-form form-sm mt-2">
+                                                            <input type="text" id="editProfile6" class="form-control">
+                                                            <label for="editProfile6" class="">City</label>
+                                                        </div>
+
+                                                    </div>
+                                                    <!--Grid column-->
+
+                                                    <!--Grid column-->
+                                                    <div class="col-md-12">
+
+                                                        <!--Description-->
+                                                        <div class="md-form">
+                                                            <textarea type="text" id="editProfile7" class="md-textarea"></textarea>
+                                                            <label for="editProfile7">Description</label>
+                                                        </div>
+
+                                                    </div>
+                                                    <!--Grid column-->
+
+                                                    <!--Grid column-->
+                                                    <div class="col-md-6">
+
+                                                        <!--Facebook-->
+                                                        <div class="md-form form-sm mt-2">
+                                                            <input type="text" id="editProfile8" class="form-control">
+                                                            <label for="editProfile8" class="">Facebook</label>
+                                                        </div>
+
+                                                    </div>
+                                                    <!--Grid column-->
+
+                                                    <!--Grid column-->
+                                                    <div class="col-md-6">
+
+                                                        <!--Twitter-->
+                                                        <div class="md-form form-sm mt-2">
+                                                            <input type="text" id="editProfile9" class="form-control">
+                                                            <label for="editProfile9" class="">Twitter</label>
+                                                        </div>
+
+                                                    </div>
+                                                    <!--Grid column-->
+
+                                                    <!--Grid column-->
+                                                    <div class="col-md-6">
+
+                                                        <!--LinkedIn-->
+                                                        <div class="md-form form-sm mt-2">
+                                                            <input type="text" id="editProfile10" class="form-control">
+                                                            <label for="editProfile10" class="">LinkedIn</label>
+                                                        </div>
+
+                                                    </div>
+                                                    <!--Grid column-->
+
+                                                    <!--Grid column-->
+                                                    <div class="col-md-6">
+
+                                                        <!--Dribbble-->
+                                                        <div class="md-form form-sm mt-2">
+                                                            <input type="text" id="editProfile11" class="form-control">
+                                                            <label for="editProfile11" class="">Dribbble</label>
+                                                        </div>
+
+                                                    </div>
+                                                    <!--Grid column-->
+
+                                                </div>
+                                                <!--Grid row-->
+
+                                            </div>
+                                            <!--Footer-->
+                                            <div class="modal-footer justify-content-center">
+                                                <button type="button" class="btn btn-outline-primary waves-effect waves-light" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary waves-effect waves-light">Save changes <i class="fa fa-check ml-1"></i></button>
+                                            </div>
+
+                                        </div>
+                                        <!--/.Panel 7-->
+
+                                        <!--Panel 8-->
+                                        <div class="tab-pane fade" id="panel88" role="tabpanel" aria-expanded="false">
+
+                                            <!--Body-->
+                                            <div class="modal-body">
+                                                <div class="md-form form-sm">
+                                                    <input type="text" id="form224" class="form-control">
+                                                    <label for="form24">User name</label>
+                                                </div>
+
+                                                <div class="md-form form-sm">
+                                                    <input type="text" id="form24" class="form-control">
+                                                    <label for="form24">Email address</label>
+                                                </div>
+
+                                                <p class="h5 text-center mt-5">Password change</p>
+
+                                                <div class="md-form form-sm">
+                                                    <input type="password" id="form25" class="form-control">
+                                                    <label for="form25">Current password</label>
+                                                </div>
+
+                                                <div class="md-form form-sm">
+                                                    <input type="password" id="form26" class="form-control">
+                                                    <label for="form26">New password</label>
+                                                </div>
+
+                                                <div class="md-form form-sm">
+                                                    <input type="password" id="form27" class="form-control">
+                                                    <label for="form27">Confirm new password</label>
+                                                </div>
+
+                                            </div>
+                                            <!--Footer-->
+                                            <div class="modal-footer justify-content-center">
+                                                <button type="button" class="btn btn-outline-primary waves-effect waves-light" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary waves-effect waves-light">Save changes <i class="fa fa-check ml-1"></i></button>
+                                            </div>
+
+                                        </div>
+                                        <!--/.Panel 8-->
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--/.Content-->
+                        </div>
+                    </div>
+                    <!--Modal: modalEditProfile-->
+
+                    <!--Modal: modalFeedback-->
+                    <div class="modal fade" id="modalFeedback" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                        <div class="modal-dialog cascading-modal modal-lg" role="document">
+
+                            <!--Content-->
+                            <div class="modal-content">
+
+                                <!--Header-->
+                                <div class="modal-header light-blue darken-3 white-text">
+                                    <h4 class=""><i class="fa fa-newspaper-o"></i> New message</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                </div>
+
+                                <!--Body-->
+                                <div class="modal-body mb-0">
+
+                                    <!--Subject-->
+                                    <div class="md-form form-sm">
+                                        <input type="text" id="modalFeedback1" class="form-control">
+                                        <label for="modalFeedback1" class="">Subject</label>
+                                    </div>
+
+                                    <!--Topic-->
+                                    <select class="mdb-select colorful-select dropdown-primary">
+                                        <option value="" disabled="" selected="">Choose category</option>
+                                        <option value="1">Idea</option>
+                                        <option value="2">Feedback</option>
+                                        <option value="3">Bug</option>
+                                    </select>
+
+                                    <!--Message-->
+                                    <div class="md-form">
+                                        <textarea type="text" id="modalFeedback2" class="md-textarea" style="height: 300px;"></textarea>
+                                        <label for="modalFeedback2">Your message</label>
+                                    </div>
+
+                                </div>
+
+                                <!--Footer-->
+                                <div class="modal-footer justify-content-center">
+                                    <button type="button" class="btn btn-outline-primary waves-effect waves-light" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary waves-effect waves-light">Send <i class="fa fa-paper-plane ml-1"></i></button>
+                                </div>
+
+                            </div>
+                            <!--/.Content-->
+
+                        </div>
+                    </div>
+                    <!--Modal: modalFeedback-->
+
+                    <!--Modal: modalAchievment-->
+                    <div class="modal fade" id="modalAchievment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog cascading-modal" role="document">
+
+                            <!--Content-->
+                            <div class="modal-content">
+
+                                <!--Header-->
+                                <div class="modal-header light-blue darken-3 white-text">
+                                    <h4 class=""><i class="fa fa-newspaper-o"></i> Bootstrap Master</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                </div>
+
+                                <!--Body-->
+                                <div class="modal-body mb-0">
+
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam quibusdam modi veritatis non
+                                        accusamus distinctio consequuntur aliquam, assumenda tempore in illum aspernatur quia,
+                                    minus ex! Eius tenetur praesentium, consectetur quod!</p>
+
+                                </div>
+
+                                <!--Footer-->
+                                <div class="modal-footer justify-content-center">
+                                    <button type="button" class="btn btn-outline-primary waves-effect waves-light" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary waves-effect waves-light">Go to <i class="fa fa-arrow-right ml-1"></i></button>
+                                </div>
+
+                            </div>
+                            <!--/.Content-->
+
+                        </div>
+                    </div>
+                    <!--Modal: modalAchievment-->
+
+                    <!--Modal: modalContactUser -->
+                    <div class="modal fade" id="modalContactUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog cascading-modal modal-lg" role="document">
+
+                            <!--Content-->
+                            <div class="modal-content">
+
+                                <!--Header-->
+                                <div class="modal-header light-blue darken-3 white-text">
+                                    <h4 class=""><i class="fa fa-envelope-o"></i> New Message</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                </div>
+
+                                <!--Body-->
+                                <div class="modal-body mb-0">
+
+                                    <!--Basic textarea-->
+                                    <div class="md-form">
+                                        <textarea type="text" id="modalContactUser1" class="md-textarea" style="height: 400px;"></textarea>
+                                        <label for="modalContactUser1">Your message</label>
+                                    </div>
+
+                                </div>
+
+                                <!--Footer-->
+                                <div class="modal-footer justify-content-center">
+                                    <button type="button" class="btn btn-outline-primary waves-effect waves-light" data-dismiss="modal">Cancel</button>
+                                    <button type="button" class="btn btn-primary waves-effect waves-light">Send <i class="fa fa-paper-plane ml-1"></i></button>
+                                </div>
+
+                            </div>
+                            <!--/.Content-->
+
+                        </div>
+                    </div>
+                    <!--Modal: modalContactUser-->
+
+                    <!--Modal: modalSubmitProject-->
+                    <div class="modal fade" id="modalSubmitProject" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog cascading-modal" role="document">
+
+                            <!--Content-->
+                            <div class="modal-content">
+
+                                <!--Header-->
+                                <div class="modal-header light-blue darken-3 white-text">
+                                    <h4 class=""><i class="fa fa-newspaper-o"></i> Submit new project</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                </div>
+
+                                <!--Body-->
+                                <div class="modal-body mb-0">
+
+                                    <!--Name-->
+                                    <div class="md-form form-sm">
+                                        <input type="text" id="newProject1" class="form-control">
+                                        <label for="newProject1" class="">Project name</label>
+                                    </div>
+
+                                    <!--Project URL address-->
+                                    <div class="md-form form-sm">
+                                        <input type="text" id="newProject2" class="form-control">
+                                        <label for="newProject2" class="">Project URL address</label>
+                                    </div>
+
+                                    <!--Image URL-->
+                                    <div class="md-form form-sm">
+                                        <input type="text" id="newProject3" class="form-control">
+                                        <label for="newProject3" class="">Image URL</label>
+                                    </div>
+
+                                    <!--Description-->
+                                    <div class="md-form">
+                                        <textarea type="text" id="newProject4" class="md-textarea"></textarea>
+                                        <label for="newProject4">Description</label>
+                                    </div>
+
+                                </div>
+
+                                <!--Footer-->
+                                <div class="modal-footer justify-content-center">
+                                    <button type="button" class="btn btn-outline-primary waves-effect waves-light" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary waves-effect waves-light">Submit <i class="fa fa-check ml-1"></i></button>
+                                </div>
+
+                            </div>
+                            <!--/.Content-->
+
+                        </div>
+                    </div>
+                    <!--Modal: modalSubmitProject-->
+
+                </section>
+                <!--Section: Modals-->
+
+                <!--Section: Profile-->
+                <section>
+
+                    <!-- Action button -->
+                    <div class="text-center mt-4">
+                        <a class="btn btn-primary btn-lg waves-effect waves-light" href="https://mdbootstrap.com/previews/templates/admin-dashboard/html/profile/extended.html" role="button" data-toggle="modal" data-target="#modalEditProfile">Edit your profile <i class="fa fa-pencil ml-2"></i></a>
+                        <a class="btn btn-outline-primary btn-lg waves-effect waves-light" href="https://mdbootstrap.com/previews/templates/admin-dashboard/html/profile/extended.html" role="button" data-toggle="modal" data-target="#modalFeedback">Send idea, feedback or bug <i class="fa fa-paper-plane ml-2"></i></a>
+                        <a class="btn btn-outline-primary btn-rounded btn-lg waves-effect waves-light" href="https://mdbootstrap.com/previews/templates/admin-dashboard/html/profile/extended.html" role="button">Log out <i class="fa fa-sign-out ml-2"></i></a>
+                    </div>
+
+                    <hr class="my-5">
+
+                    <!--Grid row-->
+                    <div class="row">
+
+                        <!--Grid column-->
+                        <div class="col-lg-4 col-md-12">
+
+                            <!--Section: Basic Info-->
+                            <section class="card card-cascade card-avatar mb-4">
+
+                                <img src="../resources/img/user.png" alt="">
+
+                                <!--Card content-->
+                                <div class="card-body">
+                                    <!--Title-->
+                                    <h4 class="card-title"><strong>Имя</strong></h4>
+                                    <h5>Турист/Экскурсовод</h5>
+                                    <p>Москва, Россия</p>
+
+                                    <!-- Social -->
+                                    <a type="button" class="btn-floating btn-small light-blue lighten-2 waves-effect waves-light"><i class="fa fa-facebook"></i></a>
+                                    <a type="button" class="btn-floating btn-small light-blue lighten-2 waves-effect waves-light"><i class="fa fa-twitter"></i></a>
+                                    <a type="button" class="btn-floating btn-small light-blue lighten-2 waves-effect waves-light"><i class="fa fa-linkedin"></i></a>
+
+                                    <!--Text-->
+                                    <p class="card-text mt-3">тел.
+                                    </p>
+
+                                    <button type="button" class="btn btn-info waves-effect waves-light" data-toggle="modal" data-target="#modalContactUser">Contact<i class="fa fa-paper-plane ml-2"></i></button>
+                                </div>
+
+                            </section>
+                            <!--Section: Basic Info-->
+
+                            <!--Section: Experience-->
+                            <section class="card mb-4">
+                                <div class="card-body">
+
+                                    <h5 class=" text-center"><strong>Уведомления</strong></h5>
+
+                                    <hr class="my-3">
+
+                                    <ul class="list-unstyled pt-4">
+                                        <li>
+                                            <p>Questions <span class="badge badge-primary pull-right">14</span></p>
+                                        </li>
+                                        <hr>
+                                        <li>
+                                            <p>Answers <span class="badge badge-primary pull-right">14</span></p>
+                                        </li>
+                                        <hr>
+                                        <li>
+                                            <p>Submited projects <span class="badge badge-primary pull-right">14</span></p>
+                                        </li>
+                                        <hr>
+                                        <li>
+                                            <p>Pull requests <span class="badge badge-primary pull-right">14</span></p>
+                                        </li>
+                                        <hr>
+                                        <li>
+                                            <p>Ideas &amp; bug reports <span class="badge badge-primary pull-right">14</span></p>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </section>
+                            <!--Section: Experience-->
+
+                        </div>
+                        <!--Grid column-->
+
+                        <!--Grid column-->
+                        <div class="col-lg-8 col-md-12 text-center">
+
+                            <!-- Heading -->
+                            <div class="text-center mt-3 mb-5">
+
+                                <h4><strong>Экскурсии</strong></h4>
+
+                                <button type="button" class="btn btn-primary mt-4 waves-effect waves-light" data-toggle="modal" data-target="#modalSubmitProject">Добавить новую экскурсию<i class="fa fa-photo ml-1"></i></button>
+
+                            </div>
+                            <!-- Heading -->
+
+                            <!-- Card row -->
+                            <div class="card-deck">
+
+                                <!--Card-->
+                                <div class="card card-cascade narrower mb-5">
+
+                                    <!--Card image-->
+                                    <div class="view overlay hm-white-slight">
+                                        <img src="./Material Design Bootstrap_files/img (73).jpg" class="img-fluid" alt="">
+                                        <a href="https://mdbootstrap.com/previews/templates/admin-dashboard/html/profile/extended.html#">
+                                            <div class="mask waves-effect waves-light"></div>
+                                        </a>
+                                    </div>
+
+                                    <!--Card content-->
+                                    <div class="card-body pb-0">
+                                        <!--Title-->
+                                        <h4 class="card-title">Название экскурсии</h4>
+                                        <!--Text-->
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                                            content.
+                                        </p>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                                            content.
+                                        </p>
+
+                                    </div>
+
+                                    <!--Card footer-->
+                                    <div class="card-footer links-light">
+                                        <span class="left pt-2">
+                                            <a><i class="fa fa-share-alt mr-2"></i></a>
+                                            <a><i class="fa fa-heart-o mr-2"></i>10</a>
+                                        </span>
+                                        <span class="right"> 
+                                            <a href="https://mdbootstrap.com/previews/templates/admin-dashboard/html/profile/extended.html" class="waves-effect p-2">Live Preview <i class="fa fa-photo ml-1"></i></a>
+                                        </span>
+                                    </div>
+
+                                </div>
+                                <!--/.Card-->
+
+                                <!--Card-->
+                                <div class="card card-cascade narrower d-flex mb-5">
+
+                                    <!--Card image-->
+                                    <div class="view overlay hm-white-slight">
+                                        <img src="./Material Design Bootstrap_files/img (75).jpg" class="img-fluid" alt="">
+                                        <a href="https://mdbootstrap.com/previews/templates/admin-dashboard/html/profile/extended.html#">
+                                            <div class="mask waves-effect waves-light"></div>
+                                        </a>
+                                    </div>
+
+                                    <!--Card content-->
+                                    <div class="card-body">
+                                        <!--Title-->
+                                        <h4 class="card-title">Project name</h4>
+                                        <!--Text-->
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                                            content.
+                                        </p>
+                                    </div>
+
+                                    <!--Card footer-->
+                                    <div class="card-footer links-light">
+                                        <span class="left pt-2">
+                                            <a><i class="fa fa-share-alt mr-2"></i></a>
+                                            <a><i class="fa fa-heart-o mr-2"></i>10</a>
+                                        </span>
+                                        <span class="right"> 
+                                            <a href="https://mdbootstrap.com/previews/templates/admin-dashboard/html/profile/extended.html" class="waves-effect p-2">Live Preview <i class="fa fa-photo ml-1"></i></a>
+                                        </span>
+                                    </div>
+
+                                </div>
+                                <!--/.Card-->
+
+                            </div>
+                            <!-- Card row -->
+
+                            <!-- Card row -->
+                            <div class="card-deck">
+
+                                <!--Card-->
+                                <div class="card card-cascade narrower d-flex mb-5">
+
+                                    <!--Card image-->
+                                    <div class="view overlay hm-white-slight">
+                                        <img src="./Material Design Bootstrap_files/img (77).jpg" class="img-fluid" alt="">
+                                        <a href="https://mdbootstrap.com/previews/templates/admin-dashboard/html/profile/extended.html#">
+                                            <div class="mask waves-effect waves-light"></div>
+                                        </a>
+                                    </div>
+
+                                    <!--Card content-->
+                                    <div class="card-body">
+                                        <!--Title-->
+                                        <h4 class="card-title">Project name</h4>
+                                        <!--Text-->
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                                            content.
+                                        </p>
+                                    </div>
+
+                                    <!--Card footer-->
+                                    <div class="card-footer links-light">
+                                        <span class="left pt-2">
+                                            <a><i class="fa fa-share-alt mr-2"></i></a>
+                                            <a><i class="fa fa-heart-o mr-2"></i>10</a>
+                                        </span>
+                                        <span class="right"> 
+                                            <a href="https://mdbootstrap.com/previews/templates/admin-dashboard/html/profile/extended.html" class="waves-effect p-2">Live Preview <i class="fa fa-photo ml-1"></i></a>
+                                        </span>
+                                    </div>
+
+                                </div>
+                                <!--/.Card-->
+
+                                <!--Card-->
+                                <div class="card card-cascade narrower d-flex mb-5">
+
+                                    <!--Card image-->
+                                    <div class="view overlay hm-white-slight">
+                                        <img src="./Material Design Bootstrap_files/img (71).jpg" class="img-fluid" alt="">
+                                        <a href="https://mdbootstrap.com/previews/templates/admin-dashboard/html/profile/extended.html#">
+                                            <div class="mask waves-effect waves-light"></div>
+                                        </a>
+                                    </div>
+
+                                    <!--Card content-->
+                                    <div class="card-body">
+                                        <!--Title-->
+                                        <h4 class="card-title">Project name</h4>
+                                        <!--Text-->
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                                            content.
+                                        </p>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                                            content.
+                                        </p>
+                                    </div>
+
+                                    <!--Card footer-->
+                                    <div class="card-footer links-light">
+                                        <span class="left pt-2">
+                                            <a><i class="fa fa-share-alt mr-2"></i></a>
+                                            <a><i class="fa fa-heart-o mr-2"></i>10</a>
+                                        </span>
+                                        <span class="right"> 
+                                            <a href="https://mdbootstrap.com/previews/templates/admin-dashboard/html/profile/extended.html" class="waves-effect p-2">Live Preview <i class="fa fa-photo ml-1"></i></a>
+                                        </span>
+                                    </div>
+
+                                </div>
+                                <!--/.Card-->
+
+                            </div>
+                            <!-- Card row -->
+
+
+                            <!--Pagination -->
+                            <nav class="my-4 d-flex justify-content-center">
+                                <ul class="pagination pagination-circle pg-blue mb-0">
+
+                                    <!--First-->
+                                    <li class="page-item disabled clearfix d-none d-md-block"><a class="page-link waves-effect waves-effect">First</a></li>
+
+                                    <!--Arrow left-->
+                                    <li class="page-item disabled">
+                                        <a class="page-link waves-effect waves-effect" aria-label="Previous">
+                                            <span aria-hidden="true">«</span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                    </li>
+
+                                    <!--Numbers-->
+                                    <li class="page-item active"><a class="page-link waves-effect waves-effect">1</a></li>
+                                    <li class="page-item"><a class="page-link waves-effect waves-effect">2</a></li>
+                                    <li class="page-item"><a class="page-link waves-effect waves-effect">3</a></li>
+                                    <li class="page-item"><a class="page-link waves-effect waves-effect">4</a></li>
+                                    <li class="page-item"><a class="page-link waves-effect waves-effect">5</a></li>
+
+                                    <!--Arrow right-->
+                                    <li class="page-item">
+                                        <a class="page-link waves-effect waves-effect" aria-label="Next">
+                                            <span aria-hidden="true">»</span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </li>
+
+                                    <!--First-->
+                                    <li class="page-item clearfix d-none d-md-block"><a class="page-link waves-effect waves-effect">Last</a></li>
+
+                                </ul>
+                            </nav>
+                            <!--/Pagination -->
+
+
+                        </div>
+                        <!--Grid column-->
+
+                    </div>
+                    <!--Grid row-->
+
+                </section>
+                <!--Section: Profile-->
+
+            </div>
+        </main>
+        <!--Main layout-->
+
+        <div class="hiddendiv common"></div>
+    </div>
+</div>
+<footer id="myFooter">
+    <div class="container">
+        <h7 class="logo"><a href="#">&copy; 2017 Excursium</a></h7>
+        <div class="social-icons">
+            <a href="https://vk.com/excursium" class="twitter"><i class="fa fa-vk"></i></a>
+        </div>
+    </div>
+</footer>
+
+<script type="text/javascript" src="../resources/js/compiled.min.js"></script>
+<!--Custom scripts-->
+<script>
+        // SideNav Initialization
+        $(".button-collapse").sideNav();
+
+        var container = document.getElementById('slide-out');
+        Ps.initialize(container, {
+            wheelSpeed: 2,
+            wheelPropagation: true,
+            minScrollbarLength: 20
+        });
+    </script><div class="drag-target" style="left: 0px; touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div>
+</body>
+</html>
