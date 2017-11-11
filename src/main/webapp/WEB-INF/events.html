@@ -158,7 +158,7 @@
         <div class="row" th:if="${id}">
             <div class="col-md-12 col-lg-8">
 
-                <form th:object="${insertEvent}" action="/events/moderation" method="POST" enctype="multipart/form-data">
+                <form th:object="${inputEvent}" action="/events/moderation" method="POST" enctype="multipart/form-data">
 
                     <div class="panel panel-default">
                         <div class="panel-heading" th:text="${#messages.msg('words.type')}">
@@ -167,7 +167,7 @@
                         <div class="panel-body">
                             <div class="input-group">
                                 <select name="type" class="form-control selectpicker"
-                                        th:selected="${insertEvent.getType()}">
+                                        th:selected="${inputEvent.getType()}">
                                     <option value="-4" th:text="${#messages.msg('event.type.blocked')}">Заблокирована
                                     </option>
                                     <option value="-3" th:text="${#messages.msg('event.type.moderation')}">На
@@ -187,7 +187,7 @@
                         <span class="input-group-addon" th:text="${#messages.msg('words.name')}">Название</span>
                         <input name="name" type="text" class="form-control" id="name" placeholder="Название"
                                aria-label="Название"
-                               th:value="${insertEvent.getName()}" required=""/>
+                               th:value="${inputEvent.getName()}" required=""/>
                         <label for="name" th:if="${#fields.hasErrors('name')}"
                                th:text="${#messages.msg('error.event.name')}" th:class="'error'">Name Error</label>
                     </div>
@@ -196,7 +196,7 @@
                         <span class="input-group-addon" th:text="${#messages.msg('words.description')}">Описание</span>
                         <textarea name="description" type="text" id="description" class="form-control"
                                   placeholder="Описание" required=""
-                                  aria-label="Описание" th:text="${insertEvent.getDescription()}"></textarea>
+                                  aria-label="Описание" th:text="${inputEvent.getDescription()}"></textarea>
                         <label for="description" th:if="${#fields.hasErrors('description')}"
                                th:text="${#messages.msg('error.event.description')}" th:class="'error'">Description
                             Error</label>
@@ -209,7 +209,7 @@
                         <div class="panel-body">
                             <div class="input-group">
                                 <select name="category" id="category" class="form-control selectpicker"
-                                        th:selected="${insertEvent.getCategory()}">
+                                        th:selected="${inputEvent.getCategory()}">
                                     <option value="0" th:text="${#messages.msg('category.0')}">Развлечения</option>
                                     <option value="1" th:text="${#messages.msg('category.1')}">Наука</option>
                                     <option value="2" th:text="${#messages.msg('category.2')}">История</option>
@@ -227,13 +227,13 @@
                         <input name="place" id="place" type="text" class="form-control" placeholder="Место встречи"
                                required=""
                                aria-label="Место встречи"
-                               th:value="${insertEvent.getPlace()}"/>
+                               th:value="${inputEvent.getPlace()}"/>
                         <label for="place" th:if="${#fields.hasErrors('place')}"
                                th:text="${#messages.msg('error.event.place')}" th:class="'error'">Place Error</label>
                     </div>
                     <br/>
                     <div class="view overlay hm-white-slight z-depth-1">
-                        <img th:src="${insertEvent.pathToPhoto}" class="img-fluid" alt=""/>
+                        <img th:src="${inputEvent.pathToPhoto}" class="img-fluid" alt=""/>
                         <a>
                             <div class="mask waves-effect waves-light"></div>
                         </a>
@@ -246,7 +246,7 @@
                         <div class="panel-body">
                             <div class="input-group">
                                 <select name="language" class="form-control selectpicker"
-                                        th:selected="${insertEvent.getLanguage()}?${insertEvent.getLanguage()}">
+                                        th:selected="${inputEvent.getLanguage()}?${inputEvent.getLanguage()}">
                                     <option value="0" th:text="${#messages.msg('language.0')}">Русский</option>
                                     <option value="1" th:text="${#messages.msg('language.1')}">Английский</option>
                                 </select>
@@ -254,7 +254,7 @@
                         </div>
                     </div>
                     <div class="input-group" style="display: none">
-                        <input name="id" type="number" class="form-control" th:value="${insertEvent.getId()}"/>
+                        <input name="id" type="number" class="form-control" th:value="${inputEvent.getId()}"/>
                     </div>
                     <br/>
                     <button type="reset" class="btn btn-default" th:text="${#messages.msg('words.reset')}">Сброс

@@ -246,81 +246,86 @@
                             <!-- Heading -->
 
                             <!-- Card row -->
-                            <div class="card-deck" th:each="i : ${#numbers.sequence( 0, events.size()-1)}">
+                            <th:block th:if="${events.size()!=0}">
+                                <div class="card-deck" th:each="i : ${#numbers.sequence( 0, events.size()-1)}">
 
-                                <th:block th:if="${i%2==0}" th:with="inc = ${i!=events.size()-1?1:0}">
-                                    <!--Card-->
-                                    <div class="card card-cascade narrower mb-5"
-                                         th:each="j : ${#numbers.sequence(i,i+inc)}" th:with="event=${events.get(j)}">
+                                    <th:block th:if="${i%2==0}" th:with="inc = ${i!=events.size()-1?1:0}">
+                                        <!--Card-->
+                                        <div class="card card-cascade narrower mb-5"
+                                             th:each="j : ${#numbers.sequence(i,i+inc)}"
+                                             th:with="event=${events.get(j)}">
 
-                                        <!--Card image-->
-                                        <div class="view overlay hm-white-slight">
-                                            <img th:src="${event.getPhotoUrl()}" src="#" class="img-fluid" alt=""/>
-                                            <a href="#">
-                                                <div class="mask waves-effect waves-light"></div>
-                                            </a>
-                                        </div>
+                                            <!--Card image-->
+                                            <div class="view overlay hm-white-slight">
+                                                <img th:src="${event.getPhotoUrl()}" src="#" class="img-fluid" alt=""/>
+                                                <a href="#">
+                                                    <div class="mask waves-effect waves-light"></div>
+                                                </a>
+                                            </div>
 
-                                        <!--Card content-->
-                                        <div class="card-body pb-0">
-                                            <!--Title-->
-                                            <h4 class="card-title" th:text="${event.getName()}">Название экскурсии</h4>
-                                            <!--Text-->
-                                            <p class="card-text" th:text="${event.getSmallDescription()}">Описание</p>
-                                        </div>
+                                            <!--Card content-->
+                                            <div class="card-body pb-0">
+                                                <!--Title-->
+                                                <h4 class="card-title" th:text="${event.getName()}">Название
+                                                    экскурсии</h4>
+                                                <!--Text-->
+                                                <p class="card-text" th:text="${event.getSmallDescription()}">
+                                                    Описание</p>
+                                            </div>
 
-                                        <!--Card footer-->
-                                        <div class="card-footer links-light">
+                                            <!--Card footer-->
+                                            <div class="card-footer links-light">
                                         <span class="left pt-2">
                                             <a><i class="fa fa-share-alt mr-2"></i></a>
                                             <a><i class="fa fa-heart-o mr-2"></i>10</a>
                                         </span>
-                                            <span class="right">
+                                                <span class="right">
                                             <a href="#" class="waves-effect p-2">Live Preview <i
                                                     class="fa fa-photo ml-1"></i></a>
                                         </span>
+                                            </div>
+
                                         </div>
+                                        <!--/.Card-->
 
-                                    </div>
-                                    <!--/.Card-->
+                                        <!--Card-->
+                                        <!--<div class="card card-cascade narrower d-flex mb-5">
 
-                                    <!--Card-->
-                                    <!--<div class="card card-cascade narrower d-flex mb-5">
+                                            &lt;!&ndash;Card image&ndash;&gt;
+                                            <div class="view overlay hm-white-slight">
+                                                <img src="#" class="img-fluid" alt=""/>
+                                                <a href="#">
+                                                    <div class="mask waves-effect waves-light"></div>
+                                                </a>
+                                            </div>
 
-                                        &lt;!&ndash;Card image&ndash;&gt;
-                                        <div class="view overlay hm-white-slight">
-                                            <img src="#" class="img-fluid" alt=""/>
-                                            <a href="#">
-                                                <div class="mask waves-effect waves-light"></div>
-                                            </a>
-                                        </div>
+                                            &lt;!&ndash;Card content&ndash;&gt;
+                                            <div class="card-body">
+                                                &lt;!&ndash;Title&ndash;&gt;
+                                                <h4 class="card-title">Название экскурсии</h4>
+                                                &lt;!&ndash;Text&ndash;&gt;
+                                                <p class="card-text">Описание
+                                                </p>
+                                            </div>
 
-                                        &lt;!&ndash;Card content&ndash;&gt;
-                                        <div class="card-body">
-                                            &lt;!&ndash;Title&ndash;&gt;
-                                            <h4 class="card-title">Название экскурсии</h4>
-                                            &lt;!&ndash;Text&ndash;&gt;
-                                            <p class="card-text">Описание
-                                            </p>
-                                        </div>
+                                            &lt;!&ndash;Card footer&ndash;&gt;
+                                            <div class="card-footer links-light">
+                                            <span class="left pt-2">
+                                                <a><i class="fa fa-share-alt mr-2"></i></a>
+                                                <a><i class="fa fa-heart-o mr-2"></i>10</a>
+                                            </span>
+                                                <span class="right">
+                                                <a href="#" class="waves-effect p-2">Live Preview <i
+                                                        class="fa fa-photo ml-1"></i></a>
+                                            </span>
+                                            </div>
 
-                                        &lt;!&ndash;Card footer&ndash;&gt;
-                                        <div class="card-footer links-light">
-                                        <span class="left pt-2">
-                                            <a><i class="fa fa-share-alt mr-2"></i></a>
-                                            <a><i class="fa fa-heart-o mr-2"></i>10</a>
-                                        </span>
-                                            <span class="right">
-                                            <a href="#" class="waves-effect p-2">Live Preview <i
-                                                    class="fa fa-photo ml-1"></i></a>
-                                        </span>
-                                        </div>
+                                        </div>-->
+                                        <!--/.Card-->
+                                    </th:block>
 
-                                    </div>-->
-                                    <!--/.Card-->
-                                </th:block>
-
-                            </div>
+                                </div>
+                            </th:block>
                             <!-- Card row -->
 
 
@@ -419,7 +424,7 @@
 
                                                         <!--First Name-->
                                                         <div class="md-form form-sm">
-                                                            <input type="text" id="editProfile1" class="form-control"/>
+                                                            <input type="text" id="editProfile1" class="form-control" th:value="${person.getFirstName()}"/>
                                                             <label for="editProfile1" class="">First name</label>
                                                         </div>
 
@@ -431,7 +436,7 @@
 
                                                         <!--Last Name-->
                                                         <div class="md-form form-sm">
-                                                            <input type="text" id="editProfile2" class="form-control"/>
+                                                            <input type="text" id="editProfile2" class="form-control" th:value="${person.getLastName()}"/>
                                                             <label for="editProfile2" class="">Last name</label>
                                                         </div>
 
@@ -467,8 +472,8 @@
 
                                                         <!--Company website-->
                                                         <div class="md-form form-sm">
-                                                            <input type="text" id="editProfile5" class="form-control"/>
-                                                            <label for="editProfile5" class="">Company website</label>
+                                                            <textarea type="text" id="editProfile5" class="md-textarea" th:text="${person.getAbout()}"></textarea>
+                                                            <label for="editProfile5" class="">About me</label>
                                                         </div>
 
                                                     </div>
@@ -590,7 +595,7 @@
                                             <div class="modal-body">
                                                 <div class="md-form form-sm">
                                                     <input type="text" id="form224" class="form-control"/>
-                                                    <label for="form24">Логин</label>
+                                                    <label for="form224">Логин</label>
                                                 </div>
 
                                                 <div class="md-form form-sm">
@@ -797,38 +802,65 @@
 
                                         <!--Name-->
                                         <div class="md-form form-sm">
-                                            <input name="name" type="text" class="form-control" id="name" th:value="${inputEvent.getName()}" required="" minlength="10" maxlength="60"/>
-                                            <label for="name" th:if="${#fields.hasErrors('name')}" th:text="${#messages.msg('error.event.name')}" th:class="'error'">Name Error</label>
-                                            <label for="name" class="" th:text="${#messages.msg('words.name')}">Название</label>
+                                            <input name="name" type="text" class="form-control" id="name"
+                                                   th:value="${inputEvent.getName()}" required="" minlength="10"
+                                                   maxlength="60"/>
+                                            <label for="name" th:if="${#fields.hasErrors('name')}"
+                                                   th:text="${#messages.msg('error.event.name')}" th:class="'error'">Name
+                                                Error</label>
+                                            <label for="name" class=""
+                                                   th:text="${#messages.msg('words.name')}">Название</label>
                                         </div>
 
                                         <!--Project URL address-->
                                         <div class="md-form">
-                                            <textarea name="description" minlength="150" maxlength="1000" type="text" id="description"
-                                                      class="md-textarea" required="" th:text="${inputEvent.getDescription()}"></textarea>
+                                            <textarea name="description" minlength="150" maxlength="1000" type="text"
+                                                      id="description"
+                                                      class="md-textarea" required=""
+                                                      th:text="${inputEvent.getDescription()}"></textarea>
                                             <label for="description" th:if="${#fields.hasErrors('description')}"
-                                                   th:text="${#messages.msg('error.event.description')}" th:class="'error'">Description
+                                                   th:text="${#messages.msg('error.event.description')}"
+                                                   th:class="'error'">Description
                                                 Error</label>
-                                            <label for="description" class="" th:text="${#messages.msg('words.description')}">Описание</label>
+                                            <label for="description" class=""
+                                                   th:text="${#messages.msg('words.description')}">Описание</label>
                                         </div>
 
                                         <!--Image URL-->
                                         <div class="md-form">
-                                            <div class="panel-heading" th:text="${#messages.msg('words.type_of_excursion')}">
+                                            <div class="panel-heading"
+                                                 th:text="${#messages.msg('words.type_of_excursion')}">
                                                 Тип экскурсии
                                             </div>
                                             <div class="panel-body">
                                                 <div class="input-group">
-                                                    <select name="category" id="category" class="form-control selectpicker"
+                                                    <select name="category" id="category"
+                                                            class="form-control selectpicker"
                                                             th:selected="${inputEvent.getCategory()}?${inputEvent.getCategory()}:0">
-                                                        <option value="0" th:text="${#messages.msg('category.0')}">Развлечения</option>
-                                                        <option value="1" th:text="${#messages.msg('category.1')}">Наука</option>
-                                                        <option value="2" th:text="${#messages.msg('category.2')}">История</option>
-                                                        <option value="3" th:text="${#messages.msg('category.3')}">Искусство</option>
-                                                        <option value="4" th:text="${#messages.msg('category.4')}">Производство</option>
-                                                        <option value="5" th:text="${#messages.msg('category.5')}">Гастрономия</option>
-                                                        <option value="6" th:text="${#messages.msg('category.6')}">Квесты</option>
-                                                        <option value="7" th:text="${#messages.msg('category.7')}">Экстрим</option>
+                                                        <option value="0" th:text="${#messages.msg('category.0')}">
+                                                            Развлечения
+                                                        </option>
+                                                        <option value="1" th:text="${#messages.msg('category.1')}">
+                                                            Наука
+                                                        </option>
+                                                        <option value="2" th:text="${#messages.msg('category.2')}">
+                                                            История
+                                                        </option>
+                                                        <option value="3" th:text="${#messages.msg('category.3')}">
+                                                            Искусство
+                                                        </option>
+                                                        <option value="4" th:text="${#messages.msg('category.4')}">
+                                                            Производство
+                                                        </option>
+                                                        <option value="5" th:text="${#messages.msg('category.5')}">
+                                                            Гастрономия
+                                                        </option>
+                                                        <option value="6" th:text="${#messages.msg('category.6')}">
+                                                            Квесты
+                                                        </option>
+                                                        <option value="7" th:text="${#messages.msg('category.7')}">
+                                                            Экстрим
+                                                        </option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -839,18 +871,26 @@
                                                    required="" min="1" max="100"
                                                    th:value="${inputEvent.getUsersCount()}?${inputEvent.getUsersCount()}"/>
                                             <label for="users_count" th:if="${#fields.hasErrors('usersCount')}"
-                                                   th:text="${#messages.msg('error.event.users_count')}" th:class="'error'">UsersCount
+                                                   th:text="${#messages.msg('error.event.users_count')}"
+                                                   th:class="'error'">UsersCount
                                                 Error</label>
-                                            <label for="users_count" class="" th:text="${#messages.msg('words.users_count')}">Количество участников</label>
+                                            <label for="users_count" class=""
+                                                   th:text="${#messages.msg('words.users_count')}">Количество
+                                                участников</label>
                                         </div>
 
                                         <div class="md-form form-sm">
                                             <input name="duration" id="duration" type="number" class="form-control"
-                                                   required="" th:value="${inputEvent.getDuration()}?${inputEvent.getDuration()}" min="1" max="240"/>
+                                                   required=""
+                                                   th:value="${inputEvent.getDuration()}?${inputEvent.getDuration()}"
+                                                   min="1" max="240"/>
                                             <label for="duration" th:if="${#fields.hasErrors('duration')}"
-                                                   th:text="${#messages.msg('error.event.duration')}" th:class="'error'">Duration
+                                                   th:text="${#messages.msg('error.event.duration')}"
+                                                   th:class="'error'">Duration
                                                 Error</label>
-                                            <label for="duration" class="" th:text="${#messages.msg('words.duration')+' ('+#messages.msg('words.hours')+')'}">Длительность (часов)</label>
+                                            <label for="duration" class=""
+                                                   th:text="${#messages.msg('words.duration')+' ('+#messages.msg('words.hours')+')'}">Длительность
+                                                (часов)</label>
                                         </div>
 
                                         <div class="md-form form-sm">
@@ -858,20 +898,26 @@
                                                    required="" minlength="5" maxlength="100"
                                                    th:value="${inputEvent.getPlace()}?${inputEvent.getPlace()}"/>
                                             <label for="place" th:if="${#fields.hasErrors('place')}"
-                                                   th:text="${#messages.msg('error.event.place')}" th:class="'error'">Place Error</label>
-                                            <label for="place" class="" th:text="${#messages.msg('words.place')}">Место встречи</label>
+                                                   th:text="${#messages.msg('error.event.place')}" th:class="'error'">Place
+                                                Error</label>
+                                            <label for="place" class="" th:text="${#messages.msg('words.place')}">Место
+                                                встречи</label>
                                         </div>
 
                                         <div class="md-form form-sm">
                                             <input name="price" id="price" type="number" class="form-control"
-                                                   required="" min="1" max="100000" th:value="${inputEvent.getPrice()}?${inputEvent.getPrice()}"/>
+                                                   required="" min="1" max="100000"
+                                                   th:value="${inputEvent.getPrice()}?${inputEvent.getPrice()}"/>
                                             <label for="price" th:if="${#fields.hasErrors('price')}"
-                                                   th:text="${#messages.msg('error.event.price')}" th:class="'error'">Price Error</label>
-                                            <label for="price" class="" th:text="${#messages.msg('words.price') + '(&#8381;)'}">Цена</label>
+                                                   th:text="${#messages.msg('error.event.price')}" th:class="'error'">Price
+                                                Error</label>
+                                            <label for="price" class=""
+                                                   th:text="${#messages.msg('words.price') + '(&#8381;)'}">Цена</label>
                                         </div>
 
                                         <div class="md-form form-sm">
-                                            <input name="file" type="file" id="file" class="form-control" required="" size="30000000"
+                                            <input name="file" type="file" id="file" class="form-control" required=""
+                                                   size="30000000"
                                                    accept="image/jpeg,image/png" aria-label="Фотографии"/>
                                             <!--<label for="file" th:if="${error_data}" th:text="${#messages.msg('error.event.file')}"
                                                    th:class="'error'">File Error</label>TODO:error_data(file)-->
@@ -886,8 +932,12 @@
                                                 <div class="input-group">
                                                     <select name="language" class="form-control selectpicker"
                                                             th:selected="${inputEvent.getLanguage()}?${inputEvent.getLanguage()}">
-                                                        <option value="0" th:text="${#messages.msg('language.0')}">Русский</option>
-                                                        <option value="1" th:text="${#messages.msg('language.1')}">Английский</option>
+                                                        <option value="0" th:text="${#messages.msg('language.0')}">
+                                                            Русский
+                                                        </option>
+                                                        <option value="1" th:text="${#messages.msg('language.1')}">
+                                                            Английский
+                                                        </option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -895,10 +945,12 @@
 
                                         <!--Footer-->
                                         <div class="modal-footer justify-content-center">
-                                            <button type="button" class="btn btn-outline-primary waves-effect waves-light"
+                                            <button type="button"
+                                                    class="btn btn-outline-primary waves-effect waves-light"
                                                     data-dismiss="modal">Закрыть
                                             </button>
-                                            <button type="submit" class="btn btn-primary waves-effect waves-light">Submit <i
+                                            <button type="submit" class="btn btn-primary waves-effect waves-light">
+                                                Submit <i
                                                     class="fa fa-check ml-1"></i></button>
                                         </div>
                                     </form>

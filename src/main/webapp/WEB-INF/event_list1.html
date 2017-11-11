@@ -234,7 +234,7 @@
                                                     style="display: inline-block; width: 100%; padding: 0 5px;">
                                             <input id="Slider2" type="slider" name="time" value="600;1200"/></span>
                                         </div>
-                                        <script type="text/javascript" charset="utf-8">
+                                        <script type="text/javascript" charset="utf-8" th:inline="javascript">
                                             jQuery("#Slider2").slider({
                                                 from: 480,
                                                 to: 1440,
@@ -243,11 +243,11 @@
                                                 skin: "plastic",
                                                 scale: ['8:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00', '24:00'],
                                                 limits: false,
-                                                calculate: function (value) {
+                                                /*calculate: function (value) {
                                                     var hours = Math.floor(value / 60);
-                                                    var mins = ( value - hours * 60 );
+                                                    var mins = value - hours * 60;
                                                     return (hours<10?"0"+hours:hours)+":"+(mins<10?"0"+mins:mins);
-                                                },
+                                                },TODO:calculate!!1!*/
                                                 onstatechange: function (value) {
                                                     console.dir(this);
                                                 }
