@@ -1,5 +1,6 @@
 package com.heroku.demo.person;
 
+import com.heroku.demo.event.Event;
 import com.heroku.demo.event.EventRepository;
 import com.heroku.demo.event.EventServiceImpl;
 import com.heroku.demo.photo.PhotoRepository;
@@ -65,6 +66,7 @@ public class PersonController {
         }
         model.addAttribute("person", person);
         model.addAttribute("events", eventService.getByGuideId(person.getId()));
+        model.addAttribute("inputEvent", new Event());
         return "account";
     }
 

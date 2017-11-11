@@ -160,18 +160,19 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="left-sidebar">
+                        <h2>Категории</h2>
+                        <div class="panel-body">
+                            <div class="chip"
+                                 th:each="i : ${#numbers.sequence(0, utils.getCategoriesCount()-1)}">
+                                <a th:href="@{/events/list(category=${i})}">
+                                    <img th:src="${utils.getCategoryUrl(i)}" alt=""
+                                         src="../resources/img/user.png"/>
+                                    <span th:text="${#messages.msg('category.'+i)}">%Категория%</span>
+                                </a>
+                            </div>
+                        </div>
                         <h2>Фильтр</h2>
                         <form method="get" action="/events/list">
-                            <div class="panel-body">
-                                <div class="chip"
-                                     th:each="i : ${#numbers.sequence(0, utils.getCategoriesCount()-1)}">
-                                    <a th:href="@{/events/list(category=${i})}">
-                                        <img th:src="${utils.getCategoryUrl(i)}" alt=""
-                                             src="../resources/img/user.png"/>
-                                        <span th:text="${#messages.msg('category.'+i)}">%Категория%</span>
-                                    </a>
-                                </div>
-                            </div>
                             <br/>
                             <div class="panel panel-default">
                                 <div class="panel-heading" th:text="${#messages.msg('words.type_of_excursion')}">
@@ -192,27 +193,70 @@
                             <div class="priceFilter">
                                 <div class="price-range">
                                     <div class="well">
-                                        <h5>Цена, ₽</h5>
+                                        <h5>Цена</h5>
                                         <br/>
                                         <div class="layout-slider" style="width: 100%">
                                         <span
                                                 style="display: inline-block; width: 100%; padding: 0 5px;">
-                                        <input id="Slider1" type="slider" name="price" value="30000.5;60000"/></span>
+                                        <input id="Slider1" type="slider" name="price" value="0;3000"/></span>
+                                        </div>
+                                        <br/>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" id="is_barter" name="is_barter"/><span>Отображать сделки по бартеру</span>
+                                            </label>
                                         </div>
                                         <script type="text/javascript" charset="utf-8">
                                             jQuery("#Slider1").slider({
-                                                from: 1000,
+                                                /*from: 1000,
                                                 to: 100000,
                                                 step: 500,
                                                 smooth: true,
                                                 round: 0,
                                                 dimension: "&nbsp;₽",
-                                                skin: "plastic"
+                                                skin: "plastic"*/
+                                                from: 0,
+                                                to: 100000,
+                                                heterogeneity: ['25/1000', '50/3000', '75/10000', '100/10000'],
+                                                scale: [0, '|', 1000, '|', 3000, '|', 10000, '|', 100000],
+                                                limits: false,
+                                                step: 1,
+                                                dimension: '',
+                                                skin: "blue"
+                                            });
+                                        </script>
+                                    </div>
+                                    <div class="well">
+                                        <h5>Время</h5>
+                                        <br/>
+                                        <div class="layout-slider" style="width: 100%">
+                                            <span
+                                                    style="display: inline-block; width: 100%; padding: 0 5px;">
+                                            <input id="Slider2" type="slider" name="time" value="600;1200"/></span>
+                                        </div>
+                                        <script type="text/javascript" charset="utf-8">
+                                            jQuery("#Slider2").slider({
+                                                from: 480,
+                                                to: 1440,
+                                                step: 15,
+                                                dimension: '',
+                                                skin: "plastic",
+                                                scale: ['8:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00', '24:00'],
+                                                limits: false,
+                                                calculate: function (value) {
+                                                    var hours = Math.floor(value / 60);
+                                                    var mins = ( value - hours * 60 );
+                                                    return (hours < 10 ? "0" + hours : hours) + ":" + ( mins == 0 ? "00" : mins );
+                                                },
+                                                onstatechange: function (value) {
+                                                    console.dir(this);
+                                                }
                                             });
                                         </script>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="text-center">
                                 <br/>
                                 <button name="filter" class="btn btn-default add-to-cart" type="submit"><i
@@ -300,6 +344,60 @@
                         </th:block>
                     </div>
                     <!--Grid column-->
+                    <div class="row">
+
+                        <!--Pagination -->
+                        <nav class="my-4 d-flex justify-content-center">
+                            <ul class="pagination pagination-circle pg-blue mb-0">
+
+                                <!--TODO:
+                                        <div class="pull-left pagination-detail"><span class="pagination-info"></span><span
+                                        class="page-list"><span class="btn-group dropup"><button type="button"
+                                                                                                 class="btn btn-default  dropdown-toggle"
+                                                                                                 data-toggle="dropdown"
+                                                                                                 aria-expanded="false"><span
+                                        class="page-size">8</span> <span class="caret"></span></button><ul class="dropdown-menu"
+                                                                                                           role="menu"><li
+                                        class="active"><a href="javascript:void(0)">8</a></li><li><a href="javascript:void(0)">10</a></li><li><a
+                                        href="javascript:void(0)">25</a></li><li><a href="javascript:void(0)">50</a></li><li><a
+                                        href="javascript:void(0)">100</a></li></ul></span> rows visible</span></div>-->
+
+                                <!--First-->
+                                <li class="page-item disabled clearfix d-none d-md-block"><a
+                                        class="page-link waves-effect waves-effect">В начало</a></li>
+
+                                <!--Arrow left-->
+                                <li class="page-item disabled">
+                                    <a class="page-link waves-effect waves-effect" aria-label="Назад">
+                                        <span aria-hidden="true">«</span>
+                                        <span class="sr-only">Назад</span>
+                                    </a>
+                                </li>
+
+                                <!--Numbers-->
+                                <li class="page-item active"><a class="page-link waves-effect waves-effect">1</a>
+                                </li>
+                                <li class="page-item"><a class="page-link waves-effect waves-effect">2</a></li>
+                                <li class="page-item"><a class="page-link waves-effect waves-effect">3</a></li>
+                                <li class="page-item"><a class="page-link waves-effect waves-effect">4</a></li>
+                                <li class="page-item"><a class="page-link waves-effect waves-effect">5</a></li>
+
+                                <!--Arrow right-->
+                                <li class="page-item">
+                                    <a class="page-link waves-effect waves-effect" aria-label="Вперёд">
+                                        <span aria-hidden="true">»</span>
+                                        <span class="sr-only">Вперёд</span>
+                                    </a>
+                                </li>
+
+                                <!--First-->
+                                <li class="page-item clearfix d-none d-md-block"><a
+                                        class="page-link waves-effect waves-effect">В конец</a></li>
+
+                            </ul>
+                        </nav>
+                        <!--/Pagination -->
+                    </div>
                 </div>
             </div>
         </div>

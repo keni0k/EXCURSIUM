@@ -88,7 +88,7 @@ public class EventController {
             eventService.addEvent(event);
         } else {
             modelMap.addAttribute("file", file);
-            modelMap.addAttribute("insertEvent", event);
+            modelMap.addAttribute("inputEvent", event);
             modelMap.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("error.event.add", null, locale)));
             return "event_add";
         }
@@ -245,8 +245,8 @@ public class EventController {
             if (img!=null)
                 editEvent.pathToPhoto="https://excursium.blob.core.windows.net/img/"+img.getData();
 //            logger.info("EVENT PATH: "+editEvent.pathToPhoto);
-            model.addAttribute("insertEvent", editEvent);
-        } else model.addAttribute("insertEvent", new Event());
+            model.addAttribute("inputEvent", editEvent);
+        } else model.addAttribute("inputEvent", new Event());
 
         return "events";
     }
@@ -270,7 +270,7 @@ public class EventController {
         eventService.editEvent(event1);
         List<Event> events = eventService.getByFilter(null, null, null, locale.getLanguage().equals("ru") ? 0 : 1, null, null);
         modelMap.addAttribute("events", events);
-        modelMap.addAttribute("insertEvent", event1);
+        modelMap.addAttribute("inputEvent", event1);
         return "events";
     }
 
