@@ -799,7 +799,7 @@
                                         <div class="md-form form-sm">
                                             <input name="name" type="text" class="form-control" id="name" th:value="${inputEvent.getName()}" required="" minlength="10" maxlength="60"/>
                                             <label for="name" th:if="${#fields.hasErrors('name')}" th:text="${#messages.msg('error.event.name')}" th:class="'error'">Name Error</label>
-                                            <label for="name" class="" th:text="${#messages.msg('')}">Название</label>
+                                            <label for="name" class="" th:text="${#messages.msg('words.name')}">Название</label>
                                         </div>
 
                                         <!--Project URL address-->
@@ -893,18 +893,16 @@
                                             </div>
                                         </div>
 
-
+                                        <!--Footer-->
+                                        <div class="modal-footer justify-content-center">
+                                            <button type="button" class="btn btn-outline-primary waves-effect waves-light"
+                                                    data-dismiss="modal">Закрыть
+                                            </button>
+                                            <button type="submit" class="btn btn-primary waves-effect waves-light">Submit <i
+                                                    class="fa fa-check ml-1"></i></button>
+                                        </div>
                                     </form>
 
-                                </div>
-
-                                <!--Footer-->
-                                <div class="modal-footer justify-content-center">
-                                    <button type="button" class="btn btn-outline-primary waves-effect waves-light"
-                                            data-dismiss="modal">Закрыть
-                                    </button>
-                                    <button type="submit" class="btn btn-primary waves-effect waves-light">Submit <i
-                                            class="fa fa-check ml-1"></i></button>
                                 </div>
 
                             </div>

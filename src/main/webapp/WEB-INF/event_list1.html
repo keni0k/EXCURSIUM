@@ -246,7 +246,7 @@
                                                 calculate: function (value) {
                                                     var hours = Math.floor(value / 60);
                                                     var mins = ( value - hours * 60 );
-                                                    return (hours < 10 ? "0" + hours : hours) + ":" + ( mins == 0 ? "00" : mins );
+                                                    return (hours < 10 ? "0" + hours : hours) + ":" + ( mins === 0 ? "00" : mins );
                                                 },
                                                 onstatechange: function (value) {
                                                     console.dir(this);
