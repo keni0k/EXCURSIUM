@@ -500,7 +500,7 @@
                                                             <!--City-->
                                                             <div class="md-form form-sm mt-2">
                                                                 <input type="text" id="editProfile6" name="city"
-                                                                       class="form-control"/>
+                                                                       class="form-control" th:value="${person.getCity()}"/>
                                                                 <label for="editProfile6" class="">City</label>
                                                             </div>
 
@@ -563,7 +563,7 @@
                                                                 class="btn btn-outline-primary waves-effect waves-light"
                                                                 data-dismiss="modal">Закрыть
                                                         </button>
-                                                        <button type="button"
+                                                        <button type="submit"
                                                                 class="btn btn-primary waves-effect waves-light">
                                                             Сохранить изменения <i class="fa fa-check ml-1"></i>
                                                         </button>
