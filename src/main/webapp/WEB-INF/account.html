@@ -118,7 +118,8 @@
                         пользователей</a></li>
                     <li th:if="${isAdmin}"><a href="/events/moderation" th:text="${#messages.msg('titles.events')}">Модерация
                         экскурсий</a></li>
-                    <li th:if="${isUser} or ${isAdmin}"><a href="/users/account" th:text="${#messages.msg('titles.account')}">Профиль</a></li>
+                    <li th:if="${isUser} or ${isAdmin}"><a href="/users/account"
+                                                           th:text="${#messages.msg('titles.account')}">Профиль</a></li>
                     <li th:unless="${isUser}"><a href="/users/registration"
                                                  th:text="${#messages.msg('titles.registration')}">Регистрация</a></li>
                     <li th:unless="${isUser}"><a href="/users/login"
@@ -174,11 +175,13 @@
                                         <th:block th:text="${person.getPhoneNumber()}"/>
                                     </p>
 
-                                    <button th:unless="${isThisUserAccount}" type="button" class="btn btn-info waves-effect waves-light"
+                                    <button th:unless="${isThisUserAccount}" type="button"
+                                            class="btn btn-info waves-effect waves-light"
                                             data-toggle="modal" data-target="#modalContactUser">Связаться<i
                                             class="fa fa-paper-plane ml-2"></i></button>
 
-                                    <a th:if="${isThisUserAccount}" class="btn btn-primary waves-effect waves-light" href="#" role="button"
+                                    <a th:if="${isThisUserAccount}" class="btn btn-primary waves-effect waves-light"
+                                       href="#" role="button"
                                        data-toggle="modal" data-target="#modalEditProfile">Редактировать профиль <i
                                             class="fa fa-pencil ml-2"></i></a>
 
@@ -237,7 +240,8 @@
 
                                 <h4><strong>Экскурсии</strong></h4>
 
-                                <button th:if="${isThisUserAccount}" type="button" class="btn btn-primary mt-4 waves-effect waves-light"
+                                <button th:if="${isThisUserAccount}" type="button"
+                                        class="btn btn-primary mt-4 waves-effect waves-light"
                                         data-toggle="modal" data-target="#modalSubmitProject">Добавить новую экскурсию<i
                                         class="fa fa-photo ml-1"></i></button>
 
@@ -279,7 +283,7 @@
                                             <a><i class="fa fa-heart-o mr-2"></i>10</a>
                                         </span>
                                                 <span class="right">
-                                            <a href="#" class="waves-effect p-2">Live Preview <i
+                                            <a th:href="@{/event(id=${event.getId()})}" class="waves-effect p-2">Страница экскурсии<i
                                                     class="fa fa-photo ml-1"></i></a>
                                         </span>
                                             </div>
@@ -413,160 +417,159 @@
                                              aria-expanded="true">
                                             <!--Body-->
                                             <div class="modal-body mb-1">
+                                                <form th:object="${person}" action="/users/edit_info"
+                                                      enctype="multipart/form-data" method="post">
 
-                                                <!--Grid row-->
-                                                <div class="row">
+                                                    <!--Grid row-->
+                                                    <div class="row">
 
-                                                    <!--Grid column-->
-                                                    <div class="col-md-6">
+                                                        <!--Grid column-->
+                                                        <div class="col-md-6">
 
-                                                        <!--First Name-->
+                                                            <!--First Name-->
+                                                            <div class="md-form form-sm">
+                                                                <input type="text" id="editProfile1"
+                                                                       class="form-control" name="first_name"
+                                                                       th:value="${person.getFirstName()}"/>
+                                                                <label for="editProfile1" class="">First name</label>
+                                                            </div>
+
+                                                        </div>
+                                                        <!--Grid column-->
+
+                                                        <!--Grid column-->
+                                                        <div class="col-md-6">
+
+                                                            <!--Last Name-->
+                                                            <div class="md-form form-sm">
+                                                                <input type="text" id="editProfile2"
+                                                                       class="form-control" name="last_name"
+                                                                       th:value="${person.getLastName()}"/>
+                                                                <label for="editProfile2" class="">Last name</label>
+                                                            </div>
+
+                                                        </div>
+                                                        <!--Grid column-->
+
+                                                        <!--Grid column-->
+                                                        <div class="col-md-12">
+
+                                                            <!--Company website-->
+                                                            <div class="md-form form-sm">
+                                                                <textarea type="text" id="editProfile5" name="about_me"
+                                                                          class="md-textarea"
+                                                                          th:text="${person.getAbout()}"></textarea>
+                                                                <label for="editProfile5" class="">About me</label>
+                                                            </div>
+
+                                                        </div>
+                                                        <!--Grid column-->
+                                                        <div class="col-md-12">
                                                         <div class="md-form form-sm">
-                                                            <input type="text" id="editProfile1" class="form-control" th:value="${person.getFirstName()}"/>
-                                                            <label for="editProfile1" class="">First name</label>
+                                                            <input name="file" type="file" id="filePerson" class="form-control" required=""
+                                                                   size="30000000"
+                                                                   accept="image/jpeg,image/png" aria-label="Фотографии"/>
+                                                            <!--<label for="file" th:if="${error_data}" th:text="${#messages.msg('error.event.file')}"
+                                                                   th:class="'error'">File Error</label>TODO:error_data(file)-->
+                                                            <label for="filePerson" class="" th:text="${#messages.msg('words.photos')}">Фотографии</label>
+                                                        </div>
                                                         </div>
 
-                                                    </div>
-                                                    <!--Grid column-->
+                                                        <!--Grid column-->
+                                                        <div class="col-md-6">
 
-                                                    <!--Grid column-->
-                                                    <div class="col-md-6">
+                                                            <!--Country-->
+                                                            <select class="mdb-select colorful-select dropdown-primary"
+                                                                    searchable="Search here..">
+                                                                <option value="" disabled="" selected="">Choose your
+                                                                    country
+                                                                </option>
+                                                                <option value="1">USA</option>
+                                                                <option value="2">Germany</option>
+                                                                <option value="3">France</option>
+                                                                <option value="3">Poland</option>
+                                                                <option value="3">Japan</option>
+                                                            </select>
 
-                                                        <!--Last Name-->
-                                                        <div class="md-form form-sm">
-                                                            <input type="text" id="editProfile2" class="form-control" th:value="${person.getLastName()}"/>
-                                                            <label for="editProfile2" class="">Last name</label>
+                                                        </div>
+                                                        <!--Grid column-->
+
+                                                        <!--Grid column-->
+                                                        <div class="col-md-6">
+
+                                                            <!--City-->
+                                                            <div class="md-form form-sm mt-2">
+                                                                <input type="text" id="editProfile6" name="city"
+                                                                       class="form-control"/>
+                                                                <label for="editProfile6" class="">City</label>
+                                                            </div>
+
                                                         </div>
 
-                                                    </div>
-                                                    <!--Grid column-->
+                                                        <!--Grid column-->
+                                                        <div class="col-md-6">
 
-                                                    <!--Grid column-->
-                                                    <div class="col-md-6">
+                                                            <!--Facebook-->
+                                                            <div class="md-form form-sm mt-2">
+                                                                <input type="text" id="editProfile8"
+                                                                       class="form-control"/>
+                                                                <label for="editProfile8" class="">VK</label>
+                                                            </div>
 
-                                                        <!--Position-->
-                                                        <div class="md-form form-sm">
-                                                            <input type="text" id="editProfile3" class="form-control"/>
-                                                            <label for="editProfile3" class="">Position</label>
                                                         </div>
+                                                        <!--Grid column-->
 
-                                                    </div>
-                                                    <!--Grid column-->
+                                                        <!--Grid column-->
+                                                        <div class="col-md-6">
 
-                                                    <!--Grid column-->
-                                                    <div class="col-md-6">
+                                                            <!--Twitter-->
+                                                            <div class="md-form form-sm mt-2">
+                                                                <input type="text" id="editProfile9"
+                                                                       class="form-control"/>
+                                                                <label for="editProfile9" class="">Facebook</label>
+                                                            </div>
 
-                                                        <!--Company Name-->
-                                                        <div class="md-form form-sm">
-                                                            <input type="text" id="editProfile4" class="form-control"/>
-                                                            <label for="editProfile4" class="">Company name</label>
                                                         </div>
+                                                        <!--Grid column-->
 
-                                                    </div>
-                                                    <!--Grid column-->
+                                                        <!--Grid column-->
+                                                        <div class="col-md-6">
 
-                                                    <!--Grid column-->
-                                                    <div class="col-md-12">
+                                                            <!--LinkedIn-->
+                                                            <div class="md-form form-sm mt-2">
+                                                                <input type="text" id="editProfile10"
+                                                                       class="form-control"/>
+                                                                <label for="editProfile10" class="">Telegram</label>
+                                                            </div>
 
-                                                        <!--Company website-->
-                                                        <div class="md-form form-sm">
-                                                            <textarea type="text" id="editProfile5" class="md-textarea" th:text="${person.getAbout()}"></textarea>
-                                                            <label for="editProfile5" class="">About me</label>
                                                         </div>
+                                                        <!--Grid column-->
 
-                                                    </div>
-                                                    <!--Grid column-->
+                                                        <!--Grid column-->
+                                                        <div class="col-md-6">
 
-                                                    <!--Grid column-->
-                                                    <div class="col-md-6">
+                                                            <!--Dribbble-->
+                                                            <div class="md-form form-sm mt-2">
+                                                                <input type="text" id="editProfile11"
+                                                                       class="form-control"/>
+                                                                <label for="editProfile11" class="">Twitter</label>
+                                                            </div>
 
-                                                        <!--Country-->
-                                                        <select class="mdb-select colorful-select dropdown-primary"
-                                                                searchable="Search here..">
-                                                            <option value="" disabled="" selected="">Choose your
-                                                                country
-                                                            </option>
-                                                            <option value="1">USA</option>
-                                                            <option value="2">Germany</option>
-                                                            <option value="3">France</option>
-                                                            <option value="3">Poland</option>
-                                                            <option value="3">Japan</option>
-                                                        </select>
-
-                                                    </div>
-                                                    <!--Grid column-->
-
-                                                    <!--Grid column-->
-                                                    <div class="col-md-6">
-
-                                                        <!--City-->
-                                                        <div class="md-form form-sm mt-2">
-                                                            <input type="text" id="editProfile6" class="form-control"/>
-                                                            <label for="editProfile6" class="">City</label>
                                                         </div>
-
+                                                        <!--Grid column-->
                                                     </div>
-
-                                                    <!--Grid column-->
-                                                    <div class="col-md-6">
-
-                                                        <!--Facebook-->
-                                                        <div class="md-form form-sm mt-2">
-                                                            <input type="text" id="editProfile8" class="form-control"/>
-                                                            <label for="editProfile8" class="">VK</label>
-                                                        </div>
-
+                                                    <div class="modal-footer justify-content-center">
+                                                        <button type="button"
+                                                                class="btn btn-outline-primary waves-effect waves-light"
+                                                                data-dismiss="modal">Закрыть
+                                                        </button>
+                                                        <button type="button"
+                                                                class="btn btn-primary waves-effect waves-light">
+                                                            Сохранить изменения <i class="fa fa-check ml-1"></i>
+                                                        </button>
                                                     </div>
-                                                    <!--Grid column-->
-
-                                                    <!--Grid column-->
-                                                    <div class="col-md-6">
-
-                                                        <!--Twitter-->
-                                                        <div class="md-form form-sm mt-2">
-                                                            <input type="text" id="editProfile9" class="form-control"/>
-                                                            <label for="editProfile9" class="">Facebook</label>
-                                                        </div>
-
-                                                    </div>
-                                                    <!--Grid column-->
-
-                                                    <!--Grid column-->
-                                                    <div class="col-md-6">
-
-                                                        <!--LinkedIn-->
-                                                        <div class="md-form form-sm mt-2">
-                                                            <input type="text" id="editProfile10" class="form-control"/>
-                                                            <label for="editProfile10" class="">Telegram</label>
-                                                        </div>
-
-                                                    </div>
-                                                    <!--Grid column-->
-
-                                                    <!--Grid column-->
-                                                    <div class="col-md-6">
-
-                                                        <!--Dribbble-->
-                                                        <div class="md-form form-sm mt-2">
-                                                            <input type="text" id="editProfile11" class="form-control"/>
-                                                            <label for="editProfile11" class="">Twitter</label>
-                                                        </div>
-
-                                                    </div>
-                                                    <!--Grid column-->
-
-                                                </div>
-                                                <!--Grid row-->
-
-                                            </div>
-                                            <!--Footer-->
-                                            <div class="modal-footer justify-content-center">
-                                                <button type="button"
-                                                        class="btn btn-outline-primary waves-effect waves-light"
-                                                        data-dismiss="modal">Закрыть
-                                                </button>
-                                                <button type="button" class="btn btn-primary waves-effect waves-light">
-                                                    Сохранить изменения <i class="fa fa-check ml-1"></i></button>
+                                                    <!--Grid row-->
+                                                </form>
                                             </div>
 
                                         </div>

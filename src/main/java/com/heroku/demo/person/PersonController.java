@@ -58,12 +58,15 @@ public class PersonController {
     }
 
     @RequestMapping(value = "/account", method = RequestMethod.GET)
-    public String account(ModelMap model, Principal principal) {
-        String loginOrEmail = principal.getName();
-        Person person = new Person();
-        if (!loginOrEmail.equals("")) {
-            person = personService.getByLoginOrEmail(loginOrEmail);
-        }
+    public String account(ModelMap model, Principal principal, Person person1) {
+        Person person;
+        if (person1==null) {
+            String loginOrEmail = principal.getName();
+            if (!loginOrEmail.equals("")) {
+                person = personService.getByLoginOrEmail(loginOrEmail);
+            } else person = new Person();
+        } else
+            person = person1;
         model.addAttribute("person", person);
         model.addAttribute("events", eventService.getByGuideId(person.getId()));
         model.addAttribute("inputEvent", new Event());
@@ -90,9 +93,7 @@ public class PersonController {
         }
         person.setEmail(person.getEmail().toLowerCase());
         person.setLogin(person.getLogin().toLowerCase());
-        if (file!=null)
-            person.setImageUrl(file.getOriginalFilename());
-        else {
+        if (file==null){
             model.addAttribute("message", new MessageUtil("danger", "You failed to upload file because the file is null."));// messageSource.getMessage("success.user.registration", null, locale)));
             return persons(model);
         }
@@ -137,6 +138,60 @@ public class PersonController {
         } else {
             model.addAttribute("message", new MessageUtil("danger", "You failed to upload file because the file is empty."));// messageSource.getMessage("success.user.registration", null, locale)));
             return persons(model);
+        }
+    }
+
+    @RequestMapping(value = "/edit_info", method = RequestMethod.POST)
+    public String editInfo(@ModelAttribute("first_name") String firstName,
+                           @ModelAttribute("last_name") String lastName,
+                           @ModelAttribute("about_me") String aboutMe,
+                           @ModelAttribute("city") String city,
+                           @ModelAttribute("id") long idPerson,
+                           @RequestParam("file") MultipartFile file,
+                           ModelMap model, Locale locale) {
+        Person person = personService.getById(idPerson);
+        if (file==null){
+            model.addAttribute("message", new MessageUtil("danger", "You failed to upload file because the file is null."));// messageSource.getMessage("success.user.registration", null, locale)));
+            return account(model, null, person);
+        }
+
+        if (!file.isEmpty()) {
+            try {
+                byte[] bytes = file.getBytes();
+
+                // Creating the directory to store file
+                String rootPath = System.getProperty("catalina.home");
+                File dir = new File(rootPath + File.separator + "tmpFiles");
+                if (!dir.exists())
+                    dir.mkdirs();
+
+                String fileName = file.getOriginalFilename();
+
+                // Create the file on server
+                File serverFile = new File(fileName);
+                BufferedOutputStream stream = new BufferedOutputStream(
+                        new FileOutputStream(serverFile));
+                stream.write(bytes);
+                stream.close();
+
+                if (getFileSizeMegaBytes(serverFile) > 1)
+                    serverFile = compress(serverFile, getFileExtension(fileName), getFileSizeMegaBytes(serverFile));
+
+                String photoToken = randomToken(32) + ".jpg";
+                putImg(serverFile.getAbsolutePath(), photoToken);
+                person.setImageUrl("https://excursium.blob.core.windows.net/img/"+photoToken);
+                personService.editPerson(person);
+                model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.registration", null, locale)));
+            } catch (Exception e) {
+                logger.error("You failed to upload file => " + e.getMessage());
+                personService.delete(person.getId());
+                model.addAttribute("message", new MessageUtil("danger", "You failed to upload file. Please, try again."));// messageSource.getMessage("success.user.registration", null, locale)));
+                return account(model, null, person);
+            }
+            return account(model, null, person);
+        } else {
+            model.addAttribute("message", new MessageUtil("danger", "You failed to upload file because the file is empty."));// messageSource.getMessage("success.user.registration", null, locale)));
+            return account(model, null, person);
         }
     }
 
