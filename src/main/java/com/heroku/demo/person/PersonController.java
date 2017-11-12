@@ -58,15 +58,12 @@ public class PersonController {
     }
 
     @RequestMapping(value = "/account", method = RequestMethod.GET)
-    public String account(ModelMap model, Principal principal, Person person1) {
+    public String account(ModelMap model, Principal principal) {
         Person person;
-        if (person1==null) {
-            String loginOrEmail = principal.getName();
-            if (!loginOrEmail.equals("")) {
-                person = personService.getByLoginOrEmail(loginOrEmail);
-            } else person = new Person();
-        } else
-            person = person1;
+        String loginOrEmail = principal.getName();
+        if (!loginOrEmail.equals("")) {
+            person = personService.getByLoginOrEmail(loginOrEmail);
+        } else person = new Person();
         model.addAttribute("person", person);
         model.addAttribute("events", eventService.getByGuideId(person.getId()));
         model.addAttribute("inputEvent", new Event());
@@ -146,13 +143,17 @@ public class PersonController {
                            @ModelAttribute("last_name") String lastName,
                            @ModelAttribute("about_me") String aboutMe,
                            @ModelAttribute("city") String city,
-                           @ModelAttribute("id") long idPerson,
                            @RequestParam("file") MultipartFile file,
-                           ModelMap model, Locale locale) {
-        Person person = personService.getById(idPerson);
+                           ModelMap model, Locale locale, Principal principal) {
+        Person person;
+        String loginOrEmail = principal.getName();
+        if (!loginOrEmail.equals("")) {
+            person = personService.getByLoginOrEmail(loginOrEmail);
+        } else person = new Person();
+
         if (file==null){
             model.addAttribute("message", new MessageUtil("danger", "You failed to upload file because the file is null."));// messageSource.getMessage("success.user.registration", null, locale)));
-            return account(model, null, person);
+            return account(model, principal);
         }
 
         if (!file.isEmpty()) {
@@ -186,12 +187,12 @@ public class PersonController {
                 logger.error("You failed to upload file => " + e.getMessage());
                 personService.delete(person.getId());
                 model.addAttribute("message", new MessageUtil("danger", "You failed to upload file. Please, try again."));// messageSource.getMessage("success.user.registration", null, locale)));
-                return account(model, null, person);
+                return account(model, principal);
             }
-            return account(model, null, person);
+            return account(model, principal);
         } else {
             model.addAttribute("message", new MessageUtil("danger", "You failed to upload file because the file is empty."));// messageSource.getMessage("success.user.registration", null, locale)));
-            return account(model, null, person);
+            return account(model, principal);
         }
     }
 
