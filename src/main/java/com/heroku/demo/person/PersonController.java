@@ -60,10 +60,12 @@ public class PersonController {
     @RequestMapping(value = "/account", method = RequestMethod.GET)
     public String account(ModelMap model, Principal principal) {
         Person person;
-        String loginOrEmail = principal.getName();
-        if (!loginOrEmail.equals("")) {
-            person = personService.getByLoginOrEmail(loginOrEmail);
-        } else person = new Person();
+        if (principal!=null) {
+            String loginOrEmail = principal.getName();
+            if (!loginOrEmail.equals("")) {
+                person = personService.getByLoginOrEmail(loginOrEmail);
+            } else person = new Person();
+        } else return "login";
         model.addAttribute("person", person);
         model.addAttribute("events", eventService.getByGuideId(person.getId()));
         model.addAttribute("inputEvent", new Event());
