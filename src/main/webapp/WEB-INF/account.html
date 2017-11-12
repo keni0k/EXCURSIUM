@@ -88,8 +88,7 @@
 </style>
 
 <div class="content"
-     th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}
-              ">
+     th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}, isThisUserAccount = ${true}">
 
     <nav class="navbar navbar-default navbar-custom" role="navigation">
         <div class="container-fluid">
@@ -115,11 +114,11 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/events/list" th:text="${#messages.msg('titles.excursions')}">Экскурсии</a></li>
                     <li><a href="#">FAQ</a></li>
-                    <li><a href="/index#contact" th:text="${#messages.msg('titles.contacts')}">Контакты</a></li>
                     <li th:if="${isAdmin}"><a href="/users/moderation" th:text="${#messages.msg('titles.persons')}">Модерация
                         пользователей</a></li>
                     <li th:if="${isAdmin}"><a href="/events/moderation" th:text="${#messages.msg('titles.events')}">Модерация
                         экскурсий</a></li>
+                    <li th:if="${isUser} or ${isAdmin}"><a href="/users/account" th:text="${#messages.msg('titles.account')}">Профиль</a></li>
                     <li th:unless="${isUser}"><a href="/users/registration"
                                                  th:text="${#messages.msg('titles.registration')}">Регистрация</a></li>
                     <li th:unless="${isUser}"><a href="/users/login"
@@ -175,11 +174,11 @@
                                         <th:block th:text="${person.getPhoneNumber()}"/>
                                     </p>
 
-                                    <button type="button" class="btn btn-info waves-effect waves-light"
+                                    <button th:unless="${isThisUserAccount}" type="button" class="btn btn-info waves-effect waves-light"
                                             data-toggle="modal" data-target="#modalContactUser">Связаться<i
                                             class="fa fa-paper-plane ml-2"></i></button>
 
-                                    <a class="btn btn-primary waves-effect waves-light" href="#" role="button"
+                                    <a th:if="${isThisUserAccount}" class="btn btn-primary waves-effect waves-light" href="#" role="button"
                                        data-toggle="modal" data-target="#modalEditProfile">Редактировать профиль <i
                                             class="fa fa-pencil ml-2"></i></a>
 
@@ -238,7 +237,7 @@
 
                                 <h4><strong>Экскурсии</strong></h4>
 
-                                <button type="button" class="btn btn-primary mt-4 waves-effect waves-light"
+                                <button th:if="${isThisUserAccount}" type="button" class="btn btn-primary mt-4 waves-effect waves-light"
                                         data-toggle="modal" data-target="#modalSubmitProject">Добавить новую экскурсию<i
                                         class="fa fa-photo ml-1"></i></button>
 
@@ -330,7 +329,7 @@
 
 
                             <!--Pagination -->
-                            <nav class="my-4 d-flex justify-content-center">
+                            <nav class="my-4 d-flex justify-content-center" th:if="${events.size()>4}">
                                 <ul class="pagination pagination-circle pg-blue mb-0">
 
                                     <!--First-->

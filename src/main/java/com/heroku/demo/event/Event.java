@@ -96,6 +96,9 @@ public class Event {
     @Transient
     public String pathToPhoto = "";
 
+    @Transient
+    public String city = "";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

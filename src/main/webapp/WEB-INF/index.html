@@ -72,6 +72,10 @@
                        th:text="${#messages.msg('titles.login')}">Войти</a>
                 </li>
                 <li class="nav-item" th:if="${isUser} or ${isAdmin}">
+                    <a class="nav-link js-scroll-trigger" href="/users/account"
+                       th:text="${#messages.msg('titles.account')}">Профиль</a>
+                </li>
+                <li class="nav-item" th:if="${isUser} or ${isAdmin}">
                     <a class="nav-link js-scroll-trigger" href="/users/logout"
                        th:text="${#messages.msg('titles.logout')}">Выйти</a>
                 </li>

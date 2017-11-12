@@ -157,7 +157,7 @@ public class EventController {
         return "event";
     }
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @RequestMapping(value = "/list_test", method = RequestMethod.GET)
     public String eventsByFilter(ModelMap model,
                                  @RequestParam(value = "category", required = false) Integer category,
                                  @RequestParam(value = "price_up", required = false) Integer priceUp,
@@ -175,7 +175,7 @@ public class EventController {
         return "event_list";
     }
 
-    @RequestMapping(value = "/list_test", method = RequestMethod.GET)
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String eventsTests(ModelMap model,
                                  @RequestParam(value = "category", required = false) Integer category,
                                  @RequestParam(value = "price_up", required = false) Integer priceUp,

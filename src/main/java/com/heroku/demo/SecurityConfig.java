@@ -31,13 +31,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/", "/index", "/resources/**",
                         "/events/list", "/events/event", "/events/categories", "/events/listjson", "/events/addevent",
-                        "/users/user", "/users/getbytoken", "/users/getbyemail", "/users/listjson").permitAll()
+                        "/users/user", "/users/getbytoken", "/users/getbyemail", "/users/listjson", "/users/account").permitAll()
                 .antMatchers("/users/registration").anonymous()
                 .antMatchers("/events/add").hasAnyRole("ADMIN","USER")
                 .antMatchers("/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().defaultSuccessUrl("/events/list", false)
+                .formLogin().defaultSuccessUrl("/users/account", false)
                 .loginPage("/users/login").failureUrl("/users/login?error=true").permitAll()
                 .and()
                 .logout().logoutUrl("/users/logout").logoutSuccessUrl("/users/login").permitAll()

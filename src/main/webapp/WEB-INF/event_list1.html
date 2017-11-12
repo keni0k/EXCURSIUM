@@ -111,7 +111,8 @@
     }
 </style>
 <div class="content"
-     th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
+     th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')},
+        page = ${#httpServletRequest.getParameter('page')}">
     <nav class="navbar navbar-default navbar-custom" role="navigation">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -136,11 +137,11 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/events/list" th:text="${#messages.msg('titles.excursions')}">Экскурсии</a></li>
                     <li><a href="#">FAQ</a></li>
-                    <li><a href="/index#contact" th:text="${#messages.msg('titles.contacts')}">Контакты</a></li>
                     <li th:if="${isAdmin}"><a href="/users/moderation" th:text="${#messages.msg('titles.persons')}">Модерация
                         пользователей</a></li>
                     <li th:if="${isAdmin}"><a href="/events/moderation" th:text="${#messages.msg('titles.events')}">Модерация
                         экскурсий</a></li>
+                    <li th:if="${isUser} or ${isAdmin}"><a href="/users/account" th:text="${#messages.msg('titles.account')}">Профиль</a></li>
                     <li th:unless="${isUser}"><a href="/users/registration"
                                                  th:text="${#messages.msg('titles.registration')}">Регистрация</a></li>
                     <li th:unless="${isUser}"><a href="/users/login"
@@ -171,20 +172,21 @@
                                 </a>
                             </div>
                         </div>
-                        <h2>Фильтр</h2>
+                        <h2>Фильтр (в разработке)</h2>
                         <form method="get" action="/events/list">
                             <br/>
                             <div class="panel panel-default">
-                                <div class="panel-heading" th:text="${#messages.msg('words.type_of_excursion')}">
+                                <div class="panel-heading" th:text="${#messages.msg('words.sort')}">
                                     Сортировка
                                 </div>
                                 <div class="panel-body">
                                     <div class="input-group">
                                         <select name="sorting" class="selectpicker">
-                                            <option value="0">Стандартная</option>
+                                            <option value="0">По популярности</option>
                                             <option value="1">Сначала дешевые</option>
                                             <option value="2">Сначала дорогие</option>
-                                            <option value="3">По названию</option>
+                                            <option value="3">По рейтингу</option>
+                                            <option value="4">По новизне</option>
                                         </select>
                                     </div>
                                 </div>
@@ -349,7 +351,7 @@
                     <div class="row">
 
                         <!--Pagination -->
-                        <nav class="my-4 d-flex justify-content-center">
+                        <nav class="my-4 d-flex justify-content-center"  th:if="${events.size()>10}">
                             <ul class="pagination pagination-circle pg-blue mb-0">
 
                                 <!--TODO:

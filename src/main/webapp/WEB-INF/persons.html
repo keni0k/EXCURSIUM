@@ -133,11 +133,11 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/events/list" th:text="${#messages.msg('titles.excursions')}">Экскурсии</a></li>
                     <li><a href="#">FAQ</a></li>
-                    <li><a href="/index#contact" th:text="${#messages.msg('titles.contacts')}">Контакты</a></li>
                     <li th:if="${isAdmin}"><a href="/users/moderation" th:text="${#messages.msg('titles.persons')}">Модерация
                         пользователей</a></li>
                     <li th:if="${isAdmin}"><a href="/events/moderation" th:text="${#messages.msg('titles.events')}">Модерация
                         экскурсий</a></li>
+                    <li th:if="${isUser} or ${isAdmin}"><a href="/users/account" th:text="${#messages.msg('titles.account')}">Профиль</a></li>
                     <li th:unless="${isUser}"><a href="/users/registration"
                                                  th:text="${#messages.msg('titles.registration')}">Регистрация</a></li>
                     <li th:unless="${isUser}"><a href="/users/login"
@@ -169,7 +169,7 @@
                             Тип пользователя
                         </div>
                         <div class="panel-body">
-                            <div class="input-group">
+                            <div class="input-group" style="z-index: 100">
                                 <select name="type" class="form-control selectpicker"
                                         th:selected="${insertPerson.getType()}?${insertPerson.getType()}:0">
                                     <option value="-3" th:text="${#messages.msg('user.type.unconfirmed')}">Не

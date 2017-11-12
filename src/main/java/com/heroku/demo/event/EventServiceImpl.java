@@ -83,6 +83,7 @@ public class EventServiceImpl implements EventService {
                 if (p!=null) {
                     aList.fullNameOfGuide = p.getFirstName() + " " + p.getLastName();
                     aList.photoOfGuide = p.getImageUrl();
+                    aList.city = p.getCity();
                 }
 
                 Photo img = photoService.getByEventId(aList.getId());
