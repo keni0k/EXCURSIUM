@@ -188,6 +188,7 @@ public class EventController {
             String prices[] = price.split(";");
             priceDown = Integer.getInteger(prices[0]);
             priceUp = Integer.getInteger(prices[1]);
+            logger.info("priceDown:"+priceDown+" priceUp:"+priceUp);//TODO delete
         }
         List<Event> events = eventService.getByFilter(priceUp, priceDown, category, locale.getLanguage().equals("ru") ? 0 : 1, words, sortBy == null ? 0 : sortBy);
         model.addAttribute("events", events);
@@ -301,7 +302,7 @@ public class EventController {
         List<Event> events = eventService.getAll();
         for (Event event : events) {
             event.setGuideId(new Random().nextInt(3) + 37);
-            eventService.editEvent(event);
+            //eventService.editEvent(event);
         }
         return "YES";
     }
