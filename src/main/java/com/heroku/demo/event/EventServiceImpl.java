@@ -60,7 +60,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<Event> getByFilter(Integer priceUp, Integer priceDown, Integer category, Integer language, String words) {
+    public List<Event> getByFilter(Integer priceUp, Integer priceDown, Integer category, Integer language, String words, boolean isAll) {
 
         boolean isAllLang = false;
         if (words==null) words = "";
@@ -77,7 +77,7 @@ public class EventServiceImpl implements EventService {
         List<Event> copy = new ArrayList<>();
         for (Event aList : list)
             if ((aList.getPrice() >= priceDown) && (aList.getPrice() <= priceUp) &&
-                    ((aList.getCategory() == category) || (category == -1)) && ((aList.getLanguage() == language) || isAllLang) && aList.getType()==0) {
+                    ((aList.getCategory() == category) || (category == -1)) && ((aList.getLanguage() == language) || isAllLang) && (aList.getType()==0 || isAll)) {
 
                 Person p = personService.getById(aList.getGuideId());
                 if (p!=null) {
@@ -121,9 +121,9 @@ public class EventServiceImpl implements EventService {
         return eventList;
     }
 
-    public List<Event> getByFilter(Integer priceUp, Integer priceDown, Integer category, Integer language, String words, Integer sortBy) {
+    public List<Event> getByFilter(Integer priceUp, Integer priceDown, Integer category, Integer language, String words, Integer sortBy, boolean isAll) {
 
-        List<Event> events = getByFilter(priceUp, priceDown, category, language, words);
+        List<Event> events = getByFilter(priceUp, priceDown, category, language, words, isAll);
         if (sortBy==null) return events;
         events.sort(new Comparator<Event>() {
             @Override

@@ -13,7 +13,7 @@ public interface EventService {
 
     List<Event> getAll();
 
-    List<Event> getByFilter(Integer priceUp, Integer priceDown, Integer category, Integer language, String words);
+    List<Event> getByFilter(Integer priceUp, Integer priceDown, Integer category, Integer language, String words, boolean isAll);
 
     List<Event> getByGuideId(long guideId);
 }

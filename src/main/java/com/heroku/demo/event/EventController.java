@@ -165,7 +165,7 @@ public class EventController {
                                  @RequestParam(value = "sort_by", required = false) Integer sortBy,
                                  @RequestParam(value = "words", required = false) String words,
                                  Locale locale) {
-        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, locale.getLanguage().equals("ru") ? 0 : 1, words, sortBy == null ? 0 : sortBy);
+        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, locale.getLanguage().equals("ru") ? 0 : 1, words, sortBy == null ? 0 : sortBy, false);
         int size = events.size() % 3;
         for (int i = 0; i < size; i++) {
             events.remove(events.size() - 1);
@@ -190,7 +190,7 @@ public class EventController {
             priceUp = Integer.parseInt(prices[1]);
             logger.info("priceDown:"+priceDown+" priceUp:"+priceUp);//TODO delete
         }
-        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, locale.getLanguage().equals("ru") ? 0 : 1, words, sortBy == null ? 0 : sortBy);
+        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, locale.getLanguage().equals("ru") ? 0 : 1, words, sortBy == null ? 0 : sortBy,false);
         model.addAttribute("events", events);
         model.addAttribute("utils", new UtilsForWeb());
         return "event_list1";
@@ -217,7 +217,7 @@ public class EventController {
                                                     @RequestParam(value = "sort_by", required = false) Integer sortBy,
                                                     @RequestParam(value = "auth") String authKey) {
         ArrayList<String> arrayList = new ArrayList<>();
-        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, language, words, sortBy);
+        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, language, words, sortBy, false);
         for (Event e : events) {
             arrayList.add(e.toString());
         }
@@ -243,7 +243,7 @@ public class EventController {
                          @RequestParam(value = "category", required = false) Integer category,
                          @RequestParam(value = "words", required = false) String words,
                          Locale locale) {
-        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, locale.getLanguage().equals("ru") ? 0 : 1, words, null);
+        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, locale.getLanguage().equals("ru") ? 0 : 1, words, null, true);
         model.addAttribute("events", events);
 
         if (id != null) {
@@ -275,7 +275,7 @@ public class EventController {
         event1.setPlace(place);
         event1.setLanguage(language);
         eventService.editEvent(event1);
-        List<Event> events = eventService.getByFilter(null, null, null, locale.getLanguage().equals("ru") ? 0 : 1, null, null);
+        List<Event> events = eventService.getByFilter(null, null, null, locale.getLanguage().equals("ru") ? 0 : 1, null, null, true);
         modelMap.addAttribute("events", events);
         modelMap.addAttribute("inputEvent", event1);
         return "events";
