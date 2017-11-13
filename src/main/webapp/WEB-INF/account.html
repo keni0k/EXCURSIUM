@@ -586,7 +586,7 @@
                                             <!--Body-->
                                             <div class="modal-body">
 
-                                                <form th:object="${person}" action="/users/edit_private" method="post">
+                                                <form th:object="${person}" action="/users/edit_private" method="post" autocomplete="off">
 
                                                     <div class="md-form form-sm">
                                                         <input type="text" id="form24" name = "email" class="form-control"/>
@@ -609,17 +609,18 @@
                                                         <input type="password" name = "pass_confirm" id="form27" class="form-control"/>
                                                         <label for="form27">Подтвердите пароль</label>
                                                     </div>
+
+                                                    <div class="modal-footer justify-content-center">
+                                                        <button type="reset"
+                                                                class="btn btn-outline-primary waves-effect waves-light"
+                                                                data-dismiss="modal">Закрыть
+                                                        </button>
+                                                        <button type="submit" class="btn btn-primary waves-effect waves-light">
+                                                            Сохранить изменения <i class="fa fa-check ml-1"></i></button>
+                                                    </div>
+
                                                 </form>
 
-                                            </div>
-                                            <!--Footer-->
-                                            <div class="modal-footer justify-content-center">
-                                                <button type="button"
-                                                        class="btn btn-outline-primary waves-effect waves-light"
-                                                        data-dismiss="modal">Закрыть
-                                                </button>
-                                                <button type="button" class="btn btn-primary waves-effect waves-light">
-                                                    Сохранить изменения <i class="fa fa-check ml-1"></i></button>
                                             </div>
 
                                         </div>

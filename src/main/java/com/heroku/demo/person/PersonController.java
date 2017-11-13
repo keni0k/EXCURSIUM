@@ -56,7 +56,7 @@ public class PersonController {
     public PersonController(PersonRepository personRepository, MessageSource messageSource, EventRepository eventRepository,
                             PhotoRepository photoRepository) {
         personService = new PersonServiceImpl(personRepository);
-        eventService = new EventServiceImpl(eventRepository,personService, new PhotoServiceImpl(photoRepository));
+        eventService = new EventServiceImpl(eventRepository, personService, new PhotoServiceImpl(photoRepository));
         this.messageSource = messageSource;
     }
 
@@ -69,7 +69,7 @@ public class PersonController {
     @RequestMapping(value = "/account", method = RequestMethod.GET)
     public String account(ModelMap model, Principal principal) {
         Person person;
-        if (principal!=null) {
+        if (principal != null) {
             String loginOrEmail = principal.getName();
             if (!loginOrEmail.equals("")) {
                 person = personService.getByLoginOrEmail(loginOrEmail);
@@ -101,7 +101,7 @@ public class PersonController {
         }
         person.setEmail(person.getEmail().toLowerCase());
         person.setLogin(person.getLogin().toLowerCase());
-        if (file==null){
+        if (file == null) {
             model.addAttribute("message", new MessageUtil("danger", "You failed to upload file because the file is null."));// messageSource.getMessage("success.user.registration", null, locale)));
             return persons(model);
         }
@@ -133,9 +133,9 @@ public class PersonController {
 
                 String photoToken = randomToken(32) + ".jpg";
                 putImg(serverFile.getAbsolutePath(), photoToken);
-                person.setImageUrl("https://excursium.blob.core.windows.net/img/"+photoToken);
+                person.setImageUrl("https://excursium.blob.core.windows.net/img/" + photoToken);
                 personService.addPerson(person);
-                sendMail(person.getToken());
+                sendMail(person.getToken(), person.getEmail());
                 model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.registration", null, locale)));
             } catch (Exception e) {
                 logger.error("You failed to upload file => " + e.getMessage());
@@ -163,7 +163,7 @@ public class PersonController {
             person = personService.getByLoginOrEmail(loginOrEmail);
         } else person = new Person();
 
-        if (file==null){
+        if (file == null) {
             model.addAttribute("message", new MessageUtil("danger", "You failed to upload file because the file is null."));// messageSource.getMessage("success.user.registration", null, locale)));
             return account(model, principal);
         }
@@ -192,7 +192,7 @@ public class PersonController {
 
                 String photoToken = randomToken(32) + ".jpg";
                 putImg(serverFile.getAbsolutePath(), photoToken);
-                person.setImageUrl("https://excursium.blob.core.windows.net/img/"+photoToken);
+                person.setImageUrl("https://excursium.blob.core.windows.net/img/" + photoToken);
                 personService.editPerson(person);
                 model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.registration", null, locale)));
             } catch (Exception e) {
@@ -210,20 +210,22 @@ public class PersonController {
 
     @RequestMapping(value = "/edit_private", method = RequestMethod.POST)
     public String editPrivate(@ModelAttribute("email") String email,
-                           @ModelAttribute("last_pass") String passLast,
-                           @ModelAttribute("pass") String pass,
-                           @ModelAttribute("pass_confirm") String passConfirm,
-                           ModelMap model, Principal principal) {
+                              @ModelAttribute("last_pass") String passLast,
+                              @ModelAttribute("pass") String pass,
+                              @ModelAttribute("pass_confirm") String passConfirm,
+                              ModelMap model, Principal principal) {
         Person person;
         String loginOrEmail = principal.getName();
         if (!loginOrEmail.equals("")) {
             person = personService.getByLoginOrEmail(loginOrEmail);
         } else person = new Person();
 
-        if (person.getPass().equals(passLast)){
+        if (person.getPass().equals(passLast)) {
             if (pass.equals(passConfirm))
                 person.setPass(pass);
         }
+
+        //TODO отработать ошибки и невыполнения if'ов и сделать смену email
 
         personService.editPerson(person);
         return account(model, principal);
@@ -237,11 +239,12 @@ public class PersonController {
     @RequestMapping(value = "/confirm", method = RequestMethod.GET)
     public String confirm(ModelMap model, @ModelAttribute("token") String token) {
         Person person = personService.getByToken(token);
-        if (person.getType()==-3) {
-            person.setType(1);
-            personService.editPerson(person);
-            model.addAttribute("message", new MessageUtil("success", "Your account has been successfully verified."));
-        }
+        if (person != null)
+            if (person.getType() == -3) {
+                person.setType(1);
+                personService.editPerson(person);
+                model.addAttribute("message", new MessageUtil("success", "Your account has been successfully verified."));
+            }
         return signIn(model);
     }
 
@@ -304,7 +307,7 @@ public class PersonController {
                               @RequestParam(value = "last_name", required = false) String lastName,
                               @RequestParam(value = "city", required = false) String city) {
         Person personWithBD = personService.getById(idPerson);
-        if (personWithBD==null) logger.info("ERROR PERSONWITHBD IS NULL");
+        if (personWithBD == null) logger.info("ERROR PERSONWITHBD IS NULL");
         else {
             personWithBD.setType(typePerson);
             personWithBD.setCity(cityPerson);
@@ -385,20 +388,20 @@ public class PersonController {
         return "profile";
     }
 
-    private String sendMail(String token) throws MailjetSocketTimeoutException, MailjetException {
+    private String sendMail(String token, String emailStr) throws MailjetSocketTimeoutException, MailjetException {
         MailjetRequest email;
         JSONArray recipients;
         MailjetResponse response;
         MailjetClient client = new MailjetClient("489ff3e95ebe1a6a3303dbd79ec3777f", "0be4f9f8ede6f035f85fd4393875f32d");
 
         recipients = new JSONArray()
-                .put(new JSONObject().put(Contact.EMAIL, "dima-vers0@rambler.ru"));
+                .put(new JSONObject().put(Contact.EMAIL, emailStr));
 
         email = new MailjetRequest(Email.resource)
                 .property(Email.FROMNAME, "Excursium")
                 .property(Email.FROMEMAIL, "elishanto@gmail.com")
                 .property(Email.SUBJECT, "Подтвердите свой e-mail")
-                .property(Email.TEXTPART, "Вы зарегистрировались на сайте http://excursium.me и для завершения регистрации должны нажать на ссылку: http://excursium.me/users/confirm?token"+token)
+                .property(Email.TEXTPART, "Вы зарегистрировались на сайте excursium.me и для завершения регистрации должны нажать на ссылку: http://excursium.me/users/confirm?token=" + token)
                 .property(Email.RECIPIENTS, recipients)
                 .property(Email.MJCUSTOMID, "JAVA-Email");
 
