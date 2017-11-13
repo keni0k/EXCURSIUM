@@ -6,7 +6,16 @@ import com.heroku.demo.event.EventServiceImpl;
 import com.heroku.demo.photo.PhotoRepository;
 import com.heroku.demo.photo.PhotoServiceImpl;
 import com.heroku.demo.utils.MessageUtil;
+import com.mailjet.client.MailjetClient;
+import com.mailjet.client.MailjetRequest;
+import com.mailjet.client.MailjetResponse;
+import com.mailjet.client.errors.MailjetException;
+import com.mailjet.client.errors.MailjetSocketTimeoutException;
+import com.mailjet.client.resource.Contact;
+import com.mailjet.client.resource.Email;
 import org.joda.time.LocalTime;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -126,6 +135,7 @@ public class PersonController {
                 putImg(serverFile.getAbsolutePath(), photoToken);
                 person.setImageUrl("https://excursium.blob.core.windows.net/img/"+photoToken);
                 personService.addPerson(person);
+                sendMail(person.getToken());
                 model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.registration", null, locale)));
             } catch (Exception e) {
                 logger.error("You failed to upload file => " + e.getMessage());
@@ -140,7 +150,7 @@ public class PersonController {
         }
     }
 
-    @RequestMapping(value = "/edit_info", method = RequestMethod.POST)
+    @RequestMapping(value = "/edit_public", method = RequestMethod.POST)
     public String editInfo(@ModelAttribute("first_name") String firstName,
                            @ModelAttribute("last_name") String lastName,
                            @ModelAttribute("about_me") String aboutMe,
@@ -198,9 +208,41 @@ public class PersonController {
         }
     }
 
+    @RequestMapping(value = "/edit_private", method = RequestMethod.POST)
+    public String editPrivate(@ModelAttribute("email") String email,
+                           @ModelAttribute("last_pass") String passLast,
+                           @ModelAttribute("pass") String pass,
+                           @ModelAttribute("pass_confirm") String passConfirm,
+                           ModelMap model, Principal principal) {
+        Person person;
+        String loginOrEmail = principal.getName();
+        if (!loginOrEmail.equals("")) {
+            person = personService.getByLoginOrEmail(loginOrEmail);
+        } else person = new Person();
+
+        if (person.getPass().equals(passLast)){
+            if (pass.equals(passConfirm))
+                person.setPass(pass);
+        }
+
+        personService.editPerson(person);
+        return account(model, principal);
+    }
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String signIn() {
+    public String signIn(ModelMap modelMap) {
         return "login";
+    }
+
+    @RequestMapping(value = "/confirm", method = RequestMethod.GET)
+    public String confirm(ModelMap model, @ModelAttribute("token") String token) {
+        Person person = personService.getByToken(token);
+        if (person.getType()==-3) {
+            person.setType(1);
+            personService.editPerson(person);
+            model.addAttribute("message", new MessageUtil("success", "Your account has been successfully verified."));
+        }
+        return signIn(model);
     }
 
     @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET, value = "/getbytoken")
@@ -341,6 +383,27 @@ public class PersonController {
         model.addAttribute("person", p != null ? p : new Person());
         //model.addAttribute("insertEvent", new Event());
         return "profile";
+    }
+
+    private String sendMail(String token) throws MailjetSocketTimeoutException, MailjetException {
+        MailjetRequest email;
+        JSONArray recipients;
+        MailjetResponse response;
+        MailjetClient client = new MailjetClient("489ff3e95ebe1a6a3303dbd79ec3777f", "0be4f9f8ede6f035f85fd4393875f32d");
+
+        recipients = new JSONArray()
+                .put(new JSONObject().put(Contact.EMAIL, "dima-vers0@rambler.ru"));
+
+        email = new MailjetRequest(Email.resource)
+                .property(Email.FROMNAME, "Excursium")
+                .property(Email.FROMEMAIL, "elishanto@gmail.com")
+                .property(Email.SUBJECT, "Подтвердите свой e-mail")
+                .property(Email.TEXTPART, "Вы зарегистрировались на сайте http://excursium.me и для завершения регистрации должны нажать на ссылку: http://excursium.me/users/confirm?token"+token)
+                .property(Email.RECIPIENTS, recipients)
+                .property(Email.MJCUSTOMID, "JAVA-Email");
+
+        response = client.post(email);
+        return response.getData() + " " + response.getStatus();
     }
 
 }

@@ -172,7 +172,7 @@
                                 </a>
                             </div>
                         </div>
-                        <h2>Фильтр (в разработке)</h2>
+                        <h2>Фильтр</h2>
                         <form method="get" action="/events/list">
                             <br/>
                             <div class="panel panel-default">
@@ -181,12 +181,12 @@
                                 </div>
                                 <div class="panel-body">
                                     <div class="input-group">
-                                        <select name="sorting" class="selectpicker">
-                                            <option value="0">По популярности</option>
-                                            <option value="1">Сначала дешевые</option>
-                                            <option value="2">Сначала дорогие</option>
-                                            <option value="3">По рейтингу</option>
-                                            <option value="4">По новизне</option>
+                                        <select name="sort_by" class="selectpicker">
+                                            <option value="-1">По популярности</option>
+                                            <option value="2">Сначала дешевые</option>
+                                            <option value="3">Сначала дорогие</option>
+                                            <option value="5">По рейтингу</option>
+                                            <option value="1">По новизне</option>
                                         </select>
                                     </div>
                                 </div>
@@ -204,9 +204,8 @@
                                         </div>
                                         <br/>
                                         <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" id="is_barter" name="is_barter"/><span>Отображать сделки по бартеру</span>
-                                            </label>
+                                            <input type="checkbox" id="is_barter" name="is_barter"/>
+                                            <label for = "is_barter"><span>Отображать сделки по бартеру</span></label>
                                         </div>
                                         <script type="text/javascript" charset="utf-8">
                                             jQuery("#Slider1").slider({
@@ -263,9 +262,7 @@
 
                             <div class="text-center">
                                 <br/>
-                                <button name="filter" class="btn btn-default add-to-cart" type="submit"><i
-                                        class="fa fa-filter"
-                                        aria-hidden="true"></i>
+                                <button class="btn btn-default add-to-cart" type="submit"><i class="fa fa-filter" aria-hidden="true"></i>
                                     Фильтровать товары
                                 </button>
                             </div>

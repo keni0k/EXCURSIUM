@@ -32,7 +32,7 @@
             src="../resources/libs/bootstrapformhelpers/js/bootstrap-formhelpers.min.js"></script>
     <!-- Plugin CSS -->
     <link rel="stylesheet" href="../resources/css/cards.css"/>
-    <title>Экскурсии</title>
+    <title th:text="${#messages.msg('titles.account')}">Профиль</title>
 </head>
 
 <body style="background-color: #f9f9f9;">
@@ -238,7 +238,8 @@
                             <!-- Heading -->
                             <div class="text-center mt-3 mb-5">
 
-                                <h4><strong>Экскурсии</strong></h4>
+                                <h2 class="title text-center" th:text="${#messages.msg('titles.excursions')}">
+                                    Экскурсии</h2>
 
                                 <button th:if="${isThisUserAccount}" type="button"
                                         class="btn btn-primary mt-4 waves-effect waves-light"
@@ -417,7 +418,7 @@
                                              aria-expanded="true">
                                             <!--Body-->
                                             <div class="modal-body mb-1">
-                                                <form th:object="${person}" action="/users/edit_info"
+                                                <form th:object="${person}" action="/users/edit_public"
                                                       enctype="multipart/form-data" method="post">
 
                                                     <!--Grid row-->
@@ -465,14 +466,17 @@
                                                         </div>
                                                         <!--Grid column-->
                                                         <div class="col-md-12">
-                                                        <div class="md-form form-sm">
-                                                            <input name="file" type="file" id="filePerson" class="form-control" required=""
-                                                                   size="30000000"
-                                                                   accept="image/jpeg,image/png" aria-label="Фотографии"/>
-                                                            <!--<label for="file" th:if="${error_data}" th:text="${#messages.msg('error.event.file')}"
-                                                                   th:class="'error'">File Error</label>TODO:error_data(file)-->
-                                                            <label for="filePerson" class="" th:text="${#messages.msg('words.photos')}">Фотографии</label>
-                                                        </div>
+                                                            <div class="md-form form-sm">
+                                                                <input name="file" type="file" id="filePerson"
+                                                                       class="form-control" required=""
+                                                                       size="30000000"
+                                                                       accept="image/jpeg,image/png"
+                                                                       aria-label="Фотографии"/>
+                                                                <!--<label for="file" th:if="${error_data}" th:text="${#messages.msg('error.event.file')}"
+                                                                       th:class="'error'">File Error</label>TODO:error_data(file)-->
+                                                                <label for="filePerson" class=""
+                                                                       th:text="${#messages.msg('words.photos')}">Фотографии</label>
+                                                            </div>
                                                         </div>
 
                                                         <!--Grid column-->
@@ -500,7 +504,8 @@
                                                             <!--City-->
                                                             <div class="md-form form-sm mt-2">
                                                                 <input type="text" id="editProfile6" name="city"
-                                                                       class="form-control" th:value="${person.getCity()}"/>
+                                                                       class="form-control"
+                                                                       th:value="${person.getCity()}"/>
                                                                 <label for="editProfile6" class="">City</label>
                                                             </div>
 
@@ -559,7 +564,7 @@
                                                         <!--Grid column-->
                                                     </div>
                                                     <div class="modal-footer justify-content-center">
-                                                        <button type="button"
+                                                        <button type="reset"
                                                                 class="btn btn-outline-primary waves-effect waves-light"
                                                                 data-dismiss="modal">Закрыть
                                                         </button>
@@ -580,32 +585,31 @@
 
                                             <!--Body-->
                                             <div class="modal-body">
-                                                <div class="md-form form-sm">
-                                                    <input type="text" id="form224" class="form-control"/>
-                                                    <label for="form224">Логин</label>
-                                                </div>
 
-                                                <div class="md-form form-sm">
-                                                    <input type="text" id="form24" class="form-control"/>
-                                                    <label for="form24">Email</label>
-                                                </div>
+                                                <form th:object="${person}" action="/users/edit_private" method="post">
 
-                                                <p class="h5 text-center mt-5">Смена пароля</p>
+                                                    <div class="md-form form-sm">
+                                                        <input type="text" id="form24" name = "email" class="form-control"/>
+                                                        <label for="form24">Email</label>
+                                                    </div>
 
-                                                <div class="md-form form-sm">
-                                                    <input type="password" id="form25" class="form-control"/>
-                                                    <label for="form25">Текущий пароль</label>
-                                                </div>
+                                                    <p class="h5 text-center mt-5">Смена пароля</p>
 
-                                                <div class="md-form form-sm">
-                                                    <input type="password" id="form26" class="form-control"/>
-                                                    <label for="form26">Новый пароль</label>
-                                                </div>
+                                                    <div class="md-form form-sm">
+                                                        <input type="password" name = "last_pass" id="form25" class="form-control"/>
+                                                        <label for="form25">Текущий пароль</label>
+                                                    </div>
 
-                                                <div class="md-form form-sm">
-                                                    <input type="password" id="form27" class="form-control"/>
-                                                    <label for="form27">Подтвердите пароль</label>
-                                                </div>
+                                                    <div class="md-form form-sm">
+                                                        <input type="password" name = "pass" id="form26" class="form-control"/>
+                                                        <label for="form26">Новый пароль</label>
+                                                    </div>
+
+                                                    <div class="md-form form-sm">
+                                                        <input type="password" name = "pass_confirm" id="form27" class="form-control"/>
+                                                        <label for="form27">Подтвердите пароль</label>
+                                                    </div>
+                                                </form>
 
                                             </div>
                                             <!--Footer-->

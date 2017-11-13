@@ -145,6 +145,12 @@
                     </div>
                 </th:block>
 
+                <th:block th:if="${message != null}">
+                    <div th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message.type)}, message=${message.message})">
+                        &nbsp;
+                    </div>
+                </th:block>
+
                 <div th:if="${isAdmin}" th:text="${#messages.msg('authorized.admin')}">Вы авторизованы как
                     администратор
                 </div>
