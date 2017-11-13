@@ -589,7 +589,7 @@
                                                 <form th:object="${person}" action="/users/edit_private" method="post" autocomplete="off">
 
                                                     <div class="md-form form-sm">
-                                                        <input type="text" id="form24" name = "email" class="form-control"/>
+                                                        <input type="text" id="form24" name = "email" class="form-control" th:value="${person.getEmail()}"/>
                                                         <label for="form24">Email</label>
                                                     </div>
 

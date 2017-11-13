@@ -186,8 +186,8 @@ public class EventController {
                                  Locale locale) {
         if (price!=null){
             String prices[] = price.split(";");
-            priceDown = Integer.getInteger(prices[0]);
-            priceUp = Integer.getInteger(prices[1]);
+            priceDown = Integer.parseInt(prices[0]);
+            priceUp = Integer.parseInt(prices[1]);
             logger.info("priceDown:"+priceDown+" priceUp:"+priceUp);//TODO delete
         }
         List<Event> events = eventService.getByFilter(priceUp, priceDown, category, locale.getLanguage().equals("ru") ? 0 : 1, words, sortBy == null ? 0 : sortBy);
