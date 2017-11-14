@@ -177,30 +177,30 @@ public class EventController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String eventsTests(ModelMap model,
-                                 @RequestParam(value = "category", required = false) Integer category,
-                                 @RequestParam(value = "price_up", required = false) Integer priceUp,
-                                 @RequestParam(value = "price_down", required = false) Integer priceDown,
-                                 @RequestParam(value = "price", required = false) String price,
-                                 @RequestParam(value = "sort_by", required = false) Integer sortBy,
-                                 @RequestParam(value = "words", required = false) String words,
-                                 @RequestParam(value = "page", required = false) Integer page,
-                                 Locale locale) {
-        if (price!=null){
+                              @RequestParam(value = "category", required = false) Integer category,
+                              @RequestParam(value = "price_up", required = false) Integer priceUp,
+                              @RequestParam(value = "price_down", required = false) Integer priceDown,
+                              @RequestParam(value = "price", required = false) String price,
+                              @RequestParam(value = "sort_by", required = false) Integer sortBy,
+                              @RequestParam(value = "words", required = false) String words,
+                              @RequestParam(value = "page", required = false) Integer page,
+                              Locale locale) {
+        if (price != null) {
             String prices[] = price.split(";");
             priceDown = Integer.parseInt(prices[0]);
             priceUp = Integer.parseInt(prices[1]);
         }
-        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, locale.getLanguage().equals("ru") ? 0 : 1, words, sortBy == null ? 0 : sortBy,false);//TODO optimize
+        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, locale.getLanguage().equals("ru") ? 0 : 1, words, sortBy == null ? 0 : sortBy, false);//TODO optimize
         List<Event> eventsFinal = new ArrayList<>();
-        if (page!=null) {
-            page = page * 12;
-            for (int i = page; i < page + 12; i++)
-                if (i < events.size())
-                    eventsFinal.add(events.get(i));
-            model.addAttribute("pageCount", events.size()/12);
-            model.addAttribute("page", page);
-        }
-        model.addAttribute("events", eventsFinal.size()>0?eventsFinal:events);
+
+        if (page==null) page = 0;
+        page = page * 12;
+        for (int i = page; i < page + 12; i++)
+            if (i < events.size())
+                eventsFinal.add(events.get(i));
+        model.addAttribute("pageCount", events.size() / 12);
+        model.addAttribute("page", page);
+        model.addAttribute("events", eventsFinal.size() > 0 ? eventsFinal : events);
         model.addAttribute("utils", new UtilsForWeb());
         return "event_list1";
     }
@@ -258,8 +258,8 @@ public class EventController {
         if (id != null) {
             Event editEvent = eventService.getById(id);
             Photo img = photoService.getByEventId(id);
-            if (img!=null)
-                editEvent.pathToPhoto="https://excursium.blob.core.windows.net/img/"+img.getData();
+            if (img != null)
+                editEvent.pathToPhoto = "https://excursium.blob.core.windows.net/img/" + img.getData();
 //            logger.info("EVENT PATH: "+editEvent.pathToPhoto);
             model.addAttribute("inputEvent", editEvent);
         } else model.addAttribute("inputEvent", new Event());
