@@ -4,6 +4,8 @@ import com.heroku.demo.person.Person;
 import com.heroku.demo.person.PersonServiceImpl;
 import com.heroku.demo.photo.Photo;
 import com.heroku.demo.photo.PhotoServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -18,6 +20,7 @@ public class EventServiceImpl implements EventService {
     private EventRepository eventRepository;
     private PersonServiceImpl personService;
     private PhotoServiceImpl photoService;
+    private static final Logger logger = LoggerFactory.getLogger(EventServiceImpl.class);
 
     @Override
     public Event addEvent(Event event) {
@@ -71,23 +74,24 @@ public class EventServiceImpl implements EventService {
         if (language == -1) isAllLang = true;
 
         String[] wds = words.split(",");
+        long curr1 = System.currentTimeMillis();
         List<Event> list = getAll();
-
+        long curr2 = System.currentTimeMillis();
         List<Event> copy = new ArrayList<>();
-        for (Event aList : list)
+        for (Event aList : list) {
             if ((aList.getPrice() >= priceDown) && (aList.getPrice() <= priceUp) &&
-                    ((aList.getCategory() == category) || (category == -1)) && ((aList.getLanguage() == language) || isAllLang) && (aList.getType()==0 || isAll)) {
+                    ((aList.getCategory() == category) || (category == -1)) && ((aList.getLanguage() == language) || isAllLang) && (aList.getType() == 0 || isAll)) {
 
                 Person p = personService.getById(aList.getGuideId());
-                if (p!=null) {
+                if (p != null) {
                     aList.fullNameOfGuide = p.getFirstName() + " " + p.getLastName();
                     aList.photoOfGuide = p.getImageUrl();
                     aList.city = p.getCity();
                 }
 
                 Photo img = photoService.getByEventId(aList.getId());
-                if (img!=null)
-                    aList.pathToPhoto="https://excursium.blob.core.windows.net/img/"+img.getData();
+                if (img != null)
+                    aList.pathToPhoto = "https://excursium.blob.core.windows.net/img/" + img.getData();
 
                 if (!words.equals("")) {
                     for (String word : wds) {
@@ -100,12 +104,18 @@ public class EventServiceImpl implements EventService {
                 } else
                     copy.add(aList);
             }
+        }
+        long curr3 = System.currentTimeMillis();
         if (!words.equals("")) copy.sort(new Comparator<Event>() {
             @Override
             public int compare(Event o1, Event o2) {
                 return Integer.compare(o2.cnt, o1.cnt);
             }
         });
+        long curr4 = System.currentTimeMillis();
+        logger.info("TIME11:"+(curr2-curr1));
+        logger.info("TIME22:"+(curr3-curr2));
+        logger.info("TIME33:"+(curr4-curr3));
         return copy;
     }
 
