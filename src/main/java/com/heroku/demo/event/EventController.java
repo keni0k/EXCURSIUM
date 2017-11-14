@@ -183,6 +183,7 @@ public class EventController {
                                  @RequestParam(value = "price", required = false) String price,
                                  @RequestParam(value = "sort_by", required = false) Integer sortBy,
                                  @RequestParam(value = "words", required = false) String words,
+                                 @RequestParam(value = "page", required = false) Integer page,
                                  Locale locale) {
         if (price!=null){
             String prices[] = price.split(";");
@@ -191,7 +192,14 @@ public class EventController {
             logger.info("priceDown:"+priceDown+" priceUp:"+priceUp);//TODO delete
         }
         List<Event> events = eventService.getByFilter(priceUp, priceDown, category, locale.getLanguage().equals("ru") ? 0 : 1, words, sortBy == null ? 0 : sortBy,false);
-        model.addAttribute("events", events);
+        List<Event> eventsFinal = new ArrayList<>();
+        if (page!=null) {
+            page = page * 10 - 10;
+            for (int i = page; i < page + 10; i++)
+                if (i < events.size())
+                    eventsFinal.add(events.get(i));
+        }
+        model.addAttribute("events", eventsFinal.size()>0?eventsFinal:events);
         model.addAttribute("utils", new UtilsForWeb());
         return "event_list1";
     }

@@ -365,7 +365,7 @@
 
                                 <!--First-->
 
-                                <li th:class="(${page==0}?'disabled') + 'page-item' + 'clearfix' + 'd-none' + 'd-md-block'"><a
+                                <li th:class="${page==0}?'disabled' + ' page-item' + ' clearfix' + ' d-none' + ' d-md-block'"><a
                                         class="page-link waves-effect waves-effect" href="/events/list">В начало</a></li>
 
                                 <!--Arrow left-->
@@ -377,8 +377,9 @@
                                 </li>
 
                                 <!--Numbers-->
-                                <li class="page-item active"><a class="page-link waves-effect waves-effect">1</a></li>
-                                <li class="page-item"><a class="page-link waves-effect waves-effect">2</a></li>
+                                <th:block th:each="i : ${#numbers.sequence( 0, events.size()/10)}">
+                                    <li th:class="${page==i}?'active' + ' page-item'"><a class="page-link waves-effect waves-effect" th:text="${i}">1</a></li>
+                                </th:block>
 
                                 <!--Arrow right-->
                                 <li class="page-item">
