@@ -193,12 +193,13 @@ public class EventController {
         List<Event> events = eventService.getByFilter(priceUp, priceDown, category, locale.getLanguage().equals("ru") ? 0 : 1, words, sortBy == null ? 0 : sortBy, false);//TODO optimize
         List<Event> eventsFinal = new ArrayList<>();
 
-        if (page==null) page = 0;
+        if (page==null) page = 1;
+        page--;
         page = page * 12;
         for (int i = page; i < page + 12; i++)
             if (i < events.size())
                 eventsFinal.add(events.get(i));
-        model.addAttribute("pageCount", events.size() / 12);
+        model.addAttribute("pageCount", (int)Math.ceil(events.size() / 12));
         model.addAttribute("page", page);
         model.addAttribute("events", eventsFinal.size() > 0 ? eventsFinal : events);
         model.addAttribute("utils", new UtilsForWeb());
