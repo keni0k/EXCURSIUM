@@ -190,7 +190,10 @@ public class EventController {
             priceDown = Integer.parseInt(prices[0]);
             priceUp = Integer.parseInt(prices[1]);
         }
+        long startTime = System.currentTimeMillis();
         List<Event> events = eventService.getByFilter(priceUp, priceDown, category, locale.getLanguage().equals("ru") ? 0 : 1, words, sortBy == null ? 0 : sortBy, false);//TODO optimize
+        long part1 = System.currentTimeMillis();
+        logger.info("TIME1: "+(part1-startTime));
         List<Event> eventsFinal = new ArrayList<>();
 
         if (page==null) page = 1;
@@ -202,6 +205,8 @@ public class EventController {
         model.addAttribute("page", page);
         model.addAttribute("events", eventsFinal.size() > 0 ? eventsFinal : events);
         model.addAttribute("utils", new UtilsForWeb());
+        long part2 = System.currentTimeMillis();
+        logger.info("TIME2: "+(part2-part1));
         return "event_list1";
     }
 

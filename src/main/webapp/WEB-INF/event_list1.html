@@ -269,7 +269,7 @@
                     </div>
                 </div>
                 <div class="col-sm-8">
-                    <h2 class="title text-center" th:text="${#messages.msg('titles.excursions')}">Экскурсии</h2>
+                    <h2 class="title text-center" th:text="${#messages.msg('titles.excursions')}" href="/events/list">Экскурсии</h2>
                     <!--Grid column-->
                     <div class="row" th:each="i : ${#numbers.sequence( 0, events.size()-1)}">
                         <th:block th:if="${i%2==0}" th:with="inc = ${i!=events.size()-1?1:0}">
@@ -365,11 +365,11 @@
                                 <!--First-->
 
                                 <li th:class="(${page==1}?'disabled ':'') + 'page-item clearfix d-none d-md-block'"><a
-                                        class="page-link waves-effect waves-effect" href="/events/list">В начало</a></li>
+                                        class="page-link waves-effect waves-effect" href="/events/list?page=0">В начало</a></li>
 
                                 <!--Arrow left-->
                                 <li th:class="(${page==1}?'disabled ':'') + 'page-item'">
-                                    <a class="page-link waves-effect waves-effect" aria-label="Назад">
+                                    <a class="page-link waves-effect waves-effect" aria-label="Назад" th:href="@{/events/list(page=${page}-1)}">
                                         <span aria-hidden="true">«</span>
                                         <span class="sr-only">Назад</span>
                                     </a>
@@ -382,7 +382,7 @@
 
                                 <!--Arrow right-->
                                 <li th:class="(${page==pageCount}?'disabled ':'') +'page-item'">
-                                    <a class="page-link waves-effect waves-effect" aria-label="Вперёд" th:href="@{/events/list(page=${page+1})}">
+                                    <a class="page-link waves-effect waves-effect" aria-label="Вперёд" th:href="@{/events/list(page=${page}-1)}">
                                         <span aria-hidden="true">»</span>
                                         <span class="sr-only">Вперёд</span>
                                     </a>
