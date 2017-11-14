@@ -199,7 +199,7 @@ public class EventController {
         for (int i = page; i < page + 12; i++)
             if (i < events.size())
                 eventsFinal.add(events.get(i));
-        model.addAttribute("pageCount", (int)Math.ceil((double)events.size() / 12));
+        model.addAttribute("pageCount", (int)(Math.ceil((double)events.size() / 12)));
         model.addAttribute("page", page+1);
         model.addAttribute("events", eventsFinal.size() > 0 ? eventsFinal : events);
         model.addAttribute("utils", new UtilsForWeb());

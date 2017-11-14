@@ -364,7 +364,7 @@
 
                                 <!--First-->
 
-                                <li th:class="(${page==1}?'disabled ':'') + 'page-item' + ' clearfix' + ' d-none' + ' d-md-block'"><a
+                                <li th:class="(${page==1}?'disabled ':'') + 'page-item clearfix d-none d-md-block'"><a
                                         class="page-link waves-effect waves-effect" href="/events/list">В начало</a></li>
 
                                 <!--Arrow left-->
@@ -377,7 +377,7 @@
 
                                 <!--Numbers-->
                                 <th:block th:each="i : ${#numbers.sequence( 1, pageCount)}">
-                                    <li th:class="(${page}==${i}?'active ':'') + 'page-item'"><a class="page-link waves-effect waves-effect" th:text="${i}" th:href="@{/events/list(page=${i})}">1</a></li>
+                                    <li th:class="(${page} eq ${i}?'active ':'') + 'page-item'"><a class="page-link waves-effect waves-effect" th:text="${i}" th:href="@{/events/list(page=${i})}">1</a></li>
                                 </th:block>
 
                                 <!--Arrow right-->
@@ -389,7 +389,7 @@
                                 </li>
 
                                 <!--First-->
-                                <li th:class="(${page==pageCount}?'diabled ':'') + 'page-item' + ' clearfix' + ' d-none' + ' d-md-block'"><a
+                                <li th:class="(${page==pageCount}?'diabled ':'') + 'page-item clearfix d-none d-md-block'"><a
                                         class="page-link waves-effect waves-effect">В конец</a></li>
 
                             </ul>
