@@ -193,8 +193,8 @@ public class EventController {
         List<Event> events = eventService.getByFilter(priceUp, priceDown, category, locale.getLanguage().equals("ru") ? 0 : 1, words, sortBy == null ? 0 : sortBy,false);//TODO optimize
         List<Event> eventsFinal = new ArrayList<>();
         if (page!=null) {
-            page = page * 10;
-            for (int i = page; i < page + 10; i++)
+            page = page * 12;
+            for (int i = page; i < page + 12; i++)
                 if (i < events.size())
                     eventsFinal.add(events.get(i));
         }

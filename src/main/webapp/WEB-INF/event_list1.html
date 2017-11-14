@@ -377,7 +377,7 @@
                                 </li>
 
                                 <!--Numbers-->
-                                <th:block th:each="i : ${#numbers.sequence( 0, events.size()/10)}">
+                                <th:block th:each="i : ${#numbers.sequence( 0, events.size()/12)}">
                                     <li th:class="${page==i}?'active' + ' page-item'"><a class="page-link waves-effect waves-effect" th:text="${i}">1</a></li>
                                 </th:block>
 
@@ -390,7 +390,7 @@
                                 </li>
 
                                 <!--First-->
-                                <li class="page-item clearfix d-none d-md-block"><a
+                                <li th:class="${page==events.size()/12}?'diabled' + ' page-item' + ' clearfix' + ' d-none' + ' d-md-block'"><a
                                         class="page-link waves-effect waves-effect">В конец</a></li>
 
                             </ul>
