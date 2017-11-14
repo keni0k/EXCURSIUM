@@ -381,7 +381,7 @@
                                 </th:block>
 
                                 <!--Arrow right-->
-                                <li th:class="(${page==pageCount}?'diabled ':'') +'page-item'">
+                                <li th:class="(${page==pageCount}?'disabled ':'') +'page-item'">
                                     <a class="page-link waves-effect waves-effect" aria-label="Вперёд" th:href="@{/events/list(page=${page+1})}">
                                         <span aria-hidden="true">»</span>
                                         <span class="sr-only">Вперёд</span>
@@ -389,7 +389,7 @@
                                 </li>
 
                                 <!--First-->
-                                <li th:class="(${page==pageCount}?'diabled ':'') + 'page-item clearfix d-none d-md-block'"><a th:href="@{/events/list(page=${pageCount})}"
+                                <li th:class="(${page==pageCount}?'disabled ':'') + 'page-item clearfix d-none d-md-block'"><a th:href="@{/events/list(page=${pageCount})}"
                                         class="page-link waves-effect waves-effect">В конец</a></li>
 
                             </ul>
