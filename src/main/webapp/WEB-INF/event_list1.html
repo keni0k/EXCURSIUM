@@ -111,8 +111,7 @@
     }
 </style>
 <div class="content"
-     th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')},
-        page = ${#httpServletRequest.getParameter('page')}">
+     th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
     <nav class="navbar navbar-default navbar-custom" role="navigation">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -377,8 +376,8 @@
                                 </li>
 
                                 <!--Numbers-->
-                                <th:block th:each="i : ${#numbers.sequence( 0, events.size()/12)}">
-                                    <li th:class="${page==i}?'active' + ' page-item'"><a class="page-link waves-effect waves-effect" th:text="${i}">1</a></li>
+                                <th:block th:each="i : ${#numbers.sequence( 0, pageCount)}">
+                                    <li th:class="${page == i}?'active' + ' page-item'"><a class="page-link waves-effect waves-effect" th:text="${i}">1</a></li>
                                 </th:block>
 
                                 <!--Arrow right-->
