@@ -376,7 +376,7 @@
                                 </li>
 
                                 <!--Numbers-->
-                                <th:block th:each="i : ${#numbers.sequence( 0, pageCount)}">
+                                <th:block th:each="i : ${#numbers.sequence( 1, pageCount)}">
                                     <li th:class="${page == i}?'active' + ' page-item'"><a class="page-link waves-effect waves-effect" th:text="${i}">1</a></li>
                                 </th:block>
 
