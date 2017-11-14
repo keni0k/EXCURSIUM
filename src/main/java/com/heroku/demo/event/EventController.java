@@ -189,12 +189,11 @@ public class EventController {
             String prices[] = price.split(";");
             priceDown = Integer.parseInt(prices[0]);
             priceUp = Integer.parseInt(prices[1]);
-            logger.info("priceDown:"+priceDown+" priceUp:"+priceUp);//TODO delete
         }
-        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, locale.getLanguage().equals("ru") ? 0 : 1, words, sortBy == null ? 0 : sortBy,false);
+        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, locale.getLanguage().equals("ru") ? 0 : 1, words, sortBy == null ? 0 : sortBy,false);//TODO optimize
         List<Event> eventsFinal = new ArrayList<>();
         if (page!=null) {
-            page = page * 10 - 10;
+            page = page * 10;
             for (int i = page; i < page + 10; i++)
                 if (i < events.size())
                     eventsFinal.add(events.get(i));
