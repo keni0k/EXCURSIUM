@@ -74,12 +74,12 @@ public class EventServiceImpl implements EventService {
         if (language == -1) isAllLang = true;
         String[] wds = words.split(",");
         long curr1 = System.currentTimeMillis();
-        List<Event> list = getEventRepository().getByFilter(priceUp, priceDown,category,language,isAll);//getAll
+        List<Event> list = getAll();//getEventRepository().getByFilter(priceUp, priceDown,category,language,isAll);//getAll
         long curr2 = System.currentTimeMillis();
         List<Event> copy = new ArrayList<>();
         for (Event aList : list) {
-//            if ((aList.getPrice() >= priceDown) && (aList.getPrice() <= priceUp) &&
-//                    ((aList.getCategory() == category) || (category == -1)) && ((aList.getLanguage() == language) || isAllLang) && (aList.getType() == 0 || isAll)) {
+            if ((aList.getPrice() >= priceDown) && (aList.getPrice() <= priceUp) &&
+                    ((aList.getCategory() == category) || (category == -1)) && ((aList.getLanguage() == language) || isAllLang) && (aList.getType() == 0 || isAll)) {
 
                 Person p = personService.getById(aList.getGuideId());
                 if (p != null) {
@@ -102,7 +102,7 @@ public class EventServiceImpl implements EventService {
                     if (aList.cnt > 0) copy.add(aList);
                 } else
                     copy.add(aList);
-//            }
+            }
         }
         long curr3 = System.currentTimeMillis();
         if (!words.equals("")) copy.sort(new Comparator<Event>() {
@@ -127,7 +127,7 @@ public class EventServiceImpl implements EventService {
         return eventList;
     }
 
-    public List<Event> getByFilter(Integer priceUp, Integer priceDown, Integer category, Integer language, String words, Integer sortBy, boolean isAll) {
+    List<Event> getByFilter(Integer priceUp, Integer priceDown, Integer category, Integer language, String words, Integer sortBy, boolean isAll) {
 
         List<Event> events = getByFilter(priceUp, priceDown, category, language, words, isAll);
         if (sortBy==null) return events;
