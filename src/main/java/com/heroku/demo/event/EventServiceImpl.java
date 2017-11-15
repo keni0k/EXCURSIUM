@@ -72,15 +72,14 @@ public class EventServiceImpl implements EventService {
         if (language==null) language = -1;
         if (priceUp == -1) priceUp = Integer.MAX_VALUE;
         if (language == -1) isAllLang = true;
-
         String[] wds = words.split(",");
         long curr1 = System.currentTimeMillis();
-        List<Event> list = getAll();
+        List<Event> list = getEventRepository().getByFilter(priceUp, priceDown,category,language,isAll);//getAll
         long curr2 = System.currentTimeMillis();
         List<Event> copy = new ArrayList<>();
         for (Event aList : list) {
-            if ((aList.getPrice() >= priceDown) && (aList.getPrice() <= priceUp) &&
-                    ((aList.getCategory() == category) || (category == -1)) && ((aList.getLanguage() == language) || isAllLang) && (aList.getType() == 0 || isAll)) {
+//            if ((aList.getPrice() >= priceDown) && (aList.getPrice() <= priceUp) &&
+//                    ((aList.getCategory() == category) || (category == -1)) && ((aList.getLanguage() == language) || isAllLang) && (aList.getType() == 0 || isAll)) {
 
                 Person p = personService.getById(aList.getGuideId());
                 if (p != null) {
@@ -103,7 +102,7 @@ public class EventServiceImpl implements EventService {
                     if (aList.cnt > 0) copy.add(aList);
                 } else
                     copy.add(aList);
-            }
+//            }
         }
         long curr3 = System.currentTimeMillis();
         if (!words.equals("")) copy.sort(new Comparator<Event>() {
@@ -112,10 +111,8 @@ public class EventServiceImpl implements EventService {
                 return Integer.compare(o2.cnt, o1.cnt);
             }
         });
-        long curr4 = System.currentTimeMillis();
         logger.info("TIME11:"+(curr2-curr1));
         logger.info("TIME22:"+(curr3-curr2));
-        logger.info("TIME33:"+(curr4-curr3));
         return copy;
     }
 
