@@ -198,9 +198,13 @@ public class EventController {
         for (int i = pages; i < pages + 12; i++)
             if (i < events.size())
                 eventsFinal.add(events.get(i));
+        if (eventsFinal.size()>0) events = eventsFinal;
+        int[] minMax = minMaxPrice(events);
         model.addAttribute("pageCount", (int)(Math.ceil((double)events.size() / 12)));
         model.addAttribute("page", page);
-        model.addAttribute("events", eventsFinal.size() > 0 ? eventsFinal : events);
+        model.addAttribute("minPrice", minMax[0]);
+        model.addAttribute("maxPrice", minMax[1]);
+        model.addAttribute("events", events);
         model.addAttribute("utils", new UtilsForWeb());
         return "event_list1";
     }
@@ -215,6 +219,17 @@ public class EventController {
         return new ResponseEntity<>(language == 0 ? ru : en, h, HttpStatus.OK);
     }
 
+    private int[] minMaxPrice(List<Event> events){
+        int[] prices = {100000, 0};
+        for (Event e:events){
+            if (e.getPrice()>prices[1])
+                prices[1] = e.getPrice();
+            else
+                if(e.getPrice()<prices[0])
+                    prices[0]=e.getPrice();
+        }
+        return prices;
+    }
 
     @RequestMapping("/listjson")
     @ResponseBody
