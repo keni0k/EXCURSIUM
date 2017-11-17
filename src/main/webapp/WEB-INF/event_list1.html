@@ -218,12 +218,12 @@
                                                 round: 0,
                                                 dimension: "&nbsp;₽",
                                                 skin: "plastic"*/
-                                                from: 0,
+                                                from: minPrice,
                                                 to: maxPrice,
                                                 heterogeneity: ['0/'+minPrice, '33/'+maxPrice/10>minPrice*3?maxPrice/10:minPrice*3, '66/'+maxPrice/5>minPrice*10?maxPrice/5:minPrice*10, '100/'+maxPrice],
                                                 scale: [minPrice, '|', maxPrice/10>minPrice*3?maxPrice/10:minPrice*3, '|', maxPrice/5>minPrice*10?maxPrice/5:minPrice*10, '|', maxPrice],
                                                 limits: false,
-                                                step: 1,
+                                                step: 10,
                                                 dimension: '',
                                                 skin: "blue"
                                             });
