@@ -279,12 +279,13 @@
                     </div>
                 </div>
                 <div class="col-sm-8">
-                    <h2 class="title text-center" th:text="${#messages.msg('titles.excursions')}" th:href="@{/events/list}">
+                    <h2 class="title text-center" th:text="${#messages.msg('titles.excursions')}"
+                        th:href="@{/events/list}">
                         Экскурсии</h2>
                     <!--Grid column-->
                     <div class="row" th:each="i : ${#numbers.sequence( 0, events.size()-1, 2)}">
                         <th:block th:with="inc = ${i!=events.size()-1?1:0}">
-                            <div class="col-sm-6" th:each="j : ${#numbers.sequence(i,i+inc)}"
+                            <div class="col-md-6" th:each="j : ${#numbers.sequence(i,i+inc)}"
                                  th:with="event=${events.get(j)}">
                                 <div class="card">
                                     <!--Card image-->
@@ -358,7 +359,7 @@
                             </div>
                         </th:block>
                         <div class="clearfix"></div>
-                    <br/>
+                        <br/>
                     </div>
                     <!--Grid column-->
                     <div class="row">
