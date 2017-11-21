@@ -77,7 +77,7 @@ public class EventServiceImpl implements EventService {
         long curr1 = System.currentTimeMillis();
         List<Event> list = getAll();//getEventRepository().getByFilter(priceUp, priceDown,category,language,isAll);//getAll
         long curr2 = System.currentTimeMillis();
-        ListEvents copy = (ListEvents) new ArrayList<Event>();
+        ListEvents copy = new ListEvents();
         for (Event aList : list) {
             if (((aList.getCategory() == category) || (category == -1)) && ((aList.getLanguage() == language) || isAllLang) && (aList.getType() == 0 || isAll)) {
                 if ((aList.getPrice() >= priceDown) && (aList.getPrice() <= priceUp)) {
