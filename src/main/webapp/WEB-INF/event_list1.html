@@ -210,6 +210,9 @@
                                             /*<![CDATA[*/
                                             var maxPrice = [[${maxPrice}]];
                                             var minPrice = [[${minPrice}]];
+                                            var s50 = (minPrice+maxPrice)/2;
+                                            var s33 = (minPrice+s50)/2;
+                                            var s66 = (s50+maxPrice)/2;
                                             jQuery("#Slider1").slider({
                                                 /*from: 1000,
                                                 to: 100000,
@@ -220,11 +223,11 @@
                                                 skin: "plastic"*/
                                                 from: minPrice,
                                                 to: maxPrice,
-                                                heterogeneity: ['0/'+minPrice, '33/'+maxPrice/10>minPrice*3?maxPrice/10:minPrice*3, '66/'+maxPrice/5>minPrice*10?maxPrice/5:minPrice*10, '100/'+maxPrice],
-                                                scale: [minPrice, '|', maxPrice/10>minPrice*3?maxPrice/10:minPrice*3, '|', maxPrice/5>minPrice*10?maxPrice/5:minPrice*10, '|', maxPrice],
+                                                heterogeneity: ['0/'+minPrice, '33/'+s33, '66/'+s66, '100/'+maxPrice],
+                                                scale: [minPrice, '|', s33, '|', s66, '|', maxPrice],
                                                 limits: false,
                                                 step: 10,
-                                                dimension: '',
+                                                dimension: '&nbsp;₽',
                                                 skin: "blue"
                                             });
                                             /*]]>*/
