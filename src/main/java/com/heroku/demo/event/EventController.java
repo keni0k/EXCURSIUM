@@ -154,6 +154,7 @@ public class EventController {
     @RequestMapping(value = "/event", method = RequestMethod.GET)
     public String event(ModelMap model, @RequestParam("id") int id) {
         model.addAttribute("event", eventService.getById(id));
+        model.addAttribute("reviews", reviewRepository.findAll());
         return "event";
     }
 
@@ -212,8 +213,8 @@ public class EventController {
         model.addAttribute("sort_by", sortBy);
         model.addAttribute("pageCount", pageCount);
         model.addAttribute("page", page);
-//        model.addAttribute("minPrice", events.getMinPrice());
-//        model.addAttribute("maxPrice", events.getMaxPrice());
+        model.addAttribute("minPrice", events.getMinPrice());
+        model.addAttribute("maxPrice", events.getMaxPrice());
         model.addAttribute("minMaxPrice", priceDown+";"+priceUp);
         model.addAttribute("events", events);
         model.addAttribute("category", category);
