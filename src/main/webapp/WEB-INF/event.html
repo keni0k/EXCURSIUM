@@ -115,7 +115,8 @@
                         пользователей</a></li>
                     <li th:if="${isAdmin}"><a href="/events/moderation" th:text="${#messages.msg('titles.events')}">Модерация
                         экскурсий</a></li>
-                    <li th:if="${isUser} or ${isAdmin}"><a href="/users/account" th:text="${#messages.msg('titles.account')}">Профиль</a></li>
+                    <li th:if="${isUser} or ${isAdmin}"><a href="/users/account"
+                                                           th:text="${#messages.msg('titles.account')}">Профиль</a></li>
                     <li th:unless="${isUser}"><a href="/users/registration"
                                                  th:text="${#messages.msg('titles.registration')}">Регистрация</a></li>
                     <li th:unless="${isUser}"><a href="/users/login"
@@ -129,7 +130,7 @@
     </nav>
     <div class="container">
         <div class="row">
-            <div class="col-md-6 col-md-offset-3">
+            <div class="col-md-8 col-md-offset-2">
                 <div class="card">
                     <!--Card image-->
                     <div class="view overlay hm-white-slight z-depth-1">
@@ -183,7 +184,7 @@
                         </ul>
 
                         <!--Description-->
-                        <p class="card-text" style="font-size: medium; color: #000000" th:text="${event.description}">
+                        <p class="card-text" style="font-size: medium; color: #000000" align="justify" th:text="${event.description}">
                             %Описание%</p>
 
                         <!--Card footer-->
@@ -201,6 +202,12 @@
                     </div>
                     <!--/.Card content-->
                 </div>
+                <th:block>
+                    <div class="clearfix"></div>
+                    <div class="card">
+
+                    </div>
+                </th:block>
             </div>
         </div>
     </div>

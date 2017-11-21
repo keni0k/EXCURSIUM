@@ -7,6 +7,7 @@ import com.heroku.demo.photo.Photo;
 import com.heroku.demo.photo.PhotoRepository;
 import com.heroku.demo.photo.PhotoServiceImpl;
 import com.heroku.demo.review.ReviewRepository;
+import com.heroku.demo.review.ReviewServiceImpl;
 import com.heroku.demo.utils.MessageUtil;
 import com.heroku.demo.utils.UtilsForWeb;
 import org.joda.time.LocalTime;
@@ -43,8 +44,8 @@ public class EventController {
 
     private final MessageSource messageSource;
 
-    private ReviewRepository reviewRepository;
     private PhotoRepository photoRepository;
+    private ReviewServiceImpl reviewService;
 
     private EventServiceImpl eventService;
     private PhotoServiceImpl photoService;
@@ -56,7 +57,7 @@ public class EventController {
     public EventController(PersonRepository personRepository, ReviewRepository reviewRepository,
                            EventRepository eventRepository, PhotoRepository photoRepository, MessageSource messageSource) {
 
-        this.reviewRepository = reviewRepository;
+        reviewService = new ReviewServiceImpl(reviewRepository);
         this.photoRepository = photoRepository;
 
         personService = new PersonServiceImpl(personRepository);
@@ -154,7 +155,7 @@ public class EventController {
     @RequestMapping(value = "/event", method = RequestMethod.GET)
     public String event(ModelMap model, @RequestParam("id") int id) {
         model.addAttribute("event", eventService.getById(id));
-        model.addAttribute("reviews", reviewRepository.findAll());
+        model.addAttribute("reviews", reviewService.getByEvent(id));
         return "event";
     }
 
