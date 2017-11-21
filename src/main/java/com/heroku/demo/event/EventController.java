@@ -195,12 +195,19 @@ public class EventController {
         eventsFinal.setMinPrice(events.getMinPrice());
         eventsFinal.setMaxPrice(events.getMaxPrice());
         if (page==null) page = 1;
-        int pages = (page-1) * 12;
-        for (int i = pages; i < pages + 12; i++)
+        int cards = (page-1) * 12;
+        for (int i = cards; i < cards + 12; i++)
             if (i < events.size())
                 eventsFinal.add(events.get(i));
         int pageCount = (int)(Math.ceil((double)events.size() / 12));
-        if (eventsFinal.size()>0) events = eventsFinal;
+
+        if (eventsFinal.size()>0) events = eventsFinal;//Если страница не пуста, то показать ее, иначе показать все экскурсии
+
+        if (priceDown==null)
+            priceDown=events.getMinPrice();//Если нет ограничений по цене, то выставить минимальную и максимальную цены
+        if (priceUp==null)
+            priceUp=events.getMaxPrice();
+
         model.addAttribute("sort_by", sortBy);
         model.addAttribute("pageCount", pageCount);
         model.addAttribute("page", page);
