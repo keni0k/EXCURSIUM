@@ -287,6 +287,7 @@
                         th:href="@{/events/list}">
                         Экскурсии</h2>
                     <!--Grid column-->
+                    <th:block th:if="${events.size()>0}">
                     <div class="row" th:each="i : ${#numbers.sequence( 0, events.size()-1, 2)}">
                         <th:block th:with="inc = ${i!=events.size()-1?1:0}">
                             <div class="col-md-6" th:each="j : ${#numbers.sequence(i,i+inc)}"
@@ -365,6 +366,12 @@
                         <div class="clearfix"></div>
                         <br/>
                     </div>
+                    </th:block>
+                    <th:block th:unless="${events.size()>0}">
+                        <div class="row">
+                            <h2>Экскурсий по данным параметрам нет, попробуйте расширить поиск или искать в другой категории</h2>
+                        </div>
+                    </th:block>
                     <!--Grid column-->
                     <div class="row">
 
