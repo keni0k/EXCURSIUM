@@ -190,24 +190,21 @@ public class EventController {
             priceDown = Integer.parseInt(prices[0]);
             priceUp = Integer.parseInt(prices[1]);
         }
-        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, locale.getLanguage().equals("ru") ? 0 : 1, words, sortBy == null ? 0 : sortBy, false);//TODO optimize
-        List<Event> eventsFinal = new ArrayList<>();
-        int[] minMax = minMaxPrice(events);
+        ListEvents events = eventService.getByFilter(priceUp, priceDown, category, locale.getLanguage().equals("ru") ? 0 : 1, words, sortBy == null ? 0 : sortBy, false);//TODO optimize
+        ListEvents eventsFinal = new ListEvents();
         if (page==null) page = 1;
         int pages = (page-1) * 12;
         for (int i = pages; i < pages + 12; i++)
-            if (i < events.size())
+            if (i >= events.size())
                 eventsFinal.add(events.get(i));
         int pageCount = (int)(Math.ceil((double)events.size() / 12));
         if (eventsFinal.size()>0) events = eventsFinal;
         model.addAttribute("sort_by", sortBy);
         model.addAttribute("pageCount", pageCount);
         model.addAttribute("page", page);
-        model.addAttribute("minPrice", minMax[0]);
-        model.addAttribute("maxPrice", minMax[1]);
-        String minMaxPrice = minMax[0]+";"+minMax[1];
-        logger.info(minMaxPrice);
-        model.addAttribute("minMaxPrice",minMaxPrice);
+        model.addAttribute("minPrice", events.getMinPrice());
+        model.addAttribute("maxPrice", events.getMaxPrice());
+        model.addAttribute("minMaxPrice", events.getMinMax());
         model.addAttribute("events", events);
         model.addAttribute("utils", new UtilsForWeb());
         return "event_list1";
@@ -221,17 +218,6 @@ public class EventController {
         String ru = "[\"Развлечения\",\"Наука\",\"История\",\"Искусство\",\"Производство\",\"Гастрономия\",\"Квесты\",\"Экстрим\"]";
         String en = "[\"Entertainment\",\"Science\",\"History\",\"Art\",\"Manufacture\",\"Gastronomy\",\"Quests\",\"Extreme\"]";
         return new ResponseEntity<>(language == 0 ? ru : en, h, HttpStatus.OK);
-    }
-
-    private int[] minMaxPrice(List<Event> events){
-        int[] prices = {100000, 0};
-        for (Event e:events){
-            if (e.getPrice()>prices[1])
-                prices[1] = e.getPrice();
-            if(e.getPrice()<prices[0])
-                prices[0]=e.getPrice();
-        }
-        return prices;
     }
 
     @RequestMapping("/listjson")

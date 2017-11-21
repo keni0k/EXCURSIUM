@@ -63,8 +63,9 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<Event> getByFilter(Integer priceUp, Integer priceDown, Integer category, Integer language, String words, boolean isAll) {
+    public ListEvents getByFilter(Integer priceUp, Integer priceDown, Integer category, Integer language, String words, boolean isAll) {
         boolean isAllLang = false;
+        int[] prices = {100000, 0};
         if (words==null) words = "";
         if (priceDown==null) priceDown = -1;
         if (priceUp==null) priceUp = -1;
@@ -76,32 +77,37 @@ public class EventServiceImpl implements EventService {
         long curr1 = System.currentTimeMillis();
         List<Event> list = getAll();//getEventRepository().getByFilter(priceUp, priceDown,category,language,isAll);//getAll
         long curr2 = System.currentTimeMillis();
-        List<Event> copy = new ArrayList<>();
+        ListEvents copy = (ListEvents) new ArrayList<Event>();
         for (Event aList : list) {
-            if ((aList.getPrice() >= priceDown) && (aList.getPrice() <= priceUp) &&
-                    ((aList.getCategory() == category) || (category == -1)) && ((aList.getLanguage() == language) || isAllLang) && (aList.getType() == 0 || isAll)) {
+            if (((aList.getCategory() == category) || (category == -1)) && ((aList.getLanguage() == language) || isAllLang) && (aList.getType() == 0 || isAll)) {
+                if ((aList.getPrice() >= priceDown) && (aList.getPrice() <= priceUp)) {
 
-                Person p = personService.getById(aList.getGuideId());
-                if (p != null) {
-                    aList.fullNameOfGuide = p.getFirstName() + " " + p.getLastName();
-                    aList.photoOfGuide = p.getImageUrl();
-                    aList.city = p.getCity();
-                }
-
-                Photo img = photoService.getByEventId(aList.getId());
-                if (img != null)
-                    aList.pathToPhoto = "https://excursium.blob.core.windows.net/img/" + img.getData();
-
-                if (!words.equals("")) {
-                    for (String word : wds) {
-                        if (aList.getName().toLowerCase().contains(word.toLowerCase()))
-                            aList.cnt += 7;
-                        if (aList.getDescription().toLowerCase().contains(word.toLowerCase()))
-                            aList.cnt += 3;
+                    Person p = personService.getById(aList.getGuideId());
+                    if (p != null) {
+                        aList.fullNameOfGuide = p.getFirstName() + " " + p.getLastName();
+                        aList.photoOfGuide = p.getImageUrl();
+                        aList.city = p.getCity();
                     }
-                    if (aList.cnt > 0) copy.add(aList);
-                } else
-                    copy.add(aList);
+
+                    Photo img = photoService.getByEventId(aList.getId());
+                    if (img != null)
+                        aList.pathToPhoto = "https://excursium.blob.core.windows.net/img/" + img.getData();
+
+                    if (!words.equals("")) {
+                        for (String word : wds) {
+                            if (aList.getName().toLowerCase().contains(word.toLowerCase()))
+                                aList.cnt += 7;
+                            if (aList.getDescription().toLowerCase().contains(word.toLowerCase()))
+                                aList.cnt += 3;
+                        }
+                        if (aList.cnt > 0) copy.add(aList);
+                    } else
+                        copy.add(aList);
+                }
+                if (aList.getPrice()>copy.getMaxPrice())
+                    copy.setMaxPrice(aList.getPrice());
+                if (aList.getPrice()<copy.getMinPrice())
+                    copy.setMinPrice(aList.getPrice());
             }
         }
         long curr3 = System.currentTimeMillis();
@@ -127,9 +133,8 @@ public class EventServiceImpl implements EventService {
         return eventList;
     }
 
-    List<Event> getByFilter(Integer priceUp, Integer priceDown, Integer category, Integer language, String words, Integer sortBy, boolean isAll) {
-
-        List<Event> events = getByFilter(priceUp, priceDown, category, language, words, isAll);
+    ListEvents getByFilter(Integer priceUp, Integer priceDown, Integer category, Integer language, String words, Integer sortBy, boolean isAll) {
+        ListEvents events = getByFilter(priceUp, priceDown, category, language, words, isAll);
         if (sortBy==null) return events;
         events.sort(new Comparator<Event>() {
             @Override
