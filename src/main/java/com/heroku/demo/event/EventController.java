@@ -198,10 +198,8 @@ public class EventController {
         for (int i = pages; i < pages + 12; i++)
             if (i < events.size())
                 eventsFinal.add(events.get(i));
-        if (eventsFinal.size()>0) events = eventsFinal;
-
         int pageCount = (int)(Math.ceil((double)events.size() / 12));
-        logger.info("PAGE_COUNT" + pageCount);
+        if (eventsFinal.size()>0) events = eventsFinal;
         model.addAttribute("sort_by", sortBy);
         model.addAttribute("pageCount", pageCount);
         model.addAttribute("page", page);
