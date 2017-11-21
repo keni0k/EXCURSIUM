@@ -190,7 +190,7 @@ public class PersonController {
                 person.setImageUrl("https://excursium.blob.core.windows.net/img/" + photoToken);
             } catch (Exception e) {
                 logger.error("You failed to upload file => " + e.getMessage());
-                model.addAttribute("message", new MessageUtil("danger", "You failed to upload file. Please, try again."));// messageSource.getMessage("success.user.registration", null, locale)));
+                model.addAttribute("message_file", new MessageUtil("danger", "You failed to upload file. Please, try again."));// messageSource.getMessage("success.user.registration", null, locale)));
                 return account(model, principal);
             }
         }
