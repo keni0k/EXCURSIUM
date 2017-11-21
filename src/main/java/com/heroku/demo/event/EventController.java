@@ -207,6 +207,7 @@ public class EventController {
             priceDown=events.getMinPrice();//Если нет ограничений по цене, то выставить минимальную и максимальную цены
         if (priceUp==null || priceDown>events.getMaxPrice())
             priceUp=events.getMaxPrice();
+        if (priceDown == events.getMaxPrice()) priceDown-=40;
 
         model.addAttribute("sort_by", sortBy);
         model.addAttribute("pageCount", pageCount);

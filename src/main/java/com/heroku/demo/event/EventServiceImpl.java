@@ -65,7 +65,6 @@ public class EventServiceImpl implements EventService {
     @Override
     public ListEvents getByFilter(Integer priceUp, Integer priceDown, Integer category, Integer language, String words, boolean isAll) {
         boolean isAllLang = false;
-        int[] prices = {100000, 0};
         if (words==null) words = "";
         if (priceDown==null) priceDown = -1;
         if (priceUp==null) priceUp = -1;
