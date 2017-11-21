@@ -180,7 +180,7 @@
                                 </div>
                                 <div class="panel-body">
                                     <div class="input-group">
-                                        <select name="sort_by" class="selectpicker">
+                                        <select name="sort_by" class="selectpicker" th:selected="${sort_by}">
                                             <option value="-1">По популярности</option>
                                             <option value="2">Сначала дешевые</option>
                                             <option value="3">Сначала дорогие</option>
@@ -224,7 +224,7 @@
                                                 scale: [minPrice, '|', maxPrice/10>minPrice*3?maxPrice/10:minPrice*3, '|', maxPrice/5>minPrice*10?maxPrice/5:minPrice*10, '|', maxPrice],
                                                 limits: false,
                                                 step: 10,
-                                                dimension: '',
+                                                dimension: '&nbsp;₽',
                                                 skin: "blue"
                                             });
                                             /*]]>*/

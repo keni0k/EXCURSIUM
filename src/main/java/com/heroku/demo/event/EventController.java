@@ -199,6 +199,7 @@ public class EventController {
             if (i < events.size())
                 eventsFinal.add(events.get(i));
         if (eventsFinal.size()>0) events = eventsFinal;
+        model.addAttribute("sort_by", sortBy);
         model.addAttribute("pageCount", (int)(Math.ceil((double)events.size() / 12)));
         model.addAttribute("page", page);
         model.addAttribute("minPrice", minMax[0]);
