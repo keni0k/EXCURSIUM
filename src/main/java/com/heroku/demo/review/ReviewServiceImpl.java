@@ -11,9 +11,9 @@ public class ReviewServiceImpl implements ReviewService {
     private ReviewRepository reviewRepository;
 
     @Override
-    public Review addReview(Review phot) {
+    public Review addReview(Review review) {
 
-        return reviewRepository.saveAndFlush(phot);
+        return reviewRepository.saveAndFlush(review);
     }
 
     @Override
@@ -26,7 +26,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public List<Review> getByType(int event) {
+    public List<Review> getByEvent(int event) {
         List<Review> list = reviewRepository.findAll();
         List<Review> copy = new ArrayList<>();
         copy.addAll(list);

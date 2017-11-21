@@ -210,8 +210,8 @@
                                         <!--</div>-->
                                         <script th:inline="javascript">
                                             /*<![CDATA[*/
-                                            var maxPrice = [[${maxPrice}]];
-                                            var minPrice = [[${minPrice}]];
+                                            var maxPrice = [[${events.getMaxPrice()}]];
+                                            var minPrice = [[${events.getMinPrice()}]];
                                             var s50 = (minPrice + maxPrice) / 2;
                                             var s33 = (minPrice + s50) / 2;
                                             var s66 = (s50 + maxPrice) / 2;

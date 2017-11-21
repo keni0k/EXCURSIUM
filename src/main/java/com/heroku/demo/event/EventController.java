@@ -207,13 +207,13 @@ public class EventController {
             priceDown=events.getMinPrice();//Если нет ограничений по цене, то выставить минимальную и максимальную цены
         if (priceUp==null || priceDown>events.getMaxPrice())
             priceUp=events.getMaxPrice();
-        if (priceDown == events.getMaxPrice()) priceDown-=40;
+        if (priceDown >= events.getMaxPrice()) priceDown=events.getMaxPrice()-40;
 
         model.addAttribute("sort_by", sortBy);
         model.addAttribute("pageCount", pageCount);
         model.addAttribute("page", page);
-        model.addAttribute("minPrice", events.getMinPrice());
-        model.addAttribute("maxPrice", events.getMaxPrice());
+//        model.addAttribute("minPrice", events.getMinPrice());
+//        model.addAttribute("maxPrice", events.getMaxPrice());
         model.addAttribute("minMaxPrice", priceDown+";"+priceUp);
         model.addAttribute("events", events);
         model.addAttribute("category", category);
