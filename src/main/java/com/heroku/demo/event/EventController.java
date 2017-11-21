@@ -224,9 +224,8 @@ public class EventController {
         for (Event e:events){
             if (e.getPrice()>prices[1])
                 prices[1] = e.getPrice();
-            else
-                if(e.getPrice()<prices[0])
-                    prices[0]=e.getPrice();
+            if(e.getPrice()<prices[0])
+                prices[0]=e.getPrice();
         }
         return prices;
     }
