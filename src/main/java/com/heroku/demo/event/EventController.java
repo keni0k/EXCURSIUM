@@ -215,6 +215,7 @@ public class EventController {
         model.addAttribute("maxPrice", events.getMaxPrice());
         model.addAttribute("minMaxPrice", priceDown+";"+priceUp);
         model.addAttribute("events", events);
+        model.addAttribute("category", category);
         model.addAttribute("utils", new UtilsForWeb());
         return "event_list1";
     }
