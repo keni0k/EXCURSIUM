@@ -170,17 +170,21 @@
                         </div>
                         <div class="panel-body">
                             <div class="input-group" style="z-index: 100">
-                                <select name="type" class="form-control selectpicker"
-                                        th:selected="${insertPerson.getType()}?${insertPerson.getType()}:0">
-                                    <option value="-3" th:text="${#messages.msg('user.type.unconfirmed')}">Не
-                                        активирован
+                                <select name="type" class="form-control selectpicker">
+                                    <option value="-3" th:text="${#messages.msg('user.type.unconfirmed')}"
+                                            th:selected="${insertPerson.getType()==-3}">Не активирован
                                     </option>
-                                    <option value="0" th:text="${#messages.msg('user.type.blocked')}">Заблокированный
+                                    <option value="0" th:text="${#messages.msg('user.type.blocked')}"
+                                            th:selected="${insertPerson.getType()==0}">Заблокированный
                                     </option>
-                                    <option value="-1">Турист на перепроверке</option>
-                                    <option value="-2">Экскурсовод на перепроверке</option>
-                                    <option value="1" th:text="${#messages.msg('user.type.tourist')}">Турист</option>
-                                    <option value="2" th:text="${#messages.msg('user.type.guide')}">Экскурсовод</option>
+                                    <option value="-1"
+                                            th:selected="${insertPerson.getType()==-1}">Турист на перепроверке</option>
+                                    <option value="-2"
+                                            th:selected="${insertPerson.getType()==-2}">Экскурсовод на перепроверке</option>
+                                    <option value="1" th:text="${#messages.msg('user.type.tourist')}"
+                                            th:selected="${insertPerson.getType()==1}">Турист</option>
+                                    <option value="2" th:text="${#messages.msg('user.type.guide')}"
+                                            th:selected="${insertPerson.getType()==2}">Экскурсовод</option>
                                 </select>
                             </div>
                         </div>

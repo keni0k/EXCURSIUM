@@ -243,7 +243,7 @@
 
                                 <button th:if="${isThisUserAccount}" type="button"
                                         class="btn btn-primary mt-4 waves-effect waves-light"
-                                        data-toggle="modal" data-target="#modalSubmitProject">Добавить новую экскурсию<i
+                                        data-toggle="modal" data-target="#modalSubmitProject" th:text="${#messages.msg('titles.add_event')}">Добавить новую экскурсию<i
                                         class="fa fa-photo ml-1"></i></button>
 
                             </div>
@@ -399,7 +399,7 @@
                                     <!-- Nav tabs -->
                                     <ul class="nav nav-tabs tabs-2 light-blue darken-3" role="tablist">
                                         <li class="nav-item waves-effect waves-light">
-                                            <a class="nav-link active" data-toggle="tab"
+                                            <a class="nav-link active" data-toggle="tab"  th:text="${#messages.msg('words.public_info')}"
                                                href="https://mdbootstrap.com/previews/templates/admin-dashboard/html/profile/extended.html#panel77"
                                                role="tab" aria-expanded="true"><i class="fa fa-user mr-1"></i> Public
                                                 info</a>
@@ -407,6 +407,7 @@
                                         <li class="nav-item waves-effect waves-light">
                                             <a class="nav-link" data-toggle="tab"
                                                href="https://mdbootstrap.com/previews/templates/admin-dashboard/html/profile/extended.html#panel88"
+                                               th:text="${#messages.msg('words.private_info')}"
                                                role="tab" aria-expanded="false"><i class="fa fa-lock mr-1"></i> Account</a>
                                         </li>
                                     </ul>
@@ -432,7 +433,7 @@
                                                                 <input type="text" id="editProfile1"
                                                                        class="form-control" name="first_name"
                                                                        th:value="${person.getFirstName()}"/>
-                                                                <label for="editProfile1" class="">First name</label>
+                                                                <label for="editProfile1" class="" th:text="${#messages.msg('words.first_name')}">First name</label>
                                                             </div>
 
                                                         </div>
@@ -446,7 +447,7 @@
                                                                 <input type="text" id="editProfile2"
                                                                        class="form-control" name="last_name"
                                                                        th:value="${person.getLastName()}"/>
-                                                                <label for="editProfile2" class="">Last name</label>
+                                                                <label for="editProfile2" class="" th:text="${#messages.msg('words.last_name')}">Last name</label>
                                                             </div>
 
                                                         </div>
@@ -460,7 +461,7 @@
                                                                 <textarea type="text" id="editProfile5" name="about_me"
                                                                           class="md-textarea"
                                                                           th:text="${person.getAbout()}"></textarea>
-                                                                <label for="editProfile5" class="">About me</label>
+                                                                <label for="editProfile5" class="" th:text="${#messages.msg('words.about_me')}">About me</label>
                                                             </div>
 
                                                         </div>
@@ -473,38 +474,19 @@
                                                                        accept="image/jpeg,image/png"
                                                                        aria-label="Фотографии"/>
                                                                 <label for="filePerson" class=""
-                                                                       th:text="${#messages.msg('words.photos')}">Новая фотография</label>
+                                                                       th:text="${#messages.msg('words.new_photo')}">Новая фотография</label>
                                                             </div>
                                                         </div>
 
                                                         <!--Grid column-->
-                                                        <div class="col-md-6">
-
-                                                            <!--Country-->
-                                                            <select class="mdb-select colorful-select dropdown-primary"
-                                                                    searchable="Search here..">
-                                                                <option value="" disabled="" selected="">Choose your
-                                                                    country
-                                                                </option>
-                                                                <option value="1">USA</option>
-                                                                <option value="2">Germany</option>
-                                                                <option value="3">France</option>
-                                                                <option value="3">Poland</option>
-                                                                <option value="3">Japan</option>
-                                                            </select>
-
-                                                        </div>
-                                                        <!--Grid column-->
-
-                                                        <!--Grid column-->
-                                                        <div class="col-md-6">
+                                                        <div class="col-md-12">
 
                                                             <!--City-->
-                                                            <div class="md-form form-sm mt-2">
+                                                            <div class="md-form form-sm">
                                                                 <input type="text" id="editProfile6" name="city"
                                                                        class="form-control"
                                                                        th:value="${person.getCity()}"/>
-                                                                <label for="editProfile6" class="">City</label>
+                                                                <label for="editProfile6" class="" th:text="${#messages.msg('words.city')}">City</label>
                                                             </div>
 
                                                         </div>
@@ -525,19 +507,6 @@
                                                         <!--Grid column-->
                                                         <div class="col-md-6">
 
-                                                            <!--Twitter-->
-                                                            <div class="md-form form-sm mt-2">
-                                                                <input type="text" id="editProfile9"
-                                                                       class="form-control"/>
-                                                                <label for="editProfile9" class="">Facebook</label>
-                                                            </div>
-
-                                                        </div>
-                                                        <!--Grid column-->
-
-                                                        <!--Grid column-->
-                                                        <div class="col-md-6">
-
                                                             <!--LinkedIn-->
                                                             <div class="md-form form-sm mt-2">
                                                                 <input type="text" id="editProfile10"
@@ -548,18 +517,6 @@
                                                         </div>
                                                         <!--Grid column-->
 
-                                                        <!--Grid column-->
-                                                        <div class="col-md-6">
-
-                                                            <!--Dribbble-->
-                                                            <div class="md-form form-sm mt-2">
-                                                                <input type="text" id="editProfile11"
-                                                                       class="form-control"/>
-                                                                <label for="editProfile11" class="">Twitter</label>
-                                                            </div>
-
-                                                        </div>
-                                                        <!--Grid column-->
                                                     </div>
                                                     <div class="modal-footer justify-content-center">
                                                         <button type="reset"

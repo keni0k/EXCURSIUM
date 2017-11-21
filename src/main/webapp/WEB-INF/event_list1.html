@@ -140,7 +140,8 @@
                         пользователей</a></li>
                     <li th:if="${isAdmin}"><a href="/events/moderation" th:text="${#messages.msg('titles.events')}">Модерация
                         экскурсий</a></li>
-                    <li th:if="${isUser} or ${isAdmin}"><a href="/users/account" th:text="${#messages.msg('titles.account')}">Профиль</a></li>
+                    <li th:if="${isUser} or ${isAdmin}"><a href="/users/account"
+                                                           th:text="${#messages.msg('titles.account')}">Профиль</a></li>
                     <li th:unless="${isUser}"><a href="/users/registration"
                                                  th:text="${#messages.msg('titles.registration')}">Регистрация</a></li>
                     <li th:unless="${isUser}"><a href="/users/login"
@@ -199,20 +200,21 @@
                                         <div class="layout-slider" style="width: 100%">
                                         <span
                                                 style="display: inline-block; width: 100%; padding: 0 5px;">
-                                        <input id="Slider1" type="slider" name="price" th:value="${minPrice}+';'+${maxPrice}"/></span>
+                                        <input id="Slider1" type="slider" name="price"
+                                               th:value="${minPrice}+';'+${maxPrice}"/></span>
                                         </div>
                                         <!--<br/>-->
                                         <!--<div class="checkbox">-->
-                                            <!--<input type="checkbox" id="is_barter" name="is_barter"/>-->
-                                            <!--<label for = "is_barter"><span>Отображать сделки по бартеру</span></label>-->
+                                        <!--<input type="checkbox" id="is_barter" name="is_barter"/>-->
+                                        <!--<label for = "is_barter"><span>Отображать сделки по бартеру</span></label>-->
                                         <!--</div>-->
                                         <script th:inline="javascript">
                                             /*<![CDATA[*/
                                             var maxPrice = [[${maxPrice}]];
                                             var minPrice = [[${minPrice}]];
-                                            var s50 = (minPrice+maxPrice)/2;
-                                            var s33 = (minPrice+s50)/2;
-                                            var s66 = (s50+maxPrice)/2;
+                                            var s50 = (minPrice + maxPrice) / 2;
+                                            var s33 = (minPrice + s50) / 2;
+                                            var s66 = (s50 + maxPrice) / 2;
                                             jQuery("#Slider1").slider({
                                                 /*from: 1000,
                                                 to: 100000,
@@ -223,7 +225,7 @@
                                                 skin: "plastic"*/
                                                 from: minPrice,
                                                 to: maxPrice,
-                                                heterogeneity: ['0/'+minPrice, '33/'+s33, '66/'+s66, '100/'+maxPrice],
+                                                heterogeneity: ['0/' + minPrice, '33/' + s33, '66/' + s66, '100/' + maxPrice],
                                                 scale: [minPrice, '|', s33, '|', s66, '|', maxPrice],
                                                 limits: false,
                                                 step: 10,
@@ -254,7 +256,7 @@
                                                 calculate: function (value) {
                                                     var hours = Math.floor(value / 60);
                                                     var mins = value - hours * 60;
-                                                    return (hours<10?"0"+hours:hours)+":"+(mins<10?"0"+mins:mins);
+                                                    return (hours < 10 ? "0" + hours : hours) + ":" + (mins < 10 ? "0" + mins : mins);
                                                 },
                                                 onstatechange: function (value) {
                                                     console.dir(this);
@@ -268,7 +270,8 @@
 
                             <div class="text-center">
                                 <br/>
-                                <button class="btn btn-default add-to-cart" type="submit"><i class="fa fa-filter" aria-hidden="true"></i>
+                                <button class="btn btn-default add-to-cart" type="submit"><i class="fa fa-filter"
+                                                                                             aria-hidden="true"></i>
                                     Фильтровать товары
                                 </button>
                             </div>
@@ -276,7 +279,8 @@
                     </div>
                 </div>
                 <div class="col-sm-8">
-                    <h2 class="title text-center" th:text="${#messages.msg('titles.excursions')}" href="/events/list">Экскурсии</h2>
+                    <h2 class="title text-center" th:text="${#messages.msg('titles.excursions')}" href="/events/list">
+                        Экскурсии</h2>
                     <!--Grid column-->
                     <div class="row" th:each="i : ${#numbers.sequence( 0, events.size()-1)}">
                         <th:block th:if="${i%2==0}" th:with="inc = ${i!=events.size()-1?1:0}">
@@ -310,21 +314,21 @@
 
                                         <!--Rating-->
                                         <ul class="rating">
-                            <span th:if="${(event.getRate()!=-1)and(event.getRate()!=0)}">
-                                <li th:each="i : ${#numbers.sequence(0, event.getRate()-1)}">
-                                    <i class="fa fa-star"></i>
-                                </li>
-                            </span>
+                                            <span th:if="${(event.getRate()!=-1)and(event.getRate()!=0)}">
+                                                <li th:each="i : ${#numbers.sequence(0, event.getRate()-1)}">
+                                                    <i class="fa fa-star"></i>
+                                                </li>
+                                            </span>
                                             <span th:if="${(event.getRate()!=-1)and(event.getRate()!=5)}">
-                                <li th:each="i : ${#numbers.sequence(event.getRate(), 4)}">
-                                    <i class="fa fa-star-o"></i>
-                                </li>
-                            </span>
+                                                <li th:each="i : ${#numbers.sequence(event.getRate(), 4)}">
+                                                    <i class="fa fa-star-o"></i>
+                                                </li>
+                                            </span>
                                             <span th:if="${(event.getRate()==-1)}">
-                                <li th:each="i : ${#numbers.sequence(0, 4)}">
-                                    <i class="fa fa-star-o"></i>
-                                </li>
-                            </span>
+                                                <li th:each="i : ${#numbers.sequence(0, 4)}">
+                                                    <i class="fa fa-star-o"></i>
+                                                </li>
+                                            </span>
                                         </ul>
 
                                         <!--Description-->
@@ -333,15 +337,16 @@
 
                                         <!--Card footer-->
                                         <div class="card-footer">
-                           <span class="left" style="color:#4285F4; font-size: large;">
-                            <strong th:text="${event.getPrice()}">%PRICE%</strong>
-                            <strong>&#8381;</strong>
-                        </span>
+                                           <span class="left" style="color:#4285F4; font-size: large;">
+                                            <strong th:text="${event.getPrice()}">%PRICE%</strong>
+                                            <strong>&#8381;</strong>
+                                           </span>
                                             <span class="right">
-                            <a th:href="@{/events/event(id=${event.getId()})}"
-                               class="btn btn-primary waves-effect waves-light"
-                               th:text="${#messages.msg('words.open')}">Открыть</a>
-                        </span>
+                                                <a th:href="@{/events/event(id=${event.getId()})}"
+                                                   class="btn btn-primary waves-effect waves-light"
+                                                   th:text="${#messages.msg('words.open')}">Открыть
+                                                </a>
+                                            </span>
                                         </div>
 
                                     </div>
@@ -355,7 +360,7 @@
                     <div class="row">
 
                         <!--Pagination -->
-                        <nav class="my-4 d-flex justify-content-center"  th:if="${pageCount>1}">
+                        <nav class="my-4 d-flex justify-content-center" th:if="${pageCount>1}">
                             <ul class="pagination pagination-circle pg-blue mb-0">
 
                                 <!--TODO:
@@ -373,11 +378,13 @@
                                 <!--First-->
 
                                 <li th:class="(${page==1}?'disabled ':'') + 'page-item clearfix d-none d-md-block'"><a
-                                        class="page-link waves-effect waves-effect" href="/events/list?page=0">В начало</a></li>
+                                        class="page-link waves-effect waves-effect" href="/events/list?page=0">В
+                                    начало</a></li>
 
                                 <!--Arrow left-->
                                 <li th:class="(${page==1}?'disabled ':'') + 'page-item'">
-                                    <a class="page-link waves-effect waves-effect" aria-label="Назад" th:href="@{/events/list(page=${page}-1)}">
+                                    <a class="page-link waves-effect waves-effect" aria-label="Назад"
+                                       th:href="@{/events/list(page=${page}-1)}">
                                         <span aria-hidden="true">«</span>
                                         <span class="sr-only">Назад</span>
                                     </a>
@@ -385,20 +392,24 @@
 
                                 <!--Numbers-->
                                 <th:block th:each="i : ${#numbers.sequence( 1, pageCount)}">
-                                    <li th:class="${page==i}?'active ':'' + 'page-item'"><a class="page-link waves-effect waves-effect" th:text="${i}" th:href="@{/events/list(page=${i})}">1</a></li>
+                                    <li th:class="${page==i}?'active ':'' + 'page-item'"><a
+                                            class="page-link waves-effect waves-effect" th:text="${i}"
+                                            th:href="@{/events/list(page=${i})}">1</a></li>
                                 </th:block>
 
                                 <!--Arrow right-->
                                 <li th:class="(${page==pageCount}?'disabled ':'') +'page-item'">
-                                    <a class="page-link waves-effect waves-effect" aria-label="Вперёд" th:href="@{/events/list(page=${page}-1)}">
+                                    <a class="page-link waves-effect waves-effect" aria-label="Вперёд"
+                                       th:href="@{/events/list(page=${page}-1)}">
                                         <span aria-hidden="true">»</span>
                                         <span class="sr-only">Вперёд</span>
                                     </a>
                                 </li>
 
                                 <!--First-->
-                                <li th:class="(${page==pageCount}?'disabled ':'') + 'page-item clearfix d-none d-md-block'"><a th:href="@{/events/list(page=${pageCount})}"
-                                        class="page-link waves-effect waves-effect">В конец</a></li>
+                                <li th:class="(${page==pageCount}?'disabled ':'') + 'page-item clearfix d-none d-md-block'">
+                                    <a th:href="@{/events/list(page=${pageCount})}"
+                                       class="page-link waves-effect waves-effect">В конец</a></li>
 
                             </ul>
                         </nav>
