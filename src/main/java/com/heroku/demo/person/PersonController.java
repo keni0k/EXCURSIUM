@@ -163,12 +163,7 @@ public class PersonController {
             person = personService.getByLoginOrEmail(loginOrEmail);
         } else person = new Person();
 
-        if (file == null) {
-            model.addAttribute("message", new MessageUtil("danger", "You failed to upload file because the file is null."));// messageSource.getMessage("success.user.registration", null, locale)));
-            return account(model, principal);
-        }
-
-        if (!file.isEmpty()) {
+        if (file!=null && !file.isEmpty()) {
             try {
                 byte[] bytes = file.getBytes();
 
@@ -193,19 +188,20 @@ public class PersonController {
                 String photoToken = randomToken(32) + ".jpg";
                 putImg(serverFile.getAbsolutePath(), photoToken);
                 person.setImageUrl("https://excursium.blob.core.windows.net/img/" + photoToken);
-                personService.editPerson(person);
-                model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.registration", null, locale)));
             } catch (Exception e) {
                 logger.error("You failed to upload file => " + e.getMessage());
-                personService.delete(person.getId());
                 model.addAttribute("message", new MessageUtil("danger", "You failed to upload file. Please, try again."));// messageSource.getMessage("success.user.registration", null, locale)));
                 return account(model, principal);
             }
-            return account(model, principal);
-        } else {
-            model.addAttribute("message", new MessageUtil("danger", "You failed to upload file because the file is empty."));// messageSource.getMessage("success.user.registration", null, locale)));
-            return account(model, principal);
         }
+        person.setFirstName(firstName);
+        person.setLastName(lastName);
+        person.setAbout(aboutMe);
+        person.setCity(city);
+        person.setType(person.getType()>0?person.getType()*-1:person.getType());
+        personService.editPerson(person);
+        model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.registration", null, locale)));
+        return account(model, principal);
     }
 
     @RequestMapping(value = "/edit_private", method = RequestMethod.POST)
@@ -241,7 +237,7 @@ public class PersonController {
         Person person = personService.getByToken(token);
         if (person != null)
             if (person.getType() == -3) {
-                person.setType(1);
+                person.setType(-1);
                 personService.editPerson(person);
                 model.addAttribute("message", new MessageUtil("success", "Your account has been successfully verified."));
             }

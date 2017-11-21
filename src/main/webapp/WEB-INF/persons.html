@@ -175,8 +175,10 @@
                                     <option value="-3" th:text="${#messages.msg('user.type.unconfirmed')}">Не
                                         активирован
                                     </option>
-                                    <option value="-2" th:text="${#messages.msg('user.type.blocked')}">Заблокированный
+                                    <option value="0" th:text="${#messages.msg('user.type.blocked')}">Заблокированный
                                     </option>
+                                    <option value="-1">Турист на перепроверке</option>
+                                    <option value="-2">Экскурсовод на перепроверке</option>
                                     <option value="1" th:text="${#messages.msg('user.type.tourist')}">Турист</option>
                                     <option value="2" th:text="${#messages.msg('user.type.guide')}">Экскурсовод</option>
                                 </select>
