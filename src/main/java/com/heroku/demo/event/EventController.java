@@ -205,7 +205,9 @@ public class EventController {
         model.addAttribute("page", page);
         model.addAttribute("minPrice", minMax[0]);
         model.addAttribute("maxPrice", minMax[1]);
-        model.addAttribute("minMaxPrice",""+minMax[0]+";"+minMax[1]);
+        String minMaxPrice = minMax[0]+";"+minMax[1];
+        logger.info(minMaxPrice);
+        model.addAttribute("minMaxPrice",minMaxPrice);
         model.addAttribute("events", events);
         model.addAttribute("utils", new UtilsForWeb());
         return "event_list1";
