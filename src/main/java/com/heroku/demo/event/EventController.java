@@ -195,7 +195,7 @@ public class EventController {
         if (page==null) page = 1;
         int pages = (page-1) * 12;
         for (int i = pages; i < pages + 12; i++)
-            if (i >= events.size())
+            if (i < events.size())
                 eventsFinal.add(events.get(i));
         int pageCount = (int)(Math.ceil((double)events.size() / 12));
         if (eventsFinal.size()>0) events = eventsFinal;
