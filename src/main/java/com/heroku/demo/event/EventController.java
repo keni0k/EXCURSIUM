@@ -192,6 +192,8 @@ public class EventController {
         }
         ListEvents events = eventService.getByFilter(priceUp, priceDown, category, locale.getLanguage().equals("ru") ? 0 : 1, words, sortBy == null ? 0 : sortBy, false);//TODO optimize
         ListEvents eventsFinal = new ListEvents();
+        eventsFinal.setMinPrice(events.getMinPrice());
+        eventsFinal.setMaxPrice(events.getMaxPrice());
         if (page==null) page = 1;
         int pages = (page-1) * 12;
         for (int i = pages; i < pages + 12; i++)
