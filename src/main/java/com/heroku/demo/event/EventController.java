@@ -203,9 +203,9 @@ public class EventController {
 
         if (eventsFinal.size()>0) events = eventsFinal;//Если страница не пуста, то показать ее, иначе показать все экскурсии
 
-        if (priceDown==null)
+        if (priceDown==null || priceDown<events.getMinPrice())
             priceDown=events.getMinPrice();//Если нет ограничений по цене, то выставить минимальную и максимальную цены
-        if (priceUp==null)
+        if (priceUp==null || priceDown>events.getMaxPrice())
             priceUp=events.getMaxPrice();
 
         model.addAttribute("sort_by", sortBy);
