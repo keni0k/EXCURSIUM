@@ -244,7 +244,7 @@ public class PersonController {
         return signIn(model);
     }
 
-    @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET, value = "/getbytoken")
+    @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST, value = "/getbytoken")
     @ResponseBody
     public String getPerson(@ModelAttribute("token") String token, @ModelAttribute("auth") String authKey) {
         Person p = null;
@@ -253,7 +253,7 @@ public class PersonController {
         return p == null ? "{}" : p.toString();
     }
 
-    @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET, value = "/getbyemail")
+    @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST, value = "/getbyemail")
     @ResponseBody
     public String getPersonByEmail(@ModelAttribute("email") String email, @ModelAttribute("auth") String authKey) {
         Person p = null;
@@ -352,7 +352,7 @@ public class PersonController {
         return p.toString();
     }*/
 
-    @RequestMapping("/listjson")
+    @RequestMapping(value = "/listjson", method = RequestMethod.POST)
     @ResponseBody
     public String getPersons(@ModelAttribute("auth") String authKey) {
         ArrayList<String> arrayList = new ArrayList<>();

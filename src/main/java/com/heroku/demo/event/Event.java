@@ -219,7 +219,7 @@ public class Event {
     }
 
     public int getIntRate() {
-        return (int)rate;
+        return Math.round(rate);
     }
 
     public void setRate(float rate) {
