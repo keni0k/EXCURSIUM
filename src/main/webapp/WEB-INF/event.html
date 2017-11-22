@@ -32,8 +32,16 @@
             src="../resources/libs/bootstrapformhelpers/js/bootstrap-formhelpers.min.js"></script>
     <!-- Plugin CSS -->
     <link rel="stylesheet" href="../resources/css/cards.css"/>
+    <link rel="stylesheet" href="../resources/css/carousel.css"/>
 
     <title>Экскурсии</title>
+    <script th:inline="javascript">
+        $(document).ready(function() {
+            $('.carousel').carousel({
+                interval: 10000
+            })
+        });
+    </script>
 </head>
 <body style="background-color: #f9f9f9;">
 <style type="text/css">
@@ -133,8 +141,12 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="card">
                     <!--Card image-->
-                    <div class="view overlay hm-white-slight z-depth-1">
-                        <img th:src="${event.pathToPhoto}" class="img-fluid" alt=""/>
+                    <div class="view overlay hm-white-slight z-depth-1" style="max-height: 20rem"><!--TODO-->
+                        <div class="img_crop">
+                            <img th:src="${event.pathToPhoto}" src="../resources/img/bg-cta.jpg" class="img-fluid"
+                                 alt=""/>
+                        </div>
+
                         <a>
                             <div class="mask waves-effect waves-light"></div>
                         </a>
@@ -184,12 +196,13 @@
                         </ul>
 
                         <!--Description-->
-                        <p class="card-text" style="font-size: medium; color: #000000" align="justify" th:text="${event.description}">
+                        <p class="card-text" style="font-size: medium; color: #000000" align="justify"
+                           th:text="${event.description}">
                             %Описание%</p>
 
                         <!--Card footer-->
                         <div class="card-footer">
-							<span class="left" style="color:#4285F4; font-size: large;">
+							<span class="left" style="color:#4285F4; font-size: x-large; padding: 0.4em 0 0 0;">
 								<strong th:text="${event.price}">%Цена%</strong>
 								<strong>&#8381;</strong>
 							</span>
@@ -202,12 +215,71 @@
                     </div>
                     <!--/.Card content-->
                 </div>
-                <th:block>
-                    <div class="clearfix"></div>
-                    <div class="card">
+                <div class="clearfix"></div>
+                <br/>
 
+                <div class="carousel slide" id="myCarousel" th:if="${reviews.size()>0}">
+                    <div class="carousel-inner">
+                        <div class="item active"
+                             th:each="i : ${#numbers.sequence(0, reviews.size()-1)}"
+                             th:class="'item'+(${i==0}?' active':'')">
+                            <div class="card" th:with="review = ${reviews.get(i)}">
+                                <div class="card-header">
+                                    <img src="../resources/img/user.png" th:src="${review.pathToUserPhoto}"
+                                         class="avatar-img"
+                                         style="max-height: 3rem"/>
+                                    <span class="span_title" style="padding-top: 1em;"
+                                          th:text="${review.userFullName}">Вершинин Дмитрий</span>
+                                    <span class="span_right" style="padding-top: 1em;">
+                                        <span>(</span>
+                                        <span th:text="${review.getLikesCount()}">%likes%</span>
+                                        <span>)</span>
+                                        <a rel="tooltip" title="Like" href="javascript:void(0)">
+                                            <i class="fa fa-heart"></i>
+                                        </a>
+                                    </span>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-xs-1">
+                                            <a data-slide="prev" href="#myCarousel" class="carousel-control left">‹</a>
+                                        </div>
+                                        <div class="col-xs-10">
+                                            <ul class="rating">
+                                                <th:block th:if="${(review.getRate()!=-1)and(review.getRate()!=0)}">
+                                                    <li th:each="i : ${#numbers.sequence(0, review.getRate()-1)}">
+                                                        <i class="fa fa-star"></i>
+                                                    </li>
+                                                </th:block>
+                                                <th:block th:if="${(review.getRate()!=-1)and(review.getRate()!=5)}">
+                                                    <li th:each="i : ${#numbers.sequence(review.getRate(), 4)}">
+                                                        <i class="fa fa-star-o"></i>
+                                                    </li>
+                                                </th:block>
+                                                <th:block th:if="${(review.getRate()==-1)}">
+                                                    <li th:each="i : ${#numbers.sequence(0, 4)}">
+                                                        <i class="fa fa-star-o"></i>
+                                                    </li>
+                                                </th:block>
+                                            </ul>
+                                            <p class="card-text" style="font-size: medium; color: #000000"
+                                               align="justify"
+                                               th:text="${review.getData()}">
+                                                %Содержимое отзыва%
+                                            </p>
+                                        </div>
+                                        <div class="col-xs-1">
+                                            <a data-slide="next" href="#myCarousel" class="carousel-control right">›</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <span style="color: #aaaaaa;" th:text="${review.getTime()}">31 Aug 2017 12:41</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </th:block>
+                </div>
             </div>
         </div>
     </div>

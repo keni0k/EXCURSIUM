@@ -1,9 +1,6 @@
 package com.heroku.demo.review;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Review {
@@ -24,6 +21,26 @@ public class Review {
 
     private int userId = 0;
 
+    private int likesCount = 0;
+
+    @Transient
+    public String userFullName = "";
+
+    @Transient
+    public String pathToUserPhoto = "";
+
+    public int getLikesCount() {
+        return likesCount;
+    }
+
+    public void setLikesCount(int likesCount) {
+        this.likesCount = likesCount;
+    }
+
+    private int rate = -1;
+
+    private int eventId = -1;
+
     public int getRate() {
         return rate;
     }
@@ -39,11 +56,6 @@ public class Review {
     public void setEventId(int eventId) {
         this.eventId = eventId;
     }
-
-    private int rate = -1;
-
-    private int eventId = -1;
-
 
     public String getData() {
         return data;

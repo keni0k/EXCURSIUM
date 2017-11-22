@@ -57,10 +57,9 @@ public class EventController {
     public EventController(PersonRepository personRepository, ReviewRepository reviewRepository,
                            EventRepository eventRepository, PhotoRepository photoRepository, MessageSource messageSource) {
 
-        reviewService = new ReviewServiceImpl(reviewRepository);
-        this.photoRepository = photoRepository;
-
         personService = new PersonServiceImpl(personRepository);
+        reviewService = new ReviewServiceImpl(reviewRepository, personService);
+        this.photoRepository = photoRepository;
         photoService = new PhotoServiceImpl(photoRepository);
         eventService = new EventServiceImpl(eventRepository, personService, photoService);
 

@@ -1,0 +1,27 @@
+/* Carousel Control */
+.carousel-control{
+    border: 0;
+    border-radius: 0;
+    display: block;
+    font-size: 34px;
+    font-weight: 200;
+    line-height: 18px;
+    opacity: 0.5;
+    padding: 16px 10px 0;
+    /*position: static;*/
+    height: 60px;
+    width: 30px;
+}
+
+
+/* Mobile Only */
+@media (max-width: 767px) {
+    .page-header {
+        text-align: center;
+    }
+}
+@media (max-width: 479px) {
+    .caption {
+        word-break: break-all;
+    }
+}
