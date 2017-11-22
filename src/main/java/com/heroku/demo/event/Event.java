@@ -56,6 +56,8 @@ public class Event {
 
     private int category=0;
 
+    private int reviewsCount = 0;
+
     private String time;
 
     @Transient
@@ -83,7 +85,7 @@ public class Event {
     @Size(min=150, max=1000)
     private String description = "";
 
-    private int rate = -1;
+    private float rate = -1;
 
     @Transient
     int cnt = 0;
@@ -108,6 +110,14 @@ public class Event {
 
     @Size(min=10, max=60)
     private String name = "";
+
+    public int getReviewsCount() {
+        return reviewsCount;
+    }
+
+    public void setReviewsCount(int reviewsCount) {
+        this.reviewsCount = reviewsCount;
+    }
 
     public String getLanguageString(){
         return language==0?"RU":"EN";
@@ -204,11 +214,15 @@ public class Event {
         this.description = description;
     }
 
-    public int getRate() {
+    public float getRate() {
         return rate;
     }
 
-    public void setRate(int rate) {
+    public int getIntRate() {
+        return (int)rate;
+    }
+
+    public void setRate(float rate) {
         this.rate = rate;
     }
 
