@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -204,14 +205,12 @@ public class EventController {
         return "event_list";
     }
 
-    @RequestMapping("/categories")
+    @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, value = "/categories")
     @ResponseBody
-    public ResponseEntity<String> preview(@ModelAttribute("language") int language) {
-        HttpHeaders h = new HttpHeaders();
-        h.add("Content-type", "text/json;charset=UTF-8");
+    public String preview(@ModelAttribute("language") int language) {
         String ru = "[\"Развлечения\",\"Наука\",\"История\",\"Искусство\",\"Производство\",\"Гастрономия\",\"Квесты\",\"Экстрим\"]";
         String en = "[\"Entertainment\",\"Science\",\"History\",\"Art\",\"Manufacture\",\"Gastronomy\",\"Quests\",\"Extreme\"]";
-        return new ResponseEntity<>(language == 0 ? ru : en, h, HttpStatus.OK);
+        return language == 0 ? ru : en;
     }
 
     @RequestMapping(value = "/listjson", method = RequestMethod.POST)
