@@ -345,9 +345,8 @@
 
                                         <!--Card footer-->
                                         <div class="card-footer">
-                                           <span class="left" style="color:#4285F4; font-size: large;">
-                                            <strong th:text="${event.getPrice()}">%PRICE%</strong>
-                                            <strong>&#8381;</strong>
+                                           <span class="left" style="color:#4285F4; font-size: x-large; padding-top: 0.4em;">
+                                            <strong th:text="${event.getPrice()}+'&#8381;'">%PRICE%</strong>
                                            </span>
                                             <span class="right">
                                                 <a th:href="@{/events/event(id=${event.getId()})}"

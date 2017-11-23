@@ -202,9 +202,8 @@
 
                         <!--Card footer-->
                         <div class="card-footer">
-							<span class="left" style="color:#4285F4; font-size: x-large; padding: 0.4em 0 0 0;">
-								<strong th:text="${event.price}">%Цена%</strong>
-								<strong>&#8381;</strong>
+							<span class="left" style="color:#4285F4; font-size: x-large; padding-top: 0.4em;">
+								<strong th:text="${event.price}+'&#8381;'">%Цена%</strong>
 							</span>
                             <span class="right">
 								<a href="#" class="btn btn-primary waves-effect waves-light"
