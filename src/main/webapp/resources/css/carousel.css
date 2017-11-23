@@ -7,14 +7,18 @@
     font-weight: 200;
     line-height: 18px;
     opacity: 0.5;
-    padding: 16px 10px 0;
+    padding: 6px 10px 0;
     /*position: static;*/
     height: 40px;
     width: 40px;
 }
 
 .carousel-control.left {
-    background-image: linear-gradient(to right,rgba(0,0,0,0.4) 0,rgba(0,0,0,.2) 100%)
+    background-image: linear-gradient(to right,rgba(0,0,0,0.5) 0,rgba(0,0,0,.2) 100%)
+}
+
+.carousel-control.right {
+    background-image: linear-gradient(to left,rgba(0,0,0,0.5) 0,rgba(0,0,0,.2) 100%)
 }
 
 /* Mobile Only */
