@@ -345,9 +345,9 @@
 
                                         <!--Card footer-->
                                         <div class="card-footer">
-                                           <span class="left" style="color:#4285F4; font-size: x-large; padding-top: 0.4em;">
+                                           <h4 class="left" style="color:#4285F4; padding: 0.4em;">
                                             <strong th:text="${event.getPrice()}+'&#8381;'">%PRICE%</strong>
-                                           </span>
+                                           </h4>
                                             <span class="right">
                                                 <a th:href="@{/events/event(id=${event.getId()})}"
                                                    class="btn btn-primary waves-effect waves-light"
@@ -370,7 +370,7 @@
                     </th:block>
                     <th:block th:unless="${events.size()>0}">
                         <div class="row">
-                            <h2>Экскурсий по данным параметрам нет, попробуйте расширить поиск или искать в другой категории</h2>
+                            <h2>Экскурсий по данным параметрам нет, попробуйте расширить поиск или искать в другой категории</h2><!--TODO: translate-->
                         </div>
                     </th:block>
                     <!--Grid column-->
