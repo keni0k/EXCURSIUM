@@ -20,7 +20,7 @@ public class Event {
                 "\t\"price\":\"" + price + "\",\n" +
                 "\t\"description\":\"" + description + "\",\n" +
                 "\t\"name\":\"" + name + "\",\n" +
-                "\t\"photo_url\":\"" + photoUrl + "\",\n" +
+                "\t\"photo_url\":\"" + pathToPhoto + "\",\n" +
                 "\t\"language\":\"" + language + "\",\n" +
                 "\t\"duration\":\"" + duration + "\",\n" +
                 "\t\"users_count\":\"" + usersCount + "\",\n" +
@@ -60,9 +60,6 @@ public class Event {
 
     private String time;
 
-    @Transient
-    private String photoUrl;
-
     @Range(min = 1, max = 240)
     private int duration;
 
@@ -90,6 +87,7 @@ public class Event {
     @Transient
     int cnt = 0;
 
+
     @Transient
     public String photoOfGuide = "";
 
@@ -101,6 +99,7 @@ public class Event {
 
     @Transient
     public String city = "";
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -224,14 +223,6 @@ public class Event {
 
     public void setRate(float rate) {
         this.rate = rate;
-    }
-
-    public String getPhotoUrl() {
-        return photoUrl;
-    }
-
-    public void setPhotoUrl(String photoUrl) {
-        this.photoUrl = photoUrl;
     }
 
 }

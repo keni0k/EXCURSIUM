@@ -31,9 +31,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/", "/index", "/resources/**",
                         "/events/list", "/events/event", "/events/categories", "/events/listjson", "/events/addevent",
-                        "/users/user", "/users/getbytoken", "/users/getbyemail", "/users/listjson", "/users/account").permitAll()
+                        "/users/user", "/users/getbytoken", "/users/getbyemail", "/users/listjson", "/users/account",
+                        "/reviews/listjson").permitAll()
                 .antMatchers("/users/registration").anonymous()
-                .antMatchers("/events/add", "/users/edit_public", "/users/edit_private").hasAnyRole("ADMIN","USER")
+                .antMatchers("/events/add", "/users/edit_public", "/users/edit_private", "/reviews/add").hasAnyRole("ADMIN","USER")
                 .antMatchers("/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
@@ -42,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout().logoutUrl("/users/logout").logoutSuccessUrl("/users/login").permitAll()
                 .and()
-                .rememberMe().key("_spring_security_remember_me").tokenValiditySeconds(1209600)
+                .rememberMe().tokenValiditySeconds(1209600)
                 .and()
                 .exceptionHandling().accessDeniedPage("/errors/403")
                 .and()

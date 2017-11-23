@@ -15,7 +15,7 @@ import java.util.List;
 
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
-    final PersonServiceImpl personService;
+    private final PersonServiceImpl personService;
 
     public CustomAuthenticationProvider(PersonServiceImpl personService) {
         this.personService = personService;
