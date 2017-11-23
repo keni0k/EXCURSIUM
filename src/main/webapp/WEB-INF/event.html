@@ -170,14 +170,15 @@
                     <div class="card-body no-padding text-center">
                         <!--Category & Title-->
                         <h5 th:text="${event.getCategoryString()}">%Категория%</h5>
-                        <h4 class="card-title">
-                            <strong>
-                                <h3 th:text="${event.name}"><a href="">%Название%</a></h3>
+                        <h3 class="card-title">
+                            <strong th:text="${event.name}">
+                                <a href="">%Название%</a>
                             </strong>
-                        </h4>
+                        </h3>
 
                         <!--Rating-->
                         <ul class="rating">
+                            <li th:if="${event.getRate()!=-1}" th:text="${event.getRate()}"></li>
                             <th:block th:if="${(event.getIntRate()!=-1)and(event.getIntRate()!=0)}">
                             <li th:each="i : ${#numbers.sequence(0, event.getIntRate()-1)}">
                                 <i class="fa fa-star"></i>
@@ -193,6 +194,7 @@
                                 <i class="fa fa-star-o"></i>
                             </li>
                             </th:block>
+                            <li th:text="'('+${event.getReviewsCount()}+')'"></li>
                         </ul>
 
                         <!--Description-->
@@ -225,14 +227,12 @@
                             <div class="card" th:with="review = ${reviews.get(i)}">
                                 <div class="card-header">
                                     <img src="../resources/img/user.png" th:src="${review.pathToUserPhoto}"
-                                         class="avatar-img"
+                                         class="rounded-circle img-thumbnail"
                                          style="max-height: 3rem"/>
                                     <span class="span_title" style="padding-top: 1em;"
                                           th:text="${review.userFullName}">Вершинин Дмитрий</span>
                                     <span class="span_right" style="padding-top: 1em;">
-                                        <span>(</span>
-                                        <span th:text="${review.getLikesCount()}">%likes%</span>
-                                        <span>)</span>
+                                        <span th:text="'('+${review.getLikesCount()}+')'">%likes%</span>
                                         <a rel="tooltip" title="Like" href="javascript:void(0)">
                                             <i class="fa fa-heart"></i>
                                         </a>
