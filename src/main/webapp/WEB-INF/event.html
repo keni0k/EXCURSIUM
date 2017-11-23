@@ -240,7 +240,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-xs-1" th:if="${reviews.size()>1}">
+                                        <div class="col-xs-1" th:if="${reviews.size()>1}" style="margin-top: 10px;">
                                             <a data-slide="prev" href="#myCarousel" class="carousel-control left">‹</a>
                                         </div>
                                         <div class="col-xs-10">
@@ -265,9 +265,10 @@
                                                align="justify"
                                                th:text="${review.getData()}">
                                                 %Содержимое отзыва%
+                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aperiam blanditiis culpa cupiditate earum error exercitationem ipsam, laboriosam laudantium magni minus praesentium quae quis similique sunt tempore tenetur vero voluptatem?
                                             </p>
                                         </div>
-                                        <div class="col-xs-1" th:if="${reviews.size()>1}">
+                                        <div class="col-xs-1" th:if="${reviews.size()>1}" style="margin-top: 10px;">
                                             <a data-slide="next" href="#myCarousel" class="carousel-control right">›</a>
                                         </div>
                                     </div>

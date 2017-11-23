@@ -1,8 +1,5 @@
 package com.heroku.demo.review;
 
-import com.heroku.demo.person.Person;
-import com.heroku.demo.person.PersonServiceImpl;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +9,6 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     private ReviewRepository reviewRepository;
-
-    private PersonServiceImpl personService;
 
     @Override
     public Review addReview(Review review) {
@@ -26,9 +21,8 @@ public class ReviewServiceImpl implements ReviewService {
         reviewRepository.delete(id);
     }
 
-    public ReviewServiceImpl(ReviewRepository reviewRepository, PersonServiceImpl personService) {
+    public ReviewServiceImpl(ReviewRepository reviewRepository) {
         this.reviewRepository = reviewRepository;
-        this.personService = personService;
     }
 
     @Override
@@ -37,11 +31,6 @@ public class ReviewServiceImpl implements ReviewService {
         List<Review> copy = new ArrayList<>();
         for (Review review:list){
             if (review.getEventId()==event) {
-                Person p = personService.getById(review.getUserId());
-                if (p!=null){
-                    review.pathToUserPhoto = p.getImageUrl();
-                    review.userFullName = p.getFullName();
-                }
                 copy.add(review);
             }
         }

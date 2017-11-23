@@ -1,6 +1,6 @@
 /* Carousel Control */
 .carousel-control{
-    border: 2px solid white;
+    border: 1px solid rgb(65,65,65);
     border-radius: 23px;
     display: block;
     font-size: 34px;
@@ -14,11 +14,13 @@
 }
 
 .carousel-control.left {
-    background-image: linear-gradient(to right,rgba(0,0,0,0.5) 0,rgba(0,0,0,.2) 100%)
+    background-image: linear-gradient(to right,rgba(0,0,0,0.3) 0,rgba(0,0,0,.1) 100%);
+    color: rgb(65,65,65);
 }
 
 .carousel-control.right {
-    background-image: linear-gradient(to left,rgba(0,0,0,0.5) 0,rgba(0,0,0,.2) 100%)
+    background-image: linear-gradient(to left,rgba(0,0,0,0.3) 0,rgba(0,0,0,.1) 100%);
+    color: rgb(65,65,65);
 }
 
 /* Mobile Only */

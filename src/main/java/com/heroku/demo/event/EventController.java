@@ -15,10 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -59,7 +56,7 @@ public class EventController {
                            EventRepository eventRepository, PhotoRepository photoRepository, MessageSource messageSource) {
 
         personService = new PersonServiceImpl(personRepository);
-        reviewService = new ReviewServiceImpl(reviewRepository, personService);
+        reviewService = new ReviewServiceImpl(reviewRepository);
         this.photoRepository = photoRepository;
         photoService = new PhotoServiceImpl(photoRepository);
         eventService = new EventServiceImpl(eventRepository, personService, photoService);
@@ -213,9 +210,9 @@ public class EventController {
         return language == 0 ? ru : en;
     }
 
-    @RequestMapping(value = "/listjson", method = RequestMethod.POST)
+    @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, value = "/listjson", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<String> getEventsByFilter(@RequestParam(value = "price_down", required = false) Integer priceDown,
+    public String getEventsByFilter(@RequestParam(value = "price_down", required = false) Integer priceDown,
                                                     @RequestParam(value = "price_up", required = false) Integer priceUp,
                                                     @RequestParam(value = "category", required = false) Integer category,
                                                     @RequestParam(value = "words", required = false) String words,
@@ -236,9 +233,7 @@ public class EventController {
             }
         }
         stringBuilder.append("]}");
-        HttpHeaders h = new HttpHeaders();
-        h.add("Content-type", "text/json;charset=UTF-8");
-        return new ResponseEntity<String>(stringBuilder.toString(), h, HttpStatus.OK);
+        return stringBuilder.toString();
     }
 
     @RequestMapping("/moderation")
