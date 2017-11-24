@@ -76,11 +76,16 @@ public class EventController {
                               BindingResult result,
                               @RequestParam("file") MultipartFile file,
                               ModelMap modelMap, Principal principal, Locale locale) {
-        event.setTime(new LocalTime().toDateTimeToday().toString());
+        String time = new LocalTime().toDateTimeToday().toString().replace('T', ' ');
+        time = time.substring(0,time.indexOf('.'));
+        event.setTime(time);
         event.setType(-3);
         String loginOrEmail = principal.getName();
         if (!loginOrEmail.equals("")) {
             Person p = personService.getByLoginOrEmail(loginOrEmail);
+            event.setFullNameOfGuide(p.getFullName());
+            event.setCity(p.getCity());
+            event.setPhotoOfGuide(p.getImageUrl());
             event.setGuideId(p.getId());
         } else event.setGuideId(-1);
         if (!result.hasErrors()) {

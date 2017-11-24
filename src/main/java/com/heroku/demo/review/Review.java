@@ -1,5 +1,7 @@
 package com.heroku.demo.review;
 
+import com.heroku.demo.utils.Consts;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,7 +30,7 @@ public class Review {
 
     public String userFullName = "";
 
-    public String pathToUserPhoto = "";
+    private String pathToUserPhoto = "";
 
     public int getLikesCount() {
         return likesCount;
@@ -51,7 +53,7 @@ public class Review {
     }
 
     public String getPathToUserPhoto() {
-        return pathToUserPhoto;
+        return Consts.URL_PATH + pathToUserPhoto;
     }
 
     public void setPathToUserPhoto(String pathToUserPhoto) {

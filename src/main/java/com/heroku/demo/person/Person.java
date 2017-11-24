@@ -1,5 +1,6 @@
 package com.heroku.demo.person;
 
+import com.heroku.demo.utils.Consts;
 import com.heroku.demo.utils.validation.LoginConstraint;
 
 import javax.persistence.Entity;
@@ -140,7 +141,7 @@ public class Person {
     }
 
     public String getImageUrl() {
-        return imageUrl;
+        return Consts.URL_PATH + imageUrl;
     }
 
     public void setImageUrl(String imageUrl) {
@@ -179,7 +180,7 @@ public class Person {
                 "\t\"about\":\"" + about + "\",\n" +
                 "\t\"city\":\"" + city + "\",\n" +
                 "\t\"token\":\"" + token + "\",\n" +
-                "\t\"imageUrl\":\"" + imageUrl + "\"\n" +
+                "\t\"imageUrl\":\"" + getImageUrl() + "\"\n" +
                 "}";
     }
 

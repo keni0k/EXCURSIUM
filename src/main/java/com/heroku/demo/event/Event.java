@@ -1,5 +1,6 @@
 package com.heroku.demo.event;
 
+import com.heroku.demo.utils.Consts;
 import com.heroku.demo.utils.UtilsForWeb;
 import org.hibernate.validator.constraints.Range;
 
@@ -221,7 +222,7 @@ public class Event {
     }
 
     public String getPhotoOfGuide() {
-        return photoOfGuide;
+        return Consts.URL_PATH + photoOfGuide;
     }
 
     public void setPhotoOfGuide(String photoOfGuide) {

@@ -107,7 +107,9 @@ public class PersonController {
         }
         person.setRole("ROLE_USER");
         person.setType(-3);
-        person.setTime(new LocalTime().toDateTimeToday().toString());
+        String time = new LocalTime().toDateTimeToday().toString().replace('T', ' ');
+        time = time.substring(0,time.indexOf('.'));
+        person.setTime(time);
 
         if (!file.isEmpty()) {
             try {
@@ -133,7 +135,7 @@ public class PersonController {
 
                 String photoToken = randomToken(32) + ".jpg";
                 putImg(serverFile.getAbsolutePath(), photoToken);
-                person.setImageUrl("https://excursium.blob.core.windows.net/img/" + photoToken);
+                person.setImageUrl(photoToken);
                 personService.addPerson(person);
                 sendMail(person.getToken(), person.getEmail());
                 model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.registration", null, locale)));
@@ -187,7 +189,7 @@ public class PersonController {
 
                 String photoToken = randomToken(32) + ".jpg";
                 putImg(serverFile.getAbsolutePath(), photoToken);
-                person.setImageUrl("https://excursium.blob.core.windows.net/img/" + photoToken);
+                person.setImageUrl(photoToken);
             } catch (Exception e) {
                 logger.error("You failed to upload file => " + e.getMessage());
                 model.addAttribute("message_file", new MessageUtil("danger", "You failed to upload file. Please, try again."));// messageSource.getMessage("success.user.registration", null, locale)));
@@ -196,8 +198,8 @@ public class PersonController {
         }
         person.setFirstName(firstName);
         person.setLastName(lastName);
-        person.setAbout(aboutMe);
         person.setCity(city);
+        person.setAbout(aboutMe);
         person.setType(person.getType()>0?person.getType()*-1:person.getType());
         personService.editPerson(person);
         model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.registration", null, locale)));

@@ -226,7 +226,7 @@
                              th:class="'item'+(${i==0}?' active':'')">
                             <div class="card" th:with="review = ${reviews.get(i)}">
                                 <div class="card-header">
-                                    <img src="../resources/img/user.png" th:src="${review.pathToUserPhoto}"
+                                    <img src="../resources/img/user.png" th:src="${review.getPathToUserPhoto()}"
                                          class="rounded-circle img-thumbnail"
                                          style="max-height: 3rem"/>
                                     <span class="span_title" style="padding-top: 1em;"
