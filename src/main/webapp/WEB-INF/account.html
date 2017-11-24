@@ -374,7 +374,7 @@
                                     <li th:each="i : ${#numbers.sequence(1, events.size()/2)}"
                                         th:class="'page-item' + (${i==1}?' active':'')"
                                         th:id="'page_events'+${i}">
-                                        <a class="page-link waves-effect waves-effect" th:text="${i}" th:onclick="showHide(${i});">1
+                                        <a class="page-link waves-effect waves-effect" th:text="${i}" th:onclick="'showHide('${i}');''">1
                                         </a>
                                     </li>
 
