@@ -277,7 +277,7 @@
                                         <div class="card card-cascade narrower mb-5"
                                              th:each="j : ${#numbers.sequence(i,i+inc)}"
                                              th:with="event = ${events.get(j)}"
-                                             th:id = "'id'+${j}"
+                                             th:id="'id'+${j}"
                                              th:style="${j == 0 or j == 1}?'display: block;':'display: none;'">
 
                                             <!--Card image-->
@@ -300,52 +300,17 @@
 
                                             <!--Card footer-->
                                             <div class="card-footer links-light">
-                                        <span class="left pt-2">
-                                            <a><i class="fa fa-share-alt mr-2"></i></a>
-                                            <a><i class="fa fa-heart-o mr-2 disabled"></i>10</a>
-                                        </span>
+                                                <span class="left pt-2">
+                                                    <a><i class="fa fa-share-alt mr-2"></i></a>
+                                                    <a><i class="fa fa-heart-o mr-2 disabled"></i>10</a>
+                                                </span>
                                                 <span class="right">
-                                            <a th:href="@{/events/event(id=${event.getId()})}" class="waves-effect p-2">Открыть<i
+                                                    <a th:href="@{/events/event(id=${event.getId()})}" class="waves-effect p-2">Открыть<i
                                                     class="fa fa-photo ml-1"></i></a>
-                                        </span>
+                                                </span>
                                             </div>
 
                                         </div>
-                                        <!--/.Card-->
-
-                                        <!--Card-->
-                                        <!--<div class="card card-cascade narrower d-flex mb-5">
-
-                                            &lt;!&ndash;Card image&ndash;&gt;
-                                            <div class="view overlay hm-white-slight">
-                                                <img src="#" class="img-fluid" alt=""/>
-                                                <a href="#">
-                                                    <div class="mask waves-effect waves-light"></div>
-                                                </a>
-                                            </div>
-
-                                            &lt;!&ndash;Card content&ndash;&gt;
-                                            <div class="card-body">
-                                                &lt;!&ndash;Title&ndash;&gt;
-                                                <h4 class="card-title">Название экскурсии</h4>
-                                                &lt;!&ndash;Text&ndash;&gt;
-                                                <p class="card-text">Описание
-                                                </p>
-                                            </div>
-
-                                            &lt;!&ndash;Card footer&ndash;&gt;
-                                            <div class="card-footer links-light">
-                                            <span class="left pt-2">
-                                                <a><i class="fa fa-share-alt mr-2"></i></a>
-                                                <a><i class="fa fa-heart-o mr-2"></i>10</a>
-                                            </span>
-                                                <span class="right">
-                                                <a href="#" class="waves-effect p-2">Live Preview <i
-                                                        class="fa fa-photo ml-1"></i></a>
-                                            </span>
-                                            </div>
-
-                                        </div>-->
                                         <!--/.Card-->
                                     </th:block>
 
@@ -374,7 +339,8 @@
                                     <li th:each="i : ${#numbers.sequence(1, events.size()/2)}"
                                         th:class="'page-item' + (${i==1}?' active':'')"
                                         th:id="'page_events'+${i}">
-                                        <a class="page-link waves-effect waves-effect" th:text="${i}" th:onclick="'showHide('+${i}+');'">1
+                                        <a class="page-link waves-effect waves-effect" th:text="${i}"
+                                           th:onclick="'showHide('+${i}+');'">1
                                         </a>
                                     </li>
 
@@ -441,10 +407,10 @@
                                                     экскурсии</h4>
                                                 <!--Text-->
                                                 <span class="card-text" style="font-size: small;" align="left"
-                                                   th:text="${order.getTime()}">
+                                                      th:text="${order.getTime()}">
                                                     Время заказа</span>
                                                 <span class="card-text" style="font-size: small;" align="right"
-                                                   th:text="${order.getTime()}">
+                                                      th:text="${order.getTime()}">
                                                     Время экскурсии</span>
                                             </div>
 
@@ -1093,23 +1059,24 @@
     /*<![CDATA[*/
     function showHide(page) {
         //Если элемент с id-шником element_id существует
-        var id = page*2-2;
-        var idUp = id+1;
+        var id = page * 2 - 2;
+        var idUp = id + 1;
         var i;
         var eventsSize = [[${events.size()}]];
-        for (i = 0; i<eventsSize; i++){
-            document.getElementById('id'+i).style.display = "none";
-            if (i<eventsSize/2)
-                document.getElementById('page_events' + i).className = "page-item";
-            if (i===page)
-                document.getElementById('page_events' + i).className = "page-item active";
+        for (i = 0; i < eventsSize; i++) {
+            document.getElementById('id' + i).style.display = "none";
+            if (i < eventsSize / 2)
+                document.getElementById('page_events' + i+1).className = "page-item";
+            if (i+1 === page)
+                document.getElementById('page_events' + i+1).className = "page-item active";
         }
 
-        if (document.getElementById('id'+id))
-            document.getElementById('id'+id).style.display = "block";
-        if (document.getElementById('id'+idUp))
-            document.getElementById('id'+idUp).style.display = "block";
+        if (document.getElementById('id' + id))
+            document.getElementById('id' + id).style.display = "block";
+        if (document.getElementById('id' + idUp))
+            document.getElementById('id' + idUp).style.display = "block";
     }
+
     /*]]>*/
 </script>
 
