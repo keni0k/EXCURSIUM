@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.Size;
 
 @Entity
-public class Person {
+public class Person{
 
     public long getId() {
         return id;
