@@ -1096,7 +1096,7 @@
         var id = page*2-2;
         var idUp = id+1;
         var i;
-        for (i = 0; i<[[${events.size}]]; i++){
+        for (i = 0; i<[[${events.size()}]]; i++){
             document.getElementById('id'+i).style.display = "none"
         }
         if (document.getElementById('id'+id))
