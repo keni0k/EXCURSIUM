@@ -411,7 +411,7 @@
                                 <th:block th:each="i : ${#numbers.sequence( 1, pageCount)}">
                                     <li th:class="${page==i}?'active ':'' + 'page-item'"><a
                                             class="page-link waves-effect waves-effect" th:text="${i}"
-                                            th:href="@{/events/list(page=${i})}">1</a></li>
+                                            th:href="@{/events/list(page=${i})}">%PAGE%</a></li>
                                 </th:block>
 
                                 <!--Arrow right-->

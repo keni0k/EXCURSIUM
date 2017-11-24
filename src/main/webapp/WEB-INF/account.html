@@ -89,7 +89,7 @@
 
 <div class="content"
      th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}, isThisUserAccount = ${true},
-              excursovod = ${person.getType()>=2 or person.getType()==-2}, page = 1"><!--TODO isThisUserAccount-->
+              excursovod = ${person.getType()>=2 or person.getType()==-2}"><!--TODO isThisUserAccount-->
 
     <nav class="navbar navbar-default navbar-custom" role="navigation">
         <div class="container-fluid">
@@ -277,7 +277,8 @@
                                         <div class="card card-cascade narrower mb-5"
                                              th:each="j : ${#numbers.sequence(i,i+inc)}"
                                              th:with="event = ${events.get(j)}"
-                                             th:style="${j==page or j+1 == page}?'display: block;':'display: none;'">
+                                             th:id = "'id'+${j}"
+                                             th:style="${j == 0 or j == 1}?'display: block;':'display: none;'">
 
                                             <!--Card image-->
                                             <div class="view overlay hm-white-slight">
@@ -370,12 +371,13 @@
                                     </li>
 
                                     <!--Numbers-->
-                                    <li class="page-item active"><a class="page-link waves-effect waves-effect">1</a>
+                                    <li th:each="i : ${#numbers.sequence(1, events.size()/2)}"
+                                        th:class="'page-item' + (${i==1}?' active':'')"
+                                        th:id="'page_events'+${i}">
+                                        <a class="page-link waves-effect waves-effect" th:text="${i}" onclick="showHide(i);">1
+                                        </a>
                                     </li>
-                                    <li class="page-item"><a class="page-link waves-effect waves-effect">2</a></li>
-                                    <li class="page-item"><a class="page-link waves-effect waves-effect">3</a></li>
-                                    <li class="page-item"><a class="page-link waves-effect waves-effect">4</a></li>
-                                    <li class="page-item"><a class="page-link waves-effect waves-effect">5</a></li>
+
 
                                     <!--Arrow right-->
                                     <li class="page-item">
@@ -438,12 +440,12 @@
                                                 <h4 class="card-title" th:text="${order.getName()}">Название
                                                     экскурсии</h4>
                                                 <!--Text-->
-                                                <p class="card-text" style="font-size: small;" align="left"
+                                                <span class="card-text" style="font-size: small;" align="left"
                                                    th:text="${order.getTime()}">
-                                                    Время заказа</p>
-                                                <p class="card-text" style="font-size: small;" align="right"
+                                                    Время заказа</span>
+                                                <span class="card-text" style="font-size: small;" align="right"
                                                    th:text="${order.getTime()}">
-                                                    Время экскурсии</p>
+                                                    Время экскурсии</span>
                                             </div>
 
                                             <!--Card footer-->
@@ -1086,6 +1088,25 @@
 <script type="text/javascript" src="../resources/js/compiled.min.js"></script>
 <script type="text/javascript" src="../resources/libs/popper/popper.js"></script>
 <!--Custom scripts-->
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    function showHide(page) {
+        //Если элемент с id-шником element_id существует
+        var id = page*2-2;
+        var idUp = id+1;
+        var i;
+        for (i = 0; i<[[${events.size}]]; i++){
+            document.getElementById('id'+i).style.display = "none"
+        }
+        if (document.getElementById('id'+id))
+            document.getElementById('id'+id).style.display = "block";
+        if (document.getElementById('id'+idUp))
+            document.getElementById('id'+idUp).style.display = "block";
+    }
+    /*]]>*/
+</script>
+
 <script>
     // SideNav Initialization
     $(".button-collapse").sideNav();
