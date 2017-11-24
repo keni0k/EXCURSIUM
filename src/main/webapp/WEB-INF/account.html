@@ -374,7 +374,7 @@
                                     <li th:each="i : ${#numbers.sequence(1, events.size()/2)}"
                                         th:class="'page-item' + (${i==1}?' active':'')"
                                         th:id="'page_events'+${i}">
-                                        <a class="page-link waves-effect waves-effect" th:text="${i}" th:onclick="'showHide('${i}');''">1
+                                        <a class="page-link waves-effect waves-effect" th:text="${i}" th:onclick="'showHide('+${i}+');''">1
                                         </a>
                                     </li>
 
@@ -1101,7 +1101,7 @@
             document.getElementById('id'+i).style.display = "none";
             if (i<eventsSize/2)
                 document.getElementById('page_events' + i).className = "page-item";
-            if (i==page)
+            if (i===page)
                 document.getElementById('page_events' + i).className = "page-item active";
         }
 
