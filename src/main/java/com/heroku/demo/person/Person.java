@@ -75,7 +75,7 @@ public class Person {
 
     public String getStringType(int language){
         String[] typesRu = {"Не активирован", "Заблокирован", "Турист", "Турист/Экскурсовод", "Админ"};
-        if (language==1) {
+        if (language==0) {
             switch (type) {
                 case -3: return typesRu[0];
                 case 0: return typesRu[1];
