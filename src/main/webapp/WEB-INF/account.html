@@ -262,7 +262,7 @@
                             <!-- Heading -->
 
                             <!-- Card row -->
-                            <th:block th:if="${events.size()!=0} and excursovod">
+                            <th:block th:if="${events.size()!=0 and excursovod}">
                                 <div class="card-deck" th:each="i : ${#numbers.sequence( 0, events.size()-1)}">
 
                                     <th:block th:if="${i%2==0}" th:with="inc = ${i!=events.size()-1?1:0}">
