@@ -1,7 +1,10 @@
 package com.heroku.demo;
 
+import com.heroku.demo.event.EventRepository;
 import com.heroku.demo.person.PersonRepository;
 import com.heroku.demo.person.PersonServiceImpl;
+import com.heroku.demo.photo.PhotoRepository;
+import com.heroku.demo.review.ReviewRepository;
 import com.heroku.demo.utils.CustomAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -17,8 +20,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private PersonServiceImpl personService;
 
     @Autowired
-    public SecurityConfig(PersonRepository personRepository) {
-        personService = new PersonServiceImpl(personRepository);
+    public SecurityConfig(PersonRepository personRepository, EventRepository eventRepository,
+                          ReviewRepository reviewRepository, PhotoRepository photoRepository) {
+        personService = new PersonServiceImpl(personRepository, eventRepository, reviewRepository, photoRepository);
     }
 
     @Override
