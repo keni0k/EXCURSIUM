@@ -1064,11 +1064,12 @@
         var i;
         var eventsSize = [[${events.size()}]];
         for (i = 0; i < eventsSize; i++) {
+            var j = i+1;
             document.getElementById('id' + i).style.display = "none";
             if (i < eventsSize / 2)
-                document.getElementById('page_events' + i+1).className = "page-item";
+                document.getElementById('page_events' + j).className = "page-item";
             if (i+1 === page)
-                document.getElementById('page_events' + i+1).className = "page-item active";
+                document.getElementById('page_events' + j).className = "page-item active";
         }
 
         if (document.getElementById('id' + id))
