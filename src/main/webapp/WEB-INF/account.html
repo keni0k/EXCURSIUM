@@ -89,7 +89,7 @@
 
 <div class="content"
      th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}, isThisUserAccount = ${true},
-              excursovod = ${person.getType()>=2 or person.getType()==-2}"><!--TODO isThisUserAccount-->
+              excursovod = ${person.getType()>=2 or person.getType()==-2}, page = 1"><!--TODO isThisUserAccount-->
 
     <nav class="navbar navbar-default navbar-custom" role="navigation">
         <div class="container-fluid">
@@ -276,7 +276,8 @@
                                         <!--Card-->
                                         <div class="card card-cascade narrower mb-5"
                                              th:each="j : ${#numbers.sequence(i,i+inc)}"
-                                             th:with="event = ${events.get(j)}">
+                                             th:with="event = ${events.get(j)}"
+                                             th:style="${j==page or j+1 == page}?'display: block;':'display: none;'">
 
                                             <!--Card image-->
                                             <div class="view overlay hm-white-slight">
@@ -437,11 +438,12 @@
                                                 <h4 class="card-title" th:text="${order.getName()}">Название
                                                     экскурсии</h4>
                                                 <!--Text-->
-                                                <p class="card-text" th:text="${order.getSmallDescription()}">
-                                                    Описание</p>
                                                 <p class="card-text" style="font-size: small;" align="left"
                                                    th:text="${order.getTime()}">
-                                                    Время</p>
+                                                    Время заказа</p>
+                                                <p class="card-text" style="font-size: small;" align="right"
+                                                   th:text="${order.getTime()}">
+                                                    Время экскурсии</p>
                                             </div>
 
                                             <!--Card footer-->

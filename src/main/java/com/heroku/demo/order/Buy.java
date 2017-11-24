@@ -27,8 +27,7 @@ public class Buy {
     @Transient
     private String name;
 
-    @Transient
-    private String smallDescription;
+    private String description;
 
     public Buy() {
     }
@@ -100,12 +99,12 @@ public class Buy {
         this.name = name;
     }
 
-    public String getSmallDescription() {
-        return smallDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setSmallDescription(String smallDescription) {
-        this.smallDescription = smallDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
 }

@@ -88,7 +88,6 @@ public class PersonController {
             Event e = eventService.getById(order.getEventId());
             order.setName(e.getName());
             order.setImageUrl(photoService.getByEventId(e.getId()).getData());
-            order.setSmallDescription(e.getSmallDescription());
         }
         model.addAttribute("orders", orders);
         model.addAttribute("inputEvent", new Event());
