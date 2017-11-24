@@ -3,7 +3,7 @@ package com.heroku.demo;
 import com.heroku.demo.message.Message;
 import com.heroku.demo.message.MessageRepository;
 import com.heroku.demo.order.Buy;
-import com.heroku.demo.order.BuyRepository;
+import com.heroku.demo.order.OrderRepository;
 import com.heroku.demo.photo.Photo;
 import com.heroku.demo.photo.PhotoRepository;
 import com.heroku.demo.review.Review;
@@ -30,7 +30,7 @@ public class HomeController {
 
     private MessageRepository messageRepository;
     private ReviewRepository reviewRepository;
-    private BuyRepository buyRepository;
+    private OrderRepository orderRepository;
     private PhotoRepository photoRepository;
 
 
@@ -39,9 +39,9 @@ public class HomeController {
 
     @Autowired
     public HomeController(MessageRepository pRepository, ReviewRepository reviewRepository,
-                          BuyRepository buyRepository, PhotoRepository photoRepository) {
+                          OrderRepository orderRepository, PhotoRepository photoRepository) {
 
-        this.buyRepository = buyRepository;
+        this.orderRepository = orderRepository;
         this.messageRepository = pRepository;
         this.reviewRepository = reviewRepository;
         this.photoRepository = photoRepository;
@@ -149,7 +149,7 @@ public class HomeController {
         Buy buy = new Buy(eventId, touristId, price, "TIME");
         if (!result.hasErrors()) {
             //person.setWhat(3);
-            buyRepository.save(buy);
+            orderRepository.save(buy);
         }
         return buy.toString();
     }
@@ -159,7 +159,7 @@ public class HomeController {
     @ResponseBody
     public String getOrders() {
         ArrayList<String> arrayList = new ArrayList<>();
-        List<Buy> buys = buyRepository.findAll();
+        List<Buy> buys = orderRepository.findAll();
         for (Buy o : buys) {
             arrayList.add(o.toString());
         }

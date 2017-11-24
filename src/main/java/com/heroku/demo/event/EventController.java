@@ -248,7 +248,7 @@ public class EventController {
             Event editEvent = eventService.getById(id);
             Photo img = photoService.getByEventId(id);
             if (img != null)
-                editEvent.pathToPhoto = "https://excursium.blob.core.windows.net/img/" + img.getData();
+                editEvent.pathToPhoto = img.getData();
 //            logger.info("EVENT PATH: "+editEvent.pathToPhoto);
             model.addAttribute("inputEvent", editEvent);
         } else model.addAttribute("inputEvent", new Event());

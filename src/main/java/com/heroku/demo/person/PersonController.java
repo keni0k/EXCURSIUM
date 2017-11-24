@@ -3,6 +3,9 @@ package com.heroku.demo.person;
 import com.heroku.demo.event.Event;
 import com.heroku.demo.event.EventRepository;
 import com.heroku.demo.event.EventServiceImpl;
+import com.heroku.demo.order.Buy;
+import com.heroku.demo.order.OrderRepository;
+import com.heroku.demo.order.OrderServiceImpl;
 import com.heroku.demo.photo.PhotoRepository;
 import com.heroku.demo.photo.PhotoServiceImpl;
 import com.heroku.demo.review.ReviewRepository;
@@ -47,6 +50,8 @@ public class PersonController {
 
     private PersonServiceImpl personService;
     private EventServiceImpl eventService;
+    private OrderServiceImpl orderService;
+    private PhotoServiceImpl photoService;
 
     private final MessageSource messageSource;
 
@@ -54,7 +59,9 @@ public class PersonController {
 
     @Autowired
     public PersonController(PersonRepository personRepository, MessageSource messageSource, EventRepository eventRepository,
-                            ReviewRepository reviewRepository, PhotoRepository photoRepository) {
+                            ReviewRepository reviewRepository, PhotoRepository photoRepository, OrderRepository orderRepository) {
+        photoService = new PhotoServiceImpl(photoRepository);
+        orderService = new OrderServiceImpl(orderRepository);
         personService = new PersonServiceImpl(personRepository, eventRepository, reviewRepository, photoRepository);
         eventService = new EventServiceImpl(eventRepository, new PhotoServiceImpl(photoRepository));
         this.messageSource = messageSource;
@@ -68,15 +75,22 @@ public class PersonController {
 
     @RequestMapping(value = "/account", method = RequestMethod.GET)
     public String account(ModelMap model, Principal principal) {
-        Person person;
+        Person person = new Person();
         if (principal != null) {
             String loginOrEmail = principal.getName();
-            if (!loginOrEmail.equals("")) {
+            if (!loginOrEmail.equals(""))
                 person = personService.getByLoginOrEmail(loginOrEmail);
-            } else person = new Person();
         } else return "login";
         model.addAttribute("person", person);
         model.addAttribute("events", eventService.getByGuideId(person.getId()));
+        List<Buy> orders = orderService.getByTourist(person.getId());
+        for(Buy order:orders){
+            Event e = eventService.getById(order.getEventId());
+            order.setName(e.getName());
+            order.setImageUrl(photoService.getByEventId(e.getId()).getData());
+            order.setSmallDescription(e.getSmallDescription());
+        }
+        model.addAttribute("orders", orders);
         model.addAttribute("inputEvent", new Event());
         return "account";
     }

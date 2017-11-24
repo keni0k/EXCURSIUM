@@ -1,9 +1,6 @@
 package com.heroku.demo.order;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Buy {
@@ -15,7 +12,33 @@ public class Buy {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private int eventId = 0;
+
+    private int price = 0;
+
+    private String time = "";
+
+    private int touristId = 0;
+
+    @Transient
+    private String imageUrl;
+
+    @Transient
+    private String name;
+
+    @Transient
+    private String smallDescription;
+
+    public Buy() {
+    }
+
+    public Buy(int eventId, int touristId, int price, String time) {
+        this.eventId = eventId;
+        this.touristId = touristId;
+        this.price = price;
+        this.time = time;
+    }
 
     public int getEventId() {
         return eventId;
@@ -41,28 +64,13 @@ public class Buy {
         this.price = price;
     }
 
-    public String getOrderDate() {
-        return orderDate;
+    public String getTime() {
+        return time;
     }
 
-    public void setOrderDate(String orderDate) {
-        this.orderDate = orderDate;
+    public void setTime(String time) {
+        this.time = time;
     }
-
-    private int touristId = 0;
-
-    public Buy() {
-    }
-
-    public Buy(int eventId, int touristId, int price, String orderDate) {
-        this.eventId = eventId;
-        this.touristId = touristId;
-        this.price = price;
-        this.orderDate = orderDate;
-    }
-
-    private int price = 0;
-    private String orderDate = "";
 
     @Override
     public String toString() {
@@ -72,8 +80,32 @@ public class Buy {
                 "\t\"event_id\":\"" + eventId + "\",\n" +
                 "\t\"tourist_id\":\"" + touristId + "\",\n" +
                 "\t\"price\":\"" + price + "\",\n" +
-                "\t\"order_date\":\"" + orderDate + "\",\n" +
+                "\t\"order_date\":\"" + time + "\",\n" +
                 "}";
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSmallDescription() {
+        return smallDescription;
+    }
+
+    public void setSmallDescription(String smallDescription) {
+        this.smallDescription = smallDescription;
     }
 
 }

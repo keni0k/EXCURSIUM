@@ -1,5 +1,7 @@
 package com.heroku.demo.photo;
 
+import com.heroku.demo.utils.Consts;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -34,7 +36,7 @@ public class Photo {
     }
 
     public String getData() {
-        return data;
+        return Consts.URL_PATH + data;
     }
 
     public void setData(String data) {

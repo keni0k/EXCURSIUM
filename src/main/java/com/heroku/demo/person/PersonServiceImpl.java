@@ -4,7 +4,7 @@ import com.heroku.demo.event.Event;
 import com.heroku.demo.event.EventRepository;
 import com.heroku.demo.event.EventServiceImpl;
 import com.heroku.demo.message.MessageServiceImpl;
-import com.heroku.demo.order.BuyServiceImpl;
+import com.heroku.demo.order.OrderServiceImpl;
 import com.heroku.demo.photo.PhotoRepository;
 import com.heroku.demo.photo.PhotoServiceImpl;
 import com.heroku.demo.review.Review;
@@ -23,7 +23,7 @@ public class PersonServiceImpl implements PersonService {
     private PersonRepository personRepository;
     private ReviewServiceImpl reviewService;
     private MessageServiceImpl messageService;
-    private BuyServiceImpl buyService;
+    private OrderServiceImpl buyService;
     private EventServiceImpl eventService;
 
     public PersonServiceImpl(PersonRepository personRepository, EventRepository eventRepository, ReviewRepository reviewRepository, PhotoRepository photoRepository) {

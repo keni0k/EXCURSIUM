@@ -89,7 +89,7 @@
 
 <div class="content"
      th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}, isThisUserAccount = ${true},
-              excursovod = ${person.getType()>=2 or person.getType()!=-2}"><!--TODO isThisUserAccount-->
+              excursovod = ${person.getType()>=2 or person.getType()==-2}"><!--TODO isThisUserAccount-->
 
     <nav class="navbar navbar-default navbar-custom" role="navigation">
         <div class="container-fluid">
@@ -246,12 +246,12 @@
                         <div class="col-lg-8 col-md-12 text-center">
 
                             <!-- Heading -->
-                            <div class="text-center mt-3 mb-5">
+                            <div class="text-center mt-3 mb-5" th:if="${excursovod}">
 
-                                <h2 class="title text-center" th:if="${events.size()>0}" th:text="${#messages.msg('titles.excursions')}">Экскурсии</h2>
-                                <h2 class="title text-center" th:if="${events.size()==0 and excursovod}">Здесь будут отображаться ваши экскурсии</h2> <!--TODO: translate-->
+                                <h2 class="title text-center" th:if="${events.size()>0}" th:text="${#messages.msg('titles.excursions')}">Добавленные экскурсии</h2>
+                                <h2 class="title text-center" th:if="${events.size()==0 and excursovod}">Здесь будут отображаться добавленные вами экскурсии</h2> <!--TODO: translate-->
 
-                                <button th:if="${isThisUserAccount}" type="button"
+                                <button th:if="${isThisUserAccount and excursovod}" type="button"
                                         class="btn btn-primary mt-4 waves-effect waves-light"
                                         data-toggle="modal" data-target="#modalSubmitProject">
                                     <th:block th:text="${#messages.msg('titles.add_event')+' '}">Добавить новую экскурсию </th:block>
@@ -262,7 +262,7 @@
                             <!-- Heading -->
 
                             <!-- Card row -->
-                            <th:block th:if="${events.size()!=0}">
+                            <th:block th:if="${events.size()!=0} and excursovod">
                                 <div class="card-deck" th:each="i : ${#numbers.sequence( 0, events.size()-1)}">
 
                                     <th:block th:if="${i%2==0}" th:with="inc = ${i!=events.size()-1?1:0}">
@@ -293,10 +293,10 @@
                                             <div class="card-footer links-light">
                                         <span class="left pt-2">
                                             <a><i class="fa fa-share-alt mr-2"></i></a>
-                                            <a><i class="fa fa-heart-o mr-2"></i>10</a>
+                                            <a><i class="fa fa-heart-o mr-2 disabled"></i>10</a>
                                         </span>
                                                 <span class="right">
-                                            <a th:href="@{/events/event(id=${event.getId()})}" class="waves-effect p-2">Страница экскурсии<i
+                                            <a th:href="@{/events/event(id=${event.getId()})}" class="waves-effect p-2">Открыть<i
                                                     class="fa fa-photo ml-1"></i></a>
                                         </span>
                                             </div>
@@ -346,7 +346,116 @@
 
 
                             <!--Pagination -->
-                            <nav class="my-4 d-flex justify-content-center" th:if="${events.size()>4}">
+                            <nav class="my-4 d-flex justify-content-center" th:if="${events.size()>2 and excursovod}">
+                                <ul class="pagination pagination-circle pg-blue mb-0">
+
+                                    <!--First-->
+                                    <li class="page-item disabled clearfix d-none d-md-block"><a
+                                            class="page-link waves-effect waves-effect">В начало</a></li>
+
+                                    <!--Arrow left-->
+                                    <li class="page-item disabled">
+                                        <a class="page-link waves-effect waves-effect" aria-label="Назад">
+                                            <span aria-hidden="true">«</span>
+                                            <span class="sr-only">Назад</span>
+                                        </a>
+                                    </li>
+
+                                    <!--Numbers-->
+                                    <li class="page-item active"><a class="page-link waves-effect waves-effect">1</a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link waves-effect waves-effect">2</a></li>
+                                    <li class="page-item"><a class="page-link waves-effect waves-effect">3</a></li>
+                                    <li class="page-item"><a class="page-link waves-effect waves-effect">4</a></li>
+                                    <li class="page-item"><a class="page-link waves-effect waves-effect">5</a></li>
+
+                                    <!--Arrow right-->
+                                    <li class="page-item">
+                                        <a class="page-link waves-effect waves-effect" aria-label="Вперёд">
+                                            <span aria-hidden="true">»</span>
+                                            <span class="sr-only">Вперёд</span>
+                                        </a>
+                                    </li>
+
+                                    <!--First-->
+                                    <li class="page-item clearfix d-none d-md-block"><a
+                                            class="page-link waves-effect waves-effect">В конец</a></li>
+
+                                </ul>
+                            </nav>
+                            <!--/Pagination -->
+
+
+                            <!-- Heading -->
+                            <div class="text-center mt-3 mb-5">
+
+                                <h2 class="title text-center" th:if="${orders.size()>0}" th:text="${#messages.msg('titles.excursions')}">Посещенные экскурсии</h2>
+                                <h2 class="title text-center" th:if="${orders.size()==0}">Здесь будут отображаться посещенные вами экскурсии</h2> <!--TODO: translate-->
+
+                                <button th:if="${isThisUserAccount}" type="button"
+                                        class="btn btn-primary mt-4 waves-effect waves-light"
+                                        data-toggle="modal" data-target="#modalSubmitProject">
+                                    <th:block th:text="${#messages.msg('titles.add_event')+' '}">Выбрать экскурсию </th:block>
+                                    <i class="fa fa-photo ml-1"></i>
+                                </button>
+
+                            </div>
+                            <!-- Heading -->
+
+                            <!-- Card row -->
+                            <th:block th:if="${orders.size()!=0}">
+                                <div class="card-deck" th:each="i : ${#numbers.sequence( 0, orders.size()-1)}">
+
+                                    <th:block th:if="${i%2==0}" th:with="inc = ${i!=orders.size()-1?1:0}">
+                                        <!--Card-->
+                                        <div class="card card-cascade narrower mb-5"
+                                             th:each="j : ${#numbers.sequence(i,i+inc)}"
+                                             th:with="order=${orders.get(j)}">
+
+                                            <!--Card image-->
+                                            <div class="view overlay hm-white-slight">
+                                                <img th:src="${order.getImageUrl()}" src="#" class="img-fluid" alt=""/>
+                                                <a href="#">
+                                                    <div class="mask waves-effect waves-light"></div>
+                                                </a>
+                                            </div>
+
+                                            <!--Card content-->
+                                            <div class="card-body pb-0">
+                                                <!--Title-->
+                                                <h4 class="card-title" th:text="${order.getName()}">Название
+                                                    экскурсии</h4>
+                                                <!--Text-->
+                                                <p class="card-text" th:text="${order.getSmallDescription()}">
+                                                    Описание</p>
+                                                <p class="card-text" style="font-size: small;" align="left" th:text="${order.getTime()}">
+                                                    Время</p>
+                                            </div>
+
+                                            <!--Card footer-->
+                                            <div class="card-footer links-light">
+                                        <span class="left pt-2">
+                                            <strong th:text="${order.getPrice()}+'&#8381;  '" style="color:#4285F4; font-size: medium; padding-top: -0.2em;">%Цена%  </strong>
+                                            <a><i class="fa fa-share-alt mr-2"></i></a>
+                                            <a><i class="fa fa-heart-o mr-2"></i>10</a>
+                                        </span>
+                                                <span class="right">
+                                            <a th:href="@{/orders/order(id=${order.getId()})}" class="waves-effect p-2">Открыть<i
+                                                    class="fa fa-photo ml-1"></i></a>
+                                        </span>
+                                            </div>
+
+                                        </div>
+                                        <!--/.Card-->
+                                    </th:block>
+
+                                </div>
+                            </th:block>
+                            <!-- Card row -->
+
+
+                            <!--Pagination -->
+                            <nav class="my-4 d-flex justify-content-center" th:if="${events.size()>2}">
                                 <ul class="pagination pagination-circle pg-blue mb-0">
 
                                     <!--First-->
