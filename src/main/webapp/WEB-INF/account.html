@@ -282,7 +282,7 @@
 
                                             <!--Card image-->
                                             <div class="view overlay hm-white-slight">
-                                                <img th:src="${event.pathToPhoto}" src="#" class="img-fluid" style="max-height: 240px;" alt=""/>
+                                                <img th:src="${event.pathToPhoto}" src="#" class="img-fluid" style="height: 240px; min-width: fit-content;" alt=""/>
                                                 <a href="#" th:href="@{/events/event(id=${event.getId()})}">
                                                     <div class="mask waves-effect waves-light"></div>
                                                 </a>
@@ -325,11 +325,14 @@
                                 <ul class="pagination pagination-circle pg-blue mb-0">
 
                                     <!--First-->
-                                    <li class="page-item disabled clearfix d-none d-md-block"><a
-                                            class="page-link waves-effect waves-effect">В начало</a></li>
+                                    <li class="page-item disabled clearfix d-none d-md-block"
+                                        id="to-home-exc">
+                                        <a class="page-link waves-effect waves-effect">В начало</a>
+                                    </li>
 
                                     <!--Arrow left-->
-                                    <li class="page-item disabled">
+                                    <li class="page-item disabled"
+                                        id="down-exc">
                                         <a class="page-link waves-effect waves-effect" aria-label="Назад">
                                             <span aria-hidden="true">«</span>
                                             <span class="sr-only">Назад</span>
@@ -347,7 +350,8 @@
 
 
                                     <!--Arrow right-->
-                                    <li class="page-item">
+                                    <li class="page-item"
+                                        id="up-exc">
                                         <a class="page-link waves-effect waves-effect" aria-label="Вперёд">
                                             <span aria-hidden="true">»</span>
                                             <span class="sr-only">Вперёд</span>
@@ -355,8 +359,10 @@
                                     </li>
 
                                     <!--First-->
-                                    <li class="page-item clearfix d-none d-md-block"><a
-                                            class="page-link waves-effect waves-effect">В конец</a></li>
+                                    <li class="page-item clearfix d-none d-md-block"
+                                        id="to-end-exc">
+                                        <a class="page-link waves-effect waves-effect">В конец</a>
+                                    </li>
 
                                 </ul>
                             </nav>
@@ -1077,6 +1083,27 @@
             document.getElementById('id' + id).style.display = "block";
         if (document.getElementById('id' + idUp))
             document.getElementById('id' + idUp).style.display = "block";
+
+        switch (page) {
+            case 1:
+                document.getElementById('to-home-exc').className = "page-item disabled clearfix d-none d-md-block";
+                document.getElementById('to-end-exc').className = "page-item clearfix d-none d-md-block";
+                document.getElementById('down-exc').className = "page-item disabled";
+                document.getElementById('up-exc').className = "page-item";
+                break;
+            case eventsSize/2-1:
+                document.getElementById('to-home-exc').className = "page-item clearfix d-none d-md-block";
+                document.getElementById('to-end-exc').className = "page-item disabled clearfix d-none d-md-block";
+                document.getElementById('down-exc').className = "page-item";
+                document.getElementById('up-exc').className = "page-item disabled";
+                break;
+            default:
+                document.getElementById('to-home-exc').className = "page-item clearfix d-none d-md-block";
+                document.getElementById('to-end-exc').className = "page-item clearfix d-none d-md-block";
+                document.getElementById('down-exc').className = "page-item";
+                document.getElementById('up-exc').className = "page-item";
+        }
+
     }
 
     /*]]>*/
