@@ -196,8 +196,7 @@ public class PersonController {
                 return account(model, principal);
             }
         }
-        person = personService.editPublic(firstName, lastName, city, person, file!=null && !file.isEmpty());
-        person.setAbout(aboutMe);
+        person = personService.editPublic(firstName, lastName, city, aboutMe, person, file!=null && !file.isEmpty());
         person.setType(person.getType()>0?person.getType()*-1:person.getType());
         personService.editPerson(person);
         model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.registration", null, locale)));
@@ -295,6 +294,7 @@ public class PersonController {
     public String signUpModer(@ModelAttribute("type") int typePerson,
                               @ModelAttribute("city") String cityPerson,
                               @ModelAttribute("id") long idPerson,
+                              @ModelAttribute("about") String about,
                               ModelMap model, Locale locale,
                               @RequestParam(value = "type", required = false) Integer type,
                               @RequestParam(value = "rate_down", required = false) Long rateDown,
@@ -305,8 +305,8 @@ public class PersonController {
         Person personWithBD = personService.getById(idPerson);
         if (personWithBD == null) logger.info("ERROR PERSONWITHBD IS NULL");
         else {
+            personService.editPublic(firstName, lastName, city, about, personWithBD, false);
             personWithBD.setType(typePerson);
-            personWithBD.setCity(cityPerson);
             personService.editPerson(personWithBD);
         }
         model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.registration", null, locale)));

@@ -170,21 +170,23 @@
                         </div>
                         <div class="panel-body">
                             <div class="input-group" style="z-index: 100">
-                                <select name="type" class="form-control selectpicker">
+                                <select name="type" class="form-control selectpicker"> <!--TODO: translate-->
                                     <option value="-3" th:text="${#messages.msg('user.type.unconfirmed')}"
                                             th:selected="${insertPerson.getType()==-3}">Не активирован
                                     </option>
                                     <option value="0" th:text="${#messages.msg('user.type.blocked')}"
-                                            th:selected="${insertPerson.getType()==0}">Заблокированный
+                                            th:selected="${insertPerson.getType()==0}">Заблокирован
                                     </option>
                                     <option value="-1"
-                                            th:selected="${insertPerson.getType()==-1}">Турист на перепроверке</option>
+                                            th:selected="${insertPerson.getType()==-1}">Турист (модерация)</option>
                                     <option value="-2"
-                                            th:selected="${insertPerson.getType()==-2}">Экскурсовод на перепроверке</option>
+                                            th:selected="${insertPerson.getType()==-2}">Турист / Экскурсовод (модерация)</option>
                                     <option value="1" th:text="${#messages.msg('user.type.tourist')}"
                                             th:selected="${insertPerson.getType()==1}">Турист</option>
                                     <option value="2" th:text="${#messages.msg('user.type.guide')}"
-                                            th:selected="${insertPerson.getType()==2}">Экскурсовод</option>
+                                            th:selected="${insertPerson.getType()==2}">Турист / Экскурсовод</option>
+                                    <option value="3" th:text="${#messages.msg('user.type.admin')}"
+                                            th:selected="${insertPerson.getType()==3}">Админ</option>
                                 </select>
                             </div>
                         </div>
@@ -200,7 +202,7 @@
                     <br/>
                     <div class="input-group">
                         <span class="input-group-addon" th:text="${#messages.msg('words.first_name')}">Имя</span>
-                        <input name="firstName" type="text" class="form-control"
+                        <input name="first_name" type="text" class="form-control"
                                th:value="${insertPerson.getFirstName()}" placeholder="Имя" aria-label="Имя"
                                required=""/>
                     </div>
@@ -210,7 +212,7 @@
                     <br/>
                     <div class="input-group">
                         <span class="input-group-addon" th:text="${#messages.msg('words.last_name')}">Фамилия</span>
-                        <input name="lastName" type="text" class="form-control" th:value="${insertPerson.getLastName()}"
+                        <input name="last_name" type="text" class="form-control" th:value="${insertPerson.getLastName()}"
                                placeholder="Фамилия" required=""
                                aria-label="Фамилия"/>
                     </div>

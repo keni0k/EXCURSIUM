@@ -156,7 +156,7 @@
                                 <div class="card-body">
                                     <!--Title-->
                                     <h4 class="card-title"><strong th:text="${person.getFullName()}">Имя</strong></h4>
-                                    <h5>Турист/Экскурсовод</h5>
+                                    <h5 th:text="${person.getStringType(0)}">Турист/Экскурсовод</h5>
                                     <p th:text="${person.getCity()}">Москва, Россия</p>
 
                                     <!-- Social -->

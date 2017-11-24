@@ -195,11 +195,12 @@ public class PersonServiceImpl implements PersonService {
         return personRepository.findAll();
     }
 
-    Person editPublic(String firstName, String lastName, String city, Person p, boolean fileUpdate){
-        if (!p.getFirstName().equals(firstName) || !p.getLastName().equals(lastName) || !p.getCity().equals(city) || fileUpdate){
+    Person editPublic(String firstName, String lastName, String city, String about, Person p, boolean fileUpdate){
+        if (!p.getFirstName().equals(firstName) || !p.getLastName().equals(lastName) || !p.getCity().equals(city) || !p.getAbout().equals(about) || fileUpdate){
             p.setFirstName(firstName);
             p.setLastName(lastName);
             p.setCity(city);
+            p.setAbout(about);
             List<Review> reviews = reviewService.getByPerson(p.getId());
             for (Review r:reviews) {
                 r.setUserFullName(p.getFullName());

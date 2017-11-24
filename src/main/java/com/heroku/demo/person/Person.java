@@ -73,6 +73,23 @@ public class Person {
         return type;
     }
 
+    public String getStringType(int language){
+        String[] typesRu = {"Не активирован", "Заблокирован", "Турист", "Турист/Экскурсовод", "Админ"};
+        if (language==1) {
+            switch (type) {
+                case -3: return typesRu[0];
+                case 0: return typesRu[1];
+                case 1:
+                case -1:return typesRu[2];
+                case 2:
+                case -2:return typesRu[3];
+                case 3: return typesRu[4];
+                default: return "TYPE NULL";
+            }
+        } else
+            return "LANGUAGE NULL";
+    }
+
     public void setType(int type) {
         this.type = type;
     }

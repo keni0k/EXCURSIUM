@@ -34,6 +34,7 @@ public class ReviewServiceImpl implements ReviewService {
                 copy.add(review);
             }
         }
+        copy.sort((o1, o2) -> Integer.compare(o2.getLikesCount(), o1.getLikesCount()));
         return copy;
     }
 
