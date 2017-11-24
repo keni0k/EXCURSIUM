@@ -182,16 +182,15 @@
                                             class="fa fa-paper-plane ml-2"></i></button>
 
                                     <button th:if="${person.getType()==-3}" type="button"
-                                            class="btn btn-primary mt-4 waves-effect waves-light">
-                                        <th:block th:text="${#messages.msg('titles.add_event')+' '}">Подтвердить
-                                            E-mail
-                                        </th:block>
+                                            class="btn btn-primary mt-4 waves-effect waves-light"
+                                    onclick="alert('В разработке с 25.11.2017. Если вы видите это сообщение, то, вероятно, подтверждающее письмо у вас на почте')"><!--TODO translate-->
+                                        <th:block>Подтвердить E-mail</th:block><!--TODO translate-->
                                     </button>
 
                                     <a th:if="${(person.getType()==1 or person.getType()==-1) and person.getType()!=-3}"
                                        class="btn btn-primary waves-effect waves-light"
-                                       href="#" role="button"
-                                       data-toggle="modal" data-target="#modalEditProfile">Стать экскурсоводом</a>
+                                       onclick="alert('В разработке с 25.11.2017. Можете связаться с нами и мы вручную вас сделаем экскурсоводом.')"><!--TODO translate-->
+                                       role="button" data-toggle="modal" data-target="#modalEditProfile">Стать экскурсоводом</a>
 
                                     <a th:if="${isThisUserAccount}" class="btn btn-primary waves-effect waves-light"
                                        href="#" role="button"
@@ -251,8 +250,7 @@
                             <!-- Heading -->
                             <div class="text-center mt-3 mb-5" th:if="${excursovod}">
 
-                                <h2 class="title text-center" th:if="${events.size()>0}"
-                                    th:text="${#messages.msg('titles.excursions')}">Добавленные экскурсии</h2>
+                                <h2 class="title text-center" th:if="${events.size()>0}">Добавленные экскурсии</h2>
                                 <h2 class="title text-center" th:if="${events.size()==0 and excursovod}">Здесь будут
                                     отображаться добавленные вами экскурсии</h2> <!--TODO: translate-->
 
@@ -374,8 +372,7 @@
                             <!-- Heading -->
                             <div class="text-center mt-3 mb-5">
 
-                                <h2 class="title text-center" th:if="${orders.size()>0}"
-                                    th:text="${#messages.msg('titles.excursions')}">Посещенные экскурсии</h2>
+                                <h2 class="title text-center" th:if="${orders.size()>0}">Посещенные экскурсии</h2>
                                 <h2 class="title text-center" th:if="${orders.size()==0}">Здесь будут отображаться
                                     посещенные вами экскурсии</h2> <!--TODO: translate-->
 
@@ -1093,7 +1090,7 @@
                 document.getElementById('down-exc').className = "page-item disabled";
                 document.getElementById('up-exc').className = "page-item";
                 break;
-            case eventsSize/2:
+            case Math.floor(eventsSize/2):
                 document.getElementById('to-home-exc').className = "page-item clearfix d-none d-md-block";
                 document.getElementById('to-end-exc').className = "page-item disabled clearfix d-none d-md-block";
                 document.getElementById('down-exc').className = "page-item";
