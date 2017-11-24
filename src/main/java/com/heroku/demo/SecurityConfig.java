@@ -47,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout().logoutUrl("/users/logout").logoutSuccessUrl("/users/login").permitAll()
                 .and()
-                .rememberMe().tokenValiditySeconds(1209600)
+                .rememberMe().tokenValiditySeconds(1209600).rememberMeCookieName("remember-me")
                 .and()
                 .exceptionHandling().accessDeniedPage("/errors/403")
                 .and()
