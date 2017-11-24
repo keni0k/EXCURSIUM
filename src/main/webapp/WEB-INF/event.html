@@ -156,14 +156,14 @@
                     <a class="btn-floating btn-action waves-effect waves-light"
                        th:href="@{/users/user(id = ${event.getGuideId()})}">
                         <div class="avatar">
-                            <img th:src="${event.photoOfGuide}" src="../resources/img/user.png"
+                            <img th:src="${event.getPhotoOfGuide()}" src="../resources/img/user.png"
                                  class="rounded-circle img-responsive" alt="Аватар"/>
                         </div>
                     </a>
                     <span></span>
                     <p></p>
                     <p></p>
-                    <p style="font-size: medium; color: #000000; text-align:right" th:text="${event.fullNameOfGuide}">
+                    <p style="font-size: medium; color: #000000; text-align:right" th:text="${event.getFullNameOfGuide()}">
                         %FULL_NAME%</p>
 
                     <!--Card content-->

@@ -9,6 +9,7 @@ import com.heroku.demo.photo.PhotoServiceImpl;
 import com.heroku.demo.review.ReviewRepository;
 import com.heroku.demo.review.ReviewServiceImpl;
 import com.heroku.demo.utils.MessageUtil;
+import com.heroku.demo.utils.Utils;
 import com.heroku.demo.utils.UtilsForWeb;
 import org.joda.time.LocalTime;
 import org.slf4j.Logger;
@@ -224,16 +225,7 @@ public class EventController {
         for (Event e : events) {
             arrayList.add(e.toString());
         }
-
-        StringBuilder stringBuilder = new StringBuilder("{ \"events\": [");
-        if (authKey.equals(AUTH_KEY)) {
-            for (int i = 0; i < arrayList.size(); i++) {
-                stringBuilder.append(arrayList.get(i));
-                if (arrayList.size() - i > 1) stringBuilder.append(",\n");
-            }
-        }
-        stringBuilder.append("]}");
-        return stringBuilder.toString();
+        return Utils.list("events", arrayList, authKey, AUTH_KEY);
     }
 
     @RequestMapping("/moderation")

@@ -19,6 +19,7 @@ import java.io.OutputStream;
 import java.net.URISyntaxException;
 import java.security.InvalidKeyException;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 public class Utils {
@@ -83,6 +84,18 @@ public class Utils {
         CloudBlobContainer container = client.getContainerReference("img");
         CloudBlockBlob blob1 = container.getBlockBlobReference(photoToken);
         blob1.uploadFromFile(path);
+    }
+
+    public static String list(String obj, List arrayList, String authKey, String AUTH_KEY){
+        StringBuilder stringBuilder = new StringBuilder("{ \""+obj+"\": [");
+        if (authKey.equals(AUTH_KEY)) {
+            for (int i = 0; i < arrayList.size(); i++) {
+                stringBuilder.append(arrayList.get(i));
+                if (arrayList.size() - i > 1) stringBuilder.append(",\n");
+            }
+        }
+        stringBuilder.append("]}");
+        return stringBuilder.toString();
     }
 
 }

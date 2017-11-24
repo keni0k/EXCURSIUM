@@ -87,19 +87,14 @@ public class Event {
     @Transient
     int cnt = 0;
 
+    private String photoOfGuide = "";
 
-    @Transient
-    public String photoOfGuide = "";
-
-    @Transient
-    public String fullNameOfGuide = "";
+    private String fullNameOfGuide = "";
 
     @Transient
     public String pathToPhoto = "";
 
-    @Transient
-    public String city = "";
-
+    private String city = "";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -223,6 +218,30 @@ public class Event {
 
     public void setRate(float rate) {
         this.rate = rate;
+    }
+
+    public String getPhotoOfGuide() {
+        return photoOfGuide;
+    }
+
+    public void setPhotoOfGuide(String photoOfGuide) {
+        this.photoOfGuide = photoOfGuide;
+    }
+
+    public String getFullNameOfGuide() {
+        return fullNameOfGuide;
+    }
+
+    public void setFullNameOfGuide(String fullNameOfGuide) {
+        this.fullNameOfGuide = fullNameOfGuide;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
 }
