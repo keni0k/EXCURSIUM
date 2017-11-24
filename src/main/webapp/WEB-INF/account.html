@@ -1066,9 +1066,9 @@
         for (i = 0; i < eventsSize; i++) {
             var j = i+1;
             document.getElementById('id' + i).style.display = "none";
-            if (i < eventsSize / 2)
+            if (i < eventsSize / 2 - 1 && document.getElementById('page_events' + j))
                 document.getElementById('page_events' + j).className = "page-item";
-            if (i+1 === page)
+            if (j === page && document.getElementById('page_events' + j))
                 document.getElementById('page_events' + j).className = "page-item active";
         }
 
