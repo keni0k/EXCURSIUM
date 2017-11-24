@@ -144,6 +144,10 @@ public class Person {
         return Consts.URL_PATH + imageUrl;
     }
 
+    public String getImageToken(){
+        return imageUrl;
+    }
+
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }

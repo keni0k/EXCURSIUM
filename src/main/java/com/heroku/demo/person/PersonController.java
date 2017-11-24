@@ -5,6 +5,7 @@ import com.heroku.demo.event.EventRepository;
 import com.heroku.demo.event.EventServiceImpl;
 import com.heroku.demo.photo.PhotoRepository;
 import com.heroku.demo.photo.PhotoServiceImpl;
+import com.heroku.demo.review.ReviewRepository;
 import com.heroku.demo.utils.MessageUtil;
 import com.mailjet.client.MailjetClient;
 import com.mailjet.client.MailjetRequest;
@@ -51,11 +52,10 @@ public class PersonController {
 
     private static final Logger logger = LoggerFactory.getLogger(PersonController.class);
 
-
     @Autowired
     public PersonController(PersonRepository personRepository, MessageSource messageSource, EventRepository eventRepository,
-                            PhotoRepository photoRepository) {
-        personService = new PersonServiceImpl(personRepository);
+                            ReviewRepository reviewRepository, PhotoRepository photoRepository) {
+        personService = new PersonServiceImpl(personRepository, eventRepository, reviewRepository, photoRepository);
         eventService = new EventServiceImpl(eventRepository, new PhotoServiceImpl(photoRepository));
         this.messageSource = messageSource;
     }
@@ -196,9 +196,7 @@ public class PersonController {
                 return account(model, principal);
             }
         }
-        person.setFirstName(firstName);
-        person.setLastName(lastName);
-        person.setCity(city);
+        person = personService.editPublic(firstName, lastName, city, person, file!=null && !file.isEmpty());
         person.setAbout(aboutMe);
         person.setType(person.getType()>0?person.getType()*-1:person.getType());
         personService.editPerson(person);
@@ -309,7 +307,6 @@ public class PersonController {
         else {
             personWithBD.setType(typePerson);
             personWithBD.setCity(cityPerson);
-//            personWithBD.setRole(person.getRole().equals("") ? "ROLE_USER" : person.getRole());
             personService.editPerson(personWithBD);
         }
         model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.registration", null, locale)));
@@ -328,31 +325,6 @@ public class PersonController {
         personService.delete(Long.parseLong(id));
         return persons_last(model, null, type, rateDown, rateUp, firstName, lastName, city);
     }
-
-  /*
-    @RequestMapping("/addperson")
-    @ResponseBody
-    public String insertPerson(@ModelAttribute("pass") String pass,
-                               @ModelAttribute("login") String login,
-        =                        @ModelAttribute("type") int type,
-                               @ModelAttribute("last_name") String lastName,
-                               @ModelAttribute("first_name") String firstName,
-                               @ModelAttribute("phone_number") String phoneNumber,
-                               @ModelAttribute("rate") int rate,
-                               @ModelAttribute("city") String city,
-                               @ModelAttribute("email") String email,
-                               @ModelAttribute("about") String about,
-                               @ModelAttribute("date") String date,
-                               @ModelAttribute("image_url") String imageUrl,
-                               BindingResult result) {
-
-        Person p = new Person(login, pass, lastName, type, email, firstName, rate, phoneNumber, about, city, date, imageUrl);
-        if (!result.hasErrors()) {
-            //person.setWhat(3);
-            personService.addPerson(p);
-        }
-        return p.toString();
-    }*/
 
     @RequestMapping(value = "/listjson", method = RequestMethod.POST)
     @ResponseBody

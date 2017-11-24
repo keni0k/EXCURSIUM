@@ -7,7 +7,9 @@ public interface ReviewService {
 
     void delete(long id);
 
-    List<Review> getByEvent(int type);
+    List<Review> getByEvent(long type);
+
+    List<Review> getByPerson(long personId);
 
     Review editReview(Review review);
 

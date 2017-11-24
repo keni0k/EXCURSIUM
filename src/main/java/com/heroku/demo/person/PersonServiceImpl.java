@@ -1,7 +1,17 @@
 package com.heroku.demo.person;
 
+import com.heroku.demo.event.Event;
+import com.heroku.demo.event.EventRepository;
+import com.heroku.demo.event.EventServiceImpl;
+import com.heroku.demo.message.MessageServiceImpl;
+import com.heroku.demo.order.BuyServiceImpl;
+import com.heroku.demo.photo.PhotoRepository;
+import com.heroku.demo.photo.PhotoServiceImpl;
+import com.heroku.demo.review.Review;
+import com.heroku.demo.review.ReviewRepository;
+import com.heroku.demo.review.ReviewServiceImpl;
+
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -11,8 +21,14 @@ import java.util.List;
 public class PersonServiceImpl implements PersonService {
 
     private PersonRepository personRepository;
+    private ReviewServiceImpl reviewService;
+    private MessageServiceImpl messageService;
+    private BuyServiceImpl buyService;
+    private EventServiceImpl eventService;
 
-    public PersonServiceImpl(PersonRepository personRepository) {
+    public PersonServiceImpl(PersonRepository personRepository, EventRepository eventRepository, ReviewRepository reviewRepository, PhotoRepository photoRepository) {
+        reviewService = new ReviewServiceImpl(reviewRepository);
+        eventService = new EventServiceImpl(eventRepository, new PhotoServiceImpl(photoRepository));
         this.personRepository = personRepository;
     }
 
@@ -77,38 +93,35 @@ public class PersonServiceImpl implements PersonService {
                 copy.add(aList);
         }
         if(sortBy!=null)
-        copy.sort(new Comparator<Person>() {
-            @Override
-            public int compare(Person o1, Person o2) {
-                switch (sortBy) {
-                    case 0:
-                        return Long.compare(o1.getId(), o2.getId());
-                    case 1:
-                        return Long.compare(o2.getId(), o1.getId());
-                    case 2:
-                        return Integer.compare(o1.getRate(), o2.getRate());
-                    case 3:
-                        return Integer.compare(o2.getRate(), o1.getRate());
-                    case 4:
-                        return Integer.compare(o1.getType(), o2.getType());
-                    case 5:
-                        return Integer.compare(o2.getType(), o1.getType());
-                    case 6:
-                        return o1.getFirstName().compareTo(o2.getFirstName());
-                    case 7:
-                        return o2.getFirstName().compareTo(o1.getFirstName());
-                    case 8:
-                        return o1.getLastName().compareTo(o2.getLastName());
-                    case 9:
-                        return o2.getLastName().compareTo(o1.getLastName());
-                    case 10:
-                        return o1.getCity().compareTo(o2.getCity());
-                    case 11:
-                        return o2.getCity().compareTo(o1.getCity());
+        copy.sort((o1, o2) -> {
+            switch (sortBy) {
+                case 0:
+                    return Long.compare(o1.getId(), o2.getId());
+                case 1:
+                    return Long.compare(o2.getId(), o1.getId());
+                case 2:
+                    return Integer.compare(o1.getRate(), o2.getRate());
+                case 3:
+                    return Integer.compare(o2.getRate(), o1.getRate());
+                case 4:
+                    return Integer.compare(o1.getType(), o2.getType());
+                case 5:
+                    return Integer.compare(o2.getType(), o1.getType());
+                case 6:
+                    return o1.getFirstName().compareTo(o2.getFirstName());
+                case 7:
+                    return o2.getFirstName().compareTo(o1.getFirstName());
+                case 8:
+                    return o1.getLastName().compareTo(o2.getLastName());
+                case 9:
+                    return o2.getLastName().compareTo(o1.getLastName());
+                case 10:
+                    return o1.getCity().compareTo(o2.getCity());
+                case 11:
+                    return o2.getCity().compareTo(o1.getCity());
 
-                }
-                return Long.compare(o1.getId(), o2.getId());
             }
+            return Long.compare(o1.getId(), o2.getId());
         });
         return copy;
     }
@@ -182,28 +195,24 @@ public class PersonServiceImpl implements PersonService {
         return personRepository.findAll();
     }
 
-//    public static List<Person> getByToken(RecordRepository recordRepository, int type) {
-//        List<Person> list = recordRepository.findAll();
-//        List<Person> list1 = new ArrayList<Person>();
-//        for (Person r:list)
-//            if (r.getWhat() == type) list1.add(r);
-//        return list1;
-//    }
-//
-//    public static List<Person> getByTypeAndLocate(RecordRepository recordRepository, int type, String locate) {
-//        List<Person> list = recordRepository.findAll();
-//        List<Person> list1 = new ArrayList<Person>();
-//        for (Person r:list)
-//            if ((r.getWhat() == type) && (locate.equals(r.getLocate()))) list1.add(r);
-//        return list1;
-//    }
-//
-//    public static List<Person> getMarshrutByLocate(RecordRepository recordRepository, String type, String locate) {
-//        List<Person> list = recordRepository.findAll();
-//        List<Person> list1 = new ArrayList<Person>();
-//        for (Person r:list)
-//            if ((r.getWhat() == 1) && (locate.equals(r.getLocate())) && (type.equals(r.getPhone())))  list1.add(r);
-//        return list1;
-//    }
+    Person editPublic(String firstName, String lastName, String city, Person p, boolean fileUpdate){
+        if (!p.getFirstName().equals(firstName) || !p.getLastName().equals(lastName) || !p.getCity().equals(city) || fileUpdate){
+            p.setFirstName(firstName);
+            p.setLastName(lastName);
+            p.setCity(city);
+            List<Review> reviews = reviewService.getByPerson(p.getId());
+            for (Review r:reviews) {
+                r.setUserFullName(p.getFullName());
+                r.setPathToUserPhoto(p.getImageToken());
+            }
+            List<Event> events = eventService.getByGuideId(p.getId());
+            for (Event e:events){
+                e.setPhotoOfGuide(p.getImageToken());
+                e.setCity(p.getCity());
+                e.setFullNameOfGuide(p.getFullName());
+            }
+        }
+        return p;
+    }
 
 }

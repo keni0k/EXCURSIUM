@@ -56,7 +56,7 @@ public class EventController {
     public EventController(PersonRepository personRepository, ReviewRepository reviewRepository,
                            EventRepository eventRepository, PhotoRepository photoRepository, MessageSource messageSource) {
 
-        personService = new PersonServiceImpl(personRepository);
+        personService = new PersonServiceImpl(personRepository, eventRepository, reviewRepository, photoRepository);
         reviewService = new ReviewServiceImpl(reviewRepository);
         this.photoRepository = photoRepository;
         photoService = new PhotoServiceImpl(photoRepository);
@@ -85,7 +85,7 @@ public class EventController {
             Person p = personService.getByLoginOrEmail(loginOrEmail);
             event.setFullNameOfGuide(p.getFullName());
             event.setCity(p.getCity());
-            event.setPhotoOfGuide(p.getImageUrl());
+            event.setPhotoOfGuide(p.getImageToken());
             event.setGuideId(p.getId());
         } else event.setGuideId(-1);
         if (!result.hasErrors()) {

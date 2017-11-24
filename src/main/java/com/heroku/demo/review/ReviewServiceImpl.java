@@ -26,11 +26,23 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public List<Review> getByEvent(int event) {
+    public List<Review> getByEvent(long event) {
         List<Review> list = reviewRepository.findAll();
         List<Review> copy = new ArrayList<>();
         for (Review review:list){
             if (review.getEventId()==event) {
+                copy.add(review);
+            }
+        }
+        return copy;
+    }
+
+    @Override
+    public List<Review> getByPerson(long personId) {
+        List<Review> list = reviewRepository.findAll();
+        List<Review> copy = new ArrayList<>();
+        for (Review review:list){
+            if (review.getUserId()==personId) {
                 copy.add(review);
             }
         }
