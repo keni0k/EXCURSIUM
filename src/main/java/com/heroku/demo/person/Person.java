@@ -3,6 +3,7 @@ package com.heroku.demo.person;
 import com.heroku.demo.utils.Consts;
 import com.heroku.demo.utils.validation.LoginConstraint;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.Entity;
@@ -10,7 +11,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class Person implements UserDetails{
@@ -218,7 +221,9 @@ public class Person implements UserDetails{
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        List<GrantedAuthority> grantedAuths = new ArrayList<>();
+        grantedAuths.add(new SimpleGrantedAuthority(getRole()));
+        return grantedAuths;
     }
 
     @Override
@@ -233,17 +238,17 @@ public class Person implements UserDetails{
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
         return true;
     }
 
     @Override
+    public boolean isAccountNonLocked() {
+        return type!=-3;
+    }
+
+    @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
