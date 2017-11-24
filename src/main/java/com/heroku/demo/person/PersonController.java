@@ -56,7 +56,7 @@ public class PersonController {
     public PersonController(PersonRepository personRepository, MessageSource messageSource, EventRepository eventRepository,
                             PhotoRepository photoRepository) {
         personService = new PersonServiceImpl(personRepository);
-        eventService = new EventServiceImpl(eventRepository, personService, new PhotoServiceImpl(photoRepository));
+        eventService = new EventServiceImpl(eventRepository, new PhotoServiceImpl(photoRepository));
         this.messageSource = messageSource;
     }
 

@@ -1,7 +1,5 @@
 package com.heroku.demo.event;
 
-import com.heroku.demo.person.Person;
-import com.heroku.demo.person.PersonServiceImpl;
 import com.heroku.demo.photo.Photo;
 import com.heroku.demo.photo.PhotoServiceImpl;
 import org.slf4j.Logger;
@@ -13,7 +11,6 @@ import java.util.List;
 public class EventServiceImpl implements EventService {
 
     private EventRepository eventRepository;
-    private PersonServiceImpl personService;
     private PhotoServiceImpl photoService;
     private static final Logger logger = LoggerFactory.getLogger(EventServiceImpl.class);
 
@@ -27,8 +24,7 @@ public class EventServiceImpl implements EventService {
         eventRepository.delete(id);
     }
 
-    public EventServiceImpl(EventRepository reviewRepository, PersonServiceImpl personService, PhotoServiceImpl photoService) {
-        this.personService = personService;
+    public EventServiceImpl(EventRepository reviewRepository, PhotoServiceImpl photoService) {
         this.eventRepository = reviewRepository;
         this.photoService = photoService;
     }
@@ -36,11 +32,6 @@ public class EventServiceImpl implements EventService {
     @Override
     public Event getById(long id) {
         Event e = eventRepository.findOne(id);
-        Person p = personService.getById(e.getGuideId());
-        if (p!=null) {
-            e.setPhotoOfGuide(p.getImageUrl());
-            e.setFullNameOfGuide(p.getFullName());
-        }
         Photo img = photoService.getByEventId(id);
         if (img!=null)
             e.pathToPhoto="https://excursium.blob.core.windows.net/img/"+img.getData();
@@ -75,14 +66,6 @@ public class EventServiceImpl implements EventService {
         for (Event aList : list) {
             if (((aList.getCategory() == category) || (category == -1)) && ((aList.getLanguage() == language) || isAllLang) && (aList.getType() == 0 || isAll)) {
                 if ((aList.getPrice() >= priceDown) && (aList.getPrice() <= priceUp)) {
-
-                    Person p = personService.getById(aList.getGuideId());
-                    if (p != null) {
-                        aList.setFullNameOfGuide(p.getFullName());
-                        aList.setPhotoOfGuide(p.getImageUrl());
-                        aList.setCity(p.getCity());
-                    }
-                    editEvent(aList);
 
                     Photo img = photoService.getByEventId(aList.getId());
                     if (img != null)

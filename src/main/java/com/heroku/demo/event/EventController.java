@@ -60,7 +60,7 @@ public class EventController {
         reviewService = new ReviewServiceImpl(reviewRepository);
         this.photoRepository = photoRepository;
         photoService = new PhotoServiceImpl(photoRepository);
-        eventService = new EventServiceImpl(eventRepository, personService, photoService);
+        eventService = new EventServiceImpl(eventRepository, photoService);
 
         this.messageSource = messageSource;
     }
