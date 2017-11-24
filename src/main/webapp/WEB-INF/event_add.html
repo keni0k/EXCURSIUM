@@ -218,7 +218,7 @@
                     <div class="input-group">
                         <span class="input-group-addon" th:text="${#messages.msg('words.price')}">Цена</span>
                         <input name="price" id="price" type="number" class="form-control" placeholder="Цена"
-                               aria-label="Цена" required="" min="1" max="100000"
+                               aria-label="Цена" required="" min="100" max="100000"
                                th:value="${inputEvent.getPrice()}?${inputEvent.getPrice()}"/>
                         <span class="input-group-addon">&#8381;</span>
                         <label for="price" th:if="${#fields.hasErrors('price')}"

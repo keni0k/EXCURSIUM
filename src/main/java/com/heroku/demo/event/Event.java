@@ -77,7 +77,7 @@ public class Event {
     @Range(min = 1, max = 100)
     private int usersCount;
 
-    @Range(min = 1, max = 100000)
+    @Range(min = 100, max = 100000)
     private int price;
 
     @Size(min=150, max=1000)

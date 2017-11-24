@@ -88,7 +88,8 @@
 </style>
 
 <div class="content"
-     th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}, isThisUserAccount = ${true}">
+     th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}, isThisUserAccount = ${true},
+              excursovod = ${person.getType()>=Math.abs(2) and person.getType()!=-3}"><!--TODO isThisUserAccount-->
 
     <nav class="navbar navbar-default navbar-custom" role="navigation">
         <div class="container-fluid">
@@ -180,6 +181,15 @@
                                             data-toggle="modal" data-target="#modalContactUser">Связаться<i
                                             class="fa fa-paper-plane ml-2"></i></button>
 
+                                    <button th:if="${person.getType()==-3}" type="button"
+                                            class="btn btn-primary mt-4 waves-effect waves-light">
+                                        <th:block th:text="${#messages.msg('titles.add_event')+' '}">Подтвердить E-mail</th:block>
+                                    </button>
+
+                                    <a th:if="${Math.abs(person.getType())==1 and person.getType()!=-3}" class="btn btn-primary waves-effect waves-light"
+                                       href="#" role="button"
+                                       data-toggle="modal" data-target="#modalEditProfile">Стать экскурсоводом</a>
+
                                     <a th:if="${isThisUserAccount}" class="btn btn-primary waves-effect waves-light"
                                        href="#" role="button"
                                        data-toggle="modal" data-target="#modalEditProfile">Редактировать профиль <i
@@ -238,13 +248,15 @@
                             <!-- Heading -->
                             <div class="text-center mt-3 mb-5">
 
-                                <h2 class="title text-center" th:text="${#messages.msg('titles.excursions')}">
-                                    Экскурсии</h2>
+                                <h2 class="title text-center" th:if="${events.size()>0}" th:text="${#messages.msg('titles.excursions')}">Экскурсии</h2>
+                                <h2 class="title text-center" th:if="${events.size()==0 and excursovod}">Здесь будут отображаться ваши экскурсии</h2> <!--TODO: translate-->
 
                                 <button th:if="${isThisUserAccount}" type="button"
                                         class="btn btn-primary mt-4 waves-effect waves-light"
-                                        data-toggle="modal" data-target="#modalSubmitProject"><th:block th:text="${#messages.msg('titles.add_event')+' '}">Добавить новую экскурсию </th:block><i
-                                        class="fa fa-photo ml-1"></i></button>
+                                        data-toggle="modal" data-target="#modalSubmitProject">
+                                    <th:block th:text="${#messages.msg('titles.add_event')+' '}">Добавить новую экскурсию </th:block>
+                                    <i class="fa fa-photo ml-1"></i>
+                                </button>
 
                             </div>
                             <!-- Heading -->
@@ -853,7 +865,7 @@
 
                                         <div class="md-form form-sm">
                                             <input name="price" id="price" type="number" class="form-control"
-                                                   required="" min="1" max="100000"
+                                                   required="" min="100" max="100000"
                                                    th:value="${inputEvent.getPrice()}?${inputEvent.getPrice()}"/>
                                             <label for="price" th:if="${#fields.hasErrors('price')}"
                                                    th:text="${#messages.msg('error.event.price')}" th:class="'error'">Price
