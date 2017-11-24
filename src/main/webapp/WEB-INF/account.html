@@ -282,8 +282,8 @@
 
                                             <!--Card image-->
                                             <div class="view overlay hm-white-slight">
-                                                <img th:src="${event.pathToPhoto}" src="#" class="img-fluid" alt=""/>
-                                                <a href="#">
+                                                <img th:src="${event.pathToPhoto}" src="#" class="img-fluid" style="max-width: 240px;" alt=""/>
+                                                <a href="#" th:href="@{/events/event(id=${event.getId()})}">
                                                     <div class="mask waves-effect waves-light"></div>
                                                 </a>
                                             </div>
@@ -291,11 +291,11 @@
                                             <!--Card content-->
                                             <div class="card-body pb-0">
                                                 <!--Title-->
-                                                <h4 class="card-title" th:text="${event.getName()}">Название
+                                                <h4 class="card-title" th:text="${event.getName()}" th:href="@{/events/event(id=${event.getId()})}">Название
                                                     экскурсии</h4>
                                                 <!--Text-->
-                                                <p class="card-text" th:text="${event.getSmallDescription()}">
-                                                    Описание</p>
+                                                <!--<p class="card-text" th:text="${event.getSmallDescription()}">
+                                                    Описание</p>-->
                                             </div>
 
                                             <!--Card footer-->
