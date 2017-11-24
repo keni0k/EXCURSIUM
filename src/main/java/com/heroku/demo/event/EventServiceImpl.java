@@ -100,8 +100,12 @@ public class EventServiceImpl implements EventService {
         List<Event> eventList = new ArrayList<>();
         List<Event> copy = getAll();
         for (Event event:copy) {
-            if (event.getGuideId()==guideId)
+            if (event.getGuideId()==guideId) {
+                Photo img = photoService.getByEventId(event.getId());
+                if (img != null)
+                    event.pathToPhoto = img.getData();
                 eventList.add(event);
+            }
         }
         return eventList;
     }

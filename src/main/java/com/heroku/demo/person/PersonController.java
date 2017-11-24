@@ -61,7 +61,7 @@ public class PersonController {
     public PersonController(PersonRepository personRepository, MessageSource messageSource, EventRepository eventRepository,
                             ReviewRepository reviewRepository, PhotoRepository photoRepository, OrderRepository orderRepository) {
         photoService = new PhotoServiceImpl(photoRepository);
-        orderService = new OrderServiceImpl(orderRepository);
+        orderService = new OrderServiceImpl(orderRepository, eventRepository, photoRepository);
         personService = new PersonServiceImpl(personRepository, eventRepository, reviewRepository, photoRepository);
         eventService = new EventServiceImpl(eventRepository, new PhotoServiceImpl(photoRepository));
         this.messageSource = messageSource;
@@ -84,11 +84,6 @@ public class PersonController {
         model.addAttribute("person", person);
         model.addAttribute("events", eventService.getByGuideId(person.getId()));
         List<Buy> orders = orderService.getByTourist(person.getId());
-        for(Buy order:orders){
-            Event e = eventService.getById(order.getEventId());
-            order.setName(e.getName());
-            order.setImageUrl(photoService.getByEventId(e.getId()).getData());
-        }
         model.addAttribute("orders", orders);
         model.addAttribute("inputEvent", new Event());
         return "account";
