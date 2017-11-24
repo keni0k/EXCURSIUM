@@ -88,7 +88,8 @@
 </style>
 
 <div class="content"
-     th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}, isThisUserAccount = ${true}"><!--TODO isThisUserAccount-->
+     th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}, isThisUserAccount = ${true},
+              excursovod = ${person.getType()>=2 or person.getType()!=-2}"><!--TODO isThisUserAccount-->
 
     <nav class="navbar navbar-default navbar-custom" role="navigation">
         <div class="container-fluid">
@@ -185,7 +186,7 @@
                                         <th:block th:text="${#messages.msg('titles.add_event')+' '}">Подтвердить E-mail</th:block>
                                     </button>
 
-                                    <a th:if="${Math.abs(person.getType())==1 and person.getType()!=-3}" class="btn btn-primary waves-effect waves-light"
+                                    <a th:if="${(person.getType()==1 or person.getType()==-1) and person.getType()!=-3}" class="btn btn-primary waves-effect waves-light"
                                        href="#" role="button"
                                        data-toggle="modal" data-target="#modalEditProfile">Стать экскурсоводом</a>
 
@@ -248,7 +249,7 @@
                             <div class="text-center mt-3 mb-5">
 
                                 <h2 class="title text-center" th:if="${events.size()>0}" th:text="${#messages.msg('titles.excursions')}">Экскурсии</h2>
-                                <h2 class="title text-center" th:if="${events.size()==0 and true}">Здесь будут отображаться ваши экскурсии</h2> <!--TODO: translate and excursovod-->
+                                <h2 class="title text-center" th:if="${events.size()==0 and excursovod}">Здесь будут отображаться ваши экскурсии</h2> <!--TODO: translate-->
 
                                 <button th:if="${isThisUserAccount}" type="button"
                                         class="btn btn-primary mt-4 waves-effect waves-light"
