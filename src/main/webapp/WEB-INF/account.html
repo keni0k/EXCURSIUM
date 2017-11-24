@@ -89,7 +89,7 @@
 
 <div class="content"
      th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}, isThisUserAccount = ${true},
-              excursovod = ${person.getType()>=Math.abs(2) and person.getType()!=-3}"><!--TODO isThisUserAccount-->
+              excursovod = ${Math.abs(person.getType())>=2 and person.getType()!=-3}"><!--TODO isThisUserAccount-->
 
     <nav class="navbar navbar-default navbar-custom" role="navigation">
         <div class="container-fluid">
