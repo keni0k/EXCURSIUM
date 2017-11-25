@@ -55,6 +55,10 @@ public class TokenCookies extends PersistentRememberMeToken {
     @PersistenceConstructor
     public TokenCookies(String username, String series, String tokenValue, Date date) {
         super(username, series, tokenValue, date);
+        this.username = username;
+        this.series = series;
+        this.tokenValue = tokenValue;
+        this.date = date;
     }
 
     public String getTokenValue() {
