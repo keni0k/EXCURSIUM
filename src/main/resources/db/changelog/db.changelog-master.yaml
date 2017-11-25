@@ -258,12 +258,12 @@ databaseChangeLog:
       author: keni0k
       changes:
         - createTable:
-          tableName: token_cookies
-          columns:
-            - column:
-               name: id
-               type: int
-               autoIncrement: true
-               constraints:
-                 primaryKey: true
-                 nullable: false
+            tableName: token_cookies
+            columns:
+                - column:
+                   name: id
+                   type: int
+                   autoIncrement: true
+                   constraints:
+                     primaryKey: true
+                     nullable: false
