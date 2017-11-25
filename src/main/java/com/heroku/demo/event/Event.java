@@ -2,8 +2,10 @@ package com.heroku.demo.event;
 
 import com.heroku.demo.utils.Consts;
 import com.heroku.demo.utils.UtilsForWeb;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "event")
@@ -50,7 +52,7 @@ public class Event {
         return id;
     }
 
-//    @Size(min=5, max=100)
+    @Size(min=5, max=100)
     private String place;
 
     private int category=0;
@@ -72,13 +74,13 @@ public class Event {
 
     private int language=0;
 
-//    @Range(min = 1, max = 100)
+    @Range(min = 1, max = 100)
     private int usersCount;
 
-//    @Range(min = 100, max = 100000)
+    @Range(min = 100, max = 100000)
     private int price;
 
-//    @Size(min=150, max=1000)
+    @Size(min=150, max=1000)
     private String description = "";
 
     private float rate = -1;
@@ -101,7 +103,7 @@ public class Event {
 
     private long guideId = -1;
 
-//    @Size(min=10, max=60)
+    @Size(min=10, max=60)
     private String name = "";
 
     public int getReviewsCount() {

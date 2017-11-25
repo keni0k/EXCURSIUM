@@ -205,7 +205,8 @@ public class PersonController {
             }
         }
         person = personService.editPublic(firstName, lastName, city, aboutMe, person, file!=null && !file.isEmpty());
-        person.setType(person.getType()>0?person.getType()*-1:person.getType());
+        if (person.getType()==1 || person.getType()==2)
+            person.setType(person.getType()*-1);
         personService.editPerson(person);
         model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.registration", null, locale)));
         return account(model, principal);
