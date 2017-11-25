@@ -1,5 +1,7 @@
 package com.heroku.demo.token;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.security.web.authentication.rememberme.PersistentRememberMeToken;
 
@@ -32,16 +34,8 @@ public class TokenCookies extends PersistentRememberMeToken {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getSeries() {
         return series;
-    }
-
-    public void setSeries(String series) {
-        this.series = series;
     }
 
     public Date getDate() {
@@ -71,12 +65,15 @@ public class TokenCookies extends PersistentRememberMeToken {
         this.date = date;
     }
 
+    public TokenCookies(){
+        super("","","",new Date());
+        Logger logger = LoggerFactory.getLogger(TokenCookies.class);
+        logger.info("ВЫЗВАЛИ НЕ ТОГО");
+    }
+
     public String getTokenValue() {
         return tokenValue;
     }
 
-    public void setTokenValue(String tokenValue) {
-        this.tokenValue = tokenValue;
-    }
 
 }

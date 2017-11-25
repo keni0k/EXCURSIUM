@@ -1,6 +1,5 @@
 package com.heroku.demo.utils;
 
-import com.heroku.demo.person.PersonController;
 import com.heroku.demo.token.TokenCookies;
 import com.heroku.demo.token.TokenRepository;
 import org.slf4j.Logger;
@@ -17,7 +16,7 @@ public class TokenService implements PersistentTokenRepository {
 
     private TokenRepository repository;
 
-    private static final Logger logger = LoggerFactory.getLogger(PersonController.class);
+    private static final Logger logger = LoggerFactory.getLogger(TokenService.class);
 
     @Autowired
     public TokenService(TokenRepository tokenRepository){
