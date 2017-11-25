@@ -300,16 +300,16 @@
 
                                             <!--Card footer-->
                                             <div class="card-footer links-light">
-                                        <span class="left pt-2">
-                                            <strong th:text="${order.getPrice()}+'&#8381;  '"
+                                                <span class="left pt-2">
+                                                    <strong th:text="${order.getPrice()}+'&#8381;  '"
                                                     style="color:#4285F4; font-size: medium; padding-top: -0.2em;">%Цена%  </strong>
-                                            <a><i class="fa fa-share-alt mr-2"></i></a>
-                                            <a><i class="fa fa-heart-o mr-2"></i>10</a>
-                                        </span>
+                                                    <a><i class="fa fa-share-alt mr-2"></i></a>
+                                                    <a><i class="fa fa-heart-o mr-2"></i>10</a>
+                                                </span>
                                                 <span class="right">
-                                            <a th:href="@{/orders/order(id=${order.getId()})}" class="waves-effect p-2">Открыть<i
+                                                    <a th:href="@{/orders/order(id=${order.getId()})}" class="waves-effect p-2">Открыть<i
                                                     class="fa fa-photo ml-1"></i></a>
-                                        </span>
+                                                </span>
                                             </div>
 
                                         </div>
@@ -411,6 +411,7 @@
                                             <!--Card footer-->
                                             <div class="card-footer links-light">
                                                 <span class="left pt-2">
+                                                    <strong style="color:#3265D4; font-size: medium; padding-top: -0.2em;">На модерации</strong>
                                                     <a><i class="fa fa-share-alt mr-2"></i></a>
                                                     <a><i class="fa fa-heart-o mr-2 disabled"></i>10</a>
                                                 </span>
