@@ -10,6 +10,7 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.List;
 
 @Component
 public class TokenService implements PersistentTokenRepository {
@@ -48,10 +49,12 @@ public class TokenService implements PersistentTokenRepository {
 
     @Override
     public void removeUserTokens(String username) {
-        TokenCookies token = repository.findByUsername(username);
-        if (token != null) {
-            logger.info("REMOVE_TOKEN: username= " + token.getUsername() + " series= " + token.getSeries() + " tokenValue= " + token.getTokenValue());
-            repository.delete(token);
+        List<TokenCookies> tokens = repository.findByUsername(username);
+        if (tokens.size()!=0) {
+            for (TokenCookies token : tokens) {
+                logger.info("REMOVE_TOKEN: username= " + token.getUsername() + " series= " + token.getSeries() + " tokenValue= " + token.getTokenValue());
+                repository.delete(token);
+            }
         }
     }
 }
