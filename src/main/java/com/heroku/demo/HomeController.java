@@ -8,7 +8,6 @@ import com.heroku.demo.photo.Photo;
 import com.heroku.demo.photo.PhotoRepository;
 import com.heroku.demo.review.Review;
 import com.heroku.demo.review.ReviewRepository;
-import com.heroku.demo.token.TokenCookies;
 import com.heroku.demo.token.TokenRepository;
 import org.joda.time.LocalTime;
 import org.slf4j.Logger;
@@ -24,7 +23,6 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -248,12 +246,6 @@ public class HomeController {
             }
         }
         return message.toString();
-    }
-
-    @RequestMapping(value = "addtoken")
-    public @ResponseBody String addToken(){
-        tokenRepository.save(new TokenCookies("keni0k", "series", "token_value", new Date()));
-        return tokenRepository.findBySeries("series").getUsername();
     }
 
 

@@ -36,15 +36,12 @@ public class TokenService implements PersistentTokenRepository {
     @Override
     public void updateToken(String series, String value, Date lastUsed) {
         TokenCookies token = repository.findBySeries(series);
-        token.setTokenValue(value);
-        token.setSeries(series);
-        token.setDate(lastUsed);
-        logger.info("UPDATE_TOKEN: username= " + token.getUsername() + " series= " + token.getSeries() + " tokenValue= " + token.getTokenValue());
-        repository.save(token);
+        repository.save(new TokenCookies(token.getId(), token.getUsername(), series, value, lastUsed));
     }
 
     @Override
     public PersistentRememberMeToken getTokenForSeries(String seriesId) {
+        logger.info("GET_TOKEN: series= "+seriesId);
         return repository.findBySeries(seriesId);
     }
 
