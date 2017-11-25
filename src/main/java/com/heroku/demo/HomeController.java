@@ -8,6 +8,8 @@ import com.heroku.demo.photo.Photo;
 import com.heroku.demo.photo.PhotoRepository;
 import com.heroku.demo.review.Review;
 import com.heroku.demo.review.ReviewRepository;
+import com.heroku.demo.token.TokenCookies;
+import com.heroku.demo.token.TokenRepository;
 import org.joda.time.LocalTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +24,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -32,6 +35,7 @@ public class HomeController {
     private ReviewRepository reviewRepository;
     private OrderRepository orderRepository;
     private PhotoRepository photoRepository;
+    private TokenRepository tokenRepository;
 
 
     private static final Logger logger = LoggerFactory
@@ -39,12 +43,14 @@ public class HomeController {
 
     @Autowired
     public HomeController(MessageRepository pRepository, ReviewRepository reviewRepository,
-                          OrderRepository orderRepository, PhotoRepository photoRepository) {
+                          OrderRepository orderRepository, PhotoRepository photoRepository,
+                          TokenRepository tokenRepository) {
 
         this.orderRepository = orderRepository;
         this.messageRepository = pRepository;
         this.reviewRepository = reviewRepository;
         this.photoRepository = photoRepository;
+        this.tokenRepository = tokenRepository;
 
     }
 
@@ -242,6 +248,12 @@ public class HomeController {
             }
         }
         return message.toString();
+    }
+
+    @RequestMapping(value = "addtoken")
+    public @ResponseBody String addToken(){
+        tokenRepository.save(new TokenCookies("keni0k", "series", "token_value", new Date()));
+        return tokenRepository.findBySeries("series").getUsername();
     }
 
 }
