@@ -899,42 +899,40 @@
                                         </div>
 
                                         <!--Image URL-->
-                                        <div class="md-form">
+                                        <div class="panel panel-default">
                                             <div class="panel-heading"
                                                  th:text="${#messages.msg('words.type_of_excursion')}">
                                                 Тип экскурсии
                                             </div>
                                             <div class="panel-body">
-                                                <div class="input-group">
                                                     <select name="category" id="category"
                                                             class="form-control selectpicker"
-                                                            th:selected="${inputEvent.getCategory()}?${inputEvent.getCategory()}:0">
-                                                        <option value="0" th:text="${#messages.msg('category.0')}">
+                                                            style="height: auto;">
+                                                        <option value="0" th:text="${#messages.msg('category.0')}" th:selected="${inputEvent.getCategory()==0}">
                                                             Развлечения
                                                         </option>
-                                                        <option value="1" th:text="${#messages.msg('category.1')}">
+                                                        <option value="1" th:selected="${inputEvent.getCategory()==1}" th:text="${#messages.msg('category.1')}">
                                                             Наука
                                                         </option>
-                                                        <option value="2" th:text="${#messages.msg('category.2')}">
+                                                        <option value="2" th:selected="${inputEvent.getCategory()==2}" th:text="${#messages.msg('category.2')}">
                                                             История
                                                         </option>
-                                                        <option value="3" th:text="${#messages.msg('category.3')}">
+                                                        <option value="3" th:selected="${inputEvent.getCategory()==3}" th:text="${#messages.msg('category.3')}">
                                                             Искусство
                                                         </option>
-                                                        <option value="4" th:text="${#messages.msg('category.4')}">
+                                                        <option value="4" th:selected="${inputEvent.getCategory()==4}" th:text="${#messages.msg('category.4')}">
                                                             Производство
                                                         </option>
-                                                        <option value="5" th:text="${#messages.msg('category.5')}">
+                                                        <option value="5" th:selected="${inputEvent.getCategory()==5}" th:text="${#messages.msg('category.5')}">
                                                             Гастрономия
                                                         </option>
-                                                        <option value="6" th:text="${#messages.msg('category.6')}">
+                                                        <option value="6" th:selected="${inputEvent.getCategory()==6}" th:text="${#messages.msg('category.6')}">
                                                             Квесты
                                                         </option>
-                                                        <option value="7" th:text="${#messages.msg('category.7')}">
+                                                        <option value="7" th:selected="${inputEvent.getCategory()==7}" th:text="${#messages.msg('category.7')}">
                                                             Экстрим
                                                         </option>
                                                     </select>
-                                                </div>
                                             </div>
                                         </div>
 

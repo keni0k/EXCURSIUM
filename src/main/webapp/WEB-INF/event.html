@@ -153,11 +153,11 @@
                     </div>
                     <!--/.Card image-->
                     <!--Button-->
-                    <a class="btn-floating btn-action waves-effect waves-light"
+                    <a class="btn-action waves-effect waves-light" style="background: none"
                        th:href="@{/users/user(id = ${event.getGuideId()})}">
                         <div class="avatar">
                             <img th:src="${event.getPhotoOfGuide()}" src="../resources/img/user.png"
-                                 class="rounded-circle img-responsive" alt="Аватар"/>
+                                 style="height: 100px; border-radius: 50%;" alt="Аватар"/>
                         </div>
                     </a>
                     <span></span>
@@ -227,8 +227,7 @@
                             <div class="card" th:with="review = ${reviews.get(i)}">
                                 <div class="card-header">
                                     <img src="../resources/img/user.png" th:src="${review.getPathToUserPhoto()}"
-                                         class="rounded-circle img-thumbnail"
-                                         style="max-height: 3rem"/>
+                                         style="height: 50px; border-radius: 50%"/>
                                     <span class="span_title" style="padding-top: 1em;"
                                           th:text="${review.userFullName}">Вершинин Дмитрий</span>
                                     <span class="span_right" style="padding-top: 1em;">
