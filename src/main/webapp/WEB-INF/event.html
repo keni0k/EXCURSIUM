@@ -153,18 +153,16 @@
                     </div>
                     <!--/.Card image-->
                     <!--Button-->
-                    <a class="btn-action waves-effect waves-light" style="background: none; width: auto;"
+                    <a class="btn-action waves-effect waves-light" style="background: none; width: auto; height: 130px"
                        th:href="@{/users/user(id = ${event.getGuideId()})}">
                         <div class="avatar">
                             <img th:src="${event.getPhotoOfGuide()}" src="../resources/img/user.png"
                                  style="height: 100px; width:auto; border-radius: 50%;" alt="Аватар"/>
                         </div>
+                        <br/>
+                        <span style="font-size: medium; color: #000000; text-align:right; padding-right: 1.8rem; padding-top: 2rem" th:text="${event.getFullNameOfGuide()}">
+                        %FULL_NAME%</span>
                     </a>
-                    <span></span>
-                    <p></p>
-                    <p></p>
-                    <p style="font-size: medium; color: #000000; text-align:right" th:text="${event.getFullNameOfGuide()}">
-                        %FULL_NAME%</p>
 
                     <!--Card content-->
                     <div class="card-body no-padding text-center">
