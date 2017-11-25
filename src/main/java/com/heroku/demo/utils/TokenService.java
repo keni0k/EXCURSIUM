@@ -21,14 +21,17 @@ public class TokenService implements PersistentTokenRepository {
 
     @Override
     public void createNewToken(PersistentRememberMeToken token) {
-        repository.save(new TokenCookies(null, token.getUsername(), token.getSeries(),
+        repository.save(new TokenCookies(token.getUsername(), token.getSeries(),
                 token.getTokenValue(), token.getDate()));
     }
 
     @Override
     public void updateToken(String series, String value, Date lastUsed) {
         TokenCookies token = repository.findBySeries(series);
-        repository.save(new TokenCookies(token.getId(), token.getUsername(), series, value, lastUsed));
+        token.setTokenValue(value);
+        token.setSeries(series);
+        token.setDate(lastUsed);
+        repository.save(token);
     }
 
     @Override
