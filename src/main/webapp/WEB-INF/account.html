@@ -403,12 +403,9 @@
                                             <!--Card content-->
                                             <div class="card-body pb-0">
                                                 <!--Title-->
-                                                <a th:href="@{/events/event(id=${event.getId()})}">
-                                                    <h4 class="card-title" th:text="${event.getName()}">Название экскурсии</h4>
-                                                </a>
-                                                <!--Text-->
-                                                <!--<p class="card-text" th:text="${event.getSmallDescription()}">
-                                                    Описание</p>-->
+
+                                                    <h4 class="card-title" th:text="${event.getName()}"><a th:href="@{/events/event(id=${event.getId()})}">Название экскурсии</a></h4>
+
                                             </div>
 
                                             <!--Card footer-->
