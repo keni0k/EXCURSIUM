@@ -5,17 +5,14 @@ import com.heroku.demo.person.PersonRepository;
 import com.heroku.demo.person.PersonServiceImpl;
 import com.heroku.demo.photo.PhotoRepository;
 import com.heroku.demo.review.ReviewRepository;
-import com.heroku.demo.utils.AuthenticationService;
 import com.heroku.demo.utils.CustomAuthenticationProvider;
+import com.heroku.demo.utils.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
-import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 @Configuration
 @EnableAutoConfiguration
@@ -23,16 +20,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private PersonServiceImpl personService;
 
-    private final AuthenticationService authenticationService;
-
-    private final PersistentTokenBasedRememberMeServices persistenceTokenRepository;
+    private final TokenService repository;
 
     @Autowired
     public SecurityConfig(PersonRepository personRepository, EventRepository eventRepository,
-                          ReviewRepository reviewRepository, PhotoRepository photoRepository, PersistentTokenBasedRememberMeServices persistenceTokenRepository, AuthenticationService authenticationService) {
+                          ReviewRepository reviewRepository, PhotoRepository photoRepository, TokenService repository) {
         personService = new PersonServiceImpl(personRepository, eventRepository, reviewRepository, photoRepository);
-        this.persistenceTokenRepository = persistenceTokenRepository;
-        this.authenticationService = authenticationService;
+        this.repository = repository;
     }
 
     @Override
@@ -57,20 +51,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout().logoutUrl("/users/logout").logoutSuccessUrl("/users/login").permitAll()
                 .and()
-                .rememberMe().tokenValiditySeconds(1209600).rememberMeParameter("remember-me").rememberMeCookieName("remember_me").
-                tokenRepository((PersistentTokenRepository) persistenceTokenRepository)
+                .rememberMe().tokenValiditySeconds(1209600).rememberMeParameter("remember-me").rememberMeCookieName("remember_me")
+                .userDetailsService(s -> personService.getByLoginOrEmail(s)).tokenRepository(repository)
                 .and()
                 .exceptionHandling().accessDeniedPage("/errors/403")
                 .and()
                 .csrf().disable();
-    }
-
-    @Bean
-    public PersistentTokenBasedRememberMeServices getPersistentTokenBasedRememberMeServices() {
-        PersistentTokenBasedRememberMeServices persistenceTokenBasedservice =
-                new PersistentTokenBasedRememberMeServices("remember_me", authenticationService, (PersistentTokenRepository) persistenceTokenRepository);
-        persistenceTokenBasedservice.setAlwaysRemember(true);
-        return persistenceTokenBasedservice;
     }
 
 }
