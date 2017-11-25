@@ -61,6 +61,10 @@ public class TokenCookies extends PersistentRememberMeToken {
         this.date = date;
     }
 
+    public TokenCookies(){
+        super("","","",new Date());
+    }
+
     public String getTokenValue() {
         return tokenValue;
     }
