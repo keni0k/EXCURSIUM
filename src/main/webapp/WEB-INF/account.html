@@ -411,12 +411,12 @@
                                             <div class="card-footer links-light">
                                                 <span class="left pt-2">
                                                     <strong th:text="${event.getPrice()}+'&#8381;  '"
-                                                            style="color:#4285F4; font-size: medium; padding-top: -0.2em;">%Цена%  </strong>
+                                                            style="color:#4285F4; font-size: medium; padding-top: -0.2em; padding-bottom: 2rem;">%Цена%  </strong>
                                                     <a><i class="fa fa-share-alt mr-2"></i></a>
                                                     <a><i class="fa fa-heart-o mr-2"></i>10</a>
                                                 </span>
                                                 <span class="right">
-                                                    <a th:href="@{/orders/order(id=${event.getId()})}" class="waves-effect p-2">Открыть<i
+                                                    <a th:href="@{/events/events(id=${event.getId()})}" class="waves-effect p-2">Открыть<i
                                                             class="fa fa-photo ml-1"></i></a>
                                                 </span>
                                             </div>
