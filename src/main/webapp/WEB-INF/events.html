@@ -167,17 +167,17 @@
                         <div class="panel-body">
                             <div class="input-group" style="z-index: 100">
                                 <select name="type" class="form-control selectpicker">
-                                    <option value="-4" th:text="${#messages.msg('event.type.blocked')}"
-                                            th:selected="${inputEvent.getType()==-4}">Заблокирована
-                                    </option>
                                     <option value="-3" th:text="${#messages.msg('event.type.moderation')}"
                                             th:selected="${inputEvent.getType()==-3}">На модерации
                                     </option>
                                     <option value="-2" th:text="${#messages.msg('event.type.moderation_was_failed')}"
                                             th:selected="${inputEvent.getType()==-2}">Не прошла модерацию
                                     </option>
-                                    <option value="-1" th:text="${#messages.msg('event.type.no_active')}"
-                                            th:selected="${inputEvent.getType()==-1}">Не активна
+                                    <option value="-1" th:text="${#messages.msg('event.type.blocked')}"
+                                            th:selected="${inputEvent.getType()==-1}">Заблокирована
+                                    </option>
+                                    <option value="0" th:text="${#messages.msg('event.type.no_active')}"
+                                            th:selected="${inputEvent.getType()==0}">Не активна
                                     </option>
                                     <option value="1" th:text="${#messages.msg('event.type.active')}"
                                             th:selected="${inputEvent.getType()==1}">Активна</option>

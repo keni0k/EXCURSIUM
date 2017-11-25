@@ -31,7 +31,6 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Random;
 
 import static com.heroku.demo.utils.Utils.*;
 
@@ -299,8 +298,8 @@ public class EventController {
     public String updateDBEvents() {
         List<Event> events = eventService.getAll();
         for (Event event : events) {
-            event.setGuideId(new Random().nextInt(3) + 37);
-            //eventService.editEvent(event);
+            if (event.getType()==0)
+                event.setType(1);
         }
         return "YES";
     }

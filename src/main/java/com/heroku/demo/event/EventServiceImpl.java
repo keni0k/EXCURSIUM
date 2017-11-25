@@ -64,7 +64,7 @@ public class EventServiceImpl implements EventService {
         long curr2 = System.currentTimeMillis();
         ListEvents copy = new ListEvents();
         for (Event aList : list) {
-            if (((aList.getCategory() == category) || (category == -1)) && ((aList.getLanguage() == language) || isAllLang) && (aList.getType() == 0 || isAll)) {
+            if (((aList.getCategory() == category) || (category == -1)) && ((aList.getLanguage() == language) || isAllLang) && (aList.getType() == 1 || isAll)) {
                 if ((aList.getPrice() >= priceDown) && (aList.getPrice() <= priceUp)) {
 
                     Photo img = photoService.getByEventId(aList.getId());

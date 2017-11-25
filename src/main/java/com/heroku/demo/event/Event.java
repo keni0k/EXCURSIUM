@@ -245,4 +245,19 @@ public class Event {
         this.city = city;
     }
 
+    public String getStringType(int language){
+        String[] ru = {"На модерации", "Не прошла модерацию","Заблокирована", "Не активна", "Активна"};//TODO:translate
+        if (language==0) {
+            switch (type) {
+                case -3:return ru[0];
+                case -2: return ru[1];
+                case -1: return ru[2];
+                case 0: return ru[3];
+                case 1: return ru[4];
+                default: return "TYPE NULL";
+            }
+        } else
+            return "LANGUAGE NULL";
+    }
+
 }
