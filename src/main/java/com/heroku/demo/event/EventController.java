@@ -300,6 +300,7 @@ public class EventController {
         for (Event event : events) {
             if (event.getType()==0)
                 event.setType(1);
+            eventService.editEvent(event);
         }
         return "YES";
     }
