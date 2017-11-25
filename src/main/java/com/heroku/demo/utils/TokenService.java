@@ -41,8 +41,10 @@ public class TokenService implements PersistentTokenRepository {
 
     @Override
     public PersistentRememberMeToken getTokenForSeries(String seriesId) {
-        logger.info("GET_TOKEN: series= "+seriesId);
-        return repository.findBySeries(seriesId);
+        TokenCookies token = repository.findBySeries(seriesId);
+        if (token!=null)
+            logger.info("GET_TOKEN: series= "+seriesId + " value= " + token.getTokenValue() + " username= " + token.getUsername());
+        return token;
     }
 
     @Override
