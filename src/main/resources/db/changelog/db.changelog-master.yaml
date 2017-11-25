@@ -253,3 +253,17 @@ databaseChangeLog:
                     type: varchar(255)
                     constraints:
                       nullable: false
+  - changeSet:
+      id: 2
+      author: keni0k
+      changes:
+        - createTable:
+          tableName: token_cookies
+          columns:
+            - column:
+               name: id
+               type: int
+               autoIncrement: true
+               constraints:
+                 primaryKey: true
+                 nullable: false
