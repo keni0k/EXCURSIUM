@@ -2,6 +2,8 @@ package com.heroku.demo.utils;
 
 public class UtilsForWeb {
 
+    public static Consts consts;
+
     public static String getCategoryString(int category, int language) {
         String[] ru = {"Развлечения", "Наука", "История", "Искусство", "Производство", "Гастрономия", "Квесты", "Экстрим"};
         String[] en = {"Entertainment", "Science", "History", "Art", "Manufacture", "Gastronomy", "Quests", "Extreme"};
@@ -19,4 +21,5 @@ public class UtilsForWeb {
                 "../resources/img/icons/quests.png", "../resources/img/icons/extreme.png"};
         return urls[category];
     }
+
 }

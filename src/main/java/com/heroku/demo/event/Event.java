@@ -22,9 +22,14 @@ public class Event {
                 "\t\"description\":\"" + description + "\",\n" +
                 "\t\"name\":\"" + name + "\",\n" +
                 "\t\"photo_url\":\"" + pathToPhoto + "\",\n" +
+                "\t\"photo_of_guide\":\"" + getPhotoOfGuide() + "\",\n" +
+                "\t\"reviews_count\":\"" + reviewsCount + "\",\n" +
+                "\t\"full_name_of_guide\":\"" + fullNameOfGuide + "\",\n" +
+                "\t\"city\":\"" + city + "\",\n" +
                 "\t\"language\":\"" + language + "\",\n" +
                 "\t\"duration\":\"" + duration + "\",\n" +
                 "\t\"users_count\":\"" + usersCount + "\",\n" +
+                "\t\"rate\":\"" + rate + "\",\n" +
                 "\t\"type\":\"" + type + "\"\n" +
                 "}";
     }
@@ -61,7 +66,7 @@ public class Event {
 
     private String time;
 
-//    @Range(min = 1, max = 240)
+    @Range(min = 1, max = 240)
     private int duration;
 
     public int getLanguage() {
@@ -249,11 +254,11 @@ public class Event {
         String[] ru = {"На модерации", "Не прошла модерацию","Заблокирована", "Не активна", "Активна"};//TODO:translate
         if (language==0) {
             switch (type) {
-                case -3:return ru[0];
-                case -2: return ru[1];
-                case -1: return ru[2];
-                case 0: return ru[3];
-                case 1: return ru[4];
+                case Consts.EXCURSION_MODERATION:return ru[0];
+                case Consts.EXCURSION_MODER_FAULT: return ru[1];
+                case Consts.EXCURSION_BLOCKED: return ru[2];
+                case Consts.EXCURSION_DISABLED: return ru[3];
+                case Consts.EXCURSION_ACTIVE: return ru[4];
                 default: return "TYPE NULL";
             }
         } else

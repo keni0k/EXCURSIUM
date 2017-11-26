@@ -89,7 +89,10 @@
 
 <div class="content"
      th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}, isThisUserAccount = ${true},
-              excursovod = ${person.getType()>=2 or person.getType()==-2}"><!--TODO isThisUserAccount-->
+              excursovod = ${person.getType()==utils.consts.PERSON_GUIDE or person.getType()==utils.consts.PERSON_MODER_GUIDE or person.getType()==utils.consts.PERSON_ADMIN},
+              tourist = ${person.getType()==utils.consts.PERSON_TOURIST or person.getType()==utils.consts.PERSON_MODER_TOURIST or person.getType()==utils.consts.PERSON_ADMIN},
+              notConfirmed = ${person.getType()==utils.consts.PERSON_DISABLED or person.getType()==utils.consts.PERSON_ADMIN}">
+    <!--TODO isThisUserAccount-->
 
     <nav class="navbar navbar-default navbar-custom" role="navigation">
         <div class="container-fluid">
@@ -181,13 +184,13 @@
                                             data-toggle="modal" data-target="#modalContactUser">Связаться<i
                                             class="fa fa-paper-plane ml-2"></i></button>
 
-                                    <button th:if="${person.getType()==-3}" type="button"
+                                    <button th:if="${notConfirmed}" type="button"
                                             class="btn btn-primary mt-4 waves-effect waves-light"
                                     onclick="alert('В разработке с 25.11.2017. Если вы видите это сообщение, то, вероятно, подтверждающее письмо у вас на почте')"><!--TODO translate-->
                                         <th:block>Подтвердить E-mail</th:block><!--TODO translate-->
                                     </button>
 
-                                    <a th:if="${(person.getType()==1 or person.getType()==-1) and person.getType()!=-3}"
+                                    <a th:if="${tourist}"
                                        class="btn btn-primary waves-effect waves-light"
                                        onclick="alert('В разработке с 25.11.2017. Можете связаться с нами и мы вручную сделаем вас экскурсоводом.')">Стать экскурсоводом
                                     </a><!--TODO translate-->

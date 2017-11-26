@@ -20,6 +20,7 @@ import java.net.URISyntaxException;
 import java.security.InvalidKeyException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 public class Utils {
@@ -96,6 +97,15 @@ public class Utils {
         }
         stringBuilder.append("]}");
         return stringBuilder.toString();
+    }
+
+    public static int localeToLang(Locale locale){
+        int lang;
+        switch (locale.getLanguage()){
+            case "en": lang = Consts.LANGUAGE_EN;
+            default: lang = Consts.LANGUAGE_RU;
+        }
+        return lang;
     }
 
 }

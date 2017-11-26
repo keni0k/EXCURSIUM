@@ -8,6 +8,7 @@ import com.heroku.demo.photo.PhotoRepository;
 import com.heroku.demo.photo.PhotoServiceImpl;
 import com.heroku.demo.review.ReviewRepository;
 import com.heroku.demo.review.ReviewServiceImpl;
+import com.heroku.demo.utils.Consts;
 import com.heroku.demo.utils.MessageUtil;
 import com.heroku.demo.utils.Utils;
 import com.heroku.demo.utils.UtilsForWeb;
@@ -18,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -42,7 +42,6 @@ import static com.heroku.demo.utils.Utils.*;
 public class EventController {
 
     private static String AUTH_KEY = "jP7xwaj12EYohNabYr1r6ewMeVJa8Jkf";
-
     private final MessageSource messageSource;
 
     private PhotoRepository photoRepository;
@@ -81,7 +80,7 @@ public class EventController {
         String time = new LocalTime().toDateTimeToday().toString().replace('T', ' ');
         time = time.substring(0,time.indexOf('.'));
         event.setTime(time);
-        event.setType(-3);
+        event.setType(Consts.EXCURSION_MODERATION);
         String loginOrEmail = principal.getName();
         if (!loginOrEmail.equals("")) {
             Person p = personService.getByLoginOrEmail(loginOrEmail);
@@ -161,6 +160,7 @@ public class EventController {
     public String event(ModelMap model, @RequestParam("id") int id) {
         model.addAttribute("event", eventService.getById(id));
         model.addAttribute("reviews", reviewService.getByEvent(id));
+        model.addAttribute("utils", new UtilsForWeb());
         return "event";
     }
 
@@ -179,7 +179,7 @@ public class EventController {
             priceDown = Integer.parseInt(prices[0]);
             priceUp = Integer.parseInt(prices[1]);
         }
-        ListEvents events = eventService.getByFilter(priceUp, priceDown, category, locale.getLanguage().equals("ru") ? 0 : 1, words, sortBy == null ? 0 : sortBy, false);//TODO optimize
+        ListEvents events = eventService.getByFilter(priceUp, priceDown, category, localeToLang(locale), words, sortBy == null ? 0 : sortBy, false);//TODO optimize
         ListEvents eventsFinal = new ListEvents();
         eventsFinal.setMinPrice(events.getMinPrice());
         eventsFinal.setMaxPrice(events.getMaxPrice());
@@ -217,10 +217,15 @@ public class EventController {
         h.add("Content-type", "text/json;charset=UTF-8");
         String ru = "[\"Развлечения\",\"Наука\",\"История\",\"Искусство\",\"Производство\",\"Гастрономия\",\"Квесты\",\"Экстрим\"]";
         String en = "[\"Entertainment\",\"Science\",\"History\",\"Art\",\"Manufacture\",\"Gastronomy\",\"Quests\",\"Extreme\"]";
-        return new ResponseEntity<>(language == 0 ? ru : en, h, HttpStatus.OK);
+        String categories;
+        switch (language){
+            case 1: categories = en; break;
+            default: categories = ru; break;
+        }
+        return new ResponseEntity<>(categories, h, HttpStatus.OK);
     }
 
-    @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, value = "/listjson", method = RequestMethod.POST)
+    @RequestMapping(value = "/listjson", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<String> getEventsByFilter(@RequestParam(value = "price_down", required = false) Integer priceDown,
                                                     @RequestParam(value = "price_up", required = false) Integer priceUp,
@@ -247,7 +252,7 @@ public class EventController {
                          @RequestParam(value = "category", required = false) Integer category,
                          @RequestParam(value = "words", required = false) String words,
                          Locale locale) {
-        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, locale.getLanguage().equals("ru") ? 0 : 1, words, null, true);
+        List<Event> events = eventService.getByFilter(priceUp, priceDown, category, localeToLang(locale), words, null, true);
         model.addAttribute("events", events);
 
         if (id != null) {
@@ -258,6 +263,7 @@ public class EventController {
 //            logger.info("EVENT PATH: "+editEvent.pathToPhoto);
             model.addAttribute("inputEvent", editEvent);
         } else model.addAttribute("inputEvent", new Event());
+        model.addAttribute("utils", new UtilsForWeb());
 
         return "events";
     }
@@ -279,7 +285,7 @@ public class EventController {
         event1.setPlace(place);
         event1.setLanguage(language);
         eventService.editEvent(event1);
-        List<Event> events = eventService.getByFilter(null, null, null, locale.getLanguage().equals("ru") ? 0 : 1, null, null, true);
+        List<Event> events = eventService.getByFilter(null, null, null, localeToLang(locale), null, null, true);
         modelMap.addAttribute("events", events);
         modelMap.addAttribute("inputEvent", event1);
         return "events";
@@ -292,7 +298,7 @@ public class EventController {
                               @ModelAttribute("photo_azure") String photo,
                               @ModelAttribute("auth") String authKey) {
         if (authKey.equals(AUTH_KEY) && !result.hasErrors()) {//todo
-            //person.setWhat(3);
+            event.setType(Consts.EXCURSION_MODERATION);
             eventService.addEvent(event);
             if (photo != null)
                 photoService.addPhoto(new Photo((int) event.getId(), photo));
@@ -305,8 +311,6 @@ public class EventController {
     public String updateDBEvents() {
         List<Event> events = eventService.getAll();
         for (Event event : events) {
-            if (event.getType()==0)
-                event.setType(1);
 //            eventService.editEvent(event);
         }
         return "YES";

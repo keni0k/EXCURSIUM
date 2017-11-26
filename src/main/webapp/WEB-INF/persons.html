@@ -171,22 +171,22 @@
                         <div class="panel-body">
                             <div class="input-group" style="z-index: 100">
                                 <select name="type" class="form-control selectpicker"> <!--TODO: translate-->
-                                    <option value="-3" th:text="${#messages.msg('user.type.unconfirmed')}"
-                                            th:selected="${insertPerson.getType()==-3}">Не активирован
+                                    <option th:value="${utils.consts.PERSON_DISABLED}" th:text="${#messages.msg('user.type.unconfirmed')}"
+                                            th:selected="${insertPerson.getType()==utils.consts.PERSON_DISABLED}">Не активирован
                                     </option>
-                                    <option value="0" th:text="${#messages.msg('user.type.blocked')}"
-                                            th:selected="${insertPerson.getType()==0}">Заблокирован
+                                    <option th:value="${utils.consts.PERSON_BLOCKED}" th:text="${#messages.msg('user.type.blocked')}"
+                                            th:selected="${insertPerson.getType()==utils.consts.PERSON_BLOCKED}">Заблокирован
                                     </option>
-                                    <option value="-1"
-                                            th:selected="${insertPerson.getType()==-1}">Турист (модерация)</option>
-                                    <option value="-2"
-                                            th:selected="${insertPerson.getType()==-2}">Турист / Экскурсовод (модерация)</option>
-                                    <option value="1" th:text="${#messages.msg('user.type.tourist')}"
-                                            th:selected="${insertPerson.getType()==1}">Турист</option>
-                                    <option value="2" th:text="${#messages.msg('user.type.guide')}"
-                                            th:selected="${insertPerson.getType()==2}">Турист / Экскурсовод</option>
-                                    <option value="3" th:text="${#messages.msg('user.type.admin')}"
-                                            th:selected="${insertPerson.getType()==3}">Админ</option>
+                                    <option th:value="${utils.consts.PERSON_MODER_TOURIST}"
+                                            th:selected="${insertPerson.getType()==utils.consts.PERSON_MODER_TOURIST}">Турист (модерация)</option>
+                                    <option th:value="${utils.consts.PERSON_MODER_GUIDE}"
+                                            th:selected="${insertPerson.getType()==utils.consts.PERSON_MODER_GUIDE}">Турист / Экскурсовод (модерация)</option>
+                                    <option th:value="${utils.consts.PERSON_TOURIST}" th:text="${#messages.msg('user.type.tourist')}"
+                                            th:selected="${insertPerson.getType()==utils.consts.PERSON_TOURIST}">Турист</option>
+                                    <option th:value="${utils.consts.PERSON_GUIDE}" th:text="${#messages.msg('user.type.guide')}"
+                                            th:selected="${insertPerson.getType()==utils.consts.PERSON_GUIDE}">Турист / Экскурсовод</option>
+                                    <option th:value="${utils.consts.PERSON_ADMIN}" th:text="${#messages.msg('user.type.admin')}"
+                                            th:selected="${insertPerson.getType()==utils.consts.PERSON_ADMIN}">Админ</option>
                                 </select>
                             </div>
                         </div>

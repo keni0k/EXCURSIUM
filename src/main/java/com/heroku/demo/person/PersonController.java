@@ -9,7 +9,10 @@ import com.heroku.demo.order.OrderServiceImpl;
 import com.heroku.demo.photo.PhotoRepository;
 import com.heroku.demo.photo.PhotoServiceImpl;
 import com.heroku.demo.review.ReviewRepository;
+import com.heroku.demo.utils.Consts;
 import com.heroku.demo.utils.MessageUtil;
+import com.heroku.demo.utils.Utils;
+import com.heroku.demo.utils.UtilsForWeb;
 import com.mailjet.client.MailjetClient;
 import com.mailjet.client.MailjetRequest;
 import com.mailjet.client.MailjetResponse;
@@ -54,7 +57,6 @@ public class PersonController {
     private PersonServiceImpl personService;
     private EventServiceImpl eventService;
     private OrderServiceImpl orderService;
-    private PhotoServiceImpl photoService;
 
     private final MessageSource messageSource;
 
@@ -63,7 +65,6 @@ public class PersonController {
     @Autowired
     public PersonController(PersonRepository personRepository, MessageSource messageSource, EventRepository eventRepository,
                             ReviewRepository reviewRepository, PhotoRepository photoRepository, OrderRepository orderRepository) {
-        photoService = new PhotoServiceImpl(photoRepository);
         orderService = new OrderServiceImpl(orderRepository, eventRepository, photoRepository);
         personService = new PersonServiceImpl(personRepository, eventRepository, reviewRepository, photoRepository);
         eventService = new EventServiceImpl(eventRepository, new PhotoServiceImpl(photoRepository));
@@ -89,6 +90,7 @@ public class PersonController {
         List<Buy> orders = orderService.getByTourist(person.getId());
         model.addAttribute("orders", orders);
         model.addAttribute("inputEvent", new Event());
+        model.addAttribute("utils", new UtilsForWeb());
         return "account";
     }
 
@@ -117,7 +119,7 @@ public class PersonController {
             return persons(model);
         }
         person.setRole("ROLE_USER");
-        person.setType(-3);
+        person.setType(Consts.PERSON_DISABLED);
         String time = new LocalTime().toDateTimeToday().toString().replace('T', ' ');
         time = time.substring(0,time.indexOf('.'));
         person.setTime(time);
@@ -208,7 +210,7 @@ public class PersonController {
             }
         }
         person = personService.editPublic(firstName, lastName, city, aboutMe, person, file!=null && !file.isEmpty());
-        if (person.getType()==1 || person.getType()==2)
+        if (person.getType()== Consts.PERSON_TOURIST || person.getType()==Consts.PERSON_GUIDE)
             person.setType(person.getType()*-1);
         personService.editPerson(person);
         model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.registration", null, locale)));
@@ -247,8 +249,8 @@ public class PersonController {
     public String confirm(ModelMap model, @ModelAttribute("token") String token) {
         Person person = personService.getByToken(token);
         if (person != null)
-            if (person.getType() == -3) {
-                person.setType(-1);
+            if (person.getType() == Consts.PERSON_DISABLED) {
+                person.setType(Consts.PERSON_MODER_TOURIST);
                 personService.editPerson(person);
                 model.addAttribute("message", new MessageUtil("success", "Your account has been successfully verified."));
             }
@@ -303,6 +305,7 @@ public class PersonController {
             Person editPerson = personService.getById(id);
             model.addAttribute("insertPerson", editPerson);
         } else model.addAttribute("insertPerson", new Person());
+        model.addAttribute("utils", new UtilsForWeb());
         return "persons";
     }
 
@@ -322,6 +325,10 @@ public class PersonController {
         if (personWithBD == null) logger.info("ERROR PERSONWITHBD IS NULL");
         else {
             personService.editPublic(firstName, lastName, city, about, personWithBD, false);
+            if (personWithBD.getType()==Consts.PERSON_BLOCKED && type!=Consts.PERSON_BLOCKED)
+                eventsModer(personWithBD.getId());
+            if (typePerson==Consts.PERSON_BLOCKED)
+                eventsBlock(personWithBD.getId());
             personWithBD.setType(typePerson);
             personService.editPerson(personWithBD);
         }
@@ -349,23 +356,13 @@ public class PersonController {
         h.add("Content-type", "text/json;charset=UTF-8");
         ArrayList<String> arrayList = new ArrayList<>();
 
-        List<Person> persons = new ArrayList<>();
-        if (authKey.equals(AUTH_KEY))
-            persons = personService.getAll();
-
-
-        StringBuilder stringBuilder = new StringBuilder("{ \"persons\": [");
+        List<Person> persons = personService.getAll();
 
         for (Person p : persons) {
             arrayList.add(p.toString());
         }
 
-        for (int i = 0; i < arrayList.size(); i++) {
-            stringBuilder.append(arrayList.get(i));
-            if (arrayList.size() - i > 1) stringBuilder.append(",\n");
-        }
-        stringBuilder.append("]}");
-        return new ResponseEntity<>(stringBuilder.toString(), h, HttpStatus.OK);
+        return new ResponseEntity<>(Utils.list("persons", arrayList, authKey, AUTH_KEY), h, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
@@ -395,6 +392,22 @@ public class PersonController {
 
         response = client.post(email);
         return response.getData() + " " + response.getStatus();
+    }
+
+    private void eventsBlock(long personId){
+        List<Event> events = eventService.getByGuideId(personId);
+        for (Event event:events){
+            event.setType(Consts.EXCURSION_BLOCKED);
+            eventService.editEvent(event);
+        }
+    }
+
+    private void eventsModer(long personId){
+        List<Event> events = eventService.getByGuideId(personId);
+        for (Event event:events){
+            event.setType(Consts.EXCURSION_MODERATION);
+            eventService.editEvent(event);
+        }
     }
 
 }

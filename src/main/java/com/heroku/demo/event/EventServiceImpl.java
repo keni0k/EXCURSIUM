@@ -2,6 +2,7 @@ package com.heroku.demo.event;
 
 import com.heroku.demo.photo.Photo;
 import com.heroku.demo.photo.PhotoServiceImpl;
+import com.heroku.demo.utils.Consts;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -60,11 +61,11 @@ public class EventServiceImpl implements EventService {
         if (language == -1) isAllLang = true;
         String[] wds = words.split(",");
         long curr1 = System.currentTimeMillis();
-        List<Event> list = getAll();//getEventRepository().getByFilter(priceUp, priceDown,category,language,isAll);//getAll
+        List<Event> list = getAll();//getEventRepository().getByFilter(priceUp, priceDown,category,language,isAll);
         long curr2 = System.currentTimeMillis();
         ListEvents copy = new ListEvents();
         for (Event aList : list) {
-            if (((aList.getCategory() == category) || (category == -1)) && ((aList.getLanguage() == language) || isAllLang) && (aList.getType() == 1 || isAll)) {
+            if (((aList.getCategory() == category) || (category == -1)) && ((aList.getLanguage() == language) || isAllLang) && (aList.getType() == Consts.EXCURSION_ACTIVE || isAll)) {
                 if ((aList.getPrice() >= priceDown) && (aList.getPrice() <= priceUp)) {
 
                     Photo img = photoService.getByEventId(aList.getId());

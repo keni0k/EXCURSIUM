@@ -83,13 +83,13 @@ public class Person implements UserDetails{
         String[] typesRu = {"Не активирован", "Заблокирован", "Турист", "Турист/Экскурсовод", "Администратор"};
         if (language==0) {
             switch (type) {
-                case -3: return typesRu[0];
-                case 0: return typesRu[1];
-                case 1:
-                case -1:return typesRu[2];
-                case 2:
-                case -2:return typesRu[3];
-                case 3: return typesRu[4];
+                case Consts.PERSON_DISABLED: return typesRu[0];
+                case Consts.PERSON_BLOCKED: return typesRu[1];
+                case Consts.PERSON_TOURIST:
+                case Consts.PERSON_MODER_TOURIST:return typesRu[2];
+                case Consts.PERSON_GUIDE:
+                case Consts.PERSON_MODER_GUIDE:return typesRu[3];
+                case Consts.PERSON_ADMIN: return typesRu[4];
                 default: return "TYPE NULL";
             }
         } else
