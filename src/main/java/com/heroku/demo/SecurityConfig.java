@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/index", "/resources/**",
                         "/events/list", "/events/event", "/events/categories", "/events/listjson", "/events/addevent",
                         "/users/user", "/users/getbytoken", "/users/getbyemail", "/users/listjson", "/users/account",
-                        "/reviews/listjson").permitAll()
+                        "/reviews/listjson", "/users/confirm").permitAll()
                 .antMatchers("/users/registration").anonymous()
                 .antMatchers("/events/add", "/users/edit_public", "/users/edit_private", "/reviews/add").hasAnyRole("ADMIN","USER")
                 .antMatchers("/**").hasRole("ADMIN")
