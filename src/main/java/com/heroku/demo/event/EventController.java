@@ -16,7 +16,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -207,29 +210,33 @@ public class EventController {
         return "event_list";
     }
 
-    @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, value = "/categories")
+    @RequestMapping("/categories")
     @ResponseBody
-    public String preview(@ModelAttribute("language") int language) {
+    public ResponseEntity<String> preview(@ModelAttribute("language") int language) {
+        HttpHeaders h = new HttpHeaders();
+        h.add("Content-type", "text/json;charset=UTF-8");
         String ru = "[\"Развлечения\",\"Наука\",\"История\",\"Искусство\",\"Производство\",\"Гастрономия\",\"Квесты\",\"Экстрим\"]";
         String en = "[\"Entertainment\",\"Science\",\"History\",\"Art\",\"Manufacture\",\"Gastronomy\",\"Quests\",\"Extreme\"]";
-        return language == 0 ? ru : en;
+        return new ResponseEntity<>(language == 0 ? ru : en, h, HttpStatus.OK);
     }
 
     @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, value = "/listjson", method = RequestMethod.POST)
     @ResponseBody
-    public String getEventsByFilter(@RequestParam(value = "price_down", required = false) Integer priceDown,
+    public ResponseEntity<String> getEventsByFilter(@RequestParam(value = "price_down", required = false) Integer priceDown,
                                                     @RequestParam(value = "price_up", required = false) Integer priceUp,
                                                     @RequestParam(value = "category", required = false) Integer category,
                                                     @RequestParam(value = "words", required = false) String words,
                                                     @RequestParam(value = "language", required = false) Integer language,
                                                     @RequestParam(value = "sort_by", required = false) Integer sortBy,
                                                     @RequestParam(value = "auth") String authKey) {
+        HttpHeaders h = new HttpHeaders();
+        h.add("Content-type", "text/json;charset=UTF-8");
         ArrayList<String> arrayList = new ArrayList<>();
         List<Event> events = eventService.getByFilter(priceUp, priceDown, category, language, words, sortBy, false);
         for (Event e : events) {
             arrayList.add(e.toString());
         }
-        return Utils.list("events", arrayList, authKey, AUTH_KEY);
+        return new ResponseEntity<>(Utils.list("events", arrayList, authKey, AUTH_KEY), h, HttpStatus.OK);
     }
 
     @RequestMapping("/moderation")

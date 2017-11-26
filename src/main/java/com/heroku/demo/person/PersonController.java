@@ -24,7 +24,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -254,20 +257,24 @@ public class PersonController {
 
     @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST, value = "/getbytoken")
     @ResponseBody
-    public String getPerson(@ModelAttribute("token") String token, @ModelAttribute("auth") String authKey) {
+    public ResponseEntity<String> getPerson(@ModelAttribute("token") String token, @ModelAttribute("auth") String authKey) {
+        HttpHeaders h = new HttpHeaders();
+        h.add("Content-type", "text/json;charset=UTF-8");
         Person p = null;
         if (authKey.equals(AUTH_KEY))
             p = personService.getByToken(token);
-        return p == null ? "{}" : p.toString();
+        return new ResponseEntity<>(p == null ? "{}" : p.toString(), h, HttpStatus.OK);
     }
 
     @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST, value = "/getbyemail")
     @ResponseBody
-    public String getPersonByEmail(@ModelAttribute("email") String email, @ModelAttribute("auth") String authKey) {
+    public ResponseEntity<String> getPersonByEmail(@ModelAttribute("email") String email, @ModelAttribute("auth") String authKey) {
+        HttpHeaders h = new HttpHeaders();
+        h.add("Content-type", "text/json;charset=UTF-8");
         Person p = null;
         if (authKey.equals(AUTH_KEY))
             p = personService.getByEmail(email);
-        return p == null ? "{}" : p.toString();
+        return new ResponseEntity<>(p == null ? "{}" : p.toString(), h, HttpStatus.OK);
     }
 
     @RequestMapping("/updatedb")
@@ -337,7 +344,9 @@ public class PersonController {
 
     @RequestMapping(value = "/listjson", method = RequestMethod.POST)
     @ResponseBody
-    public String getPersons(@ModelAttribute("auth") String authKey) {
+    public ResponseEntity<String> getPersons(@ModelAttribute("auth") String authKey) {
+        HttpHeaders h = new HttpHeaders();
+        h.add("Content-type", "text/json;charset=UTF-8");
         ArrayList<String> arrayList = new ArrayList<>();
 
         List<Person> persons = new ArrayList<>();
@@ -356,7 +365,7 @@ public class PersonController {
             if (arrayList.size() - i > 1) stringBuilder.append(",\n");
         }
         stringBuilder.append("]}");
-        return stringBuilder.toString();
+        return new ResponseEntity<>(stringBuilder.toString(), h, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
