@@ -90,7 +90,7 @@ public class PersonController {
         List<Buy> orders = orderService.getByTourist(person.getId());
         model.addAttribute("orders", orders);
         model.addAttribute("inputEvent", new Event());
-        model.addAttribute("utils", new UtilsForWeb());
+        model.addAttribute("consts", new Consts());
         return "account";
     }
 

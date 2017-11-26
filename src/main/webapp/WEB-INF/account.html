@@ -89,9 +89,9 @@
 
 <div class="content"
      th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}, isThisUserAccount = ${true},
-              excursovod = ${person.getType()==utils.consts.PERSON_GUIDE or person.getType()==utils.consts.PERSON_MODER_GUIDE or person.getType()==utils.consts.PERSON_ADMIN},
-              tourist = ${person.getType()==utils.consts.PERSON_TOURIST or person.getType()==utils.consts.PERSON_MODER_TOURIST or person.getType()==utils.consts.PERSON_ADMIN},
-              notConfirmed = ${person.getType()==utils.consts.PERSON_DISABLED or person.getType()==utils.consts.PERSON_ADMIN}">
+              excursovod = ${person.getType()==consts.PERSON_GUIDE or person.getType()==consts.PERSON_MODER_GUIDE or person.getType()==consts.PERSON_ADMIN},
+              tourist = ${person.getType()==consts.PERSON_TOURIST or person.getType()==consts.PERSON_MODER_TOURIST or person.getType()==consts.PERSON_ADMIN},
+              notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==consts.PERSON_ADMIN}">
     <!--TODO isThisUserAccount-->
 
     <nav class="navbar navbar-default navbar-custom" role="navigation">

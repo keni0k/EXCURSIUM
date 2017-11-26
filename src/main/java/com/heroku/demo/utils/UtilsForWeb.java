@@ -2,7 +2,7 @@ package com.heroku.demo.utils;
 
 public class UtilsForWeb {
 
-    public static Consts consts;
+    public static Consts consts = new Consts();
 
     public static String getCategoryString(int category, int language) {
         String[] ru = {"Развлечения", "Наука", "История", "Искусство", "Производство", "Гастрономия", "Квесты", "Экстрим"};
