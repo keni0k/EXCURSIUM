@@ -288,6 +288,7 @@ public class EventController {
         List<Event> events = eventService.getByFilter(null, null, null, localeToLang(locale), null, null, true);
         modelMap.addAttribute("events", events);
         modelMap.addAttribute("inputEvent", event1);
+
         return "events";
     }
 
