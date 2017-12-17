@@ -87,6 +87,7 @@
     }
 
 
+
 </style>
 
 <div class="content"
@@ -1073,86 +1074,90 @@
                                 <form action="/users/up_to_guide"
                                       enctype="multipart/form-data" method="post">
 
-                                <!--Body-->
-                                <div class="modal-body mb-0">
+                                    <!--Body-->
+                                    <div class="modal-body mb-0">
 
-                                    <!--Grid row-->
-                                    <div class="row">
+                                        <!--Grid row-->
+                                        <div class="row">
 
-                                        <!--Grid column-->
-                                        <div class="col-md-6">
+                                            <!--Grid column-->
+                                            <div class="col-md-6">
 
-                                            <!--First Name-->
-                                            <div class="md-form form-sm">
-                                                <input type="text" id="upToGuide1"
-                                                       class="form-control" name="passport1"/>
-                                                <label for="editProfile1" class=""
-                                                       th:text="${#messages.msg('words.first_name')}">Серия и номер паспорта</label>
+                                                <!--First Name-->
+                                                <div class="md-form form-sm">
+                                                    <input type="text" id="upToGuide1"
+                                                           class="form-control" name="passport1"/>
+                                                    <label for="editProfile1" class=""
+                                                           th:text="${#messages.msg('words.first_name')}">Серия и номер
+                                                        паспорта</label>
+                                                </div>
+
                                             </div>
+                                            <!--Grid column-->
 
-                                        </div>
-                                        <!--Grid column-->
+                                            <!--Grid column-->
+                                            <div class="col-md-6">
 
-                                        <!--Grid column-->
-                                        <div class="col-md-6">
+                                                <!--Last Name-->
+                                                <div class="md-form form-sm">
+                                                    <input type="text" id="upToGuide2"
+                                                           class="form-control" name="passport2"/>
+                                                    <label for="editProfile2" class=""
+                                                           th:text="${#messages.msg('words.last_name')}">Кем и когда
+                                                        выдан паспорт</label>
+                                                </div>
 
-                                            <!--Last Name-->
-                                            <div class="md-form form-sm">
-                                                <input type="text" id="upToGuide2"
-                                                       class="form-control" name="passport2"/>
-                                                <label for="editProfile2" class=""
-                                                       th:text="${#messages.msg('words.last_name')}">Кем и когда выдан паспорт</label>
                                             </div>
+                                            <!--Grid column-->
 
-                                        </div>
-                                        <!--Grid column-->
-
-                                        <!--Grid column-->
-                                        <div class="col-md-12">
-                                            <div class="md-form form-sm">
-                                                <input name="file" type="file" id="upToGuide3"
-                                                       class="form-control"
-                                                       size="30000000"
-                                                       style="padding-left: 10rem; padding-top: 5px; font-size: 1rem;"
-                                                       accept="image/jpeg,image/png"
-                                                       aria-label="Фотографии"/>
-                                                <label for="upToGuide3" class="" style="top: 0.5rem;"
-                                                       th:text="${#messages.msg('words.new_photo')}">Фотография паспорта</label>
+                                            <!--Grid column-->
+                                            <div class="col-md-12">
+                                                <div class="md-form form-sm">
+                                                    <input name="file" type="file" id="upToGuide3"
+                                                           class="form-control"
+                                                           size="30000000"
+                                                           style="padding-left: 10rem; padding-top: 5px; font-size: 1rem;"
+                                                           accept="image/jpeg,image/png"
+                                                           aria-label="Фотографии"/>
+                                                    <label for="upToGuide3" class="" style="top: 0.5rem;"
+                                                           th:text="${#messages.msg('words.new_photo')}">Фотография
+                                                        паспорта</label>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <!--Grid column-->
+                                            <!--Grid column-->
 
-                                        <!--Grid column-->
-                                        <div class="col-md-12" th:if="${person.getAbout()!=''}">
+                                            <!--Grid column-->
+                                            <div class="col-md-12" th:if="${person.getAbout()!=''}">
 
-                                            <!--Company website-->
-                                            <div class="md-form form-sm">
+                                                <!--Company website-->
+                                                <div class="md-form form-sm">
                                                                 <textarea type="text" id="upToGuide4" name="about_me"
                                                                           class="md-textarea"
                                                                           th:text="${person.getAbout()}"></textarea>
-                                                <label for="upToGuide4" class=""
-                                                       th:text="${#messages.msg('words.about_me')}">О себе</label>
+                                                    <label for="upToGuide4" class=""
+                                                           th:text="${#messages.msg('words.about_me')}">О себе</label>
+                                                </div>
+
                                             </div>
+                                            <!--Grid column-->
 
                                         </div>
-                                        <!--Grid column-->
+                                        <!--Grid row-->
 
                                     </div>
-                                    <!--Grid row-->
 
-                                </div>
-
-                                <!--Footer-->
-                                <div class="modal-footer justify-content-center">
-                                    <button type="reset"
-                                            class="btn btn-outline-primary waves-effect waves-light"
-                                            data-dismiss="modal">Отменить
-                                    </button>
-                                    <button type="submit"
-                                            class="btn btn-primary waves-effect waves-light">
-                                        Отправить <i class="fa fa-check ml-1"></i>
-                                    </button>
-                                </div>
+                                    <!--Footer-->
+                                    <div class="modal-footer justify-content-center">
+                                        <button type="reset"
+                                                class="btn btn-outline-primary waves-effect waves-light"
+                                                data-dismiss="modal">Отменить
+                                        </button>
+                                        <button type="submit"
+                                                class="btn btn-primary waves-effect waves-light">
+                                            Отправить <i class="fa fa-check ml-1"></i>
+                                        </button>
+                                    </div>
+                                </form>
 
                             </div>
                             <!--/.Content-->
@@ -1232,6 +1237,7 @@
     /*]]>*/
 
 
+
 </script>
 
 <script>
@@ -1246,12 +1252,14 @@
     });
 
 
+
 </script>
 <div class="drag-target"
      style="left: 0px; touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
      (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter46873476 = new Ya.Metrika({ id:46873476, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");
+
 
 </script>
 <noscript>
