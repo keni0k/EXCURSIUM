@@ -170,7 +170,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-5 col-md-4 col-lg-3">
                     <div class="left-sidebar">
                         <h2>Фильтр</h2>
                         <form method="get" action="/events/list">
@@ -282,7 +282,7 @@
                         </form>
                     </div>
                 </div>
-                <div class="col-sm-9">
+                <div class="col-sm-7 col-md-8 col-lg-9">
                     <h2 class="title text-center" th:text="${#messages.msg('titles.excursions')}"
                         th:href="@{/events/list}">
                         Экскурсии</h2>
@@ -290,7 +290,7 @@
                     <th:block th:if="${events.size()>0}">
                     <div class="row" th:each="i : ${#numbers.sequence( 0, events.size()-1, 2)}">
                         <th:block th:with="inc = ${i!=events.size()-2?2:i!=events.size()-1?1:0}">
-                            <div class="col-md-4" th:each="j : ${#numbers.sequence(i,i+inc)}"
+                            <div class="col-md-6 col-lg-4" th:each="j : ${#numbers.sequence(i,i+inc)}"
                                  th:with="event=${events.get(j)}">
                                 <div class="card">
                                     <!--Card image-->
