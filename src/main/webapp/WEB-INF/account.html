@@ -1087,8 +1087,7 @@
                                                 <div class="md-form form-sm">
                                                     <input type="text" id="upToGuide1"
                                                            class="form-control" name="passport1"/>
-                                                    <label for="editProfile1" class=""
-                                                           th:text="${#messages.msg('words.first_name')}">Серия и номер
+                                                    <label for="editProfile1" class="">Серия и номер
                                                         паспорта</label>
                                                 </div>
 
@@ -1102,8 +1101,7 @@
                                                 <div class="md-form form-sm">
                                                     <input type="text" id="upToGuide2"
                                                            class="form-control" name="passport2"/>
-                                                    <label for="editProfile2" class=""
-                                                           th:text="${#messages.msg('words.last_name')}">Кем и когда
+                                                    <label for="editProfile2" class="">Кем и когда
                                                         выдан паспорт</label>
                                                 </div>
 
@@ -1118,16 +1116,15 @@
                                                            size="30000000"
                                                            style="padding-left: 10rem; padding-top: 5px; font-size: 1rem;"
                                                            accept="image/jpeg,image/png"
-                                                           aria-label="Фотографии"/>
-                                                    <label for="upToGuide3" class="" style="top: 0.5rem;"
-                                                           th:text="${#messages.msg('words.new_photo')}">Фотография
+                                                           aria-label="Фотография паспорта"/>
+                                                    <label for="upToGuide3" class="" style="top: 0.5rem;">Фотография
                                                         паспорта</label>
                                                 </div>
                                             </div>
                                             <!--Grid column-->
 
                                             <!--Grid column-->
-                                            <div class="col-md-12" th:if="${person.getAbout()!=''}">
+                                            <div class="col-md-12" th:if="${person.getAbout().length()<50}">
 
                                                 <!--Company website-->
                                                 <div class="md-form form-sm">
