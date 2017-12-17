@@ -194,7 +194,7 @@
                             <hr/>
                             <div class="priceFilter">
                                 <div class="price-range">
-                                    <div class="well">
+                                    <div class="well" style="padding: 10px 20px;">
                                         <h5>Цена</h5>
                                         <br/>
                                         <div class="layout-slider" style="width: 100%">
@@ -235,7 +235,7 @@
                                             /*]]>*/
                                         </script>
                                     </div>
-                                    <div class="well">
+                                    <div class="well" style="padding: 10px 20px;">
                                         <h5>Время</h5>
                                         <br/>
                                         <div class="layout-slider" style="width: 100%">
@@ -289,7 +289,7 @@
                     <!--Grid column-->
                     <th:block th:if="${events.size()>0}">
                     <div class="row" th:each="i : ${#numbers.sequence( 0, events.size()-1, 2)}">
-                        <th:block th:with="inc = ${i!=events.size()-2?2:i!=events.size()-1?1:0}">
+                        <th:block th:with="inc = ${i<events.size()-2?2:i!=events.size()-1?1:0}">
                             <div class="col-lg-4" th:each="j : ${#numbers.sequence(i,i+inc)}"
                                  th:with="event=${events.get(j)}">
                                 <div class="card">
@@ -344,8 +344,8 @@
                                            th:text="${event.getSmallDescription()}" align="justify">%DESCRIPTION%</p>
 
                                         <!--Card footer-->
-                                        <div class="card-footer">
-                                           <h4 class="left" style="color:#4285F4; padding: 0.4em;">
+                                        <div class="card-footer" style="padding: 0.75rem 0.5rem;">
+                                           <h4 class="left" style="color:#4285F4; padding: 0.4em 0.1em;">
                                             <strong th:text="${event.getPrice()}+'&#8381;'">%PRICE%</strong>
                                            </h4>
                                             <span class="right">
