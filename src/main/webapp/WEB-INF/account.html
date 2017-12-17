@@ -85,6 +85,8 @@
     .navbar-custom .icon-bar {
         background-color: #33aa33;
     }
+
+
 </style>
 
 <div class="content"
@@ -186,7 +188,8 @@
 
                                     <button th:if="${notConfirmed}" type="button"
                                             class="btn btn-primary mt-4 waves-effect waves-light"
-                                    onclick="alert('В разработке с 25.11.2017. Если вы видите это сообщение, то, вероятно, подтверждающее письмо у вас на почте')"><!--TODO translate-->
+                                            onclick="alert('В разработке с 25.11.2017. Если вы видите это сообщение, то, вероятно, подтверждающее письмо у вас на почте')">
+                                        <!--TODO translate-->
                                         <th:block>Подтвердить E-mail</th:block><!--TODO translate-->
                                     </button>
 
@@ -305,13 +308,14 @@
                                             <div class="card-footer links-light">
                                                 <span class="left pt-2">
                                                     <strong th:text="${order.getPrice()}+'&#8381;  '"
-                                                    style="color:#4285F4; font-size: medium; padding-top: -0.2em;">%Цена%  </strong>
+                                                            style="color:#4285F4; font-size: medium; padding-top: -0.2em;">%Цена%  </strong>
                                                     <a><i class="fa fa-share-alt mr-2"></i></a>
                                                     <a><i class="fa fa-heart-o mr-2"></i>10</a>
                                                 </span>
                                                 <span class="right">
-                                                    <a th:href="@{/orders/order(id=${order.getId()})}" class="waves-effect p-2">Открыть<i
-                                                    class="fa fa-photo ml-1"></i></a>
+                                                    <a th:href="@{/orders/order(id=${order.getId()})}"
+                                                       class="waves-effect p-2">Открыть<i
+                                                            class="fa fa-photo ml-1"></i></a>
                                                 </span>
                                             </div>
 
@@ -397,7 +401,8 @@
 
                                             <!--Card image-->
                                             <div class="view overlay hm-white-slight">
-                                                <img th:src="${event.pathToPhoto}" src="#" class="img-fluid" style="height: 240px; min-width: -webkit-fill-available;" alt=""/>
+                                                <img th:src="${event.pathToPhoto}" src="#" class="img-fluid"
+                                                     style="height: 240px; min-width: -webkit-fill-available;" alt=""/>
                                                 <a href="#" th:href="@{/events/event(id=${event.getId()})}">
                                                     <div class="mask waves-effect waves-light"></div>
                                                 </a>
@@ -406,8 +411,11 @@
                                             <!--Card content-->
                                             <div class="card-body pb-0">
                                                 <!--Title-->
-                                                <h4 class="card-title" th:text="${event.getName()}"><a th:href="@{/events/event(id=${event.getId()})}">Название экскурсии</a></h4>
-                                                <strong style="color:#3265D4; font-size: medium; padding-top: -0.2em;" th:text="${event.getStringType(0)}">На модерации</strong>
+                                                <h4 class="card-title" th:text="${event.getName()}"><a
+                                                        th:href="@{/events/event(id=${event.getId()})}">Название
+                                                    экскурсии</a></h4>
+                                                <strong style="color:#3265D4; font-size: medium; padding-top: -0.2em;"
+                                                        th:text="${event.getStringType(0)}">На модерации</strong>
                                                 <!--TODO translate-->
                                             </div>
 
@@ -420,7 +428,8 @@
                                                     <a><i class="fa fa-heart-o mr-2"></i>10</a>
                                                 </span>
                                                 <span class="right">
-                                                    <a th:href="@{/events/event(id=${event.getId()})}" class="waves-effect p-2">Открыть<i
+                                                    <a th:href="@{/events/event(id=${event.getId()})}"
+                                                       class="waves-effect p-2">Открыть<i
                                                             class="fa fa-photo ml-1"></i></a>
                                                 </span>
                                             </div>
@@ -588,7 +597,8 @@
                                                             <div class="md-form form-sm">
                                                                 <input name="file" type="file" id="filePerson"
                                                                        class="form-control"
-                                                                       size="30000000" style="padding-left: 8rem; padding-top: 5px; font-size: 1rem;"
+                                                                       size="30000000"
+                                                                       style="padding-left: 8rem; padding-top: 5px; font-size: 1rem;"
                                                                        accept="image/jpeg,image/png"
                                                                        aria-label="Фотографии"/>
                                                                 <label for="filePerson" class="" style="top: 0.5rem;"
@@ -910,28 +920,36 @@
                                                 <select name="category" id="category"
                                                         class="selectpicker"
                                                         style="height: auto; margin-bottom: 2rem;">
-                                                    <option value="0" th:text="${#messages.msg('category.0')}" th:selected="${inputEvent.getCategory()==0}">
+                                                    <option value="0" th:text="${#messages.msg('category.0')}"
+                                                            th:selected="${inputEvent.getCategory()==0}">
                                                         Развлечения
                                                     </option>
-                                                    <option value="1" th:selected="${inputEvent.getCategory()==1}" th:text="${#messages.msg('category.1')}">
+                                                    <option value="1" th:selected="${inputEvent.getCategory()==1}"
+                                                            th:text="${#messages.msg('category.1')}">
                                                         Наука
                                                     </option>
-                                                    <option value="2" th:selected="${inputEvent.getCategory()==2}" th:text="${#messages.msg('category.2')}">
+                                                    <option value="2" th:selected="${inputEvent.getCategory()==2}"
+                                                            th:text="${#messages.msg('category.2')}">
                                                         История
                                                     </option>
-                                                    <option value="3" th:selected="${inputEvent.getCategory()==3}" th:text="${#messages.msg('category.3')}">
+                                                    <option value="3" th:selected="${inputEvent.getCategory()==3}"
+                                                            th:text="${#messages.msg('category.3')}">
                                                         Искусство
                                                     </option>
-                                                    <option value="4" th:selected="${inputEvent.getCategory()==4}" th:text="${#messages.msg('category.4')}">
+                                                    <option value="4" th:selected="${inputEvent.getCategory()==4}"
+                                                            th:text="${#messages.msg('category.4')}">
                                                         Производство
                                                     </option>
-                                                    <option value="5" th:selected="${inputEvent.getCategory()==5}" th:text="${#messages.msg('category.5')}">
+                                                    <option value="5" th:selected="${inputEvent.getCategory()==5}"
+                                                            th:text="${#messages.msg('category.5')}">
                                                         Гастрономия
                                                     </option>
-                                                    <option value="6" th:selected="${inputEvent.getCategory()==6}" th:text="${#messages.msg('category.6')}">
+                                                    <option value="6" th:selected="${inputEvent.getCategory()==6}"
+                                                            th:text="${#messages.msg('category.6')}">
                                                         Квесты
                                                     </option>
-                                                    <option value="7" th:selected="${inputEvent.getCategory()==7}" th:text="${#messages.msg('category.7')}">
+                                                    <option value="7" th:selected="${inputEvent.getCategory()==7}"
+                                                            th:text="${#messages.msg('category.7')}">
                                                         Экстрим
                                                     </option>
                                                 </select>
@@ -989,11 +1007,13 @@
 
                                         <div class="md-form form-sm">
                                             <input name="file" type="file" id="file" class="form-control" required=""
-                                                   size="30000000" style="padding-left: 6rem;font-size: 1rem;padding-top: 5px;"
+                                                   size="30000000"
+                                                   style="padding-left: 6rem;font-size: 1rem;padding-top: 5px;"
                                                    accept="image/jpeg,image/png" aria-label="Фотографии"/>
                                             <!--<label for="file" th:if="${error_data}" th:text="${#messages.msg('error.event.file')}"
                                                    th:class="'error'">File Error</label>TODO:error_data(file)-->
-                                            <label style="top: 0.45rem;" for="file" class="" th:text="${#messages.msg('words.photos')}">Фотографии</label>
+                                            <label style="top: 0.45rem;" for="file" class=""
+                                                   th:text="${#messages.msg('words.photos')}">Фотографии</label>
                                         </div>
 
                                         <div class="panel panel-default">
@@ -1050,31 +1070,88 @@
                                             aria-hidden="true">×</span></button>
                                 </div>
 
+                                <form action="/users/up_to_guide"
+                                      enctype="multipart/form-data" method="post">
+
                                 <!--Body-->
                                 <div class="modal-body mb-0">
 
-                                    <!--Subject-->
-                                    <div class="md-form form-sm">
-                                        <input type="text" id="modalUpToGuide1" class="form-control"/>
-                                        <label for="modalUpToGuide1" class="">Паспортные данные</label>
-                                    </div>
+                                    <!--Grid row-->
+                                    <div class="row">
 
-                                    <!--Message-->
-                                    <div class="md-form">
-                                        <textarea id="modalUpToGuide2" class="md-textarea"
-                                                  style="height: 100px;"></textarea>
-                                        <label for="modalUpToGuide2" th:text="${#messages.msg('words.about_me')}">О себе</label>
+                                        <!--Grid column-->
+                                        <div class="col-md-6">
+
+                                            <!--First Name-->
+                                            <div class="md-form form-sm">
+                                                <input type="text" id="upToGuide1"
+                                                       class="form-control" name="passport1"/>
+                                                <label for="editProfile1" class=""
+                                                       th:text="${#messages.msg('words.first_name')}">Серия и номер паспорта</label>
+                                            </div>
+
+                                        </div>
+                                        <!--Grid column-->
+
+                                        <!--Grid column-->
+                                        <div class="col-md-6">
+
+                                            <!--Last Name-->
+                                            <div class="md-form form-sm">
+                                                <input type="text" id="upToGuide2"
+                                                       class="form-control" name="passport2"/>
+                                                <label for="editProfile2" class=""
+                                                       th:text="${#messages.msg('words.last_name')}">Кем и когда выдан паспорт</label>
+                                            </div>
+
+                                        </div>
+                                        <!--Grid column-->
+
+                                        <!--Grid column-->
+                                        <div class="col-md-12">
+                                            <div class="md-form form-sm">
+                                                <input name="file" type="file" id="upToGuide3"
+                                                       class="form-control"
+                                                       size="30000000"
+                                                       style="padding-left: 10rem; padding-top: 5px; font-size: 1rem;"
+                                                       accept="image/jpeg,image/png"
+                                                       aria-label="Фотографии"/>
+                                                <label for="upToGuide3" class="" style="top: 0.5rem;"
+                                                       th:text="${#messages.msg('words.new_photo')}">Фотография паспорта</label>
+                                            </div>
+                                        </div>
+                                        <!--Grid column-->
+
+                                        <!--Grid column-->
+                                        <div class="col-md-12" th:if="${person.getAbout()!=''}">
+
+                                            <!--Company website-->
+                                            <div class="md-form form-sm">
+                                                                <textarea type="text" id="upToGuide4" name="about_me"
+                                                                          class="md-textarea"
+                                                                          th:text="${person.getAbout()}"></textarea>
+                                                <label for="upToGuide4" class=""
+                                                       th:text="${#messages.msg('words.about_me')}">О себе</label>
+                                            </div>
+
+                                        </div>
+                                        <!--Grid column-->
+
                                     </div>
+                                    <!--Grid row-->
 
                                 </div>
 
                                 <!--Footer-->
                                 <div class="modal-footer justify-content-center">
-                                    <button type="button" class="btn btn-outline-primary waves-effect waves-light"
-                                            data-dismiss="modal">Закрыть
+                                    <button type="reset"
+                                            class="btn btn-outline-primary waves-effect waves-light"
+                                            data-dismiss="modal">Отменить
                                     </button>
-                                    <button type="button" class="btn btn-primary waves-effect waves-light">Отправить <i
-                                            class="fa fa-paper-plane ml-1"></i></button>
+                                    <button type="submit"
+                                            class="btn btn-primary waves-effect waves-light">
+                                        Отправить <i class="fa fa-check ml-1"></i>
+                                    </button>
                                 </div>
 
                             </div>
@@ -1153,6 +1230,8 @@
     }
 
     /*]]>*/
+
+
 </script>
 
 <script>
@@ -1165,9 +1244,18 @@
         wheelPropagation: true,
         minScrollbarLength: 20
     });
+
+
 </script>
 <div class="drag-target"
      style="left: 0px; touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div>
-<!-- Yandex.Metrika counter --> <script type="text/javascript" > (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter46873476 = new Ya.Metrika({ id:46873476, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks"); </script> <noscript><div><img src="https://mc.yandex.ru/watch/46873476" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter -->
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+     (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter46873476 = new Ya.Metrika({ id:46873476, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");
+
+</script>
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/46873476" style="position:absolute; left:-9999px;" alt=""/></div>
+</noscript> <!-- /Yandex.Metrika counter -->
 </body>
 </html>

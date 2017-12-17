@@ -165,7 +165,7 @@
                 <div class="panel-body">
                     <div class="chip"
                          th:each="i : ${#numbers.sequence(0, utils.getCategoriesCount()-1)}">
-                        <a th:href="@{/events/list(category=${i}, price = ${minMaxPrice}, sort_by = ${sort_by})}">
+                        <a th:href="@{/events/list(category=${i}, sort_by = ${sort_by})}">
                             <img th:src="${utils.getCategoryUrl(i)}" alt=""
                                  src="../resources/img/user.png"/>
                             <span th:text="${#messages.msg('category.'+i)}">%Категория%</span>
