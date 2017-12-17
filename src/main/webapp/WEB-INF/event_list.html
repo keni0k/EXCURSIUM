@@ -159,19 +159,19 @@
         <!--</div>-->
         <div class="container">
             <div class="row">
-                <div class="col-sm-4">
+                <h2>Категории</h2>
+                <div class="panel-body">
+                    <div class="chip"
+                         th:each="i : ${#numbers.sequence(0, utils.getCategoriesCount()-1)}">
+                        <a th:href="@{/events/list(category=${i}, price = ${minMaxPrice}, sort_by = ${sort_by})}">
+                            <img th:src="${utils.getCategoryUrl(i)}" alt=""
+                                 src="../resources/img/user.png"/>
+                            <span th:text="${#messages.msg('category.'+i)}">%Категория%</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-3">
                     <div class="left-sidebar">
-                        <h2>Категории</h2>
-                        <div class="panel-body">
-                            <div class="chip"
-                                 th:each="i : ${#numbers.sequence(0, utils.getCategoriesCount()-1)}">
-                                <a th:href="@{/events/list(category=${i}, price = ${minMaxPrice}, sort_by = ${sort_by})}">
-                                    <img th:src="${utils.getCategoryUrl(i)}" alt=""
-                                         src="../resources/img/user.png"/>
-                                    <span th:text="${#messages.msg('category.'+i)}">%Категория%</span>
-                                </a>
-                            </div>
-                        </div>
                         <h2>Фильтр</h2>
                         <form method="get" action="/events/list">
                             <br/>
@@ -276,21 +276,21 @@
                                 <br/>
                                 <button class="btn btn-default add-to-cart" type="submit"><i class="fa fa-filter"
                                                                                              aria-hidden="true"></i>
-                                    Фильтровать товары
+                                    Фильтровать
                                 </button>
                             </div>
                         </form>
                     </div>
                 </div>
-                <div class="col-sm-8">
+                <div class="col-sm-9">
                     <h2 class="title text-center" th:text="${#messages.msg('titles.excursions')}"
                         th:href="@{/events/list}">
                         Экскурсии</h2>
                     <!--Grid column-->
                     <th:block th:if="${events.size()>0}">
                     <div class="row" th:each="i : ${#numbers.sequence( 0, events.size()-1, 2)}">
-                        <th:block th:with="inc = ${i!=events.size()-1?1:0}">
-                            <div class="col-md-6" th:each="j : ${#numbers.sequence(i,i+inc)}"
+                        <th:block th:with="inc = ${i!=events.size()-2?2:i!=events.size()-1?1:0}">
+                            <div class="col-md-4" th:each="j : ${#numbers.sequence(i,i+inc)}"
                                  th:with="event=${events.get(j)}">
                                 <div class="card">
                                     <!--Card image-->

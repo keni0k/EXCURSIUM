@@ -1035,6 +1035,55 @@
                     </div>
                     <!--Modal: modalSubmitProject-->
 
+                    <!--Modal: modalUpToGuide-->
+                    <div class="modal fade" id="modalUpToGuide" tabindex="-1" role="dialog"
+                         aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                        <div class="modal-dialog cascading-modal modal-lg" role="document">
+
+                            <!--Content-->
+                            <div class="modal-content">
+
+                                <!--Header-->
+                                <div class="modal-header light-blue darken-3 white-text">
+                                    <h4 class=""><i class="fa fa-newspaper-o"></i> Дополнительные поля</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                            aria-hidden="true">×</span></button>
+                                </div>
+
+                                <!--Body-->
+                                <div class="modal-body mb-0">
+
+                                    <!--Subject-->
+                                    <div class="md-form form-sm">
+                                        <input type="text" id="modalUpToGuide1" class="form-control"/>
+                                        <label for="modalUpToGuide1" class="">Subject</label>
+                                    </div>
+
+                                    <!--Message-->
+                                    <div class="md-form">
+                                        <textarea id="modalUpToGuide2" class="md-textarea"
+                                                  style="height: 150px;"></textarea>
+                                        <label for="modalUpToGuide2" th:text="${#messages.msg('words.about_me')}">О себе</label>
+                                    </div>
+
+                                </div>
+
+                                <!--Footer-->
+                                <div class="modal-footer justify-content-center">
+                                    <button type="button" class="btn btn-outline-primary waves-effect waves-light"
+                                            data-dismiss="modal">Закрыть
+                                    </button>
+                                    <button type="button" class="btn btn-primary waves-effect waves-light">Отправить <i
+                                            class="fa fa-paper-plane ml-1"></i></button>
+                                </div>
+
+                            </div>
+                            <!--/.Content-->
+
+                        </div>
+                    </div>
+                    <!--Modal: modalUpToGuide-->
+
                 </section>
                 <!--Section: Modals-->
 

@@ -153,7 +153,7 @@
                         <div class="col-md-12 col-lg-6">
                             <div class="input-group">
                                 <span class="input-group-addon"
-                                      th:text="${#messages.msg('words.first_name')}">Имя</span>
+                                      th:text="${#messages.msg('words.first_name')} + ' *'">Имя</span>
                                 <input name="firstName" type="text" class="form-control"
                                        th:value="${insertPerson.getFirstName()}" placeholder="Имя" aria-label="Имя"
                                        required=""/>
@@ -165,7 +165,7 @@
                         <div class="col-md-12 col-lg-6">
                             <div class="input-group">
                                 <span class="input-group-addon"
-                                      th:text="${#messages.msg('words.last_name')}">Фамилия</span>
+                                      th:text="${#messages.msg('words.last_name')} + ' *'">Фамилия</span>
                                 <input name="lastName" type="text" class="form-control"
                                        th:value="${insertPerson.getLastName()}"
                                        placeholder="Фамилия" required=""
@@ -175,7 +175,7 @@
                     </div>
                     <br/>
                     <div class="input-group">
-                        <span class="input-group-addon" th:text="${#messages.msg('words.login')}">Логин</span>
+                        <span class="input-group-addon" th:text="${#messages.msg('words.login')} + ' *'">Логин</span>
                         <input name="login" id="login" type="text" class="form-control" placeholder="Логин"
                                aria-label="Логин" th:value="${insertPerson.getLogin()}" required=""/>
                         <label for="login" th:if="${error_login}" th:text="${#messages.msg('error.user.login.free')}"
@@ -188,7 +188,7 @@
                         <div class="col-md-12 col-lg-6">
                             <div class="input-group">
                                 <span class="input-group-addon"
-                                      th:text="${#messages.msg('words.password')}">Пароль</span>
+                                      th:text="${#messages.msg('words.password')} + ' *'">Пароль</span>
                                 <input name="pass" id="pass" type="password" class="form-control" minlength="6"
                                        placeholder="Пароль" aria-label="Пароль" required=""/>
                                 <label for="pass" th:if="${error_pass}" th:text="${#messages.msg('error.user.pass2')}"
@@ -201,7 +201,7 @@
                         </div>
                         <div class="col-md-12 col-lg-6">
                             <div class="input-group">
-                                <span class="input-group-addon" th:text="${#messages.msg('words.password_again')}">Повторите пароль</span>
+                                <span class="input-group-addon" th:text="${#messages.msg('words.password_again')} + ' *'">Повторите пароль</span>
                                 <input name="pass2" type="password" id="pass2" class="form-control"
                                        placeholder="Повторите пароль" aria-label="Повторите пароль" required=""/>
                                 <label for="pass2" th:if="${error_pass}" th:text="${#messages.msg('error.user.pass2')}"
@@ -218,7 +218,7 @@
                     </div>
                     <br/>
                     <div class="input-group">
-                        <span class="input-group-addon">Email</span>
+                        <span class="input-group-addon">Email *</span>
                         <input name="email" id="email" type="email" class="form-control"
                                th:value="${insertPerson.getEmail()}" placeholder="Email" aria-label="Email"
                                required=""/>
@@ -231,7 +231,7 @@
                     </div>
                     <br/>
                     <div class="input-group">
-                        <span class="input-group-addon" th:text="${#messages.msg('words.phone')}">Телефон</span>
+                        <span class="input-group-addon" th:text="${#messages.msg('words.phone')} + ' *'">Телефон</span>
                         <input name="phoneNumber" type="text" class="form-control bfh-phone"
                                th:value="${insertPerson.getPhoneNumber()}" placeholder="Телефон" required=""
                                minlength="17"
@@ -245,14 +245,7 @@
                     </div>
                     <br/>
                     <div class="input-group">
-                        <span class="input-group-addon" th:text="${#messages.msg('words.about_me')}">О себе</span>
-                        <textarea name="about" class="form-control" placeholder="О себе" aria-label="О себе"
-                                  required=""
-                                  th:text="${insertPerson.getAbout()}"></textarea>
-                    </div>
-                    <br/>
-                    <div class="input-group">
-                        <span class="input-group-addon" th:text="${#messages.msg('words.city')}">Город</span>
+                        <span class="input-group-addon" th:text="${#messages.msg('words.city')} + ' *'">Город *</span>
                         <input name="city" type="text" class="form-control" th:value="${insertPerson.getCity()}"
                                placeholder="Город" required="" aria-label="Город"/>
                     </div>
