@@ -55,6 +55,7 @@
             margin-bottom: 60px;
             width: 50%;
         }
+
     </style>
 
 
@@ -109,6 +110,7 @@
     .navbar-custom .icon-bar {
         background-color: #33aa33;
     }
+
 </style>
 <div class="content"
      th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
@@ -159,7 +161,7 @@
         <!--</div>-->
         <div class="container">
             <div class="row">
-                <h2>Категории</h2>
+                <h2 class="title">Категории</h2>
                 <div class="panel-body">
                     <div class="chip"
                          th:each="i : ${#numbers.sequence(0, utils.getCategoriesCount()-1)}">
@@ -233,6 +235,7 @@
                                                 skin: "blue"
                                             });
                                             /*]]>*/
+
                                         </script>
                                     </div>
                                     <div class="well" style="padding: 10px 20px;">
@@ -263,6 +266,7 @@
                                                 }
                                             });
                                             /*]]>*/
+
                                         </script>
                                     </div>
                                 </div>
@@ -283,94 +287,98 @@
                     </div>
                 </div>
                 <div class="col-sm-7 col-md-8 col-lg-9">
-                    <h2 class="title text-center" th:text="${#messages.msg('titles.excursions')}"
-                        th:href="@{/events/list}">
-                        Экскурсии</h2>
+                    <a th:href="@{/events/list}">
+                        <h2 class="title text-center" th:text="${#messages.msg('titles.excursions')}">
+                            Экскурсии</h2>
+                    </a>
                     <!--Grid column-->
                     <th:block th:if="${events.size()>0}">
-                    <div class="row" th:each="i : ${#numbers.sequence( 0, events.size()-1, 2)}">
-                        <th:block th:with="inc = ${i!=events.size()-2 and i!=events.size()-1?2:i!=events.size()-1?1:0}">
-                            <div class="col-lg-4" th:each="j : ${#numbers.sequence(i,i+inc)}"
-                                 th:with="event=${events.get(j)}">
-                                <div class="card">
-                                    <!--Card image-->
-                                    <div class="view overlay hm-white-slight z-depth-1">
-                                        <div class="img_crop">
-                                            <img src="../resources/img/bg-cta.jpg" th:src="${event.pathToPhoto}"
-                                                 class="img-fluid" alt=""/>
+                        <div class="row" th:each="i : ${#numbers.sequence( 0, events.size()-1, 2)}">
+                            <th:block
+                                    th:with="inc = ${i!=events.size()-2 and i!=events.size()-1?2:i!=events.size()-1?1:0}">
+                                <div class="col-lg-4" th:each="j : ${#numbers.sequence(i,i+inc)}"
+                                     th:with="event=${events.get(j)}">
+                                    <div class="card">
+                                        <!--Card image-->
+                                        <div class="view overlay hm-white-slight z-depth-1">
+                                            <div class="img_crop">
+                                                <img src="../resources/img/bg-cta.jpg" th:src="${event.pathToPhoto}"
+                                                     class="img-fluid" alt=""/>
+                                            </div>
+                                            <a th:href="@{/events/event(id = ${event.getId()})}">
+                                                <div class="mask waves-effect waves-light"></div>
+                                            </a>
                                         </div>
-                                        <a th:href="@{/events/event(id = ${event.getId()})}">
-                                            <div class="mask waves-effect waves-light"></div>
-                                        </a>
-                                    </div>
-                                    <!--/.Card image-->
+                                        <!--/.Card image-->
 
-                                    <!--Card content-->
-                                    <div class="card-body no-padding text-center">
-                                        <!--Category & Title-->
-                                        <h5 th:text="${{event.getCategoryString()}}">%CATEGORY%</h5>
-                                        <h4 class="card-title">
-                                            <strong>
-                                                <h3>
-                                                    <a th:href="@{/events/event(id=${event.getId()})}"
-                                                       th:text="${event.name}">%NAME%</a>
-                                                </h3>
-                                            </strong>
-                                        </h4>
+                                        <!--Card content-->
+                                        <div class="card-body no-padding text-center">
+                                            <!--Category & Title-->
+                                            <h5 th:text="${{event.getCategoryString()}}">%CATEGORY%</h5>
+                                            <h4 class="card-title">
+                                                <strong>
+                                                    <h3>
+                                                        <a th:href="@{/events/event(id=${event.getId()})}"
+                                                           th:text="${event.name}">%NAME%</a>
+                                                    </h3>
+                                                </strong>
+                                            </h4>
 
-                                        <!--Rating-->
-                                        <ul class="rating">
-                                            <li th:if="${event.getRate()!=-1}" th:text="${event.getRate()}"></li>
-                                            <th:block th:if="${(event.getIntRate()!=-1)and(event.getIntRate()!=0)}">
-                                                <li th:each="i : ${#numbers.sequence(0, event.getIntRate()-1)}">
-                                                    <i class="fa fa-star"></i>
-                                                </li>
-                                            </th:block>
-                                            <th:block th:if="${(event.getIntRate()!=-1)and(event.getIntRate()!=5)}">
-                                                <li th:each="i : ${#numbers.sequence(event.getIntRate(), 4)}">
-                                                    <i class="fa fa-star-o"></i>
-                                                </li>
-                                            </th:block>
-                                            <th:block th:if="${(event.getIntRate()==-1)}">
-                                                <li th:each="i : ${#numbers.sequence(0, 4)}">
-                                                    <i class="fa fa-star-o"></i>
-                                                </li>
-                                            </th:block>
-                                            <li th:text="'('+${event.getReviewsCount()}+')'"></li>
-                                        </ul>
+                                            <!--Rating-->
+                                            <ul class="rating">
+                                                <li th:if="${event.getRate()!=-1}" th:text="${event.getRate()}"></li>
+                                                <th:block th:if="${(event.getIntRate()!=-1)and(event.getIntRate()!=0)}">
+                                                    <li th:each="i : ${#numbers.sequence(0, event.getIntRate()-1)}">
+                                                        <i class="fa fa-star"></i>
+                                                    </li>
+                                                </th:block>
+                                                <th:block th:if="${(event.getIntRate()!=-1)and(event.getIntRate()!=5)}">
+                                                    <li th:each="i : ${#numbers.sequence(event.getIntRate(), 4)}">
+                                                        <i class="fa fa-star-o"></i>
+                                                    </li>
+                                                </th:block>
+                                                <th:block th:if="${(event.getIntRate()==-1)}">
+                                                    <li th:each="i : ${#numbers.sequence(0, 4)}">
+                                                        <i class="fa fa-star-o"></i>
+                                                    </li>
+                                                </th:block>
+                                                <li th:text="'('+${event.getReviewsCount()}+')'"></li>
+                                            </ul>
 
-                                        <!--Description-->
-                                        <p class="card-text" style="font-size: medium; color: #000000"
-                                           th:text="${event.getSmallDescription()}" align="justify">%DESCRIPTION%</p>
+                                            <!--Description-->
+                                            <p class="card-text" style="font-size: medium; color: #000000"
+                                               th:text="${event.getSmallDescription()}" align="justify">
+                                                %DESCRIPTION%</p>
 
-                                        <!--Card footer-->
-                                        <div class="card-footer" style="padding: 0.75rem 0.5rem;">
-                                           <h4 class="left" style="color:#4285F4; padding: 0.4em 0.1em;">
-                                            <strong th:text="${event.getPrice()}+'&#8381;'">%PRICE%</strong>
-                                           </h4>
-                                            <span class="right">
+                                            <!--Card footer-->
+                                            <div class="card-footer" style="padding: 0.75rem 0.5rem;">
+                                                <h4 class="left" style="color:#4285F4; padding: 0.4em 0.1em;">
+                                                    <strong th:text="${event.getPrice()}+'&#8381;'">%PRICE%</strong>
+                                                </h4>
+                                                <span class="right">
                                                 <a th:href="@{/events/event(id=${event.getId()})}"
                                                    class="btn btn-primary waves-effect waves-light"
                                                    th:text="${#messages.msg('words.open')}">Открыть
                                                 </a>
                                             </span>
-                                        </div>
+                                            </div>
 
+                                        </div>
+                                        <!--/.Card content-->
                                     </div>
-                                    <!--/.Card content-->
+                                    <div class="visible-sm-block visible-xs-block" th:if="${j==i}">
+                                        <br/>
+                                    </div>
                                 </div>
-                                <div class="visible-sm-block visible-xs-block" th:if="${j==i}">
-                                    <br/>
-                                </div>
-                            </div>
-                        </th:block>
-                        <div class="clearfix"></div>
-                        <br/>
-                    </div>
+                            </th:block>
+                            <div class="clearfix"></div>
+                            <br/>
+                        </div>
                     </th:block>
                     <th:block th:unless="${events.size()>0}">
                         <div class="row">
-                            <h2>Экскурсий по данным параметрам нет, попробуйте расширить поиск или искать в другой категории</h2><!--TODO: translate-->
+                            <h2>Экскурсий по данным параметрам нет, попробуйте расширить поиск или искать в другой
+                                категории</h2><!--TODO: translate-->
                         </div>
                     </th:block>
                     <!--Grid column-->
@@ -445,6 +453,12 @@
         </div>
     </div>
 </footer>
-<!-- Yandex.Metrika counter --> <script type="text/javascript" > (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter46873476 = new Ya.Metrika({ id:46873476, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks"); </script> <noscript><div><img src="https://mc.yandex.ru/watch/46873476" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter -->
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+     (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter46873476 = new Ya.Metrika({ id:46873476, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/46873476" style="position:absolute; left:-9999px;" alt=""/></div>
+</noscript> <!-- /Yandex.Metrika counter -->
 </body>
 </html>
