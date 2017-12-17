@@ -192,7 +192,7 @@
 
                                     <a th:if="${tourist}"
                                        class="btn btn-primary waves-effect waves-light"
-                                       onclick="alert('В разработке с 25.11.2017. Можете связаться с нами и мы вручную сделаем вас экскурсоводом.')">Стать экскурсоводом
+                                       data-toggle="modal" data-target="#modalUpToGuide">Стать экскурсоводом
                                     </a><!--TODO translate-->
 
                                     <a th:if="${isThisUserAccount}" class="btn btn-primary waves-effect waves-light"
@@ -1056,13 +1056,13 @@
                                     <!--Subject-->
                                     <div class="md-form form-sm">
                                         <input type="text" id="modalUpToGuide1" class="form-control"/>
-                                        <label for="modalUpToGuide1" class="">Subject</label>
+                                        <label for="modalUpToGuide1" class="">Паспортные данные</label>
                                     </div>
 
                                     <!--Message-->
                                     <div class="md-form">
                                         <textarea id="modalUpToGuide2" class="md-textarea"
-                                                  style="height: 150px;"></textarea>
+                                                  style="height: 100px;"></textarea>
                                         <label for="modalUpToGuide2" th:text="${#messages.msg('words.about_me')}">О себе</label>
                                     </div>
 

@@ -290,7 +290,7 @@
                     <th:block th:if="${events.size()>0}">
                     <div class="row" th:each="i : ${#numbers.sequence( 0, events.size()-1, 2)}">
                         <th:block th:with="inc = ${i!=events.size()-2?2:i!=events.size()-1?1:0}">
-                            <div class="col-md-6 col-lg-4" th:each="j : ${#numbers.sequence(i,i+inc)}"
+                            <div class="col-lg-4" th:each="j : ${#numbers.sequence(i,i+inc)}"
                                  th:with="event=${events.get(j)}">
                                 <div class="card">
                                     <!--Card image-->
