@@ -161,7 +161,8 @@
         <!--</div>-->
         <div class="container">
             <div class="row">
-                <h2 class="title">Категории</h2>
+                <h2 class="title text-center d-md-none">Категории</h2>
+                <h2 class="title d-none d-md-block right">Категории</h2>
                 <div class="panel-body">
                     <div class="chip"
                          th:each="i : ${#numbers.sequence(0, utils.getCategoriesCount()-1)}">
