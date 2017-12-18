@@ -377,7 +377,7 @@ h2.title:before {
 }
 
 h2.right:before {
-  margin-left: -600px;
+  left: 2%;
 }
 
 h2.title {
