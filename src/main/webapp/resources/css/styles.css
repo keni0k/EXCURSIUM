@@ -364,6 +364,7 @@ footer {
 }
 
 h2.title:before {
+  visibility: visible;
   content: " ";
   position: absolute;
   background:  #f9f9f9;
@@ -376,15 +377,7 @@ h2.title:before {
 }
 
 h2.right:before {
-  content: " ";
-  position: absolute;
-  background:  #f9f9f9;
-  bottom: -6px;
-  width: 220px;
-  height: 30px;
-  z-index: -1;
-  left: 50%;
-  margin-left: -220px;
+  margin-left: -600px;
 }
 
 h2.title {
