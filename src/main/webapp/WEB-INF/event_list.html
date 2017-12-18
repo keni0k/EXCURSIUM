@@ -295,8 +295,8 @@
                     <th:block th:if="${events.size()>0}">
                         <div class="row" th:each="i : ${#numbers.sequence( 0, events.size()-1, 2)}">
                             <th:block
-                                    th:with="inc = ${i!=events.size()-2 and i!=events.size()-1?2:i!=events.size()-1?1:0}">
-                                <div class="col-lg-4" th:each="j : ${#numbers.sequence(i,i+inc)}"
+                                    th:with="inc = ${i!=events.size()-1?1:0}">
+                                <div class="col-lg-6" th:each="j : ${#numbers.sequence(i,i+inc)}"
                                      th:with="event=${events.get(j)}">
                                     <div class="card">
                                         <!--Card image-->
@@ -347,8 +347,7 @@
 
                                             <!--Description-->
                                             <p class="card-text" style="font-size: medium; color: #000000"
-                                               th:text="${event.getSmallDescription()}" align="justify">
-                                                %DESCRIPTION%</p>
+                                               th:text="${event.getSmallDescription()}" align="justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi beatae, earum eveniet ex facilis iure molestiae nam obcaecati odio perferendis rerum tempora veritatis. Adipisci aliquid corporis, culpa cumque dolor earum ex ipsa itaque magnam odit placeat quia quidem repellat voluptatum.</p>
 
                                             <!--Card footer-->
                                             <div class="card-footer" style="padding: 0.75rem 0.5rem;">
