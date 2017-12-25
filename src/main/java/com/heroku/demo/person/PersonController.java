@@ -394,6 +394,54 @@ public class PersonController {
         return response.getData() + " " + response.getStatus();
     }
 
+    @RequestMapping(value = "/up_to_guide", method = RequestMethod.POST)
+    private String upToGuide(@ModelAttribute("series_and_number") String seriesAndNumber,
+                             @ModelAttribute("date_and_place") String dateAndPlace,
+                             @RequestParam("file") MultipartFile file,
+                             ModelMap model, Locale locale, Principal principal){
+        Person person;
+        String loginOrEmail = principal.getName();
+        if (!loginOrEmail.equals("")) {
+            person = personService.getByLoginOrEmail(loginOrEmail);
+        } else person = new Person();
+
+        if (file!=null && !file.isEmpty()) {
+            try {
+                byte[] bytes = file.getBytes();
+
+                // Creating the directory to store file
+                String rootPath = System.getProperty("catalina.home");
+                File dir = new File(rootPath + File.separator + "tmpFiles");
+                if (!dir.exists())
+                    dir.mkdirs();
+
+                String fileName = file.getOriginalFilename();
+
+                // Create the file on server
+                File serverFile = new File(fileName);
+                BufferedOutputStream stream = new BufferedOutputStream(
+                        new FileOutputStream(serverFile));
+                stream.write(bytes);
+                stream.close();
+
+                if (getFileSizeMegaBytes(serverFile) > 1)
+                    serverFile = compress(serverFile, getFileExtension(fileName), getFileSizeMegaBytes(serverFile));
+
+                String photoToken = randomToken(32) + ".jpg";
+                putImg(serverFile.getAbsolutePath(), photoToken);
+                person.setImageOfPassportUrl(photoToken);
+                person.setType(Consts.PERSON_MODER_GUIDE);
+                person.setDateAndPlaceOfPassport(dateAndPlace);
+                person.setSeriesAndNumberOfPassport(seriesAndNumber);
+                personService.editPerson(person);
+            } catch (Exception e) {
+                logger.error("You failed to upload file => " + e.getMessage());
+                model.addAttribute("message_file", new MessageUtil("danger", "You failed to upload file. Please, try again."));// messageSource.getMessage("success.user.registration", null, locale)));
+            }
+        }
+        return account(model, principal);
+    }
+
     private void eventsBlock(long personId){
         List<Event> events = eventService.getByGuideId(personId);
         for (Event event:events){

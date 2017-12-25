@@ -43,6 +43,11 @@ public class Person implements UserDetails{
     private String role = "";
     private String time = "";
 
+    private String dateAndPlaceOfPassport = "";
+    private String seriesAndNumberOfPassport = "";
+    private String imageOfPassportUrl = "";
+
+
     public String getTime() {
         return time;
     }
@@ -254,5 +259,29 @@ public class Person implements UserDetails{
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public String getDateAndPlaceOfPassport() {
+        return dateAndPlaceOfPassport;
+    }
+
+    public void setDateAndPlaceOfPassport(String dateAndPlaceOfPassport) {
+        this.dateAndPlaceOfPassport = dateAndPlaceOfPassport;
+    }
+
+    public String getSeriesAndNumberOfPassport() {
+        return seriesAndNumberOfPassport;
+    }
+
+    public void setSeriesAndNumberOfPassport(String seriesAndNumberOfPassport) {
+        this.seriesAndNumberOfPassport = seriesAndNumberOfPassport;
+    }
+
+    public String getImageOfPassportUrl() {
+        return imageOfPassportUrl;
+    }
+
+    public void setImageOfPassportUrl(String imageOfPassportUrl) {
+        this.imageOfPassportUrl = imageOfPassportUrl;
     }
 }
