@@ -187,12 +187,11 @@
                                             data-toggle="modal" data-target="#modalContactUser">Связаться<i
                                             class="fa fa-paper-plane ml-2"></i></button>
 
-                                    <button th:if="${notConfirmed}" type="button"
-                                            class="btn btn-primary mt-4 waves-effect waves-light"
-                                            onclick="alert('В разработке с 25.11.2017. Если вы видите это сообщение, то, вероятно, подтверждающее письмо у вас на почте')">
+                                    <a th:if="${notConfirmed}" type="button" th:href="/users/resend_email"
+                                            class="btn btn-primary mt-4 waves-effect waves-light">
                                         <!--TODO translate-->
                                         <th:block>Подтвердить E-mail</th:block><!--TODO translate-->
-                                    </button>
+                                    </a>
 
                                     <a th:if="${tourist}"
                                        class="btn btn-primary waves-effect waves-light"

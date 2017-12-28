@@ -442,6 +442,18 @@ public class PersonController {
         return account(model, principal);
     }
 
+    @RequestMapping(value = "/resend_email", method = RequestMethod.GET)
+    private String reSend(ModelMap model, Locale locale, Principal principal) throws MailjetSocketTimeoutException, MailjetException {
+        Person person;
+        String loginOrEmail = principal.getName();
+        if (!loginOrEmail.equals("")) {
+            person = personService.getByLoginOrEmail(loginOrEmail);
+        } else person = new Person();
+        if (person.getType()==Consts.PERSON_DISABLED)
+            sendMail(person.getToken(), person.getEmail());
+        return account(model, principal);
+    }
+
     private void eventsBlock(long personId){
         List<Event> events = eventService.getByGuideId(personId);
         for (Event event:events){

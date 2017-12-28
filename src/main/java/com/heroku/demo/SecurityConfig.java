@@ -42,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/users/user", "/users/getbytoken", "/users/getbyemail", "/users/listjson", "/users/account",
                         "/reviews/listjson", "/users/confirm").permitAll()
                 .antMatchers("/users/registration").anonymous()
-                .antMatchers("/events/add", "/users/edit_public", "/users/edit_private", "/reviews/add", "/users/up_to_guide").hasAnyRole("ADMIN","USER")
+                .antMatchers("/events/add", "/users/edit_public", "/users/edit_private", "/reviews/add", "/users/up_to_guide", "/users/resend_email").hasAnyRole("ADMIN","USER")
                 .antMatchers("/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
