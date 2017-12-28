@@ -21,13 +21,9 @@ public class TokenCookies extends PersistentRememberMeToken {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String tokenValue = "";
-
     private String username = "";
-
     private String series = "";
-
     private Date date;
 
     public String getUsername() {
