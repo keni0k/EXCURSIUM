@@ -109,6 +109,11 @@
         background-color: #33aa33;
     }
 </style>
+
+<!--/*@thymesVar id="inputEvent" type="com.heroku.demo.event.Event"*/-->
+<!--/*@thymesVar id="events" type="java.util.List"*/-->
+<!--/*@thymesVar id="utils" type="com.heroku.demo.utils.UtilsForWeb"*/-->
+
 <div class="content"
      th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
     <nav class="navbar navbar-default navbar-custom" role="navigation">
@@ -313,6 +318,7 @@
                     </thead>
                     <tbody>
                     <tr th:each="event : ${events}">
+                        <!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
                         <td th:text="${event.id}">Some text</td>
                         <td th:text="${event.name}">Some text</td>
                         <td th:text="${event.getCategoryString()}">Some text</td>

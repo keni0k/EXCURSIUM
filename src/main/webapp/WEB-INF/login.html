@@ -146,6 +146,7 @@
                 </th:block>
 
                 <th:block th:if="${message != null}">
+                    <!--/*@thymesVar id="message" type="com.heroku.demo.utils.MessageUtil"*/-->
                     <div th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message.type)}, message=${message.message})">
                         &nbsp;
                     </div>

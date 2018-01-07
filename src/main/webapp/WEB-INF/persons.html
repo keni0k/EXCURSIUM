@@ -106,6 +106,9 @@
         background-color: #33aa33;
     }
 </style>
+<!--/*@thymesVar id="insertPerson" type="com.heroku.demo.person.Person"*/-->
+<!--/*@thymesVar id="persons" type="java.util.List"*/-->
+<!--/*@thymesVar id="utils" type="com.heroku.demo.utils.UtilsForWeb"*/-->
 <div class="content"
      th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')},
               id = ${#httpServletRequest.getParameter('id')}">
@@ -156,6 +159,7 @@
         <div class="row" th:if="${id}">
             <div class="col-md-12 col-lg-6">
 
+                <!--/*@thymesVar id="message" type="com.heroku.demo.utils.MessageUtil"*/-->
                 <th:block th:if="${message != null}">
                     <div th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message.type)}, message=${message.message})">
                         &nbsp;
@@ -293,6 +297,7 @@
                         </thead>
                         <tbody>
                         <tr th:each="person : ${persons}">
+                            <!--/*@thymesVar id="person" type="com.heroku.demo.person.Person"*/-->
                             <td th:text="${person.id}">Some text</td>
                             <td th:text="${person.login}">Some text</td>
                             <td th:text="${person.getFullName()}">Some text</td>

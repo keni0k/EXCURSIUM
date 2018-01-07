@@ -90,7 +90,10 @@
 
 
 </style>
-
+<!--/*@thymesVar id="person" type="com.heroku.demo.person.Person"*/-->
+<!--/*@thymesVar id="consts" type="com.heroku.demo.utils.Consts"*/-->
+<!--/*@thymesVar id="orders" type="java.util.List"*/-->
+<!--/*@thymesVar id="events" type="java.util.List"*/-->
 <div class="content"
      th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}, isThisUserAccount = ${true},
               excursovod = ${person.getType()==consts.PERSON_GUIDE or person.getType()==consts.PERSON_MODER_GUIDE or person.getType()==consts.PERSON_ADMIN},
@@ -254,7 +257,6 @@
 
                         <!--Grid column-->
                         <div class="col-lg-8 col-md-12 text-center">
-
                             <!-- Heading -->
                             <div class="text-center mt-3 mb-5">
 
@@ -283,6 +285,8 @@
                                         <div class="card card-cascade narrower mb-5"
                                              th:each="j : ${#numbers.sequence(i,i+inc)}"
                                              th:with="order=${orders.get(j)}">
+
+                                            <!--/*@thymesVar id="order" type="com.heroku.demo.order.Buy"*/-->
 
                                             <!--Card image-->
                                             <div class="view overlay hm-white-slight">
@@ -400,6 +404,8 @@
                                              th:with="event = ${events.get(j)}"
                                              th:id="'id'+${j}"
                                              th:style="${j == 0 or j == 1}?'display: block;':'display: none;'">
+
+                                            <!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
 
                                             <!--Card image-->
                                             <div class="view overlay hm-white-slight">
@@ -883,6 +889,7 @@
 
                                 <!--Body-->
                                 <div class="modal-body mb-0">
+                                    <!--/*@thymesVar id="inputEvent" type="com.heroku.demo.event.Event"*/-->
                                     <form th:object="${inputEvent}" action="/events/add" enctype="multipart/form-data"
                                           autocomplete="off" method="post">
 

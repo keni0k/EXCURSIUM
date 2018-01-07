@@ -84,6 +84,7 @@
         background-color: #33aa33;
     }
 </style>
+<!--/*@thymesVar id="person" type="com.heroku.demo.person.Person"*/-->
 <div class="content"
      th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
     <nav class="navbar navbar-default navbar-custom" role="navigation">

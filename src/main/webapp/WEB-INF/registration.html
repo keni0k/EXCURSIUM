@@ -85,6 +85,7 @@
         background-color: #33aa33;
     }
 </style>
+<!--/*@thymesVar id="insertPerson" type="com.heroku.demo.person.Person"*/-->
 <div class="content"
      th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
     <nav class="navbar navbar-default navbar-custom" role="navigation">
@@ -141,6 +142,7 @@
 
                 <!-- /* Handling the flash message */-->
                 <th:block th:if="${message != null}">
+                    <!--/*@thymesVar id="message" type="com.heroku.demo.utils.MessageUtil"*/-->
                     <div th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message.type)}, message=${message.message})">
                         &nbsp;
                     </div>
@@ -178,6 +180,7 @@
                         <span class="input-group-addon" th:text="${#messages.msg('words.login')} + ' *'">Логин</span>
                         <input name="login" id="login" type="text" class="form-control" placeholder="Логин"
                                aria-label="Логин" th:value="${insertPerson.getLogin()}" required=""/>
+                        <!--/*@thymesVar id="error_login" type="java.lang.Boolean"*/-->
                         <label for="login" th:if="${error_login}" th:text="${#messages.msg('error.user.login.free')}"
                                th:class="'error'">Name Error</label>
                         <label for="login" th:if="${#fields.hasErrors('login')}"
@@ -191,6 +194,7 @@
                                       th:text="${#messages.msg('words.password')} + ' *'">Пароль</span>
                                 <input name="pass" id="pass" type="password" class="form-control" minlength="6"
                                        placeholder="Пароль" aria-label="Пароль" required=""/>
+                                <!--/*@thymesVar id="error_pass" type="java.lang.Boolean"*/-->
                                 <label for="pass" th:if="${error_pass}" th:text="${#messages.msg('error.user.pass2')}"
                                        th:class="'error'">Name Error</label>
                                 <!--<label for="pass" th:if="${#fields.hasErrors('pass')}" th:text="${#messages.msg('error.user.pass')}" th:class="'error'">Name Error</label>-->
@@ -204,6 +208,7 @@
                                 <span class="input-group-addon" th:text="${#messages.msg('words.password_again')} + ' *'">Повторите пароль</span>
                                 <input name="pass2" type="password" id="pass2" class="form-control"
                                        placeholder="Повторите пароль" aria-label="Повторите пароль" required=""/>
+                                <!--/*@thymesVar id="error_pass" type="java.lang.Boolean"*/-->
                                 <label for="pass2" th:if="${error_pass}" th:text="${#messages.msg('error.user.pass2')}"
                                        th:class="'error'">Name Error</label>
                             </div>
@@ -215,9 +220,11 @@
                         <input name="email" id="email" type="email" class="form-control"
                                th:value="${insertPerson.getEmail()}" placeholder="Email" aria-label="Email"
                                required=""/>
+                        <!--/*@thymesVar id="error_email_free" type="java.lang.Boolean"*/-->
                         <label for="email" th:if="${error_email_free}"
                                th:text="${#messages.msg('error.user.email.free')}" th:class="'error'">Name
                             Error</label>
+                        <!--/*@thymesVar id="error_email_valid" type="java.lang.Boolean"*/-->
                         <label for="email" th:if="${error_email_valid}"
                                th:text="${#messages.msg('error.user.email.valid')}" th:class="'error'">Name
                             Error</label>
@@ -235,6 +242,7 @@
                                th:value="${insertPerson.getPhoneNumber()}" placeholder="Телефон" required=""
                                minlength="17"
                                aria-label="Телефон" data-format="+7 (ddd) ddd-dddd" id="phone_number"/>
+                        <!--/*@thymesVar id="error_phone" type="java.lang.Boolean"*/-->
                         <label for="phone_number" th:if="${error_phone}"
                                th:text="${#messages.msg('error.user.phone_number.free')}" th:class="'error'">Name
                             Error</label>

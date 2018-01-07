@@ -93,6 +93,8 @@
         background-color: #33aa33;
     }
 </style>
+<!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
+<!--/*@thymesVar id="reviews" type="java.util.List<com.heroku.demo.review.Review>"*/-->
 <div class="content"
      th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
     <nav class="navbar navbar-default navbar-custom" role="navigation">
@@ -222,6 +224,7 @@
                              th:each="i : ${#numbers.sequence(0, reviews.size()-1)}"
                              th:class="'item'+(${i==0}?' active':'')">
                             <div class="card" th:with="review = ${reviews.get(i)}">
+                                <!--/*@thymesVar id="review" type="com.heroku.demo.review.Review"*/-->
                                 <div class="card-header">
                                     <img src="../resources/img/user.png" th:src="${review.getPathToUserPhoto()}"
                                          style="height: 50px; border-radius: 50%"/>

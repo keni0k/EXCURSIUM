@@ -168,7 +168,6 @@
                 <h2 class="title d-none d-md-block right">Категории</h2>
                 <div class="panel-body">
                     <!--/*@thymesVar id="utils" type="com.heroku.demo.utils.UtilsForWeb"*/-->
-                    minMaxPrice
                     <div class="chip"
                          th:each="i : ${#numbers.sequence(0, utils.getCategoriesCount()-1)}">
                         <a th:href="@{/events/list(category=${i}, sort_by = ${sort_by})}">
@@ -300,12 +299,12 @@
                     </a>
                     <!--Grid column-->
                     <th:block th:if="${events.size()>0}">
-                        <!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
                         <div class="row" th:each="i : ${#numbers.sequence( 0, events.size()-1, 2)}">
                             <th:block
                                     th:with="inc = ${i!=events.size()-1?1:0}">
                                 <div class="col-lg-6" th:each="j : ${#numbers.sequence(i,i+inc)}"
                                      th:with="event=${events.get(j)}">
+                                    <!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
                                     <div class="card">
                                         <!--Card image-->
                                         <div class="view overlay hm-white-slight z-depth-1">
