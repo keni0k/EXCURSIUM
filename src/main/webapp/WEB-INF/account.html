@@ -24,14 +24,14 @@
 
     <link rel="stylesheet" href="../resources/css/segoe_ui.css"/>
 
-    <!--/* Icon */-->
+<!--/* Icon */-->
     <link rel="icon" href="../resources/img/icon.ico" type="image/x-icon"/>
     <link rel="shortcut icon" href="../resources/img/icon.ico" type="image/x-icon"/>
 
     <link rel="stylesheet" href="../resources/libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>
     <script type="text/javascript"
             src="../resources/libs/bootstrapformhelpers/js/bootstrap-formhelpers.min.js"></script>
-    <!--/* Plugin CSS */-->
+<!--/* Plugin CSS */-->
     <link rel="stylesheet" href="../resources/css/cards.css"/>
     <title th:text="${#messages.msg('titles.account')}">Профиль</title>
 </head>
@@ -52,32 +52,27 @@
 
     <div class="container">
 
-        <!--/*Main layout*/-->
+<!--/*Main layout*/-->
         <main>
             <div class="container-fluid">
-
-                <!--/*Section: Profile*/-->
+<!--/*Section: Profile*/-->
                 <section>
-
-                    <!--/*Grid row*/-->
+<!--/*Grid row*/-->
                     <div class="row">
 
-                        <!--/*Grid column*/-->
+<!--/*Grid column*/-->
                         <div class="col-lg-4 col-md-12">
-
-                            <!--/*Section: Basic Info*/-->
+<!--/*Section: Basic Info*/-->
                             <section class="card card-cascade card-avatar mb-4">
 
                                 <img th:src="${person.getImageUrl()}" src="../resources/img/user.png" alt="" onerror='this.style.marginTop = 0'/>
-
-                                <!--/*Card content*/-->
+<!--/*Card content*/-->
                                 <div class="card-body">
-                                    <!--/*Title*/-->
+<!--/*Title*/-->
                                     <h4 class="card-title"><strong th:text="${person.getFullName()}">Имя</strong></h4>
                                     <h5 th:text="${person.getStringType(0)}">Турист/Экскурсовод</h5>
                                     <p th:text="${person.getCity()}">Москва, Россия</p>
-
-                                    <!--/* Social */-->
+<!--/* Social */-->
                                     <a type="button"
                                        class="btn-floating btn-small light-blue lighten-2 waves-effect waves-light"><i
                                             class="fa fa-facebook"></i></a>
@@ -87,43 +82,33 @@
                                     <a type="button"
                                        class="btn-floating btn-small light-blue lighten-2 waves-effect waves-light"><i
                                             class="fa fa-linkedin"></i></a>
-
-                                    <!--/*Text*/-->
-                                    <p class="card-text mt-3">тел.
-                                        <th:block th:text="${person.getPhoneNumber()}"/>
-                                    </p>
-
+<!--/*Text*/-->
+                                    <p class="card-text mt-3">тел. <th:block th:text="${person.getPhoneNumber()}"/></p>
                                     <button th:unless="${isThisUserAccount}" type="button"
                                             class="btn btn-info waves-effect waves-light"
                                             data-toggle="modal" data-target="#modalContactUser">Связаться<i
                                             class="fa fa-paper-plane ml-2"></i></button>
-
-
                                     <a th:if="${notConfirmed}" type="button" th:href="'/users/resend_email'"
                                             class="btn btn-primary mt-4 waves-effect waves-light">
-                                        <!--/*TODO translate*/-->
+<!--/*TODO translate*/-->
                                         <th:block>Подтвердить E-mail</th:block><!--/*TODO translate*/-->
                                     </a>
-
                                     <a th:if="${tourist}"
                                        class="btn btn-primary waves-effect waves-light"
                                        data-toggle="modal" data-target="#modalUpToGuide">Стать экскурсоводом
-                                    </a><!--/*TODO translate*/-->
-
+                                    </a>
+<!--/*TODO translate*/-->
                                     <a th:if="${isThisUserAccount}" class="btn btn-primary waves-effect waves-light"
                                        href="#" role="button"
                                        data-toggle="modal" data-target="#modalEditProfile">Редактировать профиль <i
                                             class="fa fa-pencil ml-2"></i></a>
-
                                     <a class="btn btn-outline-primary waves-effect waves-light" href="#" role="button"
                                        data-toggle="modal" data-target="#modalFeedback">Сообщить об ошибке <i
                                             class="fa fa-paper-plane ml-2"></i></a>
                                 </div>
-
                             </section>
-                            <!--/*Section: Basic Info*/-->
-
-                            <!--/*Section: Experience*/-->
+<!--/*End-of-Section: Basic Info*/-->
+<!--/*Section: Experience*/-->
                             <!--/*<section class="card mb-4">
                                 <div class="card-body">
 
@@ -157,36 +142,27 @@
 
                                 </div>
                             </section>*/-->
-                            <!--/*Section: Experience*/-->
-
+<!--/*End-of-Section: Experience*/-->
                         </div>
-                        <!--/*Grid column*/-->
-
-                        <!--/*Grid column*/-->
+<!--/*End-of-Grid column*/-->
+<!--/*Grid column*/-->
                         <div class="col-lg-8 col-md-12 text-center">
-                            <!--/* Heading */-->
+<!--/* Heading */-->
                             <div class="text-center mt-3 mb-5">
-
                                 <h2 class="title text-center" th:if="${orders.size()>0}">Посещенные экскурсии</h2>
-                                <h2 class="title text-center" th:if="${orders.size()==0}">Здесь будут отображаться
-                                    посещенные экскурсии</h2> <!--/*TODO: translate*/-->
-
+                                <h2 class="title text-center" th:if="${orders.size()==0}">Здесь будут отображаться посещенные экскурсии</h2> <!--/*TODO: translate*/-->
                                 <a href="/events/list">
                                     <button th:if="${isThisUserAccount}" type="button"
                                             class="btn btn-primary mt-4 waves-effect waves-light">
-                                        <th:block th:text="${#messages.msg('account.select_event')+' '}">Выбрать
-                                            экскурсию
-                                        </th:block>
+                                        <th:block th:text="${#messages.msg('account.select_event')+' '}">Выбрать экскурсию</th:block>
                                         <i class="fa fa-photo ml-1"></i>
                                     </button>
                                 </a>
                             </div>
 <!--/*Heading*/-->
-
 <!--/*Card row*/-->
                             <th:block th:if="${orders.size()!=0}">
                                 <div class="card-deck" th:each="i : ${#numbers.sequence( 0, orders.size()-1)}">
-
                                     <th:block th:if="${i%2==0}" th:with="inc = ${i!=orders.size()-1?1:0}">
 <!--/*Card*/-->
                                         <div class="card card-cascade narrower mb-5"
@@ -196,22 +172,17 @@
 <!--/*Card image*/-->
                                             <div class="view overlay hm-white-slight">
                                                 <img th:src="${order.getImageUrl()}" src="#" class="img-fluid" alt=""/>
-                                                <a href="#">
-                                                    <div class="mask waves-effect waves-light"></div>
-                                                </a>
+                                                <a href="#"><div class="mask waves-effect waves-light"></div></a>
                                             </div>
 <!--/*Card content*/-->
                                             <div class="card-body pb-0">
 <!--/*Title*/-->
-                                                <h4 class="card-title" th:text="${order.getName()}">Название
-                                                    экскурсии</h4>
+                                                <h4 class="card-title" th:text="${order.getName()}">Название экскурсии</h4>
 <!--/*Text*/-->
                                                 <span class="card-text" style="font-size: small;" align="left"
-                                                      th:text="${order.getTime()}">
-                                                    Время заказа</span>
+                                                      th:text="${order.getTime()}">Время заказа</span>
                                                 <span class="card-text" style="font-size: small;" align="right"
-                                                      th:text="${order.getTime()}">
-                                                    Время экскурсии</span>
+                                                      th:text="${order.getTime()}">Время экскурсии</span>
                                             </div>
 <!--/*Card footer*/-->
                                             <div class="card-footer links-light">
@@ -227,75 +198,56 @@
                                                             class="fa fa-photo ml-1"></i></a>
                                                 </span>
                                             </div>
-
                                         </div>
 <!--/*End-of-Card*/-->
                                     </th:block>
-
                                 </div>
                             </th:block>
 <!--/*End-of-Card row*/-->
-
-
 <!--/*Pagination */-->
                             <nav class="my-4 d-flex justify-content-center" th:if="${orders.size()>2}">
                                 <ul class="pagination pagination-circle pg-blue mb-0">
-
-                                    <!--/*First*/-->
+<!--/*First*/-->
                                     <li class="page-item disabled clearfix d-none d-md-block"><a
                                             class="page-link waves-effect waves-effect">В начало</a></li>
-
-                                    <!--/*Arrow left*/-->
+<!--/*Arrow left*/-->
                                     <li class="page-item disabled">
                                         <a class="page-link waves-effect waves-effect" aria-label="Назад">
                                             <span aria-hidden="true">«</span>
                                             <span class="sr-only">Назад</span>
                                         </a>
                                     </li>
-
-                                    <!--/*Numbers*/-->
-                                    <li class="page-item active"><a class="page-link waves-effect waves-effect">1</a>
-                                    </li>
+<!--/*Numbers*/-->
+                                    <li class="page-item active"><a class="page-link waves-effect waves-effect">1</a></li>
                                     <li class="page-item"><a class="page-link waves-effect waves-effect">2</a></li>
                                     <li class="page-item"><a class="page-link waves-effect waves-effect">3</a></li>
                                     <li class="page-item"><a class="page-link waves-effect waves-effect">4</a></li>
                                     <li class="page-item"><a class="page-link waves-effect waves-effect">5</a></li>
-
-                                    <!--/*Arrow right*/-->
+<!--/*End-of-Arrow right*/-->
                                     <li class="page-item">
                                         <a class="page-link waves-effect waves-effect" aria-label="Вперёд">
                                             <span aria-hidden="true">»</span>
                                             <span class="sr-only">Вперёд</span>
                                         </a>
                                     </li>
-
-                                    <!--/*First*/-->
+<!--/*End-of-First*/-->
                                     <li class="page-item clearfix d-none d-md-block"><a
                                             class="page-link waves-effect waves-effect">В конец</a></li>
-
                                 </ul>
                             </nav>
 <!--/*End-of-Pagination */-->
-
 <!--/* Heading */-->
                             <div class="text-center mt-3 mb-5" th:if="${excursovod}">
-
                                 <h2 class="title text-center" th:if="${events.size()>0}">Добавленные экскурсии</h2>
-                                <h2 class="title text-center" th:if="${events.size()==0 and excursovod}">Здесь будут
-                                    отображаться добавленные экскурсии</h2> <!--/*TODO: translate*/-->
-
+                                <h2 class="title text-center" th:if="${events.size()==0 and excursovod}">Здесь будут отображаться добавленные экскурсии</h2> <!--/*TODO: translate*/-->
                                 <button th:if="${isThisUserAccount and excursovod}" type="button"
                                         class="btn btn-primary mt-4 waves-effect waves-light"
                                         data-toggle="modal" data-target="#modalSubmitProject">
-                                    <th:block th:text="${#messages.msg('titles.add_event')+' '}">Добавить новую
-                                        экскурсию
-                                    </th:block>
+                                    <th:block th:text="${#messages.msg('titles.add_event')+' '}">Добавить новую экскурсию</th:block>
                                     <i class="fa fa-photo ml-1"></i>
                                 </button>
-
                             </div>
 <!--/* End-of-Heading */-->
-
 <!--/* Card row */-->
                             <th:block th:if="${events.size()!=0 and excursovod}">
                                 <div class="card-deck" th:each="i : ${#numbers.sequence( 0, events.size()-1)}">
@@ -307,9 +259,7 @@
                                              th:with="event = ${events.get(j)}"
                                              th:id="'id'+${j}"
                                              th:style="${j == 0 or j == 1}?'display: block;':'display: none;'">
-
 <!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
-
 <!--/*Card image*/-->
                                             <div class="view overlay hm-white-slight">
                                                 <img th:src="${event.pathToPhoto}" src="#" class="img-fluid"
@@ -318,7 +268,6 @@
                                                     <div class="mask waves-effect waves-light"></div>
                                                 </a>
                                             </div>
-
 <!--/*Card content*/-->
                                             <div class="card-body pb-0">
                                                 <!--/*Title*/-->
@@ -329,7 +278,6 @@
                                                         th:text="${event.getStringType(0)}">На модерации</strong>
                                                 <!--/*TODO translate*/-->
                                             </div>
-
 <!--/*Card footer*/-->
                                             <div class="card-footer links-light">
                                                 <span class="left pt-2">
@@ -344,16 +292,12 @@
                                                             class="fa fa-photo ml-1"></i></a>
                                                 </span>
                                             </div>
-
                                         </div>
 <!--/*End-of-Card*/-->
                                     </th:block>
-
                                 </div>
                             </th:block>
 <!--/* End-of-Card row */-->
-
-
 <!--/*Pagination */-->
                             <nav class="my-4 d-flex justify-content-center" th:if="${events.size()>2 and excursovod}">
                                 <ul class="pagination pagination-circle pg-blue mb-0">
@@ -448,8 +392,7 @@
                                                                        class="form-control" name="first_name"
                                                                        th:value="${person.getFirstName()}"/>
                                                                 <label for="editProfile1" class=""
-                                                                       th:text="${#messages.msg('words.first_name')}">First
-                                                                    name</label>
+                                                                       th:text="${#messages.msg('words.first_name')}">First name</label>
                                                             </div>
                                                         </div>
 <!--/*End-of-Grid column*/-->
@@ -461,8 +404,7 @@
                                                                        class="form-control" name="last_name"
                                                                        th:value="${person.getLastName()}"/>
                                                                 <label for="editProfile2" class=""
-                                                                       th:text="${#messages.msg('words.last_name')}">Last
-                                                                    name</label>
+                                                                       th:text="${#messages.msg('words.last_name')}">Last name</label>
                                                             </div>
                                                         </div>
 <!--/*End-of-Grid column*/-->
@@ -489,8 +431,7 @@
                                                                        accept="image/jpeg,image/png"
                                                                        aria-label="Фотографии"/>
                                                                 <label for="filePerson" class="" style="top: 0.5rem;"
-                                                                       th:text="${#messages.msg('words.new_photo')}">Новая
-                                                                    фотография</label>
+                                                                       th:text="${#messages.msg('words.new_photo')}">Новая фотография</label>
                                                             </div>
                                                         </div>
 <!--/*End-of-Grid column*/-->
@@ -506,7 +447,6 @@
                                                         </div>
 <!--/*Grid column*/-->
                                                         <div class="col-md-6">
-
 <!--/*Facebook*/-->
                                                             <div class="md-form form-sm mt-2">
                                                                 <input type="text" id="editProfile8"
@@ -517,14 +457,12 @@
 <!--/*End-of-Grid column*/-->
 <!--/*Grid column*/-->
                                                         <div class="col-md-6">
-
-                                                            <!--/*LinkedIn*/-->
+<!--/*LinkedIn*/-->
                                                             <div class="md-form form-sm mt-2">
                                                                 <input type="text" id="editProfile10"
                                                                        class="form-control"/>
                                                                 <label for="editProfile10" class="">Telegram</label>
                                                             </div>
-
                                                         </div>
 <!--/*End-of-Grid column*/-->
                                                     </div>
@@ -534,9 +472,7 @@
                                                                 data-dismiss="modal">Закрыть
                                                         </button>
                                                         <button type="submit"
-                                                                class="btn btn-primary waves-effect waves-light">
-                                                            Сохранить <i class="fa fa-check ml-1"></i>
-                                                        </button>
+                                                                class="btn btn-primary waves-effect waves-light">Сохранить <i class="fa fa-check ml-1"></i></button>
                                                     </div>
 <!--/*End-of-Grid row*/-->
                                                 </form>
@@ -582,7 +518,6 @@
                                                     </div>
                                                 </form>
                                             </div>
-
                                         </div>
 <!--/*End-of-Panel 8*/-->
                                     </div>
@@ -624,17 +559,14 @@
                                                   style="height: 300px;"></textarea>
                                         <label for="modalFeedback2">Your message</label>
                                     </div>
-
                                 </div>
 <!--/*Footer*/-->
                                 <div class="modal-footer justify-content-center">
                                     <button type="button" class="btn btn-outline-primary waves-effect waves-light"
-                                            data-dismiss="modal">Закрыть
-                                    </button>
+                                            data-dismiss="modal">Закрыть</button>
                                     <button type="button" class="btn btn-primary waves-effect waves-light">Send <i
                                             class="fa fa-paper-plane ml-1"></i></button>
                                 </div>
-
                             </div>
 <!--/*End-of-Content*/-->
                         </div>
@@ -659,8 +591,7 @@
 <!--/*Footer*/-->
                                 <div class="modal-footer justify-content-center">
                                     <button type="button" class="btn btn-outline-primary waves-effect waves-light"
-                                            data-dismiss="modal">Закрыть
-                                    </button>
+                                            data-dismiss="modal">Закрыть</button>
                                     <button type="button" class="btn btn-primary waves-effect waves-light">Go to <i
                                             class="fa fa-arrow-right ml-1"></i></button>
                                 </div>
@@ -693,8 +624,7 @@
 <!--/*Footer*/-->
                                 <div class="modal-footer justify-content-center">
                                     <button type="button" class="btn btn-outline-primary waves-effect waves-light"
-                                            data-dismiss="modal">Отмена
-                                    </button>
+                                            data-dismiss="modal">Отмена</button>
                                     <button type="button" class="btn btn-primary waves-effect waves-light">Отправить <i
                                             class="fa fa-paper-plane ml-1"></i></button>
                                 </div>
@@ -717,7 +647,7 @@
                                 </div>
 <!--/*Body*/-->
                                 <div class="modal-body mb-0">
-                                    <!--/*@thymesVar id="inputEvent" type="com.heroku.demo.event.Event"*/-->
+<!--/*@thymesVar id="inputEvent" type="com.heroku.demo.event.Event"*/-->
                                     <form th:object="${inputEvent}" action="/events/add" enctype="multipart/form-data"
                                           autocomplete="off" method="post">
 <!--/*Name*/-->
@@ -726,8 +656,7 @@
                                                    th:value="${inputEvent.getName()}" required="" minlength="10"
                                                    maxlength="60"/>
                                             <label for="name" th:if="${#fields.hasErrors('name')}"
-                                                   th:text="${#messages.msg('error.event.name')}" th:class="'error'">Name
-                                                Error</label>
+                                                   th:text="${#messages.msg('error.event.name')}" th:class="'error'">Name Error</label>
                                             <label for="name" class=""
                                                    th:text="${#messages.msg('words.name')}">Название</label>
                                         </div>
@@ -739,53 +668,35 @@
                                                       th:text="${inputEvent.getDescription()}"></textarea>
                                             <label for="description" th:if="${#fields.hasErrors('description')}"
                                                    th:text="${#messages.msg('error.event.description')}"
-                                                   th:class="'error'">Description
-                                                Error</label>
+                                                   th:class="'error'">Description Error</label>
                                             <label for="description" class=""
                                                    th:text="${#messages.msg('words.description')}">Описание</label>
                                         </div>
 <!--/*Image URL*/-->
                                         <div class="panel panel-default">
                                             <div class="panel-heading"
-                                                 th:text="${#messages.msg('words.type_of_excursion')}">
-                                                Тип экскурсии
+                                                 th:text="${#messages.msg('words.type_of_excursion')}">Тип экскурсии
                                             </div>
                                             <div class="panel-body">
                                                 <select name="category" id="category"
                                                         class="selectpicker"
                                                         style="height: auto; margin-bottom: 2rem;">
                                                     <option value="0" th:text="${#messages.msg('category.0')}"
-                                                            th:selected="${inputEvent.getCategory()==0}">
-                                                        Развлечения
-                                                    </option>
+                                                            th:selected="${inputEvent.getCategory()==0}">Развлечения</option>
                                                     <option value="1" th:selected="${inputEvent.getCategory()==1}"
-                                                            th:text="${#messages.msg('category.1')}">
-                                                        Наука
-                                                    </option>
+                                                            th:text="${#messages.msg('category.1')}">Наука</option>
                                                     <option value="2" th:selected="${inputEvent.getCategory()==2}"
-                                                            th:text="${#messages.msg('category.2')}">
-                                                        История
-                                                    </option>
+                                                            th:text="${#messages.msg('category.2')}">История</option>
                                                     <option value="3" th:selected="${inputEvent.getCategory()==3}"
-                                                            th:text="${#messages.msg('category.3')}">
-                                                        Искусство
-                                                    </option>
+                                                            th:text="${#messages.msg('category.3')}">Искусство</option>
                                                     <option value="4" th:selected="${inputEvent.getCategory()==4}"
-                                                            th:text="${#messages.msg('category.4')}">
-                                                        Производство
-                                                    </option>
+                                                            th:text="${#messages.msg('category.4')}">Производство</option>
                                                     <option value="5" th:selected="${inputEvent.getCategory()==5}"
-                                                            th:text="${#messages.msg('category.5')}">
-                                                        Гастрономия
-                                                    </option>
+                                                            th:text="${#messages.msg('category.5')}">Гастрономия</option>
                                                     <option value="6" th:selected="${inputEvent.getCategory()==6}"
-                                                            th:text="${#messages.msg('category.6')}">
-                                                        Квесты
-                                                    </option>
+                                                            th:text="${#messages.msg('category.6')}">Квесты</option>
                                                     <option value="7" th:selected="${inputEvent.getCategory()==7}"
-                                                            th:text="${#messages.msg('category.7')}">
-                                                        Экстрим
-                                                    </option>
+                                                            th:text="${#messages.msg('category.7')}">Экстрим</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -798,8 +709,7 @@
                                                    th:class="'error'">UsersCount
                                                 Error</label>
                                             <label for="users_count" class=""
-                                                   th:text="${#messages.msg('words.users_count')}">Количество
-                                                участников</label>
+                                                   th:text="${#messages.msg('words.users_count')}">Количество участников</label>
                                         </div>
                                         <div class="md-form form-sm">
                                             <input name="duration" id="duration" type="number" class="form-control"
@@ -808,41 +718,34 @@
                                                    min="1" max="240"/>
                                             <label for="duration" th:if="${#fields.hasErrors('duration')}"
                                                    th:text="${#messages.msg('error.event.duration')}"
-                                                   th:class="'error'">Duration
-                                                Error</label>
+                                                   th:class="'error'">Duration Error</label>
                                             <label for="duration" class=""
-                                                   th:text="${#messages.msg('words.duration')+' ('+#messages.msg('words.hours')+')'}">Длительность
-                                                (часов)</label>
+                                                   th:text="${#messages.msg('words.duration')+' ('+#messages.msg('words.hours')+')'}">Длительность (часов)</label>
                                         </div>
                                         <div class="md-form form-sm">
                                             <input name="place" id="place" type="text" class="form-control"
                                                    required="" minlength="5" maxlength="100"
                                                    th:value="${inputEvent.getPlace()}?${inputEvent.getPlace()}"/>
                                             <label for="place" th:if="${#fields.hasErrors('place')}"
-                                                   th:text="${#messages.msg('error.event.place')}" th:class="'error'">Place
-                                                Error</label>
-                                            <label for="place" class="" th:text="${#messages.msg('words.place')}">Место
-                                                встречи</label>
+                                                   th:text="${#messages.msg('error.event.place')}" th:class="'error'">Place Error</label>
+                                            <label for="place" class="" th:text="${#messages.msg('words.place')}">Место встречи</label>
                                         </div>
                                         <div class="md-form form-sm">
                                             <input name="price" id="price" type="number" class="form-control"
                                                    required="" min="100" max="100000"
                                                    th:value="${inputEvent.getPrice()}?${inputEvent.getPrice()}"/>
                                             <label for="price" th:if="${#fields.hasErrors('price')}"
-                                                   th:text="${#messages.msg('error.event.price')}" th:class="'error'">Price
-                                                Error</label>
+                                                   th:text="${#messages.msg('error.event.price')}" th:class="'error'">Price Error</label>
                                             <label for="price" class=""
                                                    th:text="${#messages.msg('words.price') + '(&#8381;)'}">Цена</label>
                                         </div>
-
                                         <div class="md-form form-sm">
                                             <input name="file" type="file" id="file" class="form-control" required=""
                                                    size="30000000"
                                                    style="padding-left: 6rem;font-size: 1rem;padding-top: 5px;"
                                                    accept="image/jpeg,image/png" aria-label="Фотографии"/>
-                                            <!--/*<label for="file" th:if="${error_data}" th:text="${#messages.msg('error.event.file')}"
-                                                   th:class="'error'">File Error</label>TODO:error_data(file)
-                                                   */-->
+<!--/*<label for="file" th:if="${error_data}" th:text="${#messages.msg('error.event.file')}" th:class="'error'">File Error</label>TODO:error_data(file)
+*/-->
                                             <label style="top: 0.45rem;" for="file" class=""
                                                    th:text="${#messages.msg('words.photos')}">Фотографии</label>
                                         </div>
@@ -854,12 +757,8 @@
                                                 <select name="language" class="selectpicker"
                                                         style="height: auto; margin-bottom: 2rem;"
                                                         th:selected="${inputEvent.getLanguage()}?${inputEvent.getLanguage()}">
-                                                    <option value="0" th:text="${#messages.msg('language.0')}">
-                                                        Русский
-                                                    </option>
-                                                    <option value="1" th:text="${#messages.msg('language.1')}">
-                                                        Английский
-                                                    </option>
+                                                    <option value="0" th:text="${#messages.msg('language.0')}">Русский</option>
+                                                    <option value="1" th:text="${#messages.msg('language.1')}">Английский</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -869,15 +768,12 @@
                                                     class="btn btn-outline-primary waves-effect waves-light"
                                                     data-dismiss="modal">Закрыть
                                             </button>
-                                            <button type="submit" class="btn btn-primary waves-effect waves-light">
-                                                Сохранить <i
-                                                    class="fa fa-check ml-1"></i></button>
+                                            <button type="submit" class="btn btn-primary waves-effect waves-light">Сохранить <i class="fa fa-check ml-1"></i></button>
                                         </div>
                                     </form>
                                 </div>
                             </div>
 <!--/*End-of-Content*/-->
-
                         </div>
                     </div>
 <!--/*End-of-Modal: modalSubmitProject*/-->
@@ -893,8 +789,7 @@
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                             aria-hidden="true">×</span></button>
                                 </div>
-                                <form action="/users/up_to_guide"
-                                      enctype="multipart/form-data" method="post">
+                                <form action="/users/up_to_guide" enctype="multipart/form-data" method="post">
 <!--/*Body*/-->
                                     <div class="modal-body mb-0">
 <!--/*Grid row*/-->
@@ -905,10 +800,8 @@
                                                 <div class="md-form form-sm">
                                                     <input type="text" id="upToGuide1"
                                                            class="form-control" name="series_and_number"/>
-                                                    <label for="editProfile1" class="">Серия и номер
-                                                        паспорта</label>
+                                                    <label for="editProfile1" class="">Серия и номер паспорта</label>
                                                 </div>
-
                                             </div>
 <!--/*End-of-Grid column*/-->
 <!--/*Grid column*/-->
@@ -917,8 +810,7 @@
                                                 <div class="md-form form-sm">
                                                     <input type="text" id="upToGuide2"
                                                            class="form-control" name="date_and_place"/>
-                                                    <label for="editProfile2" class="">Кем и когда
-                                                        выдан паспорт</label>
+                                                    <label for="editProfile2" class="">Кем и когда выдан паспорт</label>
                                                 </div>
                                             </div>
 <!--/*End-of-Grid column*/-->
@@ -927,24 +819,21 @@
                                                 <div class="md-form form-sm">
                                                     <input name="file" type="file" id="upToGuide3"
                                                            class="form-control"
-                                                           size="30000000"
-                                                           style="padding-left: 10rem; padding-top: 5px; font-size: 1rem;"
+                                                           size="30000000" style="padding-left: 10rem; padding-top: 5px; font-size: 1rem;"
                                                            accept="image/jpeg,image/png"
                                                            aria-label="Фотография паспорта"/>
-                                                    <label for="upToGuide3" class="" style="top: 0.5rem;">Фотография
-                                                        паспорта</label>
+                                                    <label for="upToGuide3" class="" style="top: 0.5rem;">Фотография паспорта</label>
                                                 </div>
                                             </div>
 <!--/*End-of-Grid column*/-->
 <!--/*Grid column*/-->
                                             <div class="col-md-12" th:if="${person.getAbout()==''}">
-                                                <!--/*Company website*/-->
+<!--/*Company website*/-->
                                                 <div class="md-form form-sm">
                                                                 <textarea type="text" id="upToGuide4" name="about_me"
                                                                           class="md-textarea"
                                                                           th:text="${person.getAbout()}"></textarea>
-                                                    <label for="upToGuide4" class=""
-                                                           th:text="${#messages.msg('words.about_me')}">О себе</label>
+                                                    <label for="upToGuide4" th:text="${#messages.msg('words.about_me')}">О себе</label>
                                                 </div>
                                             </div>
 <!--/*End-of-Grid column*/-->
@@ -953,14 +842,8 @@
                                     </div>
 <!--/*Footer*/-->
                                     <div class="modal-footer justify-content-center">
-                                        <button type="reset"
-                                                class="btn btn-outline-primary waves-effect waves-light"
-                                                data-dismiss="modal">Отменить
-                                        </button>
-                                        <button type="submit"
-                                                class="btn btn-primary waves-effect waves-light">
-                                            Отправить <i class="fa fa-check ml-1"></i>
-                                        </button>
+                                        <button type="reset" class="btn btn-outline-primary waves-effect waves-light" data-dismiss="modal">Отменить</button>
+                                        <button type="submit" class="btn btn-primary waves-effect waves-light">Отправить <i class="fa fa-check ml-1"></i></button>
                                     </div>
                                 </form>
                             </div>
@@ -976,13 +859,10 @@
         <div class="hiddendiv common"></div>
     </div>
 </div>
-
 <div th:replace="fragments/footer :: footer"></div>
-
 <script type="text/javascript" src="../resources/js/compiled.min.js"></script>
 <script type="text/javascript" src="../resources/libs/popper/popper.js"></script>
 <!--/*Custom scripts*/-->
-
 <script th:inline="javascript">
     /*<![CDATA[*/
     function showHide(page) {
@@ -1024,16 +904,12 @@
                 document.getElementById('down-exc').className = "page-item";
                 document.getElementById('up-exc').className = "page-item";
         }
-
     }
-
     /*]]>*/
 </script>
-
 <script>
     // SideNav Initialization
     $(".button-collapse").sideNav();
-
     var container = document.getElementById('slide-out');
     Ps.initialize(container, {
         wheelSpeed: 2,
