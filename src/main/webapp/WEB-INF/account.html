@@ -39,7 +39,7 @@
 <body style="background-color: #f9f9f9;">
 <!--/*@thymesVar id="person" type="com.heroku.demo.person.Person"*/-->
 <!--/*@thymesVar id="consts" type="com.heroku.demo.utils.Consts"*/-->
-<!--/*@thymesVar id="orders" type="java.util.List"*/-->
+<!--/*@thymesVar id="orders" type="java.util.List<com.heroku.demo.order.Buy>"*/-->
 <!--/*@thymesVar id="events" type="java.util.List"*/-->
 <div class="content"
      th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}, isThisUserAccount = ${true},
@@ -68,7 +68,7 @@
                             <!--Section: Basic Info-->
                             <section class="card card-cascade card-avatar mb-4">
 
-                                <img th:src="${person.getImageUrl()}" src="../resources/img/user.png" alt=""/>
+                                <img th:src="${person.getImageUrl()}" src="../resources/img/user.png" alt="" onerror='this.style.marginTop = 0'/>
 
                                 <!--Card content-->
                                 <div class="card-body">
@@ -192,9 +192,7 @@
                                         <div class="card card-cascade narrower mb-5"
                                              th:each="j : ${#numbers.sequence(i,i+inc)}"
                                              th:with="order=${orders.get(j)}">
-
                                             <!--/*@thymesVar id="order" type="com.heroku.demo.order.Buy"*/-->
-
                                             <!--Card image-->
                                             <div class="view overlay hm-white-slight">
                                                 <img th:src="${order.getImageUrl()}" src="#" class="img-fluid" alt=""/>
@@ -202,7 +200,6 @@
                                                     <div class="mask waves-effect waves-light"></div>
                                                 </a>
                                             </div>
-
                                             <!--Card content-->
                                             <div class="card-body pb-0">
                                                 <!--Title-->
