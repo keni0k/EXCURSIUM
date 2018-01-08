@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<body th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}" style="background-color: #f9f9f9;" th:fragment="header">
+<body th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
 <style type="text/css">
 
     .navbar-fixed-top {
@@ -51,7 +51,7 @@
         background-color: #33aa33;
     }
 </style>
-<nav class="navbar navbar-default navbar-custom" role="navigation">
+<nav class="navbar navbar-default navbar-custom" role="navigation" th:fragment="header">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
