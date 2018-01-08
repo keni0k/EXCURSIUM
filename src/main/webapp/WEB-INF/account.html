@@ -37,59 +37,6 @@
 </head>
 
 <body style="background-color: #f9f9f9;">
-
-<style type="text/css">
-
-    .navbar-fixed-top {
-        min-height: 95px;
-    }
-
-    .navbar-nav > li > a {
-        font-family: SegoeUIRegular, serif;
-        padding-top: 0;
-        padding-bottom: 0;
-        line-height: 95px;
-    }
-
-    .navbar-custom {
-        background: linear-gradient(to left, #68b3bd, #00ae6f);
-        color: #000000;
-        border-radius: 0;
-    }
-
-    .navbar-custom .navbar-nav > li > a {
-        color: #000000;
-    }
-
-    .navbar-custom .navbar-nav > .active > a {
-        color: #000000;
-        background-color: transparent;
-    }
-
-    .navbar-custom .navbar-nav > li > a:hover,
-    .navbar-custom .navbar-nav > li > a:focus,
-    .navbar-custom .navbar-nav > .active > a:hover,
-    .navbar-custom .navbar-nav > .active > a:focus,
-    .navbar-custom .navbar-nav > .open > a {
-        text-decoration: none;
-        background-color: #B2EBF2;
-    }
-
-    .navbar-custom .navbar-brand {
-        color: #eeeeee;
-    }
-
-    .navbar-custom .navbar-toggle {
-        background-color: #eeeeee;
-    }
-
-    .navbar-custom .icon-bar {
-        background-color: #33aa33;
-    }
-
-
-
-</style>
 <!--/*@thymesVar id="person" type="com.heroku.demo.person.Person"*/-->
 <!--/*@thymesVar id="consts" type="com.heroku.demo.utils.Consts"*/-->
 <!--/*@thymesVar id="orders" type="java.util.List"*/-->
@@ -100,48 +47,8 @@
               tourist = ${person.getType()==consts.PERSON_TOURIST or person.getType()==consts.PERSON_MODER_TOURIST or person.getType()==consts.PERSON_ADMIN},
               notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==consts.PERSON_ADMIN}">
     <!--TODO isThisUserAccount-->
-
-    <nav class="navbar navbar-default navbar-custom" role="navigation">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                        data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle Navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-
-                <a class="navbar-brand" href="/">
-                    <img id="brand-image" alt="Website Logo" src="../resources/img/logo.png"/>
-                </a>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-                <!-- Содержимое основной части -->
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/events/list" th:text="${#messages.msg('titles.excursions')}">Экскурсии</a></li>
-                    <li><a href="#">FAQ</a></li>
-                    <li th:if="${isAdmin}"><a href="/users/moderation" th:text="${#messages.msg('titles.persons')}">Модерация
-                        пользователей</a></li>
-                    <li th:if="${isAdmin}"><a href="/events/moderation" th:text="${#messages.msg('titles.events')}">Модерация
-                        экскурсий</a></li>
-                    <li th:if="${isUser} or ${isAdmin}"><a href="/users/account"
-                                                           th:text="${#messages.msg('titles.account')}">Профиль</a></li>
-                    <li th:unless="${isUser}"><a href="/users/registration"
-                                                 th:text="${#messages.msg('titles.registration')}">Регистрация</a></li>
-                    <li th:unless="${isUser}"><a href="/users/login"
-                                                 th:text="${#messages.msg('titles.login')}">Войти</a></li>
-                    <li th:if="${isUser} or ${isAdmin}"><a href="/users/logout"
-                                                           th:text="${#messages.msg('titles.logout')}">Выйти</a></li>
-                </ul>
-
-            </div><!-- navbar collapse end -->
-        </div><!-- container-fluid end -->
-    </nav>
+    <div th:replace="fragments/header :: style"></div>
+    <div th:replace="fragments/header :: header"></div>
 
     <div class="container">
 
@@ -1182,14 +1089,7 @@
     </div>
 </div>
 
-<footer id="myFooter">
-    <div class="container">
-        <h7 class="logo"><a href="#">&copy; 2017 Excursium</a></h7>
-        <div class="social-icons">
-            <a href="https://vk.com/excursium" class="twitter"><i class="fa fa-vk"></i></a>
-        </div>
-    </div>
-</footer>
+<div th:replace="fragments/footer :: footer"></div>
 
 <script type="text/javascript" src="../resources/js/compiled.min.js"></script>
 <script type="text/javascript" src="../resources/libs/popper/popper.js"></script>
@@ -1261,14 +1161,5 @@
 </script>
 <div class="drag-target"
      style="left: 0px; touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div>
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript">
-     (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter46873476 = new Ya.Metrika({ id:46873476, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");
-
-
-</script>
-<noscript>
-    <div><img src="https://mc.yandex.ru/watch/46873476" style="position:absolute; left:-9999px;" alt=""/></div>
-</noscript> <!-- /Yandex.Metrika counter -->
 </body>
 </html>

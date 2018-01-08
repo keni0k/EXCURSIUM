@@ -3,33 +3,27 @@
       xmlns:th="http://www.thymeleaf.org">
 <body th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
     <style type="text/css" th:fragment="style">
-
         .navbar-fixed-top {
             min-height: 95px;
         }
-
         .navbar-nav > li > a {
             font-family: SegoeUIRegular, serif;
             padding-top: 0;
             padding-bottom: 0;
             line-height: 95px;
         }
-
         .navbar-custom {
             background: linear-gradient(to left, #68b3bd, #00ae6f);
             color: #000000;
             border-radius: 0;
         }
-
         .navbar-custom .navbar-nav > li > a {
             color: #000000;
         }
-
         .navbar-custom .navbar-nav > .active > a {
             color: #000000;
             background-color: transparent;
         }
-
         .navbar-custom .navbar-nav > li > a:hover,
         .navbar-custom .navbar-nav > li > a:focus,
         .navbar-custom .navbar-nav > .active > a:hover,
@@ -38,15 +32,12 @@
             text-decoration: none;
             background-color: #B2EBF2;
         }
-
         .navbar-custom .navbar-brand {
             color: #eeeeee;
         }
-
         .navbar-custom .navbar-toggle {
             background-color: #eeeeee;
         }
-
         .navbar-custom .icon-bar {
             background-color: #33aa33;
         }

@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Upload File Request Page</title>
 </head>
 <body>
-
+<div th:replace="fragments/header :: style"></div>
+<div th:replace="fragments/header :: header"></div>
 <form method="POST" action="/uploadMultipleFile" enctype="multipart/form-data">
     File1 to upload: <input type="file" name="file"/><br/>
-    File2 to upload: <input type="file" name="file"/><br/>
-    File3 to upload: <input type="file" name="file"/><br/>
+    File2 to upload: <input type="file" name="file2"/><br/>
+    File3 to upload: <input type="file" name="file3"/><br/>
     <input type="submit" value="Upload"/> Press here to upload the file!
 </form>
-<!-- Yandex.Metrika counter --> <script type="text/javascript" > (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter46873476 = new Ya.Metrika({ id:46873476, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks"); </script> <noscript><div><img src="https://mc.yandex.ru/watch/46873476" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter -->
+<
 </body>
 </html>
