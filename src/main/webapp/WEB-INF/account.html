@@ -24,14 +24,14 @@
 
     <link rel="stylesheet" href="../resources/css/segoe_ui.css"/>
 
-    <!-- Icon -->
+    <!--/* Icon */-->
     <link rel="icon" href="../resources/img/icon.ico" type="image/x-icon"/>
     <link rel="shortcut icon" href="../resources/img/icon.ico" type="image/x-icon"/>
 
     <link rel="stylesheet" href="../resources/libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>
     <script type="text/javascript"
             src="../resources/libs/bootstrapformhelpers/js/bootstrap-formhelpers.min.js"></script>
-    <!-- Plugin CSS -->
+    <!--/* Plugin CSS */-->
     <link rel="stylesheet" href="../resources/css/cards.css"/>
     <title th:text="${#messages.msg('titles.account')}">Профиль</title>
 </head>
@@ -46,38 +46,38 @@
               excursovod = ${person.getType()==consts.PERSON_GUIDE or person.getType()==consts.PERSON_MODER_GUIDE or person.getType()==consts.PERSON_ADMIN},
               tourist = ${person.getType()==consts.PERSON_TOURIST or person.getType()==consts.PERSON_MODER_TOURIST or person.getType()==consts.PERSON_ADMIN},
               notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==consts.PERSON_ADMIN}">
-    <!--TODO isThisUserAccount-->
+    <!--/*TODO isThisUserAccount*/-->
     <div th:replace="fragments/header :: style"></div>
     <div th:replace="fragments/header :: header"></div>
 
     <div class="container">
 
-        <!--Main layout-->
+        <!--/*Main layout*/-->
         <main>
             <div class="container-fluid">
 
-                <!--Section: Profile-->
+                <!--/*Section: Profile*/-->
                 <section>
 
-                    <!--Grid row-->
+                    <!--/*Grid row*/-->
                     <div class="row">
 
-                        <!--Grid column-->
+                        <!--/*Grid column*/-->
                         <div class="col-lg-4 col-md-12">
 
-                            <!--Section: Basic Info-->
+                            <!--/*Section: Basic Info*/-->
                             <section class="card card-cascade card-avatar mb-4">
 
                                 <img th:src="${person.getImageUrl()}" src="../resources/img/user.png" alt="" onerror='this.style.marginTop = 0'/>
 
-                                <!--Card content-->
+                                <!--/*Card content*/-->
                                 <div class="card-body">
-                                    <!--Title-->
+                                    <!--/*Title*/-->
                                     <h4 class="card-title"><strong th:text="${person.getFullName()}">Имя</strong></h4>
                                     <h5 th:text="${person.getStringType(0)}">Турист/Экскурсовод</h5>
                                     <p th:text="${person.getCity()}">Москва, Россия</p>
 
-                                    <!-- Social -->
+                                    <!--/* Social */-->
                                     <a type="button"
                                        class="btn-floating btn-small light-blue lighten-2 waves-effect waves-light"><i
                                             class="fa fa-facebook"></i></a>
@@ -88,7 +88,7 @@
                                        class="btn-floating btn-small light-blue lighten-2 waves-effect waves-light"><i
                                             class="fa fa-linkedin"></i></a>
 
-                                    <!--Text-->
+                                    <!--/*Text*/-->
                                     <p class="card-text mt-3">тел.
                                         <th:block th:text="${person.getPhoneNumber()}"/>
                                     </p>
@@ -101,14 +101,14 @@
 
                                     <a th:if="${notConfirmed}" type="button" th:href="'/users/resend_email'"
                                             class="btn btn-primary mt-4 waves-effect waves-light">
-                                        <!--TODO translate-->
-                                        <th:block>Подтвердить E-mail</th:block><!--TODO translate-->
+                                        <!--/*TODO translate*/-->
+                                        <th:block>Подтвердить E-mail</th:block><!--/*TODO translate*/-->
                                     </a>
 
                                     <a th:if="${tourist}"
                                        class="btn btn-primary waves-effect waves-light"
                                        data-toggle="modal" data-target="#modalUpToGuide">Стать экскурсоводом
-                                    </a><!--TODO translate-->
+                                    </a><!--/*TODO translate*/-->
 
                                     <a th:if="${isThisUserAccount}" class="btn btn-primary waves-effect waves-light"
                                        href="#" role="button"
@@ -121,10 +121,10 @@
                                 </div>
 
                             </section>
-                            <!--Section: Basic Info-->
+                            <!--/*Section: Basic Info*/-->
 
-                            <!--Section: Experience-->
-                            <!--<section class="card mb-4">
+                            <!--/*Section: Experience*/-->
+                            <!--/*<section class="card mb-4">
                                 <div class="card-body">
 
                                     <h5 class=" text-center"><strong>Уведомления</strong></h5>
@@ -156,20 +156,20 @@
                                     </ul>
 
                                 </div>
-                            </section>-->
-                            <!--Section: Experience-->
+                            </section>*/-->
+                            <!--/*Section: Experience*/-->
 
                         </div>
-                        <!--Grid column-->
+                        <!--/*Grid column*/-->
 
-                        <!--Grid column-->
+                        <!--/*Grid column*/-->
                         <div class="col-lg-8 col-md-12 text-center">
-                            <!-- Heading -->
+                            <!--/* Heading */-->
                             <div class="text-center mt-3 mb-5">
 
                                 <h2 class="title text-center" th:if="${orders.size()>0}">Посещенные экскурсии</h2>
                                 <h2 class="title text-center" th:if="${orders.size()==0}">Здесь будут отображаться
-                                    посещенные экскурсии</h2> <!--TODO: translate-->
+                                    посещенные экскурсии</h2> <!--/*TODO: translate*/-->
 
                                 <a href="/events/list">
                                     <button th:if="${isThisUserAccount}" type="button"
@@ -181,31 +181,31 @@
                                     </button>
                                 </a>
                             </div>
-                            <!-- Heading -->
+                            <!--/* Heading */-->
 
-                            <!-- Card row -->
+                            <!--/* Card row */-->
                             <th:block th:if="${orders.size()!=0}">
                                 <div class="card-deck" th:each="i : ${#numbers.sequence( 0, orders.size()-1)}">
 
                                     <th:block th:if="${i%2==0}" th:with="inc = ${i!=orders.size()-1?1:0}">
-                                        <!--Card-->
+                                        <!--/*Card*/-->
                                         <div class="card card-cascade narrower mb-5"
                                              th:each="j : ${#numbers.sequence(i,i+inc)}"
                                              th:with="order=${orders.get(j)}">
                                             <!--/*@thymesVar id="order" type="com.heroku.demo.order.Buy"*/-->
-                                            <!--Card image-->
+                                            <!--/*Card image*/-->
                                             <div class="view overlay hm-white-slight">
                                                 <img th:src="${order.getImageUrl()}" src="#" class="img-fluid" alt=""/>
                                                 <a href="#">
                                                     <div class="mask waves-effect waves-light"></div>
                                                 </a>
                                             </div>
-                                            <!--Card content-->
+                                            <!--/*Card content*/-->
                                             <div class="card-body pb-0">
-                                                <!--Title-->
+                                                <!--/*Title*/-->
                                                 <h4 class="card-title" th:text="${order.getName()}">Название
                                                     экскурсии</h4>
-                                                <!--Text-->
+                                                <!--/*Text*/-->
                                                 <span class="card-text" style="font-size: small;" align="left"
                                                       th:text="${order.getTime()}">
                                                     Время заказа</span>
@@ -214,7 +214,7 @@
                                                     Время экскурсии</span>
                                             </div>
 
-                                            <!--Card footer-->
+                                            <!--/*Card footer*/-->
                                             <div class="card-footer links-light">
                                                 <span class="left pt-2">
                                                     <strong th:text="${order.getPrice()}+'&#8381;  '"
@@ -230,23 +230,23 @@
                                             </div>
 
                                         </div>
-                                        <!--/.Card-->
+                                        <!--/*/.Card*/-->
                                     </th:block>
 
                                 </div>
                             </th:block>
-                            <!-- Card row -->
+                            <!--/* Card row */-->
 
 
-                            <!--Pagination -->
+                            <!--/*Pagination */-->
                             <nav class="my-4 d-flex justify-content-center" th:if="${orders.size()>2}">
                                 <ul class="pagination pagination-circle pg-blue mb-0">
 
-                                    <!--First-->
+                                    <!--/*First*/-->
                                     <li class="page-item disabled clearfix d-none d-md-block"><a
                                             class="page-link waves-effect waves-effect">В начало</a></li>
 
-                                    <!--Arrow left-->
+                                    <!--/*Arrow left*/-->
                                     <li class="page-item disabled">
                                         <a class="page-link waves-effect waves-effect" aria-label="Назад">
                                             <span aria-hidden="true">«</span>
@@ -254,7 +254,7 @@
                                         </a>
                                     </li>
 
-                                    <!--Numbers-->
+                                    <!--/*Numbers*/-->
                                     <li class="page-item active"><a class="page-link waves-effect waves-effect">1</a>
                                     </li>
                                     <li class="page-item"><a class="page-link waves-effect waves-effect">2</a></li>
@@ -262,7 +262,7 @@
                                     <li class="page-item"><a class="page-link waves-effect waves-effect">4</a></li>
                                     <li class="page-item"><a class="page-link waves-effect waves-effect">5</a></li>
 
-                                    <!--Arrow right-->
+                                    <!--/*Arrow right*/-->
                                     <li class="page-item">
                                         <a class="page-link waves-effect waves-effect" aria-label="Вперёд">
                                             <span aria-hidden="true">»</span>
@@ -270,20 +270,20 @@
                                         </a>
                                     </li>
 
-                                    <!--First-->
+                                    <!--/*First*/-->
                                     <li class="page-item clearfix d-none d-md-block"><a
                                             class="page-link waves-effect waves-effect">В конец</a></li>
 
                                 </ul>
                             </nav>
-                            <!--/Pagination -->
+                            <!--/*/Pagination */-->
 
-                            <!-- Heading -->
+                            <!--/* Heading */-->
                             <div class="text-center mt-3 mb-5" th:if="${excursovod}">
 
                                 <h2 class="title text-center" th:if="${events.size()>0}">Добавленные экскурсии</h2>
                                 <h2 class="title text-center" th:if="${events.size()==0 and excursovod}">Здесь будут
-                                    отображаться добавленные экскурсии</h2> <!--TODO: translate-->
+                                    отображаться добавленные экскурсии</h2> <!--/*TODO: translate*/-->
 
                                 <button th:if="${isThisUserAccount and excursovod}" type="button"
                                         class="btn btn-primary mt-4 waves-effect waves-light"
@@ -295,14 +295,14 @@
                                 </button>
 
                             </div>
-                            <!-- Heading -->
+                            <!--/* Heading */-->
 
-                            <!-- Card row -->
+                            <!--/* Card row */-->
                             <th:block th:if="${events.size()!=0 and excursovod}">
                                 <div class="card-deck" th:each="i : ${#numbers.sequence( 0, events.size()-1)}">
 
                                     <th:block th:if="${i%2==0}" th:with="inc=${i!=events.size()-1?1:0}">
-                                        <!--Card-->
+                                        <!--/*Card*/-->
                                         <div class="card card-cascade narrower mb-5"
                                              th:each="j : ${#numbers.sequence(i,i+inc)}"
                                              th:with="event = ${events.get(j)}"
@@ -311,7 +311,7 @@
 
                                             <!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
 
-                                            <!--Card image-->
+                                            <!--/*Card image*/-->
                                             <div class="view overlay hm-white-slight">
                                                 <img th:src="${event.pathToPhoto}" src="#" class="img-fluid"
                                                      style="height: 240px; min-width: -webkit-fill-available;" alt=""/>
@@ -320,18 +320,18 @@
                                                 </a>
                                             </div>
 
-                                            <!--Card content-->
+                                            <!--/*Card content*/-->
                                             <div class="card-body pb-0">
-                                                <!--Title-->
+                                                <!--/*Title*/-->
                                                 <h4 class="card-title" th:text="${event.getName()}"><a
                                                         th:href="@{/events/event(id=${event.getId()})}">Название
                                                     экскурсии</a></h4>
                                                 <strong style="color:#3265D4; font-size: medium; padding-top: -0.2em;"
                                                         th:text="${event.getStringType(0)}">На модерации</strong>
-                                                <!--TODO translate-->
+                                                <!--/*TODO translate*/-->
                                             </div>
 
-                                            <!--Card footer-->
+                                            <!--/*Card footer*/-->
                                             <div class="card-footer links-light">
                                                 <span class="left pt-2">
                                                     <strong th:text="${event.getPrice()}+'&#8381;  '"
@@ -347,26 +347,26 @@
                                             </div>
 
                                         </div>
-                                        <!--/.Card-->
+                                        <!--/*/.Card*/-->
                                     </th:block>
 
                                 </div>
                             </th:block>
-                            <!-- Card row -->
+                            <!--/* Card row */-->
 
 
-                            <!--Pagination -->
+                            <!--/*Pagination */-->
                             <nav class="my-4 d-flex justify-content-center" th:if="${events.size()>2 and excursovod}">
                                 <ul class="pagination pagination-circle pg-blue mb-0">
 
-                                    <!--First-->
+                                    <!--/*First*/-->
                                     <li class="page-item disabled clearfix d-none d-md-block"
                                         id="to-home-exc">
                                         <a class="page-link waves-effect waves-effect"
                                            th:onclick="'showHide(1);'">В начало</a>
                                     </li>
 
-                                    <!--Arrow left-->
+                                    <!--/*Arrow left*/-->
                                     <li class="page-item disabled"
                                         id="down-exc">
                                         <a class="page-link waves-effect waves-effect" aria-label="Назад">
@@ -375,7 +375,7 @@
                                         </a>
                                     </li>
 
-                                    <!--Numbers-->
+                                    <!--/*Numbers*/-->
                                     <li th:each="i : ${#numbers.sequence(1, events.size()/2)}"
                                         th:class="'page-item' + (${i==1}?' active':'')"
                                         th:id="'page_events'+${i}">
@@ -385,7 +385,7 @@
                                     </li>
 
 
-                                    <!--Arrow right-->
+                                    <!--/*Arrow right*/-->
                                     <li class="page-item"
                                         id="up-exc">
                                         <a class="page-link waves-effect waves-effect" aria-label="Вперёд">
@@ -394,7 +394,7 @@
                                         </a>
                                     </li>
 
-                                    <!--First-->
+                                    <!--/*First*/-->
                                     <li class="page-item clearfix d-none d-md-block"
                                         id="to-end-exc"
                                         th:onclick="'showHide('+${events.size()/2}+');'">
@@ -403,32 +403,32 @@
 
                                 </ul>
                             </nav>
-                            <!--/Pagination -->
+                            <!--/*/Pagination */-->
 
 
                         </div>
-                        <!--Grid column-->
+                        <!--/*Grid column*/-->
 
                     </div>
-                    <!--Grid row-->
+                    <!--/*Grid row*/-->
 
                 </section>
-                <!--Section: Profile-->
+                <!--/*Section: Profile*/-->
 
-                <!--Section: Modals-->
+                <!--/*Section: Modals*/-->
                 <section>
 
-                    <!--Modal: modalEditProfile-->
+                    <!--/*Modal: modalEditProfile*/-->
                     <div class="modal fade" id="modalEditProfile" tabindex="-1" role="dialog"
                          aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                         <div class="modal-dialog cascading-modal modal-lg" role="document">
-                            <!--Content-->
+                            <!--/*Content*/-->
                             <div class="modal-content">
 
-                                <!--Modal cascading tabs-->
+                                <!--/*Modal cascading tabs*/-->
                                 <div class="modal-c-tabs">
 
-                                    <!-- Nav tabs -->
+                                    <!--/* Nav tabs */-->
                                     <ul class="nav nav-tabs tabs-2 light-blue darken-3" role="tablist">
                                         <li class="nav-item waves-effect waves-light">
                                             <a class="nav-link active" data-toggle="tab"
@@ -445,23 +445,23 @@
                                         </li>
                                     </ul>
 
-                                    <!-- Tab panels -->
+                                    <!--/* Tab panels */-->
                                     <div class="tab-content">
-                                        <!--Panel 7-->
+                                        <!--/*Panel 7*/-->
                                         <div class="tab-pane fade in active" id="panel77" role="tabpanel"
                                              aria-expanded="true">
-                                            <!--Body-->
+                                            <!--/*Body*/-->
                                             <div class="modal-body mb-1">
                                                 <form th:object="${person}" action="/users/edit_public"
                                                       enctype="multipart/form-data" method="post">
 
-                                                    <!--Grid row-->
+                                                    <!--/*Grid row*/-->
                                                     <div class="row">
 
-                                                        <!--Grid column-->
+                                                        <!--/*Grid column*/-->
                                                         <div class="col-md-6">
 
-                                                            <!--First Name-->
+                                                            <!--/*First Name*/-->
                                                             <div class="md-form form-sm">
                                                                 <input type="text" id="editProfile1"
                                                                        class="form-control" name="first_name"
@@ -472,12 +472,12 @@
                                                             </div>
 
                                                         </div>
-                                                        <!--Grid column-->
+                                                        <!--/*Grid column*/-->
 
-                                                        <!--Grid column-->
+                                                        <!--/*Grid column*/-->
                                                         <div class="col-md-6">
 
-                                                            <!--Last Name-->
+                                                            <!--/*Last Name*/-->
                                                             <div class="md-form form-sm">
                                                                 <input type="text" id="editProfile2"
                                                                        class="form-control" name="last_name"
@@ -488,12 +488,12 @@
                                                             </div>
 
                                                         </div>
-                                                        <!--Grid column-->
+                                                        <!--/*Grid column*/-->
 
-                                                        <!--Grid column-->
+                                                        <!--/*Grid column*/-->
                                                         <div class="col-md-12">
 
-                                                            <!--Company website-->
+                                                            <!--/*Company website*/-->
                                                             <div class="md-form form-sm">
                                                                 <textarea type="text" id="editProfile5" name="about_me"
                                                                           class="md-textarea"
@@ -504,7 +504,7 @@
                                                             </div>
 
                                                         </div>
-                                                        <!--Grid column-->
+                                                        <!--/*Grid column*/-->
                                                         <div class="col-md-12">
                                                             <div class="md-form form-sm">
                                                                 <input name="file" type="file" id="filePerson"
@@ -519,10 +519,10 @@
                                                             </div>
                                                         </div>
 
-                                                        <!--Grid column-->
+                                                        <!--/*Grid column*/-->
                                                         <div class="col-md-12">
 
-                                                            <!--City-->
+                                                            <!--/*City*/-->
                                                             <div class="md-form form-sm">
                                                                 <input type="text" id="editProfile6" name="city"
                                                                        class="form-control"
@@ -533,10 +533,10 @@
 
                                                         </div>
 
-                                                        <!--Grid column-->
+                                                        <!--/*Grid column*/-->
                                                         <div class="col-md-6">
 
-                                                            <!--Facebook-->
+                                                            <!--/*Facebook*/-->
                                                             <div class="md-form form-sm mt-2">
                                                                 <input type="text" id="editProfile8"
                                                                        class="form-control"/>
@@ -544,12 +544,12 @@
                                                             </div>
 
                                                         </div>
-                                                        <!--Grid column-->
+                                                        <!--/*Grid column*/-->
 
-                                                        <!--Grid column-->
+                                                        <!--/*Grid column*/-->
                                                         <div class="col-md-6">
 
-                                                            <!--LinkedIn-->
+                                                            <!--/*LinkedIn*/-->
                                                             <div class="md-form form-sm mt-2">
                                                                 <input type="text" id="editProfile10"
                                                                        class="form-control"/>
@@ -557,7 +557,7 @@
                                                             </div>
 
                                                         </div>
-                                                        <!--Grid column-->
+                                                        <!--/*Grid column*/-->
 
                                                     </div>
                                                     <div class="modal-footer justify-content-center">
@@ -570,17 +570,17 @@
                                                             Сохранить <i class="fa fa-check ml-1"></i>
                                                         </button>
                                                     </div>
-                                                    <!--Grid row-->
+                                                    <!--/*Grid row*/-->
                                                 </form>
                                             </div>
 
                                         </div>
-                                        <!--/.Panel 7-->
+                                        <!--/*/.Panel 7*/-->
 
-                                        <!--Panel 8-->
+                                        <!--/*Panel 8*/-->
                                         <div class="tab-pane fade" id="panel88" role="tabpanel" aria-expanded="false">
 
-                                            <!--Body-->
+                                            <!--/*Body*/-->
                                             <div class="modal-body">
 
                                                 <form th:object="${person}" action="/users/edit_private" method="post"
@@ -628,41 +628,41 @@
                                             </div>
 
                                         </div>
-                                        <!--/.Panel 8-->
+                                        <!--/*/.Panel 8*/-->
                                     </div>
 
                                 </div>
                             </div>
-                            <!--/.Content-->
+                            <!--/*/.Content*/-->
                         </div>
                     </div>
-                    <!--Modal: modalEditProfile-->
+                    <!--/*Modal: modalEditProfile*/-->
 
-                    <!--Modal: modalFeedback-->
+                    <!--/*Modal: modalFeedback*/-->
                     <div class="modal fade" id="modalFeedback" tabindex="-1" role="dialog"
                          aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                         <div class="modal-dialog cascading-modal modal-lg" role="document">
 
-                            <!--Content-->
+                            <!--/*Content*/-->
                             <div class="modal-content">
 
-                                <!--Header-->
+                                <!--/*Header*/-->
                                 <div class="modal-header light-blue darken-3 white-text">
                                     <h4 class=""><i class="fa fa-newspaper-o"></i> Новое сообщение</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                             aria-hidden="true">×</span></button>
                                 </div>
 
-                                <!--Body-->
+                                <!--/*Body*/-->
                                 <div class="modal-body mb-0">
 
-                                    <!--Subject-->
+                                    <!--/*Subject*/-->
                                     <div class="md-form form-sm">
                                         <input type="text" id="modalFeedback1" class="form-control"/>
                                         <label for="modalFeedback1" class="">Subject</label>
                                     </div>
 
-                                    <!--Topic-->
+                                    <!--/*Topic*/-->
                                     <select class="mdb-select colorful-select dropdown-primary">
                                         <option value="" disabled="" selected="">Choose category</option>
                                         <option value="1">Idea</option>
@@ -670,7 +670,7 @@
                                         <option value="3">Bug</option>
                                     </select>
 
-                                    <!--Message-->
+                                    <!--/*Message*/-->
                                     <div class="md-form">
                                         <textarea type="text" id="modalFeedback2" class="md-textarea"
                                                   style="height: 300px;"></textarea>
@@ -679,7 +679,7 @@
 
                                 </div>
 
-                                <!--Footer-->
+                                <!--/*Footer*/-->
                                 <div class="modal-footer justify-content-center">
                                     <button type="button" class="btn btn-outline-primary waves-effect waves-light"
                                             data-dismiss="modal">Закрыть
@@ -689,35 +689,35 @@
                                 </div>
 
                             </div>
-                            <!--/.Content-->
+                            <!--/*/.Content*/-->
 
                         </div>
                     </div>
-                    <!--Modal: modalFeedback-->
+                    <!--/*Modal: modalFeedback*/-->
 
-                    <!--Modal: modalAchievment-->
+                    <!--/*Modal: modalAchievment*/-->
                     <div class="modal fade" id="modalAchievment" tabindex="-1" role="dialog"
                          aria-labelledby="myModalLabel" aria-hidden="true">
                         <div class="modal-dialog cascading-modal" role="document">
 
-                            <!--Content-->
+                            <!--/*Content*/-->
                             <div class="modal-content">
 
-                                <!--Header-->
+                                <!--/*Header*/-->
                                 <div class="modal-header light-blue darken-3 white-text">
                                     <h4 class=""><i class="fa fa-newspaper-o"></i> Bootstrap Master</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                             aria-hidden="true">×</span></button>
                                 </div>
 
-                                <!--Body-->
+                                <!--/*Body*/-->
                                 <div class="modal-body mb-0">
 
                                     <p>текст</p>
 
                                 </div>
 
-                                <!--Footer-->
+                                <!--/*Footer*/-->
                                 <div class="modal-footer justify-content-center">
                                     <button type="button" class="btn btn-outline-primary waves-effect waves-light"
                                             data-dismiss="modal">Закрыть
@@ -727,31 +727,31 @@
                                 </div>
 
                             </div>
-                            <!--/.Content-->
+                            <!--/*/.Content*/-->
 
                         </div>
                     </div>
-                    <!--Modal: modalAchievment-->
+                    <!--/*Modal: modalAchievment*/-->
 
-                    <!--Modal: modalContactUser -->
+                    <!--/*Modal: modalContactUser */-->
                     <div class="modal fade" id="modalContactUser" tabindex="-1" role="dialog"
                          aria-labelledby="myModalLabel" aria-hidden="true">
                         <div class="modal-dialog cascading-modal modal-lg" role="document">
 
-                            <!--Content-->
+                            <!--/*Content*/-->
                             <div class="modal-content">
 
-                                <!--Header-->
+                                <!--/*Header*/-->
                                 <div class="modal-header light-blue darken-3 white-text">
                                     <h4 class=""><i class="fa fa-envelope-o"></i> Новое сообщение</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                             aria-hidden="true">×</span></button>
                                 </div>
 
-                                <!--Body-->
+                                <!--/*Body*/-->
                                 <div class="modal-body mb-0">
 
-                                    <!--Basic textarea-->
+                                    <!--/*Basic textarea*/-->
                                     <div class="md-form">
                                         <textarea type="text" id="modalContactUser1" class="md-textarea"
                                                   style="height: 400px;"></textarea>
@@ -760,7 +760,7 @@
 
                                 </div>
 
-                                <!--Footer-->
+                                <!--/*Footer*/-->
                                 <div class="modal-footer justify-content-center">
                                     <button type="button" class="btn btn-outline-primary waves-effect waves-light"
                                             data-dismiss="modal">Отмена
@@ -770,34 +770,34 @@
                                 </div>
 
                             </div>
-                            <!--/.Content-->
+                            <!--/*/.Content*/-->
 
                         </div>
                     </div>
-                    <!--Modal: modalContactUser-->
+                    <!--/*Modal: modalContactUser*/-->
 
-                    <!--Modal: modalSubmitProject-->
+                    <!--/*Modal: modalSubmitProject*/-->
                     <div class="modal fade" id="modalSubmitProject" tabindex="-1" role="dialog"
                          aria-labelledby="myModalLabel" aria-hidden="true">
                         <div class="modal-dialog cascading-modal" role="document">
 
-                            <!--Content-->
+                            <!--/*Content*/-->
                             <div class="modal-content">
 
-                                <!--Header-->
+                                <!--/*Header*/-->
                                 <div class="modal-header light-blue darken-3 white-text">
                                     <h4 class=""><i class="fa fa-newspaper-o"></i> Добавить новую экскурсию</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                             aria-hidden="true">×</span></button>
                                 </div>
 
-                                <!--Body-->
+                                <!--/*Body*/-->
                                 <div class="modal-body mb-0">
                                     <!--/*@thymesVar id="inputEvent" type="com.heroku.demo.event.Event"*/-->
                                     <form th:object="${inputEvent}" action="/events/add" enctype="multipart/form-data"
                                           autocomplete="off" method="post">
 
-                                        <!--Name-->
+                                        <!--/*Name*/-->
                                         <div class="md-form form-sm">
                                             <input name="name" type="text" class="form-control" id="name"
                                                    th:value="${inputEvent.getName()}" required="" minlength="10"
@@ -809,7 +809,7 @@
                                                    th:text="${#messages.msg('words.name')}">Название</label>
                                         </div>
 
-                                        <!--Project URL address-->
+                                        <!--/*Project URL address*/-->
                                         <div class="md-form">
                                             <textarea name="description" minlength="150" maxlength="1000" type="text"
                                                       id="description"
@@ -823,7 +823,7 @@
                                                    th:text="${#messages.msg('words.description')}">Описание</label>
                                         </div>
 
-                                        <!--Image URL-->
+                                        <!--/*Image URL*/-->
                                         <div class="panel panel-default">
                                             <div class="panel-heading"
                                                  th:text="${#messages.msg('words.type_of_excursion')}">
@@ -923,8 +923,9 @@
                                                    size="30000000"
                                                    style="padding-left: 6rem;font-size: 1rem;padding-top: 5px;"
                                                    accept="image/jpeg,image/png" aria-label="Фотографии"/>
-                                            <!--<label for="file" th:if="${error_data}" th:text="${#messages.msg('error.event.file')}"
-                                                   th:class="'error'">File Error</label>TODO:error_data(file)-->
+                                            <!--/*<label for="file" th:if="${error_data}" th:text="${#messages.msg('error.event.file')}"
+                                                   th:class="'error'">File Error</label>TODO:error_data(file)
+                                                   */-->
                                             <label style="top: 0.45rem;" for="file" class=""
                                                    th:text="${#messages.msg('words.photos')}">Фотографии</label>
                                         </div>
@@ -947,7 +948,7 @@
                                             </div>
                                         </div>
 
-                                        <!--Footer-->
+                                        <!--/*Footer*/-->
                                         <div class="modal-footer justify-content-center">
                                             <button type="button"
                                                     class="btn btn-outline-primary waves-effect waves-light"
@@ -962,21 +963,21 @@
                                 </div>
 
                             </div>
-                            <!--/.Content-->
+                            <!--/*/.Content*/-->
 
                         </div>
                     </div>
-                    <!--Modal: modalSubmitProject-->
+                    <!--/*Modal: modalSubmitProject*/-->
 
-                    <!--Modal: modalUpToGuide-->
+                    <!--/*Modal: modalUpToGuide*/-->
                     <div class="modal fade" id="modalUpToGuide" tabindex="-1" role="dialog"
                          aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                         <div class="modal-dialog cascading-modal modal-lg" role="document">
 
-                            <!--Content-->
+                            <!--/*Content*/-->
                             <div class="modal-content">
 
-                                <!--Header-->
+                                <!--/*Header*/-->
                                 <div class="modal-header light-blue darken-3 white-text">
                                     <h4 class=""><i class="fa fa-newspaper-o"></i> Дополнительные поля</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
@@ -986,16 +987,16 @@
                                 <form action="/users/up_to_guide"
                                       enctype="multipart/form-data" method="post">
 
-                                    <!--Body-->
+                                    <!--/*Body*/-->
                                     <div class="modal-body mb-0">
 
-                                        <!--Grid row-->
+                                        <!--/*Grid row*/-->
                                         <div class="row">
 
-                                            <!--Grid column-->
+                                            <!--/*Grid column*/-->
                                             <div class="col-md-6">
 
-                                                <!--First Name-->
+                                                <!--/*First Name*/-->
                                                 <div class="md-form form-sm">
                                                     <input type="text" id="upToGuide1"
                                                            class="form-control" name="series_and_number"/>
@@ -1004,12 +1005,12 @@
                                                 </div>
 
                                             </div>
-                                            <!--Grid column-->
+                                            <!--/*Grid column*/-->
 
-                                            <!--Grid column-->
+                                            <!--/*Grid column*/-->
                                             <div class="col-md-6">
 
-                                                <!--Last Name-->
+                                                <!--/*Last Name*/-->
                                                 <div class="md-form form-sm">
                                                     <input type="text" id="upToGuide2"
                                                            class="form-control" name="date_and_place"/>
@@ -1018,9 +1019,9 @@
                                                 </div>
 
                                             </div>
-                                            <!--Grid column-->
+                                            <!--/*Grid column*/-->
 
-                                            <!--Grid column-->
+                                            <!--/*Grid column*/-->
                                             <div class="col-md-12">
                                                 <div class="md-form form-sm">
                                                     <input name="file" type="file" id="upToGuide3"
@@ -1033,12 +1034,12 @@
                                                         паспорта</label>
                                                 </div>
                                             </div>
-                                            <!--Grid column-->
+                                            <!--/*Grid column*/-->
 
-                                            <!--Grid column-->
+                                            <!--/*Grid column*/-->
                                             <div class="col-md-12" th:if="${person.getAbout()==''}">
 
-                                                <!--Company website-->
+                                                <!--/*Company website*/-->
                                                 <div class="md-form form-sm">
                                                                 <textarea type="text" id="upToGuide4" name="about_me"
                                                                           class="md-textarea"
@@ -1048,14 +1049,14 @@
                                                 </div>
 
                                             </div>
-                                            <!--Grid column-->
+                                            <!--/*Grid column*/-->
 
                                         </div>
-                                        <!--Grid row-->
+                                        <!--/*Grid row*/-->
 
                                     </div>
 
-                                    <!--Footer-->
+                                    <!--/*Footer*/-->
                                     <div class="modal-footer justify-content-center">
                                         <button type="reset"
                                                 class="btn btn-outline-primary waves-effect waves-light"
@@ -1069,18 +1070,18 @@
                                 </form>
 
                             </div>
-                            <!--/.Content-->
+                            <!--/*/.Content*/-->
 
                         </div>
                     </div>
-                    <!--Modal: modalUpToGuide-->
+                    <!--/*Modal: modalUpToGuide*/-->
 
                 </section>
-                <!--Section: Modals-->
+                <!--/*Section: Modals*/-->
 
             </div>
         </main>
-        <!--Main layout-->
+        <!--/*Main layout*/-->
 
         <div class="hiddendiv common"></div>
     </div>
@@ -1090,7 +1091,7 @@
 
 <script type="text/javascript" src="../resources/js/compiled.min.js"></script>
 <script type="text/javascript" src="../resources/libs/popper/popper.js"></script>
-<!--Custom scripts-->
+<!--/*Custom scripts*/-->
 
 <script th:inline="javascript">
     /*<![CDATA[*/
