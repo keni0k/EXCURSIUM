@@ -52,10 +52,9 @@
 
     <style type="text/css" media="screen">
         .layout-slider {
-            margin-bottom: 60px;
+            margin-bottom: 15px;
             width: 50%;
         }
-
     </style>
 
 
@@ -109,8 +108,87 @@
                                     </div>
                                 </div>
                             </div>
-                            <hr/>
-                            <div class="priceFilter">
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading" th:text="${#messages.msg('words.sort')}">
+                                    Цена
+                                </div>
+                                <div class="panel-body">
+                                    <div class="layout-slider" style="width: 100%">
+                                        <span style="display: inline-block; width: 100%; padding: 0 5px;">
+                                        <input id="Slider1" type="slider" name="price"
+                                               th:value="${minMaxPrice}"/></span>
+                                    </div>
+                                    <!--<br/>-->
+                                    <!--<div class="checkbox">-->
+                                    <!--<input type="checkbox" id="is_barter" name="is_barter"/>-->
+                                    <!--<label for = "is_barter"><span>Отображать сделки по бартеру</span></label>-->
+                                    <!--</div>-->
+                                    <script th:inline="javascript">
+                                        /*<![CDATA[*/
+                                        var maxPrice = [[${maxPrice}]];
+                                        var minPrice = [[${minPrice}]];
+                                        var s50 = (minPrice + maxPrice) / 2;
+                                        var s33 = (minPrice + s50) / 2;
+                                        var s66 = (s50 + maxPrice) / 2;
+                                        jQuery("#Slider1").slider({
+                                            /*from: 1000,
+                                            to: 100000,
+                                            step: 500,
+                                            smooth: true,
+                                            round: 0,
+                                            dimension: "&nbsp;₽",
+                                            skin: "plastic"*/
+                                            from: minPrice,
+                                            to: maxPrice,
+                                            heterogeneity: ['33/' + s33, '66/' + s66],
+                                            scale: [minPrice, '|', s33, '|', s66, '|', maxPrice],
+                                            limits: false,
+                                            step: 10,
+                                            dimension: '&nbsp;₽',
+                                            skin: "blue"
+                                        });
+                                        /*]]>*/
+
+                                    </script>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading" th:text="${#messages.msg('words.sort')}">
+                                    Время
+                                </div>
+                                <div class="panel-body">
+                                    <div class="layout-slider" style="width: 100%">
+                                            <span
+                                                    style="display: inline-block; width: 100%; padding: 0 5px 0 0;">
+                                            <input id="Slider2" type="slider" name="time" value="600;1200"/></span>
+                                    </div>
+                                    <script th:inline="javascript">
+                                        /*<![CDATA[*/
+                                        jQuery("#Slider2").slider({
+                                            from: 480,
+                                            to: 1440,
+                                            step: 15,
+                                            dimension: '',
+                                            skin: "plastic",
+                                            scale: ['8:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00', '24:00'],
+                                            limits: false,
+                                            calculate: function (value) {
+                                                var hours = Math.floor(value / 60);
+                                                var mins = value - hours * 60;
+                                                return (hours < 10 ? "0" + hours : hours) + ":" + (mins < 10 ? "0" + mins : mins);
+                                            },
+                                            onstatechange: function (value) {
+                                                console.dir(this);
+                                            }
+                                        });
+                                        /*]]>*/
+
+                                    </script>
+                                </div>
+                            </div>
+
+                            <!--<div class="priceFilter">
                                 <div class="price-range">
                                     <div class="well" style="padding: 10px 20px;">
                                         <h5>Цена</h5>
@@ -121,11 +199,11 @@
                                         <input id="Slider1" type="slider" name="price"
                                                th:value="${minMaxPrice}"/></span>
                                         </div>
-                                        <!--<br/>-->
-                                        <!--<div class="checkbox">-->
-                                        <!--<input type="checkbox" id="is_barter" name="is_barter"/>-->
-                                        <!--<label for = "is_barter"><span>Отображать сделки по бартеру</span></label>-->
-                                        <!--</div>-->
+                                        &lt;!&ndash;<br/>&ndash;&gt;
+                                        &lt;!&ndash;<div class="checkbox">&ndash;&gt;
+                                        &lt;!&ndash;<input type="checkbox" id="is_barter" name="is_barter"/>&ndash;&gt;
+                                        &lt;!&ndash;<label for = "is_barter"><span>Отображать сделки по бартеру</span></label>&ndash;&gt;
+                                        &lt;!&ndash;</div>&ndash;&gt;
                                         <script th:inline="javascript">
                                             /*<![CDATA[*/
                                             var maxPrice = [[${maxPrice}]];
@@ -186,7 +264,7 @@
                                         </script>
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
 
                             <div class="input-group" style="display: none">
                                 <input name="category" type="number" class="form-control" th:value="${category}"/>
