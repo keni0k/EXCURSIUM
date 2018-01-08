@@ -181,19 +181,19 @@
                                     </button>
                                 </a>
                             </div>
-                            <!--/* Heading */-->
+<!--/* Heading */-->
 
-                            <!--/* Card row */-->
+<!--/* Card row */-->
                             <th:block th:if="${orders.size()!=0}">
                                 <div class="card-deck" th:each="i : ${#numbers.sequence( 0, orders.size()-1)}">
 
                                     <th:block th:if="${i%2==0}" th:with="inc = ${i!=orders.size()-1?1:0}">
-                                        <!--/*Card*/-->
+<!--/*Card*/-->
                                         <div class="card card-cascade narrower mb-5"
                                              th:each="j : ${#numbers.sequence(i,i+inc)}"
                                              th:with="order=${orders.get(j)}">
-                                            <!--/*@thymesVar id="order" type="com.heroku.demo.order.Buy"*/-->
-                                            <!--/*Card image*/-->
+<!--/*@thymesVar id="order" type="com.heroku.demo.order.Buy"*/-->
+<!--/*Card image*/-->
                                             <div class="view overlay hm-white-slight">
                                                 <img th:src="${order.getImageUrl()}" src="#" class="img-fluid" alt=""/>
                                                 <a href="#">
@@ -1138,9 +1138,6 @@
     }
 
     /*]]>*/
-
-
-
 </script>
 
 <script>
@@ -1153,9 +1150,6 @@
         wheelPropagation: true,
         minScrollbarLength: 20
     });
-
-
-
 </script>
 <div class="drag-target"
      style="left: 0px; touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div>
