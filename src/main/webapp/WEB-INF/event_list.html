@@ -8,6 +8,7 @@ xmlns:th="http://www.thymeleaf.org">
 <meta name="author" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="keywords" content="excursium"/>
+<title th:text="${#messages.msg('titles.excursions')}">Экскурсии</title>
 
 <link rel="stylesheet" href="../resources/css/media.css"/>
 <link rel="stylesheet" type="text/css" href="../resources/css/footer.css"/>
@@ -24,15 +25,16 @@ xmlns:th="http://www.thymeleaf.org">
 
 <link rel="stylesheet" type="text/css" href="../resources/css/styles.css"/>
 <link rel="stylesheet" href="../resources/css/cards.css"/>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
 <script type="text/javascript" src="../resources/js/slider/jshashtable-2.1_src.js"></script>
 <script type="text/javascript" src="../resources/js/slider/jquery.numberformatter-1.2.3.js"></script>
 <script type="text/javascript" src="../resources/js/slider/tmpl.js"></script>
 <script type="text/javascript" src="../resources/js/slider/jquery.dependClass-0.1.js"></script>
 <script type="text/javascript" src="../resources/js/slider/draggable-0.1.js"></script>
 <script type="text/javascript" src="../resources/js/slider/jquery.slider.js"></script>
-<title th:text="${#messages.msg('titles.excursions')}">Экскурсии</title>
 </head>
 <body style="background-color: #f9f9f9;">
 <div class="content"
