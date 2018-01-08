@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta name="description" content=""/>
@@ -29,7 +29,7 @@
 
 <link rel="stylesheet" href="../resources/libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>
 <script type="text/javascript"
-        src="../resources/libs/bootstrapformhelpers/js/bootstrap-formhelpers.min.js"></script><!--/* Plugin CSS */-->
+src="../resources/libs/bootstrapformhelpers/js/bootstrap-formhelpers.min.js"></script><!--/* Plugin CSS */-->
 <link rel="stylesheet" href="../resources/css/cards.css"/>
 
 
@@ -46,265 +46,265 @@
 <script type="text/javascript" src="../resources/js/slider/jquery.slider.js"></script><!--/* end */-->
 
 <style type="text/css" media="screen">
-    .layout-slider {
-        margin-bottom: 15px;
-        margin-top: 5px;
-        width: 50%;
-    }
+.layout-slider {
+margin-bottom: 15px;
+margin-top: 5px;
+width: 50%;
+}
 </style>
 
 <title th:text="${#messages.msg('titles.excursions')}">Экскурсии</title>
 </head>
 <body style="background-color: #f9f9f9;">
 <div class="content"
-     th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
-    <div th:replace="fragments/header :: style"></div>
-    <div th:replace="fragments/header :: header"></div>
-    <div class="container">
+th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
+<div th:replace="fragments/header :: style"></div>
+<div th:replace="fragments/header :: header"></div>
+<div class="container">
 <!--/*@thymesVar id="sort_by" type="java.lang.Integer"*/-->
 <!--/*@thymesVar id="minMaxPrice" type="java.lang.Integer"*/-->
 <!--/*@thymesVar id="category" type="java.lang.Integer"*/-->
 <!--/*@thymesVar id="page" type="java.lang.Integer"*/-->
 <!--/*@thymesVar id="pageCount" type="java.lang.Integer"*/-->
 <!--/*@thymesVar id="events" type="java.util.List"*/-->
-        <div class="container">
-            <div class="row">
-                <h2 class="title text-center d-md-none">Категории</h2>
-                <h2 class="title d-none d-md-block right">Категории</h2>
-                <div class="panel-body"><!--/*@thymesVar id="utils" type="com.heroku.demo.utils.UtilsForWeb"
-               */-->
-                    <div class="chip"
-                         th:each="i : ${#numbers.sequence(0, utils.getCategoriesCount()-1)}">
-                        <a th:href="@{/events/list(category=${i}, sort_by = ${sort_by})}">
-                            <img th:src="${utils.getCategoryUrl(i)}" alt=""
-                                 src="../resources/img/user.png"/>
-                            <span th:text="${#messages.msg('category.'+i)}">%Категория%</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-sm-5 col-md-4 col-lg-3">
-                    <div class="left-sidebar">
-                        <h2>Фильтр</h2>
-                        <form method="get" action="/events/list">
-                            <br/>
-                            <div class="panel panel-default">
-                                <div class="panel-heading" th:text="${#messages.msg('words.sort')}">Сортировка</div>
-                                <div class="panel-body">
-                                    <div class="input-group">
-                                        <select name="sort_by" class="selectpicker">
-                                            <option value="-1" th:selected="${sort_by==-1}">По популярности</option>
-                                            <option value="2" th:selected="${sort_by==2}">Сначала дешевые</option>
-                                            <option value="3" th:selected="${sort_by==3}">Сначала дорогие</option>
-                                            <option value="5" th:selected="${sort_by==5}">По рейтингу</option>
-                                            <option value="1" th:selected="${sort_by==1}">По новизне</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading" th:text="${#messages.msg('words.price')}">Цена</div>
-                                <div class="panel-body">
-                                    <div class="layout-slider" style="width: 100%">
-                                        <span style="display: inline-block; width: 100%; padding: 0 5px;">
-                                        <input id="Slider1" type="slider" name="price"
-                                               th:value="${minMaxPrice}"/></span>
-                                    </div><!--/*<br/>*/--><!--/*<div class="checkbox">*/--><!--/*<input type="checkbox" id="is_barter" name="is_barter"/>*/--><!--/*<label for = "is_barter"><span>Отображать сделки по бартеру</span></label>*/--><!--/*</div>*/-->
-                                    <script th:inline="javascript">
-                                        /*<![CDATA[*/
-                                        var maxPrice = [[${maxPrice}]];
-                                        var minPrice = [[${minPrice}]];
-                                        var s50 = (minPrice + maxPrice) / 2;
-                                        var s33 = (minPrice + s50) / 2;
-                                        var s66 = (s50 + maxPrice) / 2;
-                                        jQuery("#Slider1").slider({
-                                            /*from: 1000,
-                                            to: 100000,
-                                            step: 500,
-                                            smooth: true,
-                                            round: 0,
-                                            dimension: "&nbsp;₽",
-                                            skin: "plastic"*/
-                                            from: minPrice,
-                                            to: maxPrice,
-                                            heterogeneity: ['33/' + s33, '66/' + s66],
-                                            scale: [minPrice, '|', s33, '|', s66, '|', maxPrice],
-                                            limits: false,
-                                            step: 10,
-                                            dimension: '&nbsp;₽',
-                                            skin: "blue"
-                                        });
-                                        /*]]>*/
+<div class="container">
+<div class="row">
+<h2 class="title text-center d-md-none">Категории</h2>
+<h2 class="title d-none d-md-block right">Категории</h2>
+<div class="panel-body"><!--/*@thymesVar id="utils" type="com.heroku.demo.utils.UtilsForWeb"
+*/-->
+<div class="chip"
+th:each="i : ${#numbers.sequence(0, utils.getCategoriesCount()-1)}">
+<a th:href="@{/events/list(category=${i}, sort_by = ${sort_by})}">
+<img th:src="${utils.getCategoryUrl(i)}" alt=""
+src="../resources/img/user.png"/>
+<span th:text="${#messages.msg('category.'+i)}">%Категория%</span>
+</a>
+</div>
+</div>
+<div class="col-sm-5 col-md-4 col-lg-3">
+<div class="left-sidebar">
+<h2>Фильтр</h2>
+<form method="get" action="/events/list">
+<br/>
+<div class="panel panel-default">
+<div class="panel-heading" th:text="${#messages.msg('words.sort')}">Сортировка</div>
+<div class="panel-body">
+<div class="input-group">
+<select name="sort_by" class="selectpicker">
+<option value="-1" th:selected="${sort_by==-1}">По популярности</option>
+<option value="2" th:selected="${sort_by==2}">Сначала дешевые</option>
+<option value="3" th:selected="${sort_by==3}">Сначала дорогие</option>
+<option value="5" th:selected="${sort_by==5}">По рейтингу</option>
+<option value="1" th:selected="${sort_by==1}">По новизне</option>
+</select>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading" th:text="${#messages.msg('words.price')}">Цена</div>
+<div class="panel-body">
+<div class="layout-slider" style="width: 100%">
+<span style="display: inline-block; width: 100%; padding: 0 5px;">
+<input id="Slider1" type="slider" name="price"
+th:value="${minMaxPrice}"/></span>
+</div><!--/*<br/>*/--><!--/*<div class="checkbox">*/--><!--/*<input type="checkbox" id="is_barter" name="is_barter"/>*/--><!--/*<label for = "is_barter"><span>Отображать сделки по бартеру</span></label>*/--><!--/*</div>*/-->
+<script th:inline="javascript">
+/*<![CDATA[*/
+var maxPrice = [[${maxPrice}]];
+var minPrice = [[${minPrice}]];
+var s50 = (minPrice + maxPrice) / 2;
+var s33 = (minPrice + s50) / 2;
+var s66 = (s50 + maxPrice) / 2;
+jQuery("#Slider1").slider({
+/*from: 1000,
+to: 100000,
+step: 500,
+smooth: true,
+round: 0,
+dimension: "&nbsp;₽",
+skin: "plastic"*/
+from: minPrice,
+to: maxPrice,
+heterogeneity: ['33/' + s33, '66/' + s66],
+scale: [minPrice, '|', s33, '|', s66, '|', maxPrice],
+limits: false,
+step: 10,
+dimension: '&nbsp;₽',
+skin: "blue"
+});
+/*]]>*/
 
-                                    </script>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading" th:text="${#messages.msg('words.time')}">Время</div>
-                                <div class="panel-body">
-                                    <div class="layout-slider" style="width: 100%">
-                                            <span
-                                                    style="display: inline-block; width: 100%; padding: 0 5px 0 0;">
-                                            <input id="Slider2" type="slider" name="time" value="600;1200"/></span>
-                                    </div>
-                                    <script th:inline="javascript">
-                                        /*<![CDATA[*/
-                                        jQuery("#Slider2").slider({
-                                            from: 480,
-                                            to: 1440,
-                                            step: 15,
-                                            dimension: '',
-                                            skin: "plastic",
-                                            scale: ['8:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00', '24:00'],
-                                            limits: false,
-                                            calculate: function (value) {
-                                                var hours = Math.floor(value / 60);
-                                                var mins = value - hours * 60;
-                                                return (hours < 10 ? "0" + hours : hours) + ":" + (mins < 10 ? "0" + mins : mins);
-                                            },
-                                            onstatechange: function (value) {
-                                                console.dir(this);
-                                            }
-                                        });
-                                        /*]]>*/
-                                    </script>
-                                </div>
-                            </div>
-                            <div class="input-group" style="display: none">
-                                <input name="category" type="number" class="form-control" th:value="${category}"/>
-                            </div>
-                            <div class="text-center">
-                                <button class="btn btn-default add-to-cart" type="submit">
-                                    <i class="fa fa-filter" aria-hidden="true"></i>
-                                    Фильтровать
-                                </button>
-                            </div>
-                        </form>
-                        <br class="d-md-none"/>
-                    </div>
-                </div>
-                <div class="col-sm-7 col-md-8 col-lg-9">
-                    <a th:href="@{/events/list}"><h2 class="title text-center" th:text="${#messages.msg('titles.excursions')}">Экскурсии</h2></a>
+</script>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading" th:text="${#messages.msg('words.time')}">Время</div>
+<div class="panel-body">
+<div class="layout-slider" style="width: 100%">
+<span
+style="display: inline-block; width: 100%; padding: 0 5px 0 0;">
+<input id="Slider2" type="slider" name="time" value="600;1200"/></span>
+</div>
+<script th:inline="javascript">
+/*<![CDATA[*/
+jQuery("#Slider2").slider({
+from: 480,
+to: 1440,
+step: 15,
+dimension: '',
+skin: "plastic",
+scale: ['8:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00', '24:00'],
+limits: false,
+calculate: function (value) {
+var hours = Math.floor(value / 60);
+var mins = value - hours * 60;
+return (hours < 10 ? "0" + hours : hours) + ":" + (mins < 10 ? "0" + mins : mins);
+},
+onstatechange: function (value) {
+console.dir(this);
+}
+});
+/*]]>*/
+</script>
+</div>
+</div>
+<div class="input-group" style="display: none">
+<input name="category" type="number" class="form-control" th:value="${category}"/>
+</div>
+<div class="text-center">
+<button class="btn btn-default add-to-cart" type="submit">
+<i class="fa fa-filter" aria-hidden="true"></i>
+Фильтровать
+</button>
+</div>
+</form>
+<br class="d-md-none"/>
+</div>
+</div>
+<div class="col-sm-7 col-md-8 col-lg-9">
+<a th:href="@{/events/list}"><h2 class="title text-center" th:text="${#messages.msg('titles.excursions')}">Экскурсии</h2></a>
 <!--/*Grid column*/-->
-                    <th:block th:if="${events.size()>0}">
-                        <div class="row" th:each="i : ${#numbers.sequence( 0, events.size()-1, 2)}">
-                            <th:block
-                                    th:with="inc = ${i!=events.size()-1?1:0}">
-                                <div class="col-lg-6" th:each="j : ${#numbers.sequence(i,i+inc)}"
-                                     th:with="event=${events.get(j)}">
+<th:block th:if="${events.size()>0}">
+<div class="row" th:each="i : ${#numbers.sequence( 0, events.size()-1, 2)}">
+<th:block
+th:with="inc = ${i!=events.size()-1?1:0}">
+<div class="col-lg-6" th:each="j : ${#numbers.sequence(i,i+inc)}"
+th:with="event=${events.get(j)}">
 <!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
-                                    <div class="card">
+<div class="card">
 <!--/*Card image*/-->
-                                        <div class="view overlay hm-white-slight z-depth-1">
-                                            <div class="img_crop"><img src="../resources/img/bg-cta.jpg" th:src="${event.pathToPhoto}"
-                                                     class="img-fluid" alt=""/></div>
-                                            <a th:href="@{/events/event(id = ${event.getId()})}"><div class="mask waves-effect waves-light"></div></a>
-                                        </div>
+<div class="view overlay hm-white-slight z-depth-1">
+<div class="img_crop"><img src="../resources/img/bg-cta.jpg" th:src="${event.pathToPhoto}"
+class="img-fluid" alt=""/></div>
+<a th:href="@{/events/event(id = ${event.getId()})}"><div class="mask waves-effect waves-light"></div></a>
+</div>
 <!--/*Card image*/-->
 <!--/*Card content*/-->
-                                        <div class="card-body no-padding text-center"><!--/*Category & Title*/-->
-                                            <h5 th:text="${{event.getCategoryString()}}">%CATEGORY%</h5>
-                                            <h4 class="card-title">
-                                                <strong>
-                                                    <h3><a th:href="@{/events/event(id=${event.getId()})}"
-                                                           th:text="${event.name}">%NAME%</a></h3></strong>
-                                            </h4>
+<div class="card-body no-padding text-center"><!--/*Category & Title*/-->
+<h5 th:text="${{event.getCategoryString()}}">%CATEGORY%</h5>
+<h4 class="card-title">
+<strong>
+<h3><a th:href="@{/events/event(id=${event.getId()})}"
+th:text="${event.name}">%NAME%</a></h3></strong>
+</h4>
 <!--/*Rating*/-->
-                                            <ul class="rating">
-                                                <li th:if="${event.getRate()!=-1}" th:text="${event.getRate()}"></li>
-                                                <th:block th:if="${(event.getIntRate()!=-1)and(event.getIntRate()!=0)}">
-                                                    <li th:each="i : ${#numbers.sequence(0, event.getIntRate()-1)}"><i class="fa fa-star"></i></li>
-                                                </th:block>
-                                                <th:block th:if="${(event.getIntRate()!=-1)and(event.getIntRate()!=5)}">
-                                                    <li th:each="i : ${#numbers.sequence(event.getIntRate(), 4)}"><i class="fa fa-star-o"></i></li>
-                                                </th:block>
-                                                <th:block th:if="${(event.getIntRate()==-1)}">
-                                                    <li th:each="i : ${#numbers.sequence(0, 4)}"><i class="fa fa-star-o"></i></li>
-                                                </th:block>
-                                                <li th:text="'('+${event.getReviewsCount()}+')'"></li>
-                                            </ul>
+<ul class="rating">
+<li th:if="${event.getRate()!=-1}" th:text="${event.getRate()}"></li>
+<th:block th:if="${(event.getIntRate()!=-1)and(event.getIntRate()!=0)}">
+<li th:each="i : ${#numbers.sequence(0, event.getIntRate()-1)}"><i class="fa fa-star"></i></li>
+</th:block>
+<th:block th:if="${(event.getIntRate()!=-1)and(event.getIntRate()!=5)}">
+<li th:each="i : ${#numbers.sequence(event.getIntRate(), 4)}"><i class="fa fa-star-o"></i></li>
+</th:block>
+<th:block th:if="${(event.getIntRate()==-1)}">
+<li th:each="i : ${#numbers.sequence(0, 4)}"><i class="fa fa-star-o"></i></li>
+</th:block>
+<li th:text="'('+${event.getReviewsCount()}+')'"></li>
+</ul>
 <!--/*Description*/-->
-                                            <p class="card-text" style="font-size: medium; color: #000000"
-                                               th:text="${event.getSmallDescription()}" align="justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi beatae, earum eveniet ex facilis iure molestiae nam obcaecati odio perferendis rerum tempora veritatis. Adipisci aliquid corporis, culpa cumque dolor earum ex ipsa itaque magnam odit placeat quia quidem repellat voluptatum.</p>
+<p class="card-text" style="font-size: medium; color: #000000"
+th:text="${event.getSmallDescription()}" align="justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi beatae, earum eveniet ex facilis iure molestiae nam obcaecati odio perferendis rerum tempora veritatis. Adipisci aliquid corporis, culpa cumque dolor earum ex ipsa itaque magnam odit placeat quia quidem repellat voluptatum.</p>
 <!--/*Card footer*/-->
-                                            <div class="card-footer" style="padding: 0.75rem 0.5rem;">
-                                                <h4 class="left" style="color:#4285F4; padding: 0.4em 0.1em;"><strong th:text="${event.getPrice()}+'&#8381;'">%PRICE%</strong></h4>
-                                                <span class="right">
-                                                <a th:href="@{/events/event(id=${event.getId()})}"
-                                                   class="btn btn-primary waves-effect waves-light"
-                                                   th:text="${#messages.msg('words.open')}">Открыть
-                                                </a>
-                                            </span>
-                                            </div>
-                                        </div>
+<div class="card-footer" style="padding: 0.75rem 0.5rem;">
+<h4 class="left" style="color:#4285F4; padding: 0.4em 0.1em;"><strong th:text="${event.getPrice()}+'&#8381;'">%PRICE%</strong></h4>
+<span class="right">
+<a th:href="@{/events/event(id=${event.getId()})}"
+class="btn btn-primary waves-effect waves-light"
+th:text="${#messages.msg('words.open')}">Открыть
+</a>
+</span>
+</div>
+</div>
 <!--/*End-of-Card content*/-->
-                                    </div>
-                                    <div class="visible-sm-block visible-xs-block" th:if="${j==i}">
-                                        <br/>
-                                    </div>
-                                </div>
-                            </th:block>
-                            <div class="clearfix"></div>
-                            <br/>
-                        </div>
-                    </th:block>
-                    <th:block th:unless="${events.size()>0}">
-                        <div class="row">
-                            <h2>Экскурсий по данным параметрам нет, попробуйте расширить поиск или искать в другой категории</h2><!--/*TODO: translate*/-->
-                        </div>
-                    </th:block>
+</div>
+<div class="visible-sm-block visible-xs-block" th:if="${j==i}">
+<br/>
+</div>
+</div>
+</th:block>
+<div class="clearfix"></div>
+<br/>
+</div>
+</th:block>
+<th:block th:unless="${events.size()>0}">
+<div class="row">
+<h2>Экскурсий по данным параметрам нет, попробуйте расширить поиск или искать в другой категории</h2><!--/*TODO: translate*/-->
+</div>
+</th:block>
 <!--/*End-of-Grid column*/-->
-                    <div class="row">
+<div class="row">
 <!--/*Pagination */-->
-                        <nav class="my-4 d-flex justify-content-center" th:if="${pageCount>1}">
-                            <ul class="pagination pagination-circle pg-blue mb-0">
-                                <!--/*TODO:
-                                        <div class="pull-left pagination-detail"><span class="pagination-info"></span><span
-                                        class="page-list"><span class="btn-group dropup"><button type="button"
-                                                                                                 class="btn btn-default  dropdown-toggle"
-                                                                                                 data-toggle="dropdown"
-                                                                                                 aria-expanded="false"><span
-                                        class="page-size">8</span> <span class="caret"></span></button><ul class="dropdown-menu"
-                                                                                                           role="menu"><li
-                                        class="active"><a href="javascript:void(0)">8</a></li><li><a href="javascript:void(0)">10</a></li><li><a
-                                        href="javascript:void(0)">25</a></li><li><a href="javascript:void(0)">50</a></li><li><a
-                                        href="javascript:void(0)">100</a></li></ul></span> rows visible</span></div>*/-->
+<nav class="my-4 d-flex justify-content-center" th:if="${pageCount>1}">
+<ul class="pagination pagination-circle pg-blue mb-0">
+<!--/*TODO:
+<div class="pull-left pagination-detail"><span class="pagination-info"></span><span
+class="page-list"><span class="btn-group dropup"><button type="button"
+class="btn btn-default  dropdown-toggle"
+data-toggle="dropdown"
+aria-expanded="false"><span
+class="page-size">8</span> <span class="caret"></span></button><ul class="dropdown-menu"
+role="menu"><li
+class="active"><a href="javascript:void(0)">8</a></li><li><a href="javascript:void(0)">10</a></li><li><a
+href="javascript:void(0)">25</a></li><li><a href="javascript:void(0)">50</a></li><li><a
+href="javascript:void(0)">100</a></li></ul></span> rows visible</span></div>*/-->
 <!--/*First*/-->
-                                <li th:class="(${page==1}?'disabled ':'') + 'page-item clearfix d-none d-md-block'"><a
-                                        class="page-link waves-effect waves-effect" href="/events/list?page=0">В начало</a></li>
+<li th:class="(${page==1}?'disabled ':'') + 'page-item clearfix d-none d-md-block'"><a
+class="page-link waves-effect waves-effect" href="/events/list?page=0">В начало</a></li>
 <!--/*Arrow left*/-->
-                                <li th:class="(${page==1}?'disabled ':'') + 'page-item'">
-                                    <a class="page-link waves-effect waves-effect" aria-label="Назад"
-                                       th:href="@{/events/list(page=${page}-1)}">
-                                        <span aria-hidden="true">«</span>
-                                        <span class="sr-only">Назад</span>
-                                    </a>
-                                </li>
+<li th:class="(${page==1}?'disabled ':'') + 'page-item'">
+<a class="page-link waves-effect waves-effect" aria-label="Назад"
+th:href="@{/events/list(page=${page}-1)}">
+<span aria-hidden="true">«</span>
+<span class="sr-only">Назад</span>
+</a>
+</li>
 <!--/*Numbers*/-->
-                                <th:block th:each="i : ${#numbers.sequence( 1, pageCount)}">
-                                    <li th:class="${page==i}?'active ':'' + 'page-item'"><a
-                                            class="page-link waves-effect waves-effect" th:text="${i}"
-                                            th:href="@{/events/list(page=${i})}">%PAGE%</a></li>
-                                </th:block>
+<th:block th:each="i : ${#numbers.sequence( 1, pageCount)}">
+<li th:class="${page==i}?'active ':'' + 'page-item'"><a
+class="page-link waves-effect waves-effect" th:text="${i}"
+th:href="@{/events/list(page=${i})}">%PAGE%</a></li>
+</th:block>
 <!--/*Arrow right*/-->
-                                <li th:class="(${page==pageCount}?'disabled ':'') +'page-item'">
-                                    <a class="page-link waves-effect waves-effect" aria-label="Вперёд"
-                                       th:href="@{/events/list(page=${page}-1)}">
-                                        <span aria-hidden="true">»</span>
-                                        <span class="sr-only">Вперёд</span>
-                                    </a>
-                                </li>
+<li th:class="(${page==pageCount}?'disabled ':'') +'page-item'">
+<a class="page-link waves-effect waves-effect" aria-label="Вперёд"
+th:href="@{/events/list(page=${page}-1)}">
+<span aria-hidden="true">»</span>
+<span class="sr-only">Вперёд</span>
+</a>
+</li>
 <!--/*End-of-First*/-->
-                                <li th:class="(${page==pageCount}?'disabled ':'') + 'page-item clearfix d-none d-md-block'">
-                                    <a th:href="@{/events/list(page=${pageCount})}"
-                                       class="page-link waves-effect waves-effect">В конец</a></li>
-                            </ul>
-                        </nav>
+<li th:class="(${page==pageCount}?'disabled ':'') + 'page-item clearfix d-none d-md-block'">
+<a th:href="@{/events/list(page=${pageCount})}"
+class="page-link waves-effect waves-effect">В конец</a></li>
+</ul>
+</nav>
 <!--/*End-of-Pagination */-->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div th:replace="fragments/footer :: footer"></div>
 </body>
