@@ -181,9 +181,9 @@
                                     </button>
                                 </a>
                             </div>
-<!--/* Heading */-->
+<!--/*Heading*/-->
 
-<!--/* Card row */-->
+<!--/*Card row*/-->
                             <th:block th:if="${orders.size()!=0}">
                                 <div class="card-deck" th:each="i : ${#numbers.sequence( 0, orders.size()-1)}">
 
@@ -200,12 +200,12 @@
                                                     <div class="mask waves-effect waves-light"></div>
                                                 </a>
                                             </div>
-                                            <!--/*Card content*/-->
+<!--/*Card content*/-->
                                             <div class="card-body pb-0">
-                                                <!--/*Title*/-->
+<!--/*Title*/-->
                                                 <h4 class="card-title" th:text="${order.getName()}">Название
                                                     экскурсии</h4>
-                                                <!--/*Text*/-->
+<!--/*Text*/-->
                                                 <span class="card-text" style="font-size: small;" align="left"
                                                       th:text="${order.getTime()}">
                                                     Время заказа</span>
@@ -213,8 +213,7 @@
                                                       th:text="${order.getTime()}">
                                                     Время экскурсии</span>
                                             </div>
-
-                                            <!--/*Card footer*/-->
+<!--/*Card footer*/-->
                                             <div class="card-footer links-light">
                                                 <span class="left pt-2">
                                                     <strong th:text="${order.getPrice()}+'&#8381;  '"
@@ -230,15 +229,15 @@
                                             </div>
 
                                         </div>
-                                        <!--/*/.Card*/-->
+<!--/*End-of-Card*/-->
                                     </th:block>
 
                                 </div>
                             </th:block>
-                            <!--/* Card row */-->
+<!--/*End-of-Card row*/-->
 
 
-                            <!--/*Pagination */-->
+<!--/*Pagination */-->
                             <nav class="my-4 d-flex justify-content-center" th:if="${orders.size()>2}">
                                 <ul class="pagination pagination-circle pg-blue mb-0">
 
@@ -276,9 +275,9 @@
 
                                 </ul>
                             </nav>
-                            <!--/*Pagination */-->
+<!--/*End-of-Pagination */-->
 
-                            <!--/* Heading */-->
+<!--/* Heading */-->
                             <div class="text-center mt-3 mb-5" th:if="${excursovod}">
 
                                 <h2 class="title text-center" th:if="${events.size()>0}">Добавленные экскурсии</h2>
@@ -295,23 +294,23 @@
                                 </button>
 
                             </div>
-                            <!--/* Heading */-->
+<!--/* End-of-Heading */-->
 
-                            <!--/* Card row */-->
+<!--/* Card row */-->
                             <th:block th:if="${events.size()!=0 and excursovod}">
                                 <div class="card-deck" th:each="i : ${#numbers.sequence( 0, events.size()-1)}">
 
                                     <th:block th:if="${i%2==0}" th:with="inc=${i!=events.size()-1?1:0}">
-                                        <!--/*Card*/-->
+<!--/*Card*/-->
                                         <div class="card card-cascade narrower mb-5"
                                              th:each="j : ${#numbers.sequence(i,i+inc)}"
                                              th:with="event = ${events.get(j)}"
                                              th:id="'id'+${j}"
                                              th:style="${j == 0 or j == 1}?'display: block;':'display: none;'">
 
-                                            <!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
+<!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
 
-                                            <!--/*Card image*/-->
+<!--/*Card image*/-->
                                             <div class="view overlay hm-white-slight">
                                                 <img th:src="${event.pathToPhoto}" src="#" class="img-fluid"
                                                      style="height: 240px; min-width: -webkit-fill-available;" alt=""/>
@@ -320,7 +319,7 @@
                                                 </a>
                                             </div>
 
-                                            <!--/*Card content*/-->
+<!--/*Card content*/-->
                                             <div class="card-body pb-0">
                                                 <!--/*Title*/-->
                                                 <h4 class="card-title" th:text="${event.getName()}"><a
@@ -331,7 +330,7 @@
                                                 <!--/*TODO translate*/-->
                                             </div>
 
-                                            <!--/*Card footer*/-->
+<!--/*Card footer*/-->
                                             <div class="card-footer links-light">
                                                 <span class="left pt-2">
                                                     <strong th:text="${event.getPrice()}+'&#8381;  '"
@@ -347,26 +346,24 @@
                                             </div>
 
                                         </div>
-                                        <!--/*/.Card*/-->
+<!--/*End-of-Card*/-->
                                     </th:block>
 
                                 </div>
                             </th:block>
-                            <!--/* Card row */-->
+<!--/* End-of-Card row */-->
 
 
-                            <!--/*Pagination */-->
+<!--/*Pagination */-->
                             <nav class="my-4 d-flex justify-content-center" th:if="${events.size()>2 and excursovod}">
                                 <ul class="pagination pagination-circle pg-blue mb-0">
-
-                                    <!--/*First*/-->
+<!--/*First*/-->
                                     <li class="page-item disabled clearfix d-none d-md-block"
                                         id="to-home-exc">
                                         <a class="page-link waves-effect waves-effect"
                                            th:onclick="'showHide(1);'">В начало</a>
                                     </li>
-
-                                    <!--/*Arrow left*/-->
+<!--/*Arrow left*/-->
                                     <li class="page-item disabled"
                                         id="down-exc">
                                         <a class="page-link waves-effect waves-effect" aria-label="Назад">
@@ -374,8 +371,7 @@
                                             <span class="sr-only">Назад</span>
                                         </a>
                                     </li>
-
-                                    <!--/*Numbers*/-->
+<!--/*Numbers*/-->
                                     <li th:each="i : ${#numbers.sequence(1, events.size()/2)}"
                                         th:class="'page-item' + (${i==1}?' active':'')"
                                         th:id="'page_events'+${i}">
@@ -383,9 +379,7 @@
                                            th:onclick="'showHide('+${i}+');'">1
                                         </a>
                                     </li>
-
-
-                                    <!--/*Arrow right*/-->
+<!--/*Arrow right*/-->
                                     <li class="page-item"
                                         id="up-exc">
                                         <a class="page-link waves-effect waves-effect" aria-label="Вперёд">
@@ -393,42 +387,33 @@
                                             <span class="sr-only">Вперёд</span>
                                         </a>
                                     </li>
-
-                                    <!--/*First*/-->
+<!--/*End-of-First*/-->
                                     <li class="page-item clearfix d-none d-md-block"
                                         id="to-end-exc"
                                         th:onclick="'showHide('+${events.size()/2}+');'">
                                         <a class="page-link waves-effect waves-effect">В конец</a>
                                     </li>
-
                                 </ul>
                             </nav>
-                            <!--/*Pagination */-->
-
-
+<!--/*End-of-Pagination */-->
                         </div>
-                        <!--/*Grid column*/-->
-
+<!--/*End-of-Grid column*/-->
                     </div>
-                    <!--/*Grid row*/-->
+<!--/*End-of-Grid row*/-->
 
                 </section>
-                <!--/*Section: Profile*/-->
-
-                <!--/*Section: Modals*/-->
+<!--/*End-of-Section: Profile*/-->
+<!--/*Section: Modals*/-->
                 <section>
-
-                    <!--/*Modal: modalEditProfile*/-->
+<!--/*Modal: modalEditProfile*/-->
                     <div class="modal fade" id="modalEditProfile" tabindex="-1" role="dialog"
                          aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                         <div class="modal-dialog cascading-modal modal-lg" role="document">
-                            <!--/*Content*/-->
+<!--/*Content*/-->
                             <div class="modal-content">
-
-                                <!--/*Modal cascading tabs*/-->
+<!--/*Modal cascading tabs*/-->
                                 <div class="modal-c-tabs">
-
-                                    <!--/* Nav tabs */-->
+<!--/* Nav tabs */-->
                                     <ul class="nav nav-tabs tabs-2 light-blue darken-3" role="tablist">
                                         <li class="nav-item waves-effect waves-light">
                                             <a class="nav-link active" data-toggle="tab"
@@ -444,24 +429,20 @@
                                                role="tab" aria-expanded="false"><i class="fa fa-lock mr-1"></i> Account</a>
                                         </li>
                                     </ul>
-
-                                    <!--/* Tab panels */-->
+<!--/* Tab panels */-->
                                     <div class="tab-content">
-                                        <!--/*Panel 7*/-->
+<!--/*Panel 7*/-->
                                         <div class="tab-pane fade in active" id="panel77" role="tabpanel"
                                              aria-expanded="true">
-                                            <!--/*Body*/-->
+<!--/*Body*/-->
                                             <div class="modal-body mb-1">
                                                 <form th:object="${person}" action="/users/edit_public"
                                                       enctype="multipart/form-data" method="post">
-
-                                                    <!--/*Grid row*/-->
+<!--/*Grid row*/-->
                                                     <div class="row">
-
-                                                        <!--/*Grid column*/-->
+<!--/*Grid column*/-->
                                                         <div class="col-md-6">
-
-                                                            <!--/*First Name*/-->
+<!--/*First Name*/-->
                                                             <div class="md-form form-sm">
                                                                 <input type="text" id="editProfile1"
                                                                        class="form-control" name="first_name"
@@ -470,14 +451,11 @@
                                                                        th:text="${#messages.msg('words.first_name')}">First
                                                                     name</label>
                                                             </div>
-
                                                         </div>
-                                                        <!--/*Grid column*/-->
-
-                                                        <!--/*Grid column*/-->
+<!--/*End-of-Grid column*/-->
+<!--/*Grid column*/-->
                                                         <div class="col-md-6">
-
-                                                            <!--/*Last Name*/-->
+<!--/*Last Name*/-->
                                                             <div class="md-form form-sm">
                                                                 <input type="text" id="editProfile2"
                                                                        class="form-control" name="last_name"
@@ -486,14 +464,11 @@
                                                                        th:text="${#messages.msg('words.last_name')}">Last
                                                                     name</label>
                                                             </div>
-
                                                         </div>
-                                                        <!--/*Grid column*/-->
-
-                                                        <!--/*Grid column*/-->
+<!--/*End-of-Grid column*/-->
+<!--/*Grid column*/-->
                                                         <div class="col-md-12">
-
-                                                            <!--/*Company website*/-->
+<!--/*Company website*/-->
                                                             <div class="md-form form-sm">
                                                                 <textarea type="text" id="editProfile5" name="about_me"
                                                                           class="md-textarea"
@@ -502,9 +477,9 @@
                                                                        th:text="${#messages.msg('words.about_me')}">About
                                                                     me</label>
                                                             </div>
-
                                                         </div>
-                                                        <!--/*Grid column*/-->
+<!--/*End-of-Grid column*/-->
+<!--/*Grid column*/-->
                                                         <div class="col-md-12">
                                                             <div class="md-form form-sm">
                                                                 <input name="file" type="file" id="filePerson"
@@ -518,11 +493,9 @@
                                                                     фотография</label>
                                                             </div>
                                                         </div>
-
-                                                        <!--/*Grid column*/-->
+<!--/*End-of-Grid column*/-->
                                                         <div class="col-md-12">
-
-                                                            <!--/*City*/-->
+<!--/*City*/-->
                                                             <div class="md-form form-sm">
                                                                 <input type="text" id="editProfile6" name="city"
                                                                        class="form-control"
@@ -530,23 +503,19 @@
                                                                 <label for="editProfile6" class=""
                                                                        th:text="${#messages.msg('words.city')}">City</label>
                                                             </div>
-
                                                         </div>
-
-                                                        <!--/*Grid column*/-->
+<!--/*Grid column*/-->
                                                         <div class="col-md-6">
 
-                                                            <!--/*Facebook*/-->
+<!--/*Facebook*/-->
                                                             <div class="md-form form-sm mt-2">
                                                                 <input type="text" id="editProfile8"
                                                                        class="form-control"/>
                                                                 <label for="editProfile8" class="">VK</label>
                                                             </div>
-
                                                         </div>
-                                                        <!--/*Grid column*/-->
-
-                                                        <!--/*Grid column*/-->
+<!--/*End-of-Grid column*/-->
+<!--/*Grid column*/-->
                                                         <div class="col-md-6">
 
                                                             <!--/*LinkedIn*/-->
@@ -557,8 +526,7 @@
                                                             </div>
 
                                                         </div>
-                                                        <!--/*Grid column*/-->
-
+<!--/*End-of-Grid column*/-->
                                                     </div>
                                                     <div class="modal-footer justify-content-center">
                                                         <button type="reset"
@@ -570,48 +538,38 @@
                                                             Сохранить <i class="fa fa-check ml-1"></i>
                                                         </button>
                                                     </div>
-                                                    <!--/*Grid row*/-->
+<!--/*End-of-Grid row*/-->
                                                 </form>
                                             </div>
-
                                         </div>
-                                        <!--/*Panel 7*/-->
-
-                                        <!--/*Panel 8*/-->
+<!--/*End-of-Panel 7*/-->
+<!--/*Panel 8*/-->
                                         <div class="tab-pane fade" id="panel88" role="tabpanel" aria-expanded="false">
-
-                                            <!--/*Body*/-->
+<!--/*Body*/-->
                                             <div class="modal-body">
-
                                                 <form th:object="${person}" action="/users/edit_private" method="post"
                                                       autocomplete="off">
-
                                                     <div class="md-form form-sm">
                                                         <input type="email" id="form24" name="email"
                                                                class="form-control" th:value="${person.getEmail()}"/>
                                                         <label for="form24">Email</label>
                                                     </div>
-
                                                     <p class="h5 text-center mt-5">Смена пароля</p>
-
                                                     <div class="md-form form-sm">
                                                         <input type="password" name="last_pass" id="form25"
                                                                class="form-control"/>
                                                         <label for="form25">Текущий пароль</label>
                                                     </div>
-
                                                     <div class="md-form form-sm">
                                                         <input type="password" name="pass" id="form26"
                                                                class="form-control"/>
                                                         <label for="form26">Новый пароль</label>
                                                     </div>
-
                                                     <div class="md-form form-sm">
                                                         <input type="password" name="pass_confirm" id="form27"
                                                                class="form-control"/>
                                                         <label for="form27">Подтвердите пароль</label>
                                                     </div>
-
                                                     <div class="modal-footer justify-content-center">
                                                         <button type="reset"
                                                                 class="btn btn-outline-primary waves-effect waves-light"
@@ -622,55 +580,45 @@
                                                             Сохранить <i class="fa fa-check ml-1"></i>
                                                         </button>
                                                     </div>
-
                                                 </form>
-
                                             </div>
 
                                         </div>
-                                        <!--/*Panel 8*/-->
+<!--/*End-of-Panel 8*/-->
                                     </div>
-
                                 </div>
                             </div>
-                            <!--/*Content*/-->
+<!--/*End-of-Content*/-->
                         </div>
                     </div>
-                    <!--/*Modal: modalEditProfile*/-->
-
-                    <!--/*Modal: modalFeedback*/-->
+<!--/*End-of-Modal: modalEditProfile*/-->
+<!--/*Modal: modalFeedback*/-->
                     <div class="modal fade" id="modalFeedback" tabindex="-1" role="dialog"
                          aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                         <div class="modal-dialog cascading-modal modal-lg" role="document">
-
-                            <!--/*Content*/-->
+<!--/*Content*/-->
                             <div class="modal-content">
-
-                                <!--/*Header*/-->
+<!--/*Header*/-->
                                 <div class="modal-header light-blue darken-3 white-text">
                                     <h4 class=""><i class="fa fa-newspaper-o"></i> Новое сообщение</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                             aria-hidden="true">×</span></button>
                                 </div>
-
-                                <!--/*Body*/-->
+<!--/*Body*/-->
                                 <div class="modal-body mb-0">
-
-                                    <!--/*Subject*/-->
+<!--/*Subject*/-->
                                     <div class="md-form form-sm">
                                         <input type="text" id="modalFeedback1" class="form-control"/>
                                         <label for="modalFeedback1" class="">Subject</label>
                                     </div>
-
-                                    <!--/*Topic*/-->
+<!--/*Topic*/-->
                                     <select class="mdb-select colorful-select dropdown-primary">
                                         <option value="" disabled="" selected="">Choose category</option>
                                         <option value="1">Idea</option>
                                         <option value="2">Feedback</option>
                                         <option value="3">Bug</option>
                                     </select>
-
-                                    <!--/*Message*/-->
+<!--/*Message*/-->
                                     <div class="md-form">
                                         <textarea type="text" id="modalFeedback2" class="md-textarea"
                                                   style="height: 300px;"></textarea>
@@ -678,8 +626,7 @@
                                     </div>
 
                                 </div>
-
-                                <!--/*Footer*/-->
+<!--/*Footer*/-->
                                 <div class="modal-footer justify-content-center">
                                     <button type="button" class="btn btn-outline-primary waves-effect waves-light"
                                             data-dismiss="modal">Закрыть
@@ -689,35 +636,27 @@
                                 </div>
 
                             </div>
-                            <!--/*Content*/-->
-
+<!--/*End-of-Content*/-->
                         </div>
                     </div>
-                    <!--/*Modal: modalFeedback*/-->
-
-                    <!--/*Modal: modalAchievment*/-->
+<!--/*End-of-Modal: modalFeedback*/-->
+<!--/*Modal: modalAchievment*/-->
                     <div class="modal fade" id="modalAchievment" tabindex="-1" role="dialog"
                          aria-labelledby="myModalLabel" aria-hidden="true">
                         <div class="modal-dialog cascading-modal" role="document">
-
-                            <!--/*Content*/-->
+<!--/*Content*/-->
                             <div class="modal-content">
-
-                                <!--/*Header*/-->
+<!--/*Header*/-->
                                 <div class="modal-header light-blue darken-3 white-text">
                                     <h4 class=""><i class="fa fa-newspaper-o"></i> Bootstrap Master</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                             aria-hidden="true">×</span></button>
                                 </div>
-
-                                <!--/*Body*/-->
+<!--/*Body*/-->
                                 <div class="modal-body mb-0">
-
                                     <p>текст</p>
-
                                 </div>
-
-                                <!--/*Footer*/-->
+<!--/*Footer*/-->
                                 <div class="modal-footer justify-content-center">
                                     <button type="button" class="btn btn-outline-primary waves-effect waves-light"
                                             data-dismiss="modal">Закрыть
@@ -725,42 +664,33 @@
                                     <button type="button" class="btn btn-primary waves-effect waves-light">Go to <i
                                             class="fa fa-arrow-right ml-1"></i></button>
                                 </div>
-
                             </div>
-                            <!--/*Content*/-->
-
+<!--/*End-of-Content*/-->
                         </div>
                     </div>
-                    <!--/*Modal: modalAchievment*/-->
-
-                    <!--/*Modal: modalContactUser */-->
+<!--/*End-of-Modal: modalAchievment*/-->
+<!--/*Modal: modalContactUser */-->
                     <div class="modal fade" id="modalContactUser" tabindex="-1" role="dialog"
                          aria-labelledby="myModalLabel" aria-hidden="true">
                         <div class="modal-dialog cascading-modal modal-lg" role="document">
-
-                            <!--/*Content*/-->
+<!--/*Content*/-->
                             <div class="modal-content">
-
-                                <!--/*Header*/-->
+<!--/*Header*/-->
                                 <div class="modal-header light-blue darken-3 white-text">
                                     <h4 class=""><i class="fa fa-envelope-o"></i> Новое сообщение</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                             aria-hidden="true">×</span></button>
                                 </div>
-
-                                <!--/*Body*/-->
+<!--/*Body*/-->
                                 <div class="modal-body mb-0">
-
-                                    <!--/*Basic textarea*/-->
+<!--/*Basic textarea*/-->
                                     <div class="md-form">
                                         <textarea type="text" id="modalContactUser1" class="md-textarea"
                                                   style="height: 400px;"></textarea>
                                         <label for="modalContactUser1">Your message</label>
                                     </div>
-
                                 </div>
-
-                                <!--/*Footer*/-->
+<!--/*Footer*/-->
                                 <div class="modal-footer justify-content-center">
                                     <button type="button" class="btn btn-outline-primary waves-effect waves-light"
                                             data-dismiss="modal">Отмена
@@ -768,36 +698,29 @@
                                     <button type="button" class="btn btn-primary waves-effect waves-light">Отправить <i
                                             class="fa fa-paper-plane ml-1"></i></button>
                                 </div>
-
                             </div>
-                            <!--/*Content*/-->
-
+<!--/*End-of-Content*/-->
                         </div>
                     </div>
-                    <!--/*Modal: modalContactUser*/-->
-
-                    <!--/*Modal: modalSubmitProject*/-->
+<!--/*End-of-Modal: modalContactUser*/-->
+<!--/*Modal: modalSubmitProject*/-->
                     <div class="modal fade" id="modalSubmitProject" tabindex="-1" role="dialog"
                          aria-labelledby="myModalLabel" aria-hidden="true">
                         <div class="modal-dialog cascading-modal" role="document">
-
-                            <!--/*Content*/-->
+<!--/*Content*/-->
                             <div class="modal-content">
-
-                                <!--/*Header*/-->
+<!--/*Header*/-->
                                 <div class="modal-header light-blue darken-3 white-text">
                                     <h4 class=""><i class="fa fa-newspaper-o"></i> Добавить новую экскурсию</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                             aria-hidden="true">×</span></button>
                                 </div>
-
-                                <!--/*Body*/-->
+<!--/*Body*/-->
                                 <div class="modal-body mb-0">
                                     <!--/*@thymesVar id="inputEvent" type="com.heroku.demo.event.Event"*/-->
                                     <form th:object="${inputEvent}" action="/events/add" enctype="multipart/form-data"
                                           autocomplete="off" method="post">
-
-                                        <!--/*Name*/-->
+<!--/*Name*/-->
                                         <div class="md-form form-sm">
                                             <input name="name" type="text" class="form-control" id="name"
                                                    th:value="${inputEvent.getName()}" required="" minlength="10"
@@ -808,8 +731,7 @@
                                             <label for="name" class=""
                                                    th:text="${#messages.msg('words.name')}">Название</label>
                                         </div>
-
-                                        <!--/*Project URL address*/-->
+<!--/*Project URL address*/-->
                                         <div class="md-form">
                                             <textarea name="description" minlength="150" maxlength="1000" type="text"
                                                       id="description"
@@ -822,8 +744,7 @@
                                             <label for="description" class=""
                                                    th:text="${#messages.msg('words.description')}">Описание</label>
                                         </div>
-
-                                        <!--/*Image URL*/-->
+<!--/*Image URL*/-->
                                         <div class="panel panel-default">
                                             <div class="panel-heading"
                                                  th:text="${#messages.msg('words.type_of_excursion')}">
@@ -868,7 +789,6 @@
                                                 </select>
                                             </div>
                                         </div>
-
                                         <div class="md-form form-sm">
                                             <input name="usersCount" id="users_count" type="number" class="form-control"
                                                    required="" min="1" max="100"
@@ -881,7 +801,6 @@
                                                    th:text="${#messages.msg('words.users_count')}">Количество
                                                 участников</label>
                                         </div>
-
                                         <div class="md-form form-sm">
                                             <input name="duration" id="duration" type="number" class="form-control"
                                                    required=""
@@ -895,7 +814,6 @@
                                                    th:text="${#messages.msg('words.duration')+' ('+#messages.msg('words.hours')+')'}">Длительность
                                                 (часов)</label>
                                         </div>
-
                                         <div class="md-form form-sm">
                                             <input name="place" id="place" type="text" class="form-control"
                                                    required="" minlength="5" maxlength="100"
@@ -906,7 +824,6 @@
                                             <label for="place" class="" th:text="${#messages.msg('words.place')}">Место
                                                 встречи</label>
                                         </div>
-
                                         <div class="md-form form-sm">
                                             <input name="price" id="price" type="number" class="form-control"
                                                    required="" min="100" max="100000"
@@ -929,7 +846,6 @@
                                             <label style="top: 0.45rem;" for="file" class=""
                                                    th:text="${#messages.msg('words.photos')}">Фотографии</label>
                                         </div>
-
                                         <div class="panel panel-default">
                                             <div class="panel-heading" th:text="${#messages.msg('words.language')}">
                                                 Язык экскурсии
@@ -947,8 +863,7 @@
                                                 </select>
                                             </div>
                                         </div>
-
-                                        <!--/*Footer*/-->
+<!--/*Footer*/-->
                                         <div class="modal-footer justify-content-center">
                                             <button type="button"
                                                     class="btn btn-outline-primary waves-effect waves-light"
@@ -959,44 +874,34 @@
                                                     class="fa fa-check ml-1"></i></button>
                                         </div>
                                     </form>
-
                                 </div>
-
                             </div>
-                            <!--/*Content*/-->
+<!--/*End-of-Content*/-->
 
                         </div>
                     </div>
-                    <!--/*Modal: modalSubmitProject*/-->
-
-                    <!--/*Modal: modalUpToGuide*/-->
+<!--/*End-of-Modal: modalSubmitProject*/-->
+<!--/*Modal: modalUpToGuide*/-->
                     <div class="modal fade" id="modalUpToGuide" tabindex="-1" role="dialog"
                          aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                         <div class="modal-dialog cascading-modal modal-lg" role="document">
-
-                            <!--/*Content*/-->
+<!--/*Content*/-->
                             <div class="modal-content">
-
-                                <!--/*Header*/-->
+<!--/*Header*/-->
                                 <div class="modal-header light-blue darken-3 white-text">
                                     <h4 class=""><i class="fa fa-newspaper-o"></i> Дополнительные поля</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                             aria-hidden="true">×</span></button>
                                 </div>
-
                                 <form action="/users/up_to_guide"
                                       enctype="multipart/form-data" method="post">
-
-                                    <!--/*Body*/-->
+<!--/*Body*/-->
                                     <div class="modal-body mb-0">
-
-                                        <!--/*Grid row*/-->
+<!--/*Grid row*/-->
                                         <div class="row">
-
-                                            <!--/*Grid column*/-->
+<!--/*Grid column*/-->
                                             <div class="col-md-6">
-
-                                                <!--/*First Name*/-->
+<!--/*First Name*/-->
                                                 <div class="md-form form-sm">
                                                     <input type="text" id="upToGuide1"
                                                            class="form-control" name="series_and_number"/>
@@ -1005,23 +910,19 @@
                                                 </div>
 
                                             </div>
-                                            <!--/*Grid column*/-->
-
-                                            <!--/*Grid column*/-->
+<!--/*End-of-Grid column*/-->
+<!--/*Grid column*/-->
                                             <div class="col-md-6">
-
-                                                <!--/*Last Name*/-->
+<!--/*Last Name*/-->
                                                 <div class="md-form form-sm">
                                                     <input type="text" id="upToGuide2"
                                                            class="form-control" name="date_and_place"/>
                                                     <label for="editProfile2" class="">Кем и когда
                                                         выдан паспорт</label>
                                                 </div>
-
                                             </div>
-                                            <!--/*Grid column*/-->
-
-                                            <!--/*Grid column*/-->
+<!--/*End-of-Grid column*/-->
+<!--/*Grid column*/-->
                                             <div class="col-md-12">
                                                 <div class="md-form form-sm">
                                                     <input name="file" type="file" id="upToGuide3"
@@ -1034,11 +935,9 @@
                                                         паспорта</label>
                                                 </div>
                                             </div>
-                                            <!--/*Grid column*/-->
-
-                                            <!--/*Grid column*/-->
+<!--/*End-of-Grid column*/-->
+<!--/*Grid column*/-->
                                             <div class="col-md-12" th:if="${person.getAbout()==''}">
-
                                                 <!--/*Company website*/-->
                                                 <div class="md-form form-sm">
                                                                 <textarea type="text" id="upToGuide4" name="about_me"
@@ -1047,16 +946,12 @@
                                                     <label for="upToGuide4" class=""
                                                            th:text="${#messages.msg('words.about_me')}">О себе</label>
                                                 </div>
-
                                             </div>
-                                            <!--/*Grid column*/-->
-
+<!--/*End-of-Grid column*/-->
                                         </div>
-                                        <!--/*Grid row*/-->
-
+<!--/*End-of-Grid row*/-->
                                     </div>
-
-                                    <!--/*Footer*/-->
+<!--/*Footer*/-->
                                     <div class="modal-footer justify-content-center">
                                         <button type="reset"
                                                 class="btn btn-outline-primary waves-effect waves-light"
@@ -1068,21 +963,16 @@
                                         </button>
                                     </div>
                                 </form>
-
                             </div>
-                            <!--/*Content*/-->
-
+<!--/*End-of-Content*/-->
                         </div>
                     </div>
-                    <!--/*Modal: modalUpToGuide*/-->
-
+<!--/*End-of-Modal: modalUpToGuide*/-->
                 </section>
-                <!--/*Section: Modals*/-->
-
+<!--/*End-of-Section: Modals*/-->
             </div>
         </main>
-        <!--/*Main layout*/-->
-
+<!--/*End-of-Main layout*/-->
         <div class="hiddendiv common"></div>
     </div>
 </div>
