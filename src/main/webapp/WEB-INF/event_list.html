@@ -167,13 +167,12 @@ console.dir(this);
 <a th:href="@{/events/list}"><h2 class="title text-center" th:text="${#messages.msg('titles.excursions')}">Экскурсии</h2></a>
 <!--/*Grid column*/-->
 <th:block th:if="${events.size()>0}">
-<div class="row" th:each="i : ${#numbers.sequence( 0, events.size()-1, 2)}">
+<div class="card-deck" th:each="i : ${#numbers.sequence( 0, events.size()-1, 2)}">
 <th:block
 th:with="inc = ${i!=events.size()-1?1:0}">
-<div class="col-lg-6" th:each="j : ${#numbers.sequence(i,i+inc)}"
+<div class="card card-cascade narrower lg-6" th:each="j : ${#numbers.sequence(i,i+inc)}"
 th:with="event=${events.get(j)}">
 <!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
-<div class="card">
 <!--/*Card image*/-->
 <div class="view overlay hm-white-slight z-depth-1">
 <div class="img_crop"><img src="../resources/img/bg-cta.jpg" th:src="${event.pathToPhoto}"
@@ -218,7 +217,6 @@ th:text="${#messages.msg('words.open')}">Открыть
 </div>
 </div>
 <!--/*End-of-Card content*/-->
-</div>
 <div class="visible-sm-block visible-xs-block" th:if="${j==i}">
 <br/>
 </div>
