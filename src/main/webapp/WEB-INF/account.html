@@ -268,8 +268,7 @@ style="height: 240px; min-width: -webkit-fill-available;" alt=""/>
 <h4 class="card-title" th:text="${event.getName()}"><a
 th:href="@{/events/event(id=${event.getId()})}">Название
 экскурсии</a></h4>
-<strong th:style="'color:' + event.getType()==1?'#337ABB;':'#f80000;' + 'font-size: x-large; padding-top: -0.2em;'"
-th:text="${event.getStringType(0)}">На модерации</strong>
+<strong th:style="'color:' + ${event.getType()}==1?'#337ABB;':'#f80000;' + 'font-size: x-large; padding-top: -0.2em;'" th:text="${event.getStringType(0)}">На модерации</strong>
 <!--/*TODO translate*/-->
 </div>
 <!--/*Card footer*/-->
