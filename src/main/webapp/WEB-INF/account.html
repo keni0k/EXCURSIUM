@@ -252,7 +252,7 @@ data-toggle="modal" data-target="#modalSubmitProject">
 th:each="j : ${#numbers.sequence(i,i+inc)}"
 th:with="event = ${events.get(j)}"
 th:id="'id'+${j}"
-th:style="${j == 0 or j == 1}?'display: block;':'display: none;'">
+th:style="${j != 0 and j != 1}?'display: none;'">
 <!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
 <!--/*Card image*/-->
 <div class="view overlay hm-white-slight">
@@ -272,7 +272,7 @@ th:href="@{/events/event(id=${event.getId()})}">Название
 <!--/*TODO translate*/-->
 </div>
 <!--/*Card footer*/-->
-<div class="card-footer links-light" style="padding-bottom: 0;padding-top: 0;height: 36px;">
+<div class="card-footer links-light">
 <span class="left pt-2">
 <strong th:text="${event.getPrice()}+'&#8381;  '"
 style="color:#4285F4; font-size: medium; padding-top: -0.2em; padding-bottom: 2rem;">%Цена%  </strong>
