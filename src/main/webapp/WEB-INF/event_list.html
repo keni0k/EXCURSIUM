@@ -174,7 +174,7 @@ th:with="inc = ${i!=events.size()-1?1:0}">
 th:with="event=${events.get(j)}">
 <!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
 <!--/*Card image*/-->
-<div class="view overlay hm-white-slight z-depth-1">
+<div class="view overlay hm-white-slight z-depth-1" style="margin-top: 20px;">
 <div class="img_crop"><img src="../resources/img/bg-cta.jpg" th:src="${event.pathToPhoto}"
 class="img-fluid" alt=""/></div>
 <a th:href="@{/events/event(id = ${event.getId()})}"><div class="mask waves-effect waves-light"></div></a>
@@ -205,17 +205,17 @@ th:text="${event.name}">%NAME%</a></h3></strong>
 <!--/*Description*/-->
 <p class="card-text" style="font-size: medium; color: #000000"
 th:text="${event.getSmallDescription()}" align="justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi beatae, earum eveniet ex facilis iure molestiae nam obcaecati odio perferendis rerum tempora veritatis. Adipisci aliquid corporis, culpa cumque dolor earum ex ipsa itaque magnam odit placeat quia quidem repellat voluptatum.</p>
+</div>
 <!--/*Card footer*/-->
 <div class="card-footer links-light" style="padding: 0.75rem 0.5rem;">
-<h4 class="left" style="color:#4285F4; padding: 0.4em 0.1em;"><strong th:text="${event.getPrice()}+'&#8381;'">%PRICE%</strong></h4>
-<span class="right">
+        <h4 class="left" style="color:#4285F4; padding: 0.4em 0.1em;"><strong th:text="${event.getPrice()}+'&#8381;'">%PRICE%</strong></h4>
+        <span class="right">
 <a th:href="@{/events/event(id=${event.getId()})}"
-class="btn btn-primary waves-effect waves-light"
-th:text="${#messages.msg('words.open')}">Открыть
+   class="btn btn-primary waves-effect waves-light"
+   th:text="${#messages.msg('words.open')}">Открыть
 </a>
 </span>
-</div>
-</div>
+    </div>
 <!--/*End-of-Card content*/-->
 <div class="visible-sm-block visible-xs-block" th:if="${j==i}">
 <br/>
