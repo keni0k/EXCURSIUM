@@ -181,7 +181,7 @@ class="img-fluid" alt=""/></div>
 </div>
 <!--/*Card image*/-->
 <!--/*Card content*/-->
-<div class="card-body pb-0"><!--/*Category & Title*/-->
+<div class="card-body pb-0 no-padding text-center"><!--/*Category & Title*/-->
 <h5 th:text="${{event.getCategoryString()}}">%CATEGORY%</h5>
 <h4 class="card-title">
 <strong>
@@ -207,7 +207,7 @@ th:text="${event.name}">%NAME%</a></h3></strong>
 th:text="${event.getSmallDescription()}" align="justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi beatae, earum eveniet ex facilis iure molestiae nam obcaecati odio perferendis rerum tempora veritatis. Adipisci aliquid corporis, culpa cumque dolor earum ex ipsa itaque magnam odit placeat quia quidem repellat voluptatum.</p>
 </div>
 <!--/*Card footer*/-->
-<div class="card-footer links-light" style="padding: 0.75rem 0.5rem;">
+<div class="card-footer links-light">
         <h4 class="left" style="color:#4285F4; padding: 0.4em 0.1em;"><strong th:text="${event.getPrice()}+'&#8381;'">%PRICE%</strong></h4>
         <span class="right">
 <a th:href="@{/events/event(id=${event.getId()})}"
