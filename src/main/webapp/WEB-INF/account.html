@@ -60,7 +60,8 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
 <!--/*Section: Basic Info*/-->
 <section class="card card-cascade card-avatar mb-4">
 
-<img th:src="${person.getImageUrl()}" src="../resources/img/user.png" alt="" onerror='this.style.marginTop = 0'/>
+<img th:src="${person.getImageUrl()}" src="../resources/img/user.png" alt=""
+onerror='this.style.marginTop = 0'/>
 <!--/*Card content*/-->
 <div class="card-body">
 <!--/*Title*/-->
@@ -78,7 +79,9 @@ class="fa fa-twitter"></i></a>
 class="btn-floating btn-small light-blue lighten-2 waves-effect waves-light"><i
 class="fa fa-linkedin"></i></a>
 <!--/*Text*/-->
-<p class="card-text mt-3">тел. <th:block th:text="${person.getPhoneNumber()}"/></p>
+<p class="card-text mt-3">тел.
+<th:block th:text="${person.getPhoneNumber()}"/>
+</p>
 <button th:unless="${isThisUserAccount}" type="button"
 class="btn btn-info waves-effect waves-light"
 data-toggle="modal" data-target="#modalContactUser">Связаться<i
@@ -145,11 +148,14 @@ class="badge badge-primary pull-right">14</span></p>
 <!--/* Heading */-->
 <div class="text-center mt-3 mb-5">
 <h2 class="title text-center" th:if="${orders.size()>0}">Посещенные экскурсии</h2>
-<h2 class="title text-center" th:if="${orders.size()==0}">Здесь будут отображаться посещенные экскурсии</h2> <!--/*-310,615 TODO: translate*/-->
+<h2 class="title text-center" th:if="${orders.size()==0}">Здесь будут отображаться
+посещенные экскурсии</h2> <!--/*-310,615 TODO: translate*/-->
 <a href="/events/list">
 <button th:if="${isThisUserAccount}" type="button"
 class="btn btn-primary mt-4 waves-effect waves-light">
-<th:block th:text="${#messages.msg('account.select_event')+' '}">Выбрать экскурсию</th:block>
+<th:block th:text="${#messages.msg('account.select_event')+' '}">Выбрать
+экскурсию
+</th:block>
 <i class="fa fa-photo ml-1"></i>
 </button>
 </a>
@@ -167,12 +173,15 @@ th:with="order=${orders.get(j)}">
 <!--/*Card image*/-->
 <div class="view overlay hm-white-slight">
 <img th:src="${order.getImageUrl()}" src="#" class="img-fluid" alt=""/>
-<a href="#"><div class="mask waves-effect waves-light"></div></a>
+<a href="#">
+<div class="mask waves-effect waves-light"></div>
+</a>
 </div>
 <!--/*Card content*/-->
 <div class="card-body pb-0">
 <!--/*Title*/-->
-<h4 class="card-title" th:text="${order.getName()}">Название экскурсии</h4>
+<h4 class="card-title" th:text="${order.getName()}">Название
+экскурсии</h4>
 <!--/*Text*/-->
 <span class="card-text" style="font-size: small;" align="left"
 th:text="${order.getTime()}">Время заказа</span>
@@ -212,7 +221,8 @@ class="page-link waves-effect waves-effect">В начало</a></li>
 </a>
 </li>
 <!--/*Numbers*/-->
-<li class="page-item active"><a class="page-link waves-effect waves-effect">1</a></li>
+<li class="page-item active"><a class="page-link waves-effect waves-effect">1</a>
+</li>
 <li class="page-item"><a class="page-link waves-effect waves-effect">2</a></li>
 <li class="page-item"><a class="page-link waves-effect waves-effect">3</a></li>
 <li class="page-item"><a class="page-link waves-effect waves-effect">4</a></li>
@@ -233,11 +243,14 @@ class="page-link waves-effect waves-effect">В конец</a></li>
 <!--/* Heading */-->
 <div class="text-center mt-3 mb-5" th:if="${excursovod}">
 <h2 class="title text-center" th:if="${events.size()>0}">Добавленные экскурсии</h2>
-<h2 class="title text-center" th:if="${events.size()==0 and excursovod}">Здесь будут отображаться добавленные экскурсии</h2> <!--/*-310,615 TODO: translate*/-->
+<h2 class="title text-center" th:if="${events.size()==0 and excursovod}">Здесь будут
+отображаться добавленные экскурсии</h2> <!--/*-310,615 TODO: translate*/-->
 <button th:if="${isThisUserAccount and excursovod}" type="button"
 class="btn btn-primary mt-4 waves-effect waves-light"
 data-toggle="modal" data-target="#modalSubmitProject">
-<th:block th:text="${#messages.msg('titles.add_event')+' '}">Добавить новую экскурсию</th:block>
+<th:block th:text="${#messages.msg('titles.add_event')+' '}">Добавить новую
+экскурсию
+</th:block>
 <i class="fa fa-photo ml-1"></i>
 </button>
 </div>
@@ -268,7 +281,8 @@ style="height: 240px; min-width: -webkit-fill-available;" alt=""/>
 <h4 class="card-title" th:text="${event.getName()}"><a
 th:href="@{/events/event(id=${event.getId()})}">Название
 экскурсии</a></h4>
-<strong th:style="'color:' + ${event.getType()}==1?'#337ABB;':'#f80000;' + 'font-size: x-large; padding-top: -0.2em;'" th:text="${event.getStringType(0)}">На модерации</strong>
+<strong th:style="'color:' + ${event.getType()}==1?'#337ABB;':'#f80000;' + 'font-size: x-large; padding-top: -0.2em;'"
+th:text="${event.getStringType(0)}">На модерации</strong>
 <!--/*TODO translate*/-->
 </div>
 <!--/*Card footer*/-->
@@ -354,7 +368,8 @@ aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
 <a class="nav-link active" data-toggle="tab"
 th:text="${#messages.msg('words.public_info')}"
 href="https://mdbootstrap.com/previews/templates/admin-dashboard/html/profile/extended.html#panel77"
-role="tab" aria-expanded="true"><i class="fa fa-user mr-1"></i> Public info</a>
+role="tab" aria-expanded="true"><i class="fa fa-user mr-1"></i> Public
+info</a>
 </li>
 <li class="nav-item waves-effect waves-light">
 <a class="nav-link" data-toggle="tab"
@@ -382,7 +397,8 @@ enctype="multipart/form-data" method="post">
 class="form-control" name="first_name"
 th:value="${person.getFirstName()}"/>
 <label for="editProfile1" class=""
-th:text="${#messages.msg('words.first_name')}">First name</label>
+th:text="${#messages.msg('words.first_name')}">First
+name</label>
 </div>
 </div>
 <!--/*End-of-Grid column*/-->
@@ -394,7 +410,8 @@ th:text="${#messages.msg('words.first_name')}">First name</label>
 class="form-control" name="last_name"
 th:value="${person.getLastName()}"/>
 <label for="editProfile2" class=""
-th:text="${#messages.msg('words.last_name')}">Last name</label>
+th:text="${#messages.msg('words.last_name')}">Last
+name</label>
 </div>
 </div>
 <!--/*End-of-Grid column*/-->
@@ -402,8 +419,12 @@ th:text="${#messages.msg('words.last_name')}">Last name</label>
 <div class="col-md-12">
 <!--/*Company website*/-->
 <div class="md-form form-sm">
-<textarea type="text" id="editProfile5" name="about_me" class="md-textarea" th:text="${person.getAbout()}"></textarea>
-<label for="editProfile5" class="" th:text="${#messages.msg('words.about_me')}">About me</label>
+<textarea type="text" id="editProfile5" name="about_me"
+class="md-textarea"
+th:text="${person.getAbout()}"></textarea>
+<label for="editProfile5" class=""
+th:text="${#messages.msg('words.about_me')}">About
+me</label>
 </div>
 </div>
 <!--/*End-of-Grid column*/-->
@@ -417,7 +438,8 @@ style="padding-left: 8rem; padding-top: 5px; font-size: 1rem;"
 accept="image/jpeg,image/png"
 aria-label="Фотографии"/>
 <label for="filePerson" class="" style="top: 0.5rem;"
-th:text="${#messages.msg('words.new_photo')}">Новая фотография</label>
+th:text="${#messages.msg('words.new_photo')}">Новая
+фотография</label>
 </div>
 </div>
 <!--/*End-of-Grid column*/-->
@@ -458,7 +480,8 @@ class="btn btn-outline-primary waves-effect waves-light"
 data-dismiss="modal">Закрыть
 </button>
 <button type="submit"
-class="btn btn-primary waves-effect waves-light">Сохранить <i class="fa fa-check ml-1"></i></button>
+class="btn btn-primary waves-effect waves-light">
+Сохранить <i class="fa fa-check ml-1"></i></button>
 </div>
 <!--/*End-of-Grid row*/-->
 </form>
@@ -549,7 +572,8 @@ style="height: 300px;"></textarea>
 <!--/*Footer*/-->
 <div class="modal-footer justify-content-center">
 <button type="button" class="btn btn-outline-primary waves-effect waves-light"
-data-dismiss="modal">Закрыть</button>
+data-dismiss="modal">Закрыть
+</button>
 <button type="button" class="btn btn-primary waves-effect waves-light">Send <i
 class="fa fa-paper-plane ml-1"></i></button>
 </div>
@@ -577,7 +601,8 @@ aria-hidden="true">×</span></button>
 <!--/*Footer*/-->
 <div class="modal-footer justify-content-center">
 <button type="button" class="btn btn-outline-primary waves-effect waves-light"
-data-dismiss="modal">Закрыть</button>
+data-dismiss="modal">Закрыть
+</button>
 <button type="button" class="btn btn-primary waves-effect waves-light">Go to <i
 class="fa fa-arrow-right ml-1"></i></button>
 </div>
@@ -610,7 +635,8 @@ style="height: 400px;"></textarea>
 <!--/*Footer*/-->
 <div class="modal-footer justify-content-center">
 <button type="button" class="btn btn-outline-primary waves-effect waves-light"
-data-dismiss="modal">Отмена</button>
+data-dismiss="modal">Отмена
+</button>
 <button type="button" class="btn btn-primary waves-effect waves-light">Отправить <i
 class="fa fa-paper-plane ml-1"></i></button>
 </div>
@@ -642,7 +668,8 @@ autocomplete="off" method="post">
 th:value="${inputEvent.getName()}" required="" minlength="10"
 maxlength="60"/>
 <label for="name" th:if="${#fields.hasErrors('name')}"
-th:text="${#messages.msg('error.event.name')}" th:class="'error'">Name Error</label>
+th:text="${#messages.msg('error.event.name')}" th:class="'error'">Name
+Error</label>
 <label for="name" class=""
 th:text="${#messages.msg('words.name')}">Название</label>
 </div>
@@ -668,21 +695,29 @@ th:text="${#messages.msg('words.type_of_excursion')}">Тип экскурсии
 class="selectpicker"
 style="height: auto; margin-bottom: 2rem;">
 <option value="0" th:text="${#messages.msg('category.0')}"
-th:selected="${inputEvent.getCategory()==0}">Развлечения</option>
+th:selected="${inputEvent.getCategory()==0}">Развлечения
+</option>
 <option value="1" th:selected="${inputEvent.getCategory()==1}"
-th:text="${#messages.msg('category.1')}">Наука</option>
+th:text="${#messages.msg('category.1')}">Наука
+</option>
 <option value="2" th:selected="${inputEvent.getCategory()==2}"
-th:text="${#messages.msg('category.2')}">История</option>
+th:text="${#messages.msg('category.2')}">История
+</option>
 <option value="3" th:selected="${inputEvent.getCategory()==3}"
-th:text="${#messages.msg('category.3')}">Искусство</option>
+th:text="${#messages.msg('category.3')}">Искусство
+</option>
 <option value="4" th:selected="${inputEvent.getCategory()==4}"
-th:text="${#messages.msg('category.4')}">Производство</option>
+th:text="${#messages.msg('category.4')}">Производство
+</option>
 <option value="5" th:selected="${inputEvent.getCategory()==5}"
-th:text="${#messages.msg('category.5')}">Гастрономия</option>
+th:text="${#messages.msg('category.5')}">Гастрономия
+</option>
 <option value="6" th:selected="${inputEvent.getCategory()==6}"
-th:text="${#messages.msg('category.6')}">Квесты</option>
+th:text="${#messages.msg('category.6')}">Квесты
+</option>
 <option value="7" th:selected="${inputEvent.getCategory()==7}"
-th:text="${#messages.msg('category.7')}">Экстрим</option>
+th:text="${#messages.msg('category.7')}">Экстрим
+</option>
 </select>
 </div>
 </div>
@@ -695,7 +730,8 @@ th:text="${#messages.msg('error.event.users_count')}"
 th:class="'error'">UsersCount
 Error</label>
 <label for="users_count" class=""
-th:text="${#messages.msg('words.users_count')}">Количество участников</label>
+th:text="${#messages.msg('words.users_count')}">Количество
+участников</label>
 </div>
 <div class="md-form form-sm">
 <input name="duration" id="duration" type="number" class="form-control"
@@ -706,22 +742,26 @@ min="1" max="240"/>
 th:text="${#messages.msg('error.event.duration')}"
 th:class="'error'">Duration Error</label>
 <label for="duration" class=""
-th:text="${#messages.msg('words.duration')+' ('+#messages.msg('words.hours')+')'}">Длительность (часов)</label>
+th:text="${#messages.msg('words.duration')+' ('+#messages.msg('words.hours')+')'}">Длительность
+(часов)</label>
 </div>
 <div class="md-form form-sm">
 <input name="place" id="place" type="text" class="form-control"
 required="" minlength="5" maxlength="100"
 th:value="${inputEvent.getPlace()}?${inputEvent.getPlace()}"/>
 <label for="place" th:if="${#fields.hasErrors('place')}"
-th:text="${#messages.msg('error.event.place')}" th:class="'error'">Place Error</label>
-<label for="place" class="" th:text="${#messages.msg('words.place')}">Место встречи</label>
+th:text="${#messages.msg('error.event.place')}" th:class="'error'">Place
+Error</label>
+<label for="place" class="" th:text="${#messages.msg('words.place')}">Место
+встречи</label>
 </div>
 <div class="md-form form-sm">
 <input name="price" id="price" type="number" class="form-control"
 required="" min="100" max="100000"
 th:value="${inputEvent.getPrice()}?${inputEvent.getPrice()}"/>
 <label for="price" th:if="${#fields.hasErrors('price')}"
-th:text="${#messages.msg('error.event.price')}" th:class="'error'">Price Error</label>
+th:text="${#messages.msg('error.event.price')}" th:class="'error'">Price
+Error</label>
 <label for="price" class=""
 th:text="${#messages.msg('words.price') + '(&#8381;)'}">Цена</label>
 </div>
@@ -743,8 +783,11 @@ th:text="${#messages.msg('words.photos')}">Фотографии</label>
 <select name="language" class="selectpicker"
 style="height: auto; margin-bottom: 2rem;"
 th:selected="${inputEvent.getLanguage()}?${inputEvent.getLanguage()}">
-<option value="0" th:text="${#messages.msg('language.0')}">Русский</option>
-<option value="1" th:text="${#messages.msg('language.1')}">Английский</option>
+<option value="0" th:text="${#messages.msg('language.0')}">Русский
+</option>
+<option value="1" th:text="${#messages.msg('language.1')}">
+Английский
+</option>
 </select>
 </div>
 </div>
@@ -754,7 +797,8 @@ th:selected="${inputEvent.getLanguage()}?${inputEvent.getLanguage()}">
 class="btn btn-outline-primary waves-effect waves-light"
 data-dismiss="modal">Закрыть
 </button>
-<button type="submit" class="btn btn-primary waves-effect waves-light">Сохранить <i class="fa fa-check ml-1"></i></button>
+<button type="submit" class="btn btn-primary waves-effect waves-light">
+Сохранить <i class="fa fa-check ml-1"></i></button>
 </div>
 </form>
 </div>
@@ -805,10 +849,12 @@ class="form-control" name="date_and_place"/>
 <div class="md-form form-sm">
 <input name="file" type="file" id="upToGuide3"
 class="form-control"
-size="30000000" style="padding-left: 10rem; padding-top: 5px; font-size: 1rem;"
+size="30000000"
+style="padding-left: 10rem; padding-top: 5px; font-size: 1rem;"
 accept="image/jpeg,image/png"
 aria-label="Фотография паспорта"/>
-<label for="upToGuide3" class="" style="top: 0.5rem;">Фотография паспорта</label>
+<label for="upToGuide3" class="" style="top: 0.5rem;">Фотография
+паспорта</label>
 </div>
 </div>
 <!--/*End-of-Grid column*/-->
@@ -819,7 +865,8 @@ aria-label="Фотография паспорта"/>
 <textarea type="text" id="upToGuide4" name="about_me"
 class="md-textarea"
 th:text="${person.getAbout()}"></textarea>
-<label for="upToGuide4" th:text="${#messages.msg('words.about_me')}">О себе</label>
+<label for="upToGuide4"
+th:text="${#messages.msg('words.about_me')}">О себе</label>
 </div>
 </div>
 <!--/*End-of-Grid column*/-->
@@ -828,8 +875,11 @@ th:text="${person.getAbout()}"></textarea>
 </div>
 <!--/*Footer*/-->
 <div class="modal-footer justify-content-center">
-<button type="reset" class="btn btn-outline-primary waves-effect waves-light" data-dismiss="modal">Отменить</button>
-<button type="submit" class="btn btn-primary waves-effect waves-light">Отправить <i class="fa fa-check ml-1"></i></button>
+<button type="reset" class="btn btn-outline-primary waves-effect waves-light"
+data-dismiss="modal">Отменить
+</button>
+<button type="submit" class="btn btn-primary waves-effect waves-light">Отправить
+<i class="fa fa-check ml-1"></i></button>
 </div>
 </form>
 </div>
@@ -858,7 +908,7 @@ var idUp = id + 1;
 var i;
 var eventsSize = [[${events.size()}]];
 for (i = 0; i < eventsSize; i++) {
-var j = i+1;
+var j = i + 1;
 document.getElementById('id' + i).style.display = "none";
 if (i < eventsSize / 2 - 1 && document.getElementById('page_events' + j))
 document.getElementById('page_events' + j).className = "page-item";
@@ -878,7 +928,7 @@ document.getElementById('to-end-exc').className = "page-item clearfix d-none d-m
 document.getElementById('down-exc').className = "page-item disabled";
 document.getElementById('up-exc').className = "page-item";
 break;
-case Math.floor(eventsSize/2):
+case Math.floor(eventsSize / 2):
 document.getElementById('to-home-exc').className = "page-item clearfix d-none d-md-block";
 document.getElementById('to-end-exc').className = "page-item disabled clearfix d-none d-md-block";
 document.getElementById('down-exc').className = "page-item";
@@ -891,6 +941,7 @@ document.getElementById('down-exc').className = "page-item";
 document.getElementById('up-exc').className = "page-item";
 }
 }
+
 /*]]>*/
 </script>
 <script>
@@ -904,6 +955,6 @@ minScrollbarLength: 20
 });
 </script>
 <div class="drag-target"
-style="left: 0px; touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div>
+style="left: 0; touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div>
 </body>
 </html>
