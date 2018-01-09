@@ -31,6 +31,13 @@ xmlns:th="http://www.thymeleaf.org">
 
 </head>
 <body style="background-color: #f9f9f9;">
+<style>
+.input-group .form-control {
+padding-bottom: 0;
+padding-top: 0;
+padding-left: 9px;
+}
+</style>
 <!--/*@thymesVar id="insertPerson" type="com.heroku.demo.person.Person"*/-->
 <div class="content"
 th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
@@ -163,7 +170,7 @@ Error</label>
 <span class="input-group-addon" th:text="${#messages.msg('words.photo')}">Фотография</span>
 <input name="file" type="file" id="file" class="form-control" placeholder="Фотография"
 required=""
-accept="image/jpeg,image/png" aria-label="Фотография"/>
+accept="image/jpeg,image/png" aria-label="Фотография" style="padding-top: 5px; margin-top: 0"/>
 </div>
 <br/>
 <button type="submit" class="btn btn-default" th:text="${#messages.msg('words.submit')}">
