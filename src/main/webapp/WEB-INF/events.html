@@ -53,7 +53,7 @@ xmlns:th="http://www.thymeleaf.org">
 <body style="background-color: #f9f9f9;" th:with="price_up=${#httpServletRequest.getParameter('price_up')},price_down=${#httpServletRequest.getParameter('price_down')},
 id=${#httpServletRequest.getParameter('id')},category=${#httpServletRequest.getParameter('category')},
 words=${#httpServletRequest.getParameter('words')},sort_by=${#httpServletRequest.getParameter('sort_by')}">
-<style>input[type=checkbox]{left: 130px;visibility: visible;}.fixed-table-toolbar .dropdown-menu {max-height: 600px;}</style>
+<style>input[type=checkbox]{left: 130px;visibility: visible;}.fixed-table-toolbar .dropdown-menu {max-height: 600px;}.fresh-table .bootstrap-table .table > tfoot > tr > td {padding: 0 !important;}</style>
 <!--/*@thymesVar id="inputEvent" type="com.heroku.demo.event.Event"*/-->
 <!--/*@thymesVar id="events" type="java.util.List<com.heroku.demo.event.Event>"*/-->
 <!--/*@thymesVar id="utils" type="com.heroku.demo.utils.UtilsForWeb"*/-->
