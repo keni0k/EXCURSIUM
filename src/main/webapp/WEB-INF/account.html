@@ -15,7 +15,7 @@ xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" href="../resources/libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>
 <link rel="stylesheet" href="../resources/libs/bootstrap-select/css/bootstrap-select.css"/>
 
-<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"/>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 
 <link rel="icon" href="../resources/img/icon.ico" type="image/x-icon"/>
@@ -184,8 +184,7 @@ th:text="${order.getTime()}">Время экскурсии</span>
 <span class="left pt-2">
 <strong th:text="${order.getPrice()}+'&#8381;  '"
 style="color:#4285F4; font-size: medium; padding-top: -0.2em;">%Цена%  </strong>
-<a><i class="fa fa-share-alt mr-2"></i></a>
-<a><i class="fa fa-heart-o mr-2"></i>10</a>
+<a th:href="@{/orders/order(id=${order.getId()})}"><i class="fa fa-comments mr-2"></i>Оставить отзыв</a>
 </span>
 <span class="right">
 <a th:href="@{/orders/order(id=${order.getId()})}"
@@ -269,7 +268,7 @@ style="height: 240px; min-width: -webkit-fill-available;" alt=""/>
 <h4 class="card-title" th:text="${event.getName()}"><a
 th:href="@{/events/event(id=${event.getId()})}">Название
 экскурсии</a></h4>
-<strong style="color:#f80000; font-size: x-large; padding-top: -0.2em;"
+<strong th:style="'color:' + event.getType()==1?'#337ABB;':'#f80000;' + 'font-size: x-large; padding-top: -0.2em;'"
 th:text="${event.getStringType(0)}">На модерации</strong>
 <!--/*TODO translate*/-->
 </div>
@@ -278,7 +277,6 @@ th:text="${event.getStringType(0)}">На модерации</strong>
 <span class="left pt-2">
 <strong th:text="${event.getPrice()}+'&#8381;  '"
 style="color:#4285F4; font-size: medium; padding-top: -0.2em; padding-bottom: 2rem;">%Цена%  </strong>
-<a><i class="fa fa-share-alt mr-2"></i></a>
 <a><i class="fa fa-heart-o mr-2"></i>10</a>
 </span>
 <span class="right">
@@ -870,9 +868,9 @@ document.getElementById('page_events' + j).className = "page-item active";
 }
 
 if (document.getElementById('id' + id))
-document.getElementById('id' + id).style.display = "block";
+document.getElementById('id' + id).style.display = "";
 if (document.getElementById('id' + idUp))
-document.getElementById('id' + idUp).style.display = "block";
+document.getElementById('id' + idUp).style.display = "";
 
 switch (page) {
 case 1:
