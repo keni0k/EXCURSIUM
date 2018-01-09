@@ -1,54 +1,45 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="description" content=""/>
-    <meta name="title" content=""/>
-    <meta name="author" content=""/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-    <meta name="keywords" content="excursium"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="description" content=""/>
+<meta name="title" content=""/>
+<meta name="author" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="keywords" content="excursium"/>
 
-    <link rel="stylesheet" type="text/css" href="../resources/css/styles.css"/>
-    <link rel="stylesheet" href="../resources/css/media.css"/>
-    <link rel="stylesheet" type="text/css" href="../resources/css/footer.css"/>
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"/>
+<link rel="stylesheet" href="../resources/css/media.css"/>
+<link rel="stylesheet" type="text/css" href="../resources/css/footer.css"/>
+<link rel="stylesheet" href="../resources/libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>
+<link rel="stylesheet" href="../resources/libs/bootstrap-select/css/bootstrap-select.css"/>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 
-    <link rel="stylesheet" href="../resources/libs/bootstrap-select/css/bootstrap-select.css"/>
-    <script type="text/javascript" src="../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
+<link rel="icon" href="../resources/img/icon.ico" type="image/x-icon"/>
+<link rel="shortcut icon" href="../resources/img/icon.ico" type="image/x-icon"/>
 
-    <link rel="stylesheet" href="../resources/css/segoe_ui.css"/>
+<link rel="stylesheet" type="text/css" href="../resources/css/styles.css"/>
+<link rel="stylesheet" href="../resources/css/cards.css"/>
 
-    <!-- Icon -->
-    <link rel="icon" href="../resources/img/icon.ico" type="image/x-icon"/>
-    <link rel="shortcut icon" href="../resources/img/icon.ico" type="image/x-icon"/>
-
-    <link rel="stylesheet" href="../resources/libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>
-    <script type="text/javascript"
-            src="../resources/libs/bootstrapformhelpers/js/bootstrap-formhelpers.min.js"></script>
-    <!-- Plugin CSS -->
-    <link rel="stylesheet" href="../resources/css/cards.css"/>
-    <title>403</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
+<title>403</title>
 </head>
 <body style="background-color: #f9f9f9;">
 <div class="content"
-     th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
-    <div th:replace="fragments/header :: style"></div>
-    <div th:replace="fragments/header :: header"></div>
-    <div class="container">
-        <h1 style="align-content: center; vertical-align: middle" th:text="${#messages.msg('error.403')}">Ошибка 403. Вы
-            зашли на охраняемую территорию!!1!</h1>
-        <h2 style="align-content: center; vertical-align: middle"><a href="/users/logout"
-                                                                     th:text="${#messages.msg('error.403.add.1')}">Выйти
-            и перелогиниться, чтобы получить доступ</a></h2>
-        <h3 style="align-content: center; vertical-align: middle">
-            <del th:text="${#messages.msg('error.403.add.2')}">Это фиаско</del>
-        </h3>
-    </div>
+th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
+<div th:replace="fragments/header :: style"></div>
+<div th:replace="fragments/header :: header"></div>
+<div class="container">
+<h1 style="align-content: center; vertical-align: middle" th:text="${#messages.msg('error.403')}">Ошибка 403. Вы зашли на охраняемую территорию!!1!</h1>
+<h2 style="align-content: center; vertical-align: middle"><a href="/users/logout" th:text="${#messages.msg('error.403.add.1')}">Выйти и перелогиниться, чтобы получить доступ</a></h2>
+<h3 style="align-content: center; vertical-align: middle">
+<del th:text="${#messages.msg('error.403.add.2')}">Это фиаско</del>
+</h3>
+</div>
 </div>
 <div th:replace="fragments/footer :: footer"></div>
 <script type="text/javascript" src="../resources/js/compiled.min.js"></script>

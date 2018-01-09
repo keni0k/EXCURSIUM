@@ -1,58 +1,54 @@
 <!DOCTYPE HTML>
-<!--
-  Copyright 2015 Benedikt Ritter
+<!--/*
+Copyright 2015 Benedikt Ritter
 
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-      http://www.apache.org/licenses/LICENSE-2.0
+http://www.apache.org/licenses/LICENSE-2.0
 
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
--->
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/-->
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="${#messages.msg('titles.persons')}">Модерация контента</title>
-    <meta name="description" content=""/>
-    <meta name="title" content=""/>
-    <meta name="author" content=""/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-    <meta name="keywords" content="excursium"/>
+<title th:text="${#messages.msg('titles.persons')}">Модерация контента</title>
+<meta name="description" content=""/>
+<meta name="title" content=""/>
+<meta name="author" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="keywords" content="excursium"/>
 
-    <link rel="stylesheet" type="text/css" href="../resources/css/styles.css"/>
-    <link rel="stylesheet" href="../resources/css/media.css"/>
-    <link rel="stylesheet" type="text/css" href="../resources/css/footer.css"/>
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"/>
+<link rel="stylesheet" href="../resources/css/media.css"/>
+<link rel="stylesheet" type="text/css" href="../resources/css/footer.css"/>
+<link rel="stylesheet" href="../resources/libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>
+<link rel="stylesheet" href="../resources/libs/bootstrap-select/css/bootstrap-select.css"/>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 
-    <!-- Icon -->
-    <link rel="icon" href="../resources/img/icon.ico" type="image/x-icon"/>
-    <link rel="shortcut icon" href="../resources/img/icon.ico" type="image/x-icon"/>
+<link rel="icon" href="../resources/img/icon.ico" type="image/x-icon"/>
+<link rel="shortcut icon" href="../resources/img/icon.ico" type="image/x-icon"/>
 
-    <link rel="stylesheet" href="../resources/libs/bootstrap-select/css/bootstrap-select.css"/>
-    <script type="text/javascript" src="../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
+<link rel="stylesheet" type="text/css" href="../resources/css/styles.css"/>
+<link rel="stylesheet" href="../resources/css/cards.css"/>
 
-    <link rel="stylesheet" href="../resources/css/segoe_ui.css"/>
-
-    <link rel="stylesheet" href="../resources/libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>
-    <script type="text/javascript"
-            src="../resources/libs/bootstrapformhelpers/js/bootstrap-formhelpers.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
 
 
-    <link rel="stylesheet" href="http://bootstraptema.ru/plugins/2015/bootstrap3/bootstrap.min.css"/>
-    <link rel="stylesheet" href="http://bootstraptema.ru/plugins/font-awesome/4-4-0/font-awesome.min.css"/>
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'/>
-    <link href="http://demos.creative-tim.com/fresh-bootstrap-table/assets/css/fresh-bootstrap-table.css"
-          rel="stylesheet"/>
-    <script type="text/javascript"
-            src="http://demos.creative-tim.com/fresh-bootstrap-table/assets/js/bootstrap-table.js"></script>
+<link rel="stylesheet" href="http://bootstraptema.ru/plugins/2015/bootstrap3/bootstrap.min.css"/>
+<link rel="stylesheet" href="http://bootstraptema.ru/plugins/font-awesome/4-4-0/font-awesome.min.css"/>
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'/>
+<link href="http://demos.creative-tim.com/fresh-bootstrap-table/assets/css/fresh-bootstrap-table.css"
+rel="stylesheet"/>
+<script type="text/javascript"
+src="http://demos.creative-tim.com/fresh-bootstrap-table/assets/js/bootstrap-table.js"></script>
 
 
 </head>
@@ -61,258 +57,244 @@
 <!--/*@thymesVar id="persons" type="java.util.List"*/-->
 <!--/*@thymesVar id="utils" type="com.heroku.demo.utils.UtilsForWeb"*/-->
 <div class="content"
-     th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')},
-              id = ${#httpServletRequest.getParameter('id')}">
-    <div th:replace="fragments/header :: style"></div>
-    <div th:replace="fragments/header :: header"></div>
-    <div class="container">
-        <div class="page-header">
-            <h1 th:text="${#messages.msg('titles.persons')}">Модерация пользователей</h1>
-        </div>
-        <div class="row" th:if="${id}">
-            <div class="col-md-12 col-lg-6">
+th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')},
+id = ${#httpServletRequest.getParameter('id')}">
+<div th:replace="fragments/header :: style"></div>
+<div th:replace="fragments/header :: header"></div>
+<div class="container">
+<div class="page-header">
+<h1 th:text="${#messages.msg('titles.persons')}">Модерация пользователей</h1>
+</div>
+<div class="row" th:if="${id}">
+<div class="col-md-12 col-lg-6">
 
-                <!--/*@thymesVar id="message" type="com.heroku.demo.utils.MessageUtil"*/-->
-                <th:block th:if="${message != null}">
-                    <div th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message.type)}, message=${message.message})">
-                        &nbsp;
-                    </div>
-                </th:block>
+<!--/*@thymesVar id="message" type="com.heroku.demo.utils.MessageUtil"*/-->
+<th:block th:if="${message != null}">
+<div th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message.type)}, message=${message.message})">
+&nbsp;
+</div>
+</th:block>
 
-                <form th:object="${insertPerson}" action="/users/moderation" method="POST">
+<form th:object="${insertPerson}" action="/users/moderation" method="POST">
 
-                    <div class="panel panel-default">
-                        <div class="panel-heading" th:text="${#messages.msg('words.type')}">
-                            Тип пользователя
-                        </div>
-                        <div class="panel-body">
-                            <div class="input-group" style="z-index: 100">
-                                <select name="type" class="form-control selectpicker"> <!--TODO: translate-->
-                                    <option th:value="${utils.consts.PERSON_DISABLED}" th:text="${#messages.msg('user.type.unconfirmed')}"
-                                            th:selected="${insertPerson.getType()==utils.consts.PERSON_DISABLED}">Не активирован
-                                    </option>
-                                    <option th:value="${utils.consts.PERSON_BLOCKED}" th:text="${#messages.msg('user.type.blocked')}"
-                                            th:selected="${insertPerson.getType()==utils.consts.PERSON_BLOCKED}">Заблокирован
-                                    </option>
-                                    <option th:value="${utils.consts.PERSON_MODER_TOURIST}"
-                                            th:selected="${insertPerson.getType()==utils.consts.PERSON_MODER_TOURIST}">Турист (модерация)</option>
-                                    <option th:value="${utils.consts.PERSON_MODER_GUIDE}"
-                                            th:selected="${insertPerson.getType()==utils.consts.PERSON_MODER_GUIDE}">Турист / Экскурсовод (модерация)</option>
-                                    <option th:value="${utils.consts.PERSON_TOURIST}" th:text="${#messages.msg('user.type.tourist')}"
-                                            th:selected="${insertPerson.getType()==utils.consts.PERSON_TOURIST}">Турист</option>
-                                    <option th:value="${utils.consts.PERSON_GUIDE}" th:text="${#messages.msg('user.type.guide')}"
-                                            th:selected="${insertPerson.getType()==utils.consts.PERSON_GUIDE}">Турист / Экскурсовод</option>
-                                    <option th:value="${utils.consts.PERSON_ADMIN}" th:text="${#messages.msg('user.type.admin')}"
-                                            th:selected="${insertPerson.getType()==utils.consts.PERSON_ADMIN}">Админ</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <br/>
-                    <div class="input-group">
-                        <span class="input-group-addon" th:text="${#messages.msg('words.login')}">Логин</span>
-                        <input name="login" id="login" type="text" pattern="[a-zA-Z0-9._\-]{4,20}" class="form-control"
-                               placeholder="Логин" disabled="disabled" aria-label="Логин"
-                               th:value="${insertPerson.getLogin()}" required=""/>
-                    </div>
-                    <br/>
-                    <br/>
-                    <div class="input-group">
-                        <span class="input-group-addon" th:text="${#messages.msg('words.first_name')}">Имя</span>
-                        <input name="first_name" type="text" class="form-control"
-                               th:value="${insertPerson.getFirstName()}" placeholder="Имя" aria-label="Имя"
-                               required=""/>
-                    </div>
-                    <div class="input-group" style="display: none">
-                        <input name="id" type="number" class="form-control" th:value="${insertPerson.getId()}"/>
-                    </div>
-                    <br/>
-                    <div class="input-group">
-                        <span class="input-group-addon" th:text="${#messages.msg('words.last_name')}">Фамилия</span>
-                        <input name="last_name" type="text" class="form-control" th:value="${insertPerson.getLastName()}"
-                               placeholder="Фамилия" required=""
-                               aria-label="Фамилия"/>
-                    </div>
-                    <br/>
-                    <img th:src="${insertPerson.getImageUrl()}"/>
-                    <br/>
-                    <div class="input-group">
-                        <span class="input-group-addon">Email</span>
-                        <input name="email" id="email" type="email" class="form-control" disabled="disabled"
-                               th:value="${insertPerson.getEmail()}" placeholder="Email" aria-label="Email"
-                               required=""/>
-                    </div>
-                    <br/>
-                    <div class="input-group">
-                        <span class="input-group-addon" th:text="${#messages.msg('words.about_me')}">О себе</span>
-                        <textarea name="about" class="form-control" placeholder="О себе" aria-label="О себе" required=""
-                                  th:text="${insertPerson.getAbout()}"></textarea>
-                    </div>
-                    <br/>
-                    <div class="input-group">
-                        <span class="input-group-addon" th:text="${#messages.msg('words.city')}">Город</span>
-                        <input name="city" type="text" class="form-control" th:value="${insertPerson.getCity()}"
-                               placeholder="Город" required="" aria-label="Город"/>
-                    </div>
-                    <br/>
-                    <button type="reset" class="btn btn-default" th:text="${#messages.msg('words.reset')}">Сброс
-                    </button>
-                    <button type="submit" class="btn btn-default" th:text="${#messages.msg('words.submit')}">Сохранить
-                    </button>
+<div class="panel panel-default">
+<div class="panel-heading" th:text="${#messages.msg('words.type')}">
+Тип пользователя
+</div>
+<div class="panel-body">
+<div class="input-group" style="z-index: 100">
+<select name="type" class="form-control selectpicker"> <!--/*TODO: translate*/-->
+<option th:value="${utils.consts.PERSON_DISABLED}" th:text="${#messages.msg('user.type.unconfirmed')}"
+th:selected="${insertPerson.getType()==utils.consts.PERSON_DISABLED}">Не активирован
+</option>
+<option th:value="${utils.consts.PERSON_BLOCKED}" th:text="${#messages.msg('user.type.blocked')}"
+th:selected="${insertPerson.getType()==utils.consts.PERSON_BLOCKED}">Заблокирован
+</option>
+<option th:value="${utils.consts.PERSON_MODER_TOURIST}"
+th:selected="${insertPerson.getType()==utils.consts.PERSON_MODER_TOURIST}">Турист (модерация)</option>
+<option th:value="${utils.consts.PERSON_MODER_GUIDE}"
+th:selected="${insertPerson.getType()==utils.consts.PERSON_MODER_GUIDE}">Турист / Экскурсовод (модерация)</option>
+<option th:value="${utils.consts.PERSON_TOURIST}" th:text="${#messages.msg('user.type.tourist')}"
+th:selected="${insertPerson.getType()==utils.consts.PERSON_TOURIST}">Турист</option>
+<option th:value="${utils.consts.PERSON_GUIDE}" th:text="${#messages.msg('user.type.guide')}"
+th:selected="${insertPerson.getType()==utils.consts.PERSON_GUIDE}">Турист / Экскурсовод</option>
+<option th:value="${utils.consts.PERSON_ADMIN}" th:text="${#messages.msg('user.type.admin')}"
+th:selected="${insertPerson.getType()==utils.consts.PERSON_ADMIN}">Админ</option>
+</select>
+</div>
+</div>
+</div>
+<br/>
+<div class="input-group">
+<span class="input-group-addon" th:text="${#messages.msg('words.login')}">Логин</span>
+<input name="login" id="login" type="text" pattern="[a-zA-Z0-9._\-]{4,20}" class="form-control"
+placeholder="Логин" disabled="disabled" aria-label="Логин"
+th:value="${insertPerson.getLogin()}" required=""/>
+</div>
+<br/>
+<br/>
+<div class="input-group">
+<span class="input-group-addon" th:text="${#messages.msg('words.first_name')}">Имя</span>
+<input name="first_name" type="text" class="form-control"
+th:value="${insertPerson.getFirstName()}" placeholder="Имя" aria-label="Имя"
+required=""/>
+</div>
+<div class="input-group" style="display: none">
+<input name="id" type="number" class="form-control" th:value="${insertPerson.getId()}"/>
+</div>
+<br/>
+<div class="input-group">
+<span class="input-group-addon" th:text="${#messages.msg('words.last_name')}">Фамилия</span>
+<input name="last_name" type="text" class="form-control" th:value="${insertPerson.getLastName()}"
+placeholder="Фамилия" required=""
+aria-label="Фамилия"/>
+</div>
+<br/>
+<img th:src="${insertPerson.getImageUrl()}"/>
+<br/>
+<div class="input-group">
+<span class="input-group-addon">Email</span>
+<input name="email" id="email" type="email" class="form-control" disabled="disabled"
+th:value="${insertPerson.getEmail()}" placeholder="Email" aria-label="Email"
+required=""/>
+</div>
+<br/>
+<div class="input-group">
+<span class="input-group-addon" th:text="${#messages.msg('words.about_me')}">О себе</span>
+<textarea name="about" class="form-control" placeholder="О себе" aria-label="О себе" required=""
+th:text="${insertPerson.getAbout()}"></textarea>
+</div>
+<br/>
+<div class="input-group">
+<span class="input-group-addon" th:text="${#messages.msg('words.city')}">Город</span>
+<input name="city" type="text" class="form-control" th:value="${insertPerson.getCity()}"
+placeholder="Город" required="" aria-label="Город"/>
+</div>
+<br/>
+<button type="reset" class="btn btn-default" th:text="${#messages.msg('words.reset')}">Сброс
+</button>
+<button type="submit" class="btn btn-default" th:text="${#messages.msg('words.submit')}">Сохранить
+</button>
 
-                </form>
-            </div>
-        </div>
+</form>
+</div>
+</div>
 
-        <hr/>
+<hr/>
 
-        <div class="row">
-            <div class="col-sm-12">
+<div class="row">
+<div class="col-sm-12">
 
-                <div class="fresh-table toolbar-color-blue">
+<div class="fresh-table toolbar-color-blue">
 
-                    <!-- Изменение фона таблицы: full-color-blue, full-color-azure, full-color-green, full-color-red, full-color-orange
-                    Изменение фона тулбара страницы: toolbar-color-blue, toolbar-color-azure, toolbar-color-green, toolbar-color-red, toolbar-color-orange
-                    -->
+<!--/* Изменение фона таблицы: full-color-blue, full-color-azure, full-color-green, full-color-red, full-color-orange
+Изменение фона тулбара страницы: toolbar-color-blue, toolbar-color-azure, toolbar-color-green, toolbar-color-red, toolbar-color-orange
+*/-->
 
-                    <div class="toolbar">
-                        <button id="alertBtn" class="btn btn-default">Alert</button>
-                    </div>
+<div class="toolbar">
+<button id="alertBtn" class="btn btn-default">Alert</button>
+</div>
 
-                    <table id="fresh-table" class="table">
-                        <thead>
-                        <tr>
-                            <th data-field="id" data-sortable="true">ID</th>
-                            <th data-field="login" data-sortable="true" th:text="${#messages.msg('words.login')}">
-                                Login
-                            </th>
-                            <th data-field="name" data-sortable="true" th:text="${#messages.msg('words.name')}">Name
-                            </th>
-                            <th data-field="city" data-sortable="true" th:text="${#messages.msg('words.city')}">City
-                            </th>
-                            <th data-field="email" data-sortable="true">
-                                Email
-                            </th>
-                            <th data-field="phone" data-sortable="true" th:text="${#messages.msg('words.phone')}">
-                                Phone
-                            </th>
-                            <th data-field="type" data-sortable="true" th:text="${#messages.msg('words.type')}">Type
-                            </th>
-                            <th data-field="rate" data-sortable="true" th:text="${#messages.msg('words.rate')}">Rate
-                            </th>
-                            <th data-field="token" data-sortable="true" th:text="${#messages.msg('words.token')}">
-                                Token
-                            </th>
-                            <th data-field="actions" data-formatter="operateFormatter" data-events="operateEvents">
-                                Actions
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="person : ${persons}">
-                            <!--/*@thymesVar id="person" type="com.heroku.demo.person.Person"*/-->
-                            <td th:text="${person.id}">Some text</td>
-                            <td th:text="${person.login}">Some text</td>
-                            <td th:text="${person.getFullName()}">Some text</td>
-                            <td th:text="${person.city}">Some text</td>
-                            <td th:text="${person.email}">Some text</td>
-                            <td th:text="${person.phoneNumber}">Some text</td>
-                            <td th:text="${person.type}">Some text</td>
-                            <td th:text="${person.rate}">Some text</td>
-                            <td th:text="${person.token}">Some text</td>
-                            <!--<td>-->
-                            <!--<a th:href="@{/users/moderation(id = ${person.id},sort_by=${sortBy},type=${type},rate_down=${rateDown},rate_up=${rateUp}, first_name=${firstName}, last_name=${lastName}, city=${city})}"><img-->
-                            <!--src="../resources/img/icons/edit.png" width="40dp" height="40dp"/></a></td>-->
-                            <!--<td>-->
-                            <!--<a th:href="@{/users/delete(id = ${person.id},sort_by=${sortBy},type=${type},rate_down=${rateDown},rate_up=${rateUp}, first_name=${firstName}, last_name=${lastName}, city=${city})}"><img-->
-                            <!--src="../resources/img/icons/del.png" width="40dp" height="40dp"/></a></td>-->
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+<table id="fresh-table" class="table">
+<thead>
+<tr>
+<th data-field="id" data-sortable="true">ID</th>
+<th data-field="login" data-sortable="true" th:text="${#messages.msg('words.login')}">Login</th>
+<th data-field="name" data-sortable="true" th:text="${#messages.msg('words.name')}">Name</th>
+<th data-field="city" data-sortable="true" th:text="${#messages.msg('words.city')}">City</th>
+<th data-field="email" data-sortable="true">Email</th>
+<th data-field="phone" data-sortable="true" th:text="${#messages.msg('words.phone')}">Phone</th>
+<th data-field="type" data-sortable="true" th:text="${#messages.msg('words.type')}">Type</th>
+<th data-field="rate" data-sortable="true" th:text="${#messages.msg('words.rate')}">Rate</th>
+<th data-field="token" data-sortable="true" th:text="${#messages.msg('words.token')}">Token</th>
+<th data-field="actions" data-formatter="operateFormatter" data-events="operateEvents">Actions</th>
+</tr>
+</thead>
+<tbody>
+<tr th:each="person : ${persons}">
+<!--/*@thymesVar id="person" type="com.heroku.demo.person.Person"*/-->
+<td th:text="${person.id}">Some text</td>
+<td th:text="${person.login}">Some text</td>
+<td th:text="${person.getFullName()}">Some text</td>
+<td th:text="${person.city}">Some text</td>
+<td th:text="${person.email}">Some text</td>
+<td th:text="${person.phoneNumber}">Some text</td>
+<td th:text="${person.type}">Some text</td>
+<td th:text="${person.rate}">Some text</td>
+<td th:text="${person.token}">Some text</td>
+<!--/*<td>*/-->
+<!--/*<a th:href="@{/users/moderation(id = ${person.id},sort_by=${sortBy},type=${type},rate_down=${rateDown},rate_up=${rateUp}, first_name=${firstName}, last_name=${lastName}, city=${city})}"><img*/-->
+<!--/*src="../resources/img/icons/edit.png" width="40dp" height="40dp"/></a></td>*/-->
+<!--/*<td>*/-->
+<!--/*<a th:href="@{/users/delete(id = ${person.id},sort_by=${sortBy},type=${type},rate_down=${rateDown},rate_up=${rateUp}, first_name=${firstName}, last_name=${lastName}, city=${city})}"><img*/-->
+<!--/*src="../resources/img/icons/del.png" width="40dp" height="40dp"/></a></td>*/-->
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
 </div>
 
 <div th:replace="fragments/footer :: footer"></div>
 
 <script th:inline="javascript">
-    var $table = $('#fresh-table'),
-        $alertBtn = $('#alertBtn'),
-        full_screen = false;
+var $table = $('#fresh-table'),
+$alertBtn = $('#alertBtn'),
+full_screen = false;
 
-    $().ready(function () {
-        $table.bootstrapTable({
-            toolbar: ".toolbar",
+$().ready(function () {
+$table.bootstrapTable({
+toolbar: ".toolbar",
 
-            showRefresh: true,
-            search: true,
-            showToggle: true,
-            showColumns: true,
-            pagination: true,
-            striped: true,
-            pageSize: 8,
-            pageList: [8, 10, 25, 50, 100],
+showRefresh: true,
+search: true,
+showToggle: true,
+showColumns: true,
+pagination: true,
+striped: true,
+pageSize: 8,
+pageList: [8, 10, 25, 50, 100],
 
-            formatShowingRows: function (pageFrom, pageTo, totalRows) {
-                //do nothing here, we don't want to show the text "showing x of y from..."
-            },
-            formatRecordsPerPage: function (pageNumber) {
-                return pageNumber + " rows visible";
-            },
-            icons: {
-                refresh: 'fa fa-refresh',
-                toggle: 'fa fa-th-list',
-                columns: 'fa fa-columns',
-                detailOpen: 'fa fa-plus-circle',
-                detailClose: 'fa fa-minus-circle'
-            }
-        });
-
-
-        $(window).resize(function () {
-            $table.bootstrapTable('resetView');
-        });
+formatShowingRows: function (pageFrom, pageTo, totalRows) {
+//do nothing here, we don't want to show the text "showing x of y from..."
+},
+formatRecordsPerPage: function (pageNumber) {
+return pageNumber + " rows visible";
+},
+icons: {
+refresh: 'fa fa-refresh',
+toggle: 'fa fa-th-list',
+columns: 'fa fa-columns',
+detailOpen: 'fa fa-plus-circle',
+detailClose: 'fa fa-minus-circle'
+}
+});
 
 
-        window.operateEvents = {
-            'click .like': function (e, value, row, index) {
-                alert('You click like icon, row: ' + JSON.stringify(row));
-                console.log(value, row, index);
-            },
-            'click .edit': function (e, value, row, index) {
-                document.location.href = "http://excursium.me/users/moderation?id=" + row.id;
-            },
-            'click .remove': function (e, value, row, index) {
-                $table.bootstrapTable('remove', {
-                    field: 'id',
-                    values: [row.id]
-                });
-                document.location.href = "http://excursium.me/users/delete?id=" + row.id;
-            }
-        };
-
-        $alertBtn.click(function () {
-            alert("You pressed on Alert");
-        });
-
-    });
+$(window).resize(function () {
+$table.bootstrapTable('resetView');
+});
 
 
-    function operateFormatter(value, row, index) {
-        return [
-            '<a rel="tooltip" title="Like" class="table-action like" href="javascript:void(0)">',
-            '<i class="fa fa-heart"></i>',
-            '</a>',
-            '<a rel="tooltip" title="Edit" class="table-action edit" href="javascript:void(0)">',
-            '<i class="fa fa-edit"></i>',
-            '</a>',
-            '<a rel="tooltip" title="Remove" class="table-action remove" href="javascript:void(0)">',
-            '<i class="fa fa-remove"></i>',
-            '</a>'
-        ].join('');
-    }
+window.operateEvents = {
+'click .like': function (e, value, row, index) {
+alert('You click like icon, row: ' + JSON.stringify(row));
+console.log(value, row, index);
+},
+'click .edit': function (e, value, row, index) {
+document.location.href = "http://excursium.me/users/moderation?id=" + row.id;
+},
+'click .remove': function (e, value, row, index) {
+$table.bootstrapTable('remove', {
+field: 'id',
+values: [row.id]
+});
+document.location.href = "http://excursium.me/users/delete?id=" + row.id;
+}
+};
+
+$alertBtn.click(function () {
+alert("You pressed on Alert");
+});
+
+});
+
+
+function operateFormatter(value, row, index) {
+return [
+'<a rel="tooltip" title="Like" class="table-action like" href="javascript:void(0)">',
+'<i class="fa fa-heart"></i>',
+'</a>',
+'<a rel="tooltip" title="Edit" class="table-action edit" href="javascript:void(0)">',
+'<i class="fa fa-edit"></i>',
+'</a>',
+'<a rel="tooltip" title="Remove" class="table-action remove" href="javascript:void(0)">',
+'<i class="fa fa-remove"></i>',
+'</a>'
+].join('');
+}
 
 
 </script>

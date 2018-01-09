@@ -1,184 +1,179 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="description" content=""/>
-    <meta name="title" content=""/>
-    <meta name="author" content=""/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-    <meta name="keywords" content="excursium"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="description" content=""/>
+<meta name="title" content=""/>
+<meta name="author" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="keywords" content="excursium"/>
 
-    <link rel="stylesheet" type="text/css" href="../resources/css/styles.css"/>
-    <link rel="stylesheet" href="../resources/css/media.css"/>
-    <link rel="stylesheet" type="text/css" href="../resources/css/footer.css"/>
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"/>
+<link rel="stylesheet" href="../resources/css/media.css"/>
+<link rel="stylesheet" type="text/css" href="../resources/css/footer.css"/>
+<link rel="stylesheet" href="../resources/libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>
+<link rel="stylesheet" href="../resources/libs/bootstrap-select/css/bootstrap-select.css"/>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 
-    <link rel="stylesheet" href="../resources/libs/bootstrap-select/css/bootstrap-select.css"/>
-    <script type="text/javascript" src="../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
+<link rel="icon" href="../resources/img/icon.ico" type="image/x-icon"/>
+<link rel="shortcut icon" href="../resources/img/icon.ico" type="image/x-icon"/>
 
-    <link rel="stylesheet" href="../resources/css/segoe_ui.css"/>
+<link rel="stylesheet" type="text/css" href="../resources/css/styles.css"/>
+<link rel="stylesheet" href="../resources/css/cards.css"/>
 
-    <!-- Icon -->
-    <link rel="icon" href="../resources/img/icon.ico" type="image/x-icon"/>
-    <link rel="shortcut icon" href="../resources/img/icon.ico" type="image/x-icon"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
 
-    <link rel="stylesheet" href="../resources/libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>
-    <script type="text/javascript"
-            src="../resources/libs/bootstrapformhelpers/js/bootstrap-formhelpers.min.js"></script>
-
-
-    <title th:text="${#messages.msg('titles.registration')}">Регистрация</title>
+<title th:text="${#messages.msg('titles.registration')}">Регистрация</title>
 
 </head>
 <body style="background-color: #f9f9f9;">
 <!--/*@thymesVar id="insertPerson" type="com.heroku.demo.person.Person"*/-->
 <div class="content"
-     th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
-    <div th:replace="fragments/header :: style"></div>
-    <div th:replace="fragments/header :: header"></div>
-    <div class="container">
-        <div class="page-header">
-            <h2>
-                <th:block th:text="${#messages.msg('titles.registration')}"/>
-                / <a href="/users/login">
-                <th:block th:text="${#messages.msg('titles.login')}"/>
-            </a>
-            </h2>
-        </div>
-        <div class="row">
-            <div class="col-md-12 col-lg-8">
+th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
+<div th:replace="fragments/header :: style"></div>
+<div th:replace="fragments/header :: header"></div>
+<div class="container">
+<div class="page-header">
+<h2>
+<th:block th:text="${#messages.msg('titles.registration')}"/>
+/ <a href="/users/login">
+<th:block th:text="${#messages.msg('titles.login')}"/>
+</a>
+</h2>
+</div>
+<div class="row">
+<div class="col-md-12 col-lg-8">
 
-                <!-- /* Handling the flash message */-->
-                <th:block th:if="${message != null}">
-                    <!--/*@thymesVar id="message" type="com.heroku.demo.utils.MessageUtil"*/-->
-                    <div th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message.type)}, message=${message.message})">
-                        &nbsp;
-                    </div>
-                </th:block>
+<!--/* /* Handling the flash message */-->
+<th:block th:if="${message != null}">
+<!--/*@thymesVar id="message" type="com.heroku.demo.utils.MessageUtil"*/-->
+<div th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message.type)}, message=${message.message})">
+&nbsp;
+</div>
+</th:block>
 
-                <form th:object="${insertPerson}" method="POST" action="/users/registration"
-                      enctype="multipart/form-data">
-                    <br/>
-                    <div class="row">
-                        <div class="col-md-12 col-lg-6">
-                            <div class="input-group">
-                                <span class="input-group-addon"
-                                      th:text="${#messages.msg('words.first_name')} + ' *'">Имя</span>
-                                <input name="firstName" type="text" class="form-control"
-                                       th:value="${insertPerson.getFirstName()}" placeholder="Имя" aria-label="Имя"
-                                       required=""/>
-                            </div>
-                        </div>
-                        <div class="visible-sm-block visible-xs-block visible-md-block ">
-                            <br/>
-                        </div>
-                        <div class="col-md-12 col-lg-6">
-                            <div class="input-group">
-                                <span class="input-group-addon"
-                                      th:text="${#messages.msg('words.last_name')} + ' *'">Фамилия</span>
-                                <input name="lastName" type="text" class="form-control"
-                                       th:value="${insertPerson.getLastName()}"
-                                       placeholder="Фамилия" required=""
-                                       aria-label="Фамилия"/>
-                            </div>
-                        </div>
-                    </div>
-                    <br/>
-                    <div class="input-group">
-                        <span class="input-group-addon" th:text="${#messages.msg('words.login')} + ' *'">Логин</span>
-                        <input name="login" id="login" type="text" class="form-control" placeholder="Логин"
-                               aria-label="Логин" th:value="${insertPerson.getLogin()}" required=""/>
-                        <!--/*@thymesVar id="error_login" type="java.lang.Boolean"*/-->
-                        <label for="login" th:if="${error_login}" th:text="${#messages.msg('error.user.login.free')}"
-                               th:class="'error'">Name Error</label>
-                        <label for="login" th:if="${#fields.hasErrors('login')}"
-                               th:text="${#messages.msg('error.user.login.size')}" th:class="'error'">Name Error</label>
-                    </div>
-                    <br/>
-                    <div class="row">
-                        <div class="col-md-12 col-lg-6">
-                            <div class="input-group">
-                                <span class="input-group-addon"
-                                      th:text="${#messages.msg('words.password')} + ' *'">Пароль</span>
-                                <input name="pass" id="pass" type="password" class="form-control" minlength="6"
-                                       placeholder="Пароль" aria-label="Пароль" required=""/>
-                                <!--/*@thymesVar id="error_pass" type="java.lang.Boolean"*/-->
-                                <label for="pass" th:if="${error_pass}" th:text="${#messages.msg('error.user.pass2')}"
-                                       th:class="'error'">Name Error</label>
-                                <!--<label for="pass" th:if="${#fields.hasErrors('pass')}" th:text="${#messages.msg('error.user.pass')}" th:class="'error'">Name Error</label>-->
-                            </div>
-                        </div>
-                        <div class="visible-sm-block visible-xs-block visible-md-block ">
-                            <br/>
-                        </div>
-                        <div class="col-md-12 col-lg-6">
-                            <div class="input-group">
-                                <span class="input-group-addon" th:text="${#messages.msg('words.password_again')} + ' *'">Повторите пароль</span>
-                                <input name="pass2" type="password" id="pass2" class="form-control"
-                                       placeholder="Повторите пароль" aria-label="Повторите пароль" required=""/>
-                                <!--/*@thymesVar id="error_pass" type="java.lang.Boolean"*/-->
-                                <label for="pass2" th:if="${error_pass}" th:text="${#messages.msg('error.user.pass2')}"
-                                       th:class="'error'">Name Error</label>
-                            </div>
-                        </div>
-                    </div>
-                    <br/>
-                    <div class="input-group">
-                        <span class="input-group-addon">Email *</span>
-                        <input name="email" id="email" type="email" class="form-control"
-                               th:value="${insertPerson.getEmail()}" placeholder="Email" aria-label="Email"
-                               required=""/>
-                        <!--/*@thymesVar id="error_email_free" type="java.lang.Boolean"*/-->
-                        <label for="email" th:if="${error_email_free}"
-                               th:text="${#messages.msg('error.user.email.free')}" th:class="'error'">Name
-                            Error</label>
-                        <!--/*@thymesVar id="error_email_valid" type="java.lang.Boolean"*/-->
-                        <label for="email" th:if="${error_email_valid}"
-                               th:text="${#messages.msg('error.user.email.valid')}" th:class="'error'">Name
-                            Error</label>
-                    </div>
-                    <br/>
-                    <div class="input-group">
-                        <span class="input-group-addon" th:text="${#messages.msg('words.city')} + ' *'">Город *</span>
-                        <input name="city" type="text" class="form-control" th:value="${insertPerson.getCity()}"
-                               placeholder="Город" required="" aria-label="Город"/>
-                    </div>
-                    <br/>
-                    <div class="input-group">
-                        <span class="input-group-addon" th:text="${#messages.msg('words.phone')}">Телефон</span>
-                        <input name="phoneNumber" type="text" class="form-control bfh-phone"
-                               th:value="${insertPerson.getPhoneNumber()}" placeholder="Телефон" required=""
-                               minlength="17"
-                               aria-label="Телефон" data-format="+7 (ddd) ddd-dddd" id="phone_number"/>
-                        <!--/*@thymesVar id="error_phone" type="java.lang.Boolean"*/-->
-                        <label for="phone_number" th:if="${error_phone}"
-                               th:text="${#messages.msg('error.user.phone_number.free')}" th:class="'error'">Name
-                            Error</label>
-                        <label for="phone_number" th:if="${#fields.hasErrors('phoneNumber')}"
-                               th:text="${#messages.msg('error.user.phone_number.invalid')}" th:class="'error'">Name
-                            Error</label>
-                    </div>
-                    <br/>
-                    <div class="input-group">
-                        <span class="input-group-addon" th:text="${#messages.msg('words.photo')}">Фотография</span>
-                        <input name="file" type="file" id="file" class="form-control" placeholder="Фотография"
-                               required=""
-                               accept="image/jpeg,image/png" aria-label="Фотография"/>
-                    </div>
-                    <br/>
-                    <button type="submit" class="btn btn-default" th:text="${#messages.msg('words.submit')}">
-                        Отправить
-                    </button>
+<form th:object="${insertPerson}" method="POST" action="/users/registration"
+enctype="multipart/form-data">
+<br/>
+<div class="row">
+<div class="col-md-12 col-lg-6">
+<div class="input-group">
+<span class="input-group-addon"
+th:text="${#messages.msg('words.first_name')} + ' *'">Имя</span>
+<input name="firstName" type="text" class="form-control"
+th:value="${insertPerson.getFirstName()}" placeholder="Имя" aria-label="Имя"
+required=""/>
+</div>
+</div>
+<div class="visible-sm-block visible-xs-block visible-md-block ">
+<br/>
+</div>
+<div class="col-md-12 col-lg-6">
+<div class="input-group">
+<span class="input-group-addon"
+th:text="${#messages.msg('words.last_name')} + ' *'">Фамилия</span>
+<input name="lastName" type="text" class="form-control"
+th:value="${insertPerson.getLastName()}"
+placeholder="Фамилия" required=""
+aria-label="Фамилия"/>
+</div>
+</div>
+</div>
+<br/>
+<div class="input-group">
+<span class="input-group-addon" th:text="${#messages.msg('words.login')} + ' *'">Логин</span>
+<input name="login" id="login" type="text" class="form-control" placeholder="Логин"
+aria-label="Логин" th:value="${insertPerson.getLogin()}" required=""/>
+<!--/*@thymesVar id="error_login" type="java.lang.Boolean"*/-->
+<label for="login" th:if="${error_login}" th:text="${#messages.msg('error.user.login.free')}"
+th:class="'error'">Name Error</label>
+<label for="login" th:if="${#fields.hasErrors('login')}"
+th:text="${#messages.msg('error.user.login.size')}" th:class="'error'">Name Error</label>
+</div>
+<br/>
+<div class="row">
+<div class="col-md-12 col-lg-6">
+<div class="input-group">
+<span class="input-group-addon"
+th:text="${#messages.msg('words.password')} + ' *'">Пароль</span>
+<input name="pass" id="pass" type="password" class="form-control" minlength="6"
+placeholder="Пароль" aria-label="Пароль" required=""/>
+<!--/*@thymesVar id="error_pass" type="java.lang.Boolean"*/-->
+<label for="pass" th:if="${error_pass}" th:text="${#messages.msg('error.user.pass2')}"
+th:class="'error'">Name Error</label>
+<!--/*<label for="pass" th:if="${#fields.hasErrors('pass')}" th:text="${#messages.msg('error.user.pass')}" th:class="'error'">Name Error</label>*/-->
+</div>
+</div>
+<div class="visible-sm-block visible-xs-block visible-md-block ">
+<br/>
+</div>
+<div class="col-md-12 col-lg-6">
+<div class="input-group">
+<span class="input-group-addon" th:text="${#messages.msg('words.password_again')} + ' *'">Повторите пароль</span>
+<input name="pass2" type="password" id="pass2" class="form-control"
+placeholder="Повторите пароль" aria-label="Повторите пароль" required=""/>
+<!--/*@thymesVar id="error_pass" type="java.lang.Boolean"*/-->
+<label for="pass2" th:if="${error_pass}" th:text="${#messages.msg('error.user.pass2')}"
+th:class="'error'">Name Error</label>
+</div>
+</div>
+</div>
+<br/>
+<div class="input-group">
+<span class="input-group-addon">Email *</span>
+<input name="email" id="email" type="email" class="form-control"
+th:value="${insertPerson.getEmail()}" placeholder="Email" aria-label="Email"
+required=""/>
+<!--/*@thymesVar id="error_email_free" type="java.lang.Boolean"*/-->
+<label for="email" th:if="${error_email_free}"
+th:text="${#messages.msg('error.user.email.free')}" th:class="'error'">Name
+Error</label>
+<!--/*@thymesVar id="error_email_valid" type="java.lang.Boolean"*/-->
+<label for="email" th:if="${error_email_valid}"
+th:text="${#messages.msg('error.user.email.valid')}" th:class="'error'">Name
+Error</label>
+</div>
+<br/>
+<div class="input-group">
+<span class="input-group-addon" th:text="${#messages.msg('words.city')} + ' *'">Город *</span>
+<input name="city" type="text" class="form-control" th:value="${insertPerson.getCity()}"
+placeholder="Город" required="" aria-label="Город"/>
+</div>
+<br/>
+<div class="input-group">
+<span class="input-group-addon" th:text="${#messages.msg('words.phone')}">Телефон</span>
+<input name="phoneNumber" type="text" class="form-control bfh-phone"
+th:value="${insertPerson.getPhoneNumber()}" placeholder="Телефон" required=""
+minlength="17"
+aria-label="Телефон" data-format="+7 (ddd) ddd-dddd" id="phone_number"/>
+<!--/*@thymesVar id="error_phone" type="java.lang.Boolean"*/-->
+<label for="phone_number" th:if="${error_phone}"
+th:text="${#messages.msg('error.user.phone_number.free')}" th:class="'error'">Name
+Error</label>
+<label for="phone_number" th:if="${#fields.hasErrors('phoneNumber')}"
+th:text="${#messages.msg('error.user.phone_number.invalid')}" th:class="'error'">Name
+Error</label>
+</div>
+<br/>
+<div class="input-group">
+<span class="input-group-addon" th:text="${#messages.msg('words.photo')}">Фотография</span>
+<input name="file" type="file" id="file" class="form-control" placeholder="Фотография"
+required=""
+accept="image/jpeg,image/png" aria-label="Фотография"/>
+</div>
+<br/>
+<button type="submit" class="btn btn-default" th:text="${#messages.msg('words.submit')}">
+Отправить
+</button>
 
-                </form>
-            </div>
-        </div>
-    </div>
+</form>
+</div>
+</div>
+</div>
 </div>
 <div th:replace="fragments/footer :: footer"></div>
 </body>

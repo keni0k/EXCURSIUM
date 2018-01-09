@@ -1,342 +1,324 @@
 <!DOCTYPE HTML>
-<!--
-  Copyright 2015 Benedikt Ritter
+<!--/*
+Copyright 2015 Benedikt Ritter
 
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-      http://www.apache.org/licenses/LICENSE-2.0
+http://www.apache.org/licenses/LICENSE-2.0
 
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
--->
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/-->
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="${#messages.msg('titles.events')}"></title>
-    <!-- Latest compiled and minified CSS -->
-    <meta name="description" content=""/>
-    <meta name="title" content=""/>
-    <meta name="author" content=""/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-    <meta name="keywords" content="excursium"/>
+<title th:text="${#messages.msg('titles.events')}"></title>
+<!--/* Latest compiled and minified CSS */-->
+<meta name="description" content=""/>
+<meta name="title" content=""/>
+<meta name="author" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="keywords" content="excursium"/>
 
-    <link rel="stylesheet" type="text/css" href="../resources/css/styles.css"/>
-    <link rel="stylesheet" href="../resources/css/media.css"/>
-    <link rel="stylesheet" type="text/css" href="../resources/css/footer.css"/>
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"/>
+<link rel="stylesheet" href="../resources/css/media.css"/>
+<link rel="stylesheet" type="text/css" href="../resources/css/footer.css"/>
+<link rel="stylesheet" href="../resources/libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>
+<link rel="stylesheet" href="../resources/libs/bootstrap-select/css/bootstrap-select.css"/>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="http://bootstraptema.ru/plugins/2015/bootstrap3/bootstrap.min.css"/>
+<link rel="stylesheet" href="http://bootstraptema.ru/plugins/font-awesome/4-4-0/font-awesome.min.css"/>
 
-    <!-- Icon -->
-    <link rel="icon" href="../resources/img/icon.ico" type="image/x-icon"/>
-    <link rel="shortcut icon" href="../resources/img/icon.ico" type="image/x-icon"/>
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'/>
+<link href="http://demos.creative-tim.com/fresh-bootstrap-table/assets/css/fresh-bootstrap-table.css" rel="stylesheet"/>
 
-    <link rel="stylesheet" href="../resources/libs/bootstrap-select/css/bootstrap-select.css"/>
-    <script type="text/javascript" src="../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 
-    <link rel="stylesheet" href="../resources/css/segoe_ui.css"/>
+<link rel="icon" href="../resources/img/icon.ico" type="image/x-icon"/>
+<link rel="shortcut icon" href="../resources/img/icon.ico" type="image/x-icon"/>
 
-    <link rel="stylesheet" href="../resources/libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>
-    <script type="text/javascript"
-            src="../resources/libs/bootstrapformhelpers/js/bootstrap-formhelpers.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../resources/css/styles.css"/>
+<link rel="stylesheet" href="../resources/css/cards.css"/>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
 
-    <link rel="stylesheet" href="http://bootstraptema.ru/plugins/2015/bootstrap3/bootstrap.min.css"/>
-    <link rel="stylesheet" href="http://bootstraptema.ru/plugins/font-awesome/4-4-0/font-awesome.min.css"/>
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'/>
-    <link href="http://demos.creative-tim.com/fresh-bootstrap-table/assets/css/fresh-bootstrap-table.css"
-          rel="stylesheet"/>
-    <script type="text/javascript"
-            src="http://demos.creative-tim.com/fresh-bootstrap-table/assets/js/bootstrap-table.js"></script>
+<script type="text/javascript"
+src="http://demos.creative-tim.com/fresh-bootstrap-table/assets/js/bootstrap-table.js"></script>
 
 </head>
 <body style="background-color: #f9f9f9;" th:with="price_up=${#httpServletRequest.getParameter('price_up')},price_down=${#httpServletRequest.getParameter('price_down')},
-                                                  id=${#httpServletRequest.getParameter('id')},category=${#httpServletRequest.getParameter('category')},
-                                                  words=${#httpServletRequest.getParameter('words')},sort_by=${#httpServletRequest.getParameter('sort_by')}">
+id=${#httpServletRequest.getParameter('id')},category=${#httpServletRequest.getParameter('category')},
+words=${#httpServletRequest.getParameter('words')},sort_by=${#httpServletRequest.getParameter('sort_by')}">
 <!--/*@thymesVar id="inputEvent" type="com.heroku.demo.event.Event"*/-->
 <!--/*@thymesVar id="events" type="java.util.List<com.heroku.demo.event.Event>"*/-->
 <!--/*@thymesVar id="utils" type="com.heroku.demo.utils.UtilsForWeb"*/-->
 <div class="content"
-     th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
-    <div th:replace="fragments/header :: style"></div>
-    <div th:replace="fragments/header :: header"></div>
-    <div class="container">
-        <div class="page-header">
-            <h1 th:text="${#messages.msg('titles.events')}">Модерация экскурсий</h1>
-        </div>
-        <div class="row" th:if="${id}">
-            <div class="col-md-12 col-lg-8">
+th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
+<div th:replace="fragments/header :: style"></div>
+<div th:replace="fragments/header :: header"></div>
+<div class="container">
+<div class="page-header">
+<h1 th:text="${#messages.msg('titles.events')}">Модерация экскурсий</h1>
+</div>
+<div class="row" th:if="${id}">
+<div class="col-md-12 col-lg-8">
 
-                <form th:object="${inputEvent}" action="/events/moderation" method="POST" enctype="multipart/form-data">
+<form th:object="${inputEvent}" action="/events/moderation" method="POST" enctype="multipart/form-data">
 
-                    <div class="panel panel-default">
-                        <div class="panel-heading" th:text="${#messages.msg('words.type')}">
-                            Тип экскурсии
-                        </div>
-                        <div class="panel-body">
-                            <div class="input-group" style="z-index: 100">
-                                <select name="type" class="form-control selectpicker">
-                                    <option th:value="${utils.consts.EXCURSION_MODERATION}" th:text="${#messages.msg('event.type.moderation')}"
-                                            th:selected="${inputEvent.getType()==utils.consts.EXCURSION_MODERATION}">На модерации
-                                    </option>
-                                    <option th:value="${utils.consts.EXCURSION_MODER_FAULT}" th:text="${#messages.msg('event.type.moderation_was_failed')}"
-                                            th:selected="${inputEvent.getType()==utils.consts.EXCURSION_MODER_FAULT}">Не прошла модерацию
-                                    </option>
-                                    <option th:value="${utils.consts.EXCURSION_BLOCKED}" th:text="${#messages.msg('event.type.blocked')}"
-                                            th:selected="${inputEvent.getType()==utils.consts.EXCURSION_BLOCKED}">Заблокирована
-                                    </option>
-                                    <option th:value="${utils.consts.EXCURSION_DISABLED}" th:text="${#messages.msg('event.type.no_active')}"
-                                            th:selected="${inputEvent.getType()==utils.consts.EXCURSION_DISABLED}">Не активна
-                                    </option>
-                                    <option th:value="${utils.consts.EXCURSION_ACTIVE}" th:text="${#messages.msg('event.type.active')}"
-                                            th:selected="${inputEvent.getType()==utils.consts.EXCURSION_ACTIVE}">Активна</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-addon" th:text="${#messages.msg('words.name')}">Название</span>
-                        <input name="name" type="text" class="form-control" id="name" placeholder="Название"
-                               aria-label="Название"
-                               th:value="${inputEvent.getName()}" required=""/>
-                        <label for="name" th:if="${#fields.hasErrors('name')}"
-                               th:text="${#messages.msg('error.event.name')}" th:class="'error'">Name Error</label>
-                    </div>
-                    <br/>
-                    <div class="input-group">
-                        <span class="input-group-addon" th:text="${#messages.msg('words.description')}">Описание</span>
-                        <textarea name="description" type="text" id="description" class="form-control"
-                                  placeholder="Описание" required=""
-                                  aria-label="Описание" th:text="${inputEvent.getDescription()}"></textarea>
-                        <label for="description" th:if="${#fields.hasErrors('description')}"
-                               th:text="${#messages.msg('error.event.description')}" th:class="'error'">Description
-                            Error</label>
-                    </div>
-                    <br/>
-                    <div class="panel panel-default">
-                        <div class="panel-heading" th:text="${#messages.msg('words.type_of_excursion')}">
-                            Тип экскурсии
-                        </div>
-                        <div class="panel-body">
-                            <div class="input-group" style="z-index: 100">
-                                <select name="category" id="category" class="form-control selectpicker">
-                                    <option value="0" th:text="${#messages.msg('category.0')}" th:selected="${inputEvent.getCategory()==0}">Развлечения</option>
-                                    <option value="1" th:text="${#messages.msg('category.1')}" th:selected="${inputEvent.getCategory()==1}">Наука</option>
-                                    <option value="2" th:text="${#messages.msg('category.2')}" th:selected="${inputEvent.getCategory()==2}">История</option>
-                                    <option value="3" th:text="${#messages.msg('category.3')}" th:selected="${inputEvent.getCategory()==3}">Искусство</option>
-                                    <option value="4" th:text="${#messages.msg('category.4')}" th:selected="${inputEvent.getCategory()==4}">Производство</option>
-                                    <option value="5" th:text="${#messages.msg('category.5')}" th:selected="${inputEvent.getCategory()==5}">Гастрономия</option>
-                                    <option value="6" th:text="${#messages.msg('category.6')}" th:selected="${inputEvent.getCategory()==6}">Квесты</option>
-                                    <option value="7" th:text="${#messages.msg('category.7')}" th:selected="${inputEvent.getCategory()==7}">Экстрим</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-addon" th:text="${#messages.msg('words.place')}">Место встречи</span>
-                        <input name="place" id="place" type="text" class="form-control" placeholder="Место встречи"
-                               required=""
-                               aria-label="Место встречи"
-                               th:value="${inputEvent.getPlace()}"/>
-                        <label for="place" th:if="${#fields.hasErrors('place')}"
-                               th:text="${#messages.msg('error.event.place')}" th:class="'error'">Place Error</label>
-                    </div>
-                    <br/>
-                    <div class="view overlay hm-white-slight z-depth-1">
-                        <img th:src="${inputEvent.pathToPhoto}" class="img-fluid" style="height: 300px;" alt=""/>
-                        <a>
-                            <div class="mask waves-effect waves-light"></div>
-                        </a>
-                    </div>
-                    <br/>
-                    <div class="panel panel-default">
-                        <div class="panel-heading" th:text="${#messages.msg('words.language')}">
-                            Язык экскурсии
-                        </div>
-                        <div class="panel-body">
-                            <div class="input-group" style="z-index: 100">
-                                <select name="language" class="form-control selectpicker">
-                                    <option value="0" th:text="${#messages.msg('language.0')}" th:selected="${inputEvent.getLanguage()==0}">Русский</option>
-                                    <option value="1" th:text="${#messages.msg('language.1')}" th:selected="${inputEvent.getLanguage()==1}">Английский</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="input-group" style="display: none">
-                        <input name="id" type="number" class="form-control" th:value="${inputEvent.getId()}"/>
-                    </div>
-                    <br/>
-                    <button type="reset" class="btn btn-default" th:text="${#messages.msg('words.reset')}">Сброс
-                    </button>
-                    <button type="submit" class="btn btn-default" th:text="${#messages.msg('words.submit')}">Сохранить
-                    </button>
+<div class="panel panel-default">
+<div class="panel-heading" th:text="${#messages.msg('words.type')}">
+Тип экскурсии
+</div>
+<div class="panel-body">
+<div class="input-group" style="z-index: 100">
+<select name="type" class="form-control selectpicker">
+<option th:value="${utils.consts.EXCURSION_MODERATION}" th:text="${#messages.msg('event.type.moderation')}"
+th:selected="${inputEvent.getType()==utils.consts.EXCURSION_MODERATION}">На модерации
+</option>
+<option th:value="${utils.consts.EXCURSION_MODER_FAULT}" th:text="${#messages.msg('event.type.moderation_was_failed')}"
+th:selected="${inputEvent.getType()==utils.consts.EXCURSION_MODER_FAULT}">Не прошла модерацию
+</option>
+<option th:value="${utils.consts.EXCURSION_BLOCKED}" th:text="${#messages.msg('event.type.blocked')}"
+th:selected="${inputEvent.getType()==utils.consts.EXCURSION_BLOCKED}">Заблокирована
+</option>
+<option th:value="${utils.consts.EXCURSION_DISABLED}" th:text="${#messages.msg('event.type.no_active')}"
+th:selected="${inputEvent.getType()==utils.consts.EXCURSION_DISABLED}">Не активна
+</option>
+<option th:value="${utils.consts.EXCURSION_ACTIVE}" th:text="${#messages.msg('event.type.active')}"
+th:selected="${inputEvent.getType()==utils.consts.EXCURSION_ACTIVE}">Активна</option>
+</select>
+</div>
+</div>
+</div>
+<div class="input-group">
+<span class="input-group-addon" th:text="${#messages.msg('words.name')}">Название</span>
+<input name="name" type="text" class="form-control" id="name" placeholder="Название"
+aria-label="Название"
+th:value="${inputEvent.getName()}" required=""/>
+<label for="name" th:if="${#fields.hasErrors('name')}"
+th:text="${#messages.msg('error.event.name')}" th:class="'error'">Name Error</label>
+</div>
+<br/>
+<div class="input-group">
+<span class="input-group-addon" th:text="${#messages.msg('words.description')}">Описание</span>
+<textarea name="description" type="text" id="description" class="form-control"
+placeholder="Описание" required=""
+aria-label="Описание" th:text="${inputEvent.getDescription()}"></textarea>
+<label for="description" th:if="${#fields.hasErrors('description')}"
+th:text="${#messages.msg('error.event.description')}" th:class="'error'">Description
+Error</label>
+</div>
+<br/>
+<div class="panel panel-default">
+<div class="panel-heading" th:text="${#messages.msg('words.type_of_excursion')}">
+Тип экскурсии
+</div>
+<div class="panel-body">
+<div class="input-group" style="z-index: 100">
+<select name="category" id="category" class="form-control selectpicker">
+<option value="0" th:text="${#messages.msg('category.0')}" th:selected="${inputEvent.getCategory()==0}">Развлечения</option>
+<option value="1" th:text="${#messages.msg('category.1')}" th:selected="${inputEvent.getCategory()==1}">Наука</option>
+<option value="2" th:text="${#messages.msg('category.2')}" th:selected="${inputEvent.getCategory()==2}">История</option>
+<option value="3" th:text="${#messages.msg('category.3')}" th:selected="${inputEvent.getCategory()==3}">Искусство</option>
+<option value="4" th:text="${#messages.msg('category.4')}" th:selected="${inputEvent.getCategory()==4}">Производство</option>
+<option value="5" th:text="${#messages.msg('category.5')}" th:selected="${inputEvent.getCategory()==5}">Гастрономия</option>
+<option value="6" th:text="${#messages.msg('category.6')}" th:selected="${inputEvent.getCategory()==6}">Квесты</option>
+<option value="7" th:text="${#messages.msg('category.7')}" th:selected="${inputEvent.getCategory()==7}">Экстрим</option>
+</select>
+</div>
+</div>
+</div>
+<div class="input-group">
+<span class="input-group-addon" th:text="${#messages.msg('words.place')}">Место встречи</span>
+<input name="place" id="place" type="text" class="form-control" placeholder="Место встречи"
+required=""
+aria-label="Место встречи"
+th:value="${inputEvent.getPlace()}"/>
+<label for="place" th:if="${#fields.hasErrors('place')}"
+th:text="${#messages.msg('error.event.place')}" th:class="'error'">Place Error</label>
+</div>
+<br/>
+<div class="view overlay hm-white-slight z-depth-1">
+<img th:src="${inputEvent.pathToPhoto}" class="img-fluid" style="height: 300px;" alt=""/>
+<a>
+<div class="mask waves-effect waves-light"></div>
+</a>
+</div>
+<br/>
+<div class="panel panel-default">
+<div class="panel-heading" th:text="${#messages.msg('words.language')}">
+Язык экскурсии
+</div>
+<div class="panel-body">
+<div class="input-group" style="z-index: 100">
+<select name="language" class="form-control selectpicker">
+<option value="0" th:text="${#messages.msg('language.0')}" th:selected="${inputEvent.getLanguage()==0}">Русский</option>
+<option value="1" th:text="${#messages.msg('language.1')}" th:selected="${inputEvent.getLanguage()==1}">Английский</option>
+</select>
+</div>
+</div>
+</div>
+<div class="input-group" style="display: none">
+<input name="id" type="number" class="form-control" th:value="${inputEvent.getId()}"/>
+</div>
+<br/>
+<button type="reset" class="btn btn-default" th:text="${#messages.msg('words.reset')}">Сброс
+</button>
+<button type="submit" class="btn btn-default" th:text="${#messages.msg('words.submit')}">Сохранить
+</button>
 
-                </form>
-            </div>
-        </div>
-        <hr/>
+</form>
+</div>
+</div>
+<hr/>
 
-        <div class="row">
-            <div class="col-sm-12">
+<div class="row">
+<div class="col-sm-12">
 
-                <div class="fresh-table toolbar-color-blue">
+<div class="fresh-table toolbar-color-blue">
 
-                    <!-- Изменение фона таблицы: full-color-blue, full-color-azure, full-color-green, full-color-red, full-color-orange
-                    Изменение фона тулбара страницы: toolbar-color-blue, toolbar-color-azure, toolbar-color-green, toolbar-color-red, toolbar-color-orange
-                    -->
+<!--/* Изменение фона таблицы: full-color-blue, full-color-azure, full-color-green, full-color-red, full-color-orange
+Изменение фона тулбара страницы: toolbar-color-blue, toolbar-color-azure, toolbar-color-green, toolbar-color-red, toolbar-color-orange
+*/-->
 
-                    <div class="toolbar">
-                        <button id="alertBtn" class="btn btn-default">Alert</button>
-                    </div>
+<div class="toolbar">
+<button id="alertBtn" class="btn btn-default">Alert</button>
+</div>
 
-                <table class="table" id = "fresh-table">
-                    <thead>
-                    <tr>
-                        <th data-field="id" data-sortable="true">ID</th>
-                        <th data-field="name" data-sortable="true" th:text="${#messages.msg('words.name')}">Название
-                        </th>
-                        <th data-field="category" data-sortable="true" th:text="${#messages.msg('words.category')}">
-                            Категория
-                        </th>
-                        <th data-field="id_of_guide" data-sortable="true" th:text="${#messages.msg('words.guide_id')}">
-                            ID гида
-                        </th>
-                        <th data-field="price" data-sortable="true" th:text="${#messages.msg('words.price')}">
-                            Стоимость
-                        </th>
-                        <th data-field="place" data-sortable="true" data-hidden="true" th:text="${#messages.msg('words.place')}">Место</th>
-                        <th data-field="users_count" data-sortable="true"
-                            th:text="${#messages.msg('words.users_count')}">Кол-во человек
-                        </th>
-                        <th data-field="duration" data-sortable="true" th:text="${#messages.msg('words.duration')}">
-                            Продолжительность
-                        </th>
-                        <th data-field="description" data-sortable="false" data-toggle="dropdown"
-                            th:text="${#messages.msg('words.description')}" data-hidden="true" data-th-hidden="${true}">Описание
-                        </th>
-                        <th data-field="type" data-sortable="true" th:text="${#messages.msg('words.type')}">Тип</th>
-                        <th data-field="rate" data-sortable="true" th:text="${#messages.msg('words.rate')}">Рейтинг</th>
-                        <th data-field="actions" data-formatter="operateFormatter" data-events="operateEvents">Actions
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="event : ${events}">
-                        <!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
-                        <td th:text="${event.id}">Some text</td>
-                        <td th:text="${event.name}">Some text</td>
-                        <td th:text="${event.getCategoryString()}">Some text</td>
-                        <td th:text="${event.guideId}">Some text</td>
-                        <td th:text="${event.price}">Some text</td>
-                        <td th:text="${event.place}">Some text</td>
-                        <td th:text="${event.usersCount}">Some text</td>
-                        <td th:text="${event.duration}">Some text</td>
-                        <td data-hidden="true" data-toggle="dropdown" data-th-hidden="${true}" th:text="${event.description}">Some text</td>
-                        <td th:text="${event.type}">Some text</td>
-                        <td th:text="${event.rate}">Some text</td>
-                        <td></td>
-                        <!--<td>
-                            <a th:href="@{/events/moderation(id=${event.id},price_up=${price_up},price_down=${price_down},category=${category}, words=${words}, sort_by=${sort_by})}"><img
-                                    src="../resources/img/icons/edit.png"/></a></td>
-                        <td>
-                            <a th:href="@{/events/delete(id=${event.id},price_up=${price_up},price_down=${price_down},category=${category}, words=${words}, sort_by=${sort_by})}"><img
-                                    src="../resources/img/icons/del.png"/></a>
-                        </td>-->
-                    </tr>
-                    </tbody>
-                </table>
-                </div>
-            </div>
-        </div>
-    </div>
+<table class="table" id = "fresh-table">
+<thead>
+<tr>
+<th data-field="id" data-sortable="true">ID</th>
+<th data-field="name" data-sortable="true" th:text="${#messages.msg('words.name')}">Название
+</th>
+<th data-field="category" data-sortable="true" th:text="${#messages.msg('words.category')}">
+Категория
+</th>
+<th data-field="id_of_guide" data-sortable="true" th:text="${#messages.msg('words.guide_id')}">
+ID гида
+</th>
+<th data-field="price" data-sortable="true" th:text="${#messages.msg('words.price')}">
+Стоимость
+</th>
+<th data-field="place" data-sortable="true" data-hidden="true" th:text="${#messages.msg('words.place')}">Место</th>
+<th data-field="users_count" data-sortable="true"
+th:text="${#messages.msg('words.users_count')}">Кол-во человек
+</th>
+<th data-field="duration" data-sortable="true" th:text="${#messages.msg('words.duration')}">
+Продолжительность
+</th>
+<th data-field="description" data-sortable="false" data-toggle="dropdown"
+th:text="${#messages.msg('words.description')}" data-hidden="true" data-th-hidden="${true}">Описание
+</th>
+<th data-field="type" data-sortable="true" th:text="${#messages.msg('words.type')}">Тип</th>
+<th data-field="rate" data-sortable="true" th:text="${#messages.msg('words.rate')}">Рейтинг</th>
+<th data-field="actions" data-formatter="operateFormatter" data-events="operateEvents">Actions
+</th>
+</tr>
+</thead>
+<tbody>
+<tr th:each="event : ${events}">
+<!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
+<td th:text="${event.id}">Some text</td>
+<td th:text="${event.name}">Some text</td>
+<td th:text="${event.getCategoryString()}">Some text</td>
+<td th:text="${event.guideId}">Some text</td>
+<td th:text="${event.price}">Some text</td>
+<td th:text="${event.place}">Some text</td>
+<td th:text="${event.usersCount}">Some text</td>
+<td th:text="${event.duration}">Some text</td>
+<td data-hidden="true" data-toggle="dropdown" data-th-hidden="${true}" th:text="${event.description}">Some text</td>
+<td th:text="${event.type}">Some text</td>
+<td th:text="${event.rate}">Some text</td>
+<td></td>
+<!--/*<td>
+<a th:href="@{/events/moderation(id=${event.id},price_up=${price_up},price_down=${price_down},category=${category}, words=${words}, sort_by=${sort_by})}"><img
+src="../resources/img/icons/edit.png"/></a></td>
+<td>
+<a th:href="@{/events/delete(id=${event.id},price_up=${price_up},price_down=${price_down},category=${category}, words=${words}, sort_by=${sort_by})}"><img
+src="../resources/img/icons/del.png"/></a>
+</td>*/-->
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div th:replace="fragments/footer :: footer"></div>
-
 <script th:inline="javascript">
-    var $table = $('#fresh-table'),
-        $alertBtn = $('#alertBtn'),
-        full_screen = false;
-
-    $().ready(function () {
-        $table.bootstrapTable({
-            toolbar: ".toolbar",
-
-            showRefresh: true,
-            search: true,
-            showToggle: true,
-            showColumns: true,
-            pagination: true,
-            striped: true,
-            pageSize: 8,
-            pageList: [8, 10, 25, 50, 100],
-
-            formatShowingRows: function (pageFrom, pageTo, totalRows) {
-                //do nothing here, we don't want to show the text "showing x of y from..."
-            },
-            formatRecordsPerPage: function (pageNumber) {
-                return pageNumber + " rows visible";
-            },
-            icons: {
-                refresh: 'fa fa-refresh',
-                toggle: 'fa fa-th-list',
-                columns: 'fa fa-columns',
-                detailOpen: 'fa fa-plus-circle',
-                detailClose: 'fa fa-minus-circle'
-            }
-        });
-
-
-        $(window).resize(function () {
-            $table.bootstrapTable('resetView');
-        });
-
-
-        window.operateEvents = {
-            'click .like': function (e, value, row, index) {
-                alert('You click like icon, row: ' + JSON.stringify(row));
-                console.log(value, row, index);
-            },
-            'click .edit': function (e, value, row, index) {
-                document.location.href="http://excursium.me/events/moderation?id="+row.id;
-            },
-            'click .remove': function (e, value, row, index) {
-                $table.bootstrapTable('remove', {
-                    field: 'id',
-                    values: [row.id]
-                });
-                document.location.href="http://excursium.me/events/delete?id="+row.id;
-            }
-        };
-
-        $alertBtn.click(function () {
-            alert("You pressed on Alert");
-        });
-
-    });
-
-
-    function operateFormatter(value, row, index) {
-        return [
-            '<a rel="tooltip" title="Like" class="table-action like" href="javascript:void(0)">',
-            '<i class="fa fa-heart"></i>',
-            '</a>',
-            '<a rel="tooltip" title="Edit" class="table-action edit" href="javascript:void(0)">',
-            '<i class="fa fa-edit"></i>',
-            '</a>',
-            '<a rel="tooltip" title="Remove" class="table-action remove" href="javascript:void(0)">',
-            '<i class="fa fa-remove"></i>',
-            '</a>'
-        ].join('');
-    }
-
-
+var $table = $('#fresh-table'),
+$alertBtn = $('#alertBtn'),
+full_screen = false;
+$().ready(function () {
+$table.bootstrapTable({
+toolbar: ".toolbar",
+showRefresh: true,
+search: true,
+showToggle: true,
+showColumns: true,
+pagination: true,
+striped: true,
+pageSize: 8,
+pageList: [8, 10, 25, 50, 100],
+formatShowingRows: function (pageFrom, pageTo, totalRows) {
+//do nothing here, we don't want to show the text "showing x of y from..."
+},
+formatRecordsPerPage: function (pageNumber) {
+return pageNumber + " rows visible";
+},
+icons: {
+refresh: 'fa fa-refresh',
+toggle: 'fa fa-th-list',
+columns: 'fa fa-columns',
+detailOpen: 'fa fa-plus-circle',
+detailClose: 'fa fa-minus-circle'
+}
+});
+$(window).resize(function () {
+$table.bootstrapTable('resetView');
+});
+window.operateEvents = {
+'click .like': function (e, value, row, index) {
+alert('You click like icon, row: ' + JSON.stringify(row));
+console.log(value, row, index);
+},
+'click .edit': function (e, value, row, index) {
+document.location.href="http://excursium.me/events/moderation?id="+row.id;
+},
+'click .remove': function (e, value, row, index) {
+$table.bootstrapTable('remove', {
+field: 'id',
+values: [row.id]
+});
+document.location.href="http://excursium.me/events/delete?id="+row.id;
+}
+};
+$alertBtn.click(function () {
+alert("You pressed on Alert");
+});
+});
+function operateFormatter(value, row, index) {
+return [
+'<a rel="tooltip" title="Like" class="table-action like" href="javascript:void(0)">',
+'<i class="fa fa-heart"></i>',
+'</a>',
+'<a rel="tooltip" title="Edit" class="table-action edit" href="javascript:void(0)">',
+'<i class="fa fa-edit"></i>',
+'</a>',
+'<a rel="tooltip" title="Remove" class="table-action remove" href="javascript:void(0)">',
+'<i class="fa fa-remove"></i>',
+'</a>'
+].join('');
+}
 </script>
 </body>
 </html>

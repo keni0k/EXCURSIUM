@@ -344,7 +344,6 @@ th:onclick="'showHide('+${events.size()/2}+');'">
 <!--/*End-of-Grid column*/-->
 </div>
 <!--/*End-of-Grid row*/-->
-
 </section>
 <!--/*End-of-Section: Profile*/-->
 <!--/*Section: Modals*/-->
@@ -363,8 +362,7 @@ aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
 <a class="nav-link active" data-toggle="tab"
 th:text="${#messages.msg('words.public_info')}"
 href="https://mdbootstrap.com/previews/templates/admin-dashboard/html/profile/extended.html#panel77"
-role="tab" aria-expanded="true"><i class="fa fa-user mr-1"></i> Public
-info</a>
+role="tab" aria-expanded="true"><i class="fa fa-user mr-1"></i> Public info</a>
 </li>
 <li class="nav-item waves-effect waves-light">
 <a class="nav-link" data-toggle="tab"
@@ -412,12 +410,8 @@ th:text="${#messages.msg('words.last_name')}">Last name</label>
 <div class="col-md-12">
 <!--/*Company website*/-->
 <div class="md-form form-sm">
-<textarea type="text" id="editProfile5" name="about_me"
-class="md-textarea"
-th:text="${person.getAbout()}"></textarea>
-<label for="editProfile5" class=""
-th:text="${#messages.msg('words.about_me')}">About
-me</label>
+<textarea type="text" id="editProfile5" name="about_me" class="md-textarea" th:text="${person.getAbout()}"></textarea>
+<label for="editProfile5" class="" th:text="${#messages.msg('words.about_me')}">About me</label>
 </div>
 </div>
 <!--/*End-of-Grid column*/-->

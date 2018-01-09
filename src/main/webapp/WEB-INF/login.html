@@ -1,103 +1,98 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
+xmlns:th="http://www.thymeleaf.org"
 >
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="description" content=""/>
-    <meta name="title" content=""/>
-    <meta name="author" content=""/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-    <meta name="keywords" content="excursium"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="description" content=""/>
+<meta name="title" content=""/>
+<meta name="author" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="keywords" content="excursium"/>
 
-    <link rel="stylesheet" type="text/css" href="../resources/css/styles.css"/>
-    <link rel="stylesheet" href="../resources/css/media.css"/>
-    <link rel="stylesheet" type="text/css" href="../resources/css/footer.css"/>
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"/>
+<link rel="stylesheet" href="../resources/css/media.css"/>
+<link rel="stylesheet" type="text/css" href="../resources/css/footer.css"/>
+<link rel="stylesheet" href="../resources/libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>
+<link rel="stylesheet" href="../resources/libs/bootstrap-select/css/bootstrap-select.css"/>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 
-    <link rel="stylesheet" href="../resources/libs/bootstrap-select/css/bootstrap-select.css"/>
-    <script type="text/javascript" src="../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
+<link rel="icon" href="../resources/img/icon.ico" type="image/x-icon"/>
+<link rel="shortcut icon" href="../resources/img/icon.ico" type="image/x-icon"/>
 
-    <link rel="stylesheet" href="../resources/css/segoe_ui.css"/>
+<link rel="stylesheet" type="text/css" href="../resources/css/styles.css"/>
+<link rel="stylesheet" href="../resources/css/cards.css"/>
 
-    <!-- Icon -->
-    <link rel="icon" href="../resources/img/icon.ico" type="image/x-icon"/>
-    <link rel="shortcut icon" href="../resources/img/icon.ico" type="image/x-icon"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
 
-    <link rel="stylesheet" href="../resources/libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>
-    <script type="text/javascript"
-            src="../resources/libs/bootstrapformhelpers/js/bootstrap-formhelpers.min.js"></script>
-
-
-    <title th:text="${#messages.msg('titles.login')}">Авторизация</title>
+<title th:text="${#messages.msg('titles.login')}">Авторизация</title>
 
 </head>
 <body style="background-color: #f9f9f9;" onload='document.getElementById("login").focus();'>
 <div class="content"
-     th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
-    <div th:replace="fragments/header :: style"></div>
-    <div th:replace="fragments/header :: header"></div>
-    <div class="container">
-        <div class="page-header">
-            <h2>
-                <th:block th:text="${#messages.msg('titles.login')}"/> / <a href="/users/registration">
-                <th:block th:text="${#messages.msg('titles.registration')}"/></a>
-            </h2>
-        </div>
-        <div class="row">
-            <div class="col-md-12 col-lg-6">
+th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
+<div th:replace="fragments/header :: style"></div>
+<div th:replace="fragments/header :: header"></div>
+<div class="container">
+<div class="page-header">
+<h2>
+<th:block th:text="${#messages.msg('titles.login')}"/> / <a href="/users/registration">
+<th:block th:text="${#messages.msg('titles.registration')}"/></a>
+</h2>
+</div>
+<div class="row">
+<div class="col-md-12 col-lg-6">
 
-                <th:block th:if="${#httpServletRequest.getParameter('error')}">
-                    <div th:replace="fragments/alert :: alert (type='danger', message=${#messages.msg('error.user.login')})">
-                        &nbsp;
-                    </div>
-                </th:block>
+<th:block th:if="${#httpServletRequest.getParameter('error')}">
+<div th:replace="fragments/alert :: alert (type='danger', message=${#messages.msg('error.user.login')})">
+&nbsp;
+</div>
+</th:block>
 
-                <th:block th:if="${message != null}">
-                    <!--/*@thymesVar id="message" type="com.heroku.demo.utils.MessageUtil"*/-->
-                    <div th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message.type)}, message=${message.message})">
-                        &nbsp;
-                    </div>
-                </th:block>
+<th:block th:if="${message != null}">
+<!--/*@thymesVar id="message" type="com.heroku.demo.utils.MessageUtil"*/-->
+<div th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message.type)}, message=${message.message})">
+&nbsp;
+</div>
+</th:block>
 
-                <div th:if="${isAdmin}" th:text="${#messages.msg('authorized.admin')}">Вы авторизованы как
-                    администратор
-                </div>
-                <div th:if="${isUser}" th:text="${#messages.msg('authorized.user')}">Вы авторизованы как пользователь
-                </div>
+<div th:if="${isAdmin}" th:text="${#messages.msg('authorized.admin')}">Вы авторизованы как
+администратор
+</div>
+<div th:if="${isUser}" th:text="${#messages.msg('authorized.user')}">Вы авторизованы как пользователь
+</div>
 
-                <form method="POST" action="/users/login">
-                    <br/>
-                    <div class="input-group">
-                        <span class="input-group-addon" th:text="${#messages.msg('words.login')}">Логин</span>
-                        <input name="username" id="login" autofocus="autofocus" type="text" class="form-control input-lg"
-                               placeholder="Логин" aria-label="Логин" required=""/>
-                    </div>
-                    <br/>
-                    <div class="input-group">
-                        <span class="input-group-addon" th:text="${#messages.msg('words.password')}">Пароль</span>
-                        <input name="password" id="pass" type="password" class="form-control input-lg" placeholder="Пароль"
-                               aria-label="Пароль" required=""/>
-                    </div>
-                    <br/>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" id="remember" name="remember-me" checked="checked"/><span
-                                th:text="${#messages.msg('words.remember_me')}">Запомнить меня</span>
-                        </label>
-                    </div>
-                    <br/>
-                    <input type="submit" th:value="${#messages.msg('titles.login')}"
-                           class="btn btn-lg btn-primary btn-block"/>
+<form method="POST" action="/users/login">
+<br/>
+<div class="input-group">
+<span class="input-group-addon" th:text="${#messages.msg('words.login')}">Логин</span>
+<input name="username" id="login" autofocus="autofocus" type="text" class="form-control input-lg"
+placeholder="Логин" aria-label="Логин" required=""/>
+</div>
+<br/>
+<div class="input-group">
+<span class="input-group-addon" th:text="${#messages.msg('words.password')}">Пароль</span>
+<input name="password" id="pass" type="password" class="form-control input-lg" placeholder="Пароль"
+aria-label="Пароль" required=""/>
+</div>
+<br/>
+<div class="checkbox">
+<label>
+<input type="checkbox" id="remember" name="remember-me" checked="checked"/><span
+th:text="${#messages.msg('words.remember_me')}">Запомнить меня</span>
+</label>
+</div>
+<br/>
+<input type="submit" th:value="${#messages.msg('titles.login')}"
+class="btn btn-lg btn-primary btn-block"/>
 
-                </form>
-            </div>
-        </div>
-    </div>
+</form>
+</div>
+</div>
+</div>
 </div>
 <div th:replace="fragments/footer :: footer"></div></body>
 </html>
