@@ -43,12 +43,6 @@ xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" type="text/css" href="../resources/css/styles.css"/>
 <link rel="stylesheet" href="../resources/libs/bootstrap-select/css/bootstrap-select.css"/>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
-
-<script type="text/javascript" src="http://demos.creative-tim.com/fresh-bootstrap-table/assets/js/bootstrap-table.js"></script>
-
 </head>
 <body style="background-color: #f9f9f9;" th:with="price_up=${#httpServletRequest.getParameter('price_up')},price_down=${#httpServletRequest.getParameter('price_down')},
 id=${#httpServletRequest.getParameter('id')},category=${#httpServletRequest.getParameter('category')},
@@ -252,6 +246,11 @@ src="../resources/img/icons/del.png"/></a>
 </div>
 </div>
 <div th:replace="fragments/footer :: footer"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
+
+<script type="text/javascript" src="http://demos.creative-tim.com/fresh-bootstrap-table/assets/js/bootstrap-table.js"></script>
 <script th:inline="javascript">
 var $table = $('#fresh-table'),
 $alertBtn = $('#alertBtn'),

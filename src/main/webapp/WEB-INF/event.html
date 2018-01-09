@@ -24,10 +24,6 @@ xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" href="../resources/css/cards.css"/>
 <link rel="stylesheet" href="../resources/css/media.css"/>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
-
 <title>Экскурсии</title>
 <script th:inline="javascript">
 $(document).ready(function() {
@@ -189,5 +185,8 @@ th:text="${event.description}">
 </div>
 </div>
 <div th:replace="fragments/footer :: footer"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
 </body>
 </html>
