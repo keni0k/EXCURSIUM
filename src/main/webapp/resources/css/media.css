@@ -4,7 +4,7 @@
 @media only screen and (max-width : 1200px) {
 
 	#brand-image {
-		height: 55px;
+		height: 70px;
 	}
 }
 
@@ -12,7 +12,7 @@
 @media only screen and (max-width : 992px) {
 
 	#brand-image {
-		height: 55px;
+		height: 70px;
 	}
 
 }
@@ -25,7 +25,7 @@
 	}
 
 	/* Extra Small Devices, Phones */
-	@media only screen and (max-width : 480px) {
+	@media only screen and (max-width: 480px) {
 
 		#brand-image {
 			height: 25px;
@@ -34,7 +34,7 @@
 	}
 
 	/* Custom, iPhone Retina */
-	@media only screen and (max-width : 320px) {
+	@media only screen and (max-width: 320px) {
 
 		#brand-image {
 			height: 25px;
@@ -44,23 +44,23 @@
 
 
 	/*==========  Mobile First Method  ==========*/
-
 	/* Custom, iPhone Retina */
-	@media only screen and (min-width : 320px) {
+	@media only screen and (min-width: 320px) {
 	}
 
 	/* Extra Small Devices, Phones */
-	@media only screen and (min-width : 480px) {
+	@media only screen and (min-width: 480px) {
 	}
 
 	/* Small Devices, Tablets */
-	@media only screen and (min-width : 768px) {
+	@media only screen and (min-width: 768px) {
 	}
 
 	/* Medium Devices, Desktops */
-	@media only screen and (min-width : 992px) {
+	@media only screen and (min-width: 992px) {
 	}
 
 	/* Large Devices, Wide Screens */
-	@media only screen and (min-width : 1200px) {
+	@media only screen and (min-width: 1200px) {
 	}
+}
