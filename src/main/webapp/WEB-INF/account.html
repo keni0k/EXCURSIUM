@@ -193,13 +193,16 @@ th:text="${order.getTime()}">Время экскурсии</span>
 <span class="left pt-2">
 <strong th:text="${order.getPrice()}+'&#8381;  '"
 style="color:#4285F4; font-size: medium; padding-top: -0.2em;">%Цена%  </strong>
-<a th:href="@{/orders/order(id=${order.getId()})}"><i class="fa fa-comments mr-2"></i>Оставить отзыв</a>
 </span>
 <span class="right">
 <a th:href="@{/orders/order(id=${order.getId()})}"
 class="waves-effect p-2">Открыть<i
 class="fa fa-photo ml-1"></i></a>
 </span>
+    <div class="clearfix"></div>
+    <span class="left pt-2">
+    <a th:href="@{/orders/order(id=${order.getId()})}"><i class="fa fa-comments mr-2"></i>Оставить отзыв</a>
+    </span>
 </div>
 </div>
 <!--/*End-of-Card*/-->
