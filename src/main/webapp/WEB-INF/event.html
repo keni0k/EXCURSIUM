@@ -205,18 +205,18 @@ th:text="${event.description}">
                                     <a class="nav-link active" data-toggle="tab"
                                        th:text="${#messages.msg('words.without_signup')}"
                                        href="https://mdbootstrap.com/previews/templates/admin-dashboard/html/profile/extended.html#panel77"
-                                       role="tab" aria-expanded="true"><i class="fa fa-user mr-1"></i> Without Sign up</a>
+                                       role="tab" aria-expanded="true"><i class="fa fa-user mr-1"></i> Without sign up</a>
                                 </li>
                                 <li class="nav-item waves-effect waves-light">
                                     <a class="nav-link" data-toggle="tab"
                                        href="https://mdbootstrap.com/previews/templates/admin-dashboard/html/profile/extended.html#panel88"
-                                       th:text="${#messages.msg('words.login')}"
-                                       role="tab" aria-expanded="false"><i class="fa fa-lock mr-1"></i> Sign in</a>
+                                       th:text="${#messages.msg('titles.login')}"
+                                       role="tab" aria-expanded="false"><i class="fa fa-lock mr-1"></i> Log in</a>
                                 </li>
                                 <li class="nav-item waves-effect waves-light">
                                     <a class="nav-link" data-toggle="tab"
                                        href="https://mdbootstrap.com/previews/templates/admin-dashboard/html/profile/extended.html#panel99"
-                                       th:text="${#messages.msg('words.registration')}"
+                                       th:text="${#messages.msg('titles.registration')}"
                                        role="tab" aria-expanded="false"><i class="fa fa-lock mr-1"></i> Sign up</a>
                                 </li>
                             </ul>
@@ -259,26 +259,10 @@ th:text="${event.description}">
                                                 <div class="col-md-12">
                                                     <!--/*Company website*/-->
                                                     <div class="md-form form-sm">
-<textarea type="text" id="editProfile5" name="about_me"
-          class="md-textarea"></textarea>
+<input type="text" id="editProfile5" name="email"
+          class="form-control"/>
                                                         <label for="editProfile5" class=""
-                                                               th:text="${#messages.msg('words.about_me')}">About
-                                                            me</label>
-                                                    </div>
-                                                </div>
-                                                <!--/*End-of-Grid column*/-->
-                                                <!--/*Grid column*/-->
-                                                <div class="col-md-12">
-                                                    <div class="md-form form-sm">
-                                                        <input name="file" type="file" id="filePerson"
-                                                               class="form-control"
-                                                               size="30000000"
-                                                               style="padding-left: 8rem; padding-top: 5px; font-size: 1rem;"
-                                                               accept="image/jpeg,image/png"
-                                                               aria-label="Фотографии"/>
-                                                        <label for="filePerson" class="" style="top: 0.5rem;"
-                                                               th:text="${#messages.msg('words.new_photo')}">Новая
-                                                            фотография</label>
+                                                               th:text="${#messages.msg('words.email')}">E-mail</label>
                                                     </div>
                                                 </div>
                                                 <!--/*End-of-Grid column*/-->
@@ -286,18 +270,43 @@ th:text="${event.description}">
                                                     <!--/*City*/-->
                                                     <div class="md-form form-sm">
                                                         <input type="text" id="editProfile6" name="city"
-                                                               class="form-control"/>
+                                                               class="form-control bfh-phone" required="" minlength="17"
+                                                               data-format="+7 (ddd) ddd-dddd"/>
                                                         <label for="editProfile6" class=""
-                                                               th:text="${#messages.msg('words.city')}">City</label>
+                                                               th:text="${#messages.msg('words.phone')}">Phone number</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <h4>Messangers</h4>
+                                                </div>
+                                                <div class="col-md-4">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" name="tg" style="margin-left: -20px; visibility: visible; left:20px;"/><span>Telegram</span>
+                                                    </label>
+                                                </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" name="wa" style="margin-left: -20px; visibility: visible; left:20px;"/><span>Whats App</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" name="vb" style="margin-left: -20px; visibility: visible; left:20px;"/><span>Viber</span>
+                                                        </label>
                                                     </div>
                                                 </div>
                                                 <!--/*Grid column*/-->
-                                                <div class="col-md-6">
-                                                    <!--/*Facebook*/-->
+                                                <div class="col-md-12">
+                                                    <!--/*LinkedIn*/-->
                                                     <div class="md-form form-sm mt-2">
-                                                        <input type="text" id="editProfile8"
-                                                               class="form-control"/>
-                                                        <label for="editProfile8" class="">VK</label>
+                                                        <input type="number" id="editProfile10"
+                                                               class="form-control" th:max="${event.getUsersCount()}"/>
+                                                        <label for="editProfile10">Users count</label>
                                                     </div>
                                                 </div>
                                                 <!--/*End-of-Grid column*/-->
@@ -305,9 +314,19 @@ th:text="${event.description}">
                                                 <div class="col-md-6">
                                                     <!--/*LinkedIn*/-->
                                                     <div class="md-form form-sm mt-2">
-                                                        <input type="text" id="editProfile10"
+                                                        <input type="date" id="editProfile11"
                                                                class="form-control"/>
-                                                        <label for="editProfile10" class="">Telegram</label>
+                                                        <label for="editProfile11">Date</label>
+                                                    </div>
+                                                </div>
+                                                <!--/*End-of-Grid column*/-->
+                                                <!--/*Grid column*/-->
+                                                <div class="col-md-6">
+                                                    <!--/*LinkedIn*/-->
+                                                    <div class="md-form form-sm mt-2">
+                                                        <input type="time" id="editProfile12"
+                                                               class="form-control"/>
+                                                        <label for="editProfile12">Time</label>
                                                     </div>
                                                 </div>
                                                 <!--/*End-of-Grid column*/-->
@@ -315,11 +334,11 @@ th:text="${event.description}">
                                             <div class="modal-footer justify-content-center">
                                                 <button type="reset"
                                                         class="btn btn-outline-primary waves-effect waves-light"
-                                                        data-dismiss="modal">Закрыть
+                                                        data-dismiss="modal">Отменить
                                                 </button>
                                                 <button type="submit"
                                                         class="btn btn-primary waves-effect waves-light">
-                                                    Сохранить <i class="fa fa-check ml-1"></i></button>
+                                                    К оплате <i class="fa fa-check ml-1"></i></button>
                                             </div>
                                             <!--/*End-of-Grid row*/-->
                                         </form>
@@ -330,40 +349,8 @@ th:text="${event.description}">
                                 <div class="tab-pane fade" id="panel88" role="tabpanel" aria-expanded="false">
                                     <!--/*Body*/-->
                                     <div class="modal-body">
-                                        <form action="/users/edit_private" method="post"
-                                              autocomplete="off">
-                                            <div class="md-form form-sm">
-                                                <input type="email" id="form24" name="email"
-                                                       class="form-control"/>
-                                                <label for="form24">Email</label>
-                                            </div>
-                                            <p class="h5 text-center mt-5">Смена пароля</p>
-                                            <div class="md-form form-sm">
-                                                <input type="password" name="last_pass" id="form25"
-                                                       class="form-control"/>
-                                                <label for="form25">Текущий пароль</label>
-                                            </div>
-                                            <div class="md-form form-sm">
-                                                <input type="password" name="pass" id="form26"
-                                                       class="form-control"/>
-                                                <label for="form26">Новый пароль</label>
-                                            </div>
-                                            <div class="md-form form-sm">
-                                                <input type="password" name="pass_confirm" id="form27"
-                                                       class="form-control"/>
-                                                <label for="form27">Подтвердите пароль</label>
-                                            </div>
-                                            <div class="modal-footer justify-content-center">
-                                                <button type="reset"
-                                                        class="btn btn-outline-primary waves-effect waves-light"
-                                                        data-dismiss="modal">Закрыть
-                                                </button>
-                                                <button type="submit"
-                                                        class="btn btn-primary waves-effect waves-light">
-                                                    Сохранить <i class="fa fa-check ml-1"></i>
-                                                </button>
-                                            </div>
-                                        </form>
+                                        <h2><a th:text="${#messages.msg('titles.login')}" href="/users/login">Log in</a></h2>
+                                        <h3>Warning, order will not save!</h3>
                                     </div>
                                 </div>
                                 <!--/*End-of-Panel 8*/-->
@@ -371,40 +358,8 @@ th:text="${event.description}">
                                 <div class="tab-pane fade" id="panel99" role="tabpanel" aria-expanded="false">
                                     <!--/*Body*/-->
                                     <div class="modal-body">
-                                        <form action="/users/edit_private" method="post"
-                                              autocomplete="off">
-                                            <div class="md-form form-sm">
-                                                <input type="email" id="form28" name="email"
-                                                       class="form-control"/>
-                                                <label for="form28">Email</label>
-                                            </div>
-                                            <p class="h5 text-center mt-5">Смена пароля</p>
-                                            <div class="md-form form-sm">
-                                                <input type="password" name="last_pass" id="form29"
-                                                       class="form-control"/>
-                                                <label for="form29">Текущий пароль</label>
-                                            </div>
-                                            <div class="md-form form-sm">
-                                                <input type="password" name="pass" id="form30"
-                                                       class="form-control"/>
-                                                <label for="form30">Новый пароль</label>
-                                            </div>
-                                            <div class="md-form form-sm">
-                                                <input type="password" name="pass_confirm" id="form31"
-                                                       class="form-control"/>
-                                                <label for="form31">Подтвердите пароль</label>
-                                            </div>
-                                            <div class="modal-footer justify-content-center">
-                                                <button type="reset"
-                                                        class="btn btn-outline-primary waves-effect waves-light"
-                                                        data-dismiss="modal">Закрыть
-                                                </button>
-                                                <button type="submit"
-                                                        class="btn btn-primary waves-effect waves-light">
-                                                    Сохранить <i class="fa fa-check ml-1"></i>
-                                                </button>
-                                            </div>
-                                        </form>
+                                        <h2><a th:text="${#messages.msg('titles.registration')}" href="/users/registration">Sign up</a></h2>
+                                        <h3>Warning, order will not save!</h3>
                                     </div>
                                 </div>
                                 <!--/*End-of-Panel 8*/-->
