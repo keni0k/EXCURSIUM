@@ -232,6 +232,36 @@ th:text="${event.description}">
                                             <!--/*Grid row*/-->
                                             <div class="row">
                                                 <!--/*Grid column*/-->
+                                                <div class="col-md-4">
+                                                    <!--/*LinkedIn*/-->
+                                                    <div class="md-form form-sm mt-2">
+                                                        <input type="number" id="editProfile10"
+                                                               class="form-control" th:max="${event.getUsersCount()}" min="1"/>
+                                                        <label for="editProfile10" th:text="${#messages.msg('words.users_count')} + ' (1 - ' + ${event.getUsersCount()} + ')'">Users count</label>
+                                                    </div>
+                                                </div>
+                                                <!--/*End-of-Grid column*/-->
+                                                <!--/*Grid column*/-->
+                                                <div class="col-md-4">
+                                                    <!--/*LinkedIn*/-->
+                                                    <div class="md-form form-sm mt-2">
+                                                        <input type="date" id="editProfile11"
+                                                               class="form-control" style="line-height: 36px"/>
+                                                        <!--<label for="editProfile11">Date</label>-->
+                                                    </div>
+                                                </div>
+                                                <!--/*End-of-Grid column*/-->
+                                                <!--/*Grid column*/-->
+                                                <div class="col-md-4">
+                                                    <!--/*LinkedIn*/-->
+                                                    <div class="md-form form-sm mt-2">
+                                                        <input type="time" id="editProfile12"
+                                                               class="form-control" style="line-height: 36px"/>
+                                                        <!--<label for="editProfile12">Time</label>-->
+                                                    </div>
+                                                </div>
+                                                <!--/*End-of-Grid column*/-->
+                                                <!--/*Grid column*/-->
                                                 <div class="col-md-6">
                                                     <!--/*First Name*/-->
                                                     <div class="md-form form-sm">
@@ -300,36 +330,16 @@ th:text="${event.description}">
                                                     </div>
                                                 </div>
                                                 <br/>
-                                                <!--/*Grid column*/-->
-                                                <div class="col-md-4">
-                                                    <!--/*LinkedIn*/-->
-                                                    <div class="md-form form-sm mt-2">
-                                                        <input type="number" id="editProfile10"
-                                                               class="form-control" th:max="${event.getUsersCount()}" min="1"/>
-                                                        <label for="editProfile10" th:text="${#messages.msg('words.users_count')} + ' (1 - ' + ${event.getUsersCount()} + ')'">Users count</label>
-                                                    </div>
+                                                <!--/*Company website*/-->
+                                                <div class="col-md-12">
+                                                <div class="md-form form-sm">
+                                                    <textarea type="text" id="editProfile13" name="about_me"
+                                                      class="md-textarea"></textarea>
+                                                    <label for="editProfile13" class=""
+                                                           th:text="${#messages.msg('words.your_comment')}">Your comment</label>
                                                 </div>
-                                                <!--/*End-of-Grid column*/-->
-                                                <!--/*Grid column*/-->
-                                                <div class="col-md-4">
-                                                    <!--/*LinkedIn*/-->
-                                                    <div class="md-form form-sm mt-2">
-                                                        <input type="date" id="editProfile11"
-                                                               class="form-control" style="line-height: 36px"/>
-                                                        <!--<label for="editProfile11">Date</label>-->
-                                                    </div>
-                                                </div>
-                                                <!--/*End-of-Grid column*/-->
-                                                <!--/*Grid column*/-->
-                                                <div class="col-md-4">
-                                                    <!--/*LinkedIn*/-->
-                                                    <div class="md-form form-sm mt-2">
-                                                        <input type="time" id="editProfile12"
-                                                               class="form-control" style="line-height: 36px"/>
-                                                        <!--<label for="editProfile12">Time</label>-->
-                                                    </div>
-                                                </div>
-                                                <!--/*End-of-Grid column*/-->
+                                            </div>
+                                            <!--/*End-of-Grid column*/-->
                                             </div>
                                             <div class="modal-footer justify-content-center">
                                                 <button type="reset"
