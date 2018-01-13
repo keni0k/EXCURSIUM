@@ -115,8 +115,7 @@ th:text="${event.description}">
 <span class="right">
     <a class="btn btn-primary waves-effect waves-light"
        href="#" role="button"
-       data-toggle="modal" data-target="#modalGoOrder">Заказать<i
-            class="fa fa-money ml-2"></i></a>
+       data-toggle="modal" data-target="#modalGoOrder">Заказать</a>
 </span>
 </div>
 
@@ -204,17 +203,17 @@ th:text="${event.description}">
                             <ul class="nav nav-tabs tabs-2 light-blue darken-3" role="tablist">
                                 <li class="nav-item waves-effect waves-light">
                                     <a class="nav-link active" data-toggle="tab"
-                                       th:text="${#messages.msg('words.without_signup')}"
+                                       th:text="${isUser or isAdmin}?${#messages.msg('words.without_signup')}:'ORDER'"
                                        href="https://mdbootstrap.com/previews/templates/admin-dashboard/html/profile/extended.html#panel77"
                                        role="tab" aria-expanded="true"><i class="fa fa-user mr-1"></i> Without sign up</a>
                                 </li>
-                                <li class="nav-item waves-effect waves-light">
+                                <li class="nav-item waves-effect waves-light" th:if="${not (isUser or isAdmin)}">
                                     <a class="nav-link" data-toggle="tab"
                                        href="https://mdbootstrap.com/previews/templates/admin-dashboard/html/profile/extended.html#panel88"
                                        th:text="${#messages.msg('titles.login')}"
                                        role="tab" aria-expanded="false"><i class="fa fa-lock mr-1"></i> Log in</a>
                                 </li>
-                                <li class="nav-item waves-effect waves-light">
+                                <li class="nav-item waves-effect waves-light" th:if="${not (isUser or isAdmin)}">
                                     <a class="nav-link" data-toggle="tab"
                                        href="https://mdbootstrap.com/previews/templates/admin-dashboard/html/profile/extended.html#panel99"
                                        th:text="${#messages.msg('titles.registration')}"
@@ -305,8 +304,8 @@ th:text="${event.description}">
                                                     <!--/*LinkedIn*/-->
                                                     <div class="md-form form-sm mt-2">
                                                         <input type="number" id="editProfile10"
-                                                               class="form-control" th:max="${event.getUsersCount()}"/>
-                                                        <label for="editProfile10" th:text="${#messages.msg('words.users_count')} + '(1 - ' + ${event.getUsersCount()} + ')'">Users count</label>
+                                                               class="form-control" th:max="${event.getUsersCount()}" min="1"/>
+                                                        <label for="editProfile10" th:text="${#messages.msg('words.users_count')} + ' (1 - ' + ${event.getUsersCount()} + ')'">Users count</label>
                                                     </div>
                                                 </div>
                                                 <!--/*End-of-Grid column*/-->
