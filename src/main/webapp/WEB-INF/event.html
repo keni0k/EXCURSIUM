@@ -207,13 +207,13 @@ th:text="${event.description}">
                                        href="https://mdbootstrap.com/previews/templates/admin-dashboard/html/profile/extended.html#panel77"
                                        role="tab" aria-expanded="true"><i class="fa fa-user mr-1"></i> Without sign up</a>
                                 </li>
-                                <li class="nav-item waves-effect waves-light" th:if="${not (isUser or isAdmin)}">
+                                <li class="nav-item waves-effect waves-light" th:unless="${isUser or isAdmin}">
                                     <a class="nav-link" data-toggle="tab"
                                        href="https://mdbootstrap.com/previews/templates/admin-dashboard/html/profile/extended.html#panel88"
                                        th:text="${#messages.msg('titles.login')}"
                                        role="tab" aria-expanded="false"><i class="fa fa-lock mr-1"></i> Log in</a>
                                 </li>
-                                <li class="nav-item waves-effect waves-light" th:if="${not (isUser or isAdmin)}">
+                                <li class="nav-item waves-effect waves-light" th:unless="${isUser or isAdmin}">
                                     <a class="nav-link" data-toggle="tab"
                                        href="https://mdbootstrap.com/previews/templates/admin-dashboard/html/profile/extended.html#panel99"
                                        th:text="${#messages.msg('titles.registration')}"
@@ -313,8 +313,9 @@ th:text="${event.description}">
                                                 <div class="col-md-6">
                                                     <!--/*LinkedIn*/-->
                                                     <div class="md-form form-sm mt-2">
+                                                        <span>Date:</span>
                                                         <input type="date" id="editProfile11"
-                                                               class="form-control"/>
+                                                               class="form-control" style="line-height: 36px"/>
                                                         <!--<label for="editProfile11">Date</label>-->
                                                     </div>
                                                 </div>
@@ -323,8 +324,9 @@ th:text="${event.description}">
                                                 <div class="col-md-6">
                                                     <!--/*LinkedIn*/-->
                                                     <div class="md-form form-sm mt-2">
+                                                        <span>Time:</span>
                                                         <input type="time" id="editProfile12"
-                                                               class="form-control"/>
+                                                               class="form-control" style="line-height: 36px"/>
                                                         <!--<label for="editProfile12">Time</label>-->
                                                     </div>
                                                 </div>
