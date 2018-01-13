@@ -237,10 +237,9 @@ th:text="${event.description}">
                                                     <!--/*First Name*/-->
                                                     <div class="md-form form-sm">
                                                         <input type="text" id="editProfile1"
-                                                               class="form-control" name="first_name"/>
+                                                               class="form-control" name="first_name" th:value="${person.getFirstName()}"/>
                                                         <label for="editProfile1" class=""
-                                                               th:text="${#messages.msg('words.first_name')}"
-                                                        th:value="${person.getFirstName()}">First
+                                                               th:text="${#messages.msg('words.first_name')}">First
                                                             name</label>
                                                     </div>
                                                 </div>
@@ -249,11 +248,10 @@ th:text="${event.description}">
                                                 <div class="col-md-6">
                                                     <!--/*Last Name*/-->
                                                     <div class="md-form form-sm">
-                                                        <input type="text" id="editProfile2"
+                                                        <input type="text" id="editProfile2" th:value="${person.getLastName()}"
                                                                class="form-control" name="last_name"/>
                                                         <label for="editProfile2" class=""
-                                                               th:text="${#messages.msg('words.last_name')}"
-                                                               th:value="${person.getLastName()}">Last
+                                                               th:text="${#messages.msg('words.last_name')}">Last
                                                             name</label>
                                                     </div>
                                                 </div>

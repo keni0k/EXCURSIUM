@@ -165,7 +165,7 @@ public class EventController {
             String loginOrEmail = principal.getName();
             if (!loginOrEmail.equals(""))
                 model.addAttribute("person", personService.getByLoginOrEmail(loginOrEmail));
-        } else model.addAttribute("person", null);
+        } else model.addAttribute("person", new Person());
         return "event";
     }
 
