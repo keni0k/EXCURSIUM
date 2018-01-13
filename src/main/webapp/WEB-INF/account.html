@@ -497,31 +497,33 @@ class="btn btn-primary waves-effect waves-light">
 <div class="modal-body">
 <form th:object="${person}" action="/users/edit_private" method="post"
 autocomplete="off">
+    <div class="col-md-12">
 <div class="md-form form-sm">
 <input type="email" id="form24" name="email"
 class="form-control" th:value="${person.getEmail()}"/>
 <label for="form24">Email</label>
 </div>
+    </div>
     <div class="col-md-12">
         <h4 style="font-weight: bold">Смена пароля</h4>
     </div>
 <div class="clearfix"></div>
     <br/>
-    <div class="col-md-4">
+    <div class="col-md-12">
 <div class="md-form form-sm">
 <input type="password" name="last_pass" id="form25"
 class="form-control"/>
 <label for="form25">Текущий пароль</label>
 </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-xs-6">
 <div class="md-form form-sm">
 <input type="password" name="pass" id="form26"
 class="form-control"/>
 <label for="form26">Новый пароль</label>
 </div>
     </div>
-        <div class="col-md-4">
+        <div class="col-xs-6">
 <div class="md-form form-sm">
 <input type="password" name="pass_confirm" id="form27"
 class="form-control"/>
