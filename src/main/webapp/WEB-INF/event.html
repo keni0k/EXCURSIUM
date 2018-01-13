@@ -203,7 +203,7 @@ th:text="${event.description}">
                             <ul class="nav nav-tabs tabs-2 light-blue darken-3" role="tablist">
                                 <li class="nav-item waves-effect waves-light">
                                     <a class="nav-link active" data-toggle="tab"
-                                       th:text="${isUser or isAdmin}?${#messages.msg('words.without_signup')}:'ORDER'"
+                                       th:text="${not(isUser or isAdmin)}?${#messages.msg('words.without_signup')}:${#messages.msg('words.order')}"
                                        href="https://mdbootstrap.com/previews/templates/admin-dashboard/html/profile/extended.html#panel77"
                                        role="tab" aria-expanded="true"><i class="fa fa-user mr-1"></i> Without sign up</a>
                                 </li>
@@ -256,7 +256,7 @@ th:text="${event.description}">
                                                 </div>
                                                 <!--/*End-of-Grid column*/-->
                                                 <!--/*Grid column*/-->
-                                                <div class="col-md-12">
+                                                <div class="col-md-6">
                                                     <!--/*Company website*/-->
                                                     <div class="md-form form-sm">
 <input type="text" id="editProfile5" name="email" th:value="${person.getEmail()}"
@@ -265,7 +265,7 @@ th:text="${event.description}">
                                                     </div>
                                                 </div>
                                                 <!--/*End-of-Grid column*/-->
-                                                <div class="col-md-12">
+                                                <div class="col-md-6">
                                                     <!--/*City*/-->
                                                     <div class="md-form form-sm">
                                                         <input type="text" id="editProfile6" name="city"
@@ -276,7 +276,7 @@ th:text="${event.description}">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
-                                                    <h4>Messangers</h4>
+                                                    <h5 style="font-weight: bold">Messangers</h5>
                                                 </div>
                                                 <div class="col-md-4">
                                                 <div class="checkbox">
@@ -299,8 +299,9 @@ th:text="${event.description}">
                                                         </label>
                                                     </div>
                                                 </div>
+                                                <br/>
                                                 <!--/*Grid column*/-->
-                                                <div class="col-md-12">
+                                                <div class="col-md-4">
                                                     <!--/*LinkedIn*/-->
                                                     <div class="md-form form-sm mt-2">
                                                         <input type="number" id="editProfile10"
@@ -310,10 +311,9 @@ th:text="${event.description}">
                                                 </div>
                                                 <!--/*End-of-Grid column*/-->
                                                 <!--/*Grid column*/-->
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
                                                     <!--/*LinkedIn*/-->
                                                     <div class="md-form form-sm mt-2">
-                                                        <span>Date:</span>
                                                         <input type="date" id="editProfile11"
                                                                class="form-control" style="line-height: 36px"/>
                                                         <!--<label for="editProfile11">Date</label>-->
@@ -321,10 +321,9 @@ th:text="${event.description}">
                                                 </div>
                                                 <!--/*End-of-Grid column*/-->
                                                 <!--/*Grid column*/-->
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
                                                     <!--/*LinkedIn*/-->
                                                     <div class="md-form form-sm mt-2">
-                                                        <span>Time:</span>
                                                         <input type="time" id="editProfile12"
                                                                class="form-control" style="line-height: 36px"/>
                                                         <!--<label for="editProfile12">Time</label>-->
@@ -339,7 +338,7 @@ th:text="${event.description}">
                                                 </button>
                                                 <button type="submit"
                                                         class="btn btn-primary waves-effect waves-light">
-                                                    К оплате <i class="fa fa-check ml-1"></i></button>
+                                                    Оплата <i class="fa fa-check ml-1"></i></button>
                                             </div>
                                             <!--/*End-of-Grid row*/-->
                                         </form>
