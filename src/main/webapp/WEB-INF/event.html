@@ -35,6 +35,7 @@ interval: 8000
 </head>
 <body style="background-color: #f9f9f9;">
 <!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
+<!--/*@thymesVar id="person" type="com.heroku.demo.person.Person"*/-->
 <!--/*@thymesVar id="reviews" type="java.util.List<com.heroku.demo.review.Review>"*/-->
 <div class="content"
 th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
@@ -238,7 +239,8 @@ th:text="${event.description}">
                                                         <input type="text" id="editProfile1"
                                                                class="form-control" name="first_name"/>
                                                         <label for="editProfile1" class=""
-                                                               th:text="${#messages.msg('words.first_name')}">First
+                                                               th:text="${#messages.msg('words.first_name')}"
+                                                        th:value="${person.getFirstName()}">First
                                                             name</label>
                                                     </div>
                                                 </div>
@@ -250,7 +252,8 @@ th:text="${event.description}">
                                                         <input type="text" id="editProfile2"
                                                                class="form-control" name="last_name"/>
                                                         <label for="editProfile2" class=""
-                                                               th:text="${#messages.msg('words.last_name')}">Last
+                                                               th:text="${#messages.msg('words.last_name')}"
+                                                               th:value="${person.getLastName()}">Last
                                                             name</label>
                                                     </div>
                                                 </div>
@@ -259,10 +262,9 @@ th:text="${event.description}">
                                                 <div class="col-md-12">
                                                     <!--/*Company website*/-->
                                                     <div class="md-form form-sm">
-<input type="text" id="editProfile5" name="email"
+<input type="text" id="editProfile5" name="email" th:value="${person.getEmail()}"
           class="form-control"/>
-                                                        <label for="editProfile5" class=""
-                                                               th:text="${#messages.msg('words.email')}">E-mail</label>
+                                                        <label for="editProfile5" class="">E-mail</label>
                                                     </div>
                                                 </div>
                                                 <!--/*End-of-Grid column*/-->
@@ -271,7 +273,7 @@ th:text="${event.description}">
                                                     <div class="md-form form-sm">
                                                         <input type="text" id="editProfile6" name="city"
                                                                class="form-control bfh-phone" required="" minlength="17"
-                                                               data-format="+7 (ddd) ddd-dddd"/>
+                                                               data-format="+7 (ddd) ddd-dddd" th:value="${person.getPhoneNumber()}"/>
                                                         <label for="editProfile6" class=""
                                                                th:text="${#messages.msg('words.phone')}">Phone number</label>
                                                     </div>
@@ -306,7 +308,7 @@ th:text="${event.description}">
                                                     <div class="md-form form-sm mt-2">
                                                         <input type="number" id="editProfile10"
                                                                class="form-control" th:max="${event.getUsersCount()}"/>
-                                                        <label for="editProfile10">Users count</label>
+                                                        <label for="editProfile10" th:text="${#messages.msg('words.users_count')} + '(1 - ' + ${event.getUsersCount()} + ')'">Users count</label>
                                                     </div>
                                                 </div>
                                                 <!--/*End-of-Grid column*/-->
@@ -316,7 +318,7 @@ th:text="${event.description}">
                                                     <div class="md-form form-sm mt-2">
                                                         <input type="date" id="editProfile11"
                                                                class="form-control"/>
-                                                        <label for="editProfile11">Date</label>
+                                                        <!--<label for="editProfile11">Date</label>-->
                                                     </div>
                                                 </div>
                                                 <!--/*End-of-Grid column*/-->
@@ -326,7 +328,7 @@ th:text="${event.description}">
                                                     <div class="md-form form-sm mt-2">
                                                         <input type="time" id="editProfile12"
                                                                class="form-control"/>
-                                                        <label for="editProfile12">Time</label>
+                                                        <!--<label for="editProfile12">Time</label>-->
                                                     </div>
                                                 </div>
                                                 <!--/*End-of-Grid column*/-->
