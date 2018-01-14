@@ -58,3 +58,8 @@
     margin: 0; width: 0;
     height: 0; border-style: hidden;
 }
+
+.rating > label:after{
+    margin: 0; width: 0;
+    height: 0; border-style: hidden;
+}
