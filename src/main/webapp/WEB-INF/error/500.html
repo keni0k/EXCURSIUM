@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="description" content=""/>
+    <meta name="title" content=""/>
+    <meta name="author" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta name="keywords" content="excursium"/>
+
+    <link rel="stylesheet" type="text/css" href="../../resources/css/footer.css"/>
+    <link rel="stylesheet" href="../../resources/libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>
+    <link rel="stylesheet" href="../../resources/libs/bootstrap-select/css/bootstrap-select.css"/>
+
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+    <link rel="icon" href="../../resources/img/icon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="../../resources/img/icon.ico" type="image/x-icon"/>
+
+    <link rel="stylesheet" type="text/css" href="../../resources/css/styles.css"/>
+    <link rel="stylesheet" href="../../resources/css/cards.css"/>
+    <link rel="stylesheet" href="../../resources/css/media.css"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
+    <title>500</title>
+</head>
+<body style="background-color: #f9f9f9;">
+<div class="content"
+     th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
+    <div th:replace="fragments/header :: style"></div>
+    <div th:replace="fragments/header :: header"></div>
+    <div class="container">
+        <h1 style="align-content: center; vertical-align: middle" th:text="${#messages.msg('error.500')}">Страница 500!</h1>
+        <h1 style="align-content: center; vertical-align: middle" th:text="${#messages.msg('error.500.add.0')}">Ух, описание ее</h1>
+        <h2 style="align-content: center; vertical-align: middle"><a href="/index#contact" th:text="${#messages.msg('error.404.add.1')}">Напишите нам, если у вас возникли проблемы</a></h2>
+    </div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+<script type="text/javascript" src="../../resources/js/compiled.min.js"></script>
+</body>
+</html>

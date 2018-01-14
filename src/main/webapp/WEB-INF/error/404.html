@@ -35,7 +35,7 @@ th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#http
 <div th:replace="fragments/header :: header"></div>
 <div class="container">
 <h1 style="align-content: center; vertical-align: middle" th:text="${#messages.msg('error.404')}">Страница 404!</h1>
-    <h1 style="align-content: center; vertical-align: middle" th:text="${#messages.msg('error.404.add.0')}">Ух, описние ее</h1>
+    <h1 style="align-content: center; vertical-align: middle" th:text="${#messages.msg('error.404.add.0')}">Ух, описание ее</h1>
 <h2 style="align-content: center; vertical-align: middle"><a href="/index#contact" th:text="${#messages.msg('error.404.add.1')}">Напишите нам, если у вас возникли проблемы</a></h2>
 <h3 style="align-content: center; vertical-align: middle">
 <span style="color: #555555;" th:text="${#messages.msg('error.404.add.2')}">Ничего не найдено</span>

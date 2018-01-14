@@ -48,14 +48,9 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         return templateResolver;
     }
 
-    /*@Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/error/404").setViewName("404");
-    }*/
-
     @Bean
     public EmbeddedServletContainerCustomizer containerCustomizer() {
-        return container -> container.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/error/404"));
+        return container -> container.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/error/404"), new ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR, "/error/500"));
     }
 
     @Bean(name = "jspViewResolver")
