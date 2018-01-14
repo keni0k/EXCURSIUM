@@ -35,9 +35,9 @@ th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#http
 <div th:replace="fragments/header :: header"></div>
 <div class="container">
 <h1 style="align-content: center; vertical-align: middle" th:text="${#messages.msg('error.404')}">Ошибка 404. Мы не нашли такой страницы!!1!</h1>
-<h2 style="align-content: center; vertical-align: middle"><a href="/users/logout" th:text="${#messages.msg('error.404.add.1')}">Напишите нам, если что-то не так</a></h2>
+<h2 style="align-content: center; vertical-align: middle"><a href="/index#contact" th:text="${#messages.msg('error.404.add.1')}">Напишите нам, если у вас возникли проблемы</a></h2>
 <h3 style="align-content: center; vertical-align: middle">
-<del th:text="${#messages.msg('error.403.add.2')}">Это фиаско</del>
+<span style="color: #555555;" th:text="${#messages.msg('error.404.add.2')}">Ничего не найдено</span>
 </h3>
 </div>
 </div>
