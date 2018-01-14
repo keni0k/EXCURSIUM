@@ -50,14 +50,14 @@ public class HomeController {
     }
 
 
-    @RequestMapping("errors/403")
+    @RequestMapping("error/403")
     public String access403() {
-        return "errors/403";
+        return "error/403";
     }
 
-    @RequestMapping("errors/404")
+    @RequestMapping("error/404")
     public String notFoundMethod() {
-        return "errors/404";
+        return "error/404";
     }
 
     @RequestMapping("upload")

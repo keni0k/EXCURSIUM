@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/index", "/resources/**",
                         "/events/list", "/events/event", "/events/categories", "/events/listjson", "/events/addevent",
                         "/users/user", "/users/getbytoken", "/users/getbyemail", "/users/listjson", "/users/account",
-                        "/reviews/listjson", "/users/confirm").permitAll()
+                        "/reviews/listjson", "/users/confirm", "/error/**").permitAll()
                 .antMatchers("/users/registration").anonymous()
                 .antMatchers("/events/add", "/users/edit_public", "/users/edit_private", "/reviews/add", "/users/up_to_guide", "/users/resend_email").hasAnyRole("ADMIN","USER")
                 .antMatchers("/**").hasRole("ADMIN")
@@ -54,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .rememberMe().tokenValiditySeconds(1209600).rememberMeParameter("remember-me").rememberMeCookieName("remember_me")
                 .tokenRepository(repository)
                 .and()
-                .exceptionHandling().accessDeniedPage("/errors/403")
+                .exceptionHandling().accessDeniedPage("/error/403")
                 .and()
                 .csrf().disable();
     }
