@@ -2,11 +2,8 @@ package com.heroku.demo;
 
 import com.heroku.demo.message.Message;
 import com.heroku.demo.message.MessageRepository;
-import com.heroku.demo.order.Buy;
 import com.heroku.demo.order.OrderRepository;
-import com.heroku.demo.photo.Photo;
 import com.heroku.demo.photo.PhotoRepository;
-import com.heroku.demo.review.Review;
 import com.heroku.demo.review.ReviewRepository;
 import com.heroku.demo.token.TokenRepository;
 import org.joda.time.LocalTime;
@@ -55,7 +52,12 @@ public class HomeController {
 
     @RequestMapping("errors/403")
     public String access403() {
-        return "403";
+        return "errors/403";
+    }
+
+    @RequestMapping("errors/404")
+    public String notFoundMethod() {
+        return "errors/404";
     }
 
     @RequestMapping("upload")
@@ -94,116 +96,6 @@ public class HomeController {
         }
 
         StringBuilder stringBuilder = new StringBuilder("{ \"messages\": [");
-
-        for (int i = 0; i < arrayList.size(); i++) {
-            stringBuilder.append(arrayList.get(i));
-            if (arrayList.size() - i > 1) stringBuilder.append(",\n");
-        }
-        stringBuilder.append("]}");
-        return stringBuilder.toString();
-    }
-
-
-    @RequestMapping("/addreview")
-    @ResponseBody
-    public String insertReview(ModelMap model,
-                               @ModelAttribute("data") String data,
-                               @ModelAttribute("image_url") String imageUrl,
-                               @ModelAttribute("user_id") int userId,
-                               @ModelAttribute("event_id") int eventId,
-                               @ModelAttribute("rate") int rate,
-                               BindingResult result) {
-
-        Review review = new Review(data, imageUrl, "TIME", userId, eventId, rate);
-        if (!result.hasErrors()) {
-            //person.setWhat(3);
-            reviewRepository.save(review);
-        }
-        return review.toString();
-    }
-
-
-    @RequestMapping("/getreviews")
-    @ResponseBody
-    public String getReviews() {
-        ArrayList<String> arrayList = new ArrayList<>();
-        List<Review> persons = reviewRepository.findAll();
-        for (Review r : persons) {
-            arrayList.add(r.toString());
-        }
-
-        StringBuilder stringBuilder = new StringBuilder("{ \"reviews\": [");
-
-        for (int i = 0; i < arrayList.size(); i++) {
-            stringBuilder.append(arrayList.get(i));
-            if (arrayList.size() - i > 1) stringBuilder.append(",\n");
-        }
-        stringBuilder.append("]}");
-        return stringBuilder.toString();
-    }
-
-    @RequestMapping("/addorder")
-    @ResponseBody
-    public String insertOrder(ModelMap model,
-                              @ModelAttribute("price") int price,
-                              @ModelAttribute("tourist_id") int touristId,
-                              @ModelAttribute("event_id") int eventId,
-                              BindingResult result) {
-
-        Buy buy = new Buy(eventId, touristId, price, "TIME");
-        if (!result.hasErrors()) {
-            //person.setWhat(3);
-            orderRepository.save(buy);
-        }
-        return buy.toString();
-    }
-
-
-    @RequestMapping("/getorders")
-    @ResponseBody
-    public String getOrders() {
-        ArrayList<String> arrayList = new ArrayList<>();
-        List<Buy> buys = orderRepository.findAll();
-        for (Buy o : buys) {
-            arrayList.add(o.toString());
-        }
-
-        StringBuilder stringBuilder = new StringBuilder("{ \"buys\": [");
-
-        for (int i = 0; i < arrayList.size(); i++) {
-            stringBuilder.append(arrayList.get(i));
-            if (arrayList.size() - i > 1) stringBuilder.append(",\n");
-        }
-        stringBuilder.append("]}");
-        return stringBuilder.toString();
-    }
-
-
-    @RequestMapping("addphoto")
-    @ResponseBody
-    public String insertPhoto(ModelMap model,
-                              @ModelAttribute("data") String data,
-                              @ModelAttribute("event_id") int eventId,
-                              BindingResult result) {
-
-        Photo photo = new Photo(eventId, data);
-        if (!result.hasErrors()) {
-            //person.setWhat(3);
-            photoRepository.save(photo);
-        }
-        return photo.toString();
-    }
-
-    @RequestMapping("getphotos")
-    @ResponseBody
-    public String getPhotos() {
-        ArrayList<String> arrayList = new ArrayList<>();
-        List<Photo> buys = photoRepository.findAll();
-        for (Photo o : buys) {
-            arrayList.add(o.toString());
-        }
-
-        StringBuilder stringBuilder = new StringBuilder("{ \"photos\": [");
 
         for (int i = 0; i < arrayList.size(); i++) {
             stringBuilder.append(arrayList.get(i));
