@@ -1,9 +1,7 @@
 package com.heroku.demo.order;
 
 import com.heroku.demo.event.Event;
-import com.heroku.demo.event.EventRepository;
 import com.heroku.demo.event.EventServiceImpl;
-import com.heroku.demo.photo.PhotoRepository;
 import com.heroku.demo.photo.PhotoServiceImpl;
 
 import java.util.ArrayList;
@@ -16,9 +14,8 @@ public class OrderServiceImpl implements OrderService {
     private PhotoServiceImpl photoService;
 
     @Override
-    public Buy addBuy(Buy buy) {
-
-        return orderRepository.saveAndFlush(buy);
+    public Buy addOrder(Buy order) {
+        return orderRepository.saveAndFlush(order);
     }
 
     @Override
@@ -26,11 +23,10 @@ public class OrderServiceImpl implements OrderService {
         orderRepository.delete(id);
     }
 
-    public OrderServiceImpl(OrderRepository orderRepository, EventRepository eventRepository,
-                            PhotoRepository photoRepository) {
+    public OrderServiceImpl(OrderRepository orderRepository, EventServiceImpl eventService) {
         this.orderRepository = orderRepository;
-        photoService = new PhotoServiceImpl(photoRepository);
-        eventService = new EventServiceImpl(eventRepository, photoService);
+        this.eventService = eventService;
+        this.photoService = eventService.getPhotoService();
     }
 
     @Override

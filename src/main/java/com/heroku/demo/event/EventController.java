@@ -217,12 +217,13 @@ public class EventController {
 
     @RequestMapping("/categories")
     @ResponseBody
-    public ResponseEntity<String> preview(@ModelAttribute("language") int language) {
+    public ResponseEntity<String> preview(@RequestParam(value = "language", required = false) Integer language) {
         HttpHeaders h = new HttpHeaders();
         h.add("Content-type", "text/json;charset=UTF-8");
         String ru = "[\"Развлечения\",\"Наука\",\"История\",\"Искусство\",\"Производство\",\"Гастрономия\",\"Квесты\",\"Экстрим\"]";
         String en = "[\"Entertainment\",\"Science\",\"History\",\"Art\",\"Manufacture\",\"Gastronomy\",\"Quests\",\"Extreme\"]";
         String categories;
+        if (language==null) language = 0;
         switch (language){
             case 1: categories = en; break;
             default: categories = ru; break;

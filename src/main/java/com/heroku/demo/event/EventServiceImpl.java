@@ -15,6 +15,10 @@ public class EventServiceImpl implements EventService {
     private PhotoServiceImpl photoService;
     private static final Logger logger = LoggerFactory.getLogger(EventServiceImpl.class);
 
+    public PhotoServiceImpl getPhotoService(){
+        return photoService;
+    }
+
     @Override
     public Event addEvent(Event event) {
         return eventRepository.save(event);

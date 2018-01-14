@@ -65,9 +65,10 @@ public class PersonController {
     @Autowired
     public PersonController(PersonRepository personRepository, MessageSource messageSource, EventRepository eventRepository,
                             ReviewRepository reviewRepository, PhotoRepository photoRepository, OrderRepository orderRepository) {
-        orderService = new OrderServiceImpl(orderRepository, eventRepository, photoRepository);
+        PhotoServiceImpl photoService = new PhotoServiceImpl(photoRepository);
         personService = new PersonServiceImpl(personRepository, eventRepository, reviewRepository, photoRepository);
-        eventService = new EventServiceImpl(eventRepository, new PhotoServiceImpl(photoRepository));
+        eventService = new EventServiceImpl(eventRepository, photoService);
+        orderService = new OrderServiceImpl(orderRepository, eventService);
         this.messageSource = messageSource;
     }
 

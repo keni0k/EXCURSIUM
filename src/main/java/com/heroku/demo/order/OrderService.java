@@ -3,7 +3,7 @@ package com.heroku.demo.order;
 import java.util.List;
 
 public interface OrderService {
-    Buy addBuy(Buy buy);
+    Buy addOrder(Buy buy);
 
     void delete(long id);
 
