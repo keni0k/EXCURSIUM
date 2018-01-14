@@ -23,6 +23,7 @@ xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" type="text/css" href="../../resources/css/styles.css"/>
 <link rel="stylesheet" href="../../resources/css/cards.css"/>
 <link rel="stylesheet" href="../../resources/css/media.css"/>
+    <link rel="stylesheet" href="../../resources/css/rating.css"/>
 
 <title>Экскурсии</title>
 <script th:inline="javascript">
@@ -105,8 +106,7 @@ th:href="@{/users/user(id = ${event.getGuideId()})}">
 
 <!--Description-->
 <p class="card-text" style="font-size: medium; color: #000000" align="justify"
-th:text="${order.description}">
-%Описание%</p>
+th:text="${order.description}">%Описание%</p>
 
     <!--TIME-->
     <p class="card-text" style="font-size: medium; color: #000000" align="justify"
@@ -116,6 +116,10 @@ th:text="${order.description}">
 <div class="card-footer">
 <span class="left" style="color:#4285F4; font-size: x-large; padding-top: 0.4em;">
     <strong th:text="${order.price}+'&#8381;'">%Цена%</strong>
+</span>
+    <span>
+    <a class="btn btn-primary waves-effect waves-light" href="#" role="button"
+       data-toggle="modal" data-target="#modalAddReview">Оставить отзыв</a>
 </span>
 <span class="right">
     <a class="btn btn-primary waves-effect waves-light"
@@ -134,7 +138,7 @@ th:text="${order.description}">
         <!--/*End-of-Section: Event*/-->
         <section>
             <!--/*Modal: modalEditProfile*/-->
-            <div class="modal fade" id="modalGoOrder" tabindex="-1" role="dialog"
+            <div class="modal fade" id="modalAddReview" tabindex="-1" role="dialog"
                  aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                 <div class="modal-dialog cascading-modal modal-lg" role="document">
                     <!--/*Content*/-->
@@ -145,21 +149,9 @@ th:text="${order.description}">
                             <ul class="nav nav-tabs tabs-2 light-blue darken-3" role="tablist">
                                 <li class="nav-item waves-effect waves-light">
                                     <a class="nav-link active" data-toggle="tab"
-                                       th:text="${not(isUser or isAdmin)}?${#messages.msg('words.without_signup')}:${#messages.msg('words.order')}"
+                                       th:text="${#messages.msg('words.review')}"
                                        href="https://mdbootstrap.com/previews/templates/admin-dashboard/html/profile/extended.html#panel77"
-                                       role="tab" aria-expanded="true"><i class="fa fa-user mr-1"></i> Without sign up</a>
-                                </li>
-                                <li class="nav-item waves-effect waves-light" th:unless="${isUser or isAdmin}">
-                                    <a class="nav-link" data-toggle="tab"
-                                       href="https://mdbootstrap.com/previews/templates/admin-dashboard/html/profile/extended.html#panel88"
-                                       th:text="${#messages.msg('titles.login')}"
-                                       role="tab" aria-expanded="false"><i class="fa fa-lock mr-1"></i> Log in</a>
-                                </li>
-                                <li class="nav-item waves-effect waves-light" th:unless="${isUser or isAdmin}">
-                                    <a class="nav-link" data-toggle="tab"
-                                       href="https://mdbootstrap.com/previews/templates/admin-dashboard/html/profile/extended.html#panel99"
-                                       th:text="${#messages.msg('titles.registration')}"
-                                       role="tab" aria-expanded="false"><i class="fa fa-lock mr-1"></i> Sign up</a>
+                                       role="tab" aria-expanded="true"><i class="fa fa-user mr-1"></i> REVIEW</a>
                                 </li>
                             </ul>
                             <!--/* Tab panels */-->
@@ -169,102 +161,62 @@ th:text="${order.description}">
                                      aria-expanded="true">
                                     <!--/*Body*/-->
                                     <div class="modal-body mb-1">
-                                        <form action="/users/edit_public"
+                                        <form action="/reviews/add"
                                               enctype="multipart/form-data" method="post">
                                             <!--/*Grid row*/-->
                                             <div class="row">
                                                 <!--/*Grid column*/-->
                                                 <div class="col-xs-6">
-                                                    <!--/*LinkedIn*/-->
-                                                    <div class="md-form form-sm mt-2">
-                                                        <input type="date" id="editProfile11"
-                                                               class="form-control" style="line-height: 36px"/>
-                                                        <!--<label for="editProfile11">Date</label>-->
-                                                    </div>
+                                                    <!--/*Rating*/-->
+                                                    <fieldset class="rating">
+                                                        <legend>Экскурсия:</legend>
+                                                        <input type="radio" id="star5" name="rating_of_event" value="5" /><label for="star5" title="Rocks!"></label>
+                                                        <input type="radio" id="star4" name="rating_of_event" value="4" /><label for="star4" title="Pretty good"></label>
+                                                        <input type="radio" id="star3" name="rating_of_event" value="3" /><label for="star3" title="Meh"></label>
+                                                        <input type="radio" id="star2" name="rating_of_event" value="2" /><label for="star2" title="Kinda bad"></label>
+                                                        <input type="radio" id="star1" name="rating_of_event" value="1" /><label for="star1" title="Sucks big time"></label>
+                                                    </fieldset>
                                                 </div>
                                                 <!--/*End-of-Grid column*/-->
                                                 <!--/*Grid column*/-->
                                                 <div class="col-xs-6">
-                                                    <!--/*LinkedIn*/-->
-                                                    <div class="md-form form-sm mt-2">
-                                                        <input type="time" id="editProfile12"
-                                                               class="form-control" style="line-height: 36px"/>
-                                                        <!--<label for="editProfile12">Time</label>-->
-                                                    </div>
+                                                    <!--/*Rating*/-->
+                                                    <fieldset class="rating">
+                                                        <legend>Экскурсовод:</legend>
+                                                        <input type="radio" id="star25" name="rating_of_guide" value="5" /><label for="star25" title="Rocks!"></label>
+                                                        <input type="radio" id="star24" name="rating_of_guide" value="4" /><label for="star24" title="Pretty good"></label>
+                                                        <input type="radio" id="star23" name="rating_of_guide" value="3" /><label for="star23" title="Meh"></label>
+                                                        <input type="radio" id="star22" name="rating_of_guide" value="2" /><label for="star22" title="Kinda bad"></label>
+                                                        <input type="radio" id="star21" name="rating_of_guide" value="1" /><label for="star21" title="Sucks big time"></label>
+                                                    </fieldset>
                                                 </div>
                                                 <div class="clearfix"></div>
+                                                <br/>
                                                 <!--/*End-of-Grid column*/-->
                                                 <!--/*Grid column*/-->
-                                                <div class="col-xs-6">
+                                                <div class="col-xs-12">
                                                     <!--/*First Name*/-->
                                                     <div class="md-form form-sm">
                                                         <input type="text" id="editProfile1"
-                                                               class="form-control" name="first_name" th:value="${person.getFirstName()}"/>
+                                                               class="form-control" name="first_name"/>
                                                         <label for="editProfile1" class=""
-                                                               th:text="${#messages.msg('words.first_name')}">First
-                                                            name</label>
+                                                               th:text="${#messages.msg('words.dost')}">Достоинства</label>
                                                     </div>
                                                 </div>
                                                 <!--/*End-of-Grid column*/-->
+                                                <div class="clearfix"></div>
                                                 <!--/*Grid column*/-->
-                                                <div class="col-xs-6">
+                                                <div class="col-xs-12">
                                                     <!--/*Last Name*/-->
                                                     <div class="md-form form-sm">
                                                         <input type="text" id="editProfile2" th:value="${person.getLastName()}"
                                                                class="form-control" name="last_name"/>
                                                         <label for="editProfile2" class=""
-                                                               th:text="${#messages.msg('words.last_name')}">Last
-                                                            name</label>
+                                                               th:text="${#messages.msg('words.nedost')}">Недостатки</label>
                                                     </div>
                                                 </div>
                                                 <div class="clearfix"></div>
                                                 <!--/*End-of-Grid column*/-->
-                                                <!--/*Grid column*/-->
-                                                <div class="col-xs-6">
-                                                    <!--/*Company website*/-->
-                                                    <div class="md-form form-sm">
-<input type="text" id="editProfile5" name="email" th:value="${person.getEmail()}"
-          class="form-control"/>
-                                                        <label for="editProfile5" class="">E-mail</label>
-                                                    </div>
-                                                </div>
-                                                <!--/*End-of-Grid column*/-->
-                                                <div class="col-xs-6">
-                                                    <!--/*City*/-->
-                                                    <div class="md-form form-sm">
-                                                        <input type="text" id="editProfile6" name="city"
-                                                               class="form-control bfh-phone" required="" minlength="17"
-                                                               data-format="+7 (ddd) ddd-dddd" th:value="${person.getPhoneNumber()}"/>
-                                                        <label for="editProfile6" class=""
-                                                               th:text="${#messages.msg('words.phone')}">Phone number</label>
-                                                    </div>
-                                                </div>
-                                                <div class="clearfix"></div>
-                                                <div class="col-md-12">
-                                                    <h5 style="font-weight: bold">Messangers</h5>
-                                                </div>
-                                                <div class="col-xs-4">
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input type="checkbox" name="tg" style="margin-left: -20px; visibility: visible; left:20px;"/><span>Telegram</span>
-                                                    </label>
-                                                </div>
-                                                </div>
-                                                <div class="col-xs-4">
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" name="wa" style="margin-left: -20px; visibility: visible; left:20px;"/><span>Whats App</span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xs-4">
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" name="vb" style="margin-left: -20px; visibility: visible; left:20px;"/><span>Viber</span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="clearfix"></div>
                                                 <br/>
                                                 <!--/*Company website*/-->
                                                 <div class="col-md-12">
@@ -272,7 +224,7 @@ th:text="${order.description}">
                                                     <textarea type="text" id="editProfile13" name="about_me"
                                                       class="md-textarea"></textarea>
                                                     <label for="editProfile13" class=""
-                                                           th:text="${#messages.msg('words.your_comment')}">Your comment</label>
+                                                           th:text="${#messages.msg('words.your_comment')}">Комментарий</label>
                                                 </div>
                                             </div>
                                             <!--/*End-of-Grid column*/-->
@@ -284,7 +236,7 @@ th:text="${order.description}">
                                                 </button>
                                                 <button type="submit"
                                                         class="btn btn-primary waves-effect waves-light">
-                                                    Оплата <i class="fa fa-check ml-1"></i></button>
+                                                    Опубликовать отзыв <i class="fa fa-check ml-1"></i></button>
                                             </div>
                                             <!--/*End-of-Grid row*/-->
                                         </form>
