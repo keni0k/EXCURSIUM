@@ -154,7 +154,7 @@ placeholder="Город" required="" aria-label="Город"/>
 <div class="input-group">
 <span class="input-group-addon" th:text="${#messages.msg('words.phone')}">Телефон</span>
 <input name="phoneNumber" type="text" class="form-control bfh-phone"
-th:value="${insertPerson.getPhoneNumber()}" placeholder="Телефон" required=""
+th:value="${insertPerson.getPhoneNumber()}" placeholder="Телефон"
 minlength="17"
 aria-label="Телефон" data-format="+7 (ddd) ddd-dddd" id="phone_number"/>
 <!--/*@thymesVar id="error_phone" type="java.lang.Boolean"*/-->
@@ -169,7 +169,6 @@ Error</label>
 <div class="input-group">
 <span class="input-group-addon" th:text="${#messages.msg('words.photo')}">Фотография</span>
 <input name="file" type="file" id="file" class="form-control" placeholder="Фотография"
-required=""
 accept="image/jpeg,image/png" aria-label="Фотография" style="padding-top: 5px; margin-top: 0"/>
 </div>
 <br/>

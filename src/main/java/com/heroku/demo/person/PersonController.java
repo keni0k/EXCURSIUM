@@ -20,6 +20,7 @@ import com.mailjet.client.errors.MailjetException;
 import com.mailjet.client.errors.MailjetSocketTimeoutException;
 import com.mailjet.client.resource.Contact;
 import com.mailjet.client.resource.Email;
+import com.microsoft.azure.storage.StorageException;
 import org.joda.time.LocalTime;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -41,6 +42,9 @@ import javax.validation.Valid;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.security.InvalidKeyException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -102,10 +106,10 @@ public class PersonController {
                          @ModelAttribute("pass2") String pass2,
                          ModelMap model, Locale locale) {
         person.setToken(randomToken(32));
-
         if (!personService.throwsErrors(person, pass2) || result.hasErrors()) {
             model.addAttribute("error_login", !personService.isLoginFree(person.getLogin()));
-            model.addAttribute("error_phone", !personService.isPhoneFree(person.getPhoneNumber()));
+            if (!person.getPhoneNumber().equals(""))
+                model.addAttribute("error_phone", !personService.isPhoneFree(person.getPhoneNumber()));
             model.addAttribute("error_pass", !person.getPass().equals(pass2));
             model.addAttribute("error_email_free", !personService.isEmailFree(person.getEmail()));
             model.addAttribute("error_email_valid", !personService.isEmailCorrect(person.getEmail()));
@@ -115,17 +119,17 @@ public class PersonController {
         }
         person.setEmail(person.getEmail().toLowerCase());
         person.setLogin(person.getLogin().toLowerCase());
-        if (file == null) {
+        /*if (file == null) {
             model.addAttribute("message", new MessageUtil("danger", "You failed to upload file because the file is null."));// messageSource.getMessage("success.user.registration", null, locale)));
             return persons(model);
-        }
+        } TODO: file==null and what?*/
         person.setRole("ROLE_USER");
         person.setType(Consts.PERSON_DISABLED);
         String time = new LocalTime().toDateTimeToday().toString().replace('T', ' ');
         time = time.substring(0,time.indexOf('.'));
         person.setTime(time);
 
-        if (!file.isEmpty()) {
+        if (file!=null && !file.isEmpty()) {
             try {
                 byte[] bytes = file.getBytes();
 
@@ -150,18 +154,25 @@ public class PersonController {
                 String photoToken = randomToken(32) + ".jpg";
                 putImg(serverFile.getAbsolutePath(), photoToken);
                 person.setImageUrl(photoToken);
-                personService.addPerson(person);
                 sendMail(person.getToken(), person.getEmail());
                 model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.registration", null, locale)));
-            } catch (Exception e) {
-                logger.error("You failed to upload file => " + e.getMessage());
-                personService.delete(person.getId());
-                model.addAttribute("message", new MessageUtil("danger", "You failed to upload file. Please, try again."));// messageSource.getMessage("success.user.registration", null, locale)));
-                return persons(model);
+            } catch (MailjetSocketTimeoutException | MailjetException e) {
+                model.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("danger.user.registration.mail", null, locale)));
+            } catch (IOException | StorageException | InvalidKeyException | URISyntaxException e) {
+                model.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("danger.user.registration.file", null, locale)));
+                e.printStackTrace();
             }
+            personService.addPerson(person);
             return persons(model);
         } else {
-            model.addAttribute("message", new MessageUtil("danger", "You failed to upload file because the file is empty."));// messageSource.getMessage("success.user.registration", null, locale)));
+            personService.addPerson(person);
+            try {
+                sendMail(person.getToken(), person.getEmail());
+                model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.registration", null, locale)));
+            } catch (MailjetSocketTimeoutException | MailjetException e) {
+                e.printStackTrace();
+                model.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("danger.user.registration.mail", null, locale)));
+            }
             return persons(model);
         }
     }
