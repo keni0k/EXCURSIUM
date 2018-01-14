@@ -84,7 +84,7 @@ th:href="@{/users/user(id = ${event.getGuideId()})}">
 </h3>
 
 <!--Rating-->
-<ul class="rating">
+<ul class="rating" style="float: inherit;">
 <li th:if="${event.getRate()!=-1}" th:text="${event.getRate()}"></li>
 <th:block th:if="${(event.getIntRate()!=-1)and(event.getIntRate()!=0)}">
 <li th:each="i : ${#numbers.sequence(0, event.getIntRate()-1)}">
