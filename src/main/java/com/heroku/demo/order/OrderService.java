@@ -14,4 +14,8 @@ public interface OrderService {
     Buy editBuy(Buy buy);
 
     List<Buy> getAll();
+
+    Buy getById(long id);
+
+    Boolean findByOrder(long personId, long orderId);
 }

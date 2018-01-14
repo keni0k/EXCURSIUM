@@ -61,4 +61,14 @@ public class OrderServiceImpl implements OrderService {
     public List<Buy> getAll() {
         return orderRepository.findAll();
     }
+
+    @Override
+    public Buy getById(long id) {
+        return orderRepository.findOne(id);
+    }
+
+    @Override
+    public Boolean findByOrder(long personId, long orderId) {
+        return orderRepository.findOne(orderId).getTouristId()==personId;
+    }
 }

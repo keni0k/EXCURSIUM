@@ -96,7 +96,7 @@ public class PersonController {
         model.addAttribute("orders", orders);
         model.addAttribute("inputEvent", new Event());
         model.addAttribute("consts", new Consts());
-        return "account";
+        return "person/account";
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
@@ -318,7 +318,7 @@ public class PersonController {
             model.addAttribute("insertPerson", editPerson);
         } else model.addAttribute("insertPerson", new Person());
         model.addAttribute("utils", new UtilsForWeb());
-        return "persons";
+        return "admin/persons";
     }
 
     @RequestMapping(value = "/moderation", method = RequestMethod.POST)
@@ -382,7 +382,7 @@ public class PersonController {
         Person p = personService.getById(id);
         model.addAttribute("person", p != null ? p : new Person());
         //model.addAttribute("insertEvent", new Event());
-        return "profile";
+        return "person/profile";
     }
 
     private String sendMail(String token, String emailStr) throws MailjetSocketTimeoutException, MailjetException {

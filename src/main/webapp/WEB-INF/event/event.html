@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="description" content=""/>
+<meta name="title" content=""/>
+<meta name="author" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="keywords" content="excursium"/>
+
+<link rel="stylesheet" type="text/css" href="../../resources/css/footer.css"/>
+<link rel="stylesheet" href="../../resources/libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>
+<link rel="stylesheet" href="../../resources/libs/bootstrap-select/css/bootstrap-select.css"/>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="../../resources/css/carousel.css"/>
+
+<link rel="icon" href="../../resources/img/icon.ico" type="image/x-icon"/>
+<link rel="shortcut icon" href="../../resources/img/icon.ico" type="image/x-icon"/>
+
+<link rel="stylesheet" type="text/css" href="../../resources/css/styles.css"/>
+<link rel="stylesheet" href="../../resources/css/cards.css"/>
+<link rel="stylesheet" href="../../resources/css/media.css"/>
+
+<title>Экскурсии</title>
+<script th:inline="javascript">
+$(document).ready(function() {
+$('.carousel').carousel({
+interval: 8000
+})
+});
+</script>
+</head>
+<body style="background-color: #f9f9f9;">
+<!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
+<!--/*@thymesVar id="person" type="com.heroku.demo.person.Person"*/-->
+<!--/*@thymesVar id="reviews" type="java.util.List<com.heroku.demo.review.Review>"*/-->
+<div class="content"
+th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
+<div th:replace="fragments/header :: style"></div>
+<div th:replace="fragments/header :: header"></div>
+<div class="container">
+    <main>
+    <div class="container-fluid">
+        <section>
+        <div class="row">
+<div class="col-md-8 col-md-offset-2">
+<div class="card">
+<!--Card image-->
+<div class="view overlay hm-white-slight z-depth-1" style="max-height: 20rem"><!--TODO-->
+<div class="img_crop">
+<img th:src="${event.pathToPhoto}" src="../../resources/img/bg-cta.jpg" class="img-fluid"
+     alt=""/>
+</div>
+
+<a>
+<div class="mask waves-effect waves-light"></div>
+</a>
+</div>
+<!--/.Card image-->
+<!--Button-->
+<a class="btn-action waves-effect waves-light" style="background: none; width: auto;"
+th:href="@{/users/user(id = ${event.getGuideId()})}">
+<div class="avatar">
+<img th:src="${event.getPhotoOfGuide()}" src="../../resources/img/user.png"
+     style="height: 100px; width:auto; border-radius: 50%;" alt="Аватар"/>
+</div>
+</a>
+<span style="font-size: medium; color: #000000; text-align:right; padding-right: 2rem; padding-top: 1.8rem" th:text="${event.getFullNameOfGuide()}">
+%FULL_NAME%</span>
+
+<!--Card content-->
+<div class="card-body no-padding text-center">
+<!--Category & Title-->
+<h5 th:text="${event.getCategoryString()}">%Категория%</h5>
+<h3 class="card-title">
+<strong th:text="${event.name}">
+    <a href="">%Название%</a>
+</strong>
+</h3>
+
+<!--Rating-->
+<ul class="rating">
+<li th:if="${event.getRate()!=-1}" th:text="${event.getRate()}"></li>
+<th:block th:if="${(event.getIntRate()!=-1)and(event.getIntRate()!=0)}">
+<li th:each="i : ${#numbers.sequence(0, event.getIntRate()-1)}">
+    <i class="fa fa-star"></i>
+</li>
+</th:block>
+<th:block th:if="${(event.getIntRate()!=-1)and(event.getIntRate()!=5)}">
+<li th:each="i : ${#numbers.sequence(event.getIntRate(), 4)}">
+    <i class="fa fa-star-o"></i>
+</li>
+</th:block>
+<th:block th:if="${(event.getIntRate()==-1)}">
+<li th:each="i : ${#numbers.sequence(0, 4)}">
+    <i class="fa fa-star-o"></i>
+</li>
+</th:block>
+<li th:text="'('+${event.getReviewsCount()}+')'"></li>
+</ul>
+
+<!--Description-->
+<p class="card-text" style="font-size: medium; color: #000000" align="justify"
+th:text="${event.description}">
+%Описание%</p>
+
+<!--Card footer-->
+<div class="card-footer">
+<span class="left" style="color:#4285F4; font-size: x-large; padding-top: 0.4em;">
+    <strong th:text="${event.price}+'&#8381;'">%Цена%</strong>
+</span>
+<span class="right">
+    <a class="btn btn-primary waves-effect waves-light"
+       href="#" role="button"
+       data-toggle="modal" data-target="#modalGoOrder">Заказать</a>
+</span>
+</div>
+
+</div>
+<!--/.Card content-->
+</div>
+<div class="clearfix"></div>
+<br/>
+<div class="carousel slide" id="myCarousel" th:if="${reviews.size()>0}">
+<div class="carousel-inner">
+<div class="item active"
+ th:each="i : ${#numbers.sequence(0, reviews.size()-1)}"
+ th:class="'item'+(${i==0}?' active':'')">
+<div class="card" th:with="review = ${reviews.get(i)}">
+    <!--/*@thymesVar id="review" type="com.heroku.demo.review.Review"*/-->
+    <div class="card-header">
+        <img src="../../resources/img/user.png" th:src="${review.getPathToUserPhoto()}"
+             style="height: 50px; border-radius: 50%"/>
+        <span class="span_title" style="padding-top: 1em;"
+              th:text="${review.userFullName}">Вершинин Дмитрий Алексеевич</span>
+        <span class="span_right" style="padding-top: 1em;">
+            <span th:text="'('+${review.getLikesCount()}+')'">%likes%</span>
+            <a rel="tooltip" title="Like" href="javascript:void(0)">
+                <i class="fa fa-heart"></i>
+            </a>
+        </span>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-xs-1" th:if="${reviews.size()>1}" style="margin-top: 10px;">
+                <a data-slide="prev" href="#myCarousel" class="carousel-control left">‹</a>
+            </div>
+            <div class="col-xs-10">
+                <ul class="rating">
+                    <th:block th:if="${(review.getRate()!=-1)and(review.getRate()!=0)}">
+                        <li th:each="i : ${#numbers.sequence(0, review.getRate()-1)}">
+                            <i class="fa fa-star"></i>
+                        </li>
+                    </th:block>
+                    <th:block th:if="${(review.getRate()!=-1)and(review.getRate()!=5)}">
+                        <li th:each="i : ${#numbers.sequence(review.getRate(), 4)}">
+                            <i class="fa fa-star-o"></i>
+                        </li>
+                    </th:block>
+                    <th:block th:if="${(review.getRate()==-1)}">
+                        <li th:each="i : ${#numbers.sequence(0, 4)}">
+                            <i class="fa fa-star-o"></i>
+                        </li>
+                    </th:block>
+                </ul>
+                <p class="card-text" style="font-size: medium; color: #000000"
+                   align="justify"
+                   th:text="${review.getData()}">
+                    %Содержимое отзыва%
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aperiam blanditiis culpa cupiditate earum error exercitationem ipsam, laboriosam laudantium magni minus praesentium quae quis similique sunt tempore tenetur vero voluptatem?
+                </p>
+            </div>
+            <div class="col-xs-1" th:if="${reviews.size()>1}" style="margin-top: 10px;">
+                <a data-slide="next" href="#myCarousel" class="carousel-control right">›</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <span style="color: #aaaaaa;" th:text="${review.getTime()}">31 Aug 2017 12:41</span>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+            <!--/*Section: Event*/-->
+        </section>
+        <!--/*End-of-Section: Event*/-->
+        <section>
+            <!--/*Modal: modalEditProfile*/-->
+            <div class="modal fade" id="modalGoOrder" tabindex="-1" role="dialog"
+                 aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                <div class="modal-dialog cascading-modal modal-lg" role="document">
+                    <!--/*Content*/-->
+                    <div class="modal-content">
+                        <!--/*Modal cascading tabs*/-->
+                        <div class="modal-c-tabs">
+                            <!--/* Nav tabs */-->
+                            <ul class="nav nav-tabs tabs-2 light-blue darken-3" role="tablist">
+                                <li class="nav-item waves-effect waves-light">
+                                    <a class="nav-link active" data-toggle="tab"
+                                       th:text="${not(isUser or isAdmin)}?${#messages.msg('words.without_signup')}:${#messages.msg('words.order')}"
+                                       href="https://mdbootstrap.com/previews/templates/admin-dashboard/html/profile/extended.html#panel77"
+                                       role="tab" aria-expanded="true"><i class="fa fa-user mr-1"></i> Without sign up</a>
+                                </li>
+                                <li class="nav-item waves-effect waves-light" th:unless="${isUser or isAdmin}">
+                                    <a class="nav-link" data-toggle="tab"
+                                       href="https://mdbootstrap.com/previews/templates/admin-dashboard/html/profile/extended.html#panel88"
+                                       th:text="${#messages.msg('titles.login')}"
+                                       role="tab" aria-expanded="false"><i class="fa fa-lock mr-1"></i> Log in</a>
+                                </li>
+                                <li class="nav-item waves-effect waves-light" th:unless="${isUser or isAdmin}">
+                                    <a class="nav-link" data-toggle="tab"
+                                       href="https://mdbootstrap.com/previews/templates/admin-dashboard/html/profile/extended.html#panel99"
+                                       th:text="${#messages.msg('titles.registration')}"
+                                       role="tab" aria-expanded="false"><i class="fa fa-lock mr-1"></i> Sign up</a>
+                                </li>
+                            </ul>
+                            <!--/* Tab panels */-->
+                            <div class="tab-content">
+                                <!--/*Panel 7*/-->
+                                <div class="tab-pane fade in active" id="panel77" role="tabpanel"
+                                     aria-expanded="true">
+                                    <!--/*Body*/-->
+                                    <div class="modal-body mb-1">
+                                        <form action="/orders/add"
+                                              enctype="multipart/form-data" method="post">
+                                            <!--/*Grid row*/-->
+                                            <div class="row">
+                                                <!--/*Grid column*/-->
+                                                <div class="col-md-12">
+                                                    <!--/*LinkedIn*/-->
+                                                    <div class="md-form form-sm mt-2">
+                                                        <input type="number" id="editProfile10" value="1"
+                                                               class="form-control" th:max="${event.getUsersCount()}" min="1"/>
+                                                        <label for="editProfile10" th:text="${#messages.msg('words.users_count')} + ' (1 - ' + ${event.getUsersCount()} + ')'">Users count</label>
+                                                    </div>
+                                                </div>
+                                                <!--/*End-of-Grid column*/-->
+                                                <!--/*Grid column*/-->
+                                                <div class="col-xs-6">
+                                                    <!--/*LinkedIn*/-->
+                                                    <div class="md-form form-sm mt-2">
+                                                        <input type="date" id="editProfile11"
+                                                               class="form-control" style="line-height: 36px"/>
+                                                        <!--<label for="editProfile11">Date</label>-->
+                                                    </div>
+                                                </div>
+                                                <!--/*End-of-Grid column*/-->
+                                                <!--/*Grid column*/-->
+                                                <div class="col-xs-6">
+                                                    <!--/*LinkedIn*/-->
+                                                    <div class="md-form form-sm mt-2">
+                                                        <input type="time" id="editProfile12"
+                                                               class="form-control" style="line-height: 36px"/>
+                                                        <!--<label for="editProfile12">Time</label>-->
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <!--/*End-of-Grid column*/-->
+                                                <!--/*Grid column*/-->
+                                                <div class="col-xs-6">
+                                                    <!--/*First Name*/-->
+                                                    <div class="md-form form-sm">
+                                                        <input type="text" id="editProfile1"
+                                                               class="form-control" name="first_name" th:value="${person.getFirstName()}"/>
+                                                        <label for="editProfile1" class=""
+                                                               th:text="${#messages.msg('words.first_name')}">First
+                                                            name</label>
+                                                    </div>
+                                                </div>
+                                                <!--/*End-of-Grid column*/-->
+                                                <!--/*Grid column*/-->
+                                                <div class="col-xs-6">
+                                                    <!--/*Last Name*/-->
+                                                    <div class="md-form form-sm">
+                                                        <input type="text" id="editProfile2" th:value="${person.getLastName()}"
+                                                               class="form-control" name="last_name"/>
+                                                        <label for="editProfile2" class=""
+                                                               th:text="${#messages.msg('words.last_name')}">Last
+                                                            name</label>
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <!--/*End-of-Grid column*/-->
+                                                <!--/*Grid column*/-->
+                                                <div class="col-xs-6">
+                                                    <!--/*Company website*/-->
+                                                    <div class="md-form form-sm">
+<input type="text" id="editProfile5" name="email" th:value="${person.getEmail()}"
+          class="form-control"/>
+                                                        <label for="editProfile5" class="">E-mail</label>
+                                                    </div>
+                                                </div>
+                                                <!--/*End-of-Grid column*/-->
+                                                <div class="col-xs-6">
+                                                    <!--/*City*/-->
+                                                    <div class="md-form form-sm">
+                                                        <input type="text" id="editProfile6" name="city"
+                                                               class="form-control bfh-phone" required="" minlength="17"
+                                                               data-format="+7 (ddd) ddd-dddd" th:value="${person.getPhoneNumber()}"/>
+                                                        <label for="editProfile6" class=""
+                                                               th:text="${#messages.msg('words.phone')}">Phone number</label>
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <div class="col-md-12">
+                                                    <h5 style="font-weight: bold">Messangers</h5>
+                                                </div>
+                                                <div class="col-xs-4">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" name="tg" style="margin-left: -20px; visibility: visible; left:20px;"/><span>Telegram</span>
+                                                    </label>
+                                                </div>
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" name="wa" style="margin-left: -20px; visibility: visible; left:20px;"/><span>Whats App</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" name="vb" style="margin-left: -20px; visibility: visible; left:20px;"/><span>Viber</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <br/>
+                                                <!--/*Company website*/-->
+                                                <div class="col-md-12">
+                                                <div class="md-form form-sm">
+                                                    <textarea type="text" id="editProfile13" name="about_me"
+                                                      class="md-textarea"></textarea>
+                                                    <label for="editProfile13" class=""
+                                                           th:text="${#messages.msg('words.your_comment')}">Your comment</label>
+                                                </div>
+                                            </div>
+                                            <!--/*End-of-Grid column*/-->
+                                            </div>
+                                            <div class="modal-footer justify-content-center">
+                                                <button type="reset"
+                                                        class="btn btn-outline-primary waves-effect waves-light"
+                                                        data-dismiss="modal">Отменить
+                                                </button>
+                                                <button type="submit"
+                                                        class="btn btn-primary waves-effect waves-light">
+                                                    Оплата <i class="fa fa-check ml-1"></i></button>
+                                            </div>
+                                            <!--/*End-of-Grid row*/-->
+                                        </form>
+                                    </div>
+                                </div>
+                                <!--/*End-of-Panel 7*/-->
+                                <!--/*Panel 8*/-->
+                                <div class="tab-pane fade" id="panel88" role="tabpanel" aria-expanded="false">
+                                    <!--/*Body*/-->
+                                    <div class="modal-body">
+                                        <h2><a th:text="${#messages.msg('titles.login')}" href="/users/login">Log in</a></h2>
+                                        <h3>Warning, order will not save!</h3>
+                                    </div>
+                                </div>
+                                <!--/*End-of-Panel 8*/-->
+                                <!--/*Panel 8*/-->
+                                <div class="tab-pane fade" id="panel99" role="tabpanel" aria-expanded="false">
+                                    <!--/*Body*/-->
+                                    <div class="modal-body">
+                                        <h2><a th:text="${#messages.msg('titles.registration')}" href="/users/registration">Sign up</a></h2>
+                                        <h3>Warning, order will not save!</h3>
+                                    </div>
+                                </div>
+                                <!--/*End-of-Panel 8*/-->
+                            </div>
+                        </div>
+                    </div>
+                    <!--/*End-of-Content*/-->
+                </div>
+            </div>
+            <!--/*End-of-Modal: modalEditProfile*/-->
+        </section>
+    </div>
+    </main>
+</div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+<script type="text/javascript" src="../../resources/js/compiled.min.js"></script>
+<script type="text/javascript" src="../../resources/libs/popper/popper.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
+</body>
+</html>

@@ -91,6 +91,27 @@ aria-label="Фамилия"/>
 </div>
 </div>
 <br/>
+    <div class="row">
+    <div class="col-md-12 col-lg-6">
+    <div class="input-group">
+        <span class="input-group-addon">Email *</span>
+        <input name="email" id="email" type="email" class="form-control"
+               th:value="${insertPerson.getEmail()}" placeholder="Email" aria-label="Email"
+               required=""/>
+        <!--/*@thymesVar id="error_email_free" type="java.lang.Boolean"*/-->
+        <label for="email" th:if="${error_email_free}"
+               th:text="${#messages.msg('error.user.email.free')}" th:class="'error'">Name
+            Error</label>
+        <!--/*@thymesVar id="error_email_valid" type="java.lang.Boolean"*/-->
+        <label for="email" th:if="${error_email_valid}"
+               th:text="${#messages.msg('error.user.email.valid')}" th:class="'error'">Name
+            Error</label>
+    </div>
+    </div>
+    <div class="visible-sm-block visible-xs-block visible-md-block ">
+        <br/>
+    </div>
+    <div class="col-md-12 col-lg-6">
 <div class="input-group">
 <span class="input-group-addon" th:text="${#messages.msg('words.login')} + ' *'">Логин</span>
 <input name="login" id="login" type="text" class="form-control" placeholder="Логин"
@@ -101,6 +122,8 @@ th:class="'error'">Name Error</label>
 <label for="login" th:if="${#fields.hasErrors('login')}"
 th:text="${#messages.msg('error.user.login.size')}" th:class="'error'">Name Error</label>
 </div>
+    </div>
+    </div>
 <br/>
 <div class="row">
 <div class="col-md-12 col-lg-6">
@@ -128,21 +151,6 @@ placeholder="Повторите пароль" aria-label="Повторите п�
 th:class="'error'">Name Error</label>
 </div>
 </div>
-</div>
-<br/>
-<div class="input-group">
-<span class="input-group-addon">Email *</span>
-<input name="email" id="email" type="email" class="form-control"
-th:value="${insertPerson.getEmail()}" placeholder="Email" aria-label="Email"
-required=""/>
-<!--/*@thymesVar id="error_email_free" type="java.lang.Boolean"*/-->
-<label for="email" th:if="${error_email_free}"
-th:text="${#messages.msg('error.user.email.free')}" th:class="'error'">Name
-Error</label>
-<!--/*@thymesVar id="error_email_valid" type="java.lang.Boolean"*/-->
-<label for="email" th:if="${error_email_valid}"
-th:text="${#messages.msg('error.user.email.valid')}" th:class="'error'">Name
-Error</label>
 </div>
 <br/>
 <div class="input-group">

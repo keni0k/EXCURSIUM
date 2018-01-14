@@ -9,23 +9,23 @@ xmlns:th="http://www.thymeleaf.org">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="keywords" content="excursium"/>
 
-<link rel="stylesheet" type="text/css" href="../resources/css/footer.css"/>
-<link rel="stylesheet" href="../resources/libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>
-<link rel="stylesheet" href="../resources/libs/bootstrap-select/css/bootstrap-select.css"/>
+<link rel="stylesheet" type="text/css" href="../../resources/css/footer.css"/>
+<link rel="stylesheet" href="../../resources/libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>
+<link rel="stylesheet" href="../../resources/libs/bootstrap-select/css/bootstrap-select.css"/>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 
-<link rel="icon" href="../resources/img/icon.ico" type="image/x-icon"/>
-<link rel="shortcut icon" href="../resources/img/icon.ico" type="image/x-icon"/>
+<link rel="icon" href="../../resources/img/icon.ico" type="image/x-icon"/>
+<link rel="shortcut icon" href="../../resources/img/icon.ico" type="image/x-icon"/>
 
-<link rel="stylesheet" type="text/css" href="../resources/css/styles.css"/>
-<link rel="stylesheet" href="../resources/css/cards.css"/>
-<link rel="stylesheet" href="../resources/css/media.css"/>
+<link rel="stylesheet" type="text/css" href="../../resources/css/styles.css"/>
+<link rel="stylesheet" href="../../resources/css/cards.css"/>
+<link rel="stylesheet" href="../../resources/css/media.css"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
+<script type="text/javascript" src="../../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
 <title>Экскурсии</title>
 </head>
 <body style="background-color: #f9f9f9;">
@@ -45,14 +45,14 @@ th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#http
 <div class="face front">
 <!--/* Image*/-->
 <div class="card-up">
-<img src="../resources/img/bg-cta.jpg" class="img-responsive"
-alt="Team member card image"/>
+<img src="../../resources/img/bg-cta.jpg" class="img-responsive"
+     alt="Team member card image"/>
 </div>
 
 <!--/*Avatar*/-->
 <div class="avatar">
-<img src="../resources/img/user.png" class="rounded-circle img-responsive"
-th:src="${person.getImageUrl()}" alt="Third sample avatar image"/>
+<img src="../../resources/img/user.png" class="rounded-circle img-responsive"
+     th:src="${person.getImageUrl()}" alt="Third sample avatar image"/>
 </div>
 
 <!--/*Content*/-->
@@ -129,6 +129,6 @@ th:text="${#messages.msg('words.go_back')}">Назад
 </div>
 </div>
 </div>
-<script type="text/javascript" src="../resources/js/compiled.min.js"></script>
+<script type="text/javascript" src="../../resources/js/compiled.min.js"></script>
 <div th:replace="fragments/footer :: footer"></div></body>
 </html>

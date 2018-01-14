@@ -9,20 +9,20 @@ xmlns:th="http://www.thymeleaf.org">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="keywords" content="excursium"/>
 
-<link rel="stylesheet" type="text/css" href="../resources/css/footer.css"/>
-<link rel="stylesheet" href="../resources/libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>
-<link rel="stylesheet" href="../resources/libs/bootstrap-select/css/bootstrap-select.css"/>
+<link rel="stylesheet" type="text/css" href="../../resources/css/footer.css"/>
+<link rel="stylesheet" href="../../resources/libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>
+<link rel="stylesheet" href="../../resources/libs/bootstrap-select/css/bootstrap-select.css"/>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-<link rel="stylesheet" href="../resources/css/carousel.css"/>
+<link rel="stylesheet" href="../../resources/css/carousel.css"/>
 
-<link rel="icon" href="../resources/img/icon.ico" type="image/x-icon"/>
-<link rel="shortcut icon" href="../resources/img/icon.ico" type="image/x-icon"/>
+<link rel="icon" href="../../resources/img/icon.ico" type="image/x-icon"/>
+<link rel="shortcut icon" href="../../resources/img/icon.ico" type="image/x-icon"/>
 
-<link rel="stylesheet" type="text/css" href="../resources/css/styles.css"/>
-<link rel="stylesheet" href="../resources/css/cards.css"/>
-<link rel="stylesheet" href="../resources/css/media.css"/>
+<link rel="stylesheet" type="text/css" href="../../resources/css/styles.css"/>
+<link rel="stylesheet" href="../../resources/css/cards.css"/>
+<link rel="stylesheet" href="../../resources/css/media.css"/>
 
 <title>Экскурсии</title>
 <script th:inline="javascript">
@@ -34,6 +34,7 @@ interval: 8000
 </script>
 </head>
 <body style="background-color: #f9f9f9;">
+<!--/*@thymesVar id="order" type="com.heroku.demo.order.Buy"*/-->
 <!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
 <!--/*@thymesVar id="person" type="com.heroku.demo.person.Person"*/-->
 <!--/*@thymesVar id="reviews" type="java.util.List<com.heroku.demo.review.Review>"*/-->
@@ -51,7 +52,7 @@ th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#http
 <!--Card image-->
 <div class="view overlay hm-white-slight z-depth-1" style="max-height: 20rem"><!--TODO-->
 <div class="img_crop">
-<img th:src="${event.pathToPhoto}" src="../resources/img/bg-cta.jpg" class="img-fluid"
+<img th:src="${event.pathToPhoto}" src="../../resources/img/bg-cta.jpg" class="img-fluid"
      alt=""/>
 </div>
 
@@ -64,7 +65,7 @@ th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#http
 <a class="btn-action waves-effect waves-light" style="background: none; width: auto;"
 th:href="@{/users/user(id = ${event.getGuideId()})}">
 <div class="avatar">
-<img th:src="${event.getPhotoOfGuide()}" src="../resources/img/user.png"
+<img th:src="${event.getPhotoOfGuide()}" src="../../resources/img/user.png"
      style="height: 100px; width:auto; border-radius: 50%;" alt="Аватар"/>
 </div>
 </a>
@@ -76,7 +77,7 @@ th:href="@{/users/user(id = ${event.getGuideId()})}">
 <!--Category & Title-->
 <h5 th:text="${event.getCategoryString()}">%Категория%</h5>
 <h3 class="card-title">
-<strong th:text="${event.name}">
+<strong th:text="${order.name}">
     <a href="">%Название%</a>
 </strong>
 </h3>
@@ -104,18 +105,21 @@ th:href="@{/users/user(id = ${event.getGuideId()})}">
 
 <!--Description-->
 <p class="card-text" style="font-size: medium; color: #000000" align="justify"
-th:text="${event.description}">
+th:text="${order.description}">
 %Описание%</p>
+
+    <!--TIME-->
+    <p class="card-text" style="font-size: medium; color: #000000" align="justify"
+       th:text="'Time of order: '+${order.time}">%Врмя заказа%</p>
 
 <!--Card footer-->
 <div class="card-footer">
 <span class="left" style="color:#4285F4; font-size: x-large; padding-top: 0.4em;">
-    <strong th:text="${event.price}+'&#8381;'">%Цена%</strong>
+    <strong th:text="${order.price}+'&#8381;'">%Цена%</strong>
 </span>
 <span class="right">
     <a class="btn btn-primary waves-effect waves-light"
-       href="#" role="button"
-       data-toggle="modal" data-target="#modalGoOrder">Заказать</a>
+       th:href="@{/events/event(id = ${event.getId()})}" role="button">К станице экскурсии</a>
 </span>
 </div>
 
@@ -123,68 +127,6 @@ th:text="${event.description}">
 <!--/.Card content-->
 </div>
 <div class="clearfix"></div>
-<br/>
-<div class="carousel slide" id="myCarousel" th:if="${reviews.size()>0}">
-<div class="carousel-inner">
-<div class="item active"
- th:each="i : ${#numbers.sequence(0, reviews.size()-1)}"
- th:class="'item'+(${i==0}?' active':'')">
-<div class="card" th:with="review = ${reviews.get(i)}">
-    <!--/*@thymesVar id="review" type="com.heroku.demo.review.Review"*/-->
-    <div class="card-header">
-        <img src="../resources/img/user.png" th:src="${review.getPathToUserPhoto()}"
-             style="height: 50px; border-radius: 50%"/>
-        <span class="span_title" style="padding-top: 1em;"
-              th:text="${review.userFullName}">Вершинин Дмитрий Алексеевич</span>
-        <span class="span_right" style="padding-top: 1em;">
-            <span th:text="'('+${review.getLikesCount()}+')'">%likes%</span>
-            <a rel="tooltip" title="Like" href="javascript:void(0)">
-                <i class="fa fa-heart"></i>
-            </a>
-        </span>
-    </div>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-xs-1" th:if="${reviews.size()>1}" style="margin-top: 10px;">
-                <a data-slide="prev" href="#myCarousel" class="carousel-control left">‹</a>
-            </div>
-            <div class="col-xs-10">
-                <ul class="rating">
-                    <th:block th:if="${(review.getRate()!=-1)and(review.getRate()!=0)}">
-                        <li th:each="i : ${#numbers.sequence(0, review.getRate()-1)}">
-                            <i class="fa fa-star"></i>
-                        </li>
-                    </th:block>
-                    <th:block th:if="${(review.getRate()!=-1)and(review.getRate()!=5)}">
-                        <li th:each="i : ${#numbers.sequence(review.getRate(), 4)}">
-                            <i class="fa fa-star-o"></i>
-                        </li>
-                    </th:block>
-                    <th:block th:if="${(review.getRate()==-1)}">
-                        <li th:each="i : ${#numbers.sequence(0, 4)}">
-                            <i class="fa fa-star-o"></i>
-                        </li>
-                    </th:block>
-                </ul>
-                <p class="card-text" style="font-size: medium; color: #000000"
-                   align="justify"
-                   th:text="${review.getData()}">
-                    %Содержимое отзыва%
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aperiam blanditiis culpa cupiditate earum error exercitationem ipsam, laboriosam laudantium magni minus praesentium quae quis similique sunt tempore tenetur vero voluptatem?
-                </p>
-            </div>
-            <div class="col-xs-1" th:if="${reviews.size()>1}" style="margin-top: 10px;">
-                <a data-slide="next" href="#myCarousel" class="carousel-control right">›</a>
-            </div>
-        </div>
-    </div>
-    <div class="card-footer">
-        <span style="color: #aaaaaa;" th:text="${review.getTime()}">31 Aug 2017 12:41</span>
-    </div>
-</div>
-</div>
-</div>
-</div>
 </div>
 </div>
             <!--/*Section: Event*/-->
@@ -231,16 +173,6 @@ th:text="${event.description}">
                                               enctype="multipart/form-data" method="post">
                                             <!--/*Grid row*/-->
                                             <div class="row">
-                                                <!--/*Grid column*/-->
-                                                <div class="col-md-12">
-                                                    <!--/*LinkedIn*/-->
-                                                    <div class="md-form form-sm mt-2">
-                                                        <input type="number" id="editProfile10" value="1"
-                                                               class="form-control" th:max="${event.getUsersCount()}" min="1"/>
-                                                        <label for="editProfile10" th:text="${#messages.msg('words.users_count')} + ' (1 - ' + ${event.getUsersCount()} + ')'">Users count</label>
-                                                    </div>
-                                                </div>
-                                                <!--/*End-of-Grid column*/-->
                                                 <!--/*Grid column*/-->
                                                 <div class="col-xs-6">
                                                     <!--/*LinkedIn*/-->
@@ -390,10 +322,10 @@ th:text="${event.description}">
 </div>
 </div>
 <div th:replace="fragments/footer :: footer"></div>
-<script type="text/javascript" src="../resources/js/compiled.min.js"></script>
-<script type="text/javascript" src="../resources/libs/popper/popper.js"></script>
+<script type="text/javascript" src="../../resources/js/compiled.min.js"></script>
+<script type="text/javascript" src="../../resources/libs/popper/popper.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
+<script type="text/javascript" src="../../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
 </body>
 </html>

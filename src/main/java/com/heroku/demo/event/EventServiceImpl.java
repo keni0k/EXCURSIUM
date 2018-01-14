@@ -29,8 +29,8 @@ public class EventServiceImpl implements EventService {
         eventRepository.delete(id);
     }
 
-    public EventServiceImpl(EventRepository reviewRepository, PhotoServiceImpl photoService) {
-        this.eventRepository = reviewRepository;
+    public EventServiceImpl(EventRepository eventRepository, PhotoServiceImpl photoService) {
+        this.eventRepository = eventRepository;
         this.photoService = photoService;
     }
 

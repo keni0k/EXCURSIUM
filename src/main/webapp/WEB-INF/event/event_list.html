@@ -10,31 +10,31 @@ xmlns:th="http://www.thymeleaf.org">
 <meta name="keywords" content="excursium"/>
 <title th:text="${#messages.msg('titles.excursions')}">Экскурсии</title>
 
-<link rel="stylesheet" type="text/css" href="../resources/css/footer.css"/>
-<link rel="stylesheet" href="../resources/libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>
-<link rel="stylesheet" href="../resources/libs/bootstrap-select/css/bootstrap-select.css"/>
-<link rel="stylesheet" href="../resources/css/slider/jslider.css" type="text/css"/>
-<link rel="stylesheet" href="../resources/css/slider/jslider.plastic.css" type="text/css"/>
+<link rel="stylesheet" type="text/css" href="../../resources/css/footer.css"/>
+<link rel="stylesheet" href="../../resources/libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>
+<link rel="stylesheet" href="../../resources/libs/bootstrap-select/css/bootstrap-select.css"/>
+<link rel="stylesheet" href="../../resources/css/slider/jslider.css" type="text/css"/>
+<link rel="stylesheet" href="../../resources/css/slider/jslider.plastic.css" type="text/css"/>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 
-<link rel="icon" href="../resources/img/icon.ico" type="image/x-icon"/>
-<link rel="shortcut icon" href="../resources/img/icon.ico" type="image/x-icon"/>
+<link rel="icon" href="../../resources/img/icon.ico" type="image/x-icon"/>
+<link rel="shortcut icon" href="../../resources/img/icon.ico" type="image/x-icon"/>
 
-<link rel="stylesheet" type="text/css" href="../resources/css/styles.css"/>
-<link rel="stylesheet" href="../resources/css/cards.css"/>
-<link rel="stylesheet" href="../resources/css/media.css"/>
+<link rel="stylesheet" type="text/css" href="../../resources/css/styles.css"/>
+<link rel="stylesheet" href="../../resources/css/cards.css"/>
+<link rel="stylesheet" href="../../resources/css/media.css"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
-<script type="text/javascript" src="../resources/js/slider/jshashtable-2.1_src.js"></script>
-<script type="text/javascript" src="../resources/js/slider/jquery.numberformatter-1.2.3.js"></script>
-<script type="text/javascript" src="../resources/js/slider/tmpl.js"></script>
-<script type="text/javascript" src="../resources/js/slider/jquery.dependClass-0.1.js"></script>
-<script type="text/javascript" src="../resources/js/slider/draggable-0.1.js"></script>
-<script type="text/javascript" src="../resources/js/slider/jquery.slider.js"></script>
+<script type="text/javascript" src="../../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
+<script type="text/javascript" src="../../resources/js/slider/jshashtable-2.1_src.js"></script>
+<script type="text/javascript" src="../../resources/js/slider/jquery.numberformatter-1.2.3.js"></script>
+<script type="text/javascript" src="../../resources/js/slider/tmpl.js"></script>
+<script type="text/javascript" src="../../resources/js/slider/jquery.dependClass-0.1.js"></script>
+<script type="text/javascript" src="../../resources/js/slider/draggable-0.1.js"></script>
+<script type="text/javascript" src="../../resources/js/slider/jquery.slider.js"></script>
 </head>
 <body style="background-color: #f9f9f9;">
 <div class="content"
@@ -58,7 +58,7 @@ th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#http
 th:each="i : ${#numbers.sequence(0, utils.getCategoriesCount()-1)}">
 <a th:href="@{/events/list(category=${i}, sort_by = ${sort_by})}">
 <img th:src="${utils.getCategoryUrl(i)}" alt=""
-src="../resources/img/user.png"/>
+src="../../resources/img/user.png"/>
 <span th:text="${#messages.msg('category.'+i)}">%Категория%</span>
 </a>
 </div>
@@ -175,8 +175,8 @@ th:with="event=${events.get(j)}">
 <!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
 <!--/*Card image*/-->
 <div class="view overlay hm-white-slight z-depth-1" style="margin-top: 20px;">
-<div class="img_crop"><img src="../resources/img/bg-cta.jpg" th:src="${event.pathToPhoto}"
-class="img-fluid" alt=""/></div>
+<div class="img_crop"><img src="../../resources/img/bg-cta.jpg" th:src="${event.pathToPhoto}"
+                           class="img-fluid" alt=""/></div>
 <a th:href="@{/events/event(id = ${event.getId()})}"><div class="mask waves-effect waves-light"></div></a>
 </div>
 <!--/*Card image*/-->

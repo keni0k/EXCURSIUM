@@ -69,7 +69,7 @@ public class EventController {
     @RequestMapping(value = "/add")
     public String eventAdd(ModelMap model) {
         model.addAttribute("inputEvent", new Event());
-        return "event_add";
+        return "event/event_add";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -95,7 +95,7 @@ public class EventController {
             modelMap.addAttribute("file", file);
             modelMap.addAttribute("inputEvent", event);
             modelMap.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("error.event.add", null, locale)));
-            return "event_add";
+            return "event/event_add";
         }
 
         if (file != null && !file.isEmpty()) {
@@ -142,7 +142,7 @@ public class EventController {
     private String eventAddAgain(ModelMap model, Event event, String errorData) {
         model.addAttribute("inputEvent", event);
         model.addAttribute("error_data", errorData);
-        return "event_add";
+        return "event/event_add";
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
@@ -166,7 +166,7 @@ public class EventController {
             if (!loginOrEmail.equals(""))
                 model.addAttribute("person", personService.getByLoginOrEmail(loginOrEmail));
         } else model.addAttribute("person", new Person());
-        return "event";
+        return "event/event";
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -212,7 +212,7 @@ public class EventController {
         model.addAttribute("events", events);
         model.addAttribute("category", category);
         model.addAttribute("utils", new UtilsForWeb());
-        return "event_list";
+        return "event/event_list";
     }
 
     @RequestMapping("/categories")
@@ -271,7 +271,7 @@ public class EventController {
         } else model.addAttribute("inputEvent", new Event());
         model.addAttribute("utils", new UtilsForWeb());
 
-        return "events";
+        return "admin/events";
     }
 
     @RequestMapping(value = "/moderation", method = RequestMethod.POST)
@@ -295,7 +295,7 @@ public class EventController {
         modelMap.addAttribute("events", events);
         modelMap.addAttribute("inputEvent", event1);
 
-        return "events";
+        return "admin/events";
     }
 
     @RequestMapping(value = "/addevent", method = RequestMethod.POST)
