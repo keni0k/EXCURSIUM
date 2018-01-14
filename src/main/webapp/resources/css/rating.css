@@ -15,7 +15,7 @@
     float:right;
     width:1em;
     padding:0 .1em;
-    overflow:hidden;
+    /*overflow:hidden;*/
     white-space:nowrap;
     cursor:pointer;
     font-size:200%;
@@ -52,4 +52,9 @@
     position:relative;
     top:2px;
     left:2px;
+}
+
+.rating > label:before{
+    margin: 0; width: 0;
+    height: 0; border-style: hidden;
 }
