@@ -200,7 +200,7 @@ th:text="${order.description}">%Описание%</p>
                                                         <input type="text" id="editProfile1"
                                                                class="form-control" name="first_name"/>
                                                         <label for="editProfile1" class=""
-                                                               th:text="${#messages.msg('words.advantages')}">Достоинства</label>
+                                                               th:text="${#messages.msg('review.advantages')}">Достоинства</label>
                                                     </div>
                                                 </div>
                                                 <!--/*End-of-Grid column*/-->
@@ -209,10 +209,10 @@ th:text="${order.description}">%Описание%</p>
                                                 <div class="col-xs-12">
                                                     <!--/*Last Name*/-->
                                                     <div class="md-form form-sm">
-                                                        <input type="text" id="editProfile2" th:value="${person.getLastName()}"
+                                                        <input type="text" id="editProfile2"
                                                                class="form-control" name="last_name"/>
                                                         <label for="editProfile2" class=""
-                                                               th:text="${#messages.msg('words.disadvantages')}">Недостатки</label>
+                                                               th:text="${#messages.msg('review.disadvantages')}">Недостатки</label>
                                                     </div>
                                                 </div>
                                                 <div class="clearfix"></div>
