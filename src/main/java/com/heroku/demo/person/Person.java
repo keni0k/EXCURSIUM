@@ -10,7 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -34,7 +33,6 @@ public class Person implements UserDetails{
     private String email = "";
     private String firstName = "";
     private int rate = 0;
-    @Size(min = 17, max = 17)
     private String phoneNumber = "";
     private String about = "";
     private String city = "";
