@@ -26,7 +26,7 @@ xmlns:th="http://www.thymeleaf.org">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
-<title>403</title>
+<title>404</title>
 </head>
 <body style="background-color: #f9f9f9;">
 <div class="content"
@@ -34,7 +34,8 @@ th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#http
 <div th:replace="fragments/header :: style"></div>
 <div th:replace="fragments/header :: header"></div>
 <div class="container">
-<h1 style="align-content: center; vertical-align: middle" th:text="${#messages.msg('error.404')}">Ошибка 404. Мы не нашли такой страницы!!1!</h1>
+<h1 style="align-content: center; vertical-align: middle" th:text="${#messages.msg('error.404')}">Страница 404!</h1>
+    <h1 style="align-content: center; vertical-align: middle" th:text="${#messages.msg('error.404.add.0')}">Ух, описние ее</h1>
 <h2 style="align-content: center; vertical-align: middle"><a href="/index#contact" th:text="${#messages.msg('error.404.add.1')}">Напишите нам, если у вас возникли проблемы</a></h2>
 <h3 style="align-content: center; vertical-align: middle">
 <span style="color: #555555;" th:text="${#messages.msg('error.404.add.2')}">Ничего не найдено</span>
