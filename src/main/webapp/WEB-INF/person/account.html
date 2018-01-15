@@ -30,6 +30,14 @@ xmlns:th="http://www.thymeleaf.org">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
 
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        function modalReview(id) {
+            document.getElementById('order_id').value=id;
+        }
+        /*]]>*/
+    </script>
+
 </head>
 
 <body style="background-color: #f9f9f9;">
@@ -204,7 +212,7 @@ class="fa fa-photo ml-1"></i></a>
     <th:block th:if="${order.getReviewId()==-1}">
     <div class="clearfix"></div>
     <span class="left pt-2">
-    <a href="#" data-toggle="modal" data-target="#modalAddReview"><i class="fa fa-comments mr-2"></i>Оставить отзыв</a><!--role="button" -->
+    <a href="#" data-toggle="modal" data-target="#modalAddReview" th:onclick="'modalReview('+${order.getId()}+')'"><i class="fa fa-comments mr-2"></i>Оставить отзыв</a><!--role="button" -->
     </span>
     </th:block>
 </div>
