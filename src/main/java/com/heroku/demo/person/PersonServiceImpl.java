@@ -100,9 +100,9 @@ public class PersonServiceImpl implements PersonService {
                 case 1:
                     return Long.compare(o2.getId(), o1.getId());
                 case 2:
-                    return Integer.compare(o1.getRate(), o2.getRate());
+                    return Float.compare(o1.getRate(), o2.getRate());
                 case 3:
-                    return Integer.compare(o2.getRate(), o1.getRate());
+                    return Float.compare(o2.getRate(), o1.getRate());
                 case 4:
                     return Integer.compare(o1.getType(), o2.getType());
                 case 5:
