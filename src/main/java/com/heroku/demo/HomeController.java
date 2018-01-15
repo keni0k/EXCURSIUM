@@ -49,7 +49,6 @@ public class HomeController {
 
     }
 
-
     @RequestMapping("error/403")
     public String access403() {
         return "error/403";
