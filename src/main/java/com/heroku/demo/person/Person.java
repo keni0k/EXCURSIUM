@@ -32,7 +32,7 @@ public class Person implements UserDetails{
     private int type = 0;
     private String email = "";
     private String firstName = "";
-    private int rate = 0;
+    private float rate = 0;
     private String phoneNumber = "";
     private String about = "";
     private String city = "";
@@ -127,11 +127,11 @@ public class Person implements UserDetails{
         this.firstName = firstName;
     }
 
-    public int getRate() {
+    public float getRate() {
         return rate;
     }
 
-    public void setRate(int rate) {
+    public void setRate(float rate) {
         this.rate = rate;
     }
 

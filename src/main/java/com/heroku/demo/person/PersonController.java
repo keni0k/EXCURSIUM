@@ -114,7 +114,7 @@ public class PersonController {
                             order.setReviewId(review.getId());
                             orderService.editBuy(order);
                             Person guide = personService.getById(eventService.getById(order.getEventId()).getGuideId());
-                            guide.setRate(guide.getRate()+guideRate);
+                            guide.setRate((guide.getRate()*guide.getReviewsCount()+guideRate)/(guide.getReviewsCount()+1));
                             guide.setReviewsCount(guide.getReviewsCount()+1);
                             personService.editPerson(guide);
                         }
