@@ -153,11 +153,13 @@
                                         <img src="../../resources/img/user.png" th:src="${review.getPathToUserPhoto()}"
                                              style="height: 50px; border-radius: 50%"/>
                                         <span class="span_title" style="padding-top: 1em;"
-                                              th:text="${review.userFullName}">Вершинин Дмитрий Алексеевич<span style="color: #777777"> [ваш отзыв]</span></span>
+                                              th:text="${review.userFullName}">Вершинин Дмитрий Алексеевич</span>
+                                        <span class="span_title" style="padding-top: 1em; color: #777777"> [ваш отзыв]</span>
                                         <span class="span_right" style="padding-top: 1em;">
                                             <span th:text="'('+${review.getLikesCount()}+')'">%likes%</span>
                                             <i class="fa fa-heart"></i>
-                                                <a rel="tooltip" title="Edit" href="javascript:void(0)">
+                                                <a rel="tooltip" title="Edit" href="javascript:void(0)" role="button"
+                                                   th:onclick="'modalReview('+${order.getId()}+')'" data-toggle="modal" data-target="#modalAddReview">
                                                     <i class="fa fa-edit" style="font-size: 20px; margin-left: 10px"></i>
                                                 </a>
                                         </span>
