@@ -29,7 +29,6 @@ xmlns:th="http://www.thymeleaf.org">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
-<style>.pe{width: 300px; margin-left: -150px;}.nepe{width: 620px; margin-left: -310px;}</style>
 
 </head>
 
@@ -46,6 +45,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
 <!--/*TODO isThisUserAccount*/-->
 <div th:replace="fragments/header :: style"></div>
 <div th:replace="fragments/header :: header"></div>
+<style>.pe:before{width: 300px !important; margin-left: -150px !important;}.nepe:before{width: 620px !important; margin-left: -310px !important;}</style>
 
 <div class="container">
 

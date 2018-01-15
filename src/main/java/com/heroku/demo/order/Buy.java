@@ -26,7 +26,6 @@ public class Buy {
     @Transient
     private String imageUrl;
 
-    @Transient
     private String name;
 
     private String description;

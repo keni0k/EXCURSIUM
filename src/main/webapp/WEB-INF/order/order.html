@@ -78,7 +78,7 @@ th:href="@{/users/user(id = ${event.getGuideId()})}">
 <!--Category & Title-->
 <h5 th:text="${event.getCategoryString()}">%Категория%</h5>
 <h3 class="card-title">
-<strong th:text="${order.name}">
+<strong th:text="${order.getName()}+'[скриншот заказа]'">
     <a href="">%Название%</a>
 </strong>
 </h3>

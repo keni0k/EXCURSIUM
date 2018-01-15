@@ -25,15 +25,15 @@
                                     <!--/*Rating*/-->
                                     <fieldset class="rating">
                                         <legend>Экскурсия:</legend>
-                                        <input type="radio" id="star5" name="rating_of_event" value="5"/><label for="star5"
+                                        <input type="radio" id="star5" name="rate" value="5"/><label for="star5"
                                                                                                                 title="Rocks!"></label>
-                                        <input type="radio" id="star4" name="rating_of_event" value="4"/><label for="star4"
+                                        <input type="radio" id="star4" name="rate" value="4"/><label for="star4"
                                                                                                                 title="Pretty good"></label>
-                                        <input type="radio" id="star3" name="rating_of_event" value="3"/><label for="star3"
+                                        <input type="radio" id="star3" name="rate" value="3"/><label for="star3"
                                                                                                                 title="Meh"></label>
-                                        <input type="radio" id="star2" name="rating_of_event" value="2"/><label for="star2"
+                                        <input type="radio" id="star2" name="rate" value="2"/><label for="star2"
                                                                                                                 title="Kinda bad"></label>
-                                        <input type="radio" id="star1" name="rating_of_event" value="1"/><label for="star1"
+                                        <input type="radio" id="star1" name="rate" value="1"/><label for="star1"
                                                                                                                 title="Sucks big time"></label>
                                     </fieldset>
                                 </div>
@@ -63,7 +63,7 @@
                                     <!--/*First Name*/-->
                                     <div class="md-form form-sm">
                                         <input type="text" id="editProfile1"
-                                               class="form-control" name="first_name"/>
+                                               class="form-control" name="advantages" autocomplete="off"/>
                                         <label for="editProfile1" class=""
                                                th:text="${#messages.msg('review.advantages')}">Достоинства</label>
                                     </div>
@@ -75,7 +75,7 @@
                                     <!--/*Last Name*/-->
                                     <div class="md-form form-sm">
                                         <input type="text" id="editProfile2"
-                                               class="form-control" name="last_name"/>
+                                               class="form-control" name="disadvantages" autocomplete="off"/>
                                         <label for="editProfile2" class=""
                                                th:text="${#messages.msg('review.disadvantages')}">Недостатки</label>
                                     </div>
@@ -85,7 +85,7 @@
                                 <!--/*Company website*/-->
                                 <div class="col-md-12">
                                     <div class="md-form form-sm">
-                                            <textarea type="text" id="editProfile13" name="about_me"
+                                            <textarea type="text" id="editProfile13" name="data"
                                                       class="md-textarea"></textarea>
                                         <label for="editProfile13" class=""
                                                th:text="${#messages.msg('words.your_comment')}">Комментарий</label>

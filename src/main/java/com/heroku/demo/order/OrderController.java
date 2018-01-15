@@ -61,7 +61,7 @@ public class OrderController {
     public String orderAdd(ModelMap model, @Valid Buy order, BindingResult result) {
         if (!result.hasErrors())
             orderService.addOrder(order);
-        return "account";
+        return "person/account";
     }
 
     @RequestMapping(value = "/listjson", method = RequestMethod.POST)
