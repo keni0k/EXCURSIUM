@@ -8,7 +8,9 @@ import com.heroku.demo.order.OrderRepository;
 import com.heroku.demo.order.OrderServiceImpl;
 import com.heroku.demo.photo.PhotoRepository;
 import com.heroku.demo.photo.PhotoServiceImpl;
+import com.heroku.demo.review.Review;
 import com.heroku.demo.review.ReviewRepository;
+import com.heroku.demo.review.ReviewServiceImpl;
 import com.heroku.demo.utils.Consts;
 import com.heroku.demo.utils.MessageUtil;
 import com.heroku.demo.utils.Utils;
@@ -61,6 +63,7 @@ public class PersonController {
     private PersonServiceImpl personService;
     private EventServiceImpl eventService;
     private OrderServiceImpl orderService;
+    private ReviewServiceImpl reviewService;
 
     private final MessageSource messageSource;
 
@@ -73,6 +76,7 @@ public class PersonController {
         personService = new PersonServiceImpl(personRepository, eventRepository, reviewRepository, photoRepository);
         eventService = new EventServiceImpl(eventRepository, photoService);
         orderService = new OrderServiceImpl(orderRepository, eventService);
+        reviewService = new ReviewServiceImpl(reviewRepository);
         this.messageSource = messageSource;
     }
 
@@ -80,6 +84,33 @@ public class PersonController {
     public String persons(ModelMap model) {
         model.addAttribute("insertPerson", new Person());
         return "registration";
+    }
+
+    @RequestMapping(value = "/addreview", method = RequestMethod.POST)
+    public String reviewAdd(ModelMap model, @Valid Review review, BindingResult result,
+                            Principal principal,
+                            @RequestParam("order_id") int orderId) {
+        Person person;
+        if (principal != null) {
+            String loginOrEmail = principal.getName();
+            if (!loginOrEmail.equals("")) {
+                person = personService.getByLoginOrEmail(loginOrEmail);
+                if (person!=null) {
+                    review.setUserId(person.getId());
+                    review.setUserFullName(person.getFullName());
+                    review.setPathToUserPhoto(person.getImageUrl());
+                    String time = new LocalTime().toDateTimeToday().toString().replace('T', ' ');
+                    time = time.substring(0,time.indexOf('.'));
+                    review.setTime(time);
+                    if (orderService.findByReview(orderId, review.getId()) && orderService.findByOrder(person.getId(), orderId))
+                        if (!result.hasErrors()) {
+                            reviewService.addReview(review);
+                            model.addAttribute("success", "Review was added");
+                        }
+                }
+            }
+        }
+        return account(model, principal);
     }
 
     @RequestMapping(value = "/account", method = RequestMethod.GET)
@@ -456,11 +487,12 @@ public class PersonController {
 
     @RequestMapping(value = "/resend_email", method = RequestMethod.GET)
     private String reSend(ModelMap model, Locale locale, Principal principal) throws MailjetSocketTimeoutException, MailjetException {
-        Person person;
+        Person person = null;
         String loginOrEmail = principal.getName();
         if (!loginOrEmail.equals("")) {
             person = personService.getByLoginOrEmail(loginOrEmail);
-        } else person = new Person();
+        }
+        if (person==null) return account(model, principal);
         if (person.getType()==Consts.PERSON_DISABLED)
             sendMail(person.getToken(), person.getEmail());
         return account(model, principal);

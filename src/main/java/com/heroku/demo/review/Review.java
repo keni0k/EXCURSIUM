@@ -24,7 +24,7 @@ public class Review {
 
     private String time = "";
 
-    private int userId = 0;
+    private long userId = 0;
 
     private int likesCount = 0;
 
@@ -100,11 +100,11 @@ public class Review {
         this.time = time;
     }
 
-    public int getUserId() {
+    public long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
     }
 

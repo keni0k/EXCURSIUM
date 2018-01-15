@@ -18,4 +18,6 @@ public interface OrderService {
     Buy getById(long id);
 
     Boolean findByOrder(long personId, long orderId);
+
+    boolean findByReview(long orderId, long reviewId);
 }

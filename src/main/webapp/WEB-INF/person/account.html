@@ -24,10 +24,12 @@ xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" type="text/css" href="../../resources/css/styles.css"/>
 <link rel="stylesheet" href="../../resources/css/cards.css"/>
 <link rel="stylesheet" href="../../resources/css/media.css"/>
+    <link rel="stylesheet" href="../../resources/css/rating.css"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
+<style>.pe{width: 300px; margin-left: -150px;}.nepe{width: 620px; margin-left: -310px;}</style>
 
 </head>
 
@@ -147,8 +149,8 @@ class="badge badge-primary pull-right">14</span></p>
 <div class="col-lg-8 col-md-12 text-center">
 <!--/* Heading */-->
 <div class="text-center mt-3 mb-5">
-<h2 class="title text-center" th:if="${orders.size()>0}">Посещенные экскурсии</h2>
-<h2 class="title text-center" th:if="${orders.size()==0}">Здесь будут отображаться
+<h2 class="title text-center pe" th:if="${orders.size()>0}">Посещенные экскурсии</h2>
+<h2 class="title text-center nepe" th:if="${orders.size()==0}">Здесь будут отображаться
 посещенные экскурсии</h2> <!--/*-310,615 TODO: translate*/-->
 <a href="/events/list">
 <button th:if="${isThisUserAccount}" type="button"
@@ -245,8 +247,8 @@ class="page-link waves-effect waves-effect">В конец</a></li>
 <!--/*End-of-Pagination */-->
 <!--/* Heading */-->
 <div class="text-center mt-3 mb-5" th:if="${excursovod}">
-<h2 class="title text-center" th:if="${events.size()>0}">Добавленные экскурсии</h2>
-<h2 class="title text-center" th:if="${events.size()==0 and excursovod}">Здесь будут
+<h2 class="title text-center pe" th:if="${events.size()>0}">Добавленные экскурсии</h2>
+<h2 class="title text-center nepe" th:if="${events.size()==0 and excursovod}">Здесь будут
 отображаться добавленные экскурсии</h2> <!--/*-310,615 TODO: translate*/-->
 <button th:if="${isThisUserAccount and excursovod}" type="button"
 class="btn btn-primary mt-4 waves-effect waves-light"

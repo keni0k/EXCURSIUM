@@ -69,6 +69,11 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Boolean findByOrder(long personId, long orderId) {
-        return orderRepository.findOne(orderId).getTouristId()==personId;
+        return getById(orderId).getTouristId()==personId;
+    }
+
+    @Override
+    public boolean findByReview(long orderId, long reviewId) {
+        return reviewId==-1||getById(orderId).getReviewId()==reviewId;
     }
 }

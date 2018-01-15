@@ -21,6 +21,8 @@ public class Buy {
 
     private int touristId = 0;
 
+    private int reviewId = -1;
+
     @Transient
     private String imageUrl;
 
@@ -69,6 +71,14 @@ public class Buy {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public int getReviewId() {
+        return reviewId;
+    }
+
+    public void setReviewId(int reviewId) {
+        this.reviewId = reviewId;
     }
 
     @Override
