@@ -81,13 +81,14 @@
                                     <!--Category & Title-->
                                     <h5 th:text="${event.getCategoryString()}">%Категория%</h5>
                                     <h3 class="card-title">
-                                        <strong th:text="${order.getName()}+'[скриншот заказа]'">
+                                        <strong th:text="${order.getName()}">
                                             <a href="">%Название%</a>
                                         </strong>
+                                        <span style="color: #bbbbbb"> [скриншот заказа]</span>
                                     </h3>
 
                                     <!--Rating-->
-                                    <ul class="rating" style="float: inherit;">
+                                    <ul class="rating" style="float: initial;">
                                         <li th:if="${event.getRate()!=-1}" th:text="${event.getRate()}"></li>
                                         <th:block th:if="${(event.getIntRate()!=-1)and(event.getIntRate()!=0)}">
                                             <li th:each="i : ${#numbers.sequence(0, event.getIntRate()-1)}">
@@ -143,18 +144,19 @@
                                         <img src="../../resources/img/user.png" th:src="${review.getPathToUserPhoto()}"
                                              style="height: 50px; border-radius: 50%"/>
                                         <span class="span_title" style="padding-top: 1em;"
-                                              th:text="${review.userFullName}">Вершинин Дмитрий Алексеевич</span>
+                                              th:text="${review.userFullName}">Вершинин Дмитрий Алексеевич<span style="color: #777777"> [ваш отзыв]</span></span>
                                         <span class="span_right" style="padding-top: 1em;">
-            <span th:text="'('+${review.getLikesCount()}+')'">%likes%</span>
-            <a rel="tooltip" title="Like" href="javascript:void(0)">
-                <i class="fa fa-heart"></i>
-            </a>
-        </span>
+                                            <span th:text="'('+${review.getLikesCount()}+')'">%likes%</span>
+                                            <i class="fa fa-heart"></i>
+                                                <a rel="tooltip" title="Edit" href="javascript:void(0)">
+                                                    <i class="fa fa-edit" style="font-size: 20px; margin-left: 10px"></i>
+                                                </a>
+                                        </span>
                                     </div>
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-xs-10">
-                                                <ul class="rating">
+                                                <ul class="rating" style="float: initial;">
                                                     <th:block th:if="${(review.getRate()!=-1)and(review.getRate()!=0)}">
                                                         <li th:each="i : ${#numbers.sequence(0, review.getRate()-1)}">
                                                             <i class="fa fa-star"></i>
