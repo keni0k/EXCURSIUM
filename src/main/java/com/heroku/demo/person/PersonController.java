@@ -107,16 +107,12 @@ public class PersonController {
                         if (!result.hasErrors()) {
                             model.addAttribute("success", "Review was added");//TODO: add uvedomlyashki
                             Buy order = orderService.getById(orderId);
-
                             review.setEventId(order.getEventId());
                             reviewService.addReview(review);
-
                             order.setReviewId(review.getId());
                             orderService.editBuy(order);
-                            Person guide = personService.getById(eventService.getById(order.getEventId()).getGuideId());
-                            guide.setRate((guide.getRate()*guide.getReviewsCount()+guideRate)/(guide.getReviewsCount()+1));
-                            guide.setReviewsCount(guide.getReviewsCount()+1);
-                            personService.editPerson(guide);
+                            personService.setRate(eventService.getById(order.getEventId()).getGuideId(), guideRate);
+                            eventService.setRate(review.getRate(), review.getEventId());
                         }
                 }
             }

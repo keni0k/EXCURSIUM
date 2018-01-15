@@ -126,6 +126,14 @@ public class PersonServiceImpl implements PersonService {
         return copy;
     }
 
+    @Override
+    public void setRate(long guideId, int guideRate) {
+        Person guide = getById(guideId);
+        guide.setRate((guide.getRate()*guide.getReviewsCount()+guideRate)/(guide.getReviewsCount()+1));
+        guide.setReviewsCount(guide.getReviewsCount()+1);
+        editPerson(guide);
+    }
+
 
     @Override
     public Person getById(long id) {

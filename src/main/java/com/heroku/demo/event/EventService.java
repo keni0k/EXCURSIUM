@@ -16,4 +16,6 @@ public interface EventService {
     List<Event> getByFilter(Integer priceUp, Integer priceDown, Integer category, Integer language, String words, boolean isAll);
 
     List<Event> getByGuideId(long guideId);
+
+    void setRate(int rate, long eventId);
 }
