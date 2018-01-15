@@ -19,9 +19,9 @@ public class Buy {
 
     private String time = "";
 
-    private int touristId = 0;
+    private long touristId = 0;
 
-    private int reviewId = -1;
+    private long reviewId = -1;
 
     @Transient
     private String imageUrl;
@@ -72,11 +72,11 @@ public class Buy {
         this.time = time;
     }
 
-    public int getReviewId() {
+    public long getReviewId() {
         return reviewId;
     }
 
-    public void setReviewId(int reviewId) {
+    public void setReviewId(long reviewId) {
         this.reviewId = reviewId;
     }
 

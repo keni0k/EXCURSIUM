@@ -105,7 +105,10 @@ public class PersonController {
                     if (orderService.findByReview(orderId, review.getId()) && orderService.findByOrder(person.getId(), orderId))
                         if (!result.hasErrors()) {
                             reviewService.addReview(review);
-                            model.addAttribute("success", "Review was added");
+                            model.addAttribute("success", "Review was added");//TODO: add uvedomlyashki
+                            Buy order = orderService.getById(orderId);
+                            order.setReviewId(review.getId());
+                            orderService.editBuy(order);
                         }
                 }
             }

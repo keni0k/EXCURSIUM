@@ -42,7 +42,7 @@ public class Review {
 
     private int rate = -1;
 
-    private int eventId = -1;
+    private long eventId = -1;
 
     public String getUserFullName() {
         return userFullName;
@@ -68,7 +68,7 @@ public class Review {
         this.rate = rate;
     }
 
-    public int getEventId() {
+    public long getEventId() {
         return eventId;
     }
 

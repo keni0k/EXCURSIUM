@@ -201,10 +201,12 @@ style="color:#4285F4; font-size: medium; padding-top: -0.2em;">%Цена%  </str
 class="waves-effect p-2">Открыть<i
 class="fa fa-photo ml-1"></i></a>
 </span>
+    <th:block th:if="${order.getReviewId()==-1}">
     <div class="clearfix"></div>
     <span class="left pt-2">
     <a href="#" data-toggle="modal" data-target="#modalAddReview"><i class="fa fa-comments mr-2"></i>Оставить отзыв</a><!--role="button" -->
     </span>
+    </th:block>
 </div>
 </div>
 <!--/*End-of-Card*/-->

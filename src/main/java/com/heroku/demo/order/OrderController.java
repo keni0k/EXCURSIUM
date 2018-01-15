@@ -8,6 +8,7 @@ import com.heroku.demo.person.PersonServiceImpl;
 import com.heroku.demo.photo.PhotoRepository;
 import com.heroku.demo.photo.PhotoServiceImpl;
 import com.heroku.demo.review.ReviewRepository;
+import com.heroku.demo.review.ReviewServiceImpl;
 import com.heroku.demo.utils.Utils;
 import com.heroku.demo.utils.UtilsForWeb;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,7 @@ public class OrderController {
     private OrderServiceImpl orderService;
     private PersonServiceImpl personService;
     private EventServiceImpl eventService;
+    private ReviewServiceImpl reviewService;
     private String AUTH_KEY = "Rtdk6BKb1nDK6Opl38dlYPhIBzmCISY8";
 
     @Autowired
@@ -36,6 +38,7 @@ public class OrderController {
         orderService = new OrderServiceImpl(orderRepository, new EventServiceImpl(eventRepository, new PhotoServiceImpl(photoRepository)));
         personService = new PersonServiceImpl(personRepository, eventRepository, reviewRepository, photoRepository);
         eventService = new EventServiceImpl(eventRepository, new PhotoServiceImpl(photoRepository));
+        reviewService = new ReviewServiceImpl(reviewRepository);
     }
 
     @RequestMapping(value = "/order", method = RequestMethod.GET)
@@ -50,6 +53,8 @@ public class OrderController {
                     Buy order = orderService.getById(id);
                     model.addAttribute("order", order);
                     model.addAttribute("event", eventService.getById(order.getEventId()));
+                    if (order.getReviewId()!=-1)
+                        model.addAttribute("review", reviewService.getById(order.getReviewId()));
                     return "order/order";
                 }
             }
