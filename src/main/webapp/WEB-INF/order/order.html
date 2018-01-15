@@ -123,7 +123,7 @@
 </span>
                                         <th:block th:if="${order.getReviewId()==-1}">
     <span>
-    <a class="btn btn-primary waves-effect waves-light" role="button" th:onclick="modalReview(${order.getId()})"
+    <a class="btn btn-primary waves-effect waves-light" role="button" th:onclick="'modalReview('+${order.getId()}+')'"
        data-toggle="modal" data-target="#modalAddReview">Оставить отзыв</a>
     </span>
                                         </th:block>
