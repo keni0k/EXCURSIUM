@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--/*Modal: modalEditProfile*/-->
+<div class="modal fade" id="modalAddReview" tabindex="-1" role="dialog" th:fragment="review"
+     aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog cascading-modal modal-lg" role="document">
+        <!--/*Content*/-->
+        <div class="modal-content">
+            <!--/* Nav tabs */-->
+            <div class="modal-header light-blue darken-3 white-text">
+                <h4 class="" th:text="${#messages.msg('words.review')}"><i class="fa fa-newspaper-o"></i> REVIEW</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+            </div>
+            <!--/* Tab panels */-->
+            <div class="modal-body mb-0">
+                <form action="/reviews/add"
+                              enctype="multipart/form-data" method="post">
+                            <!--/*Grid row*/-->
+                            <div class="row">
+                                <!--/*Grid column*/-->
+                                <div class="col-xs-6">
+                                    <!--/*Rating*/-->
+                                    <fieldset class="rating">
+                                        <legend>Экскурсия:</legend>
+                                        <input type="radio" id="star5" name="rating_of_event" value="5"/><label for="star5"
+                                                                                                                title="Rocks!"></label>
+                                        <input type="radio" id="star4" name="rating_of_event" value="4"/><label for="star4"
+                                                                                                                title="Pretty good"></label>
+                                        <input type="radio" id="star3" name="rating_of_event" value="3"/><label for="star3"
+                                                                                                                title="Meh"></label>
+                                        <input type="radio" id="star2" name="rating_of_event" value="2"/><label for="star2"
+                                                                                                                title="Kinda bad"></label>
+                                        <input type="radio" id="star1" name="rating_of_event" value="1"/><label for="star1"
+                                                                                                                title="Sucks big time"></label>
+                                    </fieldset>
+                                </div>
+                                <!--/*End-of-Grid column*/-->
+                                <!--/*Grid column*/-->
+                                <div class="col-xs-6">
+                                    <!--/*Rating*/-->
+                                    <fieldset class="rating">
+                                        <legend>Экскурсовод:</legend>
+                                        <input type="radio" id="star25" name="rating_of_guide" value="5"/><label for="star25"
+                                                                                                                 title="Rocks!"></label>
+                                        <input type="radio" id="star24" name="rating_of_guide" value="4"/><label for="star24"
+                                                                                                                 title="Pretty good"></label>
+                                        <input type="radio" id="star23" name="rating_of_guide" value="3"/><label for="star23"
+                                                                                                                 title="Meh"></label>
+                                        <input type="radio" id="star22" name="rating_of_guide" value="2"/><label for="star22"
+                                                                                                                 title="Kinda bad"></label>
+                                        <input type="radio" id="star21" name="rating_of_guide" value="1"/><label for="star21"
+                                                                                                                 title="Sucks big time"></label>
+                                    </fieldset>
+                                </div>
+                                <div class="clearfix"></div>
+                                <br/>
+                                <!--/*End-of-Grid column*/-->
+                                <!--/*Grid column*/-->
+                                <div class="col-xs-12">
+                                    <!--/*First Name*/-->
+                                    <div class="md-form form-sm">
+                                        <input type="text" id="editProfile1"
+                                               class="form-control" name="first_name"/>
+                                        <label for="editProfile1" class=""
+                                               th:text="${#messages.msg('review.advantages')}">Достоинства</label>
+                                    </div>
+                                </div>
+                                <!--/*End-of-Grid column*/-->
+                                <div class="clearfix"></div>
+                                <!--/*Grid column*/-->
+                                <div class="col-xs-12">
+                                    <!--/*Last Name*/-->
+                                    <div class="md-form form-sm">
+                                        <input type="text" id="editProfile2"
+                                               class="form-control" name="last_name"/>
+                                        <label for="editProfile2" class=""
+                                               th:text="${#messages.msg('review.disadvantages')}">Недостатки</label>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <!--/*End-of-Grid column*/-->
+                                <!--/*Company website*/-->
+                                <div class="col-md-12">
+                                    <div class="md-form form-sm">
+                                            <textarea type="text" id="editProfile13" name="about_me"
+                                                      class="md-textarea"></textarea>
+                                        <label for="editProfile13" class=""
+                                               th:text="${#messages.msg('words.your_comment')}">Комментарий</label>
+                                    </div>
+                                </div>
+                                <!--/*End-of-Grid column*/-->
+                            </div>
+                            <div class="modal-footer justify-content-center">
+                                <button type="reset"
+                                        class="btn btn-outline-primary waves-effect waves-light"
+                                        data-dismiss="modal">Отменить
+                                </button>
+                                <button type="submit"
+                                        class="btn btn-primary waves-effect waves-light">
+                                    Опубликовать <i class="fa fa-check ml-1"></i></button>
+                            </div>
+                            <!--/*End-of-Grid row*/-->
+                        </form>
+            </div>
+        </div>
+        <!--/*End-of-Content*/-->
+    </div>
+</div>
+<!--/*End-of-Modal: modalEditProfile*/-->
+</body>
+</html>

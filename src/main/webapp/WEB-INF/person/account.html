@@ -201,7 +201,7 @@ class="fa fa-photo ml-1"></i></a>
 </span>
     <div class="clearfix"></div>
     <span class="left pt-2">
-    <a th:href="@{/orders/order(id=${order.getId()})}"><i class="fa fa-comments mr-2"></i>Оставить отзыв</a>
+    <a href="#" data-toggle="modal" data-target="#modalAddReview"><i class="fa fa-comments mr-2"></i>Оставить отзыв</a><!--role="button" -->
     </span>
 </div>
 </div>
@@ -902,6 +902,9 @@ data-dismiss="modal">Отменить
 </div>
 </div>
 <!--/*End-of-Modal: modalUpToGuide*/-->
+
+    <div th:replace="fragments/modals :: review"></div>
+
 </section>
 <!--/*End-of-Section: Modals*/-->
 </div>
