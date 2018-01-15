@@ -74,6 +74,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public boolean findByReview(long orderId, long reviewId) {
-        return reviewId==-1||getById(orderId).getReviewId()==reviewId;
+        return getById(orderId).getReviewId()==-1||getById(orderId).getReviewId()==reviewId;
     }
 }
