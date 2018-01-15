@@ -89,7 +89,8 @@ public class PersonController {
     @RequestMapping(value = "/addreview", method = RequestMethod.POST)
     public String reviewAdd(ModelMap model, @Valid Review review, BindingResult result,
                             Principal principal,
-                            @RequestParam("order_id") int orderId) {
+                            @RequestParam("order_id") int orderId,
+                            @RequestParam("rating_of_guide") int guideRate) {
         Person person;
         if (principal != null) {
             String loginOrEmail = principal.getName();
@@ -109,6 +110,10 @@ public class PersonController {
                             Buy order = orderService.getById(orderId);
                             order.setReviewId(review.getId());
                             orderService.editBuy(order);
+                            Person guide = personService.getById(eventService.getById(order.getEventId()).getGuideId());
+                            guide.setRate(guide.getRate()+guideRate);
+                            guide.setReviewsCount(guide.getReviewsCount()+1);
+                            personService.editPerson(guide);
                         }
                 }
             }

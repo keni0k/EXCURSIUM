@@ -40,6 +40,7 @@ public class Person implements UserDetails{
     private String imageUrl = "";
     private String role = "";
     private String time = "";
+    private int reviewsCount = 0;
 
     private String dateAndPlaceOfPassport = "";
     private String seriesAndNumberOfPassport = "";
@@ -176,6 +177,18 @@ public class Person implements UserDetails{
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public int getReviewsCount() {
+        return reviewsCount;
+    }
+
+    public void setReviewsCount(int reviewsCount) {
+        this.reviewsCount = reviewsCount;
+    }
+
+    public float getFloatRate(){
+        return (float)rate/reviewsCount;
     }
 
     public Person(String login, String pass, String lastName, int type, String email, String firstName, int rate, String phoneNumber, String about, String city, String token, String imageUrl) {

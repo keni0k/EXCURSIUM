@@ -32,6 +32,9 @@ public class Review {
 
     private String pathToUserPhoto = "";
 
+    private String advantages = "";
+    private String disadvantages = "";
+
     public int getLikesCount() {
         return likesCount;
     }
@@ -106,6 +109,26 @@ public class Review {
 
     public void setUserId(long userId) {
         this.userId = userId;
+    }
+
+    public String getAdvantages() {
+        return advantages;
+    }
+
+    public void setAdvantages(String advantages) {
+        this.advantages = advantages;
+    }
+
+    public String getDisadvantages() {
+        return disadvantages;
+    }
+
+    public void setDisadvantages(String disadvantages) {
+        this.disadvantages = disadvantages;
+    }
+
+    public void setEventId(long eventId) {
+        this.eventId = eventId;
     }
 
     public Review() {
