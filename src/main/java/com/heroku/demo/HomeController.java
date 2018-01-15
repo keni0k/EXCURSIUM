@@ -60,6 +60,11 @@ public class HomeController {
         return "error/404";
     }
 
+    @RequestMapping("error/500")
+    public String internalServerError() {
+        return "error/500";
+    }
+
     @RequestMapping("upload")
     public String upload() {
         return "upload";
