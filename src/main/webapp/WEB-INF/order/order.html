@@ -123,7 +123,7 @@
 </span>
                                         <th:block th:if="${order.getReviewId()==-1}">
     <span>
-    <a class="btn btn-primary waves-effect waves-light" th:href="@{(order_id=${order.getId()})}" role="button"
+    <a class="btn btn-primary waves-effect waves-light" role="button" th:onclick="modalReview(${order.getId()})"
        data-toggle="modal" data-target="#modalAddReview">Оставить отзыв</a>
     </span>
                                         </th:block>
@@ -206,6 +206,14 @@
     </div>
 </div>
 <div th:replace="fragments/footer :: footer"></div>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    function modalReview(id) {
+        getElementById('guide_id').value=id;
+    }
+
+    /*]]>*/
+</script>
 <script type="text/javascript" src="../../resources/js/compiled.min.js"></script>
 <script type="text/javascript" src="../../resources/libs/popper/popper.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
