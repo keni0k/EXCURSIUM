@@ -158,9 +158,12 @@
                                         <span class="span_right" style="padding-top: 1em;">
                                             <span th:text="'('+${review.getLikesCount()}+')'">%likes%</span>
                                             <i class="fa fa-heart"></i>
-                                                <a rel="tooltip" title="Edit" href="javascript:void(0)" role="button"
+                                                <a rel="tooltip" title="Edit" href="javascript:void(0)" role="button" style="margin-left: 10px;"
                                                    th:onclick="'modalReview('+${order.getId()}+')'" data-toggle="modal" data-target="#modalAddReview">
-                                                    <i class="fa fa-edit" style="font-size: 20px; margin-left: 10px"></i>
+                                                    <i class="fa fa-edit" style="font-size: 20px;"></i>
+                                                </a>
+                                                <a rel="tooltip" title="Delete" href="javascript:void(0)" role="button" style="margin-left: 10px;">
+                                                    <i class="fa fa-trash" style="font-size: 20px;"></i>
                                                 </a>
                                         </span>
                                     </div>
