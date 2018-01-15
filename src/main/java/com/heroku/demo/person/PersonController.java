@@ -99,15 +99,18 @@ public class PersonController {
                 if (person!=null) {
                     review.setUserId(person.getId());
                     review.setUserFullName(person.getFullName());
-                    review.setPathToUserPhoto(person.getImageUrl());
+                    review.setPathToUserPhoto(person.getImageToken());
                     String time = new LocalTime().toDateTimeToday().toString().replace('T', ' ');
                     time = time.substring(0,time.indexOf('.'));
                     review.setTime(time);
                     if (orderService.findByReview(orderId, review.getId()) && orderService.findByOrder(person.getId(), orderId))
                         if (!result.hasErrors()) {
-                            reviewService.addReview(review);
                             model.addAttribute("success", "Review was added");//TODO: add uvedomlyashki
                             Buy order = orderService.getById(orderId);
+
+                            review.setEventId(order.getEventId());
+                            reviewService.addReview(review);
+
                             order.setReviewId(review.getId());
                             orderService.editBuy(order);
                             Person guide = personService.getById(eventService.getById(order.getEventId()).getGuideId());
