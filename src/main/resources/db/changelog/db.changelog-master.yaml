@@ -267,3 +267,18 @@ databaseChangeLog:
                    constraints:
                      primaryKey: true
                      nullable: false
+
+  - changeSet:
+        id: 3
+        author: keni0k
+        changes:
+          - createTable:
+              tableName: support
+              columns:
+                  - column:
+                    name: id
+                    type: int
+                    autoIncrement: true
+                    constraints:
+                      primaryKey: true
+                      nullable: false
