@@ -89,12 +89,12 @@ aria-label="Пароль" required=""/>
 th:text="${#messages.msg('words.remember_me')}">Запомнить меня</span>
 </label>
 </div>
+    <!--<div class="g-recaptcha" data-sitekey="6LduKUEUAAAAACGRmysEPl1Mlp9QAo1CRNe6QWUf"></div>
+    <span id="captchaError" class="alert alert-danger col-sm-4"
+          style="display:none"></span>-->
 <br/>
 <input type="submit" th:value="${#messages.msg('titles.login')}"
 class="btn btn-lg btn-primary btn-block"/>
-    <div class="g-recaptcha" data-sitekey="6LduKUEUAAAAACGRmysEPl1Mlp9QAo1CRNe6QWUf"></div>
-    <span id="captchaError" class="alert alert-danger col-sm-4"
-          style="display:none"></span>
 </form>
 </div>
 </div>
