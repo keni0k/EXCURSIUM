@@ -577,7 +577,7 @@ aria-hidden="true">×</span></button>
 </div>
 <!--/*Body*/-->
 <div class="modal-body mb-0">
-    <form action="/users/addsupport">
+    <form action="/users/addsupport" method="post">
         <!--/*Subject*/-->
         <div class="md-form form-sm">
         <input type="text" id="modalFeedback1" name="name" class="form-control"/>
@@ -601,16 +601,15 @@ aria-hidden="true">×</span></button>
         style="height: 300px;" name="data"></textarea>
         <label for="modalFeedback2">Подробное описание</label>
         </div>
+        <div class="modal-footer justify-content-center">
+            <button type="reset" class="btn btn-outline-primary waves-effect waves-light"
+                    data-dismiss="modal">Закрыть
+            </button>
+            <button type="submit" class="btn btn-primary waves-effect waves-light">Отправить <i
+                    class="fa fa-paper-plane ml-1"></i></button>
+        </div>
     </form>
 </div>
-        <!--/*Footer*/-->
-        <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-outline-primary waves-effect waves-light"
-        data-dismiss="modal">Закрыть
-        </button>
-        <button type="button" class="btn btn-primary waves-effect waves-light">Отправить <i
-        class="fa fa-paper-plane ml-1"></i></button>
-        </div>
 </div>
 <!--/*End-of-Content*/-->
 </div>
