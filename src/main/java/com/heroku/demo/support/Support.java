@@ -16,6 +16,7 @@ public class Support {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private long personId = 0;
+    private int category = 0;
     private String name = "";
     private String data = "";
     private String time = "";
@@ -45,5 +46,10 @@ public class Support {
     public void setTime(String time) {
         this.time = time;
     }
-
+    public int getCategory() {
+        return category;
+    }
+    public void setCategory(int category) {
+        this.category = category;
+    }
 }
