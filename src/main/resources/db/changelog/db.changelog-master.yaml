@@ -276,9 +276,9 @@ databaseChangeLog:
               tableName: support
               columns:
                   - column:
-                    name: id
-                    type: int
-                    autoIncrement: true
-                    constraints:
-                      primaryKey: true
-                      nullable: false
+                      name: id
+                      type: int
+                      autoIncrement: true
+                      constraints:
+                        primaryKey: true
+                        nullable: false
