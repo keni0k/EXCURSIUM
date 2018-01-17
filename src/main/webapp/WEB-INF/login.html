@@ -28,7 +28,11 @@ xmlns:th="http://www.thymeleaf.org"
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
 
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+
 <title th:text="${#messages.msg('titles.login')}">Авторизация</title>
+
+    <style rel="stylesheet">.form-control.input-lg{padding-top: 7px;padding-bottom: 7px;padding-left: 12px;margin-top: 0px;}</style>
 
 </head>
 <body style="background-color: #f9f9f9;" onload='document.getElementById("login").focus();'>
@@ -88,7 +92,9 @@ th:text="${#messages.msg('words.remember_me')}">Запомнить меня</spa
 <br/>
 <input type="submit" th:value="${#messages.msg('titles.login')}"
 class="btn btn-lg btn-primary btn-block"/>
-
+    <div class="g-recaptcha" data-sitekey="6LduKUEUAAAAACGRmysEPl1Mlp9QAo1CRNe6QWUf"></div>
+    <span id="captchaError" class="alert alert-danger col-sm-4"
+          style="display:none"></span>
 </form>
 </div>
 </div>

@@ -11,6 +11,9 @@ import com.heroku.demo.photo.PhotoServiceImpl;
 import com.heroku.demo.review.Review;
 import com.heroku.demo.review.ReviewRepository;
 import com.heroku.demo.review.ReviewServiceImpl;
+import com.heroku.demo.support.Support;
+import com.heroku.demo.support.SupportRepository;
+import com.heroku.demo.support.SupportServiceImpl;
 import com.heroku.demo.utils.Consts;
 import com.heroku.demo.utils.MessageUtil;
 import com.heroku.demo.utils.Utils;
@@ -64,6 +67,7 @@ public class PersonController {
     private EventServiceImpl eventService;
     private OrderServiceImpl orderService;
     private ReviewServiceImpl reviewService;
+    private SupportServiceImpl supportService;
 
     private final MessageSource messageSource;
 
@@ -71,12 +75,14 @@ public class PersonController {
 
     @Autowired
     public PersonController(PersonRepository personRepository, MessageSource messageSource, EventRepository eventRepository,
-                            ReviewRepository reviewRepository, PhotoRepository photoRepository, OrderRepository orderRepository) {
+                            ReviewRepository reviewRepository, PhotoRepository photoRepository, OrderRepository orderRepository,
+                            SupportRepository supportRepository) {
         PhotoServiceImpl photoService = new PhotoServiceImpl(photoRepository);
         personService = new PersonServiceImpl(personRepository, eventRepository, reviewRepository, photoRepository);
         eventService = new EventServiceImpl(eventRepository, photoService);
         orderService = new OrderServiceImpl(orderRepository, eventService);
         reviewService = new ReviewServiceImpl(reviewRepository);
+        supportService = new SupportServiceImpl(supportRepository);
         this.messageSource = messageSource;
     }
 
@@ -114,6 +120,25 @@ public class PersonController {
                             personService.setRate(eventService.getById(order.getEventId()).getGuideId(), guideRate);
                             eventService.setRate(review.getRate(), review.getEventId());
                         }
+                }
+            }
+        }
+        return account(model, principal);
+    }
+
+    @RequestMapping(value = "/addsupport", method = RequestMethod.POST)
+    public String supportAdd(ModelMap model, @Valid Support support, Principal principal) {
+        Person person;
+        if (principal != null) {
+            String loginOrEmail = principal.getName();
+            if (!loginOrEmail.equals("")) {
+                person = personService.getByLoginOrEmail(loginOrEmail);
+                if (person!=null) {
+                    support.setPersonId(person.getId());
+                    String time = new LocalTime().toDateTimeToday().toString().replace('T', ' ');
+                    time = time.substring(0,time.indexOf('.'));
+                    support.setTime(time);
+                    supportService.addSupport(support);
                 }
             }
         }
