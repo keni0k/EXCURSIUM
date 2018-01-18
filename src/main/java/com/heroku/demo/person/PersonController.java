@@ -160,9 +160,10 @@ public class PersonController {
         model.addAttribute("inputEvent", new Event());
         model.addAttribute("consts", new Consts());
 
+        model.addAttribute("answersCount", 0);
         model.addAttribute("ordersWaitCount", 0);
         model.addAttribute("ordersCompliteCount", 0);
-        model.addAttribute("ordersReviewsCount", ordersReviewsCount(orders));
+        model.addAttribute("ordersWaitReviewsCount", ordersReviewsCount(orders));
         model.addAttribute("ordersWaitCount", 0);
 
         return "person/account";

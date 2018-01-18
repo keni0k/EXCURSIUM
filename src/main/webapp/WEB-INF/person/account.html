@@ -125,37 +125,37 @@ class="fa fa-paper-plane ml-2"></i></a>
 <hr class="my-3"/>
 
 <ul class="list-unstyled pt-4">
+    <!--/*@thymesVar id="answersCount" type="java.lang.Integer"*/--><!--TODO: yyy-->
+    <th:block th:if="${answersCount!=0}">
+        <li>
+            <p>Ответы: <span class="badge badge-primary pull-right" th:text="${answersCount}">14</span></p>
+        </li>
+        <hr style="margin-top: 4px; margin-bottom: 8px;"/>
+    </th:block>
 <!--/*@thymesVar id="ordersWaitCount" type="java.lang.Integer"*/--><!--TODO: yyy-->
     <th:block th:if="${ordersWaitCount!=0}">
 <li>
-<p>Новые заказы экскурсий <span class="badge badge-primary pull-right" th:text="${ordersWaitCount}">14</span></p>
+<p>Новые заказы: <span class="badge badge-primary pull-right" th:text="${ordersWaitCount}">14</span></p>
 </li>
-<hr/>
-    </th:block>
-<!--/*@thymesVar id="answersCount" type="java.lang.Integer"*/--><!--TODO: yyy-->
-    <th:block th:if="${answersCount!=0}">
-<li>
-<p>Ответы <span class="badge badge-primary pull-right" th:text="${answersCount}">14</span></p>
-</li>
-<hr/>
+<hr style="margin-top: 4px; margin-bottom: 8px;"/>
     </th:block>
     <!--/*@thymesVar id="ordersWaitReviewsCount" type="java.lang.Integer"*/--><!--TODO: yyy-->
     <th:block th:if="${ordersWaitReviewsCount!=0}">
 <li>
-<p>Ожидают отзывов <span class="badge badge-primary pull-right" th:text="${ordersWaitReviewsCount}">14</span></p>
+<p>Ожидают отзывов: <span class="badge badge-primary pull-right" th:text="${ordersWaitReviewsCount}">14</span></p>
 </li>
-<hr/>
+        <hr style="margin-top: 4px; margin-bottom: 8px;"/>
     </th:block>
     <!--/*@thymesVar id="ordersCompliteCount" type="java.lang.Integer"*/--><!--TODO: yyy-->
     <th:block th:if="${ordersCompliteCount!=0}">
 <li>
-<p>Заказов экскурсий за все время <span class="badge badge-primary pull-right" th:text="${ordersCompliteCount}">14</span></p>
+<p>Все заказы: <span class="badge badge-primary pull-right" th:text="${ordersCompliteCount}">14</span></p>
 </li>
-<hr/>
+        <hr style="margin-top: 4px; margin-bottom: 8px;"/>
     </th:block>
     <th:block th:if="${orders.size()!=0}">
 <li>
-<p>Посещенных экскурсий за все время <span
+<p>Все посещенные экскурсии: <span
 class="badge badge-primary pull-right" th:text="${orders.size()}">14</span></p>
 </li>
     </th:block>
