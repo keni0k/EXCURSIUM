@@ -120,34 +120,34 @@ class="fa fa-paper-plane ml-2"></i></a>
 <section class="card mb-4">
 <div class="card-body">
 
-<h5 class=" text-center"><strong>Уведомления</strong></h5>
+<h5 class=" text-center"><strong>Уведомления (демо режим)</strong></h5>
 
 <hr class="my-3"/>
 
 <ul class="list-unstyled pt-4">
-<!--/*@thymesVar id="ordersWait" type="java.util.List<com.heroku.demo.order.Buy>"*/--><!--TODO: yyy-->
-<li th:if="${ordersWait.size()!=0}">
-<p>Новые заказы экскурсий <span class="badge badge-primary pull-right">14</span></p>
+<!--/*@thymesVar id="ordersWaitCount" type="java.lang.Integer"*/--><!--TODO: yyy-->
+<li th:if="${ordersWaitCount!=0}">
+<p>Новые заказы экскурсий <span class="badge badge-primary pull-right" th:text="${ordersWaitCount}">14</span></p>
 </li>
 <hr/>
-<!--/*@thymesVar id="answers" type="java.util.List<>"*/--><!--TODO: yyy-->
-    <th:block th:if="${answers.size()!=0}">
+<!--/*@thymesVar id="answersCount" type="java.lang.Integer"*/--><!--TODO: yyy-->
+    <th:block th:if="${answersCount!=0}">
 <li>
-<p>Ответы <span class="badge badge-primary pull-right">14</span></p>
-</li>
-<hr/>
-    </th:block>
-    <!--/*@thymesVar id="ordersWaitReiews" type="java.util.List<>"*/--><!--TODO: yyy-->
-    <th:block th:if="${ordersWaitReiews.size()!=0}">
-<li>
-<p>Ожидают отзывов <span class="badge badge-primary pull-right">14</span></p>
+<p>Ответы <span class="badge badge-primary pull-right" th:text="${answersCount}">14</span></p>
 </li>
 <hr/>
     </th:block>
-    <!--/*@thymesVar id="ordersComplite" type="java.util.List<>"*/--><!--TODO: yyy-->
-    <th:block th:if="${ordersComplite.size()!=0}">
+    <!--/*@thymesVar id="ordersWaitReviewsCount" type="java.lang.Integer"*/--><!--TODO: yyy-->
+    <th:block th:if="${ordersWaitReviewsCount!=0}">
 <li>
-<p>Заказов экскурсий за все время <span class="badge badge-primary pull-right">14</span></p>
+<p>Ожидают отзывов <span class="badge badge-primary pull-right" th:text="${ordersWaitReviewsCount}">14</span></p>
+</li>
+<hr/>
+    </th:block>
+    <!--/*@thymesVar id="ordersCompliteCount" type="java.lang.Integer"*/--><!--TODO: yyy-->
+    <th:block th:if="${ordersCompliteCount!=0}">
+<li>
+<p>Заказов экскурсий за все время <span class="badge badge-primary pull-right" th:text="${ordersCompliteCount}">14</span></p>
 </li>
 <hr/>
     </th:block>
