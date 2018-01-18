@@ -126,10 +126,12 @@ class="fa fa-paper-plane ml-2"></i></a>
 
 <ul class="list-unstyled pt-4">
 <!--/*@thymesVar id="ordersWaitCount" type="java.lang.Integer"*/--><!--TODO: yyy-->
-<li th:if="${ordersWaitCount!=0}">
+    <th:block th:if="${ordersWaitCount!=0}">
+<li>
 <p>Новые заказы экскурсий <span class="badge badge-primary pull-right" th:text="${ordersWaitCount}">14</span></p>
 </li>
 <hr/>
+    </th:block>
 <!--/*@thymesVar id="answersCount" type="java.lang.Integer"*/--><!--TODO: yyy-->
     <th:block th:if="${answersCount!=0}">
 <li>

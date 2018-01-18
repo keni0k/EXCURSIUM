@@ -162,10 +162,17 @@ public class PersonController {
 
         model.addAttribute("ordersWaitCount", 0);
         model.addAttribute("ordersCompliteCount", 0);
-        model.addAttribute("ordersReviewsCount", 0);
+        model.addAttribute("ordersReviewsCount", ordersReviewsCount(orders));
         model.addAttribute("ordersWaitCount", 0);
 
         return "person/account";
+    }
+
+    private int ordersReviewsCount(List<Buy> orders){
+        int ordersReviewsCount = 0;
+        for (Buy order:orders)
+            if (order.getReviewId()==-1) ordersReviewsCount++;
+        return ordersReviewsCount;
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
