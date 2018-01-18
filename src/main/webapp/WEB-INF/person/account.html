@@ -89,7 +89,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                             <section class="card card-cascade card-avatar mb-4" id = "card-person">
 
                                 <img th:src="${person.getImageUrl()}" src="../../resources/img/user.png" alt=""
-                                     onerror='this.display=none; document.getElementById("card-person").style.marginTop=0;'/>
+                                     onerror="onImgError();"/>
                                 <!--/*Card content*/-->
                                 <div class="card-body">
                                     <!--/*Title*/-->
@@ -980,6 +980,12 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
 <!--/*Custom scripts*/-->
 <script th:inline="javascript">
     /*<![CDATA[*/
+
+    function onImgError() {
+        document.getElementById("img-person").style.display="none";
+        document.getElementById("card-person").style.marginTop=0;
+    }
+
     function showHide(page) {
 //Если элемент с id-шником element_id существует
         var id = page * 2 - 2;

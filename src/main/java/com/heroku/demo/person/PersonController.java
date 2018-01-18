@@ -163,7 +163,6 @@ public class PersonController {
         model.addAttribute("answersCount", 1);
         model.addAttribute("ordersWaitCount", 2);
         model.addAttribute("ordersCompliteCount", 3);
-        model.addAttribute("ordersWaitCount", 4);
         model.addAttribute("ordersWaitReviewsCount", ordersReviewsCount(orders));
 
         return "person/account";
