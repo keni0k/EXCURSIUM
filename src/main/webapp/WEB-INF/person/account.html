@@ -53,7 +53,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
 <!--/*TODO isThisUserAccount*/-->
 <div th:replace="fragments/header :: style"></div>
 <div th:replace="fragments/header :: header"></div>
-<style>.pe:before{width: 300px !important; margin-left: -150px !important;}.nepe:before{width: 620px !important; margin-left: -310px !important;}</style>
+<style>.pe:before{width: 300px !important; margin-left: -150px !important;}.nepe:before{width: 620px !important; margin-left: -310px !important;}.notify{margin-top: 4px; margin-bottom: 8px;}.pull-right{margin-top: 3px;}</style>
 
 <div class="container">
 
@@ -120,7 +120,7 @@ class="fa fa-paper-plane ml-2"></i></a>
 <section class="card mb-4">
 <div class="card-body">
 
-<h5 class=" text-center"><strong>Уведомления (демо режим)</strong></h5>
+<h5 class=" text-center"><strong>Уведомления и статистика (демо)</strong></h5>
 
 <hr class="my-3"/>
 
@@ -130,28 +130,26 @@ class="fa fa-paper-plane ml-2"></i></a>
         <li>
             <p>Ответы: <span class="badge badge-primary pull-right" th:text="${answersCount}">14</span></p>
         </li>
-        <hr style="margin-top: 4px; margin-bottom: 8px;"/>
+        <hr class="notify"/>
     </th:block>
 <!--/*@thymesVar id="ordersWaitCount" type="java.lang.Integer"*/--><!--TODO: yyy-->
     <th:block th:if="${ordersWaitCount!=0}">
 <li>
 <p>Новые заказы: <span class="badge badge-primary pull-right" th:text="${ordersWaitCount}">14</span></p>
 </li>
-<hr style="margin-top: 4px; margin-bottom: 8px;"/>
-    </th:block>
+        <hr class="notify"/>    </th:block>
     <!--/*@thymesVar id="ordersWaitReviewsCount" type="java.lang.Integer"*/--><!--TODO: yyy-->
     <th:block th:if="${ordersWaitReviewsCount!=0}">
 <li>
 <p>Ожидают отзывов: <span class="badge badge-primary pull-right" th:text="${ordersWaitReviewsCount}">14</span></p>
 </li>
-        <hr style="margin-top: 4px; margin-bottom: 8px;"/>
-    </th:block>
+        <hr class="notify"/>    </th:block>
     <!--/*@thymesVar id="ordersCompliteCount" type="java.lang.Integer"*/--><!--TODO: yyy-->
     <th:block th:if="${ordersCompliteCount!=0}">
 <li>
 <p>Все заказы: <span class="badge badge-primary pull-right" th:text="${ordersCompliteCount}">14</span></p>
 </li>
-        <hr style="margin-top: 4px; margin-bottom: 8px;"/>
+        <hr class="notify"/>
     </th:block>
     <th:block th:if="${orders.size()!=0}">
 <li>
