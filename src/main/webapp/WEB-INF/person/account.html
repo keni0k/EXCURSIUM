@@ -117,7 +117,7 @@ class="fa fa-paper-plane ml-2"></i></a>
 </section>
 <!--/*End-of-Section: Basic Info*/-->
 <!--/*Section: Experience*/-->
-<!--/*<section class="card mb-4">
+<section class="card mb-4">
 <div class="card-body">
 
 <h5 class=" text-center"><strong>Уведомления</strong></h5>
@@ -125,31 +125,42 @@ class="fa fa-paper-plane ml-2"></i></a>
 <hr class="my-3"/>
 
 <ul class="list-unstyled pt-4">
-<li>
-<p>Questions <span class="badge badge-primary pull-right">14</span></p>
+<!--/*@thymesVar id="ordersWait" type="java.util.List<com.heroku.demo.order.Buy>"*/--><!--TODO: yyy-->
+<li th:if="${ordersWait.size()!=0}">
+<p>Новые заказы экскурсий <span class="badge badge-primary pull-right">14</span></p>
 </li>
 <hr/>
+<!--/*@thymesVar id="answers" type="java.util.List<>"*/--><!--TODO: yyy-->
+    <th:block th:if="${answers.size()!=0}">
 <li>
-<p>Answers <span class="badge badge-primary pull-right">14</span></p>
+<p>Ответы <span class="badge badge-primary pull-right">14</span></p>
 </li>
 <hr/>
+    </th:block>
+    <!--/*@thymesVar id="ordersWaitReiews" type="java.util.List<>"*/--><!--TODO: yyy-->
+    <th:block th:if="${ordersWaitReiews.size()!=0}">
 <li>
-<p>Submited projects <span class="badge badge-primary pull-right">14</span>
-</p>
+<p>Ожидают отзывов <span class="badge badge-primary pull-right">14</span></p>
 </li>
 <hr/>
+    </th:block>
+    <!--/*@thymesVar id="ordersComplite" type="java.util.List<>"*/--><!--TODO: yyy-->
+    <th:block th:if="${ordersComplite.size()!=0}">
 <li>
-<p>Pull requests <span class="badge badge-primary pull-right">14</span></p>
+<p>Заказов экскурсий за все время <span class="badge badge-primary pull-right">14</span></p>
 </li>
 <hr/>
+    </th:block>
+    <th:block th:if="${orders.size()!=0}">
 <li>
-<p>Ideas &amp; bug reports <span
-class="badge badge-primary pull-right">14</span></p>
+<p>Посещенных экскурсий за все время <span
+class="badge badge-primary pull-right" th:text="${orders.size()}">14</span></p>
 </li>
+    </th:block>
 </ul>
 
 </div>
-</section>*/-->
+</section>
 <!--/*End-of-Section: Experience*/-->
 </div>
 <!--/*End-of-Grid column*/-->
@@ -321,6 +332,7 @@ class="fa fa-photo ml-1"></i></a>
 <!--/* End-of-Card row */-->
 <!--/*Pagination */-->
 <nav class="my-4 d-flex justify-content-center" th:if="${events.size()>2 and excursovod}">
+
 <ul class="pagination pagination-circle pg-blue mb-0">
 <!--/*First*/-->
 <li class="page-item disabled clearfix d-none d-md-block"
@@ -359,6 +371,7 @@ th:onclick="'showHide('+${events.size()/2}+');'">
 <a class="page-link waves-effect waves-effect">В конец</a>
 </li>
 </ul>
+
 </nav>
 <!--/*End-of-Pagination */-->
 </div>
