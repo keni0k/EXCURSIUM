@@ -282,7 +282,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                     <!--/*End-of-First*/-->
                                     <li class="page-item clearfix d-none d-md-block"
                                         id="to-end-exc-0"
-                                        th:onclick="'showHide0('+pages+');'">
+                                        th:onclick="'showHide0('+${pages}+');'">
                                         <a class="page-link waves-effect waves-effect">В конец</a>
                                     </li>
                                 </ul>
@@ -1025,10 +1025,15 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
         var idUp = id + 1;
         var i;
         var eventsSize = [[${events.size()}]];
+
+        var pages;
+        if (eventsSize%2===0) pages = eventsSize/2;
+        else pages = eventsSize/2+1;
+
         for (i = 0; i < eventsSize; i++) {
             var j = i + 1;
             document.getElementById('id' + i).style.display = "none";
-            if (i < eventsSize / 2 - 1 && document.getElementById('page_events' + j))
+            if (i < pages && document.getElementById('page_events' + j))
                 document.getElementById('page_events' + j).className = "page-item";
             if (j === page && document.getElementById('page_events' + j))
                 document.getElementById('page_events' + j).className = "page-item active";
@@ -1044,7 +1049,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                 document.getElementById('to-home-exc').className = "page-item disabled clearfix d-none d-md-block";
                 document.getElementById('to-end-exc').className = "page-item clearfix d-none d-md-block";
                 break;
-            case Math.floor(eventsSize / 2):
+            case pages:
                 document.getElementById('to-home-exc').className = "page-item clearfix d-none d-md-block";
                 document.getElementById('to-end-exc').className = "page-item disabled clearfix d-none d-md-block";
                 break;
