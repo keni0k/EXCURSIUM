@@ -97,17 +97,15 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                     <h5 th:text="${person.getStringType(0)}">Турист/Экскурсовод</h5>
                                     <p th:text="${person.getCity()}">Москва, Россия</p>
                                     <!--/* Social */-->
-                                    <a type="button"
-                                       class="btn-floating btn-small light-blue lighten-2 waves-effect waves-light"><i
-                                            class="fa fa-facebook"></i></a>
-                                    <a type="button"
-                                       class="btn-floating btn-small light-blue lighten-2 waves-effect waves-light"><i
-                                            class="fa fa-twitter"></i></a>
-                                    <a type="button"
-                                       class="btn-floating btn-small light-blue lighten-2 waves-effect waves-light"><i
-                                            class="fa fa-linkedin"></i></a>
+                                    <a type="button" th:href="@{${person.getVk()}}" th:if="${person.getVk()!=''}"
+                                       class="btn-floating badge-blue lighten-2 waves-effect waves-light"><i
+                                            class="fa fa-vk"></i></a>
+
+                                    <a type="button" th:href="@{${person.getTelegram()}}" th:if="${person.getTelegram()!=''}"
+                                       class="btn-floating badge-blue lighten-2 waves-effect waves-light"><i
+                                            class="fa fa-telegram"></i></a>
                                     <!--/*Text*/-->
-                                    <p class="card-text mt-3">тел.
+                                    <p th:if="${person.getPhoneNumber()!=''}" class="card-text mt-3">тел.
                                         <th:block th:text="${person.getPhoneNumber()}"/>
                                     </p>
                                     <button th:unless="${isThisUserAccount}" type="button"
@@ -904,7 +902,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                             <div class="col-md-6">
                                                 <!--/*First Name*/-->
                                                 <div class="md-form form-sm">
-                                                    <input type="text" id="upToGuide1"
+                                                    <input type="text" id="upToGuide1"  required=""
                                                            class="form-control" name="series_and_number"/>
                                                     <label for="editProfile1" class="">Серия и номер паспорта</label>
                                                 </div>
@@ -914,7 +912,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                             <div class="col-md-6">
                                                 <!--/*Last Name*/-->
                                                 <div class="md-form form-sm">
-                                                    <input type="text" id="upToGuide2"
+                                                    <input type="text" id="upToGuide2"  required=""
                                                            class="form-control" name="date_and_place"/>
                                                     <label for="editProfile2" class="">Кем и когда выдан паспорт</label>
                                                 </div>
@@ -923,7 +921,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                             <!--/*Grid column*/-->
                                             <div class="col-md-12">
                                                 <div class="md-form form-sm">
-                                                    <input name="file" type="file" id="upToGuide3"
+                                                    <input name="file" type="file" id="upToGuide3"  required=""
                                                            class="form-control"
                                                            size="30000000"
                                                            style="padding-left: 10rem; padding-top: 5px; font-size: 1rem;"
@@ -939,13 +937,25 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                                 <!--/*Company website*/-->
                                                 <div class="md-form form-sm">
 <textarea type="text" id="upToGuide4" name="about_me"
-          class="md-textarea"
+          class="md-textarea" required=""
           th:text="${person.getAbout()}"></textarea>
                                                     <label for="upToGuide4"
                                                            th:text="${#messages.msg('words.about_me')}">О себе</label>
                                                 </div>
                                             </div>
                                             <!--/*End-of-Grid column*/-->
+
+                                            <!--/*Grid column*/-->
+                                            <div class="col-md-12" th:if="${person.getPhoneNumber()==''}">
+                                                <!--/*Company website*/-->
+                                                <div class="md-form form-sm">
+                                                    <input type="text" id="upToGuide5" required=""
+                                                           class="form-control" name="phone_number"/>
+                                                    <label for="editProfile5" class="">Номер телефона</label>
+                                                </div>
+                                            </div>
+                                            <!--/*End-of-Grid column*/-->
+
                                         </div>
                                         <!--/*End-of-Grid row*/-->
                                     </div>

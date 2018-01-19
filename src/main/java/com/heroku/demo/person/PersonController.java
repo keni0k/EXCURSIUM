@@ -147,14 +147,20 @@ public class PersonController {
 
     @RequestMapping(value = "/account", method = RequestMethod.GET)
     public String account(ModelMap model, Principal principal) {
+
         Person person = new Person();
         if (principal != null) {
             String loginOrEmail = principal.getName();
             if (!loginOrEmail.equals(""))
                 person = personService.getByLoginOrEmail(loginOrEmail);
         } else return "login";
+
         model.addAttribute("person", person);
-        model.addAttribute("events", eventService.getByGuideId(person.getId()));
+
+        if (person.getType()==Consts.PERSON_GUIDE || person.getType()==Consts.PERSON_MODER_GUIDE || person.getType()==Consts.PERSON_ADMIN)
+            model.addAttribute("events", eventService.getByGuideId(person.getId()));
+        else model.addAttribute("events", new ArrayList<Event>());
+
         List<Buy> orders = orderService.getByTourist(person.getId());
         model.addAttribute("orders", orders);
         model.addAttribute("inputEvent", new Event());
@@ -485,6 +491,8 @@ public class PersonController {
     @RequestMapping(value = "/up_to_guide", method = RequestMethod.POST)
     private String upToGuide(@ModelAttribute("series_and_number") String seriesAndNumber,
                              @ModelAttribute("date_and_place") String dateAndPlace,
+                             @RequestParam(value = "about_me", required = false) String aboutMe,
+                             @RequestParam(value = "phone_number", required = false) String phoneNumber,
                              @RequestParam("file") MultipartFile file,
                              ModelMap model, Locale locale, Principal principal){
         Person person;
@@ -521,6 +529,10 @@ public class PersonController {
                 person.setType(Consts.PERSON_MODER_GUIDE);
                 person.setDateAndPlaceOfPassport(dateAndPlace);
                 person.setSeriesAndNumberOfPassport(seriesAndNumber);
+                if (aboutMe!=null && !aboutMe.equals(""))
+                    person.setAbout(aboutMe);
+                if (phoneNumber!=null && !phoneNumber.equals(""))
+                    person.setPhoneNumber(phoneNumber);
                 personService.editPerson(person);
             } catch (Exception e) {
                 logger.error("You failed to upload file => " + e.getMessage());

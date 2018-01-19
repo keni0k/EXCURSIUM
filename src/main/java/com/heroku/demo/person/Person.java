@@ -40,6 +40,8 @@ public class Person implements UserDetails{
     private String imageUrl = "";
     private String role = "";
     private String time = "";
+    private String vk = "";
+    private String telegram = "";
     private int reviewsCount = 0;
 
     private String dateAndPlaceOfPassport = "";
@@ -294,5 +296,21 @@ public class Person implements UserDetails{
 
     public void setImageOfPassportUrl(String imageOfPassportUrl) {
         this.imageOfPassportUrl = imageOfPassportUrl;
+    }
+
+    public String getVk() {
+        return vk;
+    }
+
+    public void setVk(String vk) {
+        this.vk = vk;
+    }
+
+    public String getTelegram() {
+        return telegram;
+    }
+
+    public void setTelegram(String telegram) {
+        this.telegram = telegram;
     }
 }

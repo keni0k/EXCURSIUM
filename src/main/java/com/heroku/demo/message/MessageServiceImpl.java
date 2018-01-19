@@ -32,8 +32,7 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public List<Message> getByEvent(int event) {
         List<Message> list = messageRepository.findAll();
-        List<Message> copy = new ArrayList<>();
-        copy.addAll(list);
+        List<Message> copy = new ArrayList<>(list);
         for (int i = 0; i < copy.size(); i++)
             if (copy.get(i).getEventId() != event) list.remove(i);
         return list;

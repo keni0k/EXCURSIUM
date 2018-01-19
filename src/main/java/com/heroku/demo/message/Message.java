@@ -8,10 +8,10 @@ import javax.persistence.Id;
 @Entity
 public class Message {
 
-    public Message(int userId, int eventId, String date, String msg) {
+    public Message(int userId, int eventId, String time, String msg) {
         this.userId = userId;
         this.eventId = eventId;
-        this.date = date;
+        this.time = time;
         this.msg = msg;
     }
 
@@ -19,7 +19,7 @@ public class Message {
     public String toString() {
         return "{\"id\":\"" + id + "\", \"userId\":\"" + userId +
                 "\" , \"eventId\":\"" + eventId + "\" , \"date\":\"" +
-                date + "\", \"msg\":\"" + msg + "\"}";
+                time + "\", \"msg\":\"" + msg + "\"}";
     }
 
     public Message() {
@@ -29,8 +29,9 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private int eventId = -1;
-    private String date = "";
+    private String time = "";
     private int userId = -1;
+    private int type = -1;
 
     public String getMsg() {
         return msg;
@@ -64,13 +65,20 @@ public class Message {
         this.eventId = eventId;
     }
 
-    public String getDate() {
-        return date;
+    public String getTime() {
+        return time;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setTime(String time) {
+        this.time = time;
     }
 
 
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
 }
