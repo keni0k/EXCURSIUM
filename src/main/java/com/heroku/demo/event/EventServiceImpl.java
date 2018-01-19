@@ -118,9 +118,11 @@ public class EventServiceImpl implements EventService {
     @Override
     public void setRate(int rate, long eventId) {
         Event e = getById(eventId);
-        e.setRate((e.getRate()*e.getReviewsCount())/(e.getReviewsCount()+1));
-        e.setReviewsCount(e.getReviewsCount()+1);
-        editEvent(e);
+        if (e!=null) {
+            e.setRate((e.getRate() * e.getReviewsCount()) / (e.getReviewsCount() + 1));
+            e.setReviewsCount(e.getReviewsCount() + 1);
+            editEvent(e);
+        }
     }
 
     ListEvents getByFilter(Integer priceUp, Integer priceDown, Integer category, Integer language, String words, Integer sortBy, boolean isAll) {

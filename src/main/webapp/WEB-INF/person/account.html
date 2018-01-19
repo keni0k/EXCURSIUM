@@ -97,11 +97,11 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                     <h5 th:text="${person.getStringType(0)}">Турист/Экскурсовод</h5>
                                     <p th:text="${person.getCity()}">Москва, Россия</p>
                                     <!--/* Social */-->
-                                    <a type="button" th:href="@{${person.getVk()}}" th:if="${person.getVk() and person.getVk()!=''}"
+                                    <a type="button" th:if="${person.getVk()!=null and person.getVk()!=''}" th:href="@{${person.getVk()}}"
                                        class="btn-floating badge-blue lighten-2 waves-effect waves-light"><i
                                             class="fa fa-vk"></i></a>
 
-                                    <a type="button" th:href="@{${person.getTelegram()}}" th:if="${person.getTelegram() and person.getTelegram()!=''}"
+                                    <a type="button" th:if="${person.getTelegram()!=null and person.getTelegram()!=''}" th:href="@{${person.getTelegram()}}"
                                        class="btn-floating badge-blue lighten-2 waves-effect waves-light"><i
                                             class="fa fa-telegram"></i></a>
                                     <!--/*Text*/-->
