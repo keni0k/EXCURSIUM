@@ -97,11 +97,11 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                     <h5 th:text="${person.getStringType(0)}">Турист/Экскурсовод</h5>
                                     <p th:text="${person.getCity()}">Москва, Россия</p>
                                     <!--/* Social */-->
-                                    <a type="button" th:href="@{${person.getVk()}}" th:if="${person.getVk()!=''}"
+                                    <a type="button" th:href="@{${person.getVk()}}" th:if="${person.getVk() and person.getVk()!=''}"
                                        class="btn-floating badge-blue lighten-2 waves-effect waves-light"><i
                                             class="fa fa-vk"></i></a>
 
-                                    <a type="button" th:href="@{${person.getTelegram()}}" th:if="${person.getTelegram()!=''}"
+                                    <a type="button" th:href="@{${person.getTelegram()}}" th:if="${person.getTelegram() and person.getTelegram()!=''}"
                                        class="btn-floating badge-blue lighten-2 waves-effect waves-light"><i
                                             class="fa fa-telegram"></i></a>
                                     <!--/*Text*/-->
@@ -136,7 +136,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                             <section class="card mb-4">
                                 <div class="card-body">
 
-                                    <h5 class=" text-center"><strong>Уведомления и статистика (демо)</strong></h5>
+                                    <h5 class=" text-center"><strong>Статистика (демо)</strong></h5>
 
                                     <hr class="my-3"/>
 
@@ -212,6 +212,8 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                         <!--/*Card*/-->
                                         <div class="card card-cascade narrower mb-5"
                                              th:each="j : ${#numbers.sequence(i,i+inc)}"
+                                             th:id="'id-0'+${j}"
+                                             th:style="${j != 0 and j != 1}?'display: none;'"
                                              th:with="order=${orders.get(j)}">
                                             <!--/*@thymesVar id="order" type="com.heroku.demo.order.Buy"*/-->
                                             <!--/*Card image*/-->
@@ -259,35 +261,32 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                             <!--/*End-of-Card row*/-->
                             <!--/*Pagination */-->
                             <nav class="my-4 d-flex justify-content-center" th:if="${orders.size()>2}">
+
                                 <ul class="pagination pagination-circle pg-blue mb-0">
                                     <!--/*First*/-->
-                                    <li class="page-item disabled clearfix d-none d-md-block"><a
-                                            class="page-link waves-effect waves-effect">В начало</a></li>
+                                    <li class="page-item disabled clearfix d-none d-md-block"
+                                        id="to-home-exc-0">
+                                        <a class="page-link waves-effect waves-effect"
+                                           th:onclick="'showHide0(1);'">В начало</a>
+                                    </li>
                                     <!--/*Arrow left*/-->
-                                    <li class="page-item disabled">
-                                        <a class="page-link waves-effect waves-effect" aria-label="Назад">
-                                            <span aria-hidden="true">«</span>
-                                            <span class="sr-only">Назад</span>
-                                        </a>
-                                    </li>
                                     <!--/*Numbers*/-->
-                                    <li class="page-item active"><a class="page-link waves-effect waves-effect">1</a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link waves-effect waves-effect">2</a></li>
-                                    <li class="page-item"><a class="page-link waves-effect waves-effect">3</a></li>
-                                    <li class="page-item"><a class="page-link waves-effect waves-effect">4</a></li>
-                                    <li class="page-item"><a class="page-link waves-effect waves-effect">5</a></li>
-                                    <!--/*End-of-Arrow right*/-->
-                                    <li class="page-item">
-                                        <a class="page-link waves-effect waves-effect" aria-label="Вперёд">
-                                            <span aria-hidden="true">»</span>
-                                            <span class="sr-only">Вперёд</span>
+                                    <li th:each="i : ${#numbers.sequence(1, events.size()/2)}"
+                                        th:class="'page-item' + (${i==1}?' active':'')"
+                                        th:id="'page_events-0-'+${i}">
+                                        <a class="page-link waves-effect waves-effect" th:text="${i}"
+                                           th:onclick="'showHide0('+${i}+');'">1
                                         </a>
                                     </li>
+                                    <!--/*Arrow right*/-->
                                     <!--/*End-of-First*/-->
-                                    <li class="page-item clearfix d-none d-md-block"><a
-                                            class="page-link waves-effect waves-effect">В конец</a></li>
+                                    <li class="page-item clearfix d-none d-md-block"
+                                        id="to-end-exc-0"
+                                        th:onclick="'showHide0('+${events.size()/2}+');'">
+                                        <a class="page-link waves-effect waves-effect">В конец</a>
+                                    </li>
                                 </ul>
+
                             </nav>
                             <!--/*End-of-Pagination */-->
                             <!--/* Heading */-->
@@ -366,13 +365,6 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                            th:onclick="'showHide(1);'">В начало</a>
                                     </li>
                                     <!--/*Arrow left*/-->
-                                    <li class="page-item disabled"
-                                        id="down-exc">
-                                        <a class="page-link waves-effect waves-effect" aria-label="Назад">
-                                            <span aria-hidden="true">«</span>
-                                            <span class="sr-only">Назад</span>
-                                        </a>
-                                    </li>
                                     <!--/*Numbers*/-->
                                     <li th:each="i : ${#numbers.sequence(1, events.size()/2)}"
                                         th:class="'page-item' + (${i==1}?' active':'')"
@@ -382,13 +374,6 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                         </a>
                                     </li>
                                     <!--/*Arrow right*/-->
-                                    <li class="page-item"
-                                        id="up-exc">
-                                        <a class="page-link waves-effect waves-effect" aria-label="Вперёд">
-                                            <span aria-hidden="true">»</span>
-                                            <span class="sr-only">Вперёд</span>
-                                        </a>
-                                    </li>
                                     <!--/*End-of-First*/-->
                                     <li class="page-item clearfix d-none d-md-block"
                                         id="to-end-exc"
@@ -996,6 +981,41 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
         document.getElementById("card-person").style.marginTop=0;
     }
 
+    function showHide0(page) {
+//Если элемент с id-шником element_id существует
+        var id = page * 2 - 2;
+        var idUp = id + 1;
+        var i;
+        var ordersSize = [[${orders.size()}]];
+        for (i = 0; i < ordersSize; i++) {
+            var j = i + 1;
+            document.getElementById('id-0' + i).style.display = "none";
+            if (i < ordersSize / 2 - 1 && document.getElementById('page_events-0' + j))
+                document.getElementById('page_events-0' + j).className = "page-item";
+            if (j === page && document.getElementById('page_events-0' + j))
+                document.getElementById('page_events-0' + j).className = "page-item active";
+        }
+
+        if (document.getElementById('id-0' + id))
+            document.getElementById('id-0' + id).style.display = "";
+        if (document.getElementById('id-0' + idUp))
+            document.getElementById('id-0' + idUp).style.display = "";
+
+        switch (page) {
+            case 1:
+                document.getElementById('to-home-exc-0').className = "page-item disabled clearfix d-none d-md-block";
+                document.getElementById('to-end-exc-0').className = "page-item clearfix d-none d-md-block";
+                break;
+            case Math.floor(ordersSize / 2):
+                document.getElementById('to-home-exc-0').className = "page-item clearfix d-none d-md-block";
+                document.getElementById('to-end-exc-0').className = "page-item disabled clearfix d-none d-md-block";
+                break;
+            default:
+                document.getElementById('to-home-exc-0').className = "page-item clearfix d-none d-md-block";
+                document.getElementById('to-end-exc-0').className = "page-item clearfix d-none d-md-block";
+        }
+    }
+
     function showHide(page) {
 //Если элемент с id-шником element_id существует
         var id = page * 2 - 2;
@@ -1020,20 +1040,14 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
             case 1:
                 document.getElementById('to-home-exc').className = "page-item disabled clearfix d-none d-md-block";
                 document.getElementById('to-end-exc').className = "page-item clearfix d-none d-md-block";
-                document.getElementById('down-exc').className = "page-item disabled";
-                document.getElementById('up-exc').className = "page-item";
                 break;
             case Math.floor(eventsSize / 2):
                 document.getElementById('to-home-exc').className = "page-item clearfix d-none d-md-block";
                 document.getElementById('to-end-exc').className = "page-item disabled clearfix d-none d-md-block";
-                document.getElementById('down-exc').className = "page-item";
-                document.getElementById('up-exc').className = "page-item disabled";
                 break;
             default:
                 document.getElementById('to-home-exc').className = "page-item clearfix d-none d-md-block";
                 document.getElementById('to-end-exc').className = "page-item clearfix d-none d-md-block";
-                document.getElementById('down-exc').className = "page-item";
-                document.getElementById('up-exc').className = "page-item";
         }
     }
 

@@ -143,6 +143,11 @@
             <artifactId>spring-security-core</artifactId>
             <version>4.2.3.RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>com.microsoft.azure</groupId>
+            <artifactId>azure-storage</artifactId>
+            <version>6.0.0</version>
+        </dependency>
 
     </dependencies>
 

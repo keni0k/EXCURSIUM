@@ -30,6 +30,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("org.springframework.boot:spring-boot-starter-data-mongodb")
     compile('org.thymeleaf:thymeleaf-spring5:3.0.9.RELEASE')
+    compile('org.thymeleaf:thymeleaf-spring4:3.0.9.RELEASE')
     compile('org.springframework.security:spring-security-core:5.0.0.RELEASE')
     compile('org.springframework.security:spring-security-acl:5.0.0.RELEASE')
     compile('org.springframework.security:spring-security-web:5.0.0.RELEASE')
@@ -48,6 +49,7 @@ task wrapper(type: Wrapper) {
 //    environment 'JDBC_DATABASE_URL', 'jdbc:postgresql://ec2-174-129-18-170.compute-1.amazonaws.com:5432/dbagf63l26c8fb?ssl=true'
 //    environment 'JDBC_DATABASE_USERNAME', 'xirlpiwrpwoyix'
 //    environment 'JDBC_DATABASE_PASSWORD', 'w8n2XAJqxOXgATxZcdp3Hl-PMc'
+
 }
 
 task stage(type: Copy, dependsOn: [clean, build]) {

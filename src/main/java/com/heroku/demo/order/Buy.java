@@ -1,6 +1,11 @@
 package com.heroku.demo.order;
 
-import javax.persistence.*;
+import com.heroku.demo.utils.Consts;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Buy {
@@ -23,7 +28,6 @@ public class Buy {
 
     private long reviewId = -1;
 
-    @Transient
     private String imageUrl;
 
     private String name;
@@ -93,6 +97,10 @@ public class Buy {
     }
 
     public String getImageUrl() {
+        return Consts.URL_PATH + imageUrl;
+    }
+
+    public String getImageData() {
         return imageUrl;
     }
 

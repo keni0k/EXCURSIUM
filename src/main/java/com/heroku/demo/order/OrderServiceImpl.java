@@ -1,6 +1,5 @@
 package com.heroku.demo.order;
 
-import com.heroku.demo.event.Event;
 import com.heroku.demo.event.EventServiceImpl;
 import com.heroku.demo.photo.PhotoServiceImpl;
 
@@ -44,9 +43,6 @@ public class OrderServiceImpl implements OrderService {
         List<Buy> copy = new ArrayList<>();
         for (Buy order:list)
             if (order.getTouristId() == touristId) {
-                Event e = eventService.getById(order.getEventId());
-                order.setName(e.getName());
-                order.setImageUrl(photoService.getByEventId(e.getId()).getData());
                 copy.add(order);
             }
         return copy;
