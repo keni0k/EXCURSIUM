@@ -24,7 +24,7 @@ public class Buy {
 
     private String time = "";
 
-    private String timeComplite = "";
+    private String timeComplete = "";
 
     private long touristId = 0;
 
@@ -126,12 +126,12 @@ public class Buy {
         this.description = description;
     }
 
-    public String getTimeComplite() {
-        return timeComplite;
+    public String getTimeComplete() {
+        return timeComplete;
     }
 
-    public void setTimeComplite(String timeComplite) {
-        this.timeComplite = timeComplite;
+    public void setTimeComplete(String timeComplete) {
+        this.timeComplete = timeComplete;
     }
 
     public void setTouristId(long touristId) {
