@@ -123,7 +123,10 @@
 
                                     <!--TIME-->
                                     <p class="card-text" style="font-size: medium; color: #000000" align="justify"
-                                       th:text="'Time of order: '+${order.getTime()} + '          Time of book: '+${order.getTimeComplete()}">%Время заказа и экскурсии%</p>
+                                       th:text="'Time of order: '+${order.getTime()}">%Время заказа и экскурсии%</p>
+                                    <!--TIME-->
+                                    <p class="card-text" style="font-size: medium; color: #000000" align="justify"
+                                       th:text="">%Время заказа%</p>
 
                                     <!--Card footer-->
                                     <div class="card-footer">
@@ -138,7 +141,7 @@
                                         </th:block>
                                         <span class="right">
     <a class="btn btn-primary waves-effect waves-light"
-       th:href="@{/events/event(id = ${event.getId()})}" role="button">К станице экскурсии</a>
+       th:href="@{/events/event(id = ${event.getId()})}" role="button">Станица экскурсии</a>
 </span>
                                     </div>
 

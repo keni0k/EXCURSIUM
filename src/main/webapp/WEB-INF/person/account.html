@@ -265,7 +265,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
 
                                 <ul class="pagination pagination-circle pg-blue mb-0">
                                     <!--/*First*/-->
-                                    <li class="page-item disabled clearfix d-none d-md-block"
+                                    <li class="page-item disabled clearfix d-none d-sm-block"
                                         id="to-home-exc-0">
                                         <a class="page-link waves-effect waves-effect"
                                            th:onclick="'showHide0(1);'">В начало</a>
@@ -281,7 +281,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                     </li>
                                     <!--/*Arrow right*/-->
                                     <!--/*End-of-First*/-->
-                                    <li class="page-item clearfix d-none d-md-block"
+                                    <li class="page-item clearfix d-none d-sm-block"
                                         id="to-end-exc-0"
                                         th:onclick="'showHide0('+${pages}+');'">
                                         <a class="page-link waves-effect waves-effect">В конец</a>
@@ -343,10 +343,21 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                                         style="color:#4285F4; font-size: medium; padding-top: -0.2em; padding-bottom: 2rem;">%Цена%  </strong>
                                                     <span th:text="'Отзывов: '+${event.getReviewsCount()}"></span>
                                                 </span>
-                                                                                                <span class="right">
+                                                <span class="right">
                                                 <a th:href="@{/events/event(id=${event.getId()})}"
                                                    class="waves-effect p-2">Открыть<i
                                                         class="fa fa-photo ml-1"></i></a>
+                                                                                                    <a rel="tooltip"
+                                                                                                       title="Edit"
+                                                                                                       href="javascript:void(0)"
+                                                                                                       role="button"
+                                                                                                       style="margin-left: 10px; margin-right: 2px; margin-top: 8px;">
+                                                    <i class="fa fa-edit" style="font-size: 20px;"></i>
+                                                </a>
+                                                <a rel="tooltip" title="Delete" href="javascript:void(0)" role="button"
+                                                   style="margin-left: 10px; margin-top: 7px;">
+                                                    <i class="fa fa-trash" style="font-size: 20px;"></i>
+                                                </a>
                                                 </span>
                                             </div>
                                         </div>
@@ -360,7 +371,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
 
                                 <ul class="pagination pagination-circle pg-blue mb-0">
                                     <!--/*First*/-->
-                                    <li class="page-item disabled clearfix d-none d-md-block"
+                                    <li class="page-item disabled clearfix d-none d-sm-block"
                                         id="to-home-exc">
                                         <a class="page-link waves-effect waves-effect"
                                            th:onclick="'showHide(1);'">В начало</a>
@@ -376,7 +387,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                     </li>
                                     <!--/*Arrow right*/-->
                                     <!--/*End-of-First*/-->
-                                    <li class="page-item clearfix d-none d-md-block"
+                                    <li class="page-item clearfix d-none d-sm-block"
                                         id="to-end-exc"
                                         th:onclick="'showHide('+${pagesev}+');'">
                                         <a class="page-link waves-effect waves-effect">В конец</a>
@@ -1007,16 +1018,16 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
 
         switch (page) {
             case 1:
-                document.getElementById('to-home-exc-0').className = "page-item disabled clearfix d-none d-md-block";
-                document.getElementById('to-end-exc-0').className = "page-item clearfix d-none d-md-block";
+                document.getElementById('to-home-exc-0').className = "page-item disabled clearfix d-none d-sm-block";
+                document.getElementById('to-end-exc-0').className = "page-item clearfix d-none d-sm-block";
                 break;
             case Math.floor(pages):
-                document.getElementById('to-home-exc-0').className = "page-item clearfix d-none d-md-block";
-                document.getElementById('to-end-exc-0').className = "page-item disabled clearfix d-none d-md-block";
+                document.getElementById('to-home-exc-0').className = "page-item clearfix d-none d-sm-block";
+                document.getElementById('to-end-exc-0').className = "page-item disabled clearfix d-none d-sm-block";
                 break;
             default:
-                document.getElementById('to-home-exc-0').className = "page-item clearfix d-none d-md-block";
-                document.getElementById('to-end-exc-0').className = "page-item clearfix d-none d-md-block";
+                document.getElementById('to-home-exc-0').className = "page-item clearfix d-none d-sm-block";
+                document.getElementById('to-end-exc-0').className = "page-item clearfix d-none d-sm-block";
         }
     }
 
@@ -1047,16 +1058,16 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
 
         switch (page) {
             case 1:
-                document.getElementById('to-home-exc').className = "page-item disabled clearfix d-none d-md-block";
-                document.getElementById('to-end-exc').className = "page-item clearfix d-none d-md-block";
+                document.getElementById('to-home-exc').className = "page-item disabled clearfix d-none d-sm-block";
+                document.getElementById('to-end-exc').className = "page-item clearfix d-none d-sm-block";
                 break;
             case  Math.floor(pages):
-                document.getElementById('to-home-exc').className = "page-item clearfix d-none d-md-block";
-                document.getElementById('to-end-exc').className = "page-item disabled clearfix d-none d-md-block";
+                document.getElementById('to-home-exc').className = "page-item clearfix d-none d-sm-block";
+                document.getElementById('to-end-exc').className = "page-item disabled clearfix d-none d-sm-block";
                 break;
             default:
-                document.getElementById('to-home-exc').className = "page-item clearfix d-none d-md-block";
-                document.getElementById('to-end-exc').className = "page-item clearfix d-none d-md-block";
+                document.getElementById('to-home-exc').className = "page-item clearfix d-none d-sm-block";
+                document.getElementById('to-end-exc').className = "page-item clearfix d-none d-sm-block";
         }
     }
 
