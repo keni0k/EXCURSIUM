@@ -282,7 +282,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                     <!--/*End-of-First*/-->
                                     <li class="page-item clearfix d-none d-md-block"
                                         id="to-end-exc-0"
-                                        th:onclick="'showHide0('+${orders.size()/2}+');'">
+                                        th:onclick="'showHide0('+pages+');'">
                                         <a class="page-link waves-effect waves-effect">В конец</a>
                                     </li>
                                 </ul>
@@ -355,7 +355,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                             </th:block>
                             <!--/* End-of-Card row */-->
                             <!--/*Pagination */-->
-                            <nav class="my-4 d-flex justify-content-center" th:if="${events.size()>2 and excursovod}">
+                            <nav class="my-4 d-flex justify-content-center" th:if="${events.size()>2 and excursovod}" th:with="pagesev = ${events.size()%2==0}?${events.size()/2}:${events.size()/2+1}">
 
                                 <ul class="pagination pagination-circle pg-blue mb-0">
                                     <!--/*First*/-->
@@ -366,7 +366,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                     </li>
                                     <!--/*Arrow left*/-->
                                     <!--/*Numbers*/-->
-                                    <li th:each="i : ${#numbers.sequence(1, events.size()/2)}"
+                                    <li th:each="i : ${#numbers.sequence(1, pagesev)}"
                                         th:class="'page-item' + (${i==1}?' active':'')"
                                         th:id="'page_events'+${i}">
                                         <a class="page-link waves-effect waves-effect" th:text="${i}"
@@ -377,7 +377,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                     <!--/*End-of-First*/-->
                                     <li class="page-item clearfix d-none d-md-block"
                                         id="to-end-exc"
-                                        th:onclick="'showHide('+${events.size()/2}+');'">
+                                        th:onclick="'showHide('+${pagesev}+');'">
                                         <a class="page-link waves-effect waves-effect">В конец</a>
                                     </li>
                                 </ul>
@@ -986,11 +986,14 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
         var id = page * 2 - 2;
         var idUp = id + 1;
         var i;
+        var pages;
         var ordersSize = [[${orders.size()}]];
+        if (ordersSize%2===0) pages = ordersSize/2;
+        else pages = ordersSize/2+1;
         for (i = 0; i < ordersSize; i++) {
             var j = i + 1;
             document.getElementById('id-0' + i).style.display = "none";
-            if (i < ordersSize / 2 - 1 && document.getElementById('page_events-0' + j))
+            if (i < pages && document.getElementById('page_events-0' + j))
                 document.getElementById('page_events-0' + j).className = "page-item";
             if (j === page && document.getElementById('page_events-0' + j))
                 document.getElementById('page_events-0' + j).className = "page-item active";
@@ -1006,7 +1009,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                 document.getElementById('to-home-exc-0').className = "page-item disabled clearfix d-none d-md-block";
                 document.getElementById('to-end-exc-0').className = "page-item clearfix d-none d-md-block";
                 break;
-            case Math.floor(ordersSize / 2):
+            case pages:
                 document.getElementById('to-home-exc-0').className = "page-item clearfix d-none d-md-block";
                 document.getElementById('to-end-exc-0').className = "page-item disabled clearfix d-none d-md-block";
                 break;
