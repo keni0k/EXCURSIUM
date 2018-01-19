@@ -231,6 +231,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                                 <!--/*Text*/-->
                                                 <span class="card-text" style="font-size: small;" align="left"
                                                       th:text="'Time of order: '+${order.getTime()}">Время заказа</span>
+                                                <br/>
                                                 <span class="card-text" style="font-size: small;" align="right"
                                                       th:text="'Time of book: '+${order.getTimeComplete()}">Время экскурсии</span>
                                             </div>
