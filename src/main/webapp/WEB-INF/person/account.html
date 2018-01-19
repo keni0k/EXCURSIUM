@@ -260,7 +260,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                             </th:block>
                             <!--/*End-of-Card row*/-->
                             <!--/*Pagination */-->
-                            <nav class="my-4 d-flex justify-content-center" th:if="${orders.size()>2}">
+                            <nav class="my-4 d-flex justify-content-center" th:if="${orders.size()>2}" th:with="pages = ${orders.size()%2==0}?${orders.size()/2}:${orders.size()/2+1}">
 
                                 <ul class="pagination pagination-circle pg-blue mb-0">
                                     <!--/*First*/-->
@@ -271,7 +271,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                     </li>
                                     <!--/*Arrow left*/-->
                                     <!--/*Numbers*/-->
-                                    <li th:each="i : ${#numbers.sequence(1, orders.size()/2)}"
+                                    <li th:each="i : ${#numbers.sequence(1, pages)}"
                                         th:class="'page-item' + (${i==1}?' active':'')"
                                         th:id="'page_events-0'+${i}">
                                         <a class="page-link waves-effect waves-effect" th:text="${i}"
