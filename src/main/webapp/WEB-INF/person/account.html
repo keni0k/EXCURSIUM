@@ -1004,13 +1004,12 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
         if (document.getElementById('id-0' + idUp))
             document.getElementById('id-0' + idUp).style.display = "";
 
-        alert('pages: '+pages + ' page: '+page);
         switch (page) {
             case 1:
                 document.getElementById('to-home-exc-0').className = "page-item disabled clearfix d-none d-md-block";
                 document.getElementById('to-end-exc-0').className = "page-item clearfix d-none d-md-block";
                 break;
-            case pages+1:
+            case Math.floor(pages):
                 document.getElementById('to-home-exc-0').className = "page-item clearfix d-none d-md-block";
                 document.getElementById('to-end-exc-0').className = "page-item disabled clearfix d-none d-md-block";
                 break;
@@ -1050,7 +1049,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                 document.getElementById('to-home-exc').className = "page-item disabled clearfix d-none d-md-block";
                 document.getElementById('to-end-exc').className = "page-item clearfix d-none d-md-block";
                 break;
-            case pages-1:
+            case  Math.floor(pages):
                 document.getElementById('to-home-exc').className = "page-item clearfix d-none d-md-block";
                 document.getElementById('to-end-exc').className = "page-item disabled clearfix d-none d-md-block";
                 break;
