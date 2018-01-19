@@ -230,9 +230,9 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                                     экскурсии</h4>
                                                 <!--/*Text*/-->
                                                 <span class="card-text" style="font-size: small;" align="left"
-                                                      th:text="${order.getTime()}">Время заказа</span>
+                                                      th:text="'Time of order: '+${order.getTime()}">Время заказа</span>
                                                 <span class="card-text" style="font-size: small;" align="right"
-                                                      th:text="${order.getTime()}">Время экскурсии</span>
+                                                      th:text="'Time of book: '+${order.getTimeComplite()}">Время экскурсии</span>
                                             </div>
                                             <!--/*Card footer*/-->
                                             <div class="card-footer links-light">
@@ -337,16 +337,16 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                             </div>
                                             <!--/*Card footer*/-->
                                             <div class="card-footer links-light">
-<span class="left pt-2">
-<strong th:text="${event.getPrice()}+'&#8381;  '"
-        style="color:#4285F4; font-size: medium; padding-top: -0.2em; padding-bottom: 2rem;">%Цена%  </strong>
-<a><i class="fa fa-heart-o mr-2"></i>10</a>
-</span>
-                                                <span class="right">
-<a th:href="@{/events/event(id=${event.getId()})}"
-   class="waves-effect p-2">Открыть<i
-        class="fa fa-photo ml-1"></i></a>
-</span>
+                                                <span class="left pt-2">
+                                                <strong th:text="${event.getPrice()}+'&#8381;  '"
+                                                        style="color:#4285F4; font-size: medium; padding-top: -0.2em; padding-bottom: 2rem;">%Цена%  </strong>
+                                                    <span th:text="'Отзывов: '+${event.getReviewsCount()}"></span>
+                                                </span>
+                                                                                                <span class="right">
+                                                <a th:href="@{/events/event(id=${event.getId()})}"
+                                                   class="waves-effect p-2">Открыть<i
+                                                        class="fa fa-photo ml-1"></i></a>
+                                                </span>
                                             </div>
                                         </div>
                                         <!--/*End-of-Card*/-->
@@ -978,7 +978,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
 
     function onImgError() {
         document.getElementById("img-person").style.display="none";
-        document.getElementById("card-person").style.marginTop=0;
+        document.getElementById("card-person").style.marginTop='0';
     }
 
     function showHide0(page) {

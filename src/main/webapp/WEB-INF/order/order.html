@@ -119,11 +119,14 @@
 
                                     <!--Description-->
                                     <p class="card-text" style="font-size: medium; color: #000000" align="justify"
-                                       th:text="${order.description}">%Описание%</p>
+                                       th:text="${order.getDescription()}">%Описание%</p>
 
                                     <!--TIME-->
                                     <p class="card-text" style="font-size: medium; color: #000000" align="justify"
-                                       th:text="'Time of order: '+${order.time}">%Врмя заказа%</p>
+                                       th:text="'Time of order: '+${order.getTime()}">%Время заказа%</p>
+                                    <!--TIME-->
+                                    <p class="card-text" style="font-size: medium; color: #000000" align="justify"
+                                       th:text="'Time of book: '+${order.getTimeComplite()}">%Время заказа%</p>
 
                                     <!--Card footer-->
                                     <div class="card-footer">
