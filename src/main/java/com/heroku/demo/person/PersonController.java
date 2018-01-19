@@ -264,6 +264,8 @@ public class PersonController {
                            @ModelAttribute("last_name") String lastName,
                            @ModelAttribute("about_me") String aboutMe,
                            @ModelAttribute("city") String city,
+                           @RequestParam(value = "vk", required = false) String vk,
+                           @RequestParam(value = "telegram", required = false) String telegram,
                            @RequestParam("file") MultipartFile file,
                            ModelMap model, Locale locale, Principal principal) {
         Person person;
@@ -306,6 +308,8 @@ public class PersonController {
         person = personService.editPublic(firstName, lastName, city, aboutMe, person, file!=null && !file.isEmpty());
         if (person.getType()== Consts.PERSON_TOURIST || person.getType()==Consts.PERSON_GUIDE)
             person.setType(person.getType()*-1);
+        if (vk!=null && !vk.equals("")) person.setVk(vk);
+        if (telegram!=null && !telegram.equals("")) person.setTelegram(telegram);
         personService.editPerson(person);
         model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.registration", null, locale)));
         return account(model, principal);

@@ -271,9 +271,9 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                     </li>
                                     <!--/*Arrow left*/-->
                                     <!--/*Numbers*/-->
-                                    <li th:each="i : ${#numbers.sequence(1, events.size()/2)}"
+                                    <li th:each="i : ${#numbers.sequence(1, orders.size()/2)}"
                                         th:class="'page-item' + (${i==1}?' active':'')"
-                                        th:id="'page_events-0-'+${i}">
+                                        th:id="'page_events-0'+${i}">
                                         <a class="page-link waves-effect waves-effect" th:text="${i}"
                                            th:onclick="'showHide0('+${i}+');'">1
                                         </a>
@@ -282,7 +282,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                     <!--/*End-of-First*/-->
                                     <li class="page-item clearfix d-none d-md-block"
                                         id="to-end-exc-0"
-                                        th:onclick="'showHide0('+${events.size()/2}+');'">
+                                        th:onclick="'showHide0('+${orders.size()/2}+');'">
                                         <a class="page-link waves-effect waves-effect">В конец</a>
                                     </li>
                                 </ul>
@@ -495,7 +495,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                                         <div class="col-md-6">
                                                             <!--/*Facebook*/-->
                                                             <div class="md-form form-sm mt-2">
-                                                                <input type="text" id="editProfile8"
+                                                                <input type="text" id="editProfile8" name="vk" th:value="${person.getVk()}"
                                                                        class="form-control"/>
                                                                 <label for="editProfile8" class="">VK</label>
                                                             </div>
@@ -505,7 +505,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                                         <div class="col-md-6">
                                                             <!--/*LinkedIn*/-->
                                                             <div class="md-form form-sm mt-2">
-                                                                <input type="text" id="editProfile10"
+                                                                <input type="text" id="editProfile10" name="telegram" th:value="${person.getTelegram()}"
                                                                        class="form-control"/>
                                                                 <label for="editProfile10" class="">Telegram</label>
                                                             </div>
