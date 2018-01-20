@@ -89,7 +89,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                             <section class="card card-cascade card-avatar mb-4" id = "card-person">
 
                                 <img th:src="${person.getImageUrl()}" src="../../resources/img/user.png" alt=""
-                                     onerror="onImgError();"/>
+                                     th:onunload="'onImgError();'"/>
                                 <!--/*Card content*/-->
                                 <div class="card-body">
                                     <!--/*Title*/-->
@@ -190,7 +190,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                         <!--/*Grid column*/-->
                         <div class="col-lg-8 col-md-12 text-center">
                             <!--/* Heading */-->
-                            <div class="text-center mt-3 mb-5">
+                            <div class="text-center mt-3">
                                 <h2 class="title text-center pe" th:if="${orders.size()>0}">Посещенные экскурсии</h2>
                                 <h2 class="title text-center nepe" th:if="${orders.size()==0}">Здесь будут отображаться
                                     посещенные экскурсии</h2> <!--/*-310,615 TODO: translate*/-->
@@ -210,7 +210,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                 <div class="card-deck" th:each="i : ${#numbers.sequence( 0, orders.size()-1)}">
                                     <th:block th:if="${i%2==0}" th:with="inc = ${i!=orders.size()-1?1:0}">
                                         <!--/*Card*/-->
-                                        <div class="card card-cascade narrower mb-5"
+                                        <div class="card card-cascade narrower"
                                              th:each="j : ${#numbers.sequence(i,i+inc)}"
                                              th:id="'id-0'+${j}"
                                              th:style="${j != 0 and j != 1}?'display: none;'"
@@ -254,10 +254,17 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                                             заказ<i
                                                                     class="fa fa-handshake-o ml-1"></i></a>
                                                     </div>
-                                                    <div class="right"><a
+                                                    <div class="right">
+                                                        <a data-toggle="confirmation"
+                                                           data-btn-ok-label="Continue" data-btn-ok-icon="glyphicon glyphicon-share-alt"
+                                                           data-btn-ok-class="btn-success"
+                                                           data-btn-cancel-label="Stoooop!" data-btn-cancel-icon="glyphicon glyphicon-ban-circle"
+                                                           data-btn-cancel-class="btn-danger"
+                                                           data-title="Is it ok?" data-content="This might be dangerous"
                                                             th:href="@{/orders/order(id=${order.getId()})}"
                                                             class="waves-effect p-2">Открыть спор<i
-                                                            class="fa fa-gavel ml-1"></i></a></div>
+                                                            class="fa fa-gavel ml-1"></i></a>
+                                                    </div>
                                                 </th:block>
                                                 <th:block th:if="${order.getReviewId()==-1 and order.getType()==consts.ORDER_CONFIRM}">
                                                     <div class="clearfix"></div>
@@ -306,7 +313,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                             </nav>
                             <!--/*End-of-Pagination */-->
                             <!--/* Heading */-->
-                            <div class="text-center mt-3 mb-5" th:if="${excursovod}">
+                            <div class="text-center mt-3" th:if="${excursovod}">
                                 <h2 class="title text-center pe" th:if="${events.size()>0}">Добавленные экскурсии</h2>
                                 <h2 class="title text-center nepe" th:if="${events.size()==0 and excursovod}">Здесь
                                     будут
@@ -327,7 +334,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
 
                                     <th:block th:if="${i%2==0}" th:with="inc=${i!=events.size()-1?1:0}">
                                         <!--/*Card*/-->
-                                        <div class="card card-cascade narrower mb-5"
+                                        <div class="card card-cascade narrower"
                                              th:each="j : ${#numbers.sequence(i,i+inc)}"
                                              th:with="event = ${events.get(j)}"
                                              th:id="'id'+${j}"
@@ -1002,7 +1009,6 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
 <!--/*Custom scripts*/-->
 <script th:inline="javascript">
     /*<![CDATA[*/
-
     function onImgError() {
         document.getElementById("img-person").style.display="none";
         document.getElementById("card-person").style.marginTop='0';

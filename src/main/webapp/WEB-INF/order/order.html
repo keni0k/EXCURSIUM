@@ -126,7 +126,7 @@
                                        th:text="'Time of order: '+${order.getTime()}">%Время заказа и экскурсии%</p>
                                     <!--TIME-->
                                     <p class="card-text" style="font-size: medium; color: #000000" align="justify"
-                                       th:text="">%Время заказа%</p>
+                                       th:text="'Time of book: '+${order.getTimeComplete()}">%Время заказа%</p>
 
                                     <!--Card footer-->
                                     <div class="card-footer">
