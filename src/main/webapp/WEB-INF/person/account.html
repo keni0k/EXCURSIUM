@@ -218,7 +218,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                             <!--/*@thymesVar id="order" type="com.heroku.demo.order.Buy"*/-->
                                             <!--/*Card image*/-->
                                             <div class="view overlay hm-white-slight">
-                                                <img th:src="${order.getImageUrl()}" src="#" class="img-fluid" alt=""/>
+                                                <img th:src="${order.getImageUrl()}" src="#" class="img-fluid" alt="" style="height: 240px; min-width: -webkit-fill-available;"/>
                                                 <a href="#">
                                                     <div class="mask waves-effect waves-light"></div>
                                                 </a>
@@ -237,21 +237,36 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                             </div>
                                             <!--/*Card footer*/-->
                                             <div class="card-footer links-light">
-<span class="left pt-2">
-<strong th:text="${order.getPrice()}+'&#8381;  '"
-        style="color:#4285F4; font-size: medium; padding-top: -0.2em;">%Цена%  </strong>
-</span>
-                                                <span class="right">
-<a th:href="@{/orders/order(id=${order.getId()})}"
-   class="waves-effect p-2">Открыть<i
-        class="fa fa-photo ml-1"></i></a>
-</span>
-                                                <th:block th:if="${order.getReviewId()==-1}">
+                                                <div class="left pt-2">
+                                                    <strong th:text="${order.getPrice()}+'&#8381;  '"
+                                                            style="color:#4285F4; font-size: medium; padding-top: -0.2em;">%Цена% </strong>
+                                                </div>
+                                                <div class="right">
+                                                    <a th:href="@{/orders/order(id=${order.getId()})}"
+                                                       class="waves-effect p-2">Открыть<i
+                                                            class="fa fa-photo ml-1"></i></a>
+                                                </div>
+                                                <th:block th:if="${order.getType()==consts.ORDER_OPEN}">
                                                     <div class="clearfix"></div>
-                                                    <span class="left pt-2">
-    <a href="#" data-toggle="modal" data-target="#modalAddReview" th:onclick="'modalReview('+${order.getId()}+')'"><i
-            class="fa fa-comments mr-2"></i>Оставить отзыв</a><!--role="button" -->
-    </span>
+                                                    <div class="left pt-2">
+                                                        <a th:href="@{/orders/confirm(id=${order.getId()})}"
+                                                           class="waves-effect" rel="tooltip" style="display: inline">Подтвердить
+                                                            заказ<i
+                                                                    class="fa fa-handshake-o ml-1"></i></a>
+                                                    </div>
+                                                    <div class="right"><a
+                                                            th:href="@{/orders/order(id=${order.getId()})}"
+                                                            class="waves-effect p-2">Открыть спор<i
+                                                            class="fa fa-gavel ml-1"></i></a></div>
+                                                </th:block>
+                                                <th:block th:if="${order.getReviewId()==-1 and order.getType()==consts.ORDER_CONFIRM}">
+                                                    <div class="clearfix"></div>
+                                                    <div class="pt-2">
+                                                        <a href="#" data-toggle="modal" data-target="#modalAddReview"
+                                                           th:onclick="'modalReview('+${order.getId()}+')'">Оставить отзыв<i
+                                                                class="fa fa-comments ml-1"></i></a>
+                                                        <!--role="button" -->
+                                                    </div>
                                                 </th:block>
                                             </div>
                                         </div>

@@ -18,4 +18,11 @@ public class Consts {
 
     public static final int LANGUAGE_RU = 0;
     public static final int LANGUAGE_EN = 1;
+
+    public static final int ORDER_DISPUTE = -3;
+    public static final int ORDER_DISPUTE_CLOSE = -2;
+    public static final int ORDER_CLOSE = -1;
+    public static final int ORDER_ADD = 0;
+    public static final int ORDER_OPEN = 1;
+    public static final int ORDER_CONFIRM = 2;
 }

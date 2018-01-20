@@ -64,6 +64,7 @@ public class OrderController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String orderAdd(ModelMap model, @Valid Buy order, BindingResult result) {
+        order.setType(0);
         if (!result.hasErrors())
             orderService.addOrder(order);
         return "person/account";
