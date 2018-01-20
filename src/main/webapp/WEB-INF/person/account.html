@@ -36,7 +36,7 @@
             document.getElementById('order_id').value = id;
         }
 
-        $('#confirm-delete').on('show.bs.modal', function(e) {
+        $('#confirm-delete').on('show.bs.modal', function (e) {
             $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
 
             $('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>');
@@ -92,7 +92,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                         <!--/*Grid column*/-->
                         <div class="col-lg-4 col-md-12">
                             <!--/*Section: Basic Info*/-->
-                            <section class="card card-cascade card-avatar mb-4" id = "card-person">
+                            <section class="card card-cascade card-avatar mb-4" id="card-person">
 
                                 <img th:src="${person.getImageUrl()}" src="../../resources/img/user.png" alt=""
                                      th:onunload="'onImgError();'"/>
@@ -103,11 +103,13 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                     <h5 th:text="${person.getStringType(0)}">Турист/Экскурсовод</h5>
                                     <p th:text="${person.getCity()}">Москва, Россия</p>
                                     <!--/* Social */-->
-                                    <a type="button" th:if="${person.getVk()!=null and person.getVk()!=''}" th:href="@{${person.getVk()}}"
+                                    <a type="button" th:if="${person.getVk()!=null and person.getVk()!=''}"
+                                       th:href="@{${person.getVk()}}"
                                        class="btn-floating badge-blue lighten-2 waves-effect waves-light"><i
                                             class="fa fa-vk"></i></a>
 
-                                    <a type="button" th:if="${person.getTelegram()!=null and person.getTelegram()!=''}" th:href="@{${person.getTelegram()}}"
+                                    <a type="button" th:if="${person.getTelegram()!=null and person.getTelegram()!=''}"
+                                       th:href="@{${person.getTelegram()}}"
                                        class="btn-floating badge-blue lighten-2 waves-effect waves-light"><i
                                             class="fa fa-telegram"></i></a>
                                     <!--/*Text*/-->
@@ -151,7 +153,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
 
                                         <li>
                                             <p>Новые сообщения: <span class="badge badge-primary pull-right"
-                                                                 th:text="${answersCount}">14</span></p>
+                                                                      th:text="${answersCount}">14</span></p>
                                         </li>
                                         <hr class="notify"/>
                                         <!--/*@thymesVar id="ordersWaitCount" type="java.lang.Integer"*/-->
@@ -197,8 +199,10 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                         <div class="col-lg-8 col-md-12 text-center">
                             <!--/* Heading */-->
                             <div class="text-center mt-3">
-                                <h2 class="title text-center pe" style="margin-bottom: 15px !important;" th:if="${orders.size()>0}">Посещенные экскурсии</h2>
-                                <h2 class="title text-center nepe" style="margin-bottom: 15px !important;" th:if="${orders.size()==0}">Здесь будут отображаться
+                                <h2 class="title text-center pe" style="margin-bottom: 15px !important;"
+                                    th:if="${orders.size()>0}">Посещенные экскурсии</h2>
+                                <h2 class="title text-center nepe" style="margin-bottom: 15px !important;"
+                                    th:if="${orders.size()==0}">Здесь будут отображаться
                                     посещенные экскурсии</h2> <!--/*-310,615 TODO: translate*/-->
                                 <a href="/events/list" th:if="${orders.size()==0}">
                                     <button th:if="${isThisUserAccount}" type="button"
@@ -224,7 +228,8 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                             <!--/*@thymesVar id="order" type="com.heroku.demo.order.Buy"*/-->
                                             <!--/*Card image*/-->
                                             <div class="view overlay hm-white-slight">
-                                                <img th:src="${order.getImageUrl()}" src="#" class="img-fluid" alt="" style="height: 240px; min-width: -webkit-fill-available;"/>
+                                                <img th:src="${order.getImageUrl()}" src="#" class="img-fluid" alt=""
+                                                     style="height: 240px; min-width: -webkit-fill-available;"/>
                                                 <a href="#">
                                                     <div class="mask waves-effect waves-light"></div>
                                                 </a>
@@ -261,17 +266,20 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                                                     class="fa fa-handshake-o ml-1"></i></a>
                                                     </div>
                                                     <div class="right">
-                                                        <a href="#" th:data-href="${order.getId()}" data-toggle="modal" data-target="#confirmDelete"
-                                                            class="waves-effect p-2">Открыть спор<i
-                                                            class="fa fa-gavel ml-1"></i></a>
+                                                        <a href="#" th:data-href="${order.getId()}" data-toggle="modal"
+                                                           data-target="#confirmDelete"
+                                                           class="waves-effect p-2">Открыть спор<i
+                                                                class="fa fa-gavel ml-1"></i></a>
                                                     </div>
                                                 </th:block>
-                                                <th:block th:if="${order.getReviewId()==-1 and order.getType()==consts.ORDER_CONFIRM}">
+                                                <th:block
+                                                        th:if="${order.getReviewId()==-1 and order.getType()==consts.ORDER_CONFIRM}">
                                                     <div class="clearfix"></div>
                                                     <div class="pt-2">
                                                         <a href="#" data-toggle="modal" data-target="#modalAddReview"
-                                                           th:onclick="'modalReview('+${order.getId()}+')'">Оставить отзыв<i
-                                                                class="fa fa-comments ml-1"></i></a>
+                                                           th:onclick="'modalReview('+${order.getId()}+')'">Оставить
+                                                            отзыв<i
+                                                                    class="fa fa-comments ml-1"></i></a>
                                                         <!--role="button" -->
                                                     </div>
                                                 </th:block>
@@ -283,7 +291,8 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                             </th:block>
                             <!--/*End-of-Card row*/-->
                             <!--/*Pagination */-->
-                            <nav class="my-4 d-flex justify-content-center" th:if="${orders.size()>2}" th:with="pages = ${orders.size()%2==0}?${orders.size()/2}:${orders.size()/2+1}">
+                            <nav class="my-4 d-flex justify-content-center" th:if="${orders.size()>2}"
+                                 th:with="pages = ${orders.size()%2==0}?${orders.size()/2}:${orders.size()/2+1}">
 
                                 <ul class="pagination pagination-circle pg-blue mb-0">
                                     <!--/*First*/-->
@@ -314,8 +323,10 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                             <!--/*End-of-Pagination */-->
                             <!--/* Heading */-->
                             <div class="text-center mt-3" th:if="${excursovod}">
-                                <h2 class="title text-center pe" style="margin-bottom: 15px !important;" th:if="${events.size()>0}">Добавленные экскурсии</h2>
-                                <h2 class="title text-center nepe" style="margin-bottom: 15px !important;" th:if="${events.size()==0 and excursovod}">Здесь
+                                <h2 class="title text-center pe" style="margin-bottom: 15px !important;"
+                                    th:if="${events.size()>0}">Добавленные экскурсии</h2>
+                                <h2 class="title text-center nepe" style="margin-bottom: 15px !important;"
+                                    th:if="${events.size()==0 and excursovod}">Здесь
                                     будут
                                     отображаться добавленные экскурсии</h2> <!--/*-310,615 TODO: translate*/-->
                                 <button th:if="${isThisUserAccount and excursovod}" type="button"
@@ -389,7 +400,8 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                             </th:block>
                             <!--/* End-of-Card row */-->
                             <!--/*Pagination */-->
-                            <nav class="my-4 d-flex justify-content-center" th:if="${events.size()>2 and excursovod}" th:with="pagesev = ${events.size()%2==0}?${events.size()/2}:${events.size()/2+1}">
+                            <nav class="my-4 d-flex justify-content-center" th:if="${events.size()>2 and excursovod}"
+                                 th:with="pagesev = ${events.size()%2==0}?${events.size()/2}:${events.size()/2+1}">
 
                                 <ul class="pagination pagination-circle pg-blue mb-0">
                                     <!--/*First*/-->
@@ -529,7 +541,8 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                                         <div class="col-md-6">
                                                             <!--/*Facebook*/-->
                                                             <div class="md-form form-sm mt-2">
-                                                                <input type="text" id="editProfile8" name="vk" th:value="${person.getVk()}"
+                                                                <input type="text" id="editProfile8" name="vk"
+                                                                       th:value="${person.getVk()}"
                                                                        class="form-control"/>
                                                                 <label for="editProfile8" class="">VK</label>
                                                             </div>
@@ -539,7 +552,8 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                                         <div class="col-md-6">
                                                             <!--/*LinkedIn*/-->
                                                             <div class="md-form form-sm mt-2">
-                                                                <input type="text" id="editProfile10" name="telegram" th:value="${person.getTelegram()}"
+                                                                <input type="text" id="editProfile10" name="telegram"
+                                                                       th:value="${person.getTelegram()}"
                                                                        class="form-control"/>
                                                                 <label for="editProfile10" class="">Telegram</label>
                                                             </div>
@@ -921,7 +935,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                             <div class="col-md-6">
                                                 <!--/*First Name*/-->
                                                 <div class="md-form form-sm">
-                                                    <input type="text" id="upToGuide1"  required=""
+                                                    <input type="text" id="upToGuide1" required=""
                                                            class="form-control" name="series_and_number"/>
                                                     <label for="editProfile1" class="">Серия и номер паспорта</label>
                                                 </div>
@@ -931,7 +945,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                             <div class="col-md-6">
                                                 <!--/*Last Name*/-->
                                                 <div class="md-form form-sm">
-                                                    <input type="text" id="upToGuide2"  required=""
+                                                    <input type="text" id="upToGuide2" required=""
                                                            class="form-control" name="date_and_place"/>
                                                     <label for="editProfile2" class="">Кем и когда выдан паспорт</label>
                                                 </div>
@@ -940,7 +954,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                             <!--/*Grid column*/-->
                                             <div class="col-md-12">
                                                 <div class="md-form form-sm">
-                                                    <input name="file" type="file" id="upToGuide3"  required=""
+                                                    <input name="file" type="file" id="upToGuide3" required=""
                                                            class="form-control"
                                                            size="30000000"
                                                            style="padding-left: 10rem; padding-top: 5px; font-size: 1rem;"
@@ -993,7 +1007,8 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                     </div>
                     <!--/*End-of-Modal: modalUpToGuide*/-->
 
-                    <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog"
+                         aria-labelledby="myModalLabel" aria-hidden="true">
                         <div class="modal-dialog cascading-modal modal-lg">
                             <div class="modal-content">
 
@@ -1015,6 +1030,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                     </button>
                                     <button type="submit" class="btn btn-primary waves-effect waves-light">Отправить
                                         <i class="fa fa-check ml-1"></i></button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1036,8 +1052,8 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
 <script th:inline="javascript">
     /*<![CDATA[*/
     function onImgError() {
-        document.getElementById("img-person").style.display="none";
-        document.getElementById("card-person").style.marginTop='0';
+        document.getElementById("img-person").style.display = "none";
+        document.getElementById("card-person").style.marginTop = '0';
     }
 
     function showHide0(page) {
@@ -1047,8 +1063,8 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
         var i;
         var pages;
         var ordersSize = [[${orders.size()}]];
-        if (ordersSize%2===0) pages = ordersSize/2;
-        else pages = ordersSize/2+1;
+        if (ordersSize % 2 === 0) pages = ordersSize / 2;
+        else pages = ordersSize / 2 + 1;
         for (i = 0; i < ordersSize; i++) {
             var j = i + 1;
             document.getElementById('id-0' + i).style.display = "none";
@@ -1086,8 +1102,8 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
         var eventsSize = [[${events.size()}]];
 
         var pages;
-        if (eventsSize%2===0) pages = eventsSize/2;
-        else pages = eventsSize/2+1;
+        if (eventsSize % 2 === 0) pages = eventsSize / 2;
+        else pages = eventsSize / 2 + 1;
 
         for (i = 0; i < eventsSize; i++) {
             var j = i + 1;
