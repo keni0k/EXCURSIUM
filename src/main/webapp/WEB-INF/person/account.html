@@ -29,13 +29,18 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
-    <script type="text/javascript" src="../../resources/libs/bootstrap-confirmation/js/bootstrap-confirmation.min.js"></script>
 
     <script th:inline="javascript">
         /*<![CDATA[*/
         function modalReview(id) {
             document.getElementById('order_id').value = id;
         }
+
+        $('#confirm-delete').on('show.bs.modal', function(e) {
+            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+
+            $('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>');
+        });
 
         /*]]>*/
     </script>
@@ -256,15 +261,9 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                                                     class="fa fa-handshake-o ml-1"></i></a>
                                                     </div>
                                                     <div class="right">
-                                                        <button data-toggle="confirmation"
-                                                           data-btn-ok-label="Continue" data-btn-ok-icon="glyphicon glyphicon-share-alt"
-                                                           data-btn-ok-class="btn-success"
-                                                           data-btn-cancel-label="Stoooop!" data-btn-cancel-icon="glyphicon glyphicon-ban-circle"
-                                                           data-btn-cancel-class="btn-danger"
-                                                           data-title="Is it ok?" data-content="This might be dangerous"
-                                                            th:href="@{/orders/order(id=${order.getId()})}"
+                                                        <a href="#" th:data-href="${order.getId()}" data-toggle="modal" data-target="#confirmDelete"
                                                             class="waves-effect p-2">Открыть спор<i
-                                                            class="fa fa-gavel ml-1"></i></button>
+                                                            class="fa fa-gavel ml-1"></i></a>
                                                     </div>
                                                 </th:block>
                                                 <th:block th:if="${order.getReviewId()==-1 and order.getType()==consts.ORDER_CONFIRM}">
@@ -993,6 +992,32 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                         </div>
                     </div>
                     <!--/*End-of-Modal: modalUpToGuide*/-->
+
+                    <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog cascading-modal modal-lg">
+                            <div class="modal-content">
+
+                                <div class="modal-header light-blue darken-3 white-text">
+                                    <h4 class=""><i class="fa fa-newspaper-o"></i> Открыть спор?</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                            aria-hidden="true">×</span></button>
+                                </div>
+
+                                <div class="modal-body">
+                                    <p>You are about to delete one track, this procedure is irreversible.</p>
+                                    <p>Do you want to proceed?</p>
+                                    <p class="debug-url"></p>
+                                </div>
+
+                                <div class="modal-footer justify-content-center">
+                                    <button type="reset" class="btn btn-outline-primary waves-effect waves-light"
+                                            data-dismiss="modal">Отменить
+                                    </button>
+                                    <button type="submit" class="btn btn-primary waves-effect waves-light">Отправить
+                                        <i class="fa fa-check ml-1"></i></button>
+                            </div>
+                        </div>
+                    </div>
 
                     <div th:replace="fragments/modals :: review"></div>
 
