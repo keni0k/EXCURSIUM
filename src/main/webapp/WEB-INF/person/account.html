@@ -192,12 +192,12 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                         <div class="col-lg-8 col-md-12 text-center">
                             <!--/* Heading */-->
                             <div class="text-center mt-3">
-                                <h2 class="title text-center pe" th:if="${orders.size()>0}">Посещенные экскурсии</h2>
-                                <h2 class="title text-center nepe" th:if="${orders.size()==0}">Здесь будут отображаться
+                                <h2 class="title text-center pe" style="margin-bottom: 15px !important;" th:if="${orders.size()>0}">Посещенные экскурсии</h2>
+                                <h2 class="title text-center nepe" style="margin-bottom: 15px !important;" th:if="${orders.size()==0}">Здесь будут отображаться
                                     посещенные экскурсии</h2> <!--/*-310,615 TODO: translate*/-->
-                                <a href="/events/list">
+                                <a href="/events/list" th:if="${orders.size()==0}">
                                     <button th:if="${isThisUserAccount}" type="button"
-                                            class="btn btn-primary mt-4 waves-effect waves-light">
+                                            class="btn btn-primary mb-3 waves-effect waves-light">
                                         <th:block th:text="${#messages.msg('account.select_event')+' '}">Выбрать
                                             экскурсию
                                         </th:block>
@@ -315,12 +315,12 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                             <!--/*End-of-Pagination */-->
                             <!--/* Heading */-->
                             <div class="text-center mt-3" th:if="${excursovod}">
-                                <h2 class="title text-center pe" th:if="${events.size()>0}">Добавленные экскурсии</h2>
-                                <h2 class="title text-center nepe" th:if="${events.size()==0 and excursovod}">Здесь
+                                <h2 class="title text-center pe" style="margin-bottom: 15px !important;" th:if="${events.size()>0}">Добавленные экскурсии</h2>
+                                <h2 class="title text-center nepe" style="margin-bottom: 15px !important;" th:if="${events.size()==0 and excursovod}">Здесь
                                     будут
                                     отображаться добавленные экскурсии</h2> <!--/*-310,615 TODO: translate*/-->
                                 <button th:if="${isThisUserAccount and excursovod}" type="button"
-                                        class="btn btn-primary mt-4 waves-effect waves-light"
+                                        class="btn btn-primary mb-3 waves-effect waves-light"
                                         data-toggle="modal" data-target="#modalSubmitProject">
                                     <th:block th:text="${#messages.msg('titles.add_event')+' '}">Добавить новую
                                         экскурсию
