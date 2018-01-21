@@ -25,7 +25,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
 
     <style rel="stylesheet">.form-control{padding-top: 7px;padding-bottom: 7px;padding-left: 12px;margin-top: 0;border-bottom-right-radius: 4px;border-top-right-radius: 4px; border: 1px solid #bdbdbd}</style>
 </head>
@@ -133,9 +132,11 @@ th:text="${#messages.msg('error.event.duration')}" th:class="'error'">Duration
 Error</label>
 </div>
 <br/>
-    <div class="input-group the-basics">
-        <span class="input-group-addon" th:text="${#messages.msg('words.city')}">Город</span>
-        <input class="typeahead form-control" name="city" type="text" placeholder="Search" autocomplete="off"/>
+    <div class="input-group">
+        <select class="selectpicker" data-live-search="true" title="Город">
+            <option th:data-tokens="'Moscow'" data-tokens="Moscow">Москва</option>
+            <option th:data-tokens="'Peterburg'">Санкт-Петербург</option>
+        </select>
     </div>
     <br/>
 <div class="input-group">
@@ -192,45 +193,5 @@ th:text="${#messages.msg('words.submit')}">Отправить
 </div>
 </div>
 <div th:replace="fragments/footer :: footer"></div>
-
-<script type="application/javascript">
-var substringMatcher = function(strs) {
-return function findMatches(q, cb) {
-var matches, substrRegex;
-
-// an array that will be populated with substring matches
-matches = [];
-
-// regex used to determine if a string contains the substring `q`
-substrRegex = new RegExp(q, 'i');
-
-// iterate through the pool of strings and for any string that
-// contains the substring `q`, add it to the `matches` array
-$.each(strs, function(i, str) {
-if (substrRegex.test(str)) {
-// the typeahead jQuery plugin expects suggestions to a
-// JavaScript object, refer to typeahead docs for more info
-matches.push({ value: str });
-}
-});
-
-cb(matches);
-};
-};
-
-var states = ["Москва", "Санкт-Петербург", "Новосибирск", "Волгоград", "Арангельск", "Иркутск", "Красноярск", "Калининград",
-    "Moscow", "St. Petersburg", "Novosibirsk", "Volgograd", "Arkhangelsk", "Irkutsk", "Krasnoyarsk", "Kaliningrad"];
-
-$('#the-basics .typeahead').typeahead({
-hint: true,
-highlight: true,
-minLength: 1
-},
-{
-name: 'states',
-displayKey: 'value',
-source: substringMatcher(states)
-});
-</script>
 </body>
 </html>
