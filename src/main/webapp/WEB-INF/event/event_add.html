@@ -135,12 +135,8 @@ Error</label>
     <div class="input-group">
         <span class="input-group-addon" th:text="${#messages.msg('words.city')}">Город</span>
         <select class="selectpicker" data-live-search="true">
-            <option>Москва, Россия</option>
-            <option>Санкт-Петербург, Россия</option>
-            <option>Новосибирск, Россия</option>
-            <option>Волгоград, Россия</option>
-            <option>Архангельск, Россия</option>
-            <option>Иркутск, Россия</option>
+            <!--/*@thymesVar id="utils" type="com.heroku.demo.utils.UtilsForWeb"*/-->
+            <option th:each="i : ${#numbers.sequence(0, utils.getCitiesCount()-1)}" th:name="${i}" th:text="${utils.getCity(i, 0)}">Москва, Россия</option>
         </select>
     </div>
     <br/>

@@ -22,11 +22,15 @@ public class UtilsForWeb {
         return urls[category];
     }
 
-    public static String[] getCitiesStringRussia(int language) {
-        String[] ruRussia = {"Москва", "Санкт-Петербург", "Новосибирск", "Волгоград", "Арангельск", "Иркутск", "Красноярск", "Калининград"};
-        String[] enRussia = {"Moscow", "St. Petersburg", "Novosibirsk", "Volgograd", "Arkhangelsk", "Irkutsk", "Krasnoyarsk", "Kaliningrad"};
-        if (language == 0) return ruRussia;
-        else return enRussia;
+    public static String getCity(int city, int language) {
+        String[] ruRussia = {"Москва", "Санкт-Петербург", "Сочи", "Казань", "Калининград", "Нижний Новгород", "Краснодар", "Ярославль", "Кисловодск", "Вологда"};
+        String[] enRussia = {"Moscow", "St. Petersburg", "Sochi", "Kazan", "Kaliningrad", "Nizhny Novgorod", "Krasnodar", "Yaroslavl", "Kislovodsk", "Vologda"};
+        if (language == 0) return ruRussia[city];
+        else return enRussia[city];
+    }
+
+    public int getCitiesCount(){
+        return 10;
     }
 
 }
