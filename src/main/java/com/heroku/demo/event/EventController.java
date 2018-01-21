@@ -69,6 +69,7 @@ public class EventController {
     @RequestMapping(value = "/add")
     public String eventAdd(ModelMap model) {
         model.addAttribute("inputEvent", new Event());
+        model.addAttribute("utils", new UtilsForWeb());
         return "event/event_add";
     }
 
