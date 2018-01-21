@@ -234,8 +234,10 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                             <!--/*@thymesVar id="order" type="com.heroku.demo.order.Buy"*/-->
                                             <!--/*Card image*/-->
                                             <div class="view overlay hm-white-slight">
+                                                <div class="img_crop">
                                                 <img th:src="${order.getImageUrl()}" src="#" class="img-fluid" alt=""
                                                      style="height: 240px; min-width: -webkit-fill-available;"/>
+                                                </div>
                                                 <a href="#">
                                                     <div class="mask waves-effect waves-light"></div>
                                                 </a>
@@ -338,8 +340,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                     будут
                                     отображаться добавленные экскурсии</h2> <!--/*-310,615 TODO: translate*/-->
                                 <button th:if="${isThisUserAccount and excursovod}" type="button"
-                                        class="btn btn-primary mb-3 waves-effect waves-light"
-                                        data-toggle="modal" data-target="#modalSubmitProject">
+                                        class="btn btn-primary mb-3 waves-effect waves-light" href="/events/add">
                                     <th:block th:text="${#messages.msg('titles.add_event')+' '}">Добавить новую
                                         экскурсию
                                     </th:block>
@@ -361,8 +362,10 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                             <!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
                                             <!--/*Card image*/-->
                                             <div class="view overlay hm-white-slight">
+                                                <div class="img_crop">
                                                 <img th:src="${event.pathToPhoto}" src="#" class="img-fluid"
                                                      style="height: 240px; min-width: -webkit-fill-available;" alt=""/>
+                                                </div>
                                                 <a href="#" th:href="@{/events/event(id=${event.getId()})}">
                                                     <div class="mask waves-effect waves-light"></div>
                                                 </a>
@@ -760,168 +763,6 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                         </div>
                     </div>
                     <!--/*End-of-Modal: modalContactUser*/-->
-                    <!--/*Modal: modalSubmitProject*/-->
-                    <div class="modal fade" id="modalSubmitProject" tabindex="-1" role="dialog"
-                         aria-labelledby="myModalLabel" aria-hidden="true">
-                        <div class="modal-dialog cascading-modal" role="document">
-                            <!--/*Content*/-->
-                            <div class="modal-content">
-                                <!--/*Header*/-->
-                                <div class="modal-header light-blue darken-3 white-text">
-                                    <h4 class=""><i class="fa fa-newspaper-o"></i> Добавить новую экскурсию</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                            aria-hidden="true">×</span></button>
-                                </div>
-                                <!--/*Body*/-->
-                                <div class="modal-body mb-0">
-                                    <!--/*@thymesVar id="inputEvent" type="com.heroku.demo.event.Event"*/-->
-                                    <form th:object="${inputEvent}" action="/events/add" enctype="multipart/form-data"
-                                          autocomplete="off" method="post">
-                                        <!--/*Name*/-->
-                                        <div class="md-form form-sm">
-                                            <input name="name" type="text" class="form-control" id="name"
-                                                   th:value="${inputEvent.getName()}" required="" minlength="10"
-                                                   maxlength="60"/>
-                                            <label for="name" th:if="${#fields.hasErrors('name')}"
-                                                   th:text="${#messages.msg('error.event.name')}" th:class="'error'">Name
-                                                Error</label>
-                                            <label for="name" class=""
-                                                   th:text="${#messages.msg('words.name')}">Название</label>
-                                        </div>
-                                        <!--/*Project URL address*/-->
-                                        <div class="md-form">
-<textarea name="description" minlength="150" maxlength="1000" type="text"
-          id="description"
-          class="md-textarea" required=""
-          th:text="${inputEvent.getDescription()}"></textarea>
-                                            <label for="description" th:if="${#fields.hasErrors('description')}"
-                                                   th:text="${#messages.msg('error.event.description')}"
-                                                   th:class="'error'">Description Error</label>
-                                            <label for="description" class=""
-                                                   th:text="${#messages.msg('words.description')}">Описание</label>
-                                        </div>
-                                        <!--/*Image URL*/-->
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading"
-                                                 th:text="${#messages.msg('words.type_of_excursion')}">Тип экскурсии
-                                            </div>
-                                            <div class="panel-body">
-                                                <select name="category" id="category"
-                                                        class="selectpicker"
-                                                        style="height: auto; margin-bottom: 2rem;">
-                                                    <option value="0" th:text="${#messages.msg('category.0')}"
-                                                            th:selected="${inputEvent.getCategory()==0}">Развлечения
-                                                    </option>
-                                                    <option value="1" th:selected="${inputEvent.getCategory()==1}"
-                                                            th:text="${#messages.msg('category.1')}">Наука
-                                                    </option>
-                                                    <option value="2" th:selected="${inputEvent.getCategory()==2}"
-                                                            th:text="${#messages.msg('category.2')}">История
-                                                    </option>
-                                                    <option value="3" th:selected="${inputEvent.getCategory()==3}"
-                                                            th:text="${#messages.msg('category.3')}">Искусство
-                                                    </option>
-                                                    <option value="4" th:selected="${inputEvent.getCategory()==4}"
-                                                            th:text="${#messages.msg('category.4')}">Производство
-                                                    </option>
-                                                    <option value="5" th:selected="${inputEvent.getCategory()==5}"
-                                                            th:text="${#messages.msg('category.5')}">Гастрономия
-                                                    </option>
-                                                    <option value="6" th:selected="${inputEvent.getCategory()==6}"
-                                                            th:text="${#messages.msg('category.6')}">Квесты
-                                                    </option>
-                                                    <option value="7" th:selected="${inputEvent.getCategory()==7}"
-                                                            th:text="${#messages.msg('category.7')}">Экстрим
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="md-form form-sm">
-                                            <input name="usersCount" id="users_count" type="number" class="form-control"
-                                                   required="" min="1" max="100"
-                                                   th:value="${inputEvent.getUsersCount()}?${inputEvent.getUsersCount()}"/>
-                                            <label for="users_count" th:if="${#fields.hasErrors('usersCount')}"
-                                                   th:text="${#messages.msg('error.event.users_count')}"
-                                                   th:class="'error'">UsersCount
-                                                Error</label>
-                                            <label for="users_count" class=""
-                                                   th:text="${#messages.msg('words.users_count')}">Количество
-                                                участников</label>
-                                        </div>
-                                        <div class="md-form form-sm">
-                                            <input name="duration" id="duration" type="number" class="form-control"
-                                                   required=""
-                                                   th:value="${inputEvent.getDuration()}?${inputEvent.getDuration()}"
-                                                   min="1" max="240"/>
-                                            <label for="duration" th:if="${#fields.hasErrors('duration')}"
-                                                   th:text="${#messages.msg('error.event.duration')}"
-                                                   th:class="'error'">Duration Error</label>
-                                            <label for="duration" class=""
-                                                   th:text="${#messages.msg('words.duration')+' ('+#messages.msg('words.hours')+')'}">Длительность
-                                                (часов)</label>
-                                        </div>
-                                        <div class="md-form form-sm">
-                                            <input name="place" id="place" type="text" class="form-control"
-                                                   required="" minlength="5" maxlength="100"
-                                                   th:value="${inputEvent.getPlace()}?${inputEvent.getPlace()}"/>
-                                            <label for="place" th:if="${#fields.hasErrors('place')}"
-                                                   th:text="${#messages.msg('error.event.place')}" th:class="'error'">Place
-                                                Error</label>
-                                            <label for="place" class="" th:text="${#messages.msg('words.place')}">Место
-                                                встречи</label>
-                                        </div>
-                                        <div class="md-form form-sm">
-                                            <input name="price" id="price" type="number" class="form-control"
-                                                   required="" min="100" max="100000"
-                                                   th:value="${inputEvent.getPrice()}?${inputEvent.getPrice()}"/>
-                                            <label for="price" th:if="${#fields.hasErrors('price')}"
-                                                   th:text="${#messages.msg('error.event.price')}" th:class="'error'">Price
-                                                Error</label>
-                                            <label for="price" class=""
-                                                   th:text="${#messages.msg('words.price') + '(&#8381;)'}">Цена</label>
-                                        </div>
-                                        <div class="md-form form-sm">
-                                            <input name="file" type="file" id="file" class="form-control" required=""
-                                                   size="30000000"
-                                                   style="padding-left: 6rem;font-size: 1rem;padding-top: 5px;"
-                                                   accept="image/jpeg,image/png" aria-label="Фотографии"/>
-                                            <!--/*<label for="file" th:if="${error_data}" th:text="${#messages.msg('error.event.file')}" th:class="'error'">File Error</label>TODO:error_data(file)
-                                            */-->
-                                            <label style="top: 0.45rem;" for="file" class=""
-                                                   th:text="${#messages.msg('words.photos')}">Фотографии</label>
-                                        </div>
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading" th:text="${#messages.msg('words.language')}">
-                                                Язык экскурсии
-                                            </div>
-                                            <div class="panel-body">
-                                                <select name="language" class="selectpicker"
-                                                        style="height: auto; margin-bottom: 2rem;"
-                                                        th:selected="${inputEvent.getLanguage()}?${inputEvent.getLanguage()}">
-                                                    <option value="0" th:text="${#messages.msg('language.0')}">Русский
-                                                    </option>
-                                                    <option value="1" th:text="${#messages.msg('language.1')}">
-                                                        Английский
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <!--/*Footer*/-->
-                                        <div class="modal-footer justify-content-center">
-                                            <button type="button"
-                                                    class="btn btn-outline-primary waves-effect waves-light"
-                                                    data-dismiss="modal">Закрыть
-                                            </button>
-                                            <button type="submit" class="btn btn-primary waves-effect waves-light">
-                                                Сохранить <i class="fa fa-check ml-1"></i></button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <!--/*End-of-Content*/-->
-                        </div>
-                    </div>
-                    <!--/*End-of-Modal: modalSubmitProject*/-->
                     <!--/*Modal: modalUpToGuide*/-->
                     <div class="modal fade" id="modalUpToGuide" tabindex="-1" role="dialog"
                          aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">

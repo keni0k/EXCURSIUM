@@ -20,7 +20,6 @@ xmlns:th="http://www.thymeleaf.org">
 <link rel="shortcut icon" href="../../resources/img/icon.ico" type="image/x-icon"/>
 
 <link rel="stylesheet" type="text/css" href="../../resources/css/styles.css"/>
-<link rel="stylesheet" href="../../resources/css/cards.css"/>
 <link rel="stylesheet" href="../../resources/css/media.css"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -138,7 +137,7 @@ th:text="${#messages.msg('error.event.price')}" th:class="'error'">Price Error</
 <div class="input-group">
 <span class="input-group-addon" th:text="${#messages.msg('words.photos')}">Фотографии</span>
 <input name="file" type="file" id="file" class="form-control" placeholder="Фотографии"
-required="" size="30000000"
+required="" size="30000000" style="padding-top: 5px;padding-left: 7px;"
 accept="image/jpeg,image/png" aria-label="Фотографии"/>
 <label for="file" th:if="${error_data}" th:text="${#messages.msg('error.event.file')}"
 th:class="'error'">File Error</label>
