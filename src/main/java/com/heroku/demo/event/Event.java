@@ -93,6 +93,8 @@ public class Event {
     @Transient
     int cnt = 0;
 
+    private int ageLimit = 0;
+
     private String photoOfGuide = "";
 
     private String fullNameOfGuide = "";
@@ -265,4 +267,11 @@ public class Event {
             return "LANGUAGE NULL";
     }
 
+    public int getAgeLimit() {
+        return ageLimit;
+    }
+
+    public void setAgeLimit(int ageLimit) {
+        this.ageLimit = ageLimit;
+    }
 }

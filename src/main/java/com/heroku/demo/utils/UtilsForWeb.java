@@ -22,4 +22,11 @@ public class UtilsForWeb {
         return urls[category];
     }
 
+    public static String[] getCitiesStringRussia(int language) {
+        String[] ruRussia = {"Москва", "Санкт-Петербург", "Новосибирск", "Волгоград", "Арангельск", "Иркутск", "Красноярск", "Калининград"};
+        String[] enRussia = {"Moscow", "St. Petersburg", "Novosibirsk", "Volgograd", "Arkhangelsk", "Irkutsk", "Krasnoyarsk", "Kaliningrad"};
+        if (language == 0) return ruRussia;
+        else return enRussia;
+    }
+
 }
