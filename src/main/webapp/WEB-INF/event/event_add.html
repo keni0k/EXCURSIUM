@@ -133,9 +133,14 @@ Error</label>
 </div>
 <br/>
     <div class="input-group">
-        <select class="selectpicker" data-live-search="true" title="Город">
-            <option th:data-tokens="'Moscow'" data-tokens="Moscow">Москва</option>
-            <option th:data-tokens="'Peterburg'">Санкт-Петербург</option>
+        <span class="input-group-addon" th:text="${#messages.msg('words.city')}">Город</span>
+        <select class="selectpicker" data-live-search="true">
+            <option>Москва, Россия</option>
+            <option>Санкт-Петербург, Россия</option>
+            <option>Новосибирск, Россия</option>
+            <option>Волгоград, Росиия</option>
+            <option>Архангельск, Росиия</option>
+            <option>Иркутск, Росиия</option>
         </select>
     </div>
     <br/>
