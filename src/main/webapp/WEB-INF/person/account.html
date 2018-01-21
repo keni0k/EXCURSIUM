@@ -14,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="../../resources/css/footer.css"/>
     <link rel="stylesheet" href="../../resources/libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>
     <link rel="stylesheet" href="../../resources/libs/bootstrap-select/css/bootstrap-select.css"/>
+    <link rel="stylesheet" href="../../resources/libs/bootstrap-confirmation/js/bootstrap-confirmation.min.js"/>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
@@ -32,11 +33,16 @@
 
     <script th:inline="javascript">
         /*<![CDATA[*/
+
         function modalReview(id) {
             document.getElementById('order_id').value = id;
         }
 
-        $('#confirm-delete').on('show.bs.modal', function (e) {
+        function modalDispute(id) {
+            document.getElementById('order_id1').value = id;
+        }
+
+        $('#modalDispute').on('show.bs.modal', function (e) {
             $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
 
             $('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>');
@@ -260,14 +266,16 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                                 <th:block th:if="${order.getType()==consts.ORDER_OPEN}">
                                                     <div class="clearfix"></div>
                                                     <div class="left pt-2">
-                                                        <a th:href="@{/orders/confirm(id=${order.getId()})}"
+                                                        <a th:href="@{/orders/confirm(id=${order.getId()})}" data-title="Confirm order?"
+                                                           data-target="_blank" data-toggle="confirmation"
                                                            class="waves-effect" rel="tooltip" style="display: inline">Подтвердить
                                                             заказ<i
                                                                     class="fa fa-handshake-o ml-1"></i></a>
                                                     </div>
                                                     <div class="right">
-                                                        <a href="#" th:data-href="${order.getId()}" data-toggle="modal"
-                                                           data-target="#confirmDelete"
+                                                        <a href="#" data-toggle="modal"
+                                                           th:onclick="'modalDispute('+${order.getId()}+')'"
+                                                           data-target="#modalDispute"
                                                            class="waves-effect p-2">Открыть спор<i
                                                                 class="fa fa-gavel ml-1"></i></a>
                                                     </div>
@@ -1007,7 +1015,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                     </div>
                     <!--/*End-of-Modal: modalUpToGuide*/-->
 
-                    <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog"
+                    <div class="modal fade" id="modalDispute" tabindex="-1" role="dialog"
                          aria-labelledby="myModalLabel" aria-hidden="true">
                         <div class="modal-dialog cascading-modal modal-lg">
                             <div class="modal-content">
@@ -1019,17 +1027,37 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                 </div>
 
                                 <div class="modal-body">
-                                    <p>You are about to delete one track, this procedure is irreversible.</p>
-                                    <p>Do you want to proceed?</p>
-                                    <p class="debug-url"></p>
-                                </div>
-
-                                <div class="modal-footer justify-content-center">
-                                    <button type="reset" class="btn btn-outline-primary waves-effect waves-light"
-                                            data-dismiss="modal">Отменить
-                                    </button>
-                                    <button type="submit" class="btn btn-primary waves-effect waves-light">Отправить
-                                        <i class="fa fa-check ml-1"></i></button>
+                                    <form action="/orders/add_disute" method="post">
+                                        <!--/*Subject*/-->
+                                        <input id="order_id1" name="order_id" style="visibility: hidden; width: 0; height: 0; display: none;"/>
+                                        <!--/*Topic*/-->
+                                        <div class="md-form form-sm">
+                                            <fieldset class="">
+                                                <h4 style="font-weight: bold">Выберите категорию:</h4>
+                                                <input type="radio" id="star28" name="category" value="1"/>
+                                                <label for="star28">Идея</label>
+                                                <input type="radio" id="star27" name="category" value="2"/>
+                                                <label for="star27">Отзыв</label>
+                                                <input type="radio" id="star26" name="category" value="3"/>
+                                                <label for="star26">Ошибка</label>
+                                            </fieldset>
+                                        </div>
+                                        <!--/*Message*/-->
+                                        <div class="md-form">
+        <textarea type="text" id="modalDispute2" class="md-textarea"
+                  style="height: 220px;" name="data"></textarea>
+                                            <label for="modalDispute2">Подробное описание</label>
+                                        </div>
+                                        <div class="modal-footer justify-content-center">
+                                            <button type="reset"
+                                                    class="btn btn-outline-primary waves-effect waves-light"
+                                                    data-dismiss="modal">Закрыть
+                                            </button>
+                                            <button type="submit" class="btn btn-primary waves-effect waves-light">
+                                                Открыть <i
+                                                    class="fa fa-paper-plane ml-1"></i></button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -1137,6 +1165,12 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
     /*]]>*/
 </script>
 <script>
+
+    $('[data-toggle=confirmation]').confirmation({
+        rootSelector: '[data-toggle=confirmation]'
+        // other options
+    });
+
     // SideNav Initialization
     $(".button-collapse").sideNav();
     var container = document.getElementById('slide-out');
