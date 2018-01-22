@@ -34,6 +34,7 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 import static com.heroku.demo.utils.Utils.*;
 
@@ -212,6 +213,8 @@ public class EventController {
         model.addAttribute("minMaxPrice", priceDown+";"+priceUp);
         model.addAttribute("events", events);
         model.addAttribute("category", category);
+        model.addAttribute("country", 0);
+        model.addAttribute("city", new Random().nextInt(9));
         model.addAttribute("utils", new UtilsForWeb());
         return "event/event_list";
     }
