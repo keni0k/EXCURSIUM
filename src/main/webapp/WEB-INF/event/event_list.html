@@ -68,7 +68,7 @@ th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#http
             <a th:href="@{/events/countries(country=${country})}">
                 <img th:src="${utils.getCountryUrl(country)}" alt=""
                      src="../../resources/img/icons/russia-ico.png"/>
-                <span th:text="${#messages.msg('country.'+${country})}">Россия</span>
+                <span th:text="${#messages.msg('country.'+country)}">Россия</span>
             </a>
         </div>
         <span>→ </span>
@@ -76,7 +76,7 @@ th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#http
             <a th:href="@{/events/cities(country=${country}, city = ${city})}">
                 <img th:src="${utils.getCityUrl(country, city)}" alt=""
                      src="../../resources/img/icons/irkutsk-ico.png"/>
-                <span th:text="${#messages.msg('city.'+${country}+'.'+${city})}">Иркутск</span>
+                <span th:text="${#messages.msg('city.'+country+'.'+city)}">Иркутск</span>
             </a>
         </div>
     </div>
