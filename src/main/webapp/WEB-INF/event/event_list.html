@@ -57,22 +57,22 @@ th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#http
     <div class="panel-body" style="padding-bottom: 0;">
         <!--/*@thymesVar id="country" type="java.lang.Integer"*/-->
         <!--/*@thymesVar id="city" type="java.lang.Integer"*/-->
-        <div class="chip">
+        <div class="chip" style="margin-right: 0">
             <a href="/events/countries">
                 <img alt="" src="../../resources/img/icons/countries-ico.png"/>
                 <span th:text="${#messages.msg('country.all')}">Все страны</span>
             </a>
         </div>
-        <span>→ </span>
-        <div class="chip">
+        <i class="fa fa-long-arrow-right" aria-hidden="true" style="font-size: 16px;"></i>
+        <div class="chip" style="margin-right: 0">
             <a th:href="@{/events/countries(country=${country})}">
                 <img th:src="${utils.getCountryUrl(country)}" alt=""
                      src="../../resources/img/icons/russia-ico.png"/>
                 <span th:text="${#messages.msg('country.'+country)}">Россия</span>
             </a>
         </div>
-        <span>→ </span>
-        <div class="chip">
+        <i class="fa fa-long-arrow-right" aria-hidden="true" style="font-size: 16px;"></i>
+        <div class="chip" style="margin-right: 0">
             <a th:href="@{/events/cities(country=${country}, city = ${city})}">
                 <img th:src="${utils.getCityUrl(country, city)}" alt=""
                      src="../../resources/img/icons/irkutsk-ico.png"/>
