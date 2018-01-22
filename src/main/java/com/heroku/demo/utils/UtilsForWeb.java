@@ -29,10 +29,15 @@ public class UtilsForWeb {
         else return enRussia[city];
     }
 
+    public static String getCountryUrl(int country){
+        String[] countries = {"../resources/img/icons/russia-ico.png"};
+        return countries[country];
+    }
+
     public static String getCityUrl(int country, int city) {
         String[] citiesOfRussia = {"../resources/img/icons/moscow-ico.png", "../resources/img/icons/spb-ico.png", "../resources/img/icons/sochi-ico.png",
-                "../resources/img/icons/kazan-ico.png", "../resources/img/icons/kaliningrad-ico.png", "../resources/img/icons/gastronomy.png",
-                "../resources/img/icons/quests.png", "../resources/img/icons/extreme.png", "../resources/img/icons/irkutsk-ico.png"};
+                "../resources/img/icons/kazan-ico.png", "../resources/img/icons/kaliningrad-ico.png", "../resources/img/icons/nizhny-novgorod-ico.png",
+                "../resources/img/icons/krasnodar-ico.png", "../resources/img/icons/yaroslavl-ico.png", "../resources/img/icons/irkutsk-ico.png"};
         String[] citiesOfItaly = {"Moscow", "St. Petersburg", "Sochi", "Kazan", "Kaliningrad", "Nizhny Novgorod", "Krasnodar", "Yaroslavl", "Irkutsk"};
         switch (country) {
             case 0: return citiesOfRussia[city];
