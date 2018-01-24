@@ -175,7 +175,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Boolean throwsErrors(Person person, String pass2) {
-        return pass2 == null || isEmailCorrect(person.getEmail()) && isLoginFree(person.getLogin()) && isPhoneFree(person.getPhoneNumber()) && isEmailFree(person.getEmail()) && person.getPass().equals(pass2);
+        return pass2 == null || isEmailCorrect(person.getEmail()) && isLoginFree(person.getLogin()) && (person.getPhoneNumber().equals("") || isPhoneFree(person.getPhoneNumber())) && isEmailFree(person.getEmail()) && person.getPass().equals(pass2);
     }
 
     @Override
