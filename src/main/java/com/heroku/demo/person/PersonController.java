@@ -184,7 +184,7 @@ public class PersonController {
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String signUp(@ModelAttribute("insertPerson") @Valid Person person,
                          BindingResult result,
-                         @RequestParam("file") MultipartFile file,
+                         @RequestParam(value = "file", required = false) MultipartFile file,
                          @ModelAttribute("pass2") String pass2,
                          ModelMap model, Locale locale) {
         person.setToken(randomToken(32));
