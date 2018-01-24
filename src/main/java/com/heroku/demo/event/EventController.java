@@ -132,7 +132,7 @@ public class EventController {
                 eventService.delete(event.getId());
                 return eventAddAgain(modelMap, event, "You failed to upload file. Please, try again.");
             }
-            return event(modelMap, (int) event.getId(), principal);
+            return event(modelMap, (int) event.getId(), principal, null, null);
         } else if (file == null) {
             return eventAddAgain(modelMap, event, "You failed to upload file because the file is null.");
         } else {
@@ -158,7 +158,12 @@ public class EventController {
     }
 
     @RequestMapping(value = "/event", method = RequestMethod.GET)
-    public String event(ModelMap model, @RequestParam("id") int id, Principal principal) {
+    public String event(ModelMap model,
+                        @RequestParam("id") int id, Principal principal,
+                        @RequestParam(value = "country", required = false) Integer country,
+                        @RequestParam(value = "city", required = false) Integer city) {
+        model.addAttribute("country", country);
+        model.addAttribute("city", city);
         model.addAttribute("event", eventService.getById(id));
         model.addAttribute("reviews", reviewService.getByEvent(id));
         model.addAttribute("utils", new UtilsForWeb());

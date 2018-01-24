@@ -68,7 +68,7 @@ data-target="#bs-example-navbar-collapse-1">
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 <!--/* Содержимое основной части */-->
 <ul class="nav navbar-nav navbar-right">
-<li><a href="/events/list" th:text="${#messages.msg('titles.excursions')}">Экскурсии</a></li>
+<li><a th:href="@{/events/list(country=${country}, city = ${city})}" th:text="${#messages.msg('titles.excursions')}">Экскурсии</a></li>
 <li><a href="#">FAQ</a></li>
 <li th:if="${isAdmin}"><a href="/users/moderation" th:text="${#messages.msg('titles.persons')}">Модерация
 пользователей</a></li>
