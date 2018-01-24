@@ -48,15 +48,14 @@ th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#http
 <!--/*@thymesVar id="page" type="java.lang.Integer"*/-->
 <!--/*@thymesVar id="pageCount" type="java.lang.Integer"*/-->
 <!--/*@thymesVar id="events" type="java.util.List"*/-->
-<div class="container">
+    <!--/*@thymesVar id="country" type="java.lang.Integer"*/-->
+    <!--/*@thymesVar id="city" type="java.lang.Integer"*/-->
 <div class="row">
     <!--/*@thymesVar id="utils" type="com.heroku.demo.utils.UtilsForWeb"*/-->
 <!--/*<h2 class="title text-center d-md-none">Категории</h2>
 <h2 class="title d-none d-md-block right">Категории</h2>*/-->
 
     <div class="panel-body" style="padding-bottom: 0;">
-        <!--/*@thymesVar id="country" type="java.lang.Integer"*/-->
-        <!--/*@thymesVar id="city" type="java.lang.Integer"*/-->
         <div class="chip" style="margin-right: 0">
             <a href="/events/countries">
                 <img alt="" src="../../resources/img/icons/countries-ico.png"/>
@@ -65,7 +64,7 @@ th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#http
         </div>
         <i class="fa fa-long-arrow-right" aria-hidden="true" style="font-size: 16px;"></i>
         <div class="chip" style="margin-right: 0">
-            <a th:href="@{/events/countries(country=${country})}">
+            <a th:href="@{/events/cities(country=${country})}">
                 <img th:src="${utils.getCountryUrl(country)}" alt=""
                      src="../../resources/img/icons/russia-ico.png"/>
                 <span th:text="${#messages.msg('country.'+country)}">Россия</span>
@@ -73,17 +72,15 @@ th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#http
         </div>
         <i class="fa fa-long-arrow-right" aria-hidden="true" style="font-size: 16px;"></i>
         <div class="chip" style="margin-right: 0">
-            <a th:href="@{/events/cities(country=${country}, city = ${city})}">
-                <img th:src="${utils.getCityUrl(country, city)}" alt=""
-                     src="../../resources/img/icons/irkutsk-ico.png"/>
-                <span th:text="${#messages.msg('city.'+country+'.'+city)}">Иркутск</span>
-            </a>
+            <img th:src="${utils.getCityUrl(country, city)}" alt=""
+                 src="../../resources/img/icons/irkutsk-ico.png"/>
+            <span th:text="${#messages.msg('city.'+country+'.'+city)}">Иркутск</span>
         </div>
     </div>
 <div class="panel-body text-center">
 <div class="chip"
 th:each="i : ${#numbers.sequence(0, utils.getCategoriesCount()-1)}">
-<a th:href="@{/events/list(category=${i}, sort_by = ${sort_by})}">
+<a th:href="@{/events/list(category=${i}, sort_by = ${sort_by}, country = ${country}, city = ${city})}">
 <img th:src="${utils.getCategoryUrl(i)}" alt=""
 src="../../resources/img/user.png"/>
 <span th:text="${#messages.msg('category.'+i)}">%Категория%</span>
@@ -93,7 +90,7 @@ src="../../resources/img/user.png"/>
 <div class="col-sm-5 col-md-4 col-lg-3">
 <div class="left-sidebar">
 <h2>Фильтр</h2>
-<form method="get" action="/events/list">
+<form method="get" th:action="@{/events/list(country = ${country}, city = ${city})}">
 <br/>
 <div class="panel panel-default">
 <div class="panel-heading" th:text="${#messages.msg('words.sort')}">Сортировка</div>
@@ -191,7 +188,7 @@ console.dir(this);
 </div>
 </div>
 <div class="col-sm-7 col-md-8 col-lg-9">
-<a th:href="@{/events/list}"><h2 class="title text-center" th:text="${#messages.msg('titles.excursions')}">Экскурсии</h2></a>
+<a th:href="@{/events/list(country = ${country}, city = ${city})}"><h2 class="title text-center" th:text="${#messages.msg('titles.excursions')}">Экскурсии</h2></a>
 <!--/*Grid column*/-->
 <th:block th:if="${events.size()>0}">
 <div class="card-deck" th:each="i : ${#numbers.sequence( 0, events.size()-1, 2)}">
@@ -276,11 +273,11 @@ href="javascript:void(0)">25</a></li><li><a href="javascript:void(0)">50</a></li
 href="javascript:void(0)">100</a></li></ul></span> rows visible</span></div>*/-->
 <!--/*First*/-->
 <li th:class="(${page==1}?'disabled ':'') + 'page-item clearfix d-none d-md-block'"><a
-class="page-link waves-effect waves-effect" href="/events/list?page=0">В начало</a></li>
+class="page-link waves-effect waves-effect" th:href="@{/events/list(page=0, country = ${country}, city = ${city})}">В начало</a></li>
 <!--/*Arrow left*/-->
 <li th:class="(${page==1}?'disabled ':'') + 'page-item'">
 <a class="page-link waves-effect waves-effect" aria-label="Назад"
-th:href="@{/events/list(page=${page}-1)}">
+th:href="@{/events/list(page=${page}-1, country = ${country}, city = ${city})}">
 <span aria-hidden="true">«</span>
 <span class="sr-only">Назад</span>
 </a>
@@ -289,24 +286,23 @@ th:href="@{/events/list(page=${page}-1)}">
 <th:block th:each="i : ${#numbers.sequence( 1, pageCount)}">
 <li th:class="${page==i}?'active ':'' + 'page-item'"><a
 class="page-link waves-effect waves-effect" th:text="${i}"
-th:href="@{/events/list(page=${i})}">%PAGE%</a></li>
+th:href="@{/events/list(page=${i}, country = ${country}, city = ${city})}">%PAGE%</a></li>
 </th:block>
 <!--/*Arrow right*/-->
 <li th:class="(${page==pageCount}?'disabled ':'') +'page-item'">
 <a class="page-link waves-effect waves-effect" aria-label="Вперёд"
-th:href="@{/events/list(page=${page}-1)}">
+th:href="@{/events/list(page=${page}+1, country = ${country}, city = ${city})}">
 <span aria-hidden="true">»</span>
 <span class="sr-only">Вперёд</span>
 </a>
 </li>
 <!--/*End-of-First*/-->
 <li th:class="(${page==pageCount}?'disabled ':'') + 'page-item clearfix d-none d-md-block'">
-<a th:href="@{/events/list(page=${pageCount})}"
+<a th:href="@{/events/list(page=${pageCount}, country = ${country}, city = ${city})}"
 class="page-link waves-effect waves-effect">В конец</a></li>
 </ul>
 </nav>
 <!--/*End-of-Pagination */-->
-</div>
 </div>
 </div>
 </div>

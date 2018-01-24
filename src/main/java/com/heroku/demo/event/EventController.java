@@ -34,7 +34,6 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Random;
 
 import static com.heroku.demo.utils.Utils.*;
 
@@ -171,6 +170,29 @@ public class EventController {
         return "event/event";
     }
 
+    @RequestMapping(value = "/cities", method = RequestMethod.GET)
+    public String cities(ModelMap model, @RequestParam(value = "country", required = false) Integer country) {
+
+        if (country==null) return countries(model);
+
+        //model.addAttribute("utils", new UtilsForWeb());
+//        model.addAttribute("items", );
+        model.addAttribute("type", 1);
+        model.addAttribute("utils", new UtilsForWeb());
+        return "event/countries_and_cities";
+    }
+
+    @RequestMapping(value = "/countries", method = RequestMethod.GET)
+    public String countries(ModelMap model) {
+        //model.addAttribute("utils", new UtilsForWeb());
+
+//        model.addAttribute("items", );
+        model.addAttribute("type", 0);
+        model.addAttribute("utils", new UtilsForWeb());
+
+        return "event/countries_and_cities";
+    }
+
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String eventsTests(ModelMap model,
                               @RequestParam(value = "category", required = false) Integer category,
@@ -180,7 +202,11 @@ public class EventController {
                               @RequestParam(value = "sort_by", required = false) Integer sortBy,
                               @RequestParam(value = "words", required = false) String words,
                               @RequestParam(value = "page", required = false) Integer page,
+                              @RequestParam(value = "country", required = false) Integer country,
+                              @RequestParam(value = "city", required = false) Integer city,
                               Locale locale) {
+        if (country==null) return countries(model);
+        if (city==null) return cities(model, country);
         if (price != null) {
             String prices[] = price.split(";");
             priceDown = Integer.parseInt(prices[0]);
@@ -213,8 +239,8 @@ public class EventController {
         model.addAttribute("minMaxPrice", priceDown+";"+priceUp);
         model.addAttribute("events", events);
         model.addAttribute("category", category);
-        model.addAttribute("country", 0);
-        model.addAttribute("city", new Random().nextInt(9));
+        model.addAttribute("country", country);
+        model.addAttribute("city", city);
         model.addAttribute("utils", new UtilsForWeb());
         return "event/event_list";
     }
