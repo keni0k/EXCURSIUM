@@ -354,7 +354,11 @@ public class EventController {
     public String updateDBEvents() {
         List<Event> events = eventService.getAll();
         for (Event event : events) {
-//            eventService.editEvent(event);
+            if (event.getCategory()==4) event.setCategory(6);
+            if (event.getCategory()==5) event.setCategory(7);
+            if (event.getCategory()==6) event.setCategory(4);
+            if (event.getCategory()==7) event.setCategory(5);
+            eventService.editEvent(event);
         }
         return "YES";
     }

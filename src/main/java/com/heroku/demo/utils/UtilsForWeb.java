@@ -5,8 +5,8 @@ public class UtilsForWeb {
     public static Consts consts = new Consts();
 
     public static String getCategoryString(int category, int language) {
-        String[] ru = {"Развлечения", "Наука", "История", "Искусство", "Производство", "Гастрономия", "Квесты", "Экстрим"};
-        String[] en = {"Entertainment", "Science", "History", "Art", "Manufacture", "Gastronomy", "Quests", "Extreme"};
+        String[] ru = {"Развлечения", "Наука", "История", "Искусство", "Квесты", "Экстрим", "Производство", "Гастрономия"};
+        String[] en = {"Entertainment", "Science", "History", "Art", "Quests", "Extreme", "Manufacture", "Gastronomy"};
         if (language == 0) return ru[category];
         else return en[category];
     }
@@ -17,8 +17,8 @@ public class UtilsForWeb {
 
     public static String getCategoryUrl(int category) {
         String[] urls = {"../resources/img/icons/rest.png", "../resources/img/icons/science.png", "../resources/img/icons/history.png",
-                "../resources/img/icons/art.png", "../resources/img/icons/production.png", "../resources/img/icons/gastronomy.png",
-                "../resources/img/icons/quests.png", "../resources/img/icons/extreme.png"};
+                "../resources/img/icons/art.png", "../resources/img/icons/quests.png", "../resources/img/icons/extreme.png",
+                "../resources/img/icons/production.png", "../resources/img/icons/gastronomy.png"};
         return urls[category];
     }
 
