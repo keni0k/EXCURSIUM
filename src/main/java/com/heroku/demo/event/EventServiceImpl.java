@@ -54,8 +54,10 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public ListEvents getByFilter(Integer priceUp, Integer priceDown, Integer category, Integer language, String words, boolean isAll) {
+    public ListEvents getByFilter(Integer priceUp, Integer priceDown, Integer category, Integer language, Integer country, Integer city, String words, boolean isAll) {
         boolean isAllLang = false;
+        if (country==null) country = -1;
+        if (city==null) city = -1;
         if (words==null) words = "";
         if (priceDown==null) priceDown = -1;
         if (priceUp==null) priceUp = -1;
@@ -69,6 +71,7 @@ public class EventServiceImpl implements EventService {
         long curr2 = System.currentTimeMillis();
         ListEvents copy = new ListEvents();
         for (Event aList : list) {
+            if ((aList.getCountry()==country || country==-1) && (aList.getCity()==city || city==-1))
             if (((aList.getCategory() == category) || (category == -1)) && ((aList.getLanguage() == language) || isAllLang) && (aList.getType() == Consts.EXCURSION_ACTIVE || isAll)) {
                 if ((aList.getPrice() >= priceDown) && (aList.getPrice() <= priceUp)) {
 
@@ -125,8 +128,8 @@ public class EventServiceImpl implements EventService {
         }
     }
 
-    ListEvents getByFilter(Integer priceUp, Integer priceDown, Integer category, Integer language, String words, Integer sortBy, boolean isAll) {
-        ListEvents events = getByFilter(priceUp, priceDown, category, language, words, isAll);
+    ListEvents getByFilter(Integer priceUp, Integer priceDown, Integer category, Integer language, Integer country, Integer city, String words, Integer sortBy, boolean isAll) {
+        ListEvents events = getByFilter(priceUp, priceDown, category, language, country, city, words, isAll);
         if (sortBy==null) return events;
         events.sort((o1, o2) -> {
             switch (sortBy) {

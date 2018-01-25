@@ -218,7 +218,7 @@ th:with="event=${events.get(j)}">
 <div class="view overlay hm-white-slight z-depth-1" style="margin-top: 20px;">
 <div class="img_crop"><img src="../../resources/img/bg-cta.jpg" th:src="${event.pathToPhoto}"
                            class="img-fluid" alt="" style="height: 240px; min-width: -webkit-fill-available;"/></div>
-<a th:href="@{/events/event(id = ${event.getId()}, country = ${country}, city = ${city})}"><div class="mask waves-effect waves-light"></div></a>
+<a th:href="@{/events/event(id = ${event.getId()})}"><div class="mask waves-effect waves-light"></div></a>
 </div>
 <!--/*Card image*/-->
 <!--/*Card content*/-->
@@ -226,7 +226,7 @@ th:with="event=${events.get(j)}">
 <h5 th:text="${{event.getCategoryString()}}">%CATEGORY%</h5>
 <h4 class="card-title">
 <strong>
-<h3><a th:href="@{/events/event(id=${event.getId()}, country = ${country}, city = ${city})}"
+<h3><a th:href="@{/events/event(id=${event.getId()})}"
 th:text="${event.name}">%NAME%</a></h3></strong>
 </h4>
 <!--/*Rating*/-->
@@ -251,7 +251,7 @@ th:text="${event.getSmallDescription()}" align="justify">Lorem ipsum dolor sit a
 <div class="card-footer links-light">
         <h4 class="left" style="color:#4285F4; padding: 0.4em 0.1em;"><strong th:text="${event.getPrice()}+'&#8381;'">%PRICE%</strong></h4>
         <span class="right">
-<a th:href="@{/events/event(id=${event.getId()}, country = ${country}, city = ${city})}"
+<a th:href="@{/events/event(id=${event.getId()})}"
    class="btn btn-primary waves-effect waves-light"
    th:text="${#messages.msg('words.open')}">Открыть
 </a>
