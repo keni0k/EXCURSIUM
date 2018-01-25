@@ -38,6 +38,7 @@
 <!--/*@thymesVar id="type" type="java.lang.Integer"*/-->
 <!--/*@thymesVar id="country" type="java.lang.Integer"*/-->
 <!--/*@thymesVar id="utils" type="com.heroku.demo.utils.UtilsForWeb"*/-->
+<!--/*@thymesVar id="service" type="com.heroku.demo.event.EventServiceImpl"*/-->
 <div class="content"
      th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
     <div th:replace="fragments/header :: style"></div>
@@ -68,7 +69,7 @@
             </div>
             <div class="col-md-12">
                 <!--<h2 class="title text-center" th:text="${type==0?#messages.msg('words.countries'):#messages.msg('words.cities')}">Страны/Города</h2>-->
-                <h2 class="title text-center" th:if="${type==0}">Страны (в разработке)</h2>
+                <h2 class="title text-center" th:if="${type==0}" th:onclick="'alert(\'LANG:'+${#locale.getLanguage().toString()}+';COUNTRY:'+${#locale.getCountry().toString()}'\');'"> Страны (в разработке)</h2>
                 <h2 class="title text-center" th:if="${type==1}">Города (в разработке)</h2>
 
                 <th:block th:if="${type==0}">
@@ -79,7 +80,7 @@
                                 <a href="/events/list?country=0"><div class="mask waves-effect waves-light"></div></a>
                                 <div class="card-info">
                                     <h1 class="card-title" style="color: #ffffff">Россия</h1>
-                                    <h2 class="card-text" style="color: #ffffff">261 экскурсия 1030 отзывов</h2>
+                                    <h2 class="card-text" style="color: #ffffff" th:text="${service.getCountInCountry(0, 0)}">261 экскурсия</h2>
                                 </div>
                             </div>
                         </div>
@@ -94,7 +95,7 @@
                                 <a th:href="@{/events/list(country=${country},city=0)}"><div class="mask waves-effect waves-light"></div></a>
                                 <div class="card-info">
                                     <h1 class="card-title" style="color: #ffffff">Москва</h1>
-                                    <h2 class="card-text" style="color: #ffffff">102 экскурсии 500 отзывов</h2>
+                                    <h2 class="card-text" style="color: #ffffff" th:text="${service.getCountInCity(0, 0, 0)}">102 экскурсии</h2>
                                 </div>
                             </div>
                         </div>
@@ -104,7 +105,7 @@
                                 <a th:href="@{/events/list(country=${country},city=1)}"><div class="mask waves-effect waves-light"></div></a>
                                 <div class="card-info">
                                     <h1 class="card-title" style="color: #ffffff">Санкт-Петербург</h1>
-                                    <h2 class="card-text" style="color: #ffffff">95 экскурсий 401 отзыв</h2>
+                                    <h2 class="card-text" style="color: #ffffff" th:text="${service.getCountInCity(0, 1, 0)}">95 экскурсий</h2>
                                 </div>
                             </div>
                         </div>
@@ -114,7 +115,7 @@
                                 <a th:href="@{/events/list(country=${country},city=2)}"><div class="mask waves-effect waves-light"></div></a>
                                 <div class="card-info">
                                     <h1 class="card-title" style="color: #ffffff">Сочи</h1>
-                                    <h2 class="card-text" style="color: #ffffff">30 экскурсии 70 отзывов</h2>
+                                    <h2 class="card-text" style="color: #ffffff">30 экскурсии</h2>
                                 </div>
                             </div>
                         </div>
@@ -128,7 +129,7 @@
                                 <a th:href="@{/events/list(country=${country},city=3)}"><div class="mask waves-effect waves-light"></div></a>
                                 <div class="card-info">
                                     <h1 class="card-title" style="color: #ffffff">Казань</h1>
-                                    <h2 class="card-text" style="color: #ffffff">15 экскурсии 23 отзыва</h2>
+                                    <h2 class="card-text" style="color: #ffffff">15 экскурсии</h2>
                                 </div>
                             </div>
                         </div>
@@ -138,7 +139,7 @@
                                 <a th:href="@{/events/list(country=${country},city=4)}"><div class="mask waves-effect waves-light"></div></a>
                                 <div class="card-info">
                                     <h1 class="card-title" style="color: #ffffff">Калининград</h1>
-                                    <h2 class="card-text" style="color: #ffffff">12 экскурсии 21 отзыв</h2>
+                                    <h2 class="card-text" style="color: #ffffff">12 экскурсии</h2>
                                 </div>
                             </div>
                         </div>
@@ -148,7 +149,7 @@
                                 <a th:href="@{/events/list(country=${country},city=5)}"><div class="mask waves-effect waves-light"></div></a>
                                 <div class="card-info">
                                     <h1 class="card-title" style="color: #ffffff">Нижний Новгород</h1>
-                                    <h2 class="card-text" style="color: #ffffff">7 экскурсии 15 отзывов</h2>
+                                    <h2 class="card-text" style="color: #ffffff">7 экскурсии</h2>
                                 </div>
                             </div>
                         </div>

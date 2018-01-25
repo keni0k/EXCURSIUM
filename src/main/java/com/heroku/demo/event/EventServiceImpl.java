@@ -118,6 +118,26 @@ public class EventServiceImpl implements EventService {
         return eventList;
     }
 
+    public int getCountInCity(int country, int city, int language){
+        List<Event> list = getAll();
+        int k = 0;
+        for (Event e:list) {
+            if (e.getCountry()==country && e.getCity()==city && e.getLanguage()==language)
+                k++;
+        }
+        return k;
+    }
+
+    public int getCountInCountry(int country, int language){
+        List<Event> list = getAll();
+        int k = 0;
+        for (Event e:list) {
+            if (e.getCountry()==country && e.getLanguage()==language)
+                k++;
+        }
+        return k;
+    }
+
     @Override
     public void setRate(int rate, long eventId) {
         Event e = getById(eventId);

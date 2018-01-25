@@ -179,6 +179,8 @@ public class EventController {
         model.addAttribute("type", 1);
         model.addAttribute("country", country);
         model.addAttribute("utils", new UtilsForWeb());
+        model.addAttribute("service", eventService);
+
         return "event/countries_and_cities";
     }
 
@@ -189,6 +191,7 @@ public class EventController {
 //        model.addAttribute("items", );
         model.addAttribute("type", 0);
         model.addAttribute("utils", new UtilsForWeb());
+        model.addAttribute("service", eventService);
 
         return "event/countries_and_cities";
     }
