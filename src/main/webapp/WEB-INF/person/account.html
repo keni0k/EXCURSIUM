@@ -91,7 +91,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
         <main>
             <div class="container-fluid">
                 <!--/*Section: Profile*/-->
-                <section>
+                <section style="padding: 0;">
                     <!--/*Grid row*/-->
                     <div class="row">
 
@@ -100,7 +100,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                             <!--/*Section: Basic Info*/-->
                             <section class="card card-cascade card-avatar mb-4" id="card-person">
 
-                                <img th:src="${person.getImageUrl()}" src="../../resources/img/user.png" alt=""
+                                <img th:src="${person.getImageUrl()}" src="../../resources/img/user.png" alt="" id = "img-person"
                                      onerror="onImgError();" onload="if (this.width + this.height === 0) {this.onerror();return;}"/>
                                 <!--/*Card content*/-->
                                 <div class="card-body">

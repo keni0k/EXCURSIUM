@@ -62,7 +62,6 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         return templateResolver;
     }
 
-
     @Bean(name = "templateEngine")
     public SpringTemplateEngine getTemplateEngine() {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
