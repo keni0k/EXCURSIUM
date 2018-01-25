@@ -67,9 +67,9 @@
                     </th:block>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12" th:with="alert = 'LANG:'+${#locale.getLanguage().toString()}+';COUNTRY:'+${#locale.getCountry().toString()}">
                 <!--<h2 class="title text-center" th:text="${type==0?#messages.msg('words.countries'):#messages.msg('words.cities')}">Страны/Города</h2>-->
-                <h2 class="title text-center" th:if="${type==0}" th:onclick="'alert(\'LANG:'+${#locale.getLanguage().toString()}+';COUNTRY:'+${#locale.getCountry().toString()}'\');'"> Страны (в разработке)</h2>
+                <h2 class="title text-center" th:if="${type==0}" th:onclick="'alert('+${alert}+');'"> Страны (в разработке)</h2>
                 <h2 class="title text-center" th:if="${type==1}">Города (в разработке)</h2>
 
                 <th:block th:if="${type==0}">
