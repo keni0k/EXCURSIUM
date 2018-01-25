@@ -102,12 +102,12 @@ public class PersonController {
             String loginOrEmail = principal.getName();
             if (!loginOrEmail.equals("")) {
                 person = personService.getByLoginOrEmail(loginOrEmail);
-                if (person!=null) {
+                if (person != null) {
                     review.setUserId(person.getId());
                     review.setUserFullName(person.getFullName());
                     review.setPathToUserPhoto(person.getImageToken());
                     String time = new LocalTime().toDateTimeToday().toString().replace('T', ' ');
-                    time = time.substring(0,time.indexOf('.'));
+                    time = time.substring(0, time.indexOf('.'));
                     review.setTime(time);
                     if (orderService.findByReview(orderId, review.getId()) && orderService.findByOrder(person.getId(), orderId))
                         if (!result.hasErrors()) {
@@ -133,10 +133,10 @@ public class PersonController {
             String loginOrEmail = principal.getName();
             if (!loginOrEmail.equals("")) {
                 person = personService.getByLoginOrEmail(loginOrEmail);
-                if (person!=null) {
+                if (person != null) {
                     support.setPersonId(person.getId());
                     String time = new LocalTime().toDateTimeToday().toString().replace('T', ' ');
-                    time = time.substring(0,time.indexOf('.'));
+                    time = time.substring(0, time.indexOf('.'));
                     support.setTime(time);
                     supportService.addSupport(support);
                 }
@@ -157,7 +157,7 @@ public class PersonController {
 
         model.addAttribute("person", person);
 
-        if (person.getType()==Consts.PERSON_GUIDE || person.getType()==Consts.PERSON_MODER_GUIDE || person.getType()==Consts.PERSON_ADMIN)
+        if (person.getType() == Consts.PERSON_GUIDE || person.getType() == Consts.PERSON_MODER_GUIDE || person.getType() == Consts.PERSON_ADMIN)
             model.addAttribute("events", eventService.getByGuideId(person.getId()));
         else model.addAttribute("events", new ArrayList<Event>());
 
@@ -174,10 +174,10 @@ public class PersonController {
         return "person/account";
     }
 
-    private int ordersReviewsCount(List<Buy> orders){
+    private int ordersReviewsCount(List<Buy> orders) {
         int ordersReviewsCount = 0;
-        for (Buy order:orders)
-            if (order.getReviewId()==-1) ordersReviewsCount++;
+        for (Buy order : orders)
+            if (order.getReviewId() == -1) ordersReviewsCount++;
         return ordersReviewsCount;
     }
 
@@ -208,10 +208,10 @@ public class PersonController {
         person.setRole("ROLE_USER");
         person.setType(Consts.PERSON_DISABLED);
         String time = new LocalTime().toDateTimeToday().toString().replace('T', ' ');
-        time = time.substring(0,time.indexOf('.'));
+        time = time.substring(0, time.indexOf('.'));
         person.setTime(time);
 
-        if (file!=null && !file.isEmpty()) {
+        if (file != null && !file.isEmpty()) {
             try {
                 byte[] bytes = file.getBytes();
 
@@ -274,7 +274,7 @@ public class PersonController {
             person = personService.getByLoginOrEmail(loginOrEmail);
         } else person = new Person();
 
-        if (file!=null && !file.isEmpty()) {
+        if (file != null && !file.isEmpty()) {
             try {
                 byte[] bytes = file.getBytes();
 
@@ -305,11 +305,11 @@ public class PersonController {
                 return account(model, principal);
             }
         }
-        person = personService.editPublic(firstName, lastName, city, aboutMe, person, file!=null && !file.isEmpty());
-        if (person.getType()== Consts.PERSON_TOURIST || person.getType()==Consts.PERSON_GUIDE)
-            person.setType(person.getType()*-1);
-        if (vk!=null && !vk.equals("")) person.setVk(vk);
-        if (telegram!=null && !telegram.equals("")) person.setTelegram(telegram);
+        person = personService.editPublic(firstName, lastName, city, aboutMe, person, file != null && !file.isEmpty());
+        if (person.getType() == Consts.PERSON_TOURIST || person.getType() == Consts.PERSON_GUIDE)
+            person.setType(person.getType() * -1);
+        if (vk != null && !vk.equals("")) person.setVk(vk);
+        if (telegram != null && !telegram.equals("")) person.setTelegram(telegram);
         personService.editPerson(person);
         model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.update.public", null, locale)));
         return account(model, principal);
@@ -329,21 +329,46 @@ public class PersonController {
         } else person = new Person();
 
         if (person.getPass().equals(passLast)) {
+
             if (pass.equals(passConfirm))
                 person.setPass(pass);
             else {
                 good = false;
                 model.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("danger.user.update.private.pass_confirm", null, locale)));
             }
-        } else model.addAttribute("message1", new MessageUtil("danger", messageSource.getMessage("danger.user.update.private.pass_last", null, locale)));
+
+            if (!person.getEmail().equals(email)) {
+                if (personService.isEmailFree(email)) {
+                    if (personService.isEmailCorrect(email)) {
+                        String newToken = randomToken(32);
+                        try {
+                            sendMail(newToken, email);
+                            person.setToken(newToken);
+                            person.setType(Consts.PERSON_DISABLED);
+                        } catch (MailjetSocketTimeoutException | MailjetException e) {
+                            good = false;
+                            model.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("danger.user.update.private.email_send", null, locale)));
+                            e.printStackTrace();
+                        }
+                    } else {
+                        good = false;
+                        model.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("error.user.email.valid", null, locale)));
+                    }
+                } else {
+                    good = false;
+                    model.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("error.user.email.free", null, locale)));
+                }
+            }
+
+        } else {
+            good = false;
+            model.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("danger.user.update.private.pass_last", null, locale)));
+        }
         //TODO отработать ошибки и невыполнения if'ов и сделать смену email
 
-        if (!person.getEmail().equals(email)){
-            logger.debug("Email was update");
-        }
-
         personService.editPerson(person);
-        if (good) model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.update.private", null, locale)));
+        if (good)
+            model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.update.private", null, locale)));
         return account(model, principal);
     }
 
@@ -432,9 +457,9 @@ public class PersonController {
         if (personWithBD == null) logger.info("ERROR PERSONWITHBD IS NULL");
         else {
             personService.editPublic(firstName, lastName, city, about, personWithBD, false);
-            if (personWithBD.getType()==Consts.PERSON_BLOCKED && type!=Consts.PERSON_BLOCKED)
+            if (personWithBD.getType() == Consts.PERSON_BLOCKED && type != Consts.PERSON_BLOCKED)
                 eventsModer(personWithBD.getId());
-            if (typePerson==Consts.PERSON_BLOCKED)
+            if (typePerson == Consts.PERSON_BLOCKED)
                 eventsBlock(personWithBD.getId());
             personWithBD.setType(typePerson);
             personService.editPerson(personWithBD);
@@ -507,14 +532,14 @@ public class PersonController {
                              @RequestParam(value = "about_me", required = false) String aboutMe,
                              @RequestParam(value = "phone_number", required = false) String phoneNumber,
                              @RequestParam("file") MultipartFile file,
-                             ModelMap model, Locale locale, Principal principal){
+                             ModelMap model, Locale locale, Principal principal) {
         Person person;
         String loginOrEmail = principal.getName();
         if (!loginOrEmail.equals("")) {
             person = personService.getByLoginOrEmail(loginOrEmail);
         } else person = new Person();
 
-        if (file!=null && !file.isEmpty()) {
+        if (file != null && !file.isEmpty()) {
             try {
                 byte[] bytes = file.getBytes();
 
@@ -542,9 +567,9 @@ public class PersonController {
                 person.setType(Consts.PERSON_MODER_GUIDE);
                 person.setDateAndPlaceOfPassport(dateAndPlace);
                 person.setSeriesAndNumberOfPassport(seriesAndNumber);
-                if (aboutMe!=null && !aboutMe.equals(""))
+                if (aboutMe != null && !aboutMe.equals(""))
                     person.setAbout(aboutMe);
-                if (phoneNumber!=null && !phoneNumber.equals(""))
+                if (phoneNumber != null && !phoneNumber.equals(""))
                     person.setPhoneNumber(phoneNumber);
                 personService.editPerson(person);
             } catch (Exception e) {
@@ -562,23 +587,23 @@ public class PersonController {
         if (!loginOrEmail.equals("")) {
             person = personService.getByLoginOrEmail(loginOrEmail);
         }
-        if (person==null) return account(model, principal);
-        if (person.getType()==Consts.PERSON_DISABLED)
+        if (person == null) return account(model, principal);
+        if (person.getType() == Consts.PERSON_DISABLED)
             sendMail(person.getToken(), person.getEmail());
         return account(model, principal);
     }
 
-    private void eventsBlock(long personId){
+    private void eventsBlock(long personId) {
         List<Event> events = eventService.getByGuideId(personId);
-        for (Event event:events){
+        for (Event event : events) {
             event.setType(Consts.EXCURSION_BLOCKED);
             eventService.editEvent(event);
         }
     }
 
-    private void eventsModer(long personId){
+    private void eventsModer(long personId) {
         List<Event> events = eventService.getByGuideId(personId);
-        for (Event event:events){
+        for (Event event : events) {
             event.setType(Consts.EXCURSION_MODERATION);
             eventService.editEvent(event);
         }

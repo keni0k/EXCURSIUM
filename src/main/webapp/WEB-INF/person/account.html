@@ -104,13 +104,6 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                             </div>
                         </th:block>
 
-                        <!--/*@thymesVar id="message1" type="com.heroku.demo.utils.MessageUtil"*/-->
-                        <th:block th:if="${message1 != null}">
-                            <div th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message1.type)}, message=${message1.message})">
-                                &nbsp;
-                            </div>
-                        </th:block>
-
                         <!--/*Grid column*/-->
                         <div class="col-lg-4 col-md-12">
                             <!--/*Section: Basic Info*/-->
@@ -613,6 +606,10 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                                 <form th:object="${person}" action="/users/edit_private" method="post"
                                                       autocomplete="off">
                                                     <div class="col-md-12">
+                                                        <h4 style="font-weight: bold">Изменение email адреса</h4>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                    <div class="col-md-12">
                                                         <div class="md-form form-sm">
                                                             <input type="email" id="form24" name="email"
                                                                    class="form-control"
@@ -621,17 +618,9 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12">
-                                                        <h4 style="font-weight: bold">Смена пароля</h4>
+                                                        <h4 style="font-weight: bold">Изменение пароля</h4>
                                                     </div>
                                                     <div class="clearfix"></div>
-                                                    <br/>
-                                                    <div class="col-md-12">
-                                                        <div class="md-form form-sm">
-                                                            <input type="password" name="last_pass" id="form25"
-                                                                   class="form-control"/>
-                                                            <label for="form25">Текущий пароль</label>
-                                                        </div>
-                                                    </div>
                                                     <div class="col-xs-6">
                                                         <div class="md-form form-sm">
                                                             <input type="password" name="pass" id="form26"
@@ -644,6 +633,17 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                                             <input type="password" name="pass_confirm" id="form27"
                                                                    class="form-control"/>
                                                             <label for="form27">Подтвердите пароль</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <h4 style="font-weight: bold">Для применения изменений введите текущий пароль</h4>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                    <div class="col-md-12">
+                                                        <div class="md-form form-sm">
+                                                            <input type="password" name="last_pass" id="form25"
+                                                                   class="form-control" required=""/>
+                                                            <label for="form25">Текущий пароль</label>
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer justify-content-center">
