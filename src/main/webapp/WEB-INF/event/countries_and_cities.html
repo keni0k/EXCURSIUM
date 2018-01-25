@@ -86,7 +86,7 @@
 
                 <th:block th:if="${type==0}">
                     <div class="row">
-                        <th:block th:each="i : ${#numbers.sequence(0, utils.getCountriesCount())}">
+                        <th:block th:each="i : ${#numbers.sequence(0, utils.getCountriesCount()-1)}">
                         <div class="col-md-4">
                             <div class="card card-inverse view overlay hm-white-slight z-depth-1">
                                 <img class="card-img" src="../../resources/img/user.png" alt="Card image"/>
@@ -101,14 +101,18 @@
                                 </div>
                             </div>
                         </div>
-                            <div class="clearfix" th:if="${i%3==0}"></div>
+                            <th:block th:if="${i%3==0 and i!=0}">
+                                <div class="clearfix"></div>
+                                <br/>
+                            </th:block>
+
                         </th:block>
                     </div>
                 </th:block>
 
                 <th:block th:if="${type==1}">
                     <div class="row">
-                        <th:block th:each="i : ${#numbers.sequence(0, utils.getCitiesCount(country))}">
+                        <th:block th:each="i : ${#numbers.sequence(0, utils.getCitiesCount(country)-1)}">
                             <div class="col-md-4">
                                 <div class="card card-inverse view overlay hm-white-slight z-depth-1">
                                     <img class="card-img" src="../../resources/img/user.png" alt="Card image"/>
@@ -123,7 +127,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="clearfix" th:if="${i%3==0}"></div>
+                            <th:block th:if="${i%3==0 and i!=0}">
+                                <div class="clearfix"></div>
+                                <br/>
+                            </th:block>
                         </th:block>
                     </div>
                 </th:block>

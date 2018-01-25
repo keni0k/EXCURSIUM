@@ -47,13 +47,13 @@ public class UtilsForWeb {
 
     public int getCitiesCount(int country){
         switch (country) {
-            case 0: return 11;
-            default: return 11;
+            case 0: return 9;
+            default: return 9;
         }
     }
 
     public int getCountriesCount(){
-        return 0;
+        return 1;
     }
 
 }
