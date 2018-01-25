@@ -148,7 +148,7 @@
                         <span class="input-group-addon" th:text="${#messages.msg('words.city')}">Город</span>
                         <select class="selectpicker" data-live-search="true">
                             <!--/*@thymesVar id="utils" type="com.heroku.demo.utils.UtilsForWeb"*/-->
-                            <option th:each="i : ${#numbers.sequence(0, utils.getCitiesCount()-1)}" th:name="${i}"
+                            <option th:each="i : ${#numbers.sequence(0, utils.getCitiesCount(0)-1)}" th:name="${i}"/><!--TODO: country, city-->
                                     th:text="${utils.getCity(i, 0)}">Москва, Россия
                             </option>
                         </select>
