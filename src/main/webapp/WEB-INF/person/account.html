@@ -29,7 +29,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
-    <script type="text/javascript" src="../../resources/libs/bootstrap-confirmation/js/bootstrap-confirmation.min.js"></script>
+    <script type="text/javascript"
+            src="../../resources/libs/bootstrap-confirmation/js/bootstrap-confirmation.min.js"></script>
 
     <script th:inline="javascript">
         /*<![CDATA[*/
@@ -62,7 +63,8 @@
      th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}, isThisUserAccount = ${true},
 excursovod = ${person.getType()==consts.PERSON_GUIDE or person.getType()==consts.PERSON_MODER_GUIDE or person.getType()==consts.PERSON_ADMIN},
 tourist = ${person.getType()==consts.PERSON_TOURIST or person.getType()==consts.PERSON_MODER_TOURIST or person.getType()==consts.PERSON_ADMIN},
-notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==consts.PERSON_ADMIN}">
+notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==consts.PERSON_ADMIN}" ,
+     lang=${#locale.getLanguage().toString()=='en'?1:0}>
     <!--/*TODO isThisUserAccount*/-->
     <div th:replace="fragments/header :: style"></div>
     <div th:replace="fragments/header :: header"></div>
@@ -100,8 +102,10 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                             <!--/*Section: Basic Info*/-->
                             <section class="card card-cascade card-avatar mb-4" id="card-person">
 
-                                <img th:src="${person.getImageUrl()}" src="../../resources/img/user.png" alt="" id = "img-person"
-                                     onerror="onImgError();" onload="if (this.width + this.height === 0) {this.onerror();return;}"/>
+                                <img th:src="${person.getImageUrl()}" src="../../resources/img/user.png" alt=""
+                                     id="img-person"
+                                     onerror="onImgError();"
+                                     onload="if (this.width + this.height === 0) {this.onerror();return;}"/>
                                 <!--/*Card content*/-->
                                 <div class="card-body">
                                     <!--/*Title*/-->
@@ -235,8 +239,9 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                             <!--/*Card image*/-->
                                             <div class="view overlay hm-white-slight">
                                                 <div class="img_crop">
-                                                <img th:src="${order.getImageUrl()}" src="#" class="img-fluid" alt=""
-                                                     style="height: 240px; min-width: -webkit-fill-available;"/>
+                                                    <img th:src="${order.getImageUrl()}" src="#" class="img-fluid"
+                                                         alt=""
+                                                         style="height: 240px; min-width: -webkit-fill-available;"/>
                                                 </div>
                                                 <a href="#">
                                                     <div class="mask waves-effect waves-light"></div>
@@ -268,7 +273,8 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                                 <th:block th:if="${order.getType()==consts.ORDER_OPEN}">
                                                     <div class="clearfix"></div>
                                                     <div class="left pt-2">
-                                                        <a th:href="@{/orders/confirm(id=${order.getId()})}" data-title="Confirm order?"
+                                                        <a th:href="@{/orders/confirm(id=${order.getId()})}"
+                                                           data-title="Confirm order?"
                                                            data-target="_blank" data-toggle="confirmation"
                                                            class="waves-effect" rel="tooltip" style="display: inline">Подтвердить
                                                             заказ<i
@@ -363,8 +369,9 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                             <!--/*Card image*/-->
                                             <div class="view overlay hm-white-slight">
                                                 <div class="img_crop">
-                                                <img th:src="${event.pathToPhoto}" src="#" class="img-fluid"
-                                                     style="height: 240px; min-width: -webkit-fill-available;" alt=""/>
+                                                    <img th:src="${event.pathToPhoto}" src="#" class="img-fluid"
+                                                         style="height: 240px; min-width: -webkit-fill-available;"
+                                                         alt=""/>
                                                 </div>
                                                 <a href="#" th:href="@{/events/event(id=${event.getId()})}">
                                                     <div class="mask waves-effect waves-light"></div>
@@ -377,7 +384,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                                         th:href="@{/events/event(id=${event.getId()})}">Название
                                                     экскурсии</a></h4>
                                                 <strong th:style="'color:' + ${event.getType()}==1?'#337ABB;':'#f80000;' + 'font-size: x-large; padding-top: -0.2em;'"
-                                                        th:text="${event.getStringType(0)}">На модерации</strong>
+                                                        th:text="${event.getStringType(lang)}">На модерации</strong>
                                                 <!--/*TODO translate*/-->
                                             </div>
                                             <!--/*Card footer*/-->
@@ -870,7 +877,8 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                                 <div class="modal-body">
                                     <form action="/orders/add_disute" method="post">
                                         <!--/*Subject*/-->
-                                        <input id="order_id1" name="order_id" style="visibility: hidden; width: 0; height: 0; display: none;"/>
+                                        <input id="order_id1" name="order_id"
+                                               style="visibility: hidden; width: 0; height: 0; display: none;"/>
                                         <!--/*Topic*/-->
                                         <div class="md-form form-sm">
                                             <fieldset class="">

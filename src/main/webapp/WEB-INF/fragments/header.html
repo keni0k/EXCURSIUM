@@ -2,6 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 xmlns:th="http://www.thymeleaf.org">
 <body th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
+<!--/*@thymesVar id="country" type="java.lang.Integer"*/-->
+<!--/*@thymesVar id="city" type="java.lang.Integer"*/-->
 <style type="text/css" th:fragment="style">
 .navbar-fixed-top {
 min-height: 95px;
@@ -68,7 +70,8 @@ data-target="#bs-example-navbar-collapse-1">
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 <!--/* Содержимое основной части */-->
 <ul class="nav navbar-nav navbar-right">
-<li><a th:href="@{/events/list(country=${country}, city = ${city})}" th:text="${#messages.msg('titles.excursions')}">Экскурсии</a></li>
+<li>
+<a th:href="@{/events/list(country=${country}, city = ${city})}" th:text="${#messages.msg('titles.excursions')}">Экскурсии</a></li>
 <li><a href="#">FAQ</a></li>
 <li th:if="${isAdmin}"><a href="/users/moderation" th:text="${#messages.msg('titles.persons')}">Модерация
 пользователей</a></li>

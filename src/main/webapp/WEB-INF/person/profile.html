@@ -1,134 +1,135 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="description" content=""/>
-<meta name="title" content=""/>
-<meta name="author" content=""/>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="keywords" content="excursium"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="description" content=""/>
+    <meta name="title" content=""/>
+    <meta name="author" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta name="keywords" content="excursium"/>
 
-<link rel="stylesheet" type="text/css" href="../../resources/css/footer.css"/>
-<link rel="stylesheet" href="../../resources/libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>
-<link rel="stylesheet" href="../../resources/libs/bootstrap-select/css/bootstrap-select.css"/>
+    <link rel="stylesheet" type="text/css" href="../../resources/css/footer.css"/>
+    <link rel="stylesheet" href="../../resources/libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>
+    <link rel="stylesheet" href="../../resources/libs/bootstrap-select/css/bootstrap-select.css"/>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 
-<link rel="icon" href="../../resources/img/icon.ico" type="image/x-icon"/>
-<link rel="shortcut icon" href="../../resources/img/icon.ico" type="image/x-icon"/>
+    <link rel="icon" href="../../resources/img/icon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="../../resources/img/icon.ico" type="image/x-icon"/>
 
-<link rel="stylesheet" type="text/css" href="../../resources/css/styles.css"/>
-<link rel="stylesheet" href="../../resources/css/cards.css"/>
-<link rel="stylesheet" href="../../resources/css/media.css"/>
+    <link rel="stylesheet" type="text/css" href="../../resources/css/styles.css"/>
+    <link rel="stylesheet" href="../../resources/css/cards.css"/>
+    <link rel="stylesheet" href="../../resources/css/media.css"/>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
-<title>Экскурсии</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
+    <title>Экскурсии</title>
 </head>
 <body style="background-color: #f9f9f9;">
 <!--/*@thymesVar id="person" type="com.heroku.demo.person.Person"*/-->
 <div class="content"
-th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
-<div th:replace="fragments/header :: style"></div>
-<div th:replace="fragments/header :: header"></div>
-<div class="container">
-<div class="row">
-<!--/*Grid column*/-->
-<div class="col-md-6 col-md-offset-3">
-<!--/*Rotating card*/-->
-<div class="card-wrapper">
-<div id="card-3" class="card-rotating effect__click">
-<!--/*Front Side*/-->
-<div class="face front">
-<!--/* Image*/-->
-<div class="card-up">
-<img src="../../resources/img/bg-cta.jpg" class="img-responsive"
-     alt="Team member card image"/>
-</div>
+     th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
+    <div th:replace="fragments/header :: style"></div>
+    <div th:replace="fragments/header :: header"></div>
+    <div class="container">
+        <div class="row">
+            <!--/*Grid column*/-->
+            <div class="col-md-6 col-md-offset-3">
+                <!--/*Rotating card*/-->
+                <div class="card-wrapper">
+                    <div id="card-3" class="card-rotating effect__click">
+                        <!--/*Front Side*/-->
+                        <div class="face front">
+                            <!--/* Image*/-->
+                            <div class="card-up">
+                                <img src="../../resources/img/bg-cta.jpg" class="img-responsive"
+                                     alt="Team member card image"/>
+                            </div>
 
-<!--/*Avatar*/-->
-<div class="avatar">
-<img src="../../resources/img/user.png" class="rounded-circle img-responsive"
-     th:src="${person.getImageUrl()}" alt="Third sample avatar image"/>
-</div>
+                            <!--/*Avatar*/-->
+                            <div class="avatar">
+                                <img src="../../resources/img/user.png" class="rounded-circle img-responsive"
+                                     th:src="${person.getImageUrl()}" alt="Third sample avatar image"/>
+                            </div>
 
-<!--/*Content*/-->
-<div class="card-body">
-<!--/*Rating*/-->
-<ul class="rating">
-<span th:if="${(person.getRate()!=-1)and(person.getRate()!=0)}">
+                            <!--/*Content*/-->
+                            <div class="card-body">
+                                <!--/*Rating*/-->
+                                <ul class="rating">
+<th:block th:if="${(person.getRate()!=-1)and(person.getRate()!=0)}">
 <li th:each="i : ${#numbers.sequence(0, person.getRate()-1)}">
 <i class="fa fa-star"></i>
 </li>
-</span>
-<span th:if="${(person.getRate()!=-1)and(person.getRate()!=5)}">
+</th:block>
+                                    <th:block th:if="${(person.getRate()!=-1)and(person.getRate()!=5)}">
 <li th:each="i : ${#numbers.sequence(person.getRate(), 4)}">
 <i class="fa fa-star-o"></i>
 </li>
-</span>
-<span th:if="${(person.getRate()==-1)}">
+</th:block>
+                                    <th:block th:if="${(person.getRate()==-1)}">
 <li th:each="i : ${#numbers.sequence(0, 4)}">
 <i class="fa fa-star-o"></i>
 </li>
-</span>
-</ul>
-<h3 class="mt-1" th:text="${person.getFullName()}">Имя</h3>
-<p class="font-bold" th:text="${person.getCity()}">Город</p>
-<!--/*Triggering button*/-->
-<a class="rotate-btn" data-card="card-3">
-<i class="fa fa-repeat"></i>&nbsp;&nbsp;О себе</a>
-</div>
-
-</div>
-<!--/*Front Side*/-->
-
-<!--/*Back Side*/-->
-<div class="face back">
-
-<!--/*Content*/-->
-<h4 class="mt-2 mb-2" th:text="${#messages.msg('words.about_me')}">О себе</h4>
-<hr/>
-<p th:text="${person.getAbout()}">текст о себе</p>
-<hr/>
-<!--/*Social Icons*/-->
-<ul class="rating">
-<li>
-<a class="icons-sm gplus-ic">
-<i class="fa fa-google-plus"> </i>
-</a>
-</li>
-<li>
-<a class="icons-sm fb-ic">
-<i class="fa fa-facebook"> </i>
-</a>
-</li>
-<li>
-<a class="icons-sm git-ic">
-<i class="fa fa-github"> </i>
-</a>
-</li>
-</ul>
-<!--/*Triggering button*/-->
-<a class="rotate-btn" data-card="card-3">
-<i class="fa fa-undo"></i>&nbsp;&nbsp;<th:block
-th:text="${#messages.msg('words.go_back')}">Назад
 </th:block>
-</a>
+                                </ul>
+                                <h3 class="mt-1" th:text="${person.getFullName()}">Имя</h3>
+                                <p class="font-bold" th:text="${person.getCity()}">Город</p>
+                                <!--/*Triggering button*/-->
+                                <a class="rotate-btn" data-card="card-3">
+                                    <i class="fa fa-repeat"></i>&nbsp;&nbsp;О себе</a>
+                            </div>
 
-</div>
-<!--/*Back Side*/-->
+                        </div>
+                        <!--/*Front Side*/-->
 
-</div>
-</div>
-<!--/*Rotating card*/-->
-</div>
-<!--/*Grid column*/-->
-</div>
-</div>
+                        <!--/*Back Side*/-->
+                        <div class="face back">
+
+                            <!--/*Content*/-->
+                            <h4 class="mt-2 mb-2" th:text="${#messages.msg('words.about_me')}">О себе</h4>
+                            <hr/>
+                            <p th:text="${person.getAbout()}">текст о себе</p>
+                            <hr/>
+                            <!--/*Social Icons*/-->
+                            <ul class="rating">
+                                <li>
+                                    <a class="icons-sm gplus-ic">
+                                        <i class="fa fa-google-plus"> </i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="icons-sm fb-ic">
+                                        <i class="fa fa-facebook"> </i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="icons-sm git-ic">
+                                        <i class="fa fa-github"> </i>
+                                    </a>
+                                </li>
+                            </ul>
+                            <!--/*Triggering button*/-->
+                            <a class="rotate-btn" data-card="card-3">
+                                <i class="fa fa-undo"></i>&nbsp;&nbsp;<th:block
+                                    th:text="${#messages.msg('words.go_back')}">Назад
+                            </th:block>
+                            </a>
+
+                        </div>
+                        <!--/*Back Side*/-->
+
+                    </div>
+                </div>
+                <!--/*Rotating card*/-->
+            </div>
+            <!--/*Grid column*/-->
+        </div>
+    </div>
 </div>
 <script type="text/javascript" src="../../resources/js/compiled.min.js"></script>
-<div th:replace="fragments/footer :: footer"></div></body>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
 </html>
