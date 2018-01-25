@@ -102,7 +102,9 @@ public class Event {
     @Transient
     public String pathToPhoto = "";
 
-    private String city = "";
+    private int city = -1;
+
+    private int country = -1;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -244,11 +246,11 @@ public class Event {
         this.fullNameOfGuide = fullNameOfGuide;
     }
 
-    public String getCity() {
+    public int getCity() {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(int city) {
         this.city = city;
     }
 
@@ -273,5 +275,13 @@ public class Event {
 
     public void setAgeLimit(int ageLimit) {
         this.ageLimit = ageLimit;
+    }
+
+    public int getCountry() {
+        return country;
+    }
+
+    public void setCountry(int country) {
+        this.country = country;
     }
 }

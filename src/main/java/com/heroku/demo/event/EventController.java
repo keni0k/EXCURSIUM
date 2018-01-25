@@ -86,7 +86,6 @@ public class EventController {
         if (!loginOrEmail.equals("")) {
             Person p = personService.getByLoginOrEmail(loginOrEmail);
             event.setFullNameOfGuide(p.getFullName());
-            event.setCity(p.getCity());
             event.setPhotoOfGuide(p.getImageToken());
             event.setGuideId(p.getId());
         } else event.setGuideId(-1);
@@ -132,7 +131,7 @@ public class EventController {
                 eventService.delete(event.getId());
                 return eventAddAgain(modelMap, event, "You failed to upload file. Please, try again.");
             }
-            return event(modelMap, (int) event.getId(), principal, null, null);
+            return event(modelMap, (int) event.getId(), principal);
         } else if (file == null) {
             return eventAddAgain(modelMap, event, "You failed to upload file because the file is null.");
         } else {
@@ -158,12 +157,7 @@ public class EventController {
     }
 
     @RequestMapping(value = "/event", method = RequestMethod.GET)
-    public String event(ModelMap model,
-                        @RequestParam("id") int id, Principal principal,
-                        @RequestParam(value = "country", required = false) Integer country,
-                        @RequestParam(value = "city", required = false) Integer city) {
-        model.addAttribute("country", country);
-        model.addAttribute("city", city);
+    public String event(ModelMap model, @RequestParam("id") int id, Principal principal) {
         model.addAttribute("event", eventService.getById(id));
         model.addAttribute("reviews", reviewService.getByEvent(id));
         model.addAttribute("utils", new UtilsForWeb());

@@ -219,7 +219,6 @@ public class PersonServiceImpl implements PersonService {
             List<Event> events = eventService.getByGuideId(p.getId());
             for (Event e:events){
                 e.setPhotoOfGuide(p.getImageToken());
-                e.setCity(p.getCity());
                 e.setFullNameOfGuide(p.getFullName());
             }
         }

@@ -32,9 +32,7 @@ public class HomeController {
     private PhotoRepository photoRepository;
     private TokenRepository tokenRepository;
 
-
-    private static final Logger logger = LoggerFactory
-            .getLogger(HomeController.class);
+    private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
     @Autowired
     public HomeController(MessageRepository pRepository, ReviewRepository reviewRepository,

@@ -37,11 +37,10 @@
 <!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
 <!--/*@thymesVar id="person" type="com.heroku.demo.person.Person"*/-->
 <!--/*@thymesVar id="reviews" type="java.util.List<com.heroku.demo.review.Review>"*/-->
-<!--/*@thymesVar id="country" type="java.lang.Integer"*/-->
 <!--/*@thymesVar id="utils" type="com.heroku.demo.utils.UtilsForWeb"*/-->
-<!--/*@thymesVar id="city" type="java.lang.Integer"*/-->
 <div class="content"
-     th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
+     th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')},
+     country = ${event.getCountry()}, city = ${event.getCity()}">
     <div th:replace="fragments/header :: style"></div>
     <div th:replace="fragments/header :: header"></div>
     <div class="container">
