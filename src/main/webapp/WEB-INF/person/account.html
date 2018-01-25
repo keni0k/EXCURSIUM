@@ -63,8 +63,8 @@
      th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}, isThisUserAccount = ${true},
 excursovod = ${person.getType()==consts.PERSON_GUIDE or person.getType()==consts.PERSON_MODER_GUIDE or person.getType()==consts.PERSON_ADMIN},
 tourist = ${person.getType()==consts.PERSON_TOURIST or person.getType()==consts.PERSON_MODER_TOURIST or person.getType()==consts.PERSON_ADMIN},
-notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==consts.PERSON_ADMIN}" ,
-     lang=${#locale.getLanguage().toString()=='en'?1:0}>
+notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==consts.PERSON_ADMIN},
+lang=${#locale.getLanguage().toString()=='en'?1:0}">
     <!--/*TODO isThisUserAccount*/-->
     <div th:replace="fragments/header :: style"></div>
     <div th:replace="fragments/header :: header"></div>
@@ -96,6 +96,20 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                 <section style="padding: 0;">
                     <!--/*Grid row*/-->
                     <div class="row">
+
+                        <!--/*@thymesVar id="message" type="com.heroku.demo.utils.MessageUtil"*/-->
+                        <th:block th:if="${message != null}">
+                            <div th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message.type)}, message=${message.message})">
+                                &nbsp;
+                            </div>
+                        </th:block>
+
+                        <!--/*@thymesVar id="message1" type="com.heroku.demo.utils.MessageUtil"*/-->
+                        <th:block th:if="${message1 != null}">
+                            <div th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message1.type)}, message=${message1.message})">
+                                &nbsp;
+                            </div>
+                        </th:block>
 
                         <!--/*Grid column*/-->
                         <div class="col-lg-4 col-md-12">

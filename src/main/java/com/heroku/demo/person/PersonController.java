@@ -311,7 +311,7 @@ public class PersonController {
         if (vk!=null && !vk.equals("")) person.setVk(vk);
         if (telegram!=null && !telegram.equals("")) person.setTelegram(telegram);
         personService.editPerson(person);
-        model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.registration", null, locale)));
+        model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.update.public", null, locale)));
         return account(model, principal);
     }
 
@@ -320,7 +320,8 @@ public class PersonController {
                               @ModelAttribute("last_pass") String passLast,
                               @ModelAttribute("pass") String pass,
                               @ModelAttribute("pass_confirm") String passConfirm,
-                              ModelMap model, Principal principal) {
+                              ModelMap model, Principal principal, Locale locale) {
+        boolean good = true;
         Person person;
         String loginOrEmail = principal.getName();
         if (!loginOrEmail.equals("")) {
@@ -330,11 +331,19 @@ public class PersonController {
         if (person.getPass().equals(passLast)) {
             if (pass.equals(passConfirm))
                 person.setPass(pass);
-        }
-
+            else {
+                good = false;
+                model.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("danger.user.update.private.pass_confirm", null, locale)));
+            }
+        } else model.addAttribute("message1", new MessageUtil("danger", messageSource.getMessage("danger.user.update.private.pass_last", null, locale)));
         //TODO отработать ошибки и невыполнения if'ов и сделать смену email
 
+        if (!person.getEmail().equals(email)){
+            logger.debug("Email was update");
+        }
+
         personService.editPerson(person);
+        if (good) model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.update.private", null, locale)));
         return account(model, principal);
     }
 
