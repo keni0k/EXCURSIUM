@@ -330,11 +330,13 @@ public class PersonController {
 
         if (person.getPass().equals(passLast)) {
 
-            if (pass.equals(passConfirm))
-                person.setPass(pass);
-            else {
-                good = false;
-                model.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("danger.user.update.private.pass_confirm", null, locale)));
+            if (!pass.equals("")) {
+                if (pass.equals(passConfirm))
+                    person.setPass(pass);
+                else {
+                    good = false;
+                    model.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("danger.user.update.private.pass_confirm", null, locale)));
+                }
             }
 
             if (!person.getEmail().equals(email)) {
