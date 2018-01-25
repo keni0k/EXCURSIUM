@@ -101,7 +101,7 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
                             <section class="card card-cascade card-avatar mb-4" id="card-person">
 
                                 <img th:src="${person.getImageUrl()}" src="../../resources/img/user.png" alt=""
-                                     th:onunload="'onImgError();'"/>
+                                     onerror="onImgError();" onload="if (this.width + this.height === 0) {this.onerror();return;}"/>
                                 <!--/*Card content*/-->
                                 <div class="card-body">
                                     <!--/*Title*/-->
