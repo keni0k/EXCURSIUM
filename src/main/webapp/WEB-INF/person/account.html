@@ -602,13 +602,14 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                         <!--/*Panel 8*/-->
                                         <div class="tab-pane fade" id="panel88" role="tabpanel" aria-expanded="false">
                                             <!--/*Body*/-->
-                                            <div class="modal-body">
+                                            <div class="modal-body" style="padding-top: 0">
                                                 <form th:object="${person}" action="/users/edit_private" method="post"
                                                       autocomplete="off">
                                                     <div class="col-md-12">
                                                         <h4 style="font-weight: bold">Изменение email адреса</h4>
                                                     </div>
                                                     <div class="clearfix"></div>
+                                                    <br/>
                                                     <div class="col-md-12">
                                                         <div class="md-form form-sm">
                                                             <input type="email" id="form24" name="email"
@@ -621,6 +622,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                                         <h4 style="font-weight: bold">Изменение пароля</h4>
                                                     </div>
                                                     <div class="clearfix"></div>
+                                                    <br/>
                                                     <div class="col-xs-6">
                                                         <div class="md-form form-sm">
                                                             <input type="password" name="pass" id="form26"
@@ -639,6 +641,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                                         <h4 style="font-weight: bold">Для применения изменений введите текущий пароль</h4>
                                                     </div>
                                                     <div class="clearfix"></div>
+                                                    <br/>
                                                     <div class="col-md-12">
                                                         <div class="md-form form-sm">
                                                             <input type="password" name="last_pass" id="form25"
