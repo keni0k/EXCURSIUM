@@ -338,6 +338,7 @@ public class PersonController {
             }
 
             if (!person.getEmail().equals(email)) {
+                good = false;
                 if (personService.isEmailFree(email)) {
                     if (personService.isEmailCorrect(email)) {
                         String newToken = randomToken(32);
@@ -345,26 +346,21 @@ public class PersonController {
                             sendMail(newToken, email);
                             person.setToken(newToken);
                             person.setType(Consts.PERSON_DISABLED);
+                            model.addAttribute("message", new MessageUtil("warning", messageSource.getMessage("warning.user.update.private.email_success", null, locale)));
                         } catch (MailjetSocketTimeoutException | MailjetException e) {
-                            good = false;
                             model.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("danger.user.update.private.email_send", null, locale)));
                             e.printStackTrace();
                         }
-                    } else {
-                        good = false;
+                    } else
                         model.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("error.user.email.valid", null, locale)));
-                    }
-                } else {
-                    good = false;
+                } else
                     model.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("error.user.email.free", null, locale)));
-                }
             }
 
         } else {
             good = false;
             model.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("danger.user.update.private.pass_last", null, locale)));
         }
-        //TODO отработать ошибки и невыполнения if'ов и сделать смену email
 
         personService.editPerson(person);
         if (good)
