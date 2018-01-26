@@ -352,13 +352,13 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                     th:if="${events.size()==0 and excursovod}">Здесь
                                     будут
                                     отображаться добавленные экскурсии</h2> <!--/*-310,615 TODO: translate*/-->
+                                <a href="/events/add">
                                 <button th:if="${isThisUserAccount and excursovod}" type="button"
-                                        class="btn btn-primary mb-3 waves-effect waves-light" href="/events/add">
-                                    <th:block th:text="${#messages.msg('titles.add_event')+' '}">Добавить новую
-                                        экскурсию
-                                    </th:block>
+                                        class="btn btn-primary mb-3 waves-effect waves-light">
+                                    <th:block th:text="${#messages.msg('titles.add_event')+' '}">Добавить новую экскурсию</th:block>
                                     <i class="fa fa-photo ml-1"></i>
                                 </button>
+                                </a>
                             </div>
                             <!--/* End-of-Heading */-->
                             <!--/* Card row */-->

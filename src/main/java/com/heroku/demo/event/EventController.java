@@ -77,7 +77,9 @@ public class EventController {
     public String insertEvent(@ModelAttribute("inputEvent") @Valid Event event,
                               BindingResult result,
                               @RequestParam("file") MultipartFile file,
+                              @RequestParam(value = "city_and_country", required = false) String cityAndCountry,
                               ModelMap modelMap, Principal principal, Locale locale) {
+        event.setCountryAndCity(cityAndCountry);
         String time = new LocalTime().toDateTimeToday().toString().replace('T', ' ');
         time = time.substring(0,time.indexOf('.'));
         event.setTime(time);

@@ -284,4 +284,10 @@ public class Event {
     public void setCountry(int country) {
         this.country = country;
     }
+
+    public void setCountryAndCity(String countryAndCity) {
+        String[] mas = countryAndCity.split(".");
+        city = Integer.parseInt(mas[0]);
+        country = Integer.parseInt(mas[1]);
+    }
 }
