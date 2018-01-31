@@ -855,9 +855,17 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                             <div class="col-md-12" th:if="${person.getPhoneNumber()==''}">
                                                 <!--/*Company website*/-->
                                                 <div class="md-form form-sm">
-                                                    <input type="text" id="upToGuide5" required=""
-                                                           class="form-control" name="phone_number"/>
-                                                    <label for="editProfile5" class="">Номер телефона</label>
+                                                        <input name="phone_number" type="text" class="form-control bfh-phone"
+                                                               minlength="17" data-format="+7 (ddd) ddd-dddd" id="phone_number"/>
+                                                        <label for="phone_number"
+                                                               th:text="${#messages.msg('words.phone')}">Номер телефона</label>
+                                                        <!--/*@thymesVar id="error_phone" type="java.lang.Boolean"*/-->
+                                                        <!--<label for="phone_number" th:if="${error_phone}"
+                                                               th:text="${#messages.msg('error.user.phone_number.free')}" th:class="'error'">Name
+                                                            Error</label>
+                                                        <label for="phone_number" th:if="${#fields.hasErrors('phoneNumber')}"
+                                                               th:text="${#messages.msg('error.user.phone_number.invalid')}" th:class="'error'">Name
+                                                            Error</label>--><!--TODO-->
                                                 </div>
                                             </div>
                                             <!--/*End-of-Grid column*/-->
