@@ -855,7 +855,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                             <div class="col-md-12" th:if="${person.getPhoneNumber()==''}">
                                                 <!--/*Company website*/-->
                                                 <div class="md-form form-sm">
-                                                        <input name="phone_number" type="text" class="form-control bfh-phone"
+                                                        <input name="phone_number" type="text" class="form-control bfh-phone" required=""
                                                                minlength="17" data-format="+7 (ddd) ddd-dddd" id="phone_number"/>
                                                         <label for="phone_number"
                                                                th:text="${#messages.msg('words.phone')}">Номер телефона</label>
