@@ -79,7 +79,6 @@ public class EventController {
                               @RequestParam("file") MultipartFile file,
                               @RequestParam(value = "city_and_country", required = false) String cityAndCountry,
                               ModelMap modelMap, Principal principal, Locale locale) {
-        logger.info("CANDC:"+cityAndCountry);
         event.setCountryAndCity(cityAndCountry);
         String time = new LocalTime().toDateTimeToday().toString().replace('T', ' ');
         time = time.substring(0,time.indexOf('.'));
