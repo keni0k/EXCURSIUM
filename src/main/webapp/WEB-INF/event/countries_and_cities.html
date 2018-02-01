@@ -87,20 +87,21 @@
                 <th:block th:if="${type==0}">
                     <div class="row">
                         <th:block th:each="i : ${#numbers.sequence(0, utils.getCountriesCount()-1)}">
-                        <div class="col-md-4">
-                            <div class="card card-inverse view overlay hm-white-slight z-depth-1">
-                                <img class="card-img" src="../../resources/img/user.png" alt="Card image"/>
-                                <a th:href="@{/events/list(country=${i})}">
-                                    <div class="mask waves-effect waves-light"></div>
-                                </a>
-                                <div class="card-info">
-                                    <h1 class="card-title" style="color: #ffffff">Россия</h1>
-                                    <h2 class="card-text" style="color: #ffffff"
-                                        th:text="${service.getCountInCountry(i, lang)} + ' экскурсий'">261
-                                        экскурсия</h2><!--TODO: окончания-->
+                            <div class="col-md-4">
+                                <div class="card card-inverse view overlay hm-white-slight z-depth-1">
+                                    <img class="card-img" src="../../resources/img/user.png" alt="Card image"/>
+                                    <a th:href="@{/events/list(country=${i})}">
+                                        <div class="mask waves-effect waves-light"></div>
+                                    </a>
+                                    <div class="card-info">
+                                        <h1 class="card-title" style="color: #ffffff"
+                                            th:text="${#messages.msg('countries.'+i})}">Россия</h1>
+                                        <h2 class="card-text" style="color: #ffffff"
+                                            th:text="${service.getCountInCountry(i, lang)} + ' экскурсий'">261
+                                            экскурсия</h2><!--TODO: окончания-->
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                             <th:block th:if="${i%3==2}">
                                 <div class="clearfix"></div>
                                 <br/>
@@ -113,23 +114,22 @@
                 <th:block th:if="${type==1}">
                     <div class="row">
                         <th:block th:each="i : ${#numbers.sequence(0, utils.getCitiesCount(country)-1)}">
-                            <div class="col-md-4">
-                                <div class="card card-inverse view overlay hm-white-slight z-depth-1">
-                                    <img class="card-img" src="../../resources/img/user.png" alt="Card image"/>
-                                    <a th:href="@{/events/list(country=${country},city=${i})}">
-                                        <div class="mask waves-effect waves-light"></div>
-                                    </a>
-                                    <div class="card-info">
-                                        <h1 class="card-title" style="color: #ffffff" th:text="${#messages.msg('city.'+country+'.'+i)}">Москва</h1>
-                                        <h2 class="card-text" style="color: #ffffff"
-                                            th:text="${service.getCountInCity(country,i,lang)} + ' экскурсий'">261
-                                            экскурсия</h2><!--TODO: окончания-->
+                            <th:block th:if="${service.getCountInCity(country,i,lang)>0}">
+                                <div class="col-md-4-mb-2">
+                                    <div class="card card-inverse view overlay hm-white-slight z-depth-1">
+                                        <img class="card-img" src="../../resources/img/user.png" alt="Card image"/>
+                                        <a th:href="@{/events/list(country=${country},city=${i})}">
+                                            <div class="mask waves-effect waves-light"></div>
+                                        </a>
+                                        <div class="card-info">
+                                            <h1 class="card-title" style="color: #ffffff"
+                                                th:text="${#messages.msg('city.'+country+'.'+i)}">Москва</h1>
+                                            <h2 class="card-text" style="color: #ffffff"
+                                                th:text="${service.getCountInCity(country,i,lang)} + ' экскурсий'">261
+                                                экскурсия</h2><!--TODO: окончания-->
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <th:block th:if="${i%3==2}">
-                                <div class="clearfix"></div>
-                                <br/>
                             </th:block>
                         </th:block>
                     </div>
