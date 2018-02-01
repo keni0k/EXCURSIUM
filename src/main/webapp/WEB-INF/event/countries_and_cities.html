@@ -10,6 +10,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
     <meta name="keywords" content="excursium"/>
 
+    <!--/*@thymesVar id="type" type="java.lang.Integer"*/-->
+    <title th:text="${#messages.msg('country.all')}" th:if="${type==0}">Страны</title>
+    <title th:text="${#messages.msg('city.all')}" th:if="${type==1}">Города</title>
+
     <link rel="stylesheet" type="text/css" href="../../resources/css/footer.css"/>
     <link rel="stylesheet" href="../../resources/libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>
     <link rel="stylesheet" href="../../resources/libs/bootstrap-select/css/bootstrap-select.css"/>
@@ -42,9 +46,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
-
-    <title>Страна, город</title>
-
 </head>
 <body style="background-color: #f9f9f9;">
 <!--/*@thymesVar id="type" type="java.lang.Integer"*/-->
@@ -95,7 +96,7 @@
                                     </a>
                                     <div class="card-info">
                                         <h1 class="card-title" style="color: #ffffff"
-                                            th:text="${#messages.msg('countries.'+i)}">Россия</h1>
+                                            th:text="${#messages.msg('country.'+i)}">Россия</h1>
                                         <h2 class="card-text" style="color: #ffffff"
                                             th:text="${service.getCountInCountry(i, lang)} + ' экскурсий'">261
                                             экскурсия</h2><!--TODO: окончания-->
