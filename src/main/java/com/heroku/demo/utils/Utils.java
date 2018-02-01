@@ -102,7 +102,10 @@ public class Utils {
     public static int localeToLang(Locale locale){
         int lang;
         switch (locale.getLanguage()){
-            case "en": lang = Consts.LANGUAGE_EN;
+            case "en": lang = Consts.LANGUAGE_EN; break;
+            case "fr": lang = Consts.LANGUAGE_EN; break;
+            case "de": lang = Consts.LANGUAGE_EN; break;
+            case "it": lang = Consts.LANGUAGE_EN; break;
             default: lang = Consts.LANGUAGE_RU;
         }
         return lang;
