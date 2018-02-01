@@ -122,7 +122,7 @@ public class EventServiceImpl implements EventService {
         List<Event> list = getAll();
         int k = 0;
         for (Event e:list) {
-            if (e.getCountry()==country && e.getCity()==city && e.getLanguage()==language)
+            if (e.getCountry()==country && e.getCity()==city && e.getLanguage()==language && e.getType()==Consts.EXCURSION_ACTIVE)
                 k++;
         }
         return k;
@@ -132,7 +132,7 @@ public class EventServiceImpl implements EventService {
         List<Event> list = getAll();
         int k = 0;
         for (Event e:list) {
-            if (e.getCountry()==country && e.getLanguage()==language)
+            if (e.getCountry()==country && e.getLanguage()==language && e.getType()==Consts.EXCURSION_ACTIVE)
                 k++;
         }
         return k;
