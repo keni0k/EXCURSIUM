@@ -121,12 +121,12 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                     <p th:text="${person.getCity()}">Москва, Россия</p>
                                     <!--/* Social */-->
                                     <a type="button" th:if="${person.getVk()!=null and person.getVk()!=''}"
-                                       th:href="@{${person.getVk()}}"
+                                       th:href="${person.getVk()}"
                                        class="btn-floating badge-blue lighten-2 waves-effect waves-light"><i
                                             class="fa fa-vk"></i></a>
 
                                     <a type="button" th:if="${person.getTelegram()!=null and person.getTelegram()!=''}"
-                                       th:href="@{${person.getTelegram()}}"
+                                       th:href="'https://t.me/'+${person.getTelegram()}"
                                        class="btn-floating badge-blue lighten-2 waves-effect waves-light"><i
                                             class="fa fa-telegram"></i></a>
                                     <!--/*Text*/-->
