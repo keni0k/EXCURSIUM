@@ -21,13 +21,31 @@
 	.card-deck {
 		display: flex;
 	}
+	.card-left {
+		margin-left: 0;
+		margin-right: 8px;
+	}
+	.card-right {
+		margin-left: 8px;
+		margin-right: 0;
+	}
 }
 
 /* Large Devices, Wide Screens */
 @media only screen and (max-width : 1200px) {
 
 	.card-deck {
-		display: inline;
+		 display: inline;
+		 margin-left: 0;
+		 margin-right: 0;
+	 }
+	.card-left {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.card-right {
+		margin-left: 0;
+		margin-right: 0;
 	}
 
 	#brand-image {
