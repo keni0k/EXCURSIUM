@@ -1,5 +1,25 @@
 /*==========  Desktop First Method  ==========*/
 
+/* X-Large Devices, Wide Screens */
+@media only screen and (min-width : 1201px) {
+
+    #brand-image {
+        height: 100px;
+    }
+    #brand-title {
+        font-size: 60px;
+    }
+    #navbar-brand {
+        padding-top: 15px;
+    }
+    .container {
+        padding-top: 100px;
+    }
+    .navbar-nav > li > a {
+        line-height: 95px;
+    }
+}
+
 /* Large Devices, Wide Screens */
 @media only screen and (max-width : 1200px) {
 
