@@ -6,6 +6,9 @@
 	#brand-image {
 		height: 100px;
 	}
+	#brand-title {
+		font-size: 60px;
+	}
 }
 
 /* Medium Devices, Desktops */
@@ -13,31 +16,47 @@
 
 	#brand-image {
 		height: 100px;
+		margin-top: -30px;
 	}
-
+	#brand-title {
+		font-size: 60px;
+	}
 }
 
-/* Small Devices, Tablets */
-@media only screen and (max-width : 768px) {
+	/* Small Devices, Tablets */
+	@media only screen and (max-width : 768px) {
 
-	#brand-image {
-		height: 25px;
+		#brand-image {
+			height: 50px;
+			margin-top: -12px;
+		}
+
+		#brand-title {
+			font-size: 30px;
+		}
 	}
 
 	/* Extra Small Devices, Phones */
 	@media only screen and (max-width: 480px) {
 
 		#brand-image {
-			height: 25px;
+			height: 50px;
+			margin-top: -12px;
 		}
-
+		#brand-title {
+			font-size: 30px;
+		}
 	}
 
 	/* Custom, iPhone Retina */
 	@media only screen and (max-width: 320px) {
 
 		#brand-image {
-			height: 25px;
+			height: 50px;
+			margin-top: -12px;
+		}
+		#brand-title {
+			font-size: 30px;
 		}
 
 	}
@@ -63,4 +82,3 @@
 	/* Large Devices, Wide Screens */
 	@media only screen and (min-width: 1200px) {
 	}
-}
