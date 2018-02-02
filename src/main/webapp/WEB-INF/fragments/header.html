@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="../../resources/libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>
+    <link rel="stylesheet" href="../../resources/libs/bootstrap-select/css/bootstrap-select.css"/>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../resources/css/styles.css"/>
+    <link rel="stylesheet" href="../../resources/css/media.css"/>
+</head>
 <body th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
 <!--/*@thymesVar id="country" type="java.lang.Integer"*/-->
 <!--/*@thymesVar id="city" type="java.lang.Integer"*/-->
@@ -16,7 +25,7 @@ line-height: 95px;
 }
 
 .navbar-custom {
-background: linear-gradient(to left, #68b3bd, #00ae6f);
+background: linear-gradient(to left, #98d3dd, #00de8f);
 color: #000000;
 border-radius: 0;
 }
@@ -40,7 +49,7 @@ background-color: #B2EBF2;
 }
 
 .navbar-custom .navbar-brand {
-color: #eeeeee;
+color: #44444;
 }
 
 .navbar-custom .navbar-toggle {
@@ -50,6 +59,13 @@ background-color: #eeeeee;
 .navbar-custom .icon-bar {
 background-color: #33aa33;
 }
+    .navbar-brand > .brand-image {
+        margin-top: -30px; display: inline;
+    }
+    .navbar-brand > .brand-title {
+        font-size: 60px;
+        display: inline;
+    }
 </style>
 <nav class="navbar navbar-default navbar-custom" role="navigation" th:fragment="header">
 <div class="container-fluid">
@@ -63,7 +79,8 @@ data-target="#bs-example-navbar-collapse-1">
 <span class="icon-bar"></span>
 </button>
 <a class="navbar-brand" href="/">
-<img id="brand-image" alt="Website Logo" src="../../resources/img/logo.png"/>
+<img id="brand-image" class="brand-image" alt="Website Logo" src="../../resources/img/logo1.png"/>
+    <h2 class="brand-title">Excursium</h2>
 </a>
 </div>
 <!--/* Collect the nav links, forms, and other content for toggling */-->

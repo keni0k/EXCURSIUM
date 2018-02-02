@@ -1,18 +1,742 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+>
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Upload File Request Page</title>
+    <link rel="stylesheet" href="../resources/css/header.css"/>
 </head>
 <body>
-<div th:replace="fragments/header :: style"></div>
-<div th:replace="fragments/header :: header"></div>
+
+<div class="header relative" style="margin-left: 0;">
+    <div class="header_top">
+        <div class="centerwrap lg-centerwrap relative">
+            <div class="headertop"><a class="menu-category "
+                                      href="https://kwork.ru/categories"><span></span><span></span><span></span><span></span></a>
+                <div class="foxmenubutton">
+                    <div class="    " onclick=" mobile_menu_toggle();"><span></span><span></span><span></span></div>
+                </div>
+                <div class="brand-image"><a href="/"><i class="icon ico_retina ico-kwork"></i>
+                </a></div>
+                <div class="search">
+                    <form action="https://kwork.ru/search" method="get" class="search_form"><input name="query"
+                                                                                                   type="text"
+                                                                                                   class="js_clearingInput textbox-search"
+                                                                                                   placeholder="Найти услуги"
+                                                                                                   value=""><input
+                            type="hidden" name="c" value="0"><input type="reset" value=""
+                                                                    class="js_clearBtn ico-close-12 clearbtn"
+                                                                    style="display: none;"><input type="submit" value=""
+                                                                                                  class="searchbtn">
+                    </form>
+                </div>
+                <input type="hidden" class="needCheckNotify" value="1">
+                <div class="logoutheader">
+                    <div class="usernamebox droparrow" style="background: none;"><a
+                            href="https://kwork.ru/user/excursium"><span class="userimage"><img
+                            src="https://kwork.ru/files/avatar/medium/noprofilepicture.gif" class="rounded"
+                            alt="excursium" height="28" width="28"></span><span class="dib"><span
+                            class="menu usernamebox_user_name db">excursium</span><span id="usertypelabel"
+                                                                                        class="uppercase f9 font-OpenSans db">Покупатель</span></span></a>
+                        <div class="clear"></div>
+                        <div class="dropdownbox dropdownbox-profile" style="display: none;"><a
+                                href="https://kwork.ru/user/excursium" class="dib v-align-m"><img
+                                src="https://kwork.ru/files/avatar/big/noprofilepicture.gif" class="rounded"
+                                alt="excursium" height="60" width="60"></a>
+                            <p class="dib v-align-m pull-reset ml10"><a href="https://kwork.ru/user/excursium"
+                                                                        class="color-text font-OpenSans dropdownbox_username">excursium</a><br><span
+                                    id="usertypelabel2" class="f14 font-OpenSans color-lightGray dib">Покупатель</span>
+                            </p>
+                            <div class="select-user-type select-user-type_small mt15 mb10"><input name="userType"
+                                                                                                  onclick="changeUserType(1, true);"
+                                                                                                  type="radio" id="1"
+                                                                                                  value="1"
+                                                                                                  checked=""><label
+                                    for="1"
+                                    class="select-user-type_customer select-user-type-js">Покупатель</label><input
+                                    name="userType" onclick="changeUserType(2, true);" type="radio" id="2"
+                                    value="2"><label for="2" class="select-user-type_performer select-user-type-js">Продавец</label>
+                            </div>
+                            <ul class="user-menu-payer" style="display: block;">
+                                <li><a href="https://kwork.ru/orders" class="has-orders-count-as-payer">Мои заказы</a>
+                                </li>
+                                <li><a href="https://kwork.ru/manage_projects">Запросы на услуги</a></li>
+                                <li><a href="https://kwork.ru/bookmarks">Избранное</a></li>
+                            </ul>
+                            <ul class="user-menu-worker" style="display: none;">
+                                <li><a href="https://kwork.ru/manage_kworks">Мои кворки</a></li>
+                                <li><a href="https://kwork.ru/projects">Запросы от покупателей</a></li>
+                                <li><a href="https://kwork.ru/anywhere" class="new">Кворк повсюду</a></li>
+                                <li><a href="https://kwork.ru/bookmarks">Избранное</a></li>
+                            </ul>
+                            <ul>
+                                <li><a href="https://kwork.ru/settings">Настройки</a></li>
+                                <li class="divider"></li>
+                                <li><a href="javascript:loadContent('#loadme', 'https://kwork.ru/log_out');">Выход</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="pull-right droparrow pricebox" style="background: none;"><a
+                            href="https://kwork.ru/balance"
+                            class="color-white font-OpenSans f20 underline-hover js-user-purse_link">0&nbsp;<span
+                            class="rouble">Р</span></a>
+                        <div class="dropdownbox dropdownbox-balance" style="right: -30px; display: none;">
+                            <div style="text-align: center; margin-top: 10px;">
+                                <div class="green-btn" style="width: 90%;"
+                                     onclick="toggleBalanceRefillPopup();show_balance_popup('', 'balance');">Пополнить
+                                    баланс
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="js-notice-other massage ml10" data-active="">
+                        <a href="#" class="js-notice__link">
+                            <div class="massage_counter " style="display: none"></div>
+                        </a>
+                        <div class="block-popup " style="display: none;">
+                            <div id="foxNotifBox_none" class="nowrap">
+                                У Вас пока нет новых уведомлений.
+                            </div>
+                            <script>
+                                notifyIsLoad = true;
+                            </script>
+                        </div>
+                    </div>
+                    <div class="js-notice-inbox massage todo ml10" data-active="">
+                        <a href="https://kwork.ru/inbox" class="js-notice__link">
+                            <div class="massage_counter " style="display: none"></div>
+                        </a>
+                        <div class="block-popup" style="display: none;">
+                            <div class="notifications-content-block">
+									<span class="inbox-message-link empty-inbox-data nowrap">
+						У Вас пока нет новых сообщений.
+					</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cart-popup pull-right ml10  cart-popup_empty">
+                        <form id="cart-form" method="post" action="/cart"><span class="cart-popup_notify"
+                                                                                style="opacity: 0;">0</span>
+                            <div class="cart-popup_icon"></div>
+                            <div class="block-popup noextra" style="display: none;">
+                                <div class="cart-popup_row cart-popup_head hidden">
+                                    <div class="cart-popup__col_head cart-popup__image">Кворк</div>
+                                    <div class="cart-popup__col_head cart-popup__name"></div>
+                                    <div class="cart-popup__col_head cart-popup__count">Кол-во</div>
+                                    <div class="cart-popup__col_head cart-popup__extras hidden">Доп. опции</div>
+                                    <div class="cart-popup__col_head cart-popup__sum">Сумма</div>
+                                    <div class="cart-popup__col_head cart-popup__delete-block"></div>
+                                </div>
+                                <div class="block-popup_body" style="overflow: hidden; padding: 0px; width: 543px;">
+                                    <div class="jspContainer" style="width: 543px; height: 81px;">
+                                        <div class="jspPane" style="padding: 0px; top: 0px; width: 543px;">
+                                            <div class="cart-popup_empty_block">Корзина пуста. Но так быть не должно
+                                                ;)<br>Добавляйте кворки, делайте заказы!
+                                            </div>
+                                            <div class="block-popup_body_conteiner"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix cart-popup_row_bottom">
+                                    <div onclick="CartModule.makeOrder();"
+                                         class="pull-right hugeGreenBtn GreenBtnStyle pull-right">Заказать&nbsp;(<span
+                                            class="cart-popup_total-js">0</span>&nbsp;<span class="rouble">Р</span>)
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <a onclick="if (typeof (yaCounter32983614) !== 'undefined') {yaCounter32983614.reachGoal('ADD-KWORK');return true;}"
+                       href="https://kwork.ru/new" id="newkworkbutton" style="display:none"
+                       class="js-blocked-kworks pull-right GreenBtnStyle h24 mt15"><i
+                            class="icon ico-plusWhite v-align-m"></i><span
+                            class="dib v-align-m ml5 uppercase">Кворк</span></a>
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="header_search m-visible">
+                <form action="https://kwork.ru/search" method="get"><span
+                        class="js_clearBtn header_search_clear "></span><input name="query" type="text"
+                                                                               class="textbox js_clearingInput"
+                                                                               placeholder="Найти услугу"></form>
+            </div>
+        </div>
+        <div class="subnav">
+            <div class="centerwrap lg-centerwrap category-menu">
+                <ul class="category-menu__list cat-menu-wide sub-menu-parent">
+                    <li><a href="https://kwork.ru/categories/design" class="category-menu__list_item">Дизайн</a>
+                        <div class="menubox" style="display: none;">
+                            <div class="menulist">
+                                <div class="menutitle">Дизайн</div>
+                                <table>
+                                    <colgroup>
+                                        <col style="width:50%;">
+                                        <col style="width:50%;">
+                                    </colgroup>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/logo">Логотипы</a>
+                                        </td>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/photo">Готовые шаблоны и картинки</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/banner-icon">Баннеры и иконки</a>
+                                        </td>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/illustrations">Иллюстрации и
+                                                рисунки</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/business-cards">Визитки</a>
+                                        </td>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/image-processing">Обработка
+                                                изображений</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/flyer">Листовки и брошюры</a>
+                                        </td>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/vector-tracing">Отрисовка в векторе</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/web-design">Веб-дизайн</a>
+                                        </td>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/photomontage">Фотомонтаж</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/smm-design">Дизайн групп в соцсетях</a>
+                                        </td>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/animation-3d">Флеш и 3D-графика</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/graphic-design">Графический дизайн</a>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </li>
+                    <li><span class="menu-separator"></span></li>
+                    <li><a href="https://kwork.ru/categories/programming" class="category-menu__list_item">Разработка и
+                        IT</a>
+                        <div class="menubox" style="display: none;">
+                            <div class="menulist">
+                                <div class="menutitle">Разработка и IT</div>
+                                <table>
+                                    <colgroup>
+                                        <col style="width:50%;">
+                                        <col style="width:50%;">
+                                    </colgroup>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/frontend">Верстка</a>
+                                        </td>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/configuration">Администрирование и
+                                                настройка</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/website-repair">Доработка сайтов</a>
+                                        </td>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/user-testing">Пользовательское
+                                                тестирование</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/website-development">Сайт под ключ</a>
+                                        </td>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/mobile-apps">Мобильные приложения</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/script-programming">Скрипты</a>
+                                        </td>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/software">Программы для ПК</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/domain-hosting">Домены и хостинги</a>
+                                        </td>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/game-dev">Разработка игр</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </li>
+                    <li><span class="menu-separator"></span></li>
+                    <li><a href="https://kwork.ru/categories/promotion" class="category-menu__list_item">Маркетинг и
+                        реклама</a>
+                        <div class="menubox" style="display: none;">
+                            <div class="menulist">
+                                <div class="menutitle">Маркетинг и реклама</div>
+                                <table>
+                                    <colgroup>
+                                        <col style="width:50%;">
+                                        <col style="width:50%;">
+                                    </colgroup>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/marketing">Реклама и PR</a>
+                                        </td>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/bulletin-boards">Доски объявлений</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/website-promotion">Комплексное
+                                                продвижение</a>
+                                        </td>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/email-marketing">E-mail маркетинг</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/context">Контекстная реклама</a>
+                                        </td>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/information-bases">Информационные
+                                                базы</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/smm">Продвижение в социальных сетях</a>
+                                        </td>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/analytics">Статистика и аналитика</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </li>
+                    <li><span class="menu-separator"></span></li>
+                    <li><a href="https://kwork.ru/categories/writing-translations" class="category-menu__list_item">Тексты
+                        и переводы</a>
+                        <div class="menubox" style="display: none;">
+                            <div class="menulist">
+                                <div class="menutitle">Тексты и переводы</div>
+                                <table>
+                                    <colgroup>
+                                        <col style="width:50%;">
+                                        <col style="width:50%;">
+                                    </colgroup>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/writing">Статьи</a>
+                                        </td>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/typing">Набор текста</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/business-copywriting">Продающие и
+                                                бизнес-тексты</a>
+                                        </td>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/editing-proofreading">Редактирование и
+                                                корректура</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/creative-writing">Стихи, рассказы,
+                                                сказки</a>
+                                        </td>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/translations">Переводы</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/scenario">Сценарии</a>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </li>
+                    <li><span class="menu-separator"></span></li>
+                    <li><a href="https://kwork.ru/categories/seo" class="category-menu__list_item">SEO и трафик</a>
+                        <div class="menubox" style="display: none;">
+                            <div class="menulist last">
+                                <div class="menutitle">SEO и трафик</div>
+                                <table>
+                                    <colgroup>
+                                        <col style="width:50%;">
+                                        <col style="width:50%;">
+                                    </colgroup>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/audit">Аудиты и консультации</a>
+                                        </td>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/links">Ссылки</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/optimization">Внутренняя
+                                                оптимизация</a>
+                                        </td>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/traffic">Трафик</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/keywords">Семантическое ядро</a>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </li>
+                    <li><span class="menu-separator"></span></li>
+                    <li><a href="https://kwork.ru/categories/business" class="category-menu__list_item">Бизнес</a>
+                        <div class="menubox" style="display: none;">
+                            <div class="menulist last">
+                                <div class="menutitle">Бизнес</div>
+                                <table>
+                                    <colgroup>
+                                        <col style="width:50%;">
+                                        <col style="width:50%;">
+                                    </colgroup>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/content-management">Наполнение
+                                                контентом</a>
+                                        </td>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/branding">Нейминг и брендинг</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/smm-manage">Администраторы и
+                                                модераторы</a>
+                                        </td>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/financial-consulting">Бухгалтерия и
+                                                налоги</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/training-consulting">Обучение и
+                                                консалтинг</a>
+                                        </td>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/lawyer-consulting">Юридические
+                                                консультации</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/personal-assistant">Персональный
+                                                помощник</a>
+                                        </td>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/presentations">Презентации и
+                                                инфографика</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/project-management">Менеджмент
+                                                проектов</a>
+                                        </td>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/sites-for-sale">Продажа сайтов</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </li>
+                    <li><span class="menu-separator"></span></li>
+                    <li><a href="https://kwork.ru/categories/audio-video" class="category-menu__list_item">Аудио и
+                        видео</a>
+                        <div class="menubox" style="display: none;">
+                            <div class="menulist last">
+                                <div class="menutitle">Аудио и видео</div>
+                                <table>
+                                    <colgroup>
+                                        <col style="width:50%;">
+                                        <col style="width:50%;">
+                                    </colgroup>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/audio">Аудиозапись и озвучка</a>
+                                        </td>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/animation">Видеоролики</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/music">Музыка и песни</a>
+                                        </td>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/intro">Интро и анимация логотипа</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/editing-audio">Редактирование аудио</a>
+                                        </td>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/editing-media">Монтаж и обработка
+                                                видео</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/screencasts">Скринкасты и
+                                                видеообзоры</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/slide-show">Слайд-шоу</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </li>
+                    <li><span class="menu-separator"></span></li>
+                    <li><a href="https://kwork.ru/categories/hobbies" class="category-menu__list_item">Стиль жизни</a>
+                        <div class="menubox" style="display: none;">
+                            <div class="menulist last">
+                                <div class="menutitle">Стиль жизни</div>
+                                <table>
+                                    <colgroup>
+                                        <col style="width:50%;">
+                                        <col style="width:50%;">
+                                    </colgroup>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/online-games">Онлайн игры</a>
+                                        </td>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/engineering">Инжиниринг</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/fitness">Здоровье и фитнес</a>
+                                        </td>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/interior-design">Мебель и дизайн
+                                                интерьера</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/travel">Путешествия и туризм</a>
+                                        </td>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/insurance">Страхование</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/teachers">Репетиторы</a>
+                                        </td>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/cooking">Рецепты</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/style">Стиль и красота</a>
+                                        </td>
+                                        <td>
+                                            <a href="https://kwork.ru/categories/different">Другое</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </li>
+                    <li><span class="menu-separator"></span></li>
+                    <li><a href="https://kwork.ru/categories/fun-original"
+                           class="category-menu__list_item">Оригинальное</a>
+                        <div class="menubox" style="display: none;">
+                            <div class="menulist last">
+                                <div class="menutitle">Оригинальное</div>
+                                <table>
+                                    <colgroup>
+                                        <col style="width:100%;">
+                                    </colgroup>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <a class="mr10" href="https://kwork.ru/categories/your-message-on">Ваше
+                                                сообщение на ...</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a class="mr10" href="https://kwork.ru/categories/bizarre">Интересное и
+                                                необычное</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a class="mr10" href="https://kwork.ru/categories/congratulations">Поздравления</a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </li>
+                    <li><span class="menu-separator"></span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
 <form method="POST" action="/uploadMultipleFile" enctype="multipart/form-data">
     File1 to upload: <input type="file" name="file"/><br/>
     File2 to upload: <input type="file" name="file2"/><br/>
     File3 to upload: <input type="file" name="file3"/><br/>
+    File3 to upload: <input type="file" name="file3"/><br/>
+    File3 to upload: <input type="file" name="file3"/><br/>
+    File3 to upload: <input type="file" name="file3"/><br/>
+    File3 to upload: <input type="file" name="file3"/><br/>
+    File3 to upload: <input type="file" name="file3"/><br/>
+    File3 to upload: <input type="file" name="file3"/><br/>
+    File3 to upload: <input type="file" name="file3"/><br/>
+    File3 to upload: <input type="file" name="file3"/><br/>
+    File3 to upload: <input type="file" name="file3"/><br/>
+    File3 to upload: <input type="file" name="file3"/><br/>
+    File3 to upload: <input type="file" name="file3"/><br/>
+    File3 to upload: <input type="file" name="file3"/><br/>
+    File3 to upload: <input type="file" name="file3"/><br/>
+    File3 to upload: <input type="file" name="file3"/><br/>
+    File3 to upload: <input type="file" name="file3"/><br/>
+    <h1>Title</h1>
+    <h1>Title</h1>
+    <h1>Title</h1>
+    <h1>Title</h1>
+    <h1>Title</h1>
+    <h1>Title</h1>
+    <h1>Title</h1>
+    <h1>Title</h1>
+    <h1>Title</h1>
+    <h1>Title</h1>
+    <h1>Title</h1>
+
     <input type="submit" value="Upload"/> Press here to upload the file!
 </form>
-<
 </body>
 </html>
