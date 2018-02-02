@@ -18,10 +18,17 @@
     .navbar-nav > li > a {
         line-height: 95px;
     }
+	.card-deck {
+		display: flex;
+	}
 }
 
 /* Large Devices, Wide Screens */
 @media only screen and (max-width : 1200px) {
+
+	.card-deck {
+		display: inline;
+	}
 
 	#brand-image {
 		height: 100px;

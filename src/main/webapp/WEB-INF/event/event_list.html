@@ -211,7 +211,7 @@ console.dir(this);
 <div class="card-deck" th:each="i : ${#numbers.sequence( 0, events.size()-1, 2)}">
 <th:block
 th:with="inc = ${i!=events.size()-1?1:0}">
-<div class="card card-cascade narrower lg-6" th:each="j : ${#numbers.sequence(i,i+inc)}"
+<div class="card card-cascade narrower" th:each="j : ${#numbers.sequence(i,i+inc)}"
 th:with="event=${events.get(j)}">
 <!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
 <!--/*Card image*/-->
