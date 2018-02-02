@@ -13,8 +13,16 @@ body, html {
     font-size: 60px;
 }
 
+#navbar-brand {
+    padding-top: 15px;
+}
+
 body {
     font-family: SegoeUIRegular, Helvetica, Arial, sans-serif
+}
+
+.container {
+    padding-top: 100px;
 }
 
 b {

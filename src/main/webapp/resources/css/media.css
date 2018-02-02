@@ -9,6 +9,12 @@
 	#brand-title {
 		font-size: 60px;
 	}
+	#navbar-brand {
+		padding-top: 15px;
+	}
+	.container {
+		padding-top: 100px;
+	}
 }
 
 /* Medium Devices, Desktops */
@@ -20,6 +26,12 @@
 	}
 	#brand-title {
 		font-size: 60px;
+	}
+	#navbar-brand {
+		padding-top: 15px;
+	}
+	.container {
+		padding-top: 100px;
 	}
 }
 
@@ -34,6 +46,12 @@
 		#brand-title {
 			font-size: 30px;
 		}
+		#navbar-brand {
+			padding-top: 10px;
+		}
+		.container {
+			padding-top: 60px;
+		}
 	}
 
 	/* Extra Small Devices, Phones */
@@ -45,6 +63,12 @@
 		}
 		#brand-title {
 			font-size: 30px;
+		}
+		#navbar-brand {
+			padding-top: 10px;
+		}
+		.container {
+			padding-top: 60px;
 		}
 	}
 
@@ -58,7 +82,12 @@
 		#brand-title {
 			font-size: 30px;
 		}
-
+		#navbar-brand {
+			padding-top: 10px;
+		}
+		.container {
+			padding-top: 60px;
+		}
 	}
 
 
