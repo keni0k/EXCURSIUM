@@ -4,25 +4,8 @@ body, html {
     font-family: SegoeUIRegular, serif
 }
 
-#brand-image {
-    height: 100px;
-    margin-top: -30px;
-}
-
-#brand-title {
-    font-size: 60px;
-}
-
-#navbar-brand {
-    padding-top: 15px;
-}
-
 body {
     font-family: SegoeUIRegular, Helvetica, Arial, sans-serif
-}
-
-.container {
-    padding-top: 100px;
 }
 
 b {
