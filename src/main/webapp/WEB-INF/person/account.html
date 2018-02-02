@@ -244,7 +244,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                              th:with="order=${orders.get(j)}">
                                             <!--/*@thymesVar id="order" type="com.heroku.demo.order.Buy"*/-->
                                             <!--/*Card image*/-->
-                                            <div class="view overlay hm-white-slight">
+                                            <div class="view overlay hm-white-slight" style="margin-top: 20px">
                                                 <div class="img_crop">
                                                     <img th:src="${order.getImageUrl()}" src="#" class="img-fluid"
                                                          alt=""
@@ -374,7 +374,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                              th:style="${j != 0 and j != 1}?'display: none;'">
                                             <!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
                                             <!--/*Card image*/-->
-                                            <div class="view overlay hm-white-slight">
+                                            <div class="view overlay hm-white-slight"  style="margin-top: 20px">
                                                 <div class="img_crop">
                                                     <img th:src="${event.pathToPhoto}" src="#" class="img-fluid"
                                                          style="height: 240px; min-width: -webkit-fill-available;"
