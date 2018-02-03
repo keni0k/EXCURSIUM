@@ -92,9 +92,9 @@ data-target="#bs-example-navbar-collapse-1">
 экскурсий</a></li>
 <li th:if="${isUser} or ${isAdmin}"><a href="/users/account"
 th:text="${#messages.msg('titles.account')}">Профиль</a></li>
-<li th:unless="${isUser}"><a href="/users/registration"
+<li th:unless="${isUser  or isAdmin}"><a href="/users/registration"
 th:text="${#messages.msg('titles.registration')}">Регистрация</a></li>
-<li th:unless="${isUser}"><a href="/users/login"
+<li th:unless="${isUser or isAdmin}"><a href="/users/login"
 th:text="${#messages.msg('titles.login')}">Войти</a></li>
 <li th:if="${isUser} or ${isAdmin}"><a href="/users/logout"
 th:text="${#messages.msg('titles.logout')}">Выйти</a></li>
