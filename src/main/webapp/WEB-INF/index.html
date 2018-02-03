@@ -11,6 +11,8 @@ xmlns:th="http://www.thymeleaf.org">
 <link href="../resources/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 <!--/* Custom styles for this template */-->
 <link href="../resources/css/styles.css" rel="stylesheet"/>
+    <!--/* Custom styles for this template */-->
+    <link href="../resources/css/media.css" rel="stylesheet"/>
 <!--/* Icon */-->
 <link rel="icon" href="../resources/img/icon.ico" type="image/x-icon"/>
 <link rel="shortcut icon" href="../resources/img/icon.ico" type="image/x-icon"/>
@@ -20,8 +22,9 @@ xmlns:th="http://www.thymeleaf.org">
 <title>Excursium</title>
 </head>
 
-<body th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
+<body style="background-color: #f9f9f9;">
 
+<div class="content"  th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
 <div th:replace="fragments/header :: style"></div>
 <div th:replace="fragments/header :: header"></div>
 
@@ -31,6 +34,7 @@ xmlns:th="http://www.thymeleaf.org">
             Excusium
         </div>
     </div>
+</div>
 </div>
 
 <footer>
