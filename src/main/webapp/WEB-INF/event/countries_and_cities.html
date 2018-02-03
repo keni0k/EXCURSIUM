@@ -88,7 +88,7 @@
                 <th:block th:if="${type==0}">
                     <div class="row">
                         <th:block th:each="i : ${#numbers.sequence(0, utils.getCountriesCount()-1)}">
-                            <div class="col-md-4">
+                            <div class="col-md-4 col-xs-6">
                                 <div class="card card-inverse view overlay hm-white-slight z-depth-1">
                                     <img class="card-img" src="../../resources/img/user.png" alt="Card image"/>
                                     <a th:href="@{/events/list(country=${i})}">
@@ -116,7 +116,7 @@
                     <div class="row">
                         <th:block th:each="i : ${#numbers.sequence(0, utils.getCitiesCount(country)-1)}">
                             <th:block th:if="${service.getCountInCity(country,i,lang)>0}">
-                                <div class="col-md-4 mb-2">
+                                <div class="col-md-4 mb-2 col-xs-6">
                                     <div class="card card-inverse view overlay hm-white-slight z-depth-1">
                                         <img class="card-img" src="../../resources/img/user.png" alt="Card image"/>
                                         <a th:href="@{/events/list(country=${country},city=${i})}">
