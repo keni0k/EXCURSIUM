@@ -541,9 +541,9 @@ h2.title {
 }
 
 .navbar-custom .navbar-nav > li > a {
-    color: #FFFFFF;
+    color: #FFFFFF !important;
 }
 
 .brand-title{
-    color: #777;
+    color: #ffffff;
 }
