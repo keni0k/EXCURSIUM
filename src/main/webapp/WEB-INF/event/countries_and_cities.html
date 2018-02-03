@@ -93,7 +93,7 @@
                         <th:block th:each="i : ${#numbers.sequence(0, utils.getCountriesCount()-1)}">
                             <div class="col-md-4 col-xs-6">
                                 <div class="card card-inverse view overlay hm-white-slight z-depth-1">
-                                    <img class="card-img" src="../../resources/img/user.png" alt="Card image"/>
+                                    <img class="card-img" src="../../resources/img/countries/0.png" th:src="'../../resources/img/countries/'+${i}+'.png'" alt="Card image"/>
                                     <a th:href="@{/events/list(country=${i})}">
                                         <div class="mask waves-effect waves-light"></div>
                                     </a>
