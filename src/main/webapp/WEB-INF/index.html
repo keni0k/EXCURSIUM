@@ -31,10 +31,6 @@ xmlns:th="http://www.thymeleaf.org">
 <div class="content"  th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
 <div th:replace="fragments/header :: style"></div>
 <div th:replace="fragments/header :: header"></div>
-
-    <div class="index-top">
-    </div>
-
 <div class="container">
     <div class="row">
         <th:block th:each="i : ${#numbers.sequence(0, 6)}">

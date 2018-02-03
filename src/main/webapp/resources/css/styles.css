@@ -530,10 +530,12 @@ h2.title {
     width: 50%;
 }
 
-.index-top {
-    position: relative;
-    height: 390px;
+.img-top {
+    min-height: 200px;
+    max-height: 360px;
     width: 100%;
-    background-size: cover;
-    background: url(../../resources/img/wrapper.jpg) no-repeat 50% 15%;
+    object-fit: cover;
+}
+.welcome-header {
+
 }

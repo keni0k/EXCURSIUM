@@ -31,7 +31,7 @@
 		margin-left: 8px !important;
 		margin-right: 0 !important;
 	}
-	.index-top {
+	.img-top {
 		margin-top: 95px;
 	}
 }
@@ -68,7 +68,7 @@
 	.navbar-nav > li > a {
 		line-height: 95px;
 	}
-	.index-top {
+	.img-top {
 		margin-top: 95px;
 	}
 }
@@ -93,7 +93,7 @@
 	.navbar-nav > li > a {
 		line-height: 95px;
 	}
-	.index-top {
+	.img-top {
 		margin-top: 95px;
 	}
 }
@@ -118,7 +118,7 @@
 		.navbar-nav > li > a {
 			line-height: 45px;
 		}
-		.index-top {
+		.img-top {
 			margin-top: 45px;
 		}
 	}
@@ -142,7 +142,7 @@
 		.navbar-nav > li > a {
 			line-height: 45px;
 		}
-		.index-top {
+		.img-top {
 			margin-top: 45px;
 		}
 	}
@@ -166,7 +166,7 @@
 		.navbar-nav > li > a {
 			line-height: 45px;
 		}
-		.index-top {
+		.img-top {
 			margin-top: 45px;
 		}
 	}

@@ -56,6 +56,9 @@
      th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}, lang = ${#locale.getLanguage().toString()=='en'?1:0}">
     <div th:replace="fragments/header :: style"></div>
     <div th:replace="fragments/header :: header"></div>
+    <div class="welcome-header">
+        <img src="../../resources/img/wrapper.jpg" class="img-top"/>
+    </div>
     <div class="container">
         <div class="row">
             <div class="panel-body">
