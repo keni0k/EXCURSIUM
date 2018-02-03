@@ -533,14 +533,7 @@ h2.title {
 .index-top {
     position: relative;
     height: 390px;
+    width: 100%;
     background-size: cover;
     background: url(../../resources/img/wrapper.jpg) no-repeat 50% 15%;
-}
-.index-top:before{
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
 }
