@@ -529,3 +529,18 @@ h2.title {
     margin-top: 5px;
     width: 50%;
 }
+
+.index-top {
+    position: relative;
+    height: 390px;
+    background-size: cover;
+    background: url(../../resources/img/wrapper.jpg) no-repeat 50% 15%;
+}
+.index-top:before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}

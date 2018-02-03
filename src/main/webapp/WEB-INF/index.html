@@ -9,8 +9,6 @@ xmlns:th="http://www.thymeleaf.org">
 
 <!--/* Bootstrap core CSS */-->
 <link href="../resources/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
-<!--/* Plugin CSS */-->
-<link rel="stylesheet" href="../resources/device-mockups/device-mockups.min.css"/>
 <!--/* Custom styles for this template */-->
 <link href="../resources/css/styles.css" rel="stylesheet"/>
 <!--/* Icon */-->
@@ -19,278 +17,21 @@ xmlns:th="http://www.thymeleaf.org">
 
 <!--/* Custom fonts for this template */-->
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-<link rel="stylesheet" href="../resources/libs/simple-line-icons/css/simple-line-icons.css"/>
-<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet"/>
 <title>Excursium</title>
 </head>
 
-<body id="page-top">
+<body th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
 
-<!--/* Navigation */-->
-<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-<div class="container"
-th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
-<a class="navbar-brand js-scroll-trigger" href="#page-top">Excursium</a>
-<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-aria-label="Toggle navigation">
-Меню
-<i class="fa fa-bars"></i>
-</button>
-<div class="collapse navbar-collapse" id="navbarResponsive">
-<ul class="navbar-nav ml-auto">
-<li class="nav-item">
-<a class="nav-link js-scroll-trigger" href="/events/list"
-th:text="${#messages.msg('titles.excursions')}">Экскурсии</a>
-</li>
-<li class="nav-item">
-<a class="nav-link js-scroll-trigger" href="#download"
-th:text="${#messages.msg('titles.download')}">Скачать</a>
-</li>
-<li class="nav-item">
-<a class="nav-link js-scroll-trigger" href="#features"
-th:text="${#messages.msg('titles.features')}">Особенности</a>
-</li>
-<li class="nav-item">
-<a class="nav-link js-scroll-trigger" href="#contact" th:text="${#messages.msg('titles.contacts')}">Контакты</a>
-</li>
-<li class="nav-item" th:unless="${isUser}">
-<a class="nav-link js-scroll-trigger" href="/users/registration"
-th:text="${#messages.msg('titles.registration')}">Регистрация</a>
-</li>
-<li class="nav-item" th:unless="${isUser}">
-<a class="nav-link js-scroll-trigger" href="/users/login"
-th:text="${#messages.msg('titles.login')}">Войти</a>
-</li>
-<li class="nav-item" th:if="${isUser} or ${isAdmin}">
-<a class="nav-link js-scroll-trigger" href="/users/account"
-th:text="${#messages.msg('titles.account')}">Профиль</a>
-</li>
-<li class="nav-item" th:if="${isUser} or ${isAdmin}">
-<a class="nav-link js-scroll-trigger" href="/users/logout"
-th:text="${#messages.msg('titles.logout')}">Выйти</a>
-</li>
-</ul>
-</div>
-</div>
-</nav>
+<div th:replace="fragments/header :: style"></div>
+<div th:replace="fragments/header :: header"></div>
 
-<header class="masthead">
-<div class="container h-100">
-<div class="row h-100">
-<div class="col-lg-7 my-auto">
-<div class="header-content mx-auto">
-<h1 class="mb-5" th:text="${#messages.msg('taglines.main')}">Путешествуйте без ограничений</h1>
-<p th:text="${#messages.msg('words.service_description')}">Надежное бронирование интересных экскурсий.
-Экскурсоводы покажут вам город с необычной стороны. Незабываемые впечатления, яркие эмоции,
-хорошее настроение &mdash; все это он, Excursium!</p>
-<a href="#download" class="btn btn-outline btn-xl js-scroll-trigger" th:text="${#messages.msg('words.buttons.next')}">Вперед!</a>
-</div>
-</div>
-<div class="col-lg-5 my-auto">
-<div class="device-container">
-<div class="device-mockup galaxy_s5 portrait black">
-<div class="device">
-<div class="screen">
-<!--/* Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! */-->
-<img src="../resources/img/Pul_exkursii.jpg" class="img-fluid" alt=""/>
-</div>
-<div class="button">
-<!--/* You can hook the "home button" to some JavaScript events or just remove it */-->
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</header>
-
-<section class="download bg-primary text-center" id="download">
 <div class="container">
-<div class="row">
-<div class="col-md-8 mx-auto">
-<h2 class="section-heading" th:text="${#messages.msg('taglines.opportunities')}">Попробуйте все возможности Excursium!</h2>
-<p th:text="${#messages.msg('words.gp_app')}">Наше приложение доступно для Android!</p>
-<div class="badges">
-<a class="badge-link" href="#"><img src="../resources/img/google-play-badge.svg" alt=""/></a>
-
+    <div class="row">
+        <div class="index-top">
+            Excusium
+        </div>
+    </div>
 </div>
-</div>
-</div>
-</div>
-</section>
-
-<section class="features" id="features">
-<div class="container">
-<div class="section-heading text-center">
-<h2 th:text="${#messages.msg('taglines.easy')}">Просто и удобно</h2>
-<p class="text-muted" th:text="${#messages.msg('taglines.check_out')}">Узнайте обо всех возможностях Excursium!</p>
-<hr/>
-</div>
-
-<!--/* Scr 1 */-->
-
-<div class="row">
-<div class="col-lg-4 my-auto">
-<div class="device-container">
-<div class="device-mockup galaxy_s5 portrait black">
-<div class="device">
-<div class="screen">
-<!--/* Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! */-->
-<img src="../resources/img/Opisanie_exkursii.jpg" class="img-fluid" alt=""/>
-</div>
-<div class="button">
-<!--/* You can hook the "home button" to some JavaScript events or just remove it */-->
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="col-lg-8 my-auto">
-<div class="container-fluid">
-<div class="row">
-<div class="col-lg-6">
-<div class="feature-item">
-<i class="icon-compass text-primary"></i>
-<h3 th:text="${#messages.msg('taglines.features.1')}">Выберите экскурсию для себя</h3>
-<p class="text-muted" th:text="${#messages.msg('taglines.features.1.descr')}">Подробное описание и возможность связаться с экскурсоводом</p>
-</div>
-</div>
-<div class="col-lg-6">
-<div class="feature-item">
-<i class="icon-shield text-primary"></i>
-<h3 th:text="${#messages.msg('taglines.features.2')}">Безопасная оплата</h3>
-<p class="text-muted" th:text="${#messages.msg('taglines.features.2.descr')}">Предоплата и возможность вернуть деньги</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-<!--/* End Of Scr 1 */-->
-
-<!--/* Scr 2 */-->
-
-<div class="row" style="margin-top: 40px;">
-<div class="col-lg-8 my-auto">
-<div class="container-fluid">
-<div class="row">
-<div class="col-lg-6">
-<div class="feature-item">
-<i class="icon-globe text-primary"></i>
-<h3 th:text="${#messages.msg('taglines.features.3')}">Огромный выбор</h3>
-<p class="text-muted" th:text="${#messages.msg('taglines.features.3.descr')}">Потрясающее разнообразие экскурсий</p>
-</div>
-</div>
-<div class="col-lg-6">
-<div class="feature-item">
-<i class="icon-equalizer text-primary"></i>
-<h3 th:text="${#messages.msg('taglines.features.4')}">Удобный поиск</h3>
-<p class="text-muted" th:text="${#messages.msg('taglines.features.4.descr')}">Найдите идеальную экскурсию для себя</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="col-lg-4 my-auto">
-<div class="device-container">
-<div class="device-mockup galaxy_s5 portrait black">
-<div class="device">
-<div class="screen">
-<!--/* Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! */-->
-<img src="../resources/img/Filtr.jpg" class="img-fluid" alt=""/>
-</div>
-<div class="button">
-<!--/* You can hook the "home button" to some JavaScript events or just remove it */-->
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-<!--/* End Of Scr 2 */-->
-
-<!--/* Scr 3 */-->
-
-<div class="row" style="margin-top: 40px;">
-<div class="col-lg-4 my-auto">
-<div class="device-container">
-<div class="device-mockup galaxy_s5 portrait black">
-<div class="device">
-<div class="screen">
-<!--/* Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! */-->
-<img src="../resources/img/Profile.jpg" class="img-fluid" alt=""/>
-</div>
-<div class="button">
-<!--/* You can hook the "home button" to some JavaScript events or just remove it */-->
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="col-lg-8 my-auto">
-<div class="container-fluid">
-<div class="row">
-<div class="col-lg-6">
-<div class="feature-item">
-<i class="icon-user text-primary"></i>
-<h3 th:text="${#messages.msg('taglines.features.5')}">Личный кабинет</h3>
-<p class="text-muted" th:text="${#messages.msg('taglines.features.5.descr')}">Настройте свой профиль как вам нравится</p>
-</div>
-</div>
-<div class="col-lg-6">
-<div class="feature-item">
-<i class="icon-arrow-up-circle text-primary"></i>
-<h3 th:text="${#messages.msg('taglines.features.6')}">Станьте экскурсоводом</h3>
-<p class="text-muted" th:text="${#messages.msg('taglines.features.6.descr')}">Купите Pro-аккаунт и предлагайте свои экскурсии</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-<!--/* End Of Scr 3 */-->
-</div>
-</section>
-
-<section class="cta">
-<div class="cta-content">
-<div class="container">
-<h2 th:text="${#messages.msg('taglines.start_journey')}">Начните свое путешествие прямо сейчас!</h2>
-<a href="#contact" class="btn btn-outline btn-xl js-scroll-trigger" th:text="${#messages.msg('words.buttons.start_now')}">Начать!</a>
-</div>
-</div>
-<div class="overlay"></div>
-</section>
-
-<section class="contact bg-primary" id="contact">
-<div class="container">
-<h2><span th:text="${#messages.msg('taglines.we_love.1')}">Мы</span>
-<i class="fa fa-heart"></i>
-<span th:text="${#messages.msg('taglines.we_love.2')}">новых друзей!</span></h2>
-<ul class="list-inline list-social">
-<li class="list-inline-item social-facebook">
-<a href="https://vk.com/excursium">
-<i class="fa fa-vk"></i>
-</a>
-</li>
-<li class="list-inline-item social-facebook">
-<a href="https://t.me/ken0k">
-<i class="fa fa-telegram"></i>
-</a>
-</li>
-<li style="display:inline-block; background-color: #3b5998; border-radius: 50px; width: 380px;">
-<span style="line-height: 80px; font-size: 36px; color: white">hello@excursium.me</span>
-</li>
-</ul>
-</div>
-</section>
 
 <footer>
 <div class="container">
@@ -309,16 +50,6 @@ th:text="${#messages.msg('titles.logout')}">Выйти</a>
 </div>
 </footer>
 
-<!--/* Bootstrap core JavaScript */-->
-<script src="../resources/libs/jquery/jquery.min.js"></script>
-<script src="../resources/libs/popper/popper.min.js"></script>
-<script src="../resources/libs/bootstrap/js/bootstrap.min.js"></script>
-
-<!--/* Plugin JavaScript */-->
-<script src="../resources/libs/jquery-easing/jquery.easing.min.js"></script>
-
-<!--/* Custom scripts for this template */-->
-<script src="../resources/js/scripts.js"></script>
 <!--/* Yandex.Metrika counter */--> <script type="text/javascript" > (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter46873476 = new Ya.Metrika({ id:46873476, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks"); </script> <noscript><div><img src="https://mc.yandex.ru/watch/46873476" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!--/* /Yandex.Metrika counter */-->
 </body>
 

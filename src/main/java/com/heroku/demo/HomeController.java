@@ -69,6 +69,11 @@ public class HomeController {
 
     @RequestMapping({"/", "index"})
     public String index() {
+        return "lending";
+    }
+
+    @RequestMapping("index_test")
+    public String indexTest() {
         return "index";
     }
 
