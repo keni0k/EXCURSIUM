@@ -216,9 +216,9 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                         <div class="col-lg-8 col-md-12 text-center">
                             <!--/* Heading */-->
                             <div class="text-center mt-3">
-                                <h2 class="title text-center pe" style="margin-bottom: 15px !important;"
+                                <h2 class="title text-center pe"
                                     th:if="${orders.size()>0}">Посещенные экскурсии</h2>
-                                <h2 class="title text-center nepe" style="margin-bottom: 15px !important;"
+                                <h2 class="title text-center nepe"
                                     th:if="${orders.size()==0}">Здесь будут отображаться
                                     посещенные экскурсии</h2> <!--/*-310,615 TODO: translate*/-->
                                 <a href="/events/list" th:if="${orders.size()==0}">
@@ -346,9 +346,9 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                             <!--/*End-of-Pagination */-->
                             <!--/* Heading */-->
                             <div class="text-center mt-3" th:if="${excursovod}">
-                                <h2 class="title text-center pe" style="margin-bottom: 15px !important;"
+                                <h2 class="title text-center pe"
                                     th:if="${events.size()>0}">Добавленные экскурсии</h2>
-                                <h2 class="title text-center nepe" style="margin-bottom: 15px !important;"
+                                <h2 class="title text-center nepe"
                                     th:if="${events.size()==0 and excursovod}">Здесь
                                     будут
                                     отображаться добавленные экскурсии</h2> <!--/*-310,615 TODO: translate*/-->
