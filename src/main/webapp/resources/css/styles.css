@@ -539,3 +539,11 @@ h2.title {
 .welcome-header {
 
 }
+
+.navbar-custom .navbar-nav > li > a {
+    color: #FFFFFF;
+}
+
+.brand-title{
+    color: #777;
+}
