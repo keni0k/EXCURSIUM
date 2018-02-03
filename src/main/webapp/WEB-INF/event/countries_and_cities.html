@@ -94,11 +94,11 @@
                                     <a th:href="@{/events/list(country=${i})}">
                                         <div class="mask waves-effect waves-light"></div>
                                     </a>
-                                    <div class="card-info">
+                                    <div class="card-info" th:with="k = ${service.getCountInCountry(i, lang)}">
                                         <h1 class="card-title" style="color: #ffffff"
                                             th:text="${#messages.msg('country.'+i)}">Россия</h1>
                                         <h2 class="card-text" style="color: #ffffff"
-                                            th:text="${service.getCountInCountry(i, lang)} + ' экскурсий'">261
+                                            th:text="${k} + ' ' + ${utils.getTheCaseOfANumeral(0, k)}">261
                                             экскурсия</h2><!--TODO: окончания-->
                                     </div>
                                 </div>

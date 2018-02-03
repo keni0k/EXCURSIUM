@@ -111,4 +111,15 @@ public class Utils {
         return lang;
     }
 
+    public static String getTheCaseOfANumeral(int type, int number){
+        int cases[] = {2, 0, 1, 1, 1, 2};
+        String[] titles = new String[]{"экскурсия", "экскурсии", "экскурсий"};
+        String[] solve;
+        switch (type){
+            case 0: solve = titles; break;
+            default: solve = titles; break;
+        }
+        return solve[ (number%100>4 && number%100<20)? 2 : cases[(number%10<5)?number%10:5]];
+    }
+
 }
