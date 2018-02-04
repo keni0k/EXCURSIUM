@@ -536,9 +536,6 @@ h2.title {
     width: 100%;
     object-fit: cover;
 }
-.welcome-header {
-
-}
 
 .navbar-custom .navbar-nav > li > a {
     color: #FFFFFF !important;
@@ -546,10 +543,6 @@ h2.title {
 
 .brand-title{
     color: #ffffff;
-}
-
-.welcome-search {
-
 }
 
 .welcome-search-control{
@@ -577,4 +570,9 @@ h2.title {
 
 .c_a_c-h1{
     margin-top: 10px !important;
+}
+
+.before-120:before{
+    width: 120px;
+    margin-left: -60px;
 }
