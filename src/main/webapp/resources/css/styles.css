@@ -567,9 +567,11 @@ h2.title {
 
 .welcome-button {
     margin-right: 20px;
+    color: #000!important;
 }
 
 .w-a {
+    color: #eeeeee;
     width: auto !important;
 }
 
