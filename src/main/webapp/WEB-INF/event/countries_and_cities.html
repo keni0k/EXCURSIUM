@@ -116,7 +116,7 @@
                         <th:block th:each="i : ${#numbers.sequence(0, utils.getCountriesCount()-1)}">
                             <div class="col-md-3 col-xs-6">
                                 <div class="card card-inverse view overlay hm-white-slight z-depth-1">
-                                    <img class="card-img" src="../../resources/img/countries/0.png" th:src="'../../resources/img/countries/'+${i}+'.png'" alt="Card image"/>
+                                    <img class="card-img" src="../../resources/img/countries/0.png" th:src="'../../resources/img/countries/'+${i}+'.jpg'" alt="Card image"/>
                                     <a th:href="@{/events/list(country=${i})}">
                                         <div class="mask waves-effect waves-light"></div>
                                     </a>
@@ -144,7 +144,7 @@
                             <th:block th:if="${service.getCountInCity(country,i,lang)>0}">
                                 <div class="col-md-3 mb-2 col-xs-6">
                                     <div class="card card-inverse view overlay hm-white-slight z-depth-1">
-                                        <img class="card-img" src="../../resources/img/user.png" th:src="'../../resources/img/cities/'+${country}+'.'+${i}+'.png'" alt="Card image"/>
+                                        <img class="card-img" src="../../resources/img/user.png" th:src="'../../resources/img/cities/'+${country}+'.'+${i}+'.jpg'" alt="Card image"/>
                                         <a th:href="@{/events/list(country=${country},city=${i})}">
                                             <div class="mask waves-effect waves-light"></div>
                                         </a>
