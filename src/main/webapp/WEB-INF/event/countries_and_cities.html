@@ -120,7 +120,7 @@
                                     <a th:href="@{/events/list(country=${i})}">
                                         <div class="mask waves-effect waves-light"></div>
                                     </a>
-                                    <div class="card-info" th:with="k = ${service.getCountInCountry(i, lang)}">
+                                    <div class="card-info c_a_c-ci" th:with="k = ${service.getCountInCountry(i, lang)}">
                                         <h1 class="card-title c_a_c-h1" style="color: #ffffff"
                                             th:text="${#messages.msg('country.'+i)}">Россия</h1>
                                         <h2 class="card-text c_a_c-h2" style="color: #ffffff"
@@ -148,7 +148,7 @@
                                         <a th:href="@{/events/list(country=${country},city=${i})}">
                                             <div class="mask waves-effect waves-light"></div>
                                         </a>
-                                        <div class="card-info">
+                                        <div class="card-info c_a_c-ci">
                                             <h1 class="card-title c_a_c-h1" style="color: #ffffff"
                                                 th:text="${#messages.msg('city.'+country+'.'+i)}">Москва</h1>
                                             <h2 class="card-text c_a_c-h2" style="color: #ffffff"

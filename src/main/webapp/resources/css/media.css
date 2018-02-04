@@ -145,6 +145,15 @@
 		.img-top {
 			margin-top: 45px;
 		}
+		.c_a_c-h1{
+			font-size: 20px;
+		}
+		.c_a_c-h2{
+			font-size: 14px;
+		}
+		.c_a_c-ci{
+			 padding: 10px 10px 15px 10px;
+		 }
 	}
 
 	/* Custom, iPhone Retina */

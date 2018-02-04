@@ -569,5 +569,5 @@ h2.title {
 }
 
 .w-a {
-    width: auto;
+    width: auto !important;
 }
