@@ -43,63 +43,70 @@
 
             <section class="cd-gallery">
                 <ul>
-                    <!--/*@thymesVar id="events" type="java.util.List<heroku.demo.event.Event>"*/-->
-                    <div class="card-deck" th:each="i : ${#numbers.sequence( 0, events.size()-1, 2)}">
-                        <th:block
-                                th:with="inc = ${i!=events.size()-1?1:0}">
-                            <div th:each="j : ${#numbers.sequence(i,i+inc)}" class="card card-cascade narrower"
-                                 th:with="event=${events.get(j)}">
-                                <!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
-                                <!--/*Card image*/-->
-                                <div class="view overlay hm-white-slight z-depth-1" style="margin-top: 20px;">
-                                    <div class="img_crop"><img src="../../resources/img/bg-cta.jpg" th:src="${event.pathToPhoto}"
-                                                               class="img-fluid" alt="" style="height: 240px; min-width: -webkit-fill-available;"/></div>
-                                    <a th:href="@{/events/event(id = ${event.getId()})}"><div class="mask waves-effect waves-light"></div></a>
+                    <li>
+                        <!--/*@thymesVar id="events" type="java.util.List<heroku.demo.event.Event>"*/-->
+                        <div th:each="j : ${#numbers.sequence( 0, events.size()-1}" class="card card-cascade narrower"
+                             th:with="event=${events.get(j)}">
+                            <!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
+                            <!--/*Card image*/-->
+                            <div class="view overlay hm-white-slight z-depth-1" style="margin-top: 20px;">
+                                <div class="img_crop"><img src="../../resources/img/bg-cta.jpg"
+                                                           th:src="${event.pathToPhoto}"
+                                                           class="img-fluid" alt=""
+                                                           style="height: 240px; min-width: -webkit-fill-available;"/>
                                 </div>
-                                <!--/*Card image*/-->
-                                <!--/*Card content*/-->
-                                <div class="card-body pb-0 no-padding text-center"><!--/*Category & Title*/-->
-                                    <h5 th:text="${{event.getCategoryString()}}">%CATEGORY%</h5>
-                                    <h4 class="card-title">
-                                        <strong>
-                                            <h3><a th:href="@{/events/event(id=${event.getId()})}"
-                                                   th:text="${event.name}">%NAME%</a></h3></strong>
-                                    </h4>
-                                    <!--/*Rating*/-->
-                                    <ul class="rating">
-                                        <li th:if="${event.getRate()!=-1}" th:text="${event.getRate()}"></li>
-                                        <th:block th:if="${(event.getIntRate()!=-1)and(event.getIntRate()!=0)}">
-                                            <li th:each="i : ${#numbers.sequence(0, event.getIntRate()-1)}"><i class="fa fa-star"></i></li>
-                                        </th:block>
-                                        <th:block th:if="${(event.getIntRate()!=-1)and(event.getIntRate()!=5)}">
-                                            <li th:each="i : ${#numbers.sequence(event.getIntRate(), 4)}"><i class="fa fa-star-o"></i></li>
-                                        </th:block>
-                                        <th:block th:if="${(event.getIntRate()==-1)}">
-                                            <li th:each="i : ${#numbers.sequence(0, 4)}"><i class="fa fa-star-o"></i></li>
-                                        </th:block>
-                                        <li th:text="'('+${event.getReviewsCount()}+')'"></li>
-                                    </ul>
-                                    <!--/*Description*/-->
-                                    <p class="card-text" style="font-size: medium; color: #000000"
-                                       th:text="${event.getSmallDescription()}" align="justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi beatae, earum eveniet ex facilis iure molestiae nam obcaecati odio perferendis rerum tempora veritatis. Adipisci aliquid corporis, culpa cumque dolor earum ex ipsa itaque magnam odit placeat quia quidem repellat voluptatum.</p>
-                                </div>
-                                <!--/*Card footer*/-->
-                                <div class="card-footer links-light">
-                                    <h4 class="left" style="color:#4285F4; padding: 0.4em 0.1em;"><strong th:text="${event.getPrice()}+'&#8381;'">%PRICE%</strong></h4>
-                                    <span class="right">
-<a th:href="@{/events/event(id=${event.getId()})}"
-   class="btn btn-primary waves-effect waves-light"
-   th:text="${#messages.msg('words.open')}">Открыть
-</a>
-</span>
-                                </div>
-                                <!--/*End-of-Card content*/-->
-                                <!--<div class="visible-sm-block visible-xs-block" th:if="${j==i}">
-                                    <br/>
-                                </div>TODO: test-->
+                                <a th:href="@{/events/event(id = ${event.getId()})}">
+                                    <div class="mask waves-effect waves-light"></div>
+                                </a>
                             </div>
-                        </th:block>
-                    </div>
+                            <!--/*Card image*/-->
+                            <!--/*Card content*/-->
+                            <div class="card-body pb-0 no-padding text-center"><!--/*Category & Title*/-->
+                                <h5 th:text="${{event.getCategoryString()}}">%CATEGORY%</h5>
+                                <h4 class="card-title">
+                                    <strong>
+                                        <h3><a th:href="@{/events/event(id=${event.getId()})}"
+                                               th:text="${event.name}">%NAME%</a></h3></strong>
+                                </h4>
+                                <!--/*Rating*/-->
+                                <ul class="rating">
+                                    <li th:if="${event.getRate()!=-1}" th:text="${event.getRate()}"></li>
+                                    <th:block th:if="${(event.getIntRate()!=-1)and(event.getIntRate()!=0)}">
+                                        <li th:each="i : ${#numbers.sequence(0, event.getIntRate()-1)}"><i
+                                                class="fa fa-star"></i></li>
+                                    </th:block>
+                                    <th:block th:if="${(event.getIntRate()!=-1)and(event.getIntRate()!=5)}">
+                                        <li th:each="i : ${#numbers.sequence(event.getIntRate(), 4)}"><i
+                                                class="fa fa-star-o"></i></li>
+                                    </th:block>
+                                    <th:block th:if="${(event.getIntRate()==-1)}">
+                                        <li th:each="i : ${#numbers.sequence(0, 4)}"><i class="fa fa-star-o"></i></li>
+                                    </th:block>
+                                    <li th:text="'('+${event.getReviewsCount()}+')'"></li>
+                                </ul>
+                                <!--/*Description*/-->
+                                <p class="card-text" style="font-size: medium; color: #000000"
+                                   th:text="${event.getSmallDescription()}" align="justify">Lorem ipsum dolor sit amet,
+                                    consectetur adipisicing elit. Animi beatae, earum eveniet ex facilis iure molestiae
+                                    nam obcaecati odio perferendis rerum tempora veritatis. Adipisci aliquid corporis,
+                                    culpa cumque dolor earum ex ipsa itaque magnam odit placeat quia quidem repellat
+                                    voluptatum.</p>
+                            </div>
+                            <!--/*Card footer*/-->
+                            <div class="card-footer links-light">
+                                <h4 class="left" style="color:#4285F4; padding: 0.4em 0.1em;"><strong
+                                        th:text="${event.getPrice()}+'&#8381;'">%PRICE%</strong></h4>
+                                <a th:href="@{/events/event(id=${event.getId()})}"
+                                   class="btn btn-primary waves-effect waves-light right"
+                                   th:text="${#messages.msg('words.open')}">Открыть
+                                </a>
+                            </div>
+                            <!--/*End-of-Card content*/-->
+                            <!--<div class="visible-sm-block visible-xs-block" th:if="${j==i}">
+                                <br/>
+                            </div>TODO: test-->
+                        </div>
+                    </li>
                     <li class="gap"></li>
                     <li class="gap"></li>
                     <li class="gap"></li>
