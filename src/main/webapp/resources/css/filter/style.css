@@ -202,7 +202,6 @@ xtab-filter
     position: static;
     box-shadow: none;
     text-align: center;
-    top: 45px;
   }
   .cd-tab-filter li {
     display: inline-block;
@@ -385,9 +384,6 @@ xfilter
     width: 48%;
     margin-bottom: 2em;
   }
-  .cd-filter .cd-close {
-    top: 45px;
-  }
 }
 @media only screen and (min-width: 1170px) {
   .cd-filter {
@@ -415,11 +411,6 @@ xfilter
 }
 .cd-filter-trigger.filter-is-visible {
   pointer-events: none;
-}
-@media only screen and (min-width: 768px) {
-  .cd-filter-trigger {
-    top: 45px;
-  }
 }
 @media only screen and (min-width: 1170px) {
   .cd-filter-trigger {
@@ -641,9 +632,12 @@ xcustom form elements
   display: block;
 }
 
-@media only screen and (min-width: 768px){
+@media only screen and (max-width: 768px){
   .cd-filter-block input[type=radio],
-  .cd-filter-block input[type=checkbox] {
+  .cd-filter-block input[type=checkbox],
+  .cd-tab-filter ul,
+  .cd-filter-trigger,
+  .cd-filter .cd-close {
     /* hide original check and radio buttons */
     top: 45px;
   }
