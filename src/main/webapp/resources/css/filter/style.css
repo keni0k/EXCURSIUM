@@ -625,7 +625,7 @@ xcustom form elements
 .cd-filter-block input[type=radio]:checked + label::before,
 .cd-filter-block input[type=checkbox]:checked + label::before {
   background-color: #41307c;
-  top: 0;
+  top: 4px;
   left: 0;
   width: 16px;
   height: 16px;
@@ -641,6 +641,12 @@ xcustom form elements
 .cd-filter-block input[type=checkbox]:checked + label::after {
   display: block;
   left: 0;
+}
+.cd-filter-block input[type=radio]:checked + label::after{
+  left: 5px;
+  top: 5px;
+  border-color: #fff;
+  background-color: #fff;
 }
 
 @media only screen and (max-width: 768px){
