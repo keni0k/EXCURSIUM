@@ -549,18 +549,19 @@ h2.title {
 }
 
 .welcome-search {
-    position: absolute;
+
 }
 
 .welcome-search-control{
-    display: inline;
+    display: inline-block;
 }
 
 .welcome-search-form{
-    margin-top: -40px;
-    margin-left: 565px;
-    background: #5555ee;
-    padding: 20px 70px;
+    width: fit-content;
+    margin: -40px auto 0;
+    background: #17174a;
+    padding: 10px 30px;
+    position: relative;
     border-radius: 20px;
 }
 
@@ -570,4 +571,8 @@ h2.title {
 
 .w-a {
     width: auto !important;
+}
+
+.c_a_c-h1{
+    margin-top: 10px !important;
 }

@@ -147,7 +147,6 @@
 		}
 		.c_a_c-h1{
 			font-size: 20px;
-			margin-top: 10px !important;
 		}
 		.c_a_c-h2{
 			margin-top: 10px !important;
@@ -155,6 +154,16 @@
 		.c_a_c-ci{
 			 padding: 10px !important;
 		 }
+		.welcome-button{
+			padding: 6px 12px;
+		}
+		.typeahead{
+			width: 160px;
+		}
+		.welcome-search-form{
+			padding: 5px 15px;
+			border-radius: 15px;
+		}
 	}
 
 	/* Custom, iPhone Retina */
