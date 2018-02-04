@@ -45,7 +45,7 @@
                 <ul>
                     <li>
                         <!--/*@thymesVar id="events" type="java.util.List<heroku.demo.event.Event>"*/-->
-                        <div th:each="j : ${#numbers.sequence( 0, events.size()-1}" class="card card-cascade narrower"
+                        <div th:each="j : ${#numbers.sequence( 0, events.size()-1)}" class="card card-cascade narrower"
                              th:with="event=${events.get(j)}">
                             <!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
                             <!--/*Card image*/-->
