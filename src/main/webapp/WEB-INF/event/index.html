@@ -35,6 +35,7 @@
                 </li>
                 <li class="filter"><a class="selected" href="#0" data-type="all">All</a></li>
                 <li class="filter" data-filter=".color-1"><a href="#0" data-type="color-1">Color 1</a></li>
+                <li class="filter" data-filter=".color-2"><a href="#0" data-type="color-2">Color 2</a></li>
             </ul> <!-- cd-filters -->
         </div> <!-- cd-tab-filter -->
     </div> <!-- cd-tab-filter-wrapper -->
@@ -43,9 +44,9 @@
 
             <section class="cd-gallery">
                 <ul>
-                    <li>
+                    <li th:each="j : ${#numbers.sequence( 0, events.size()-1)}" th:class="${j%3==0?'color-1':'color-2'}">
                         <!--/*@thymesVar id="events" type="java.util.List<heroku.demo.event.Event>"*/-->
-                        <div th:each="j : ${#numbers.sequence( 0, events.size()-1)}" class="card card-cascade narrower"
+                        <div class="card card-cascade narrower"
                              th:with="event=${events.get(j)}">
                             <!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
                             <!--/*Card image*/-->
