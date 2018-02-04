@@ -94,7 +94,7 @@ Main Components
 }
 @media only screen and (min-width: 1170px) {
   .cd-main-content.is-fixed .cd-gallery {
-    padding-top: 100px;
+    padding-top: 200px;
   }
 }
 
@@ -202,6 +202,7 @@ xtab-filter
     position: static;
     box-shadow: none;
     text-align: center;
+    top: 45px;
   }
   .cd-tab-filter li {
     display: inline-block;
@@ -275,23 +276,6 @@ xgallery
   display: none;
   text-align: center;
 }
-@media only screen and (min-width: 768px) {
-  .cd-gallery {
-    padding: 40px 3%;
-  }
-  .cd-gallery ul {
-    text-align: justify;
-  }
-  .cd-gallery ul:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-  .cd-gallery li {
-    width: 48%;
-    margin-bottom: 2em;
-  }
-}
 @media only screen and (min-width: 1170px) {
   .cd-gallery {
     padding: 50px 2%;
@@ -356,7 +340,7 @@ xfilter
 }
 .cd-filter .cd-close {
   position: absolute;
-  top: 0;
+  top: 95px;
   right: 0;
   height: 50px;
   line-height: 50px;
@@ -385,6 +369,26 @@ xfilter
 .cd-filter.filter-is-visible .cd-close {
   opacity: 1;
 }
+@media only screen and (min-width: 768px) {
+  .cd-gallery {
+    padding: 40px 3%;
+  }
+  .cd-gallery ul {
+    text-align: justify;
+  }
+  .cd-gallery ul:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  .cd-gallery li {
+    width: 48%;
+    margin-bottom: 2em;
+  }
+  .cd-filter .cd-close {
+    top: 45px;
+  }
+}
 @media only screen and (min-width: 1170px) {
   .cd-filter {
     width: 20%;
@@ -411,6 +415,11 @@ xfilter
 }
 .cd-filter-trigger.filter-is-visible {
   pointer-events: none;
+}
+@media only screen and (min-width: 768px) {
+  .cd-filter-trigger {
+    top: 45px;
+  }
 }
 @media only screen and (min-width: 1170px) {
   .cd-filter-trigger {
@@ -632,6 +641,13 @@ xcustom form elements
   display: block;
 }
 
+@media only screen and (min-width: 768px){
+  .cd-filter-block input[type=radio],
+  .cd-filter-block input[type=checkbox] {
+    /* hide original check and radio buttons */
+    top: 45px;
+  }
+}
 @-moz-document url-prefix() {
   /* hide custom arrow on Firefox - select element */
   .cd-filter-block .cd-select::after {
