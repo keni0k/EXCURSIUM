@@ -34,7 +34,11 @@
                     <a data-type="all" href="#0">All</a> <!-- selected option on mobile -->
                 </li>
                 <li class="filter"><a class="selected" href="#0" data-type="all">All</a></li>
-                <li th:each="i : ${#numbers.sequence(0, utils.getCategoriesCount()-1)}" class="filter" data-filter=".category-1"><a href="#0" th:data-type="'category-'+${i}" th:text="${#messages.msg('category.'+i)}">Category 1</a></li>
+                <li class="filter" data-filter=".category-0"><a href="#0" data-type="category-0" th:text="${#messages.msg('category.0')}">Category 0</a></li>
+                <li class="filter" data-filter=".category-1"><a href="#0" data-type="category-1" th:text="${#messages.msg('category.1')}">Category 1</a></li>
+                <li class="filter" data-filter=".category-2"><a href="#0" data-type="category-2" th:text="${#messages.msg('category.2')}">Category 2</a></li>
+                <li class="filter" data-filter=".category-3"><a href="#0" data-type="category-3" th:text="${#messages.msg('category.3')}">Category 3</a></li>
+                <li class="filter" data-filter=".category-4"><a href="#0" data-type="category-4" th:text="${#messages.msg('category.4')}">Category 4</a></li>
             </ul> <!-- cd-filters -->
         </div> <!-- cd-tab-filter -->
     </div> <!-- cd-tab-filter-wrapper -->
@@ -150,11 +154,12 @@
                         <div class="cd-filter-content">
                             <div class="cd-select cd-filters">
                                 <select class="filter" name="selectThis" id="selectThis">
+                                    <option value="" selected="">Не выбрано</option>
                                     <option value=".age0">До 6</option>
                                     <option value=".age6">До 12</option>
                                     <option value=".age12">До 16</option>
                                     <option value=".age16">До 18</option>
-                                    <option value=".age18" selected="">18 и более</option>
+                                    <option value=".age18">18 и более</option>
                                 </select>
                             </div> <!-- cd-select -->
                         </div> <!-- cd-filter-content -->
