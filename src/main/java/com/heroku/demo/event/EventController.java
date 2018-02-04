@@ -251,7 +251,19 @@ public class EventController {
     }
 
     @RequestMapping(value = "/list_test", method = RequestMethod.GET)
-    public String listTest(ModelMap model){
+    public String listTest(ModelMap model,
+                           @RequestParam(value = "country", required = false) Integer country,
+                           @RequestParam(value = "city", required = false) Integer city,
+                           Locale locale){
+        if (country==null) return countries(model);
+        if (city==null) return cities(model, country);
+        ListEvents events = eventService.getByFilter(null, null, null, localeToLang(locale), country, city, null, 0, false);
+        model.addAttribute("minPrice", events.getMinPrice());
+        model.addAttribute("maxPrice", events.getMaxPrice());
+        model.addAttribute("events", events);
+        model.addAttribute("country", country);
+        model.addAttribute("city", city);
+        model.addAttribute("utils", new UtilsForWeb());
         return "event/index";
     }
 
