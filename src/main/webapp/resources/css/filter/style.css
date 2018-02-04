@@ -663,6 +663,11 @@ xcustom form elements
     padding-top: 130px;
   }
 }
+
+.filter{
+  display: block!important;
+}
+
 @-moz-document url-prefix() {
   /* hide custom arrow on Firefox - select element */
   .cd-filter-block .cd-select::after {
