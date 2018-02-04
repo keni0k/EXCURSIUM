@@ -624,12 +624,23 @@ xcustom form elements
 }
 .cd-filter-block input[type=radio]:checked + label::before,
 .cd-filter-block input[type=checkbox]:checked + label::before {
-  border-color: #41307c;
   background-color: #41307c;
+  top: 0;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #41307c;
+  -webkit-transform: none;
+  -webkit-backface-visibility: hidden;
+  -webkit-transform-origin: 100% 100%;
+  -ms-transform-origin: 100% 100%;
+  transform-origin: 100% 100%;
+  margin-top: 0;
 }
 .cd-filter-block input[type=radio]:checked + label::after,
 .cd-filter-block input[type=checkbox]:checked + label::after {
   display: block;
+  left: 0;
 }
 
 @media only screen and (max-width: 768px){
@@ -641,6 +652,9 @@ xcustom form elements
   .cd-main-content.is-fixed .cd-tab-filter-wrapper{
     /* hide original check and radio buttons */
     top: 45px;
+  }
+  .cd-main-content.is-fixed .cd-gallery {
+    padding-top: 130px;
   }
 }
 @-moz-document url-prefix() {
