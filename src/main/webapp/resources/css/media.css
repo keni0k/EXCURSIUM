@@ -156,6 +156,7 @@
 		 }
 		.welcome-button{
 			padding: 6px 12px;
+			margin-left: 6px !important;
 		}
 		.typeahead{
 			width: 160px !important;
