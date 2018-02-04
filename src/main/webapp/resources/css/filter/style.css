@@ -665,7 +665,7 @@ xcustom form elements
 }
 
 .filter{
-  display: block!important;
+  display: inline!important;
 }
 
 @-moz-document url-prefix() {

@@ -44,30 +44,41 @@
 
             <section class="cd-gallery">
                 <ul>
-                    <li class="mix color-1 check1 radio2 option3"><img src="../../resources/img/event-list/img-1.jpg"
-                                                                       alt="Image 1"/></li>
-                    <li class="mix color-2 check2 radio2 option2"><img src="../../resources/img/event-list/img-2.jpg"
-                                                                       alt="Image 2"/></li>
-                    <li class="mix color-1 check3 radio3 option1"><img src="../../resources/img/event-list/img-3.jpg"
-                                                                       alt="Image 3"/></li>
-                    <li class="mix color-1 check3 radio2 option4"><img src="../../resources/img/event-list/img-4.jpg"
-                                                                       alt="Image 4"/></li>
-                    <li class="mix color-1 check1 radio3 option2"><img src="../../resources/img/event-list/img-5.jpg"
-                                                                       alt="Image 5"/></li>
-                    <li class="mix color-2 check2 radio3 option3"><img src="../../resources/img/event-list/img-6.jpg"
-                                                                       alt="Image 6"/></li>
-                    <li class="mix color-2 check2 radio2 option1"><img src="../../resources/img/event-list/img-7.jpg"
-                                                                       alt="Image 7"/></li>
-                    <li class="mix color-1 check1 radio3 option4"><img src="../../resources/img/event-list/img-8.jpg"
-                                                                       alt="Image 8"/></li>
-                    <li class="mix color-2 check1 radio2 option3"><img src="../../resources/img/event-list/img-9.jpg"
-                                                                       alt="Image 9"/></li>
-                    <li class="mix color-1 check3 radio2 option4"><img src="../../resources/img/event-list/img-10.jpg"
-                                                                       alt="Image 10"/></li>
-                    <li class="mix color-1 check3 radio3 option2"><img src="../../resources/img/event-list/img-11.jpg"
-                                                                       alt="Image 11"/></li>
-                    <li class="mix color-2 check1 radio3 option1"><img src="../../resources/img/event-list/img-12.jpg"
-                                                                       alt="Image 12"/></li>
+                    <li th:each="j : ${#numbers.sequence(0,10)}" th:class="'mix radio2 option3 '+${j%2==0?'color-1 check1':'color-2 check2 check3'}">
+                        <div class="card card-cascade narrower">
+                            <!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
+                            <!--/*Card image*/-->
+                            <div class="view overlay hm-white-slight z-depth-1" style="margin-top: 20px;">
+                                <div class="img_crop"><img src="../../resources/img/bg-cta.jpg" class="img-fluid" alt="" style="height: 240px; min-width: -webkit-fill-available;"/></div>
+                                <a ><div class="mask waves-effect waves-light"></div></a>
+                            </div>
+                            <!--/*Card image*/-->
+                            <!--/*Card content*/-->
+                            <div class="card-body pb-0 no-padding text-center"><!--/*Category & Title*/-->
+                                <h5>%CATEGORY%</h5>
+                                <h4 class="card-title">
+                                    <strong><h3>%NAME%</h3></strong>
+                                </h4>
+                                <!--/*Rating*/-->
+                                <ul class="rating">
+                                    <li>5</li>
+                                    <li th:each="i : ${#numbers.sequence(0, 4)}"><i class="fa fa-star"></i></li>
+                                </ul>
+                                <!--/*Description*/-->
+                                <p class="card-text" style="font-size: medium; color: #000000"
+                                   th:text="${event.getSmallDescription()}" align="justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi beatae, earum eveniet ex facilis iure molestiae nam obcaecati odio perferendis rerum tempora veritatis.</p>
+                            </div>
+                            <!--/*Card footer*/-->
+                            <div class="card-footer links-light">
+                                <h4 class="left" style="color:#4285F4; padding: 0.4em 0.1em;"><strong th:text="${event.getPrice()}+'&#8381;'">%PRICE%</strong></h4>
+                                <a th:href="@{/events/event(id=${event.getId()})}"
+                                   class="btn btn-primary waves-effect waves-light right"
+                                   th:text="${#messages.msg('words.open')}">Открыть
+                                </a>
+                            </div>
+                            <!--/*End-of-Card content*/-->
+                        </div>
+                    </li>
                     <li class="gap"></li>
                     <li class="gap"></li>
                     <li class="gap"></li>
