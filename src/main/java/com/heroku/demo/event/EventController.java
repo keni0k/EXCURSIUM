@@ -250,6 +250,11 @@ public class EventController {
         return "event/event_list";
     }
 
+    @RequestMapping(value = "/list_test", method = RequestMethod.GET)
+    public String listTest(ModelMap model){
+        return "event/index";
+    }
+
     @RequestMapping("/categories")
     @ResponseBody
     public ResponseEntity<String> preview(@RequestParam(value = "language", required = false) Integer language) {
