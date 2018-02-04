@@ -121,9 +121,9 @@
                                         <div class="mask waves-effect waves-light"></div>
                                     </a>
                                     <div class="card-info" th:with="k = ${service.getCountInCountry(i, lang)}">
-                                        <h1 class="card-title" style="color: #ffffff"
+                                        <h1 class="card-title c_a_c-h1" style="color: #ffffff"
                                             th:text="${#messages.msg('country.'+i)}">Россия</h1>
-                                        <h2 class="card-text" style="color: #ffffff"
+                                        <h2 class="card-text c_a_c-h2" style="color: #ffffff"
                                             th:text="${k} + ' ' + ${utils.getTheCaseOfANumeral(0, k)}">261
                                             экскурсия</h2><!--TODO: окончания-->
                                     </div>
@@ -149,9 +149,9 @@
                                             <div class="mask waves-effect waves-light"></div>
                                         </a>
                                         <div class="card-info">
-                                            <h1 class="card-title" style="color: #ffffff"
+                                            <h1 class="card-title c_a_c-h1" style="color: #ffffff"
                                                 th:text="${#messages.msg('city.'+country+'.'+i)}">Москва</h1>
-                                            <h2 class="card-text" style="color: #ffffff"
+                                            <h2 class="card-text c_a_c-h2" style="color: #ffffff"
                                                 th:text="${service.getCountInCity(country,i,lang)} + ' экскурсий'">261
                                                 экскурсия</h2><!--TODO: окончания-->
                                         </div>
