@@ -147,12 +147,13 @@
 		}
 		.c_a_c-h1{
 			font-size: 20px;
+			margin-top: 10px !important;
 		}
 		.c_a_c-h2{
-			font-size: 14px;
+			margin-top: 10px !important;
 		}
 		.c_a_c-ci{
-			 padding: 10px 10px 15px 10px;
+			 padding: 10px !important;
 		 }
 	}
 
