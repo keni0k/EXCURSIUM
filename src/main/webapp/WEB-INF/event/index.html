@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="../../resources/css/media.css"/>
     <script src="../../resources/js/filter/modernizr.js"></script> <!-- Modernizr -->
 
-    <title>Content Filters | CodyHouse</title>
+    <title>Excursim</title>
 </head>
 <body th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}, lang = ${#locale.getLanguage().toString()=='en'?1:0}">
 <div th:replace="fragments/header :: style"></div>
@@ -27,7 +27,7 @@
 
 
 <main class="cd-main-content">
-    <div class="cd-tab-filter-wrapper" style="top: 45px">
+    <div class="cd-tab-filter-wrapper">
         <div class="cd-tab-filter">
             <ul class="cd-filters" style="top: 0">
                 <li class="placeholder">

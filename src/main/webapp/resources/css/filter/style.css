@@ -637,7 +637,8 @@ xcustom form elements
   .cd-filter-block input[type=checkbox],
   .cd-tab-filter ul,
   .cd-filter-trigger,
-  .cd-filter .cd-close {
+  .cd-filter .cd-close,
+  .cd-main-content.is-fixed .cd-tab-filter-wrapper{
     /* hide original check and radio buttons */
     top: 45px;
   }
