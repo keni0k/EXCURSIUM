@@ -13,6 +13,10 @@
     <link rel="stylesheet" href="../../resources/css/filter/style.css"/> <!-- Resource style -->
     <script src="../../resources/js/filter/modernizr.js"></script> <!-- Modernizr -->
 
+    <link rel="stylesheet" type="text/css" href="../../resources/css/styles.css"/>
+    <link rel="stylesheet" href="../../resources/css/cards.css"/>
+    <link rel="stylesheet" href="../../resources/css/media.css"/>
+
     <title>Content Filters | CodyHouse</title>
 </head>
 <body th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}, lang = ${#locale.getLanguage().toString()=='en'?1:0}">
@@ -36,7 +40,7 @@
             </ul> <!-- cd-filters -->
         </div> <!-- cd-tab-filter -->
     </div> <!-- cd-tab-filter-wrapper -->
-    <div class="container">
+    <div class="container pt-0">
         <div class="row">
 
             <section class="cd-gallery">
