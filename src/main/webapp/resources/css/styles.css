@@ -547,3 +547,23 @@ h2.title {
 .brand-title{
     color: #ffffff;
 }
+
+.welcome-search {
+    position: absolute;
+}
+
+.welcome-search-control{
+    display: inline;
+}
+
+.welcome-search-form{
+    margin-top: -40px;
+    margin-left: 565px;
+    background: #5555ee;
+    padding: 20px 70px;
+    border-radius: 20px;
+}
+
+.welcome-button {
+    margin-right: 20px;
+}

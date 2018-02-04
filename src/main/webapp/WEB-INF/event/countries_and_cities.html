@@ -69,6 +69,18 @@
     <div th:replace="fragments/header :: header"></div>
     <div class="welcome-header">
         <img src="../../resources/img/wrapper.jpg" class="img-top"/>
+        <div class="welcome-search">
+            <form action="/events/list" class="welcome-search-form">
+                <div class="welcome-search-control">
+                    <input type="text" class="typeahead" placeholder="Куда вы собираетесь?" autocomplete="off">
+                </div>
+                <div class="welcome-search-control">
+                    <button type="submit" class="welcome-button">
+                        Найти
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
     <div class="container pt-0">
         <div class="row">
