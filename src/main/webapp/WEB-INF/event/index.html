@@ -1,6 +1,7 @@
 <!doctype html>
 <html class="no-js"
-      xmlns:th="http://www.w3.org/1999/xhtml">
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -14,7 +15,7 @@
 
     <title>Content Filters | CodyHouse</title>
 </head>
-<body>
+<body th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}, lang = ${#locale.getLanguage().toString()=='en'?1:0}">
 <div th:replace="fragments/header :: style"></div>
 <div th:replace="fragments/header :: header"></div>
 <!--<header class="cd-header">
