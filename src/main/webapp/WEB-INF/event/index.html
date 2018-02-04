@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="../../resources/css/media.css"/>
     <script src="../../resources/js/filter/modernizr.js"></script> <!-- Modernizr -->
 
-    <title>Excursim</title>
+    <title>Excursium</title>
 </head>
 <body th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}, lang = ${#locale.getLanguage().toString()=='en'?1:0}">
 <div th:replace="fragments/header :: style"></div>
@@ -46,7 +46,6 @@
                 <ul>
                     <li th:each="j : ${#numbers.sequence(0,10)}" th:class="'mix radio2 option3 '+${j%2==0?'color-1 check1':'color-2 check2 check3'}">
                         <div class="card card-cascade narrower">
-                            <!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
                             <!--/*Card image*/-->
                             <div class="view overlay hm-white-slight z-depth-1" style="margin-top: 20px;">
                                 <div class="img_crop"><img src="../../resources/img/bg-cta.jpg" class="img-fluid" alt="" style="height: 240px; min-width: -webkit-fill-available;"/></div>
@@ -65,14 +64,12 @@
                                     <li th:each="i : ${#numbers.sequence(0, 4)}"><i class="fa fa-star"></i></li>
                                 </ul>
                                 <!--/*Description*/-->
-                                <p class="card-text" style="font-size: medium; color: #000000"
-                                   th:text="${event.getSmallDescription()}" align="justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi beatae, earum eveniet ex facilis iure molestiae nam obcaecati odio perferendis rerum tempora veritatis.</p>
+                                <p class="card-text" style="font-size: medium; color: #000000" align="justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi beatae, earum eveniet ex facilis iure molestiae nam obcaecati odio perferendis rerum tempora veritatis.</p>
                             </div>
                             <!--/*Card footer*/-->
                             <div class="card-footer links-light">
-                                <h4 class="left" style="color:#4285F4; padding: 0.4em 0.1em;"><strong th:text="${event.getPrice()}+'&#8381;'">%PRICE%</strong></h4>
-                                <a th:href="@{/events/event(id=${event.getId()})}"
-                                   class="btn btn-primary waves-effect waves-light right"
+                                <h4 class="left" style="color:#4285F4; padding: 0.4em 0.1em;"><strong th:text="'2000 '+'&#8381;'">%PRICE%</strong></h4>
+                                <a class="btn btn-primary waves-effect waves-light right"
                                    th:text="${#messages.msg('words.open')}">Открыть
                                 </a>
                             </div>
