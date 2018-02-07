@@ -376,6 +376,11 @@ public class EventController {
         List<Event> events = eventService.getAll();
         StringBuilder s = new StringBuilder();
         for (Event event : events) {
+            if (event.getDescription().length()>900 || event.getDescription().length()<160)
+                s.append(" ID: ").append(event.getId()).append(" ");
+        }
+        if (s.length()!=0) return s.toString();
+        for (Event event : events) {
             switch (new Random().nextInt(5)){
                 case 0: event.setAgeLimit(1); break;
                 case 1: event.setAgeLimit(12); break;
