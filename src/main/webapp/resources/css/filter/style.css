@@ -181,7 +181,7 @@ xtab-filter
   box-shadow: inset 0 -2px 0 #41307c, 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 .cd-tab-filter.is-open ul li {
-  display: block;
+  display: block !important;
 }
 .cd-tab-filter.is-open .placeholder a {
   /* reduces the opacity of the placeholder on mobile when the menu is open */
@@ -204,7 +204,7 @@ xtab-filter
     text-align: center;
   }
   .cd-tab-filter li {
-    display: inline-block;
+    display: inline-block !important;
   }
   .cd-tab-filter li.placeholder {
     display: none !important;

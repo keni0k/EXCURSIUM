@@ -51,7 +51,7 @@
             <section class="cd-gallery">
                 <ul>
                     <!--/*@thymesVar id="events" type="java.util.List<com.heroku.demo.event.Event>"*/-->
-                    <li th:each="j : ${#numbers.sequence( 0, events.size()-1)}" th:with="event=${events.get(j)}" th:class="'mix category-'+${event.getCategory()}">
+                    <li th:each="j : ${#numbers.sequence( 0, events.size()-1)}" th:with="event=${events.get(j)}" th:class="'mix category-'+${event.getCategory()}+' '+${event.getName()}">
                         <div class="card card-cascade narrower">
                             <!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
                             <!--/*Card image*/-->
@@ -123,7 +123,7 @@
             <div class="cd-filter">
                 <form>
                     <div class="cd-filter-block" style="margin-top: 100px;">
-                        <h4>Поиск</h4>
+                        <h4>Поиск по названию</h4>
 
                         <div class="cd-filter-content">
                             <input type="search" placeholder="Начните писать..."/>

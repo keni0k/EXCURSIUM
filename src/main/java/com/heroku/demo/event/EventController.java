@@ -198,7 +198,7 @@ public class EventController {
         return "event/countries_and_cities";
     }
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @RequestMapping(value = "/list_test", method = RequestMethod.GET)
     public String eventsTests(ModelMap model,
                               @RequestParam(value = "category", required = false) Integer category,
                               @RequestParam(value = "price_up", required = false) Integer priceUp,
@@ -250,7 +250,7 @@ public class EventController {
         return "event/event_list";
     }
 
-    @RequestMapping(value = "/list_test", method = RequestMethod.GET)
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String listTest(ModelMap model,
                            @RequestParam(value = "country", required = false) Integer country,
                            @RequestParam(value = "city", required = false) Integer city,
