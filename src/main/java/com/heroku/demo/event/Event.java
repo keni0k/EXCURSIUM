@@ -292,11 +292,11 @@ public class Event {
     }
 
     public String getAgeLimitString(){
-        String s = " age0";
-        if (ageLimit>=6) s+=" age6";
-        if (ageLimit>=12) s+=" age12";
-        if (ageLimit>=16) s+=" age16";
-        if (ageLimit>=18) s+=" age18";
+        String s = " age18";
+        if (ageLimit==16) s+=" age16";
+        if (ageLimit==12) s+=" age12";
+        if (ageLimit==6) s+=" age6";
+        if (ageLimit==0) s+=" age0";
         return s;
     }
 }
