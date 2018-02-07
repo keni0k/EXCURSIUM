@@ -382,18 +382,18 @@ public class EventController {
         if (s.length()!=0) return s.toString();
         for (Event event : events) {
             switch (new Random().nextInt(5)){
-                case 0: event.setAgeLimit(1); break;
-                case 1: event.setAgeLimit(12); break;
-                case 2: event.setAgeLimit(123); break;
-                case 3: event.setAgeLimit(1234); break;
-                default: event.setAgeLimit(12345);
+                case 0: event.setAgeLimit(0); break;
+                case 1: event.setAgeLimit(6); break;
+                case 2: event.setAgeLimit(12); break;
+                case 3: event.setAgeLimit(16); break;
+                default: event.setAgeLimit(18);
             }
             if (event.getDescription().length()<900&&event.getDescription().length()>160)
                 eventService.editEvent(event);
             else
                 s.append(" id: ").append(event.getId()).append(" ");
         }
-        return s.toString();
+        return "Yes";
     }
 
 }

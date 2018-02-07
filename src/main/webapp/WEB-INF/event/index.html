@@ -51,7 +51,7 @@
             <section class="cd-gallery">
                 <ul>
                     <!--/*@thymesVar id="events" type="java.util.List<com.heroku.demo.event.Event>"*/-->
-                    <li th:each="j : ${#numbers.sequence( 0, events.size()-1)}" th:with="event=${events.get(j)}" th:class="'mix category-'+${event.getCategory()}+' '+${event.getName()}+' age' + ${event.getAgeLimit()}">
+                    <li th:each="j : ${#numbers.sequence( 0, events.size()-1)}" th:with="event=${events.get(j)}" th:class="'mix category-'+${event.getCategory()}+' '+${event.getName()}+${event.getAgeLimitString()}">
                         <div class="card card-cascade narrower">
                             <!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
                             <!--/*Card image*/-->
@@ -130,7 +130,7 @@
                         </div> <!-- cd-filter-content -->
                     </div> <!-- cd-filter-block -->
 
-                    <div class="cd-filter-block">
+                    <!--<div class="cd-filter-block">
                         <h4>Check boxes</h4>
 
                         <ul class="cd-filter-content cd-filters list">
@@ -148,8 +148,8 @@
                                 <input class="filter" data-filter=".check3" type="checkbox" id="checkbox3"/>
                                 <label class="checkbox-label" for="checkbox3">Option 3</label>
                             </li>
-                        </ul> <!-- cd-filter-content -->
-                    </div> <!-- cd-filter-block -->
+                        </ul> &lt;!&ndash; cd-filter-content &ndash;&gt;
+                    </div> &lt;!&ndash; cd-filter-block &ndash;&gt;-->
 
                     <div class="cd-filter-block">
                         <h4>Сколько вам лет?</h4>
@@ -158,17 +158,17 @@
                             <div class="cd-select cd-filters">
                                 <select class="filter" name="selectThis" id="selectThis">
                                     <option value="" selected="">Не выбрано</option>
-                                    <option value=".age1">0-5</option>
-                                    <option value=".age12">6-11</option>
-                                    <option value=".age123">12-15</option>
-                                    <option value=".age1234">16-17</option>
-                                    <option value=".age12345">18 и более</option>
+                                    <option value=".age0">0-5</option>
+                                    <option value=".age6">6-11</option>
+                                    <option value=".age12">12-15</option>
+                                    <option value=".age16">16-17</option>
+                                    <option value=".age18">18 и более</option>
                                 </select>
                             </div> <!-- cd-select -->
                         </div> <!-- cd-filter-content -->
                     </div> <!-- cd-filter-block -->
 
-                    <div class="cd-filter-block">
+                    <!--<div class="cd-filter-block">
                         <h4>Radio buttons</h4>
 
                         <ul class="cd-filter-content cd-filters list">
@@ -189,8 +189,8 @@
                                        id="radio3"/>
                                 <label class="radio-label" for="radio3">Choice 3</label>
                             </li>
-                        </ul> <!-- cd-filter-content -->
-                    </div> <!-- cd-filter-block -->
+                        </ul> &lt;!&ndash; cd-filter-content &ndash;&gt;
+                    </div> &lt;!&ndash; cd-filter-block &ndash;&gt;-->
                 </form>
 
                 <a href="#0" class="cd-close">Close</a>
