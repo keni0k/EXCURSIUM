@@ -383,7 +383,7 @@ public class EventController {
                 case 3: event.setAgeLimit(1234); break;
                 default: event.setAgeLimit(12345);
             }
-            if (event.getDescription().length()>1000||event.getDescription().length()<150)
+            if (event.getDescription().length()>900||event.getDescription().length()<140)
                 s.append(" id: ").append(event.getId());
             else
                 eventService.editEvent(event);
