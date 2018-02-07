@@ -34,6 +34,7 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 import static com.heroku.demo.utils.Utils.*;
 
@@ -374,7 +375,14 @@ public class EventController {
     public String updateDBEvents() {
         List<Event> events = eventService.getAll();
         for (Event event : events) {
-//            eventService.editEvent(event);
+            switch (new Random().nextInt(5)){
+                case 0: event.setAgeLimit(1); break;
+                case 1: event.setAgeLimit(12); break;
+                case 2: event.setAgeLimit(123); break;
+                case 3: event.setAgeLimit(1234); break;
+                default: event.setAgeLimit(12345);
+            }
+            eventService.editEvent(event);
         }
         return "YES";
     }
