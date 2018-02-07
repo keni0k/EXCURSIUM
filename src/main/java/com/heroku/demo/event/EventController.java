@@ -374,6 +374,7 @@ public class EventController {
     @ResponseBody
     public String updateDBEvents() {
         List<Event> events = eventService.getAll();
+        StringBuilder s = new StringBuilder();
         for (Event event : events) {
             switch (new Random().nextInt(5)){
                 case 0: event.setAgeLimit(1); break;
@@ -382,9 +383,12 @@ public class EventController {
                 case 3: event.setAgeLimit(1234); break;
                 default: event.setAgeLimit(12345);
             }
-            eventService.editEvent(event);
+            if (event.getDescription().length()>1000||event.getDescription().length()<150)
+                s.append(" id: ").append(event.getId());
+            else
+                eventService.editEvent(event);
         }
-        return "YES";
+        return s.toString();
     }
 
 }
