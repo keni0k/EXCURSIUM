@@ -109,9 +109,9 @@ data-target="#bs-example-navbar-collapse-1">
 
 <li th:if="${isAdmin}">
     <a class="waves-effect waves-light" type="button" data-toggle="dropdown" aria-expanded="false">Модерация <b class="caret"></b>
-    </a><ul class="dropdown-menu">
-        <li><a href="/events/moderation" class="waves-effect waves-light">Модерация экскурсий</a></li>
-        <li><a href="/users/moderation" class="waves-effect waves-light">Модерация пользователей</a></li>
+    </a><ul class="dropdown-menu" style="display: none;">
+        <li><a href="/events/moderation" class="waves-effect waves-light" th:text="${#messages.msg('titles.events')}">Модерация экскурсий</a></li>
+        <li><a href="/users/moderation" class="waves-effect waves-light" th:text="${#messages.msg('titles.persons')}">Модерация пользователей</a></li>
     </ul></li>
 <li th:if="${isUser} or ${isAdmin}"><a href="/users/account"
 th:text="${#messages.msg('titles.account')}">Профиль</a></li>

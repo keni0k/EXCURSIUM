@@ -383,6 +383,8 @@ public class EventController {
                 case 1: event.setActiveDates(Integer.toBinaryString(random.nextInt(127))); break;
                 case 2: event.setActiveDates("14.02.2018;16.02.2018;17.02.2018");
             }
+            while (event.getActiveDates().length()<7)
+                event.setActiveDates("0"+event.getActiveDates());
             eventService.editEvent(event);
         }
         return "Yes";
