@@ -69,7 +69,7 @@ public class HomeController {
 
     @RequestMapping({"/", "index"})
     public String index() {
-        return "redirect://events/list";
+        return "redirect:/excursium.me/events/list";
     }
 
     @RequestMapping("index_test")
