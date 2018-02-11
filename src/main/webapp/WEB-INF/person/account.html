@@ -59,7 +59,7 @@
 <!--/*@thymesVar id="consts" type="com.heroku.demo.utils.Consts"*/-->
 <!--/*@thymesVar id="orders" type="java.util.List<com.heroku.demo.order.Buy>"*/-->
 <!--/*@thymesVar id="events" type="java.util.List"*/-->
-<div class="content"
+<div class="content mb-0"
      th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}, isThisUserAccount = ${true},
 excursovod = ${person.getType()==consts.PERSON_GUIDE or person.getType()==consts.PERSON_MODER_GUIDE or person.getType()==consts.PERSON_ADMIN},
 tourist = ${person.getType()==consts.PERSON_TOURIST or person.getType()==consts.PERSON_MODER_TOURIST or person.getType()==consts.PERSON_ADMIN},
