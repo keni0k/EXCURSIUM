@@ -121,6 +121,31 @@
                             </div>
                         </div>
                     </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Тип экскурсии
+                        </div>
+                        <div class="panel-body">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="type_of_dates" id="optionsRadios1" value="0" checked>
+                                    Индивидуальная по запросу. Заказать экскурсию можно на дни недели, которые указали в расписании. Оплатить заказ можно только после вашего подтверждения.
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="type_of_dates" id="optionsRadios2" value="1">
+                                    Групповая по еженедельному расписанию. Вы составляете повторяющееся расписание экскурсии, участники записываются на доступные даты независимо друг от друга. Бронирования подтверждаются автоматически.
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="type_of_dates" id="optionsRadios3" value="2" checked>
+                                    Групповая по фиксированным датам. Вы указываете даты проведения экскурсии, участники записываются на доступные даты независимо друг от друга. Бронирования подтверждаются автоматически.
+                                </label>
+                            </div>
+                        </div>
+                    </div>
                     <div class="input-group">
                         <span class="input-group-addon" th:text="${#messages.msg('words.users_count')}">Количество участников</span>
                         <input name="usersCount" id="users_count" type="number" class="form-control"
