@@ -95,7 +95,7 @@ data-target="#bs-example-navbar-collapse-1">
 <span class="icon-bar"></span>
 <span class="icon-bar"></span>
 </button>
-<a class="navbar-brand" id="navbar-brand" href="/">
+<a class="navbar-brand" id="navbar-brand" href="/events/list">
 <img id="brand-image" class="brand-image" alt="Website Logo" src="../../resources/img/logo0.png"/>
     <h2 class="brand-title" id="brand-title">Excursium</h2>
 </a>
@@ -110,7 +110,7 @@ data-target="#bs-example-navbar-collapse-1">
 
 <li th:if="${isAdmin}">
     <a class="waves-effect waves-light" type="button" data-toggle="dropdown" aria-expanded="false">Модерация <b class="caret"></b>
-    </a><ul class="dropdown-menu" style=" display: none;">
+    </a><ul class="dropdown-menu">
         <li><a href="/events/moderation" class="waves-effect waves-light" th:text="${#messages.msg('titles.events')}">Модерация экскурсий</a></li>
         <li><a href="/users/moderation" class="waves-effect waves-light" th:text="${#messages.msg('titles.persons')}">Модерация пользователей</a></li>
     </ul></li>
