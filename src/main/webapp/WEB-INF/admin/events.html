@@ -48,7 +48,7 @@ xmlns:th="http://www.thymeleaf.org">
 id=${#httpServletRequest.getParameter('id')},category=${#httpServletRequest.getParameter('category')},
 words=${#httpServletRequest.getParameter('words')},sort_by=${#httpServletRequest.getParameter('sort_by')},
 lang = ${#locale.getLanguage().toString()=='en'?1:0}">
-<style>input[type=checkbox]{left: 130px;visibility: visible;}.fixed-table-toolbar .dropdown-menu {max-height: 600px;}</style>
+<style>input[type=checkbox]{left: 130px;visibility: visible;}.fixed-table-toolbar .dropdown-menu {max-height: 600px;}.btn .btn-default .dropdown-toggle{padding: 0.8rem 1.5rem;}  .fixed-table-toolbar .bars, .fixed-table-toolbar .search, .fixed-table-toolbar .columns {margin-top: 0; margin-bottom: 0}.pull-right .search>.form-control{padding-bottom: 0;margin-bottom: 5px;}</style>
 <!--/*@thymesVar id="inputEvent" type="com.heroku.demo.event.Event"*/-->
 <!--/*@thymesVar id="events" type="java.util.List<com.heroku.demo.event.Event>"*/-->
 <!--/*@thymesVar id="utils" type="com.heroku.demo.utils.UtilsForWeb"*/-->
