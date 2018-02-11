@@ -374,24 +374,16 @@ public class EventController {
     @ResponseBody
     public String updateDBEvents() {
         List<Event> events = eventService.getAll();
-        StringBuilder s = new StringBuilder();
-        for (Event event : events) {
-            if (event.getDescription().length()>900 || event.getDescription().length()<160)
-                s.append(" ID: ").append(event.getId()).append(" ");
-        }
-        if (s.length()!=0) return s.toString();
-        for (Event event : events) {
-            switch (new Random().nextInt(5)){
-                case 0: event.setAgeLimit(0); break;
-                case 1: event.setAgeLimit(6); break;
-                case 2: event.setAgeLimit(12); break;
-                case 3: event.setAgeLimit(16); break;
-                default: event.setAgeLimit(18);
+        Random random = new Random();
+        for (Event event: events) {
+            int type = random.nextInt(3);
+            event.setTypeOfDates(type);
+            switch (type){
+                case 0:
+                case 1: event.setActiveDates(Integer.toBinaryString(random.nextInt(127))); break;
+                case 2: event.setActiveDates("14.02.2018;16.02.2018;17.02.2018");
             }
-            if (event.getDescription().length()<900&&event.getDescription().length()>160)
-                eventService.editEvent(event);
-            else
-                s.append(" id: ").append(event.getId()).append(" ");
+            eventService.editEvent(event);
         }
         return "Yes";
     }

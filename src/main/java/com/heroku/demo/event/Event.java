@@ -303,4 +303,20 @@ public class Event {
         if (ageLimit==0) s+=" age0";
         return s;
     }
+
+    public String getActiveDates() {
+        return activeDates;
+    }
+
+    public void setActiveDates(String activeDates) {
+        this.activeDates = activeDates;
+    }
+
+    public int getTypeOfDates() {
+        return typeOfDates;
+    }
+
+    public void setTypeOfDates(int typeOfDates) {
+        this.typeOfDates = typeOfDates;
+    }
 }

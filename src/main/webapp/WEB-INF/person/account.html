@@ -216,9 +216,9 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                         <div class="col-lg-8 col-md-12 text-center">
                             <!--/* Heading */-->
                             <div class="text-center mt-3">
-                                <h2 class="title text-center pe"
+                                <h2 class="title text-center pe mt-4"
                                     th:if="${orders.size()>0}">Посещенные экскурсии</h2>
-                                <h2 class="title text-center nepe"
+                                <h2 class="title text-center nepe mt-4"
                                     th:if="${orders.size()==0}">Здесь будут отображаться
                                     посещенные экскурсии</h2> <!--/*-310,615 TODO: translate*/-->
                                 <a href="/events/list" th:if="${orders.size()==0}">
