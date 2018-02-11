@@ -80,7 +80,6 @@
 }
 .card .card-body h5 {
     margin-bottom: 1rem;
-    font-size: 1rem;
     font-weight: 400;
 }
 .card-body h4 {
@@ -102,4 +101,10 @@
 .card-footer, .card-header {
     padding: .75rem 1.25rem;
     background-color: rgba(0,0,0,.1);
+}
+.right{
+    float: right;
+}
+.mt-1{
+    margin-top: 1rem;
 }
