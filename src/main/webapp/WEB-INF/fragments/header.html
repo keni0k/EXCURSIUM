@@ -86,10 +86,19 @@ data-target="#bs-example-navbar-collapse-1">
 <li>
 <a th:href="@{/events/list(country=${country}, city = ${city})}" th:text="${#messages.msg('titles.excursions')}">Экскурсии</a></li>
 <li><a href="#">FAQ</a></li>
-<li th:if="${isAdmin}"><a href="/users/moderation" th:text="${#messages.msg('titles.persons')}">Модерация
-пользователей</a></li>
-<li th:if="${isAdmin}"><a href="/events/moderation" th:text="${#messages.msg('titles.events')}">Модерация
-экскурсий</a></li>
+
+<li th:if="${isAdmin}"><div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false" style="
+    height: 95px;
+    background: #a274c8;
+    border: none;
+">Модерация <b class="caret"></b>
+    </button>
+    <ul class="dropdown-menu">
+        <li><a href="/events/moderation" th:text="${#messages.msg('titles.events')}">Модерция экскурсий</a></li>
+        <li><a href="/users/moderation" th:text="${#messages.msg('titles.persons')}">Модерация пользователей</a></li>
+    </ul>
+</div></li>
 <li th:if="${isUser} or ${isAdmin}"><a href="/users/account"
 th:text="${#messages.msg('titles.account')}">Профиль</a></li>
 <li th:unless="${isUser  or isAdmin}"><a href="/users/registration"

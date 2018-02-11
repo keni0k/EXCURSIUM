@@ -115,6 +115,10 @@ public class Event {
     @Size(min=10, max=60)
     private String name = "";
 
+    private String activeDates = "0000000";
+
+    private int typeOfDates = 0;
+
     public int getReviewsCount() {
         return reviewsCount;
     }
