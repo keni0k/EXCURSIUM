@@ -49,10 +49,7 @@ background-color: transparent;
 .navbar-custom .navbar-nav > .active > a:focus,
 .navbar-custom .navbar-nav > .open > a,
 .navbar-custom .navbar-nav > li > ul > li > a:hover,
-.navbar-custom .navbar-nav > li > ul > li > > a:focus
-/*.navbar-custom .navbar-nav > .active > ul > li > a:hover,
-.navbar-custom .navbar-nav > .active > ul > li > a:focus,
-.navbar-custom .navbar-nav > .open > ul > li > a*/{
+.navbar-custom .navbar-nav > li > ul > li > a:focus {
 text-decoration: none;
 background-color: #c090e7;
 }
@@ -102,7 +99,7 @@ data-target="#bs-example-navbar-collapse-1">
 
 <li th:if="${isAdmin}">
     <a class="waves-effect waves-light" type="button" data-toggle="dropdown" aria-expanded="false">Модерация <b class="caret"></b>
-    </a><ul class="dropdown-menu" style="display: none;">
+    </a><ul class="dropdown-menu">
         <li><a href="/events/moderation" class="waves-effect waves-light">Модерация экскурсий</a></li>
         <li><a href="/users/moderation" class="waves-effect waves-light">Модерация пользователей</a></li>
     </ul></li>
