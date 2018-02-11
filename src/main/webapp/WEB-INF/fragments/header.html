@@ -112,7 +112,16 @@ data-target="#bs-example-navbar-collapse-1">
     </a><ul class="dropdown-menu">
         <li><a href="/events/moderation" class="waves-effect waves-light" th:text="${#messages.msg('titles.events')}">Модерация экскурсий</a></li>
         <li><a href="/users/moderation" class="waves-effect waves-light" th:text="${#messages.msg('titles.persons')}">Модерация пользователей</a></li>
-    </ul></li>
+    </ul>
+</li>
+    <li th:if="${isAdmin}">
+        <a class="waves-effect waves-light" type="button" data-toggle="dropdown" aria-expanded="false">Гиду <b class="caret"></b>
+        </a><ul class="dropdown-menu">
+        <li><a href="/events/add" class="waves-effect waves-light">Добавить экскурсию</a></li>
+        <li><a href="/users/account" class="waves-effect waves-light">Мои экскурсии</a></li>
+        <li><a href="/users/account" class="waves-effect waves-light">Заказы</a></li>
+    </ul>
+    </li>
 <li th:if="${isUser} or ${isAdmin}"><a href="/users/account"
 th:text="${#messages.msg('titles.account')}">Профиль</a></li>
 <li th:unless="${isUser  or isAdmin}"><a href="/users/registration"
