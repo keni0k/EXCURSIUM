@@ -286,12 +286,12 @@
             $('#card-price').text(txt+"₽");
         });
         $("#category").change(function() {
-            var txt=$('#category').val();
-            if (txt == null){
-                txt="";
-            }
+            var txt=$('#category').value;
             var lang = [[${lang}]];
-            var categories = [[${utils.getCategoryString(txt, lang)}]];
+            alert(txt+" "+lang);
+            var ru = ["Развлечения", "Наука", "История", "Искусство", "Квесты", "Экстрим", "Производство", "Гастрономия"];
+            var en = ["Entertainment", "Science", "History", "Art", "Quests", "Extreme", "Manufacture", "Gastronomy"];
+            var categories = lang===0?ru[txt]:en[txt];
             $('#card-category').text(categories);
         });
     });
