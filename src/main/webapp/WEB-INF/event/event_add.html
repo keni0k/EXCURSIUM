@@ -286,8 +286,8 @@
             $('#card-price').text(txt+"₽");
         });
         $("#category").change(function() {
-            var txt=$('#category').value;
-            var lang = [[${lang}]];
+            var txt=$('#category').val();
+            var lang = [[${#locale.getLanguage().toString()=='en'?1:0}]];
             alert(txt+" "+lang);
             var ru = ["Развлечения", "Наука", "История", "Искусство", "Квесты", "Экстрим", "Производство", "Гастрономия"];
             var en = ["Entertainment", "Science", "History", "Art", "Quests", "Extreme", "Manufacture", "Gastronomy"];
