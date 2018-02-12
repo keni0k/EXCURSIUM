@@ -54,7 +54,6 @@ lang = ${#locale.getLanguage().toString()=='en'?1:0}">
 <!--/*@thymesVar id="utils" type="com.heroku.demo.utils.UtilsForWeb"*/-->
 <div class="content"
 th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
-<div th:replace="fragments/header :: style"></div>
 <div th:replace="fragments/header :: header"></div>
 <div class="container">
 <div class="page-header">

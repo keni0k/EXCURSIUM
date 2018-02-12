@@ -66,7 +66,6 @@ tourist = ${person.getType()==consts.PERSON_TOURIST or person.getType()==consts.
 notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==consts.PERSON_ADMIN},
 lang=${#locale.getLanguage().toString()=='en'?1:0}">
     <!--/*TODO isThisUserAccount*/-->
-    <div th:replace="fragments/header :: style"></div>
     <div th:replace="fragments/header :: header"></div>
     <style>.pe:before {
         width: 300px !important;

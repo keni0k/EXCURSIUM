@@ -23,4 +23,4 @@
 .card-footer {border-top: 1px solid rgba(0,0,0,.125);}
 .card-footer, .card-header {padding: .75rem 1.25rem;background-color: rgba(0,0,0,.1);}
 .card-footer-left{color:#4285F4!important;padding: 0.4em 0.1em!important;display: inline-block!important;font-size: 24px!important;}
-.card-title h3 {padding-bottom: 1rem; font-size: 24px!important;}
+h3.card-title {padding-bottom: 1rem; font-size: 24px!important;}

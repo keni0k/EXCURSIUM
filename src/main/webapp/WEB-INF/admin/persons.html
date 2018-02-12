@@ -42,7 +42,6 @@
 <div class="content"
 th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')},
 id = ${#httpServletRequest.getParameter('id')}, lang = ${#locale.getLanguage().toString()=='en'?1:0}">
-<div th:replace="fragments/header :: style"></div>
 <div th:replace="fragments/header :: header"></div>
 <div class="container">
 <div class="page-header">

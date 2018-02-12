@@ -38,7 +38,6 @@ xmlns:th="http://www.thymeleaf.org"
 <body style="background-color: #f9f9f9;" onload='document.getElementById("login").focus();'>
 <div class="content"
 th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
-<div th:replace="fragments/header :: style"></div>
 <div th:replace="fragments/header :: header"></div>
 <div class="container">
 <div class="page-header">

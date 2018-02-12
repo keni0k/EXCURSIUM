@@ -28,32 +28,22 @@
     <link rel="stylesheet" href="../../resources/css/cards.css"/>
     <link rel="stylesheet" href="../../resources/css/media.css"/>
 
-    <style>.card-info {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        padding: 15px 15px 23px 15px;
-        background: rgba(0, 0, 0, .66);
-        color: #fff;
-        font-size: 18px;
-        font-weight: normal;
-    }</style>
     <style>
+        .card-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 15px 23px 15px;
+            background: rgba(0, 0, 0, .66);
+            color: #fff;
+            font-size: 18px;
+            font-weight: normal;
+        }
         .card-inverse {
             display: block;
         }
-        /*.navbar-custom {
-            background: #FFFFFF !important;
-        }
-        .brand-title{
-            color: #777777;
-        }
-        .navbar-custom .navbar-nav > li > a {
-            color: #000000 !important;
-        }*/
     </style>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
@@ -65,7 +55,6 @@
 <!--/*@thymesVar id="service" type="com.heroku.demo.event.EventServiceImpl"*/-->
 <div class="content"
      th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}, lang = ${#locale.getLanguage().toString()=='en'?1:0}">
-    <div th:replace="fragments/header :: style"></div>
     <div th:replace="fragments/header :: header"></div>
     <div class="welcome-header">
         <img src="../../resources/img/wrapper.jpg" class="img-top"/>

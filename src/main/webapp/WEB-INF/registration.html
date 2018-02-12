@@ -41,7 +41,6 @@ padding-left: 9px;
 <!--/*@thymesVar id="insertPerson" type="com.heroku.demo.person.Person"*/-->
 <div class="content"
 th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
-<div th:replace="fragments/header :: style"></div>
 <div th:replace="fragments/header :: header"></div>
 <div class="container">
 <div class="page-header">

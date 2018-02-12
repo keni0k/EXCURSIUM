@@ -31,7 +31,6 @@ xmlns:th="http://www.thymeleaf.org">
 <body style="background-color: #f9f9f9;">
 <div class="content"
 th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
-<div th:replace="fragments/header :: style"></div>
 <div th:replace="fragments/header :: header"></div>
 <div class="container">
 <h1 style="align-content: center; vertical-align: middle" th:text="${#messages.msg('error.403')}">Ошибка 403. Вы зашли на охраняемую территорию!!1!</h1>
