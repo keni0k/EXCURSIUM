@@ -250,29 +250,17 @@
                         <h3 class="card-title">
                             <strong>%Назание экскурсии%</strong>
                         </h3>
-                        <!--&lt;!&ndash;/*Rating*/&ndash;&gt;
+                        <!--/*Rating*/-->
                         <ul class="rating">
-                            <li th:if="${event.getRate()!=-1}" th:text="${event.getRate()}"></li>
-                            <th:block th:if="${(event.getIntRate()!=-1)and(event.getIntRate()!=0)}">
-                                <li th:each="i : ${#numbers.sequence(0, event.getIntRate()-1)}"><i
-                                        class="fa fa-star"></i></li>
-                            </th:block>
-                            <th:block th:if="${(event.getIntRate()!=-1)and(event.getIntRate()!=5)}">
-                                <li th:each="i : ${#numbers.sequence(event.getIntRate(), 4)}"><i
-                                        class="fa fa-star-o"></i></li>
-                            </th:block>
-                            <th:block th:if="${(event.getIntRate()==-1)}">
-                                <li th:each="i : ${#numbers.sequence(0, 4)}"><i class="fa fa-star-o"></i></li>
-                            </th:block>
-                            <li th:text="'('+${event.getReviewsCount()}+')'"></li>
-                        </ul>-->
+                            <li th:each="i : ${#numbers.sequence(0, 4)}"><i class="fa fa-star-o"></i></li>
+                        </ul>
                         <!--/*Description*/-->
                         <p class="card-text" style="font-size: medium; color: #000000"
                            align="justify">Начните заполнять описание, чтобы текст обновился!</p>
                     </div>
                     <!--/*Card footer*/-->
                     <div class="card-footer links-light">
-                        <h4 class="left" style="color:#4285F4; padding: 0.4em 0.1em; display: inline-block;"><strong>%PRICE%</strong></h4>
+                        <h3 class="left card-footer-left"><strong>%PRICE%</strong></h3>
                         <a class="btn btn-primary waves-effect waves-light right disabled mt-1">Открыть</a>
                     </div>
                     <!--/*End-of-Card content*/-->

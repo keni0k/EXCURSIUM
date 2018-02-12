@@ -100,10 +100,10 @@
                             </div>
                             <!--/*Card footer*/-->
                             <div class="card-footer links-light">
-                                <h4 class="left" style="color:#4285F4; padding: 0.4em 0.1em;"><strong
-                                        th:text="${event.getPrice()}+'&#8381;'">%PRICE%</strong></h4>
+                                <h3 class="left card-footer-left"><strong
+                                        th:text="${event.getPrice()}+'&#8381;'">%PRICE%</strong></h3>
                                 <a th:href="@{/events/event(id=${event.getId()})}"
-                                   class="btn btn-primary waves-effect waves-light right"
+                                   class="btn btn-primary waves-effect waves-light right mt-05"
                                    th:text="${#messages.msg('words.open')}">Открыть
                                 </a>
                             </div>
