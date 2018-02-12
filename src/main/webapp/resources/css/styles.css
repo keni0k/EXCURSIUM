@@ -13,14 +13,14 @@ b {
 }
 
 a {
-    color: #fdcc52;
+    color: #337ab7;
     -webkit-transition: all .35s;
     -moz-transition: all .35s;
     transition: all .35s
 }
 
 a:focus, a:hover {
-    color: #fcbd20
+    color: #286090;
 }
 
 hr {
