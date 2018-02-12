@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="stylesheet" href="../../resources/css/cards.css"/>
+    <link rel="stylesheet" href="../../resources/css/mycards.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'/>
@@ -69,11 +69,11 @@
                             <!--/*Card content*/-->
                             <div class="card-body pb-0 no-padding text-center"><!--/*Category & Title*/-->
                                 <h5 th:text="${{event.getCategoryString()}}">%CATEGORY%</h5>
-                                <h4 class="card-title">
-                                    <strong>
-                                        <h3><a th:href="@{/events/event(id=${event.getId()})}"
-                                               th:text="${event.name}">%NAME%</a></h3></strong>
-                                </h4>
+                                <h3 class="card-title">
+                                    <strong><a th:href="@{/events/event(id=${event.getId()})}"
+                                               th:text="${event.name}">%NAME%</a>
+                                    </strong>
+                                </h3>
                                 <!--&lt;!&ndash;/*Rating*/&ndash;&gt;
                                 <ul class="rating">
                                     <li th:if="${event.getRate()!=-1}" th:text="${event.getRate()}"></li>
