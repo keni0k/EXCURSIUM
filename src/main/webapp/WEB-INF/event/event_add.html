@@ -287,7 +287,11 @@
         });
         $("#category").change(function() {
             var txt=$('#category').val();
-            var categories = [[${utils.getCategoryToString(txt)}]];
+            if (txt == null){
+                txt="";
+            }
+            var lang = [[${lang}]];
+            var categories = [[${utils.getCategoryString(txt, lang)}]];
             $('#card-category').text(categories);
         });
     });
