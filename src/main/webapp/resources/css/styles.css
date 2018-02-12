@@ -235,3 +235,5 @@ h2.title {
 .navbar-brand > .brand-title {display: inline;}
 .navbar-nav>li>.dropdown-menu, .navbar-nav .open .dropdown-menu{padding-bottom: 0;padding-top: 0;background-color:#a274c8!important;}
 .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover{background-color: #ffffff26 !important;}
+
+.img_age{width: 15%;position: absolute;right: 4px;z-index: 1;top: 4px;}
