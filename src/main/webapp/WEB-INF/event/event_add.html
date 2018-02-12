@@ -242,7 +242,7 @@
                     <!--/*Card image*/-->
                     <!--/*Card content*/-->
                     <div class="card-body pb-0 no-padding text-center"><!--/*Category & Title*/-->
-                        <h5>Развлечения</h5>
+                        <h5 id = "card-category">Развлечения</h5>
                         <h3 class="card-title">
                             <strong id="card-title">%Назание экскурсии%</strong>
                         </h3>
@@ -270,7 +270,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
-<script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
     $(document).ready(function() {
         $("#description").keyup(function() {
             var txt=$('#description').val();
@@ -282,9 +283,14 @@
         });
         $("#price").keyup(function() {
             var txt=$('#price').val();
-            $('#card-price').text(txt);
+            $('#card-price').text(txt+"₽");
+        });
+        $("#category").change(function() {
+            var txt=$('#category').val();
+            var categories = [[${utils.getCategoryToString(txt)}]];
+            $('#card-category').text(categories);
         });
     });
-
+    /*]]>*/
 </script>
 </html>
