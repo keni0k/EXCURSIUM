@@ -252,7 +252,7 @@
                         </h3>
                         <!--/*Rating*/-->
                         <ul class="rating">
-                            <li th:each="i : ${#numbers.sequence(0, 4)}"><i class="fa fa-star-o"></i></li>
+                            <li class="rating-inline" th:each="i : ${#numbers.sequence(0, 4)}"><i class="fa fa-star-o"></i></li>
                         </ul>
                         <!--/*Description*/-->
                         <p class="card-text" style="font-size: medium; color: #000000"
@@ -260,8 +260,8 @@
                     </div>
                     <!--/*Card footer*/-->
                     <div class="card-footer links-light">
-                        <h3 class="left card-footer-left"><strong>%PRICE%</strong></h3>
-                        <a class="btn btn-primary waves-effect waves-light right disabled mt-1">Открыть</a>
+                        <h3 class="left card-footer-left mt-0 mb-0"><strong>%PRICE%</strong></h3>
+                        <a class="btn btn-primary waves-effect waves-light right disabled mt-05">Открыть</a>
                     </div>
                     <!--/*End-of-Card content*/-->
                 </div>

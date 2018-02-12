@@ -25,7 +25,8 @@
 .card-footer, .card-header {padding: .75rem 1.25rem;background-color: rgba(0,0,0,.1);}
 .right{float: right;}
 .mt-1{margin-top: 1rem!important;}
-.mt-05{margin-top: 0.5rem;}
+.mt-05{margin-top: 0.5rem!important;}
 .mt-0{margin-top: 0!important;}
+.mb-0{margin-bottom: 0!important;}
 .pt-0{padding-top: 0!important;}
 .card-footer-left{color:#4285F4!important;padding: 0.4em 0.1em!important;display: inline-block!important;font-size: 24px!important;}
