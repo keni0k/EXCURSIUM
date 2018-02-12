@@ -69,12 +69,12 @@ public class HomeController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String index2() {
-        return "redirect:http://excursium.me/events/list";
+        return "redirect:/events/list";
     }
 
     @RequestMapping({"/", "index"})
     public String index() {
-        return "redirect:http://excursium.me/events/list";
+        return "redirect:/events/list";
     }
 
     @RequestMapping("index_test")
