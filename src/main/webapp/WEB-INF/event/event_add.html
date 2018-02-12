@@ -274,8 +274,7 @@
     $(document).ready(function() {
         $("#description").keyup(function() {
             var txt=$('#description').val();
-            $('#card-text').val(txt);
-            alert(txt);
+            $('#card-text').value=txt;
         });
     });
 
