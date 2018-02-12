@@ -103,7 +103,7 @@ footer ul li a.active, footer ul li a:active, footer ul li a:focus, footer ul li
 }
 
 .btn {
-    border-radius: 300px;
+    /*border-radius: 300px;*/
     font-family: Lato, Helvetica, Arial, sans-serif;
     letter-spacing: 2px;
     text-transform: uppercase

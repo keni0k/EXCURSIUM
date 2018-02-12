@@ -23,10 +23,6 @@
     <link rel="stylesheet" type="text/css" href="../../resources/css/styles.css"/>
     <link rel="stylesheet" href="../../resources/css/media.css"/>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
-
     <style rel="stylesheet">.form-control {
         padding-top: 7px;
         padding-bottom: 7px;
@@ -54,7 +50,7 @@
             <h2 th:text="${#messages.msg('titles.add_event')}">Добавление экскурсии</h2>
         </div>
         <div class="row">
-            <div class="col-xs-12 col-md-6 col-lg-5">
+            <div class="col-xs-12 col-md-7 col-lg-6">
 
                 <!-- /* Handling the flash message */-->
                 <th:block th:if="${message != null}">
@@ -232,7 +228,7 @@
                     </button>
                 </form>
             </div>
-            <div class="col-xs-12 col-md-6 col-lg-7">
+            <div class="col-xs-12 col-md-5 col-lg-6">
                 <div class="card card-cascade narrower">
                     <!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
                     <!--/*Card image*/-->
@@ -255,7 +251,7 @@
                             <li class="rating-inline" th:each="i : ${#numbers.sequence(0, 4)}"><i class="fa fa-star-o"></i></li>
                         </ul>
                         <!--/*Description*/-->
-                        <p class="card-text" style="font-size: medium; color: #000000"
+                        <p class="card-text" style="font-size: medium; color: #000000" id="card-text"
                            align="justify">Начните заполнять описание, чтобы текст обновился!</p>
                     </div>
                     <!--/*Card footer*/-->
@@ -271,4 +267,17 @@
 </div>
 <div th:replace="fragments/footer :: footer"></div>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#description").keyup(function() {
+            var txt=$('#description').val();
+            $('#card-text').val(txt);
+            alert(txt);
+        });
+    });
+
+</script>
 </html>
