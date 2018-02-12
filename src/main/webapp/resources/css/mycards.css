@@ -13,7 +13,6 @@
 .badge, .card-wrapper .back, .card-wrapper .front, .card:not([class*=card-outline-]), .chip, .counter, .dropdown-content, .modal-dialog.cascading-modal .modal-c-tabs .nav-tabs, .pagination .active .page-link, .side-nav, .social-list, .z-depth-1 {-webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);}
 .card.card-cascade .card-body {padding-top: 1.8rem;}
 .btn .fa, .card .card-body {position: relative;}
-.pb-0 {padding-bottom: 0!important;}
 .text-center {text-align: center!important;}
 .card-body {-ms-flex: 1 1 auto;-webkit-box-flex: 1;-webkit-flex: 1 1 auto;flex: 1 1 auto;padding: 1.25rem;}
 .card .card-body h5 {margin-bottom: 1rem;font-weight: 400;}
@@ -23,11 +22,5 @@
 .card-footer:last-child {border-radius: 0 0 -webkit-calc(.25rem - 1px) -webkit-calc(.25rem - 1px);}
 .card-footer {border-top: 1px solid rgba(0,0,0,.125);}
 .card-footer, .card-header {padding: .75rem 1.25rem;background-color: rgba(0,0,0,.1);}
-.right{float: right;}
-.mt-1{margin-top: 1rem!important;}
-.mt-05{margin-top: 0.5rem!important;}
-.mt-0{margin-top: 0!important;}
-.mb-0{margin-bottom: 0!important;}
-.pt-0{padding-top: 0!important;}
 .card-footer-left{color:#4285F4!important;padding: 0.4em 0.1em!important;display: inline-block!important;font-size: 24px!important;}
 .card-title h3 {padding-bottom: 1rem; font-size: 24px!important;}

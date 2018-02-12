@@ -66,7 +66,7 @@
                         <span class="input-group-addon" th:text="${#messages.msg('words.name')}">Название</span>
                         <input name="name" type="text" class="form-control" id="name" placeholder="Название"
                                aria-label="Название"
-                               th:value="${inputEvent.getName()}" required="" minlength="10" maxlength="60"/>
+                               th:value="${inputEvent.getName()}" required="" minlength="10" maxlength="35"/>
                         <label for="name" th:if="${#fields.hasErrors('name')}"
                                th:text="${#messages.msg('error.event.name')}" th:class="'error'">Name Error</label>
                     </div>
@@ -251,7 +251,7 @@
                             <li class="rating-inline" th:each="i : ${#numbers.sequence(0, 4)}"><i class="fa fa-star-o"></i></li>
                         </ul>
                         <!--/*Description*/-->
-                        <p class="card-text" style="font-size: medium; color: #000000" id="card-text"
+                        <p class="card-text" style="font-size: 18px; color: #000000" id="card-text"
                            align="justify">Начните заполнять описание, чтобы текст обновился!</p>
                     </div>
                     <!--/*Card footer*/-->

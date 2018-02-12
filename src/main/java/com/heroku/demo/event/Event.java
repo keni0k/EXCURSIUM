@@ -132,7 +132,7 @@ public class Event {
     }
 
     public String getSmallDescription() {
-        String smallDesc = description.substring(0, description.length() > 251 ? 251 : description.length());
+        String smallDesc = description.substring(0, description.length() > 180 ? 180 : description.length());
         smallDesc = smallDesc.replace("\\\"", "\"");
         if (smallDesc.length() != description.length()) smallDesc += "...";
         return smallDesc;
