@@ -67,6 +67,11 @@ public class HomeController {
         return "upload";
     }
 
+    @RequestMapping(method = RequestMethod.GET)
+    public String index2() {
+        return "redirect:/excursium.me/events/list";
+    }
+
     @RequestMapping({"/", "index"})
     public String index() {
         return "redirect:/excursium.me/events/list";
