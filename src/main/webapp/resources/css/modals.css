@@ -137,6 +137,77 @@ body.modal-open {
     -ms-flex: 1;
     flex: 1;
 }
+
+.modal-dialog.cascading-modal .nav-tabs li a {
+    text-align: center;
+    font-weight: 400;
+}
+.nav-tabs .nav-item.open .nav-link, .nav-tabs .nav-link.active {
+    background-color: rgba(255,255,255,.2);
+    color: #fff;
+    -webkit-transition: all 1s;
+    transition: all 1s;
+    border-radius: 2px;
+}
+.nav-tabs .nav-link {
+    border: 0;
+    color: #fff;
+}
+
+.modal-dialog.cascading-modal .modal-c-tabs .tab-content {
+    padding: 1.7rem 0 0;
+}
+.tab-content {
+    padding: 2rem 1rem 1rem;
+    z-index: 1;
+    border-radius: 0 0 .3rem .3rem;
+}
+
+.modal-dialog.cascading-modal .modal-body, .modal-dialog.cascading-modal .modal-footer {
+    color: #616161;
+    padding-right: 2rem;
+    padding-left: 2rem;
+}
+.mb-1, .my-1 {
+    margin-bottom: .25rem!important;
+}
+.modal-body {
+    position: relative;
+    -ms-flex: 1 1 auto;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 15px;
+}
+
+.modal-dialog.cascading-modal .modal-body, .modal-dialog.cascading-modal .modal-footer {
+    color: #616161;
+    padding-right: 2rem;
+    padding-left: 2rem;
+}
+.justify-content-center {
+    -ms-flex-pack: center!important;
+    -webkit-box-pack: center!important;
+    -webkit-justify-content: center!important;
+    justify-content: center!important;
+}
+.modal-footer {
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-align: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -ms-flex-pack: end;
+    -webkit-box-pack: end;
+    -webkit-justify-content: flex-end;
+    justify-content: flex-end;
+    padding: 15px;
+    border-top: 1px solid #e9ecef;
+}
+
 @media (min-width: 992px){
     .modal-lg {
         max-width: 800px;
