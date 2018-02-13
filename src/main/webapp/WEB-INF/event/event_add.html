@@ -248,7 +248,7 @@
                         </h3>
                         <!--/*Rating*/-->
                         <ul class="rating">
-                            <li class="rating-inline" th:each="i : ${#numbers.sequence(0, 4)}"><i class="fa fa-star-o"></i></li>
+                            <li th:each="i : ${#numbers.sequence(0, 4)}"><i class="fa fa-star-o"></i></li>
                         </ul>
                         <!--/*Description*/-->
                         <p class="card-text" style="font-size: 18px; color: #000000" id="card-text"
