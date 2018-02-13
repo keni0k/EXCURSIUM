@@ -75,7 +75,7 @@
                         <div class="col-md-8 col-md-offset-2">
                             <div class="card">
                                 <!--Card image-->
-                                <div class="view overlay hm-white-slight z-depth-1" style="max-height: 20rem">
+                                <div class="view overlay hm-white-slight z-depth-1" style="max-height: 30rem">
                                     <!--TODO-->
                                     <div class="img_crop">
                                         <img th:src="${event.pathToPhoto}" src="../../resources/img/bg-cta.jpg"
@@ -89,26 +89,18 @@
                                 </div>
                                 <!--/.Card image-->
                                 <!--Button-->
-                                <a class="btn-action waves-effect waves-light" style="background: none; width: auto;"
-                                   th:href="@{/users/user(id = ${event.getGuideId()})}">
+                                <a class="btn-action waves-effect waves-light" style="background: none;width: auto;" th:href="@{/users/user(id=${event.getGuideId()})}">
                                     <div class="avatar">
-                                        <img th:src="${event.getPhotoOfGuide()}" src="../../resources/img/user.png"
-                                             style="height: 100px; width:auto; border-radius: 50%;" alt="Аватар"/>
+                                        <img th:src="${event.getPhotoOfGuide()}" src="../../resources/img/user.png" style="height: 100px; width:auto; border-radius: 50%;" alt="Аватар">
                                     </div>
                                 </a>
-                                <span style="font-size: medium; color: #000000; text-align:right; padding-right: 2rem; padding-top: 1.8rem"
-                                      th:text="${event.getFullNameOfGuide()}">
-%FULL_NAME%</span>
+                                <span style="font-size: medium;color: #000000;text-align:right;padding-top: 100px;margin: 2px 30px -80px auto;"
+                                      th:text="${event.getFullNameOfGuide()}">%FULL_NAME%</span>
 
                                 <!--Card content-->
                                 <div class="card-body no-padding text-center">
                                     <!--Category & Title-->
-                                    <h5 th:text="${event.getCategoryString()}">%Категория%</h5>
-                                    <h3 class="card-title">
-                                        <strong th:text="${event.name}">
-                                            <a href="">%Название%</a>
-                                        </strong>
-                                    </h3>
+                                    <h4 th:text="${event.getCategoryString()}">%Категория%</h4>
 
                                     <!--Rating-->
                                     <ul class="rating">
@@ -131,10 +123,15 @@
                                         <li th:text="'('+${event.getReviewsCount()}+')'"></li>
                                     </ul>
 
+                                    <h3 class="card-title">
+                                        <strong th:text="${event.name}">
+                                            <a href="">%Название%</a>
+                                        </strong>
+                                    </h3>
+
                                     <!--Description-->
                                     <p class="card-text" style="font-size: medium; color: #000000" align="justify"
-                                       th:text="${event.description}">
-                                        %Описание%</p>
+                                       th:text="${event.description}">%Описание%</p>
                                 </div>
                                 <!--Card footer-->
                                 <div class="card-footer links-light">

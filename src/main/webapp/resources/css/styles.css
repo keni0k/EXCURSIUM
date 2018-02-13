@@ -201,7 +201,7 @@ h2.title {
 .w-a {color: #eeeeee;width: auto !important;}
 .c_a_c-h1{margin-top: 10px !important;}
 .before-120:before{width: 120px !important;margin-left: -60px !important;}
-.rating{padding-left: 0;}
+.rating{padding-left: 0; color: #ffa000;}
 .rating > li {display: inline;}
 .waves-effect {position: relative;cursor: pointer;overflow: hidden;-ms-user-select: none;user-select: none;z-index: 1;}
 .btn-primary {background-color: #4285f4;}
