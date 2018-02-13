@@ -91,7 +91,7 @@
                                 <!--Button-->
                                 <a class="btn-action waves-effect waves-light" style="background: none;width: auto;" th:href="@{/users/user(id=${event.getGuideId()})}">
                                     <div class="avatar">
-                                        <img th:src="${event.getPhotoOfGuide()}" src="../../resources/img/user.png" style="height: 100px; width:auto; border-radius: 50%;" alt="Аватар">
+                                        <img th:src="${event.getPhotoOfGuide()}" src="../../resources/img/user.png" style="height: 100px; width:auto; border-radius: 50%;" alt="Аватар"/>
                                     </div>
                                 </a>
                                 <span style="font-size: medium;color: #000000;text-align:right;padding-top: 100px;margin: 2px 30px -80px auto;"
@@ -138,7 +138,7 @@
                                     <h3 class="left card-footer-left mt-0 mb-0">
                                         <strong th:text="${event.price}+'&#8381;'">%Цена%</strong>
                                     </h3>
-                                    <a class="btn btn-primary waves-effect waves-light right disabled mt-05" href="#" role="button" data-toggle="modal" data-target="#modalGoOrder">Заказать</a>
+                                    <a class="btn btn-primary waves-effect waves-light right mt-05" href="#" role="button" data-toggle="modal" data-target="#modalGoOrder">Заказать</a>
                                 </div>
                                 <!--/.Card content-->
                             </div>
