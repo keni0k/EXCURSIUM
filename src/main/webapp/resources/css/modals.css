@@ -52,17 +52,6 @@ body.modal-open {
     -ms-transform: translate(0,-25%);
     transform: translate(0,-25%);
 }
-@media (min-width: 992px){
-    .modal-lg {
-        max-width: 800px;
-    }
-}
-@media (min-width: 576px) {
-    .modal-dialog {
-        max-width: 500px;
-        margin: 30px auto;
-    }
-}
 .modal-dialog {
     position: relative;
     width: auto;
@@ -103,4 +92,59 @@ body.modal-open {
 .list-group, .modal-content {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
+}
+.list-group, .modal-content {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+}
+.modal-dialog.cascading-modal .modal-c-tabs .nav-tabs {
+    margin: -1.5rem 1rem 0;
+}
+.badge, .btn, .card-wrapper .back, .card-wrapper .front, .card:not([class*=card-outline-]), .chip, .counter, .dropdown-content, .modal-dialog.cascading-modal .modal-c-tabs .nav-tabs, .pagination .active .page-link, .side-nav, .social-list, .z-depth-1 {
+    -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+}
+.modal-dialog.cascading-modal .nav-tabs {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+.light-blue.darken-3 {
+    background-color: #0277bd!important;
+}
+.nav-tabs {
+    border: 0;
+    padding: .7rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-bottom: -20px;
+    background-color: #2bbbad;
+    z-index: 2;
+    position: relative;
+    border-radius: 2px;
+}
+.btn-floating, .btn:active, .btn:focus, .btn:hover, .card.card-cascade.card-avatar img, .colorful-select .dropdown-content li.active span, .dropdown .dropdown-menu .dropdown-item:active, .dropdown .dropdown-menu .dropdown-item:hover, .form-header, .media .media-left img, .modal-dialog .modal-content, .modal-dialog.cascading-modal .modal-header, .nav-tabs {
+    -webkit-box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+}
+.light-blue {
+    background-color: #03a9f4!important;
+}
+.modal-dialog.cascading-modal .nav-tabs li {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+@media (min-width: 992px){
+    .modal-lg {
+        max-width: 800px;
+    }
+}
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 500px;
+        margin: 30px auto;
+    }
 }
