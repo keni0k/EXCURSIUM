@@ -135,19 +135,13 @@
                                     <p class="card-text" style="font-size: medium; color: #000000" align="justify"
                                        th:text="${event.description}">
                                         %Описание%</p>
-
-                                    <!--Card footer-->
-                                    <div class="card-footer">
-<span class="left" style="color:#4285F4; font-size: x-large; padding-top: 0.4em;">
-    <strong th:text="${event.price}+'&#8381;'">%Цена%</strong>
-</span>
-                                        <span class="right">
-    <a class="btn btn-primary waves-effect waves-light"
-       href="#" role="button"
-       data-toggle="modal" data-target="#modalGoOrder">Заказать</a>
-</span>
-                                    </div>
-
+                                </div>
+                                <!--Card footer-->
+                                <div class="card-footer links-light">
+                                    <h3 class="left card-footer-left mt-0 mb-0">
+                                        <strong th:text="${event.price}+'&#8381;'">%Цена%</strong>
+                                    </h3>
+                                    <a class="btn btn-primary waves-effect waves-light right disabled mt-05" href="#" role="button" data-toggle="modal" data-target="#modalGoOrder">Заказать</a>
                                 </div>
                                 <!--/.Card content-->
                             </div>
@@ -174,7 +168,7 @@
         </span>
                                             </div>
                                             <div class="card-body">
-                                                <div class="row">
+                                                <div class="row m-0">
                                                     <div class="col-xs-1" th:if="${reviews.size()>1}"
                                                          style="margin-top: 10px;">
                                                         <a data-slide="prev" href="#myCarousel"
@@ -210,7 +204,7 @@
                                                             voluptatem?
                                                         </p>
                                                     </div>
-                                                    <div class="col-xs-1" th:if="${reviews.size()>1}"
+                                                    <div class="col-xs-1 right" th:if="${reviews.size()>1}"
                                                          style="margin-top: 10px;">
                                                         <a data-slide="next" href="#myCarousel"
                                                            class="carousel-control right">›</a>
