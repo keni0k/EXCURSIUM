@@ -51,9 +51,10 @@
             <section class="cd-gallery">
                 <ul>
                     <!--/*@thymesVar id="events" type="java.util.List<com.heroku.demo.event.Event>"*/-->
-                    <li th:each="j : ${#numbers.sequence( 0, events.size()-1)}" th:with="event=${events.get(j)}" th:class="'mix category-'+${event.getCategory()}+' '+${event.getName()}+${event.getAgeLimitString()}">
+                    <li th:if="${events.size()>0}" th:each="j : ${#numbers.sequence( 0, events.size()-1)}" th:with="event=${events.get(j)}" th:class="'mix category-'+${event.getCategory()}+' '+${event.getName()}+${event.getAgeLimitString()}">
                         <div class="card card-cascade narrower mt-0">
                             <!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
+                            <img class="img_age" id = "card-age_limit" th:src="'../../resources/img/age_limits/'+${event.ageLimit}+'.png'"/>
                             <!--/*Card image*/-->
                             <div class="view overlay hm-white-slight z-depth-1" style="margin-top: 20px;">
                                 <div class="img_crop"><img src="../../resources/img/bg-cta.jpg"

@@ -229,8 +229,7 @@
             </div>
             <div class="col-xs-12 col-md-5 col-lg-6">
                 <div class="card card-cascade narrower">
-                    <!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
-                    <img class="img_age" src="../../resources/img/age_limits/0.png"/>
+                    <img class="img_age" id = "card-age_limit" src="../../resources/img/age_limits/0.png"/>
                     <!--/*Card image*/-->
                     <div class="view overlay hm-white-slight z-depth-1" style="margin-top: 20px;">
                         <div class="img_crop"><img src="../../resources/img/bg-cta.jpg"
@@ -293,6 +292,10 @@
             var categories = lang===0?ru[txt]:en[txt];
             $('#card-category').text(categories);
         });
+        $("#age_limit").change(function () {
+            var age = $("age_limit").val();
+            $("#card-age_limit").src("../../resources/img/age_limits/"+age+".png");
+        })
     });
     /*]]>*/
 </script>
