@@ -70,14 +70,14 @@ public class UtilsForWeb {
     }
 
     public static boolean isTourist(Person person) {
-        return person != null && (person.getType() == Consts.PERSON_MODER_TOURIST || person.getType() == Consts.PERSON_TOURIST);
+        return person != null && (person.getType() == Consts.PERSON_MODER_TOURIST || person.getType() == Consts.PERSON_TOURIST ||
+                person.getType() == Consts.PERSON_MODER_GUIDE ||
+                person.getType() == Consts.PERSON_GUIDE || person.getType() == Consts.PERSON_ADMIN);
     }
 
     public static boolean isGuide(Person person){
         return person != null && (person.getType() == Consts.PERSON_MODER_GUIDE ||
-                person.getType() == Consts.PERSON_GUIDE ||
-                person.getType() == Consts.PERSON_MODER_TOURIST ||
-                person.getType() == Consts.PERSON_TOURIST);
+                person.getType() == Consts.PERSON_GUIDE || person.getType() == Consts.PERSON_ADMIN);
     }
 
 }
