@@ -1,5 +1,7 @@
 package com.heroku.demo.utils;
 
+import com.heroku.demo.person.Person;
+
 public class UtilsForWeb {
 
     public static Consts consts = new Consts();
@@ -67,15 +69,15 @@ public class UtilsForWeb {
         return solve[ (number%100>4 && number%100<20)? 2 : cases[(number%10<5)?number%10:5]];
     }
 
-    public static boolean isTourist(Integer type) {
-        return type != null && (type == Consts.PERSON_MODER_TOURIST || type == Consts.PERSON_TOURIST);
+    public static boolean isTourist(Person person) {
+        return person != null && (person.getType() == Consts.PERSON_MODER_TOURIST || person.getType() == Consts.PERSON_TOURIST);
     }
 
-    public static boolean isGuide(Integer type){
-        return type != null && (type == Consts.PERSON_MODER_GUIDE ||
-                type == Consts.PERSON_GUIDE ||
-                type == Consts.PERSON_MODER_TOURIST ||
-                type == Consts.PERSON_TOURIST);
+    public static boolean isGuide(Person person){
+        return person != null && (person.getType() == Consts.PERSON_MODER_GUIDE ||
+                person.getType() == Consts.PERSON_GUIDE ||
+                person.getType() == Consts.PERSON_MODER_TOURIST ||
+                person.getType() == Consts.PERSON_TOURIST);
     }
 
 }
