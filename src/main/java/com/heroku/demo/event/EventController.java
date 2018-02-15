@@ -384,16 +384,15 @@ public class EventController {
         List<Event> events = eventService.getAll();
         Random random = new Random();
         for (Event event: events) {
-            int type = random.nextInt(3);
-//            event.setTypeOfDates(type);
-//            switch (type){
-//                case 0:
-//                case 1: event.setActiveDates(Integer.toBinaryString(random.nextInt(127))); break;
-//                case 2: event.setActiveDates("14.02.2018;16.02.2018;17.02.2018");
-//            }
-//            while (event.getActiveDates().length()<7)
-//                event.setActiveDates("0"+event.getActiveDates());
-//            eventService.editEvent(event);
+            int type = random.nextInt(5);
+            switch (type){
+                case 0: event.setAgeLimit(0); break;
+                case 1: event.setAgeLimit(6); break;
+                case 2: event.setAgeLimit(12); break;
+                case 3: event.setAgeLimit(16); break;
+                case 4: event.setAgeLimit(18); break;
+            }
+            eventService.editEvent(event);
         }
         return "Yes";
     }
