@@ -358,6 +358,7 @@ public class EventController {
         List<Event> events = eventService.getByFilter(null, null, null, localeToLang(locale), null, null, null, null, true);
         modelMap.addAttribute("events", events);
         modelMap.addAttribute("inputEvent", event1);
+        modelMap.addAttribute("utils", new UtilsForWeb());
         modelMap.addAttribute("person", utils.getPerson(principal));
         return "admin/events";
     }

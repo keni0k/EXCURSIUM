@@ -90,6 +90,7 @@ public class PersonController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String persons(ModelMap model) {
+        model.addAttribute("utils", new UtilsForWeb());
         model.addAttribute("insertPerson", new Person());
         return "registration";
     }
@@ -154,7 +155,7 @@ public class PersonController {
         model.addAttribute("orders", orders);
         model.addAttribute("inputEvent", new Event());
         model.addAttribute("consts", new Consts());
-
+        model.addAttribute("utils", new UtilsForWeb());
         model.addAttribute("answersCount", 1);
         model.addAttribute("ordersWaitCount", 2);
         model.addAttribute("ordersCompliteCount", 3);
@@ -185,6 +186,7 @@ public class PersonController {
             model.addAttribute("error_email_free", !personService.isEmailFree(person.getEmail()));
             model.addAttribute("error_email_valid", !personService.isEmailCorrect(person.getEmail()));
             model.addAttribute("insertPerson", person);
+            model.addAttribute("utils", new UtilsForWeb());
             model.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("error.user.add", null, locale)));
             return "registration";
         }
@@ -501,6 +503,7 @@ public class PersonController {
         model.addAttribute("personView", p != null ? p : new Person());
         //model.addAttribute("insertEvent", new Event());
         model.addAttribute("person", utils.getPerson(principal));
+        model.addAttribute("utils", new UtilsForWeb());
         return "person/profile";
     }
 

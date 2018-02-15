@@ -10,6 +10,7 @@ import com.heroku.demo.photo.PhotoRepository;
 import com.heroku.demo.review.ReviewRepository;
 import com.heroku.demo.token.TokenRepository;
 import com.heroku.demo.utils.Utils;
+import com.heroku.demo.utils.UtilsForWeb;
 import org.joda.time.LocalTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,24 +59,28 @@ public class HomeController {
     @RequestMapping("error/403")
     public String access403(ModelMap modelMap, Principal principal) {
         modelMap.addAttribute("person", utils.getPerson(principal));
+        modelMap.addAttribute("utils", new UtilsForWeb());
         return "error/403";
     }
 
     @RequestMapping("error/404")
     public String notFoundMethod(ModelMap modelMap, Principal principal) {
         modelMap.addAttribute("person", utils.getPerson(principal));
+        modelMap.addAttribute("utils", new UtilsForWeb());
         return "error/404";
     }
 
     @RequestMapping("error/500")
     public String internalServerError(ModelMap modelMap, Principal principal) {
         modelMap.addAttribute("person", utils.getPerson(principal));
+        modelMap.addAttribute("utils", new UtilsForWeb());
         return "error/500";
     }
 
     @RequestMapping("upload")
     public String upload(ModelMap modelMap, Principal principal) {
         modelMap.addAttribute("person", utils.getPerson(principal));
+        modelMap.addAttribute("utils", new UtilsForWeb());
         return "upload";
     }
 
@@ -94,6 +99,7 @@ public class HomeController {
     @RequestMapping("index_test")
     public String indexTest(ModelMap modelMap, Principal principal) {
         modelMap.addAttribute("person", utils.getPerson(principal));
+        modelMap.addAttribute("utils", new UtilsForWeb());
         return "index";
     }
 

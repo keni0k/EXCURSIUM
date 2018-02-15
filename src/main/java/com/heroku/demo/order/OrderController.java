@@ -67,7 +67,7 @@ public class OrderController {
         order.setType(0);
         if (!result.hasErrors())
             orderService.addOrder(order);
-        return "person/account";
+        return "redirect:http://excursium.me/person/account";
     }
 
     @RequestMapping(value = "/listjson", method = RequestMethod.POST)
