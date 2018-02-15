@@ -294,7 +294,8 @@
         });
         $("#age_limit").change(function () {
             var age = $("#age_limit").val();
-            $("#card-age_limit").src = "../../resources/img/age_limits/"+age+".png";
+            var src = "../../resources/img/age_limits/"+age+".png";
+            $("#card-age_limit").src = src;
         })
     });
     /*]]>*/
