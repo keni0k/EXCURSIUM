@@ -1,11 +1,15 @@
 package com.heroku.demo;
 
+import com.heroku.demo.event.EventRepository;
 import com.heroku.demo.message.Message;
 import com.heroku.demo.message.MessageRepository;
 import com.heroku.demo.order.OrderRepository;
+import com.heroku.demo.person.PersonRepository;
+import com.heroku.demo.person.PersonServiceImpl;
 import com.heroku.demo.photo.PhotoRepository;
 import com.heroku.demo.review.ReviewRepository;
 import com.heroku.demo.token.TokenRepository;
+import com.heroku.demo.utils.Utils;
 import org.joda.time.LocalTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,52 +38,62 @@ public class HomeController {
     private TokenRepository tokenRepository;
 
     private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+    private Utils utils;
 
     @Autowired
-    public HomeController(MessageRepository pRepository, ReviewRepository reviewRepository,
+    public HomeController(MessageRepository messageRepository, ReviewRepository reviewRepository,
                           OrderRepository orderRepository, PhotoRepository photoRepository,
-                          TokenRepository tokenRepository) {
+                          EventRepository eventRepository,
+                          TokenRepository tokenRepository, PersonRepository personRepository) {
 
         this.orderRepository = orderRepository;
-        this.messageRepository = pRepository;
+        this.messageRepository = messageRepository;
         this.reviewRepository = reviewRepository;
         this.photoRepository = photoRepository;
         this.tokenRepository = tokenRepository;
+        utils = new Utils(new PersonServiceImpl(personRepository, eventRepository, reviewRepository, photoRepository));
 
     }
 
     @RequestMapping("error/403")
-    public String access403() {
+    public String access403(ModelMap modelMap, Principal principal) {
+        modelMap.addAttribute("person", utils.getPerson(principal));
         return "error/403";
     }
 
     @RequestMapping("error/404")
-    public String notFoundMethod() {
+    public String notFoundMethod(ModelMap modelMap, Principal principal) {
+        modelMap.addAttribute("person", utils.getPerson(principal));
         return "error/404";
     }
 
     @RequestMapping("error/500")
-    public String internalServerError() {
+    public String internalServerError(ModelMap modelMap, Principal principal) {
+        modelMap.addAttribute("person", utils.getPerson(principal));
         return "error/500";
     }
 
     @RequestMapping("upload")
-    public String upload() {
+    public String upload(ModelMap modelMap, Principal principal) {
+        modelMap.addAttribute("person", utils.getPerson(principal));
         return "upload";
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String index2() {
+    public String index2(ModelMap modelMap, Principal principal) {
+        modelMap.addAttribute("person", utils.getPerson(principal));
         return "redirect:/events/list";
     }
 
     @RequestMapping({"/", "index"})
-    public String index() {
+    public String index(ModelMap modelMap, Principal principal) {
+        modelMap.addAttribute("person", utils.getPerson(principal));
         return "redirect:/events/list";
     }
 
     @RequestMapping("index_test")
-    public String indexTest() {
+    public String indexTest(ModelMap modelMap, Principal principal) {
+        modelMap.addAttribute("person", utils.getPerson(principal));
         return "index";
     }
 
