@@ -178,7 +178,7 @@ h2.title {
 .navbar-nav>li>.dropdown-menu, .navbar-nav .open .dropdown-menu{padding-bottom: 0;padding-top: 0;background-color:#a274c8!important;}
 .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover{background-color: #ffffff26 !important;}
 
-.img_age{width: 15%;position: absolute;right: 4px;z-index: 1;top: 4px;}
+.img_age{width: 15% !important;position: absolute;right: 4px;z-index: 1;top: 4px;}
 
 .chip {height: 32px;font-size: 13px;font-weight: 500;color: rgba(0, 0, 0, .6);padding: 0 12px;border-radius: 16px;background-color: #eceff1;margin-bottom: 1rem;margin-right: 1rem;display: inline-block;}
 .chip, .chip .close {line-height: 32px;}
