@@ -356,6 +356,7 @@ public class PersonController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String signIn(ModelMap modelMap, Principal principal) {
+        modelMap.addAttribute("utils", new UtilsForWeb());
         Person person = utils.getPerson(principal);
         modelMap.addAttribute("person", person);
         if (person == null)
