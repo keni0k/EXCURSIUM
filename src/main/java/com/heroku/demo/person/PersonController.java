@@ -68,8 +68,9 @@ public class PersonController {
     private OrderServiceImpl orderService;
     private ReviewServiceImpl reviewService;
     private SupportServiceImpl supportService;
-
     private final MessageSource messageSource;
+
+    private Utils utils;
 
     private static final Logger logger = LoggerFactory.getLogger(PersonController.class);
 
@@ -84,6 +85,7 @@ public class PersonController {
         reviewService = new ReviewServiceImpl(reviewRepository);
         supportService = new SupportServiceImpl(supportRepository);
         this.messageSource = messageSource;
+        this.utils = new Utils(personService);
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
@@ -97,50 +99,40 @@ public class PersonController {
                             Principal principal,
                             @RequestParam("order_id") int orderId,
                             @RequestParam("rating_of_guide") int guideRate) {
-        Person person;
-        if (principal != null) {
-            String loginOrEmail = principal.getName();
-            if (!loginOrEmail.equals("")) {
-                person = personService.getByLoginOrEmail(loginOrEmail);
-                if (person != null) {
-                    review.setUserId(person.getId());
-                    review.setUserFullName(person.getFullName());
-                    review.setPathToUserPhoto(person.getImageToken());
-                    String time = new LocalTime().toDateTimeToday().toString().replace('T', ' ');
-                    time = time.substring(0, time.indexOf('.'));
-                    review.setTime(time);
-                    if (orderService.findByReview(orderId, review.getId()) && orderService.findByOrder(person.getId(), orderId))
-                        if (!result.hasErrors()) {
-                            model.addAttribute("success", "Review was added");//TODO: add uvedomlyashki
-                            Buy order = orderService.getById(orderId);
-                            review.setEventId(order.getEventId());
-                            reviewService.addReview(review);
-                            order.setReviewId(review.getId());
-                            orderService.editBuy(order);
-                            personService.setRate(eventService.getById(order.getEventId()).getGuideId(), guideRate);
-                            eventService.setRate(review.getRate(), review.getEventId());
-                        }
+        Person person = utils.getPerson(principal);
+        if (person != null) {
+            review.setUserId(person.getId());
+            review.setUserFullName(person.getFullName());
+            review.setPathToUserPhoto(person.getImageToken());
+            String time = new LocalTime().toDateTimeToday().toString().replace('T', ' ');
+            time = time.substring(0, time.indexOf('.'));
+            review.setTime(time);
+            if (orderService.findByReview(orderId, review.getId()) && orderService.findByOrder(person.getId(), orderId))
+                if (!result.hasErrors()) {
+                    model.addAttribute("success", "Review was added");//TODO: add uvedomlyashki
+                    Buy order = orderService.getById(orderId);
+                    review.setEventId(order.getEventId());
+                    reviewService.addReview(review);
+                    order.setReviewId(review.getId());
+                    orderService.editBuy(order);
+                    personService.setRate(eventService.getById(order.getEventId()).getGuideId(), guideRate);
+                    eventService.setRate(review.getRate(), review.getEventId());
+                    return "redirect:http://excursium.me/events/event?id=" + order.getEventId();
                 }
-            }
         }
         return account(model, principal);
     }
 
     @RequestMapping(value = "/addsupport", method = RequestMethod.POST)
     public String supportAdd(ModelMap model, @Valid Support support, Principal principal) {
-        Person person;
-        if (principal != null) {
-            String loginOrEmail = principal.getName();
-            if (!loginOrEmail.equals("")) {
-                person = personService.getByLoginOrEmail(loginOrEmail);
-                if (person != null) {
-                    support.setPersonId(person.getId());
-                    String time = new LocalTime().toDateTimeToday().toString().replace('T', ' ');
-                    time = time.substring(0, time.indexOf('.'));
-                    support.setTime(time);
-                    supportService.addSupport(support);
-                }
-            }
+        Person person = utils.getPerson(principal);
+        if (person != null) {
+            support.setPersonId(person.getId());
+            String time = new LocalTime().toDateTimeToday().toString().replace('T', ' ');
+            time = time.substring(0, time.indexOf('.'));
+            support.setTime(time);
+            supportService.addSupport(support);
+            model.addAttribute("success", "Thanks for your message!");
         }
         return account(model, principal);
     }
@@ -148,12 +140,9 @@ public class PersonController {
     @RequestMapping(value = "/account", method = RequestMethod.GET)
     public String account(ModelMap model, Principal principal) {
 
-        Person person = new Person();
-        if (principal != null) {
-            String loginOrEmail = principal.getName();
-            if (!loginOrEmail.equals(""))
-                person = personService.getByLoginOrEmail(loginOrEmail);
-        } else return "login";
+        Person person = utils.getPerson(principal);
+
+        if (person == null) return signIn(model, principal);
 
         model.addAttribute("person", person);
 
@@ -268,11 +257,7 @@ public class PersonController {
                            @RequestParam(value = "telegram", required = false) String telegram,
                            @RequestParam("file") MultipartFile file,
                            ModelMap model, Locale locale, Principal principal) {
-        Person person;
-        String loginOrEmail = principal.getName();
-        if (!loginOrEmail.equals("")) {
-            person = personService.getByLoginOrEmail(loginOrEmail);
-        } else person = new Person();
+        Person person = utils.getPerson(principal);
 
         if (file != null && !file.isEmpty()) {
             try {
@@ -322,61 +307,65 @@ public class PersonController {
                               @ModelAttribute("pass_confirm") String passConfirm,
                               ModelMap model, Principal principal, Locale locale) {
         boolean good = true;
-        Person person;
-        String loginOrEmail = principal.getName();
-        if (!loginOrEmail.equals("")) {
-            person = personService.getByLoginOrEmail(loginOrEmail);
-        } else person = new Person();
+        Person person = utils.getPerson(principal);
 
-        if (person.getPass().equals(passLast)) {
+        if (person != null) {
+            if (person.getPass().equals(passLast)) {
 
-            if (!pass.equals("")) {
-                if (pass.equals(passConfirm))
-                    person.setPass(pass);
-                else {
-                    good = false;
-                    model.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("danger.user.update.private.pass_confirm", null, locale)));
+                if (!pass.equals("")) {
+                    if (pass.equals(passConfirm))
+                        person.setPass(pass);
+                    else {
+                        good = false;
+                        model.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("danger.user.update.private.pass_confirm", null, locale)));
+                    }
                 }
-            }
 
-            if (!person.getEmail().equals(email)) {
-                good = false;
-                if (personService.isEmailFree(email)) {
-                    if (personService.isEmailCorrect(email)) {
-                        String newToken = randomToken(32);
-                        try {
-                            sendMail(newToken, email);
-                            person.setToken(newToken);
-                            person.setType(Consts.PERSON_DISABLED);
-                            model.addAttribute("message", new MessageUtil("warning", messageSource.getMessage("warning.user.update.private.email_success", null, locale)));
-                        } catch (MailjetSocketTimeoutException | MailjetException e) {
-                            model.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("danger.user.update.private.email_send", null, locale)));
-                            e.printStackTrace();
-                        }
+                if (!person.getEmail().equals(email)) {
+                    good = false;
+                    if (personService.isEmailFree(email)) {
+                        if (personService.isEmailCorrect(email)) {
+                            String newToken = randomToken(32);
+                            try {
+                                sendMail(newToken, email);
+                                person.setToken(newToken);
+                                person.setType(Consts.PERSON_DISABLED);
+                                model.addAttribute("message", new MessageUtil("warning", messageSource.getMessage("warning.user.update.private.email_success", null, locale)));
+                            } catch (MailjetSocketTimeoutException | MailjetException e) {
+                                model.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("danger.user.update.private.email_send", null, locale)));
+                                e.printStackTrace();
+                            }
+                        } else
+                            model.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("error.user.email.valid", null, locale)));
                     } else
-                        model.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("error.user.email.valid", null, locale)));
-                } else
-                    model.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("error.user.email.free", null, locale)));
+                        model.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("error.user.email.free", null, locale)));
+                }
+
+            } else {
+                good = false;
+                model.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("danger.user.update.private.pass_last", null, locale)));
             }
 
-        } else {
-            good = false;
-            model.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("danger.user.update.private.pass_last", null, locale)));
+            personService.editPerson(person);
+            if (good)
+                model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.update.private", null, locale)));
+            return account(model, principal);
         }
-
-        personService.editPerson(person);
-        if (good)
-            model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.update.private", null, locale)));
-        return account(model, principal);
+        return signIn(model, principal);
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String signIn(ModelMap modelMap) {
-        return "login";
+    public String signIn(ModelMap modelMap, Principal principal) {
+        Person person = utils.getPerson(principal);
+        modelMap.addAttribute("person", person);
+        if (person == null)
+            return "login";
+        else
+            return account(modelMap, principal);
     }
 
     @RequestMapping(value = "/confirm", method = RequestMethod.GET)
-    public String confirm(ModelMap model, @ModelAttribute("token") String token) {
+    public String confirm(ModelMap model, @ModelAttribute("token") String token, Principal principal) {
         Person person = personService.getByToken(token);
         if (person != null)
             if (person.getType() == Consts.PERSON_DISABLED) {
@@ -384,7 +373,7 @@ public class PersonController {
                 personService.editPerson(person);
                 model.addAttribute("message", new MessageUtil("success", "Your account has been successfully verified."));
             }
-        return signIn(model);
+        return signIn(model, principal);
     }
 
     @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST, value = "/getbytoken")
@@ -428,15 +417,20 @@ public class PersonController {
                                @RequestParam(value = "rate_up", required = false) Long rateUp,
                                @RequestParam(value = "first_name", required = false) String firstName,
                                @RequestParam(value = "last_name", required = false) String lastName,
-                               @RequestParam(value = "city", required = false) String city) {
-        List<Person> persons = personService.getByFilter(type, rateDown, rateUp, firstName, lastName, city, null);
-        model.addAttribute("persons", persons);
-        if (id != null) {
-            Person editPerson = personService.getById(id);
-            model.addAttribute("insertPerson", editPerson);
-        } else model.addAttribute("insertPerson", new Person());
-        model.addAttribute("utils", new UtilsForWeb());
-        return "admin/persons";
+                               @RequestParam(value = "city", required = false) String city,
+                               Principal principal) {
+        Person person = utils.getPerson(principal);
+        if (person!=null && person.getType()==Consts.PERSON_ADMIN) {
+            List<Person> persons = personService.getByFilter(type, rateDown, rateUp, firstName, lastName, city, null);
+            model.addAttribute("persons", persons);
+            if (id != null) {
+                Person editPerson = personService.getById(id);
+                model.addAttribute("insertPerson", editPerson);
+            } else model.addAttribute("insertPerson", new Person());
+            model.addAttribute("utils", new UtilsForWeb());
+            model.addAttribute("person", person);
+            return "admin/persons";
+        } return signIn(model, principal);
     }
 
     @RequestMapping(value = "/moderation", method = RequestMethod.POST)
@@ -450,7 +444,8 @@ public class PersonController {
                               @RequestParam(value = "rate_up", required = false) Long rateUp,
                               @RequestParam(value = "first_name", required = false) String firstName,
                               @RequestParam(value = "last_name", required = false) String lastName,
-                              @RequestParam(value = "city", required = false) String city) {
+                              @RequestParam(value = "city", required = false) String city,
+                              Principal principal) {
         Person personWithBD = personService.getById(idPerson);
         if (personWithBD == null) logger.info("ERROR PERSONWITHBD IS NULL");
         else {
@@ -461,22 +456,26 @@ public class PersonController {
                 eventsBlock(personWithBD.getId());
             personWithBD.setType(typePerson);
             personService.editPerson(personWithBD);
+            model.addAttribute("message", new MessageUtil("success", "SUCCESS! DATA WAS CHANGED!"));
+            return persons_last(model, null, type, rateDown, rateUp, firstName, lastName, city, principal);
         }
-        model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.registration", null, locale)));
-        return persons_last(model, null, type, rateDown, rateUp, firstName, lastName, city);
+        model.addAttribute("message", new MessageUtil("success", "WARNING! DATA WASN'T CHANGED!"));
+        return persons_last(model, null, type, rateDown, rateUp, firstName, lastName, city, principal);
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public String deleteContact(ModelMap model,
-                                @ModelAttribute("id") String id,
+                                @ModelAttribute("id") long id,
                                 @RequestParam(value = "type", required = false) Integer type,
                                 @RequestParam(value = "rate_down", required = false) Long rateDown,
                                 @RequestParam(value = "rate_up", required = false) Long rateUp,
                                 @RequestParam(value = "first_name", required = false) String firstName,
                                 @RequestParam(value = "last_name", required = false) String lastName,
-                                @RequestParam(value = "city", required = false) String city) {
-        personService.delete(Long.parseLong(id));
-        return persons_last(model, null, type, rateDown, rateUp, firstName, lastName, city);
+                                @RequestParam(value = "city", required = false) String city, Principal principal) {
+        Person person = personService.getById(id);
+        person.setType(Consts.PERSON_BLOCKED);
+        personService.editPerson(person);
+        return persons_last(model, null, type, rateDown, rateUp, firstName, lastName, city, principal);
     }
 
     @RequestMapping(value = "/listjson", method = RequestMethod.POST)
@@ -496,10 +495,11 @@ public class PersonController {
     }
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public String profile(ModelMap model, @RequestParam("id") long id) {
+    public String profile(ModelMap model, @RequestParam("id") long id, Principal principal) {
         Person p = personService.getById(id);
-        model.addAttribute("person", p != null ? p : new Person());
+        model.addAttribute("personView", p != null ? p : new Person());
         //model.addAttribute("insertEvent", new Event());
+        model.addAttribute("person", utils.getPerson(principal));
         return "person/profile";
     }
 
@@ -531,48 +531,45 @@ public class PersonController {
                              @RequestParam(value = "phone_number", required = false) String phoneNumber,
                              @RequestParam("file") MultipartFile file,
                              ModelMap model, Locale locale, Principal principal) {
-        Person person;
-        String loginOrEmail = principal.getName();
-        if (!loginOrEmail.equals("")) {
-            person = personService.getByLoginOrEmail(loginOrEmail);
-        } else person = new Person();
+        Person person = utils.getPerson(principal);
+        if (person!=null) {
+            if (file != null && !file.isEmpty()) {
+                try {
+                    byte[] bytes = file.getBytes();
 
-        if (file != null && !file.isEmpty()) {
-            try {
-                byte[] bytes = file.getBytes();
+                    // Creating the directory to store file
+                    String rootPath = System.getProperty("catalina.home");
+                    File dir = new File(rootPath + File.separator + "tmpFiles");
+                    if (!dir.exists())
+                        dir.mkdirs();
 
-                // Creating the directory to store file
-                String rootPath = System.getProperty("catalina.home");
-                File dir = new File(rootPath + File.separator + "tmpFiles");
-                if (!dir.exists())
-                    dir.mkdirs();
+                    String fileName = file.getOriginalFilename();
 
-                String fileName = file.getOriginalFilename();
+                    // Create the file on server
+                    File serverFile = new File(fileName);
+                    BufferedOutputStream stream = new BufferedOutputStream(
+                            new FileOutputStream(serverFile));
+                    stream.write(bytes);
+                    stream.close();
 
-                // Create the file on server
-                File serverFile = new File(fileName);
-                BufferedOutputStream stream = new BufferedOutputStream(
-                        new FileOutputStream(serverFile));
-                stream.write(bytes);
-                stream.close();
+                    if (getFileSizeMegaBytes(serverFile) > 1)
+                        serverFile = compress(serverFile, getFileExtension(fileName), getFileSizeMegaBytes(serverFile));
 
-                if (getFileSizeMegaBytes(serverFile) > 1)
-                    serverFile = compress(serverFile, getFileExtension(fileName), getFileSizeMegaBytes(serverFile));
-
-                String photoToken = randomToken(32) + ".jpg";
-                putImg(serverFile.getAbsolutePath(), photoToken);
-                person.setImageOfPassportUrl(photoToken);
-                person.setType(Consts.PERSON_MODER_GUIDE);
-                person.setDateAndPlaceOfPassport(dateAndPlace);
-                person.setSeriesAndNumberOfPassport(seriesAndNumber);
-                if (aboutMe != null && !aboutMe.equals(""))
-                    person.setAbout(aboutMe);
-                if (phoneNumber != null && !phoneNumber.equals(""))
-                    person.setPhoneNumber(phoneNumber);
-                personService.editPerson(person);
-            } catch (Exception e) {
-                logger.error("You failed to upload file => " + e.getMessage());
-                model.addAttribute("message_file", new MessageUtil("danger", "You failed to upload file. Please, try again."));// messageSource.getMessage("success.user.registration", null, locale)));
+                    String photoToken = randomToken(32) + ".jpg";
+                    putImg(serverFile.getAbsolutePath(), photoToken);
+                    person.setImageOfPassportUrl(photoToken);
+                    person.setType(Consts.PERSON_MODER_GUIDE);
+                    person.setDateAndPlaceOfPassport(dateAndPlace);
+                    person.setSeriesAndNumberOfPassport(seriesAndNumber);
+                    if (aboutMe != null && !aboutMe.equals(""))
+                        person.setAbout(aboutMe);
+                    if (phoneNumber != null && !phoneNumber.equals(""))
+                        person.setPhoneNumber(phoneNumber);
+                    personService.editPerson(person);
+                } catch (Exception e) {
+                    logger.error("You failed to upload file => " + e.getMessage());
+                    model.addAttribute("message_file", new MessageUtil("danger", "You failed to upload file. Please, try again."));// messageSource.getMessage("success.user.registration", null, locale)));
+                }
             }
         }
         return account(model, principal);
@@ -580,14 +577,10 @@ public class PersonController {
 
     @RequestMapping(value = "/resend_email", method = RequestMethod.GET)
     private String reSend(ModelMap model, Locale locale, Principal principal) throws MailjetSocketTimeoutException, MailjetException {
-        Person person = null;
-        String loginOrEmail = principal.getName();
-        if (!loginOrEmail.equals("")) {
-            person = personService.getByLoginOrEmail(loginOrEmail);
-        }
-        if (person == null) return account(model, principal);
-        if (person.getType() == Consts.PERSON_DISABLED)
-            sendMail(person.getToken(), person.getEmail());
+        Person person = utils.getPerson(principal);
+        if (person!=null)
+            if (person.getType() == Consts.PERSON_DISABLED)
+                sendMail(person.getToken(), person.getEmail());
         return account(model, principal);
     }
 

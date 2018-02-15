@@ -13,7 +13,9 @@ xmlns:th="http://www.thymeleaf.org">
 <body th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
 <!--/*@thymesVar id="country" type="java.lang.Integer"*/-->
 <!--/*@thymesVar id="city" type="java.lang.Integer"*/-->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top" role="navigation" th:fragment="header">
+<!--/*@thymesVar id="person" type="com.heroku.demo.person.Person"*/-->
+<!--/*@thymesVar id="utils" type="com.heroku.demo.utils.UtilsForWeb"*/-->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top" role="navigation" th:with="isTourist = ${utils.isTourist(person.getType())}, isGuide = ${utils.isGuide(person.getType())}" th:fragment="header">
 <div class="container" style="padding-top: 0!important;">
 <!-- Brand and toggle get grouped for better mobile display -->
 <div class="navbar-header">
@@ -35,7 +37,7 @@ data-target="#bs-example-navbar-collapse-1">
 <ul class="nav navbar-nav navbar-right">
 <li>
 <a th:href="@{/events/list(country=${country}, city = ${city})}" th:text="${#messages.msg('titles.excursions')}">Экскурсии</a></li>
-<li><a href="#">FAQ</a></li>
+<!--<li><a href="#">FAQ</a></li>-->
 
 <li th:if="${isAdmin}">
     <a class="waves-effect waves-light" type="button" data-toggle="dropdown" aria-expanded="false" href="">Модерация <b class="caret"></b>
@@ -44,12 +46,18 @@ data-target="#bs-example-navbar-collapse-1">
         <li><a href="/users/moderation" class="waves-effect waves-light" th:text="${#messages.msg('titles.persons')}">Модерация пользователей</a></li>
     </ul>
 </li>
-    <li th:if="${isAdmin}">
+    <li th:if="${isGuide}">
         <a class="waves-effect waves-light" type="button" data-toggle="dropdown" aria-expanded="false" href="">Гиду <b class="caret"></b>
         </a><ul class="dropdown-menu">
         <li><a href="/events/add" class="waves-effect waves-light">Добавить экскурсию</a></li>
-        <li><a href="/users/account" class="waves-effect waves-light">Мои экскурсии</a></li>
-        <li><a href="/users/account" class="waves-effect waves-light">Заказы</a></li>
+        <li><a href="/events/my" class="waves-effect waves-light">Мои экскурсии</a></li>
+        <li><a href="/orders/list_guide" class="waves-effect waves-light">Новые Заказы</a></li>
+    </ul>
+    </li>
+    <li th:if="${isTourist}">
+        <a class="waves-effect waves-light" type="button" data-toggle="dropdown" aria-expanded="false" href="">Туристу <b class="caret"></b>
+        </a><ul class="dropdown-menu">
+        <li><a href="/orders/list_tourist" class="waves-effect waves-light">Заказанные экскурсии</a></li>
     </ul>
     </li>
 <li th:if="${isUser} or ${isAdmin}"><a href="/users/account"

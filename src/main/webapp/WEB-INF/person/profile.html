@@ -29,7 +29,7 @@
     <title>Экскурсии</title>
 </head>
 <body style="background-color: #f9f9f9;">
-<!--/*@thymesVar id="person" type="com.heroku.demo.person.Person"*/-->
+<!--/*@thymesVar id="personView" type="com.heroku.demo.person.Person"*/-->
 <div class="content"
      th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
     <div th:replace="fragments/header :: header"></div>
@@ -51,31 +51,31 @@
                             <!--/*Avatar*/-->
                             <div class="avatar">
                                 <img src="../../resources/img/user.png" class="rounded-circle img-responsive"
-                                     th:src="${person.getImageUrl()}" alt="Third sample avatar image"/>
+                                     th:src="${personView.getImageUrl()}" alt="Third sample avatar image"/>
                             </div>
 
                             <!--/*Content*/-->
                             <div class="card-body">
                                 <!--/*Rating*/-->
                                 <ul class="rating">
-<th:block th:if="${(person.getRate()!=-1)and(person.getRate()!=0)}">
-<li th:each="i : ${#numbers.sequence(0, person.getRate()-1)}">
+<th:block th:if="${(personView.getRate()!=-1)and(personView.getRate()!=0)}">
+<li th:each="i : ${#numbers.sequence(0, personView.getRate()-1)}">
 <i class="fa fa-star"></i>
 </li>
 </th:block>
-                                    <th:block th:if="${(person.getRate()!=-1)and(person.getRate()!=5)}">
-<li th:each="i : ${#numbers.sequence(person.getRate(), 4)}">
+                                    <th:block th:if="${(personView.getRate()!=-1)and(personView.getRate()!=5)}">
+<li th:each="i : ${#numbers.sequence(personView.getRate(), 4)}">
 <i class="fa fa-star-o"></i>
 </li>
 </th:block>
-                                    <th:block th:if="${(person.getRate()==-1)}">
+                                    <th:block th:if="${(personView.getRate()==-1)}">
 <li th:each="i : ${#numbers.sequence(0, 4)}">
 <i class="fa fa-star-o"></i>
 </li>
 </th:block>
                                 </ul>
-                                <h3 class="mt-1" th:text="${person.getFullName()}">Имя</h3>
-                                <p class="font-bold" th:text="${person.getCity()}">Город</p>
+                                <h3 class="mt-1" th:text="${personView.getFullName()}">Имя</h3>
+                                <p class="font-bold" th:text="${personView.getCity()}">Город</p>
                                 <!--/*Triggering button*/-->
                                 <a class="rotate-btn" data-card="card-3">
                                     <i class="fa fa-repeat"></i>&nbsp;&nbsp;О себе</a>
@@ -90,7 +90,7 @@
                             <!--/*Content*/-->
                             <h4 class="mt-2 mb-2" th:text="${#messages.msg('words.about_me')}">О себе</h4>
                             <hr/>
-                            <p th:text="${person.getAbout()}">текст о себе</p>
+                            <p th:text="${personView.getAbout()}">текст о себе</p>
                             <hr/>
                             <!--/*Social Icons*/-->
                             <ul class="rating">

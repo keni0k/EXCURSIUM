@@ -1,5 +1,7 @@
 package com.heroku.demo.utils;
 
+import com.heroku.demo.person.Person;
+import com.heroku.demo.person.PersonServiceImpl;
 import com.microsoft.azure.storage.CloudStorageAccount;
 import com.microsoft.azure.storage.StorageException;
 import com.microsoft.azure.storage.blob.CloudBlobClient;
@@ -18,12 +20,19 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URISyntaxException;
 import java.security.InvalidKeyException;
+import java.security.Principal;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
 public class Utils {
+
+    PersonServiceImpl personService;
+
+    public Utils(PersonServiceImpl personService) {
+        this.personService = personService;
+    }
 
     public static String randomToken(int length) {
         final String mCHAR = "qwertyuioplkjhgfdsazxcvbnmABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
@@ -35,6 +44,7 @@ public class Utils {
             char ch = mCHAR.charAt(number);
             builder.append(ch);
         }
+
         return builder.toString();
     }
 
@@ -109,6 +119,18 @@ public class Utils {
             default: lang = Consts.LANGUAGE_RU;
         }
         return lang;
+    }
+
+    public Person getPerson(Principal principal){
+        if (principal!=null) {
+            Person person = null;
+            String loginOrEmail = principal.getName();
+            if (!loginOrEmail.equals("")) {
+                person = personService.getByLoginOrEmail(loginOrEmail);
+            }
+            return person;
+        }
+        else return null;
     }
 
 }

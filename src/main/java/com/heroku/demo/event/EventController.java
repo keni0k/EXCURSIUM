@@ -9,7 +9,6 @@ import com.heroku.demo.photo.PhotoServiceImpl;
 import com.heroku.demo.review.ReviewRepository;
 import com.heroku.demo.review.ReviewServiceImpl;
 import com.heroku.demo.utils.Consts;
-import com.heroku.demo.utils.MessageUtil;
 import com.heroku.demo.utils.Utils;
 import com.heroku.demo.utils.UtilsForWeb;
 import org.joda.time.LocalTime;
@@ -51,6 +50,7 @@ public class EventController {
     private EventServiceImpl eventService;
     private PhotoServiceImpl photoService;
     private PersonServiceImpl personService;
+    private Utils utils;
 
     private static final Logger logger = LoggerFactory.getLogger(EventController.class);
 
@@ -63,14 +63,15 @@ public class EventController {
         this.photoRepository = photoRepository;
         photoService = new PhotoServiceImpl(photoRepository);
         eventService = new EventServiceImpl(eventRepository, photoService);
-
         this.messageSource = messageSource;
+        this.utils = new Utils(personService);
     }
 
     @RequestMapping(value = "/add")
-    public String eventAdd(ModelMap model) {
+    public String eventAdd(ModelMap model, Principal principal) {
         model.addAttribute("inputEvent", new Event());
         model.addAttribute("utils", new UtilsForWeb());
+        model.addAttribute("person", utils.getPerson(principal));
         return "event/event_add";
     }
 
@@ -85,22 +86,17 @@ public class EventController {
         time = time.substring(0,time.indexOf('.'));
         event.setTime(time);
         event.setType(Consts.EXCURSION_MODERATION);
-        String loginOrEmail = principal.getName();
-        if (!loginOrEmail.equals("")) {
-            Person p = personService.getByLoginOrEmail(loginOrEmail);
-            event.setFullNameOfGuide(p.getFullName());
-            event.setPhotoOfGuide(p.getImageToken());
-            event.setGuideId(p.getId());
-        } else event.setGuideId(-1);
-        if (!result.hasErrors()) {
-            eventService.addEvent(event);
-        } else {
-            modelMap.addAttribute("file", file);
-            modelMap.addAttribute("inputEvent", event);
-            modelMap.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("error.event.add", null, locale)));
-            return "event/event_add";
-        }
 
+        Person person = utils.getPerson(principal);
+        if (person!=null && !result.hasErrors()) {
+            event.setFullNameOfGuide(person.getFullName());
+            event.setPhotoOfGuide(person.getImageToken());
+            event.setGuideId(person.getId());
+        } else {
+            return eventAddAgain(modelMap, event, messageSource.getMessage("error.event.add", null, locale), file, principal);
+        }
+        String photoToken = randomToken(32) + ".jpg";
+        Photo photo = new Photo((int) event.getId(), photoToken);
         if (file != null && !file.isEmpty()) {
             try {
                 byte[] bytes = file.getBytes();
@@ -126,25 +122,34 @@ public class EventController {
                 logger.info("Server File Location="
                         + serverFile.getAbsolutePath());
 
-                String photoToken = randomToken(32) + ".jpg";
                 putImg(serverFile.getAbsolutePath(), photoToken);
-                photoRepository.save(new Photo((int) event.getId(), photoToken));//todo
+
+                photoRepository.save(photo);//todo
+                eventService.addEvent(event);
             } catch (Exception e) {
                 logger.error("You failed to upload file => " + e.getMessage());
                 eventService.delete(event.getId());
-                return eventAddAgain(modelMap, event, "You failed to upload file. Please, try again.");
+                photoRepository.delete(photo.getId());
+                return eventAddAgain(modelMap, event, "You failed to upload file. Please, try again.", file, principal);
             }
             return event(modelMap, (int) event.getId(), principal);
         } else if (file == null) {
-            return eventAddAgain(modelMap, event, "You failed to upload file because the file is null.");
+            eventService.delete(event.getId());
+            photoRepository.delete(photo.getId());
+            return eventAddAgain(modelMap, event, "You failed to upload file because the file is null.", null, principal);
         } else {
-            return eventAddAgain(modelMap, event, "You failed to upload file because the file is empty.");
+            eventService.delete(event.getId());
+            photoRepository.delete(photo.getId());
+            return eventAddAgain(modelMap, event, "You failed to upload file because the file is empty.", file, principal);
         }
     }
 
-    private String eventAddAgain(ModelMap model, Event event, String errorData) {
+    private String eventAddAgain(ModelMap model, Event event, String errorData, MultipartFile file, Principal principal) {
         model.addAttribute("inputEvent", event);
         model.addAttribute("error_data", errorData);
+        model.addAttribute("utils", new UtilsForWeb());
+        model.addAttribute("file", file);
+        model.addAttribute("person", utils.getPerson(principal));
         return "event/event_add";
     }
 
@@ -154,9 +159,11 @@ public class EventController {
                               @RequestParam(value = "price_down", required = false) Integer priceDown,
                               @RequestParam(value = "category", required = false) Integer category,
                               @RequestParam(value = "words", required = false) String words,
-                              Locale locale) {
-        eventService.delete(id);
-        return events(model, null, priceUp, priceDown, category, null, null, words, locale);
+                              Locale locale, Principal principal) {
+        Event e = eventService.getById(id);
+        e.setType(Consts.EXCURSION_BLOCKED);
+        eventService.editEvent(e);
+        return events(model, null, priceUp, priceDown, category, null, null, words, locale, principal);
     }
 
     @RequestMapping(value = "/event", method = RequestMethod.GET)
@@ -164,18 +171,14 @@ public class EventController {
         model.addAttribute("event", eventService.getById(id));
         model.addAttribute("reviews", reviewService.getByEvent(id));
         model.addAttribute("utils", new UtilsForWeb());
-        if (principal != null) {
-            String loginOrEmail = principal.getName();
-            if (!loginOrEmail.equals(""))
-                model.addAttribute("person", personService.getByLoginOrEmail(loginOrEmail));
-        } else model.addAttribute("person", new Person());
+        model.addAttribute("person", utils.getPerson(principal));
         return "event/event";
     }
 
     @RequestMapping(value = "/cities", method = RequestMethod.GET)
-    public String cities(ModelMap model, @RequestParam(value = "country", required = false) Integer country) {
+    public String cities(ModelMap model, @RequestParam(value = "country", required = false) Integer country, Principal principal) {
 
-        if (country==null) return countries(model);
+        if (country==null) return countries(model, principal);
 
         //model.addAttribute("utils", new UtilsForWeb());
 //        model.addAttribute("items", );
@@ -183,18 +186,20 @@ public class EventController {
         model.addAttribute("country", country);
         model.addAttribute("utils", new UtilsForWeb());
         model.addAttribute("service", eventService);
+        model.addAttribute("person", utils.getPerson(principal));
 
         return "event/countries_and_cities";
     }
 
     @RequestMapping(value = "/countries", method = RequestMethod.GET)
-    public String countries(ModelMap model) {
+    public String countries(ModelMap model, Principal principal) {
         //model.addAttribute("utils", new UtilsForWeb());
 
 //        model.addAttribute("items", );
         model.addAttribute("type", 0);
         model.addAttribute("utils", new UtilsForWeb());
         model.addAttribute("service", eventService);
+        model.addAttribute("person", utils.getPerson(principal));
 
         return "event/countries_and_cities";
     }
@@ -210,9 +215,9 @@ public class EventController {
                               @RequestParam(value = "page", required = false) Integer page,
                               @RequestParam(value = "country", required = false) Integer country,
                               @RequestParam(value = "city", required = false) Integer city,
-                              Locale locale) {
-        if (country==null) return countries(model);
-        if (city==null) return cities(model, country);
+                              Locale locale, Principal principal) {
+        if (country==null) return countries(model, principal);
+        if (city==null) return cities(model, country, principal);
         if (price != null) {
             String prices[] = price.split(";");
             priceDown = Integer.parseInt(prices[0]);
@@ -248,6 +253,8 @@ public class EventController {
         model.addAttribute("country", country);
         model.addAttribute("city", city);
         model.addAttribute("utils", new UtilsForWeb());
+        model.addAttribute("person", utils.getPerson(principal));
+
         return "event/event_list";
     }
 
@@ -255,9 +262,9 @@ public class EventController {
     public String listTest(ModelMap model,
                            @RequestParam(value = "country", required = false) Integer country,
                            @RequestParam(value = "city", required = false) Integer city,
-                           Locale locale){
-        if (country==null) return countries(model);
-        if (city==null) return cities(model, country);
+                           Locale locale, Principal principal){
+        if (country==null) return countries(model, principal);
+        if (city==null) return cities(model, country, principal);
         ListEvents events = eventService.getByFilter(null, null, null, localeToLang(locale), country, city, null, 0, false);
         model.addAttribute("minPrice", events.getMinPrice());
         model.addAttribute("maxPrice", events.getMaxPrice());
@@ -265,6 +272,7 @@ public class EventController {
         model.addAttribute("country", country);
         model.addAttribute("city", city);
         model.addAttribute("utils", new UtilsForWeb());
+        model.addAttribute("person", utils.getPerson(principal));
         return "event/index";
     }
 
@@ -314,7 +322,7 @@ public class EventController {
                          @RequestParam(value = "country", required = false) Integer country,
                          @RequestParam(value = "city", required = false) Integer city,
                          @RequestParam(value = "words", required = false) String words,
-                         Locale locale) {
+                         Locale locale, Principal principal) {
         List<Event> events = eventService.getByFilter(priceUp, priceDown, category, localeToLang(locale), country, city, words, null, true);
         model.addAttribute("events", events);
 
@@ -323,11 +331,10 @@ public class EventController {
             Photo img = photoService.getByEventId(id);
             if (img != null)
                 editEvent.pathToPhoto = img.getData();
-//            logger.info("EVENT PATH: "+editEvent.pathToPhoto);
             model.addAttribute("inputEvent", editEvent);
-        } else model.addAttribute("inputEvent", new Event());
+        }
         model.addAttribute("utils", new UtilsForWeb());
-
+        model.addAttribute("person", utils.getPerson(principal));
         return "admin/events";
     }
 
@@ -339,7 +346,7 @@ public class EventController {
                                    @ModelAttribute("place") String place,
                                    @ModelAttribute("category") int category,
                                    @ModelAttribute("language") int language,
-                                   ModelMap modelMap, Locale locale) {
+                                   ModelMap modelMap, Locale locale, Principal principal) {
         Event event1 = eventService.getById(id);
         event1.setType(type);
         event1.setCategory(category);
@@ -351,7 +358,7 @@ public class EventController {
         List<Event> events = eventService.getByFilter(null, null, null, localeToLang(locale), null, null, null, null, true);
         modelMap.addAttribute("events", events);
         modelMap.addAttribute("inputEvent", event1);
-
+        modelMap.addAttribute("person", utils.getPerson(principal));
         return "admin/events";
     }
 
@@ -377,15 +384,15 @@ public class EventController {
         Random random = new Random();
         for (Event event: events) {
             int type = random.nextInt(3);
-            event.setTypeOfDates(type);
-            switch (type){
-                case 0:
-                case 1: event.setActiveDates(Integer.toBinaryString(random.nextInt(127))); break;
-                case 2: event.setActiveDates("14.02.2018;16.02.2018;17.02.2018");
-            }
-            while (event.getActiveDates().length()<7)
-                event.setActiveDates("0"+event.getActiveDates());
-            eventService.editEvent(event);
+//            event.setTypeOfDates(type);
+//            switch (type){
+//                case 0:
+//                case 1: event.setActiveDates(Integer.toBinaryString(random.nextInt(127))); break;
+//                case 2: event.setActiveDates("14.02.2018;16.02.2018;17.02.2018");
+//            }
+//            while (event.getActiveDates().length()<7)
+//                event.setActiveDates("0"+event.getActiveDates());
+//            eventService.editEvent(event);
         }
         return "Yes";
     }

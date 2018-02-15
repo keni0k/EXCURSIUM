@@ -104,6 +104,8 @@ public class Event {
 
     private int city = -1;
 
+    private String smallData = "";
+
     private int country = -1;
 
     @Id
@@ -318,5 +320,13 @@ public class Event {
 
     public void setTypeOfDates(int typeOfDates) {
         this.typeOfDates = typeOfDates;
+    }
+
+    public String getSmallData() {
+        return smallData;
+    }
+
+    public void setSmallData(String smallData) {
+        this.smallData = smallData;
     }
 }

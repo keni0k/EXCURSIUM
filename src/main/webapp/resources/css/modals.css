@@ -263,6 +263,24 @@ input[type=date], input[type=datetime-local], input[type=email], input[type=numb
     font-size: 1rem;
     cursor: text;
 }
+.md-form label.active {
+    -webkit-transform: translateY(-140%);
+    -ms-transform: translateY(-140%);
+    transform: translateY(-140%);
+    font-size: .8rem;
+}
+input[type=date]+label:after, input[type=datetime-local]+label:after, input[type=email]+label:after, input[type=number]+label:after, input[type=password]+label:after, input[type=search-md]+label:after, input[type=search]+label:after, input[type=tel]+label:after, input[type=text]+label:after, input[type=time]+label:after, input[type=url]+label:after, textarea.md-textarea+label:after {
+    display: block;
+    content: "";
+    position: absolute;
+    top: 65px;
+    opacity: 0;
+    -webkit-transition: .2s opacity ease-out,.2s color ease-out;
+    transition: .2s opacity ease-out,.2s color ease-out;
+}
+.modal-dialog.cascading-modal {
+    margin-top: 10%;
+}
 
 @media (min-width: 576px) {
     .modal-dialog {
