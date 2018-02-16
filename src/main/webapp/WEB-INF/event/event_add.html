@@ -241,9 +241,9 @@
                     <!--/*Card image*/-->
                     <!--/*Card content*/-->
                     <div class="card-body pb-0 no-padding text-center"><!--/*Category & Title*/-->
-                        <h5 id="card-category">Развлечения</h5>
+                        <h4 id="card-category">Развлечения</h4>
                         <h3 class="card-title">
-                            <strong id="card-title">%Назание экскурсии%</strong>
+                            <strong id="card-title">%Название экскурсии%</strong>
                         </h3>
                         <!--/*Rating*/-->
                         <ul class="rating">
@@ -300,7 +300,7 @@
                         </ul>
 
                         <h3 class="card-title">
-                            <strong id="card-title-1">%Название%</strong>
+                            <strong id="card-title-1">%Название экскурсии%</strong>
                         </h3>
 
                         <!--Description-->
@@ -330,6 +330,7 @@
         $("#description").keyup(function() {
             var txt=$('#description').val();
             $('#card-text').text(txt);
+            if (txt.indexOf('.')!=-1 || txt.indexOf('!')!=-1 || txt.indexOf('?')!=-1)
             $('#card-text-1').text(txt);
         });
         $("#name").keyup(function() {

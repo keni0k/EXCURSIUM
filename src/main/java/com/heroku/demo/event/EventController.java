@@ -385,12 +385,12 @@ public class EventController {
             int tochka = event.getDescription().indexOf('.');
             int voskl = event.getDescription().indexOf('!');
             int vopr = event.getDescription().indexOf('?');
-            if (tochka<5) tochka=61;
-            if (voskl<5) voskl=61;
-            if (vopr<5) vopr=61;
+            if (tochka<10) tochka=61;
+            if (voskl<10) voskl=61;
+            if (vopr<10) vopr=61;
             int i = Math.min(Math.min(Math.min(tochka,vopr),voskl),60);
             if (i==60) event.setSmallData(event.getDescription().substring(0,57)+"...");
-            else event.setSmallData(event.getDescription().substring(0,i));
+            else event.setSmallData(event.getDescription().substring(0,i+1));
             eventService.editEvent(event);
         }
         return "Yes";
