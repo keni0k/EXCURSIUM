@@ -309,7 +309,7 @@
                                                             <div class="md-form form-sm">
                                                                 <input type="text" id="editProfile1"
                                                                        class="form-control" name="first_name"
-                                                                       th:value="${person.getFirstName()}"/>
+                                                                       th:value="${person!=null}?${person.getFirstName()}"/>
                                                                 <label for="editProfile1" class=""
                                                                        th:text="${#messages.msg('words.first_name')}">First
                                                                     name</label>
@@ -321,7 +321,7 @@
                                                             <!--/*Last Name*/-->
                                                             <div class="md-form form-sm">
                                                                 <input type="text" id="editProfile2"
-                                                                       th:value="${person.getLastName()}"
+                                                                       th:value="${person!=null}?${person.getLastName()}"
                                                                        class="form-control" name="last_name"/>
                                                                 <label for="editProfile2" class=""
                                                                        th:text="${#messages.msg('words.last_name')}">Last
@@ -335,7 +335,7 @@
                                                             <!--/*Company website*/-->
                                                             <div class="md-form form-sm">
                                                                 <input type="text" id="editProfile5" name="email"
-                                                                       th:value="${person.getEmail()}"
+                                                                       th:value="${person!=null}?${person.getEmail()}"
                                                                        class="form-control"/>
                                                                 <label for="editProfile5" class="">E-mail</label>
                                                             </div>
@@ -348,7 +348,7 @@
                                                                        class="form-control bfh-phone" required=""
                                                                        minlength="17"
                                                                        data-format="+7 (ddd) ddd-dddd"
-                                                                       th:value="${person.getPhoneNumber()}"/>
+                                                                       th:value="${person!=null}?${person.getPhoneNumber()}"/>
                                                                 <label for="editProfile6" class=""
                                                                        th:text="${#messages.msg('words.phone')}">Phone
                                                                     number</label>

@@ -22,7 +22,7 @@
     <link rel="shortcut icon" href="../../resources/img/icon.ico" type="image/x-icon"/>
 
     <link rel="stylesheet" type="text/css" href="../../resources/css/styles.css"/>
-    <link rel="stylesheet" href="../../resources/css/cards.css"/>
+    <link rel="stylesheet" href="../../resources/css/mycards.css"/>
     <link rel="stylesheet" href="../../resources/css/media.css"/>
     <link rel="stylesheet" href="../../resources/css/rating.css"/>
 
@@ -111,9 +111,9 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                 <img th:src="${person.getImageUrl()}" src="../../resources/img/user.png" alt=""
                                      id="img-person"
                                      onerror="onImgError();"
-                                     onload="if (this.width + this.height === 0) {this.onerror();return;}"/>
+                                     onload="if (this.width + this.height === 0) {onImgError();return;}"/>
                                 <!--/*Card content*/-->
-                                <div class="card-body">
+                                <div class="card-body text-center">
                                     <!--/*Title*/-->
                                     <h4 class="card-title"><strong th:text="${person.getFullName()}">Имя</strong></h4>
                                     <h5 th:text="${person.getStringType(0)}">Турист/Экскурсовод</h5>
@@ -318,11 +318,11 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
 
                                 <ul class="pagination pagination-circle pg-blue mb-0">
                                     <!--/*First*/-->
-                                    <li class="page-item disabled clearfix d-none d-sm-block"
+                                    <!--/*<li class="page-item disabled clearfix d-none d-sm-block"
                                         id="to-home-exc-0">
                                         <a class="page-link waves-effect waves-effect"
                                            th:onclick="'showHide0(1);'">В начало</a>
-                                    </li>
+                                    </li>*/-->
                                     <!--/*Arrow left*/-->
                                     <!--/*Numbers*/-->
                                     <li th:each="i : ${#numbers.sequence(1, pages)}"
@@ -334,7 +334,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                     </li>
                                     <!--/*Arrow right*/-->
                                     <!--/*End-of-First*/-->
-                                    <li class="page-item clearfix d-none d-sm-block"
+                                    <!--/*<li class="page-item clearfix d-none d-sm-block"
                                         id="to-end-exc-0"
                                         th:onclick="'showHide0('+${pages}+');'">
                                         <a class="page-link waves-effect waves-effect">В конец</a>
@@ -429,11 +429,11 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
 
                                 <ul class="pagination pagination-circle pg-blue mb-0">
                                     <!--/*First*/-->
-                                    <li class="page-item disabled clearfix d-none d-sm-block"
+                                    <!--/*<li class="page-item disabled clearfix d-none d-sm-block"
                                         id="to-home-exc">
                                         <a class="page-link waves-effect waves-effect"
                                            th:onclick="'showHide(1);'">В начало</a>
-                                    </li>
+                                    </li>*/-->
                                     <!--/*Arrow left*/-->
                                     <!--/*Numbers*/-->
                                     <li th:each="i : ${#numbers.sequence(1, pagesev)}"
@@ -444,12 +444,12 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                         </a>
                                     </li>
                                     <!--/*Arrow right*/-->
-                                    <!--/*End-of-First*/-->
+                                    <!--/*&lt;!&ndash;/*End-of-First*/&ndash;&gt;
                                     <li class="page-item clearfix d-none d-sm-block"
                                         id="to-end-exc"
                                         th:onclick="'showHide('+${pagesev}+');'">
                                         <a class="page-link waves-effect waves-effect">В конец</a>
-                                    </li>
+                                    </li>*/-->
                                 </ul>
 
                             </nav>
