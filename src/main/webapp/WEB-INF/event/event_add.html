@@ -23,16 +23,7 @@
     <link rel="stylesheet" type="text/css" href="../../resources/css/styles.css"/>
     <link rel="stylesheet" href="../../resources/css/media.css"/>
 
-    <style rel="stylesheet">.form-control {
-        padding-top: 7px;
-        padding-bottom: 7px;
-        padding-left: 12px;
-        margin-top: 0;
-        border-bottom-right-radius: 4px;
-        border-top-right-radius: 4px;
-        border: 1px solid #bdbdbd
-    }
-
+    <style rel="stylesheet">.form-control {padding-top: 7px;padding-bottom: 7px;padding-left: 12px;margin-top: 0;border-bottom-right-radius: 4px;border-top-right-radius: 4px;border: 1px solid #bdbdbd}
     .dropdown-toggle {
         border-radius: 4px;
     }</style>
@@ -82,7 +73,7 @@
                     <br/>
                     <div class="panel panel-default">
                         <div class="panel-heading" th:text="${#messages.msg('words.type_of_excursion')}">
-                            Тип экскурсии
+                            Категория экскурсии
                         </div>
                         <div class="panel-body">
                             <div class="input-group">
@@ -228,6 +219,9 @@
                 </form>
             </div>
             <div class="col-md-5 col-lg-6 ">
+                <div class="page-header mt-1">
+                    <h3>Так она будет выглядеть в списке экскурсий</h3>
+                </div>
                 <div class="card card-cascade narrower">
                     <img class="img_age" id="card-age_limit" src="../../resources/img/age_limits/0.png"/>
                     <!--/*Card image*/-->
@@ -261,60 +255,6 @@
                     </div>
                     <!--/*End-of-Card content*/-->
                 </div>
-                <br/>
-                <div class="card">
-                    <img class="img_age" id="card-age_limit-1" src="../../resources/img/age_limits/0.png"/>
-                    <!--/*@thymesVar id="person" type="com.heroku.demo.person.Person"*/-->
-                    <!--Card image-->
-                    <div class="view overlay hm-white-slight z-depth-1" style="max-height: 30rem">
-                        <!--TODO-->
-                        <div class="img_crop">
-                            <img src="../../resources/img/bg-cta.jpg" class="img-fluid" alt=""/>
-                        </div>
-
-                        <a>
-                            <div class="mask waves-effect waves-light"></div>
-                        </a>
-                    </div>
-                    <!--/.Card image-->
-                    <!--Button-->
-                    <a class="btn-action waves-effect waves-light disabled" style="background: none;width: auto;">
-                        <div class="avatar">
-                            <img th:src="${person.getImageUrl()}" src="../../resources/img/user.png" style="height: 100px; width:auto; border-radius: 50%;" alt="Аватар"/>
-                        </div>
-                    </a>
-                    <span style="font-size: medium;color: #000000;text-align:right;padding-top: 100px;margin: 2px 30px -80px auto;"
-                          th:text="${person.getFullName()}">%FULL_NAME%</span>
-
-                    <!--Card content-->
-                    <div class="card-body no-padding text-center">
-                        <!--Category & Title-->
-                        <h4 id="card-category-1">Развлечения</h4>
-
-                        <!--Rating-->
-                        <ul class="rating">
-                                <li th:each="i : ${#numbers.sequence(0, 5)}">
-                                    <i class="fa fa-star-o"></i>
-                                </li>
-                            <li><span>(0)</span></li>
-                        </ul>
-
-                        <h3 class="card-title">
-                            <strong id="card-title-1">%Название экскурсии%</strong>
-                        </h3>
-
-                        <!--Description-->
-                        <p class="card-text mb-0" style="font-size: medium; color: #000000" align="justify" id="card-text-1">%Полное описание%</p>
-                    </div>
-                    <!--Card footer-->
-                    <div class="card-footer links-light">
-                        <h3 class="left card-footer-left mt-0 mb-0">
-                            <strong id="card-price-1">%Цена%</strong>
-                        </h3>
-                        <a class="btn btn-primary waves-effect waves-light right mt-05 disabled" href="#" role="button" data-toggle="modal" data-target="#modalGoOrder">Заказать</a>
-                    </div>
-                    <!--/.Card content-->
-                </div>
             </div>
         </div>
     </div>
@@ -329,19 +269,20 @@
     $(document).ready(function() {
         $("#description").keyup(function() {
             var txt=$('#description').val();
-            $('#card-text').text(txt);
-            if (txt.indexOf('.')!=-1 || txt.indexOf('!')!=-1 || txt.indexOf('?')!=-1)
-            $('#card-text-1').text(txt);
+            if (((txt.indexOf('.')===txt.length || txt.indexOf('!')===txt.length || txt.indexOf('?')===txt.length)
+                    || (txt.indexOf('.')===-1 && txt.indexOf('!')===-1 && txt.indexOf('?')===-1))
+                && txt.length<60)
+                $('#card-text').text(txt);
+            else if (txt.length>=60)
+                $('#card-text').text(txt.substring(0,57)+'...');
         });
         $("#name").keyup(function() {
             var txt=$('#name').val();
             $('#card-title').text(txt);
-            $('#card-title-1').text(txt);
         });
         $("#price").keyup(function() {
             var txt=$('#price').val();
             $('#card-price').text(txt+"₽");
-            $('#card-price-1').text(txt+"₽");
         });
         $("#category").change(function() {
             var txt=$('#category').val();
@@ -350,13 +291,11 @@
             var en = ["Entertainment", "Science", "History", "Art", "Quests", "Extreme", "Manufacture", "Gastronomy"];
             var categories = lang===0?ru[txt]:en[txt];
             $('#card-category').text(categories);
-            $('#card-category-1').text(categories);
         });
         $("#age_limit").change(function () {
             var age = $("#age_limit").val();
             var src = "../../resources/img/age_limits/"+age+".png";
             $("#card-age_limit").attr("src", src);
-            $("#card-age_limit-1").attr("src", src);
         })
     });
     /*]]>*/
