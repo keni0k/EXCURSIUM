@@ -226,7 +226,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                         <th:block th:text="${#messages.msg('account.select_event')+' '}">Выбрать
                                             экскурсию
                                         </th:block>
-                                        <i class="fa fa-photo ml-1"></i>
+                                        <i class="fa fa-photo ml-05"></i>
                                     </button>
                                 </a>
                             </div>
@@ -271,7 +271,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                         <div class="right">
                                             <a th:href="@{/orders/order(id=${order.getId()})}"
                                                class="waves-effect p-2">Открыть<i
-                                                    class="fa fa-photo ml-1"></i></a>
+                                                    class="fa fa-photo ml-05"></i></a>
                                         </div>
                                         <th:block th:if="${order.getType()==consts.ORDER_OPEN}">
                                             <div class="clearfix"></div>
@@ -280,14 +280,14 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                                    data-title="Confirm order?" data-toggle="confirmation"
                                                    class="waves-effect" style="display: inline">Подтвердить
                                                     заказ<i
-                                                            class="fa fa-handshake-o ml-1"></i></a>
+                                                            class="fa fa-handshake-o ml-05"></i></a>
                                             </div>
                                             <div class="right">
                                                 <a href="#" data-toggle="modal"
                                                    th:onclick="'modalDispute('+${order.getId()}+')'"
                                                    data-target="#modalDispute"
                                                    class="waves-effect p-2">Открыть спор<i
-                                                        class="fa fa-gavel ml-1"></i></a>
+                                                        class="fa fa-gavel ml-05"></i></a>
                                             </div>
                                         </th:block>
                                         <th:block
@@ -297,7 +297,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                                 <a href="#" data-toggle="modal" data-target="#modalAddReview"
                                                    th:onclick="'modalReview('+${order.getId()}+')'">Оставить
                                                     отзыв<i
-                                                            class="fa fa-comments ml-1"></i></a>
+                                                            class="fa fa-comments ml-05"></i></a>
                                                 <!--role="button" -->
                                             </div>
                                         </th:block>
@@ -347,7 +347,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                 <button th:if="${isThisUserAccount and excursovod}" type="button"
                                         class="btn btn-primary mb-3 waves-effect waves-light">
                                     <th:block th:text="${#messages.msg('titles.add_event')+' '}">Добавить новую экскурсию</th:block>
-                                    <i class="fa fa-photo ml-1"></i>
+                                    <i class="fa fa-photo ml-05"></i>
                                 </button>
                                 </a>
                             </div>
@@ -409,7 +409,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                     <span class="right">
                                     <a th:href="@{/events/event(id=${event.getId()})}"
                                        class="waves-effect">Открыть<i
-                                            class="fa fa-photo ml-1"></i></a>
+                                            class="fa fa-photo ml-05"></i></a>
                                         <a rel="tooltip" title="Edit" href="javascript:void(0)" role="button"
                                            style="margin-left: 10px; margin-right: 2px; margin-top: 8px;">
                                         <i class="fa fa-edit" style="font-size: 20px;"></i>
@@ -590,7 +590,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                                         </button>
                                                         <button type="submit"
                                                                 class="btn btn-primary waves-effect waves-light">
-                                                            Сохранить <i class="fa fa-check ml-1"></i></button>
+                                                            Сохранить <i class="fa fa-check ml-05"></i></button>
                                                     </div>
                                                     <!--/*End-of-Grid row*/-->
                                                 </form>
@@ -654,7 +654,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                                         </button>
                                                         <button type="submit"
                                                                 class="btn btn-primary waves-effect waves-light">
-                                                            Сохранить <i class="fa fa-check ml-1"></i>
+                                                            Сохранить <i class="fa fa-check ml-05"></i>
                                                         </button>
                                                     </div>
                                                 </form>
@@ -713,7 +713,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                             </button>
                                             <button type="submit" class="btn btn-primary waves-effect waves-light">
                                                 Отправить <i
-                                                    class="fa fa-paper-plane ml-1"></i></button>
+                                                    class="fa fa-paper-plane ml-05"></i></button>
                                         </div>
                                     </form>
                                 </div>
@@ -744,7 +744,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                             data-dismiss="modal">Закрыть
                                     </button>
                                     <button type="button" class="btn btn-primary waves-effect waves-light">Go to <i
-                                            class="fa fa-arrow-right ml-1"></i></button>
+                                            class="fa fa-arrow-right ml-05"></i></button>
                                 </div>
                             </div>
                             <!--/*End-of-Content*/-->
@@ -778,7 +778,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                             data-dismiss="modal">Отмена
                                     </button>
                                     <button type="button" class="btn btn-primary waves-effect waves-light">Отправить <i
-                                            class="fa fa-paper-plane ml-1"></i></button>
+                                            class="fa fa-paper-plane ml-05"></i></button>
                                 </div>
                             </div>
                             <!--/*End-of-Content*/-->
@@ -877,7 +877,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                                 data-dismiss="modal">Отменить
                                         </button>
                                         <button type="submit" class="btn btn-primary waves-effect waves-light">Отправить
-                                            <i class="fa fa-check ml-1"></i></button>
+                                            <i class="fa fa-check ml-05"></i></button>
                                     </div>
                                 </form>
                             </div>
@@ -927,7 +927,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                             </button>
                                             <button type="submit" class="btn btn-primary waves-effect waves-light">
                                                 Открыть спор<i
-                                                    class="fa fa-gavel ml-1"></i></button>
+                                                    class="fa fa-gavel ml-05"></i></button>
                                         </div>
                                     </form>
                                 </div>
