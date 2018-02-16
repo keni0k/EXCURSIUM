@@ -277,9 +277,8 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                             <div class="clearfix"></div>
                                             <div class="left">
                                                 <a th:href="@{/orders/confirm(id=${order.getId()})}"
-                                                   data-title="Confirm order?"
-                                                   data-target="_blank" data-toggle="confirmation"
-                                                   class="waves-effect" rel="tooltip" style="display: inline">Подтвердить
+                                                   data-title="Confirm order?" data-toggle="confirmation"
+                                                   class="waves-effect" style="display: inline">Подтвердить
                                                     заказ<i
                                                             class="fa fa-handshake-o ml-1"></i></a>
                                             </div>
@@ -996,11 +995,12 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
         var pages = [[${events.size()}]];
 
         for (i = 0; i < pages; i++) {
+            var j = i + 1;
             document.getElementById('id' + i).style.display = "none";
-            if (i < pages && document.getElementById('page_events' + i+1))
-                document.getElementById('page_events' + i).className = "page-item";
-            if (i+1 === page && document.getElementById('page_events' + i+1))
-                document.getElementById('page_events' + i).className = "page-item active";
+            if (i < pages && document.getElementById('page_events' + j))
+                document.getElementById('page_events' + j).className = "page-item";
+            if (j === page && document.getElementById('page_events' + j))
+                document.getElementById('page_events' + j).className = "page-item active";
         }
 
         if (document.getElementById('id' + id))
