@@ -50,14 +50,8 @@ data-target="#bs-example-navbar-collapse-1">
         <a class="waves-effect waves-light" type="button" data-toggle="dropdown" aria-expanded="false" href="">Гиду <b class="caret"></b>
         </a><ul class="dropdown-menu">
         <li><a href="/events/add" class="waves-effect waves-light">Добавить экскурсию</a></li>
-        <li><a href="/events/my" class="waves-effect waves-light">Мои экскурсии</a></li>
-        <li><a href="/orders/list_guide" class="waves-effect waves-light">Новые заказы</a></li>
-    </ul>
-    </li>
-    <li th:if="${isTourist}">
-        <a class="waves-effect waves-light" type="button" data-toggle="dropdown" aria-expanded="false" href="">Туристу <b class="caret"></b>
-        </a><ul class="dropdown-menu">
-        <li><a href="/orders/list_tourist" class="waves-effect waves-light">Заказанные экскурсии</a></li>
+        <li><a href="/events/mylist" class="waves-effect waves-light">Мои экскурсии</a></li>
+        <li><a href="/orders/mylist" class="waves-effect waves-light">Новые заказы</a></li>
     </ul>
     </li>
 <li th:if="${isUser} or ${isAdmin}"><a href="/users/account"
