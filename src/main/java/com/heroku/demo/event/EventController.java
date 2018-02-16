@@ -33,7 +33,6 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Random;
 
 import static com.heroku.demo.utils.Utils.*;
 
@@ -382,16 +381,10 @@ public class EventController {
     @ResponseBody
     public String updateDBEvents() {
         List<Event> events = eventService.getAll();
-        Random random = new Random();
         for (Event event: events) {
-            int type = random.nextInt(5);
-            switch (type){
-                case 0: event.setAgeLimit(0); break;
-                case 1: event.setAgeLimit(6); break;
-                case 2: event.setAgeLimit(12); break;
-                case 3: event.setAgeLimit(16); break;
-                case 4: event.setAgeLimit(18); break;
-            }
+            int i = Math.min(Math.min(Math.min(event.getDescription().indexOf('.'),event.getDescription().indexOf('!')),event.getDescription().indexOf('!')),60);
+            if (i==60) event.setSmallData(event.getDescription().substring(0,57)+"...");
+            else event.setSmallData(event.getDescription().substring(0,i));
             eventService.editEvent(event);
         }
         return "Yes";
