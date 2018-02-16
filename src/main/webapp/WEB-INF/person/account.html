@@ -21,10 +21,10 @@
     <link rel="icon" href="../../resources/img/icon.ico" type="image/x-icon"/>
     <link rel="shortcut icon" href="../../resources/img/icon.ico" type="image/x-icon"/>
 
+    <link rel="stylesheet" href="../../resources/css/rating.css"/>
     <link rel="stylesheet" type="text/css" href="../../resources/css/styles.css"/>
     <link rel="stylesheet" href="../../resources/css/mycards.css"/>
     <link rel="stylesheet" href="../../resources/css/media.css"/>
-    <link rel="stylesheet" href="../../resources/css/rating.css"/>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -388,6 +388,26 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                                 <h4 class="card-title" th:text="${event.getName()}"><a
                                                         th:href="@{/events/event(id=${event.getId()})}">Название
                                                     экскурсии</a></h4>
+                                                <!--Rating-->
+                                                <ul class="rating">
+                                                    <li th:if="${event.getRate()!=-1}" th:text="${event.getRate()}"></li>
+                                                    <th:block th:if="${(event.getIntRate()!=-1)and(event.getIntRate()!=0)}">
+                                                        <li th:each="i : ${#numbers.sequence(0, event.getIntRate()-1)}">
+                                                            <i class="fa fa-star"></i>
+                                                        </li>
+                                                    </th:block>
+                                                    <th:block th:if="${(event.getIntRate()!=-1)and(event.getIntRate()!=5)}">
+                                                        <li th:each="i : ${#numbers.sequence(event.getIntRate(), 4)}">
+                                                            <i class="fa fa-star-o"></i>
+                                                        </li>
+                                                    </th:block>
+                                                    <th:block th:if="${(event.getIntRate()==-1)}">
+                                                        <li th:each="i : ${#numbers.sequence(0, 4)}">
+                                                            <i class="fa fa-star-o"></i>
+                                                        </li>
+                                                    </th:block>
+                                                    <li th:text="'('+${event.getReviewsCount()}+')'"></li>
+                                                </ul>
                                                 <strong th:style="'color:' + ${event.getType()}==1?'#337ABB;':'#f80000;' + 'font-size: x-large; padding-top: -0.2em;'"
                                                         th:text="${event.getStringType(lang)}">На модерации</strong>
                                                 <!--/*TODO translate*/-->
@@ -396,7 +416,6 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                             <div class="card-footer links-light">
                                                 <span class="left price-text">
                                                     <strong th:text="${event.getPrice()}+'&#8381;  '">%Цена%  </strong>
-                                                    <span th:text="'Отзывов: '+${event.getReviewsCount()}"></span>
                                                 </span>
                                                 <span class="right">
                                                 <a th:href="@{/events/event(id=${event.getId()})}"
