@@ -137,7 +137,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                             data-toggle="modal" data-target="#modalContactUser">Связаться<i
                                             class="fa fa-paper-plane ml-2"></i></button>
                                     <a th:if="${notConfirmed}" type="button" th:href="'/users/resend_email'"
-                                       class="btn btn-primary mt-4 waves-effect waves-light">
+                                       class="btn btn-primary mt-1 waves-effect waves-light">
                                         <!--/*TODO translate*/-->
                                         <th:block>Подтвердить E-mail</th:block><!--/*TODO translate*/-->
                                     </a>
@@ -215,9 +215,9 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                         <div class="col-lg-8 col-md-12 text-center">
                             <!--/* Heading */-->
                             <div class="text-center mt-3">
-                                <h2 class="title text-center pe mt-4"
+                                <h2 class="title text-center pe mt-1"
                                     th:if="${orders.size()>0}">Посещенные экскурсии</h2>
-                                <h2 class="title text-center nepe mt-4"
+                                <h2 class="title text-center nepe mt-1"
                                     th:if="${orders.size()==0}">Здесь будут отображаться
                                     посещенные экскурсии</h2> <!--/*-310,615 TODO: translate*/-->
                                 <a href="/events/list" th:if="${orders.size()==0}">
@@ -267,7 +267,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                             </div>
                                             <!--/*Card footer*/-->
                                             <div class="card-footer links-light">
-                                                <div class="left pt-05 price-text">
+                                                <div class="left price-text">
                                                     <strong th:text="${order.getPrice()}+'&#8381;  '">%Цена% </strong>
                                                 </div>
                                                 <div class="right">
@@ -277,7 +277,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                                 </div>
                                                 <th:block th:if="${order.getType()==consts.ORDER_OPEN}">
                                                     <div class="clearfix"></div>
-                                                    <div class="left pt-05">
+                                                    <div class="left">
                                                         <a th:href="@{/orders/confirm(id=${order.getId()})}"
                                                            data-title="Confirm order?"
                                                            data-target="_blank" data-toggle="confirmation"
@@ -394,13 +394,13 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                             </div>
                                             <!--/*Card footer*/-->
                                             <div class="card-footer links-light">
-                                                <span class="left pt-05 price-text">
+                                                <span class="left price-text">
                                                     <strong th:text="${event.getPrice()}+'&#8381;  '">%Цена%  </strong>
                                                     <span th:text="'Отзывов: '+${event.getReviewsCount()}"></span>
                                                 </span>
                                                 <span class="right">
                                                 <a th:href="@{/events/event(id=${event.getId()})}"
-                                                   class="waves-effect p-2">Открыть<i
+                                                   class="waves-effect">Открыть<i
                                                         class="fa fa-photo ml-1"></i></a>
                                                                                                     <a rel="tooltip"
                                                                                                        title="Edit"
