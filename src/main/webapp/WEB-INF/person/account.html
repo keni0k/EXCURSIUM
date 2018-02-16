@@ -267,7 +267,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                             </div>
                                             <!--/*Card footer*/-->
                                             <div class="card-footer links-light">
-                                                <div class="left pt-2">
+                                                <div class="left pt-05">
                                                     <strong th:text="${order.getPrice()}+'&#8381;  '"
                                                             style="color:#4285F4; font-size: medium; padding-top: -0.2em;">%Цена% </strong>
                                                 </div>
@@ -278,7 +278,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                                 </div>
                                                 <th:block th:if="${order.getType()==consts.ORDER_OPEN}">
                                                     <div class="clearfix"></div>
-                                                    <div class="left pt-2">
+                                                    <div class="left pt-05">
                                                         <a th:href="@{/orders/confirm(id=${order.getId()})}"
                                                            data-title="Confirm order?"
                                                            data-target="_blank" data-toggle="confirmation"
@@ -297,7 +297,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                                 <th:block
                                                         th:if="${order.getReviewId()==-1 and order.getType()==consts.ORDER_CONFIRM}">
                                                     <div class="clearfix"></div>
-                                                    <div class="pt-2">
+                                                    <div class="pt-05">
                                                         <a href="#" data-toggle="modal" data-target="#modalAddReview"
                                                            th:onclick="'modalReview('+${order.getId()}+')'">Оставить
                                                             отзыв<i
@@ -395,7 +395,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                             </div>
                                             <!--/*Card footer*/-->
                                             <div class="card-footer links-light">
-                                                <span class="left pt-2">
+                                                <span class="left pt-05">
                                                 <strong th:text="${event.getPrice()}+'&#8381;  '"
                                                         style="color:#4285F4; font-size: medium; padding-top: -0.2em; padding-bottom: 2rem;">%Цена%  </strong>
                                                     <span th:text="'Отзывов: '+${event.getReviewsCount()}"></span>

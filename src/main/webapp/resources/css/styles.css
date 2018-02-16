@@ -151,8 +151,12 @@ h2.title {
 .mt-05{margin-top: 0.5rem!important;}
 .mt-0{margin-top: 0!important;}
 .mb-0{margin-bottom: 0!important;}
+.mb-05{margin-bottom: 0.5rem!important;}
+.mb-1{margin-bottom: 1rem!important;}
 .pb-0 {padding-bottom: 0!important;}
 .pt-0{padding-top: 0!important;}
+.pt-2 {padding-top: 2rem!important;}
+.pt-05 {padding-top: 0.5rem!important;}
 
 .navbar .dropdown-menu a {color: #fff!important;}
 .navbar-nav>li>.dropdown-menu {background-color: #a274c8;}

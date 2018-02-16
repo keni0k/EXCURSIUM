@@ -24,5 +24,10 @@
 .card-footer, .card-header {padding: .75rem 1.25rem;background-color: rgba(0,0,0,.1);}
 .card-footer-left{color:#4285F4!important;padding: 0.4em 0.1em!important;display: inline-block!important;font-size: 24px!important;}
 h3.card-title {padding-bottom: 1rem; font-size: 24px!important;}
-
 .card .btn-action {margin: -23px 20px -100px auto;background-color: #929fba;height: 100px;width: 100px;line-height: 0;}
+.card.card-cascade.card-avatar img {margin-top: -5rem;margin-left: auto;margin-right: auto;max-width: 160px;border-radius: 50%;}
+.btn-floating, .btn:active, .btn:focus, .btn:hover, .card.card-cascade.card-avatar img, .colorful-select .dropdown-content li.active span, .dropdown .dropdown-menu .dropdown-item:active, .dropdown .dropdown-menu .dropdown-item:hover, .form-header, .media .media-left img, .modal-dialog .modal-content, .modal-dialog.cascading-modal .modal-header, .nav-tabs {
+    -webkit-box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+}
+.card .card-footer .left {float: left;}
