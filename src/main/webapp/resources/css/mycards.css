@@ -22,6 +22,8 @@
 .card-footer:last-child {border-radius: 0 0 -webkit-calc(.25rem - 1px) -webkit-calc(.25rem - 1px);}
 .card-footer {border-top: 1px solid rgba(0,0,0,.125);}
 .card-footer, .card-header {padding: .75rem 1.25rem;background-color: rgba(0,0,0,.1);}
+.card .card-footer .left {float: left; padding-top: 0.5rem!important; font-size: 18px!important;}
+.card .card-footer .right {float: right; padding-top: 0.5rem!important; font-size: 18px!important;}
 .card-footer-left{color:#4285F4!important;padding: 0.4em 0.1em!important;display: inline-block!important;font-size: 24px!important;}
 h3.card-title {padding-bottom: 1rem; font-size: 24px!important;}
 .card .btn-action {margin: -23px 20px -100px auto;background-color: #929fba;height: 100px;width: 100px;line-height: 0;}
@@ -30,8 +32,6 @@ h3.card-title {padding-bottom: 1rem; font-size: 24px!important;}
     -webkit-box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
     box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
 }
-.card .card-footer .left {float: left; padding-top: 0.5rem!important; font-size: 18px!important;}
-.card .card-footer .right {float: right; padding-top: 0.5rem!important; font-size: 18px!important;}
 
 .card.card-cascade.card-avatar {margin-top: 6rem;text-align: center;}
 
