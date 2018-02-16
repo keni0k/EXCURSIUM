@@ -233,8 +233,8 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                             <!--/*Heading*/-->
                             <!--/*Card row*/-->
                                 <!--/*Card*/-->
-                                <div th:if="${events.size()>0}"
-                                     th:each="j : ${#numbers.sequence(0,events.size()-1)}"
+                                <div th:if="${orders.size()>0}"
+                                     th:each="j : ${#numbers.sequence(0,orders.size()-1)}"
                                      class="card card-cascade narrower"
                                      th:id="'id-0'+${j}"
                                      th:style="${j != 0}?'display: none;'"
