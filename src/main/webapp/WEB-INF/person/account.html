@@ -360,86 +360,80 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                             </div>
                             <!--/* End-of-Heading */-->
                             <!--/* Card row */-->
-                            <th:block th:if="${events.size()!=0 and excursovod}">
-                                <div class="card-deck" th:each="i : ${#numbers.sequence( 0, events.size()-1)}">
-
-                                    <th:block th:if="${i%2==0}" th:with="inc=${i!=events.size()-1?1:0}">
-                                        <!--/*Card*/-->
-                                        <div th:each="j : ${#numbers.sequence(i,i+inc)}"
-                                             th:class="'card card-cascade narrower ' + ${j%2==0?'card-left':'card-right'}"
-                                             th:with="event = ${events.get(j)}"
-                                             th:id="'id'+${j}"
-                                             th:style="${j != 0 and j != 1}?'display: none;'">
-                                            <!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
-                                            <!--/*Card image*/-->
-                                            <div class="view overlay hm-white-slight"  style="margin-top: 20px">
-                                                <div class="img_crop">
-                                                    <img th:src="${event.pathToPhoto}" src="#" class="img-fluid"
-                                                         style="height: 240px; min-width: -webkit-fill-available;"
-                                                         alt=""/>
-                                                </div>
-                                                <a href="#" th:href="@{/events/event(id=${event.getId()})}">
-                                                    <div class="mask waves-effect waves-light"></div>
-                                                </a>
-                                            </div>
-                                            <!--/*Card content*/-->
-                                            <div class="card-body pb-0">
-                                                <!--/*Title*/-->
-                                                <h4 class="card-title" th:text="${event.getName()}"><a
-                                                        th:href="@{/events/event(id=${event.getId()})}">Название
-                                                    экскурсии</a></h4>
-                                                <!--Rating-->
-                                                <ul class="rating">
-                                                    <li th:if="${event.getRate()!=-1}" th:text="${event.getRate()}"></li>
-                                                    <th:block th:if="${(event.getIntRate()!=-1)and(event.getIntRate()!=0)}">
-                                                        <li th:each="i : ${#numbers.sequence(0, event.getIntRate()-1)}">
-                                                            <i class="fa fa-star"></i>
-                                                        </li>
-                                                    </th:block>
-                                                    <th:block th:if="${(event.getIntRate()!=-1)and(event.getIntRate()!=5)}">
-                                                        <li th:each="i : ${#numbers.sequence(event.getIntRate(), 4)}">
-                                                            <i class="fa fa-star-o"></i>
-                                                        </li>
-                                                    </th:block>
-                                                    <th:block th:if="${(event.getIntRate()==-1)}">
-                                                        <li th:each="i : ${#numbers.sequence(0, 4)}">
-                                                            <i class="fa fa-star-o"></i>
-                                                        </li>
-                                                    </th:block>
-                                                    <li th:text="'('+${event.getReviewsCount()}+')'"></li>
-                                                </ul>
-                                                <strong th:style="'color:' + ${event.getType()}==1?'#337ABB;':'#f80000;' + 'font-size: x-large; padding-top: -0.2em;'"
-                                                        th:text="${event.getStringType(lang)}">На модерации</strong>
-                                                <!--/*TODO translate*/-->
-                                            </div>
-                                            <!--/*Card footer*/-->
-                                            <div class="card-footer links-light">
-                                                <span class="left price-text">
-                                                    <strong th:text="${event.getPrice()}+'&#8381;  '">%Цена%  </strong>
-                                                </span>
-                                                <span class="right">
-                                                <a th:href="@{/events/event(id=${event.getId()})}"
-                                                   class="waves-effect">Открыть<i
-                                                        class="fa fa-photo ml-1"></i></a>
-                                                    <a rel="tooltip" title="Edit" href="javascript:void(0)" role="button"
-                                                       style="margin-left: 10px; margin-right: 2px; margin-top: 8px;">
-                                                    <i class="fa fa-edit" style="font-size: 20px;"></i>
-                                                </a>
-                                                <a rel="tooltip" title="Delete" href="javascript:void(0)" role="button"
-                                                   style="margin-left: 10px; margin-top: 7px;">
-                                                    <i class="fa fa-trash" style="font-size: 20px;"></i>
-                                                </a>
-                                                </span>
-                                            </div>
+                            <th:block th:if="${events.size()!=0 and excursovod}" th:each="j : ${#numbers.sequence( 0, events.size()-1)}">
+                                <!--/*Card*/-->
+                                <div class="card card-cascade narrower"
+                                     th:with="event = ${events.get(j)}"
+                                     th:id="'id'+${j}"
+                                     th:style="${j != 0}?'display: none;'">
+                                    <!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
+                                    <!--/*Card image*/-->
+                                    <div class="view overlay hm-white-slight"  style="margin-top: 20px">
+                                        <div class="img_crop">
+                                            <img th:src="${event.pathToPhoto}" src="#" class="img-fluid"
+                                                 style="height: 240px; min-width: -webkit-fill-available;"
+                                                 alt=""/>
                                         </div>
-                                        <!--/*End-of-Card*/-->
-                                    </th:block>
+                                        <a href="#" th:href="@{/events/event(id=${event.getId()})}">
+                                            <div class="mask waves-effect waves-light"></div>
+                                        </a>
+                                    </div>
+                                    <!--/*Card content*/-->
+                                    <div class="card-body pb-0">
+                                        <!--/*Title*/-->
+                                        <h4 class="card-title" th:text="${event.getName()}"><a
+                                                th:href="@{/events/event(id=${event.getId()})}">Название
+                                            экскурсии</a></h4>
+                                        <!--Rating-->
+                                        <ul class="rating" style="float: inherit;">
+                                            <li th:if="${event.getRate()!=-1}" th:text="${event.getRate()}"></li>
+                                            <th:block th:if="${(event.getIntRate()!=-1)and(event.getIntRate()!=0)}">
+                                                <li th:each="i : ${#numbers.sequence(0, event.getIntRate()-1)}">
+                                                    <i class="fa fa-star"></i>
+                                                </li>
+                                            </th:block>
+                                            <th:block th:if="${(event.getIntRate()!=-1)and(event.getIntRate()!=5)}">
+                                                <li th:each="i : ${#numbers.sequence(event.getIntRate(), 4)}">
+                                                    <i class="fa fa-star-o"></i>
+                                                </li>
+                                            </th:block>
+                                            <th:block th:if="${(event.getIntRate()==-1)}">
+                                                <li th:each="i : ${#numbers.sequence(0, 4)}">
+                                                    <i class="fa fa-star-o"></i>
+                                                </li>
+                                            </th:block>
+                                            <li th:text="'('+${event.getReviewsCount()}+')'"></li>
+                                        </ul>
+                                        <strong th:style="'color:' + ${event.getType()}==1?'#337ABB;':'#f80000;' + 'font-size: x-large; padding-top: -0.2em;'"
+                                                th:text="${event.getStringType(lang)}">На модерации</strong>
+                                        <!--/*TODO translate*/-->
+                                    </div>
+                                    <!--/*Card footer*/-->
+                                    <div class="card-footer links-light">
+                                        <span class="left price-text">
+                                            <strong th:text="${event.getPrice()}+'&#8381;  '">%Цена%  </strong>
+                                        </span>
+                                        <span class="right">
+                                        <a th:href="@{/events/event(id=${event.getId()})}"
+                                           class="waves-effect">Открыть<i
+                                                class="fa fa-photo ml-1"></i></a>
+                                            <a rel="tooltip" title="Edit" href="javascript:void(0)" role="button"
+                                               style="margin-left: 10px; margin-right: 2px; margin-top: 8px;">
+                                            <i class="fa fa-edit" style="font-size: 20px;"></i>
+                                        </a>
+                                        <a rel="tooltip" title="Delete" href="javascript:void(0)" role="button"
+                                           style="margin-left: 10px; margin-top: 7px;">
+                                            <i class="fa fa-trash" style="font-size: 20px;"></i>
+                                        </a>
+                                        </span>
+                                    </div>
                                 </div>
+                                <!--/*End-of-Card*/-->
                             </th:block>
                             <!--/* End-of-Card row */-->
                             <!--/*Pagination */-->
-                            <nav class="my-4 d-flex justify-content-center" th:if="${events.size()>2 and excursovod}"
-                                 th:with="pagesev = ${events.size()%2==0}?${events.size()/2}:${events.size()/2+1}">
+                            <nav class="my-4 d-flex justify-content-center" th:if="${events.size()>1 and excursovod}"
+                                 th:with="pagesev = ${events.size()}">
 
                                 <ul class="pagination pagination-circle pg-blue mb-0">
                                     <!--/*First*/-->
