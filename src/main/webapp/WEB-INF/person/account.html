@@ -236,7 +236,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                 <div th:if="${orders.size()>0}"
                                      th:each="j : ${#numbers.sequence(0,orders.size()-1)}"
                                      class="card card-cascade narrower"
-                                     th:id="'id-0'+${j}"
+                                     th:id="'id-0'+${j+1}"
                                      th:style="${j != 0}?'display: none;'"
                                      th:with="order=${orders.get(j)}">
                                     <!--/*@thymesVar id="order" type="com.heroku.demo.order.Buy"*/-->
@@ -358,7 +358,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                  th:each="j : ${#numbers.sequence(0, events.size()-1)}"
                                  class="card card-cascade narrower"
                                  th:with="event = ${events.get(j)}"
-                                 th:id="'id'+${j}"
+                                 th:id="'id'+${j+1}"
                                  th:style="${j != 0}?'display: none;'">
                                 <!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
                                 <!--/*Card image*/-->
@@ -961,10 +961,8 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
 //Если элемент с id-шником element_id существует
         var id = page;
         var i;
-        var pages;
-        var ordersSize = [[${orders.size()}]];
-        pages = ordersSize;
-        for (i = 0; i < ordersSize; i++) {
+        var pages = [[${orders.size()}]];
+        for (i = 0; i < pages; i++) {
             var j = i + 1;
             document.getElementById('id-0' + i).style.display = "none";
             if (i < pages && document.getElementById('page_events-0' + j))
@@ -976,8 +974,8 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
         if (document.getElementById('id-0' + id))
             document.getElementById('id-0' + id).style.display = "";
 
-        switch (page) {
-            case 1:
+        /*switch (page) {
+            case 0:
                 document.getElementById('to-home-exc-0').className = "page-item disabled clearfix d-none d-sm-block";
                 document.getElementById('to-end-exc-0').className = "page-item clearfix d-none d-sm-block";
                 break;
@@ -988,18 +986,16 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
             default:
                 document.getElementById('to-home-exc-0').className = "page-item clearfix d-none d-sm-block";
                 document.getElementById('to-end-exc-0').className = "page-item clearfix d-none d-sm-block";
-        }
+        }*/
     }
 
     function showHide(page) {
 //Если элемент с id-шником element_id существует
         var id = page;
         var i;
-        var eventsSize = [[${events.size()}]];
+        var pages = [[${events.size()}]];
 
-        var pages = eventsSize;
-
-        for (i = 0; i < eventsSize; i++) {
+        for (i = 0; i < pages; i++) {
             var j = i + 1;
             document.getElementById('id' + i).style.display = "none";
             if (i < pages && document.getElementById('page_events' + j))
@@ -1011,7 +1007,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
         if (document.getElementById('id' + id))
             document.getElementById('id' + id).style.display = "";
 
-        switch (page) {
+        /*switch (page) {
             case 1:
                 document.getElementById('to-home-exc').className = "page-item disabled clearfix d-none d-sm-block";
                 document.getElementById('to-end-exc').className = "page-item clearfix d-none d-sm-block";
@@ -1023,7 +1019,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
             default:
                 document.getElementById('to-home-exc').className = "page-item clearfix d-none d-sm-block";
                 document.getElementById('to-end-exc').className = "page-item clearfix d-none d-sm-block";
-        }
+        }*/
     }
 
     /*]]>*/
