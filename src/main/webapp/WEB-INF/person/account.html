@@ -129,7 +129,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                        class="btn-floating badge-blue lighten-2 waves-effect waves-light"><i
                                             class="fa fa-telegram"></i></a>
                                     <!--/*Text*/-->
-                                    <p th:if="${person.getPhoneNumber()!=''}" class="card-text mt-3">тел.
+                                    <p th:if="${person.getPhoneNumber()!=''}" class="card-text">тел.
                                         <th:block th:text="${person.getPhoneNumber()}"/>
                                     </p>
                                     <button th:unless="${isThisUserAccount}" type="button"
@@ -142,15 +142,15 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                         <th:block>Подтвердить E-mail</th:block><!--/*TODO translate*/-->
                                     </a>
                                     <a th:if="${tourist}"
-                                       class="btn btn-primary waves-effect waves-light"
+                                       class="btn btn-primary waves-effect waves-light mt-1"
                                        data-toggle="modal" data-target="#modalUpToGuide">Стать экскурсоводом
                                     </a>
                                     <!--/*TODO translate*/-->
-                                    <a th:if="${isThisUserAccount}" class="btn btn-primary waves-effect waves-light"
+                                    <a th:if="${isThisUserAccount}" class="btn btn-primary waves-effect waves-light mt-1"
                                        href="#" role="button"
                                        data-toggle="modal" data-target="#modalEditProfile">Редактировать профиль <i
                                             class="fa fa-pencil ml-2"></i></a>
-                                    <a class="btn btn-outline-primary waves-effect waves-light" href="#" role="button"
+                                    <a class="btn btn-outline-primary waves-effect waves-light mt-1" href="#" role="button"
                                        data-toggle="modal" data-target="#modalFeedback">Сообщить об ошибке <i
                                             class="fa fa-paper-plane ml-2"></i></a>
                                 </div>
@@ -312,7 +312,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                             </th:block>
                             <!--/*End-of-Card row*/-->
                             <!--/*Pagination */-->
-                            <nav class="my-4 d-flex justify-content-center" th:if="${orders.size()>2}"
+                            <nav class="my-4 d-flex justify-content-center mb-1" th:if="${orders.size()>2}"
                                  th:with="pages = ${orders.size()%2==0}?${orders.size()/2}:${orders.size()/2+1}">
 
                                 <ul class="pagination pagination-circle pg-blue mb-0">
@@ -402,11 +402,8 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                                 <a th:href="@{/events/event(id=${event.getId()})}"
                                                    class="waves-effect">Открыть<i
                                                         class="fa fa-photo ml-1"></i></a>
-                                                                                                    <a rel="tooltip"
-                                                                                                       title="Edit"
-                                                                                                       href="javascript:void(0)"
-                                                                                                       role="button"
-                                                                                                       style="margin-left: 10px; margin-right: 2px; margin-top: 8px;">
+                                                    <a rel="tooltip" title="Edit" href="javascript:void(0)" role="button"
+                                                       style="margin-left: 10px; margin-right: 2px; margin-top: 8px;">
                                                     <i class="fa fa-edit" style="font-size: 20px;"></i>
                                                 </a>
                                                 <a rel="tooltip" title="Delete" href="javascript:void(0)" role="button"
@@ -459,7 +456,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                 </section>
                 <!--/*End-of-Section: Profile*/-->
                 <!--/*Section: Modals*/-->
-                <section>
+                <section class="pt-0">
                     <!--/*Modal: modalEditProfile*/-->
                     <div class="modal fade" id="modalEditProfile" tabindex="-1" role="dialog"
                          aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">

@@ -3,9 +3,11 @@ body {font-family: SegoeUIRegular, Helvetica, Arial, sans-serif}
 b {font-family: SegoeUISemiBold, Helvetica, Arial, sans-serif}
 
 a {color: #337ab7;-webkit-transition: all .35s;-moz-transition: all .35s;transition: all .35s}
-a:focus, a:hover {color: #286090;}
+a:focus, a:hover {color: #286090;text-decoration: none;}
 
-hr {max-width: 100px;margin: 25px auto 0;border-width: 1px;border-color: rgba(34, 34, 34, .1)}
+hr {max-width: 100px;margin: 25px auto 0;
+    border: 1px rgba(34, 34, 34, .1);
+}
 hr.light {border-color: #fff}
 
 h1, h2, h3, h4, h5, h6 {font-family: SegoeUISemiBold, Helvetica, Arial, sans-serif;font-weight: 200;letter-spacing: 1px}

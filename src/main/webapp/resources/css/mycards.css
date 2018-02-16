@@ -32,7 +32,6 @@ h3.card-title {padding-bottom: 1rem; font-size: 24px!important;}
 }
 .card .card-footer .left {float: left; padding-top: 0.5rem!important; font-size: 18px!important;}
 .card .card-footer .right {float: right; padding-top: 0.5rem!important; font-size: 18px!important;}
-.card .card-footer a:focus {text-decoration: none;}
 
 .card.card-cascade.card-avatar {margin-top: 6rem;text-align: center;}
 
