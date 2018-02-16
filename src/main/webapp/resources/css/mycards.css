@@ -31,3 +31,7 @@ h3.card-title {padding-bottom: 1rem; font-size: 24px!important;}
     box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
 }
 .card .card-footer .left {float: left;}
+.card.card-cascade.card-avatar {margin-top: 6rem;text-align: center;}
+
+.card.card-cascade {width: 100%;}
+.card:not([class*=card-outline-]) {border: 0;}

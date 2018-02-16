@@ -106,7 +106,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                         <!--/*Grid column*/-->
                         <div class="col-lg-4 col-md-12">
                             <!--/*Section: Basic Info*/-->
-                            <section class="card card-cascade card-avatar mb-4" id="card-person">
+                            <section class="card card-cascade card-avatar mb-2" id="card-person">
 
                                 <img th:src="${person.getImageUrl()}" src="../../resources/img/user.png" alt=""
                                      id="img-person"
@@ -157,7 +157,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                             </section>
                             <!--/*End-of-Section: Basic Info*/-->
                             <!--/*Section: Experience*/-->
-                            <section class="card mb-4">
+                            <section class="card mb-2">
                                 <div class="card-body">
 
                                     <h5 class=" text-center"><strong>Статистика (демо)</strong></h5>
@@ -267,9 +267,8 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                             </div>
                                             <!--/*Card footer*/-->
                                             <div class="card-footer links-light">
-                                                <div class="left pt-05">
-                                                    <strong th:text="${order.getPrice()}+'&#8381;  '"
-                                                            style="color:#4285F4; font-size: medium; padding-top: -0.2em;">%Цена% </strong>
+                                                <div class="left pt-05 price-text">
+                                                    <strong th:text="${order.getPrice()}+'&#8381;  '">%Цена% </strong>
                                                 </div>
                                                 <div class="right">
                                                     <a th:href="@{/orders/order(id=${order.getId()})}"
@@ -395,9 +394,8 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                             </div>
                                             <!--/*Card footer*/-->
                                             <div class="card-footer links-light">
-                                                <span class="left pt-05">
-                                                <strong th:text="${event.getPrice()}+'&#8381;  '"
-                                                        style="color:#4285F4; font-size: medium; padding-top: -0.2em; padding-bottom: 2rem;">%Цена%  </strong>
+                                                <span class="left pt-05 price-text">
+                                                    <strong th:text="${event.getPrice()}+'&#8381;  '">%Цена%  </strong>
                                                     <span th:text="'Отзывов: '+${event.getReviewsCount()}"></span>
                                                 </span>
                                                 <span class="right">
