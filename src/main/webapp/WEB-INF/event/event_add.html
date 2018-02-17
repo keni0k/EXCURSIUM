@@ -198,7 +198,7 @@
                         <input type="file" multiple="multiple" required="" size="30000000"
                                accept="image/jpeg,image/png" name="files[]" style="display:none;" id="upload_input"/>
                         <input type="button" value="Добавить фотографии" class="btn btn-block" tabindex="9" id="upload_button"/><br/>
-                        <div class="result" id="result" style="margin-bottom: 15px; margin-top: 20px; vertical-align: top;">
+                        <div class="result" id="result">
                         </div>
                     </div>
                     <br/>
@@ -273,11 +273,11 @@
 /*<![CDATA[*/
     function setimage() { // функция загрузки на сервер
         var iter; // кол-во загруженных картинок
-        var max = 3;
+        var max = 4;
         // с классом file_link_name приходят загруженные изображения - счетаем их кол-во
-        iter = $('.file_link_name').length;
+        iter = $('.upload-img').length;
         if(iter>=max){
-            alert('Максимально количество фотографий = 3!')
+            alert('Максимально количество фотографий = 4!')
             return;
         }
         var fd = new FormData;
@@ -292,11 +292,11 @@
         // в цикле по данному массиву отправляем файлы на сервер
         for (var i = 0; i < inputFile.length; i++) {
             if(i>max-1){ // проверка на кол-во
-                alert('Максимально количество фотографий = 3!')
+                alert('Максимально количество фотографий = 4!')
                 return;
             }
             if(iter>max-1){ // еще одна проверка на кол-во
-                alert('Максимально количество фотографий = 3!')
+                alert('Максимально количество фотографий = 4!')
                 return;
             }
             // формирую объект data

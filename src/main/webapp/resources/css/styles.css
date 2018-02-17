@@ -198,3 +198,9 @@ h2.title {
 .chip img {float: left;margin: 0 8px 0 -12px;height: 32px;width: 32px;border-radius: 50%;}
 
 .price-text{color: #4285F4;font-size: 18px;}
+
+.upload-img{
+    width: 270px;
+    object-fit: cover;
+    height: 135px;
+}

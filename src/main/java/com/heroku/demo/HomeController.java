@@ -124,7 +124,7 @@ public class HomeController {
 
                 putImg(serverFile.getAbsolutePath(), photoToken);
                 photoRepository.save(photo);
-                message.append("<img src=\"").append(Consts.URL_PATH).append(photoToken).append("\" class=\"img-rounded file_link_name\"/>");
+                message.append("<img src=\"").append(Consts.URL_PATH).append(photoToken).append("\" class=\"img-rounded upload-img mb-1\"/>");
             } catch (Exception e) {
                 return "You failed to upload " + name + " => " + e.getMessage();
             }
