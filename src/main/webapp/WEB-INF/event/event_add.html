@@ -279,7 +279,7 @@
 
         var max = 4-iter;
         if(max<=0){
-            alert('Максимально количество фотографий = 4!')
+            alert('Максимально количество фотографий = 4!');
             return;
         }
 
@@ -298,7 +298,8 @@
                 break;
             }
             // формирую объект data
-            fd.append('img', $input.prop('files')[i]).append('id', id);
+            fd.append('img', $input.prop('files')[i]);
+            fd.append('id', id);
             $.ajax({
                 url: $url,
                 data: fd,
