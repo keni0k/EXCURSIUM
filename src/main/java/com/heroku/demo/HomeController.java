@@ -95,6 +95,15 @@ public class HomeController {
         StringBuilder message = new StringBuilder();
         for (MultipartFile file : files) {
             String name = file.getOriginalFilename();
+            /*try {
+                InputStream input = file.getInputStream();
+                String rootPath = System.getProperty("catalina.home" + File.separator + "tmpFiles" );
+                Path path = Paths.get(rootPath);//check path
+                OutputStream output = Files.newOutputStream(path);
+                IOUtils.copy(input, output);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }*/
             try {
                 byte[] bytes = file.getBytes();
 
@@ -109,10 +118,10 @@ public class HomeController {
                 // Create the file on server
                 File serverFile = new File(dir.getAbsolutePath()
                         + File.separator + name);
-                BufferedOutputStream stream = new BufferedOutputStream(
-                        new FileOutputStream(serverFile));
-                stream.write(bytes);
-                stream.close();
+                try (BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile)))
+                {
+                    stream.write(bytes);
+                }
 
                 logger.info("Server File Location=" + serverFile.getAbsolutePath());
 
