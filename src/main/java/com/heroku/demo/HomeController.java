@@ -6,9 +6,11 @@ import com.heroku.demo.message.MessageRepository;
 import com.heroku.demo.order.OrderRepository;
 import com.heroku.demo.person.PersonRepository;
 import com.heroku.demo.person.PersonServiceImpl;
+import com.heroku.demo.photo.Photo;
 import com.heroku.demo.photo.PhotoRepository;
 import com.heroku.demo.review.ReviewRepository;
 import com.heroku.demo.token.TokenRepository;
+import com.heroku.demo.utils.Consts;
 import com.heroku.demo.utils.Utils;
 import com.heroku.demo.utils.UtilsForWeb;
 import org.joda.time.LocalTime;
@@ -27,6 +29,8 @@ import java.io.FileOutputStream;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.heroku.demo.utils.Utils.*;
 
 @Controller
 @RequestMapping("/")
@@ -100,6 +104,8 @@ public class HomeController {
                 if (!dir.exists())
                     dir.mkdirs();
 
+                String fileName = file.getOriginalFilename();
+
                 // Create the file on server
                 File serverFile = new File(dir.getAbsolutePath()
                         + File.separator + name);
@@ -108,10 +114,17 @@ public class HomeController {
                 stream.write(bytes);
                 stream.close();
 
-                logger.info("Server File Location="
-                        + serverFile.getAbsolutePath());
+                logger.info("Server File Location=" + serverFile.getAbsolutePath());
 
-                message.append("<p>You successfully uploaded file=").append(name).append("</p><br />");
+                if (getFileSizeMegaBytes(serverFile) > 1)
+                    serverFile = compress(serverFile, getFileExtension(fileName), getFileSizeMegaBytes(serverFile));
+
+                String photoToken = randomToken(32) + ".jpg";
+                Photo photo = new Photo(0, photoToken);
+
+                putImg(serverFile.getAbsolutePath(), photoToken);
+                photoRepository.save(photo);
+                message.append("<img src=\"").append(Consts.URL_PATH).append(photoToken).append("\" class=\"img-rounded file_link_name\"/>");
             } catch (Exception e) {
                 return "You failed to upload " + name + " => " + e.getMessage();
             }
