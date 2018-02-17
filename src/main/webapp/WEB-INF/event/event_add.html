@@ -341,7 +341,7 @@
                     var substr =  txt.substring(120 - i, 120);
                     if (substr.indexOf('.') !== -1 || substr.indexOf('!') !== -1 || substr.indexOf('?') !== -1) break;
                 }
-                if (i!==120 && i<50) $('#card-text').text(txt.substring(0,120-i));
+                if (i!==120 && i<50) $('#card-text').text(txt.substring(0,120-i+1));
                 else $('#card-text').text(txt.substring(0,117)+'…');
             }
         });

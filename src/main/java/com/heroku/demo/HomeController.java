@@ -84,6 +84,41 @@ public class HomeController {
         return "upload";
     }
 
+    @RequestMapping(value = "/upload_images", method = RequestMethod.POST)
+    public @ResponseBody
+    String uploadMultipleFileHandler(@RequestParam("img") MultipartFile[] files) {
+
+        StringBuilder message = new StringBuilder();
+        for (MultipartFile file : files) {
+            String name = file.getOriginalFilename();
+            try {
+                byte[] bytes = file.getBytes();
+
+                // Creating the directory to store file
+                String rootPath = System.getProperty("catalina.home");
+                File dir = new File(rootPath + File.separator + "tmpFiles");
+                if (!dir.exists())
+                    dir.mkdirs();
+
+                // Create the file on server
+                File serverFile = new File(dir.getAbsolutePath()
+                        + File.separator + name);
+                BufferedOutputStream stream = new BufferedOutputStream(
+                        new FileOutputStream(serverFile));
+                stream.write(bytes);
+                stream.close();
+
+                logger.info("Server File Location="
+                        + serverFile.getAbsolutePath());
+
+                message.append("<p>You successfully uploaded file=").append(name).append("</p><br />");
+            } catch (Exception e) {
+                return "You failed to upload " + name + " => " + e.getMessage();
+            }
+        }
+        return message.toString();
+    }
+
     @RequestMapping(method = RequestMethod.GET)
     public String index2(ModelMap modelMap, Principal principal) {
         modelMap.addAttribute("person", utils.getPerson(principal));
@@ -137,41 +172,5 @@ public class HomeController {
         stringBuilder.append("]}");
         return stringBuilder.toString();
     }
-
-    @RequestMapping(value = "uploadMultipleFile", method = RequestMethod.POST)
-    public @ResponseBody
-    String uploadMultipleFileHandler(@RequestParam("file") MultipartFile[] files) {
-
-        StringBuilder message = new StringBuilder();
-        for (MultipartFile file : files) {
-            String name = file.getOriginalFilename();
-            try {
-                byte[] bytes = file.getBytes();
-
-                // Creating the directory to store file
-                String rootPath = System.getProperty("catalina.home");
-                File dir = new File(rootPath + File.separator + "tmpFiles");
-                if (!dir.exists())
-                    dir.mkdirs();
-
-                // Create the file on server
-                File serverFile = new File(dir.getAbsolutePath()
-                        + File.separator + name);
-                BufferedOutputStream stream = new BufferedOutputStream(
-                        new FileOutputStream(serverFile));
-                stream.write(bytes);
-                stream.close();
-
-                logger.info("Server File Location="
-                        + serverFile.getAbsolutePath());
-
-                message.append("You successfully uploaded file=").append(name).append("<br />");
-            } catch (Exception e) {
-                return "You failed to upload " + name + " => " + e.getMessage();
-            }
-        }
-        return message.toString();
-    }
-
 
 }
