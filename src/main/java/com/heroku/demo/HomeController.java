@@ -90,7 +90,7 @@ public class HomeController {
 
     @RequestMapping(value = "/upload_images", method = RequestMethod.POST)
     public @ResponseBody
-    String uploadMultipleFileHandler(@RequestParam("img") MultipartFile[] files) {
+    String uploadMultipleFileHandler(@RequestParam("img") MultipartFile[] files, int id) {
 
         StringBuilder message = new StringBuilder();
         for (MultipartFile file : files) {
@@ -120,7 +120,7 @@ public class HomeController {
                     serverFile = compress(serverFile, getFileExtension(fileName), getFileSizeMegaBytes(serverFile));
 
                 String photoToken = randomToken(32) + ".jpg";
-                Photo photo = new Photo(0, photoToken);
+                Photo photo = new Photo(id, photoToken);
 
                 putImg(serverFile.getAbsolutePath(), photoToken);
                 photoRepository.save(photo);

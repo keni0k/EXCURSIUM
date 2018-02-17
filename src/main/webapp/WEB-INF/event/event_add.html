@@ -280,9 +280,11 @@
             alert('Максимально количество фотографий = 3!')
             return;
         }
+        var fd = new FormData;
 
         $input = $("#upload_input");
-        var fd = new FormData;
+
+        var id = [[${inputEvent.getId()}]]
         // адрес приемщика файлов
         var $url='/upload_images';
         // массив файлов в нашем инпате
@@ -299,22 +301,22 @@
             }
             // формирую объект data
             fd.append('img', $input.prop('files')[i]);
-            $.ajax({
-                url: $url,
-                data: fd,
-                processData: false,
-                contentType: false,
-                type: 'POST',
-                success: function (data) {
-                    // сервер возвращает нам нимиатюру в data
-                    $("#result").append(data); // вставляю миниатюру в #result
-                },
-                error: function(data) {
-                    // действие при ошибке
-                }
-            });
-
         }
+        fd.append('id', id);
+        $.ajax({
+            url: $url,
+            data: fd,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            success: function (data) {
+                // сервер возвращает нам нимиатюру в data
+                $("#result").append(data); // вставляю миниатюру в #result
+            },
+            error: function(data) {
+                // действие при ошибке
+            }
+        });
     }
     /* Обработчики событий кнопки загрузки и нашего input */
     // откладываю возможность загрузки картинок до полной загрузки страницы
