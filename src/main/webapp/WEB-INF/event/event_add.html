@@ -333,7 +333,7 @@
 <script th:inline="javascript">
     /*<![CDATA[*/
     function sortable(rootEl, onUpdate){
-        var dragEl;
+        var dragEl, nextEl;
 
         // Делаем всех детей перетаскиваемыми
         [].slice.call(rootEl.children).forEach(function (itemEl){
@@ -348,7 +348,9 @@
             var target = evt.target;
             if( target && target !== dragEl && target.nodeName === 'IMG' ){
                 // Сортируем
-                rootEl.insertBefore(dragEl, target.nextSibling || target);
+                var rect = target.getBoundingClientRect();
+                var next = (evt.clientY - rect.top)/(rect.bottom - rect.top) > .5;
+                rootEl.insertBefore(dragEl, next && target.nextSibling || target);
             }
         }
 
@@ -360,13 +362,16 @@
             rootEl.removeEventListener('dragover', _onDragOver, false);
             rootEl.removeEventListener('dragend', _onDragEnd, false);
 
-            // Сообщаем об окончании сортировки
-            onUpdate(dragEl);
+            if( nextEl !== dragEl.nextSibling ){
+                // Сообщаем об окончании сортировки
+                onUpdate(dragEl);
+            }
         }
 
         // Начало сортировки
         rootEl.addEventListener('dragstart', function (evt){
             dragEl = evt.target; // Запоминаем элемент который будет перемещать
+            nextEl = dragEl.nextSibling;
 
             // Ограничиваем тип перетаскивания
             evt.dataTransfer.effectAllowed = 'move';
