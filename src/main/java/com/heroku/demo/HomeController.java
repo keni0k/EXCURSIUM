@@ -118,43 +118,10 @@ public class HomeController {
 
                 putImg(serverFile.getAbsolutePath(), photoToken);
                 photoRepository.save(photo);
-                message.append("<img src=\"").append(Consts.URL_PATH).append(photoToken).append("\" class=\"img-rounded upload-img\"/>");
+                message.append("<div class=\"upload-img\"><img src=\"").append(Consts.URL_PATH).append(photoToken).append("\" class=\"img-rounded\"/></div>");
             } catch (Exception e) {
                 message.append("<p>").append(e.getMessage()).append("</p>");
             }
-            /*try {
-                byte[] bytes = file.getBytes();
-
-                // Creating the directory to store file
-                String rootPath = System.getProperty("catalina.home");
-                File dir = new File(rootPath + File.separator + "tmpFiles");
-                if (!dir.exists())
-                    dir.mkdirs();
-
-                String fileName = file.getOriginalFilename();
-
-                // Create the file on server
-                File serverFile = new File(dir.getAbsolutePath()
-                        + File.separator + name);
-                try (BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile)))
-                {
-                    stream.write(bytes);
-                }
-
-                logger.info("Server File Location=" + serverFile.getAbsolutePath());
-
-                if (getFileSizeMegaBytes(serverFile) > 1)
-                    serverFile = compress(serverFile, getFileExtension(fileName), getFileSizeMegaBytes(serverFile));
-
-                String photoToken = randomToken(32) + ".jpg";
-                Photo photo = new Photo(id, photoToken);
-
-                putImg(serverFile.getAbsolutePath(), photoToken);
-                photoRepository.save(photo);
-                message.append("<img src=\"").append(Consts.URL_PATH).append(photoToken).append("\" class=\"img-rounded upload-img\"/>");
-            } catch (Exception e) {
-                return "You failed to upload " + name + " => " + e.getMessage();
-            }*/
         }
         return message.toString();
     }

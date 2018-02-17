@@ -201,8 +201,21 @@ h2.title {
 
 .upload-img{
     width: 270px;
-    object-fit: cover;
+    display: inline-block;
     height: 135px;
-    margin-left: 6px;
-    margin-bottom: 6px;
+    cursor: move;
+    position: relative;
+    padding: 8px;
+    margin: 0 1% 10px 1%;
+    background: #fff;
+    border: 1px solid #bcbdbf;
+    border-radius: 5px;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.upload-img > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
