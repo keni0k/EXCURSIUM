@@ -203,4 +203,6 @@ h2.title {
     width: 270px;
     object-fit: cover;
     height: 135px;
+    margin-left: 6px;
+    margin-bottom: 6px;
 }

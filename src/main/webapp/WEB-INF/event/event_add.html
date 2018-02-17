@@ -273,50 +273,48 @@
 /*<![CDATA[*/
     function setimage() { // функция загрузки на сервер
         var iter; // кол-во загруженных картинок
-        var max = 4;
+
         // с классом file_link_name приходят загруженные изображения - счетаем их кол-во
         iter = $('.upload-img').length;
-        if(iter>=max){
+
+        var max = 4-iter;
+        if(max<=0){
             alert('Максимально количество фотографий = 4!')
             return;
         }
-        var fd = new FormData;
 
         $input = $("#upload_input");
 
-        var id = [[${inputEvent.getId()}]]
+        var id = [[${inputEvent.getId()}]];
         // адрес приемщика файлов
         var $url='/upload_images';
         // массив файлов в нашем инпате
         var inputFile = document.getElementById('upload_input').files;
         // в цикле по данному массиву отправляем файлы на сервер
         for (var i = 0; i < inputFile.length; i++) {
+            var fd = new FormData;
             if(i>max-1){ // проверка на кол-во
-                alert('Максимально количество фотографий = 4!')
-                return;
-            }
-            if(iter>max-1){ // еще одна проверка на кол-во
-                alert('Максимально количество фотографий = 4!')
-                return;
+                alert('Максимально количество фотографий = 4!');
+                break;
             }
             // формирую объект data
-            fd.append('img', $input.prop('files')[i]);
+            fd.append('img', $input.prop('files')[i]).append('id', id);
+            $.ajax({
+                url: $url,
+                data: fd,
+                processData: false,
+                contentType: false,
+                type: 'POST',
+                success: function (data) {
+                    // сервер возвращает нам нимиатюру в data
+                    $("#result").append(data); // вставляю миниатюру в #result
+                },
+                error: function(data) {
+                    // действие при ошибке
+                }
+            });
         }
-        fd.append('id', id);
-        $.ajax({
-            url: $url,
-            data: fd,
-            processData: false,
-            contentType: false,
-            type: 'POST',
-            success: function (data) {
-                // сервер возвращает нам нимиатюру в data
-                $("#result").append(data); // вставляю миниатюру в #result
-            },
-            error: function(data) {
-                // действие при ошибке
-            }
-        });
+
     }
     /* Обработчики событий кнопки загрузки и нашего input */
     // откладываю возможность загрузки картинок до полной загрузки страницы
