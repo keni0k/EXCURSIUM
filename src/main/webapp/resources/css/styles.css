@@ -213,9 +213,11 @@ h2.title {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
-
 .upload-img > img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+.result{
+    -webkit-box-sizing: content-box;
 }
