@@ -13,6 +13,7 @@ import com.heroku.demo.token.TokenRepository;
 import com.heroku.demo.utils.Consts;
 import com.heroku.demo.utils.Utils;
 import com.heroku.demo.utils.UtilsForWeb;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.joda.time.LocalTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,9 +24,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -88,23 +90,39 @@ public class HomeController {
         return "upload";
     }
 
+    private File streamToFile(String fileExtension, InputStream in) throws IOException {
+        File tempFile = File.createTempFile(System.getProperty("catalina.home") + File.separator + "tmpFiles"+randomToken(10), fileExtension);
+        tempFile.deleteOnExit();
+        FileOutputStream out = new FileOutputStream(tempFile);
+        IOUtils.copy(in, out);
+        return tempFile;
+    }
+
     @RequestMapping(value = "/upload_images", method = RequestMethod.POST)
     public @ResponseBody
     String uploadMultipleFileHandler(@RequestParam("img") MultipartFile[] files, int id) {
 
         StringBuilder message = new StringBuilder();
         for (MultipartFile file : files) {
-            String name = file.getOriginalFilename();
-            /*try {
-                InputStream input = file.getInputStream();
-                String rootPath = System.getProperty("catalina.home" + File.separator + "tmpFiles" );
-                Path path = Paths.get(rootPath);//check path
-                OutputStream output = Files.newOutputStream(path);
-                IOUtils.copy(input, output);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }*/
             try {
+                String fileName = file.getOriginalFilename();
+                String photoToken = randomToken(32);
+                InputStream input = file.getInputStream();
+                File serverFile = streamToFile(getFileExtension(fileName), input);
+
+                if (getFileSizeMegaBytes(serverFile) > 1)
+                    serverFile = compress(serverFile, getFileExtension(fileName), getFileSizeMegaBytes(serverFile));
+
+                photoToken+=".jpg";
+                Photo photo = new Photo(id, photoToken);
+
+                putImg(serverFile.getAbsolutePath(), photoToken);
+                photoRepository.save(photo);
+                message.append("<img src=\"").append(Consts.URL_PATH).append(photoToken).append("\" class=\"img-rounded upload-img\"/>");
+            } catch (Exception e) {
+                message.append("<p>").append(e.getMessage()).append("</p>");
+            }
+            /*try {
                 byte[] bytes = file.getBytes();
 
                 // Creating the directory to store file
@@ -136,7 +154,7 @@ public class HomeController {
                 message.append("<img src=\"").append(Consts.URL_PATH).append(photoToken).append("\" class=\"img-rounded upload-img\"/>");
             } catch (Exception e) {
                 return "You failed to upload " + name + " => " + e.getMessage();
-            }
+            }*/
         }
         return message.toString();
     }
