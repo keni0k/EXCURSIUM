@@ -269,6 +269,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
+<script type="text/javascript" src="../../resources/js/Sortable.min.js"></script>
 <script th:inline="javascript">
 /*<![CDATA[*/
     function setimage() { // функция загрузки на сервер
@@ -332,7 +333,7 @@
 </script>
 <script th:inline="javascript">
     /*<![CDATA[*/
-    function sortable(rootEl, onUpdate){
+    /*function sortable(rootEl, onUpdate){
         var dragEl, nextEl;
 
         // Делаем всех детей перетаскиваемыми
@@ -387,12 +388,18 @@
                 dragEl.classList.add('ghost');
             }, 0)
         }, false);
-    }
+    }*/
     $(document).ready(function() {
 
 // Используем
-        sortable(document.getElementById('result'), function (item){
-            console.log(item);
+        var container = document.getElementById("result");
+        var sort = Sortable.create(container, {
+            animation: 150, // ms, animation speed moving items when sorting, `0` — without animation
+            /*handle: ".tile__title", // Restricts sort start click/touch to the specified element*/
+            /*draggable: ".tile", // Specifies which items inside the element should be sortable*/
+            onUpdate: function (evt/**Event*/){
+                var item = evt.item; // the current dragged HTMLElement
+            }
         });
 
         $("#description").keyup(function() {
