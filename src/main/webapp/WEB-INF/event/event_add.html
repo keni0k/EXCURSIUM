@@ -332,8 +332,19 @@
                         <div class="panel-body">
                             <input type="file" multiple="multiple" required="" size="30000000"
                                    accept="image/jpeg,image/png" name="files[]" style="display:none;" id="upload_input"/>
-                            <input type="button" value="Добавить фотографии" class="btn btn-block" tabindex="9"
-                                   id="upload_button"/><br/>
+                            <div class="upload-img" draggable="false" style="cursor: auto;">
+                                <img class="img-rounded"
+                                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAA8CAIAAAAiz+n/AAAAAXNSR0IArs4c6QAAAARnQU1BAACx&#10;jwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAu&#10;MjHxIGmVAAAAkUlEQVR4Xu3QMQEAAAzDoPnXWDFzwRUkcAtRNFI0UjRSNFI0UjRSNFI0UjRSNFI0&#10;UjRSNFI0UjRSNFI0UjRSNFI0UjRSNFI0UjRSNFI0UjRSNFI0UjRSNFI0UjRSNFI0UjRSNFI0UjRS&#10;NFI0UjRSNFI0UjRSNFI0UjRSNFI0UjRSNFI0UjRSNFI0UjRSNFI0sT3eqIa5HCIQEgAAAABJRU5E&#10;rkJggg=="
+                                     draggable="false" >
+                                <input type="button" value="Добавить фотографии" class="btn btn-block" tabindex="9" id="upload_button" style="
+                                    background: #eee;
+                                    width: auto;
+                                    position: absolute;
+                                    left: 40px;
+                                    top: 65px;">
+                            </div>
+                            <!--<input type="button" value="Добавить фотографии" class="btn btn-block" tabindex="9"
+                                   id="upload_button"/>--><br/>
                             <div class="result" id="result">
                             </div>
                         </div>
