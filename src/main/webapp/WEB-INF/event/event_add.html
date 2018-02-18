@@ -404,7 +404,11 @@
             var hour = 7;
             if (i%2===0) hour++;
             if (hour===24) hour = 0;
-            st+='<option value="'+i+'">0'+hour+':'+i%2===0?'0':'3'+'0</option>';
+            var minutes;
+            if (i%2===0)
+                minutes = '0';
+            else minutes = '3';
+            st += '<option value="' + i + '">0' + hour + ':' + minutes + '0</option>';
         }
         return st;
     }
@@ -427,7 +431,7 @@
             locale: 'ru',
             format: 'DD.MM.YYYY',
             minDate: moment(),
-            maxDate: moment().add('months', 3)
+            maxDate: moment().add(3, 'months')
         });
     }
 
