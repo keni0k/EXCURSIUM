@@ -71,6 +71,12 @@
 	.img-top {
 		margin-top: 95px;
 	}
+	.demo {
+		top: 141px;
+	}
+	.demo>.page-header{
+		font-size: 20px;
+	}
 }
 
 /* Medium Devices, Desktops */

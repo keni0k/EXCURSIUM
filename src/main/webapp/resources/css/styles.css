@@ -213,3 +213,4 @@ h2.title {
 .right-input{padding-right: 0!important;padding-left: 0!important;margin-left: calc(100%/12);}
 .left-input{padding-left: 0!important; padding-right: 0!important;}
 .my-sp{width: auto;display: inline-block!important;margin-left: 10px;}
+.demo{position: fixed;top: 127px;right: 10px;}

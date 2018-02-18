@@ -346,9 +346,9 @@
                     <button type="submit" value="Upload" style="display: none" id="sbmt">Отправить</button>
                 </form>
             </div>
-            <div class="hidden visible-md visible-lg col-md-5 col-lg-6">
+            <div class="hidden visible-md visible-lg col-md-5 col-lg-6 demo">
                 <div class="page-header mt-1">
-                    <h3>Так она будет выглядеть в списке экскурсий</h3>
+                    <h3>Такой она будет в списке экскурсий</h3>
                 </div>
                 <div class="card card-cascade narrower">
                     <img class="img_age" id="card-age_limit" src="../../resources/img/age_limits/0.png"/>
@@ -400,7 +400,7 @@
 <script th:inline="javascript">
     /*<![CDATA[*/
     function remove_img(el) {
-        el.parent().remove();
+        el.parent.remove();
         $('#add-photo').css('display','block');
     }
     function sbmt() {
@@ -409,6 +409,7 @@
         if (type === 1) {$('#radio0').remove();$('#radio2').remove();}
         if (type === 2) {$('#radio0').remove();$('#radio1').remove();}
         var st = type.toString();
+        var container = document.getElementById('result');
         for (var i = 0; i<container.children.length; i++)
             st+=$('#result').children()[i].attr('src')
         alert(st);
