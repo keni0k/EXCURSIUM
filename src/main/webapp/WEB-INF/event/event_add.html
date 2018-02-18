@@ -66,8 +66,7 @@
                             Название
                         </div>
                         <div class="panel-body">
-                            <input name="name" type="text" class="form-control" id="name" placeholder="Название"
-                                   aria-label="Название"
+                            <input name="name" type="text" class="form-control" id="name"
                                    th:value="${inputEvent.getName()}" required="" minlength="10" maxlength="35"/>
                             <label for="name" th:if="${#fields.hasErrors('name')}"
                                    th:text="${#messages.msg('error.event.name')}" th:class="'error'">Name
@@ -82,8 +81,7 @@
                         <div class="panel-body">
                             <textarea name="description" minlength="150" maxlength="1000" type="text"
                                       id="description" style="resize: vertical"
-                                      class="form-control" placeholder="Описание" required=""
-                                      aria-label="Описание" th:text="${inputEvent.getDescription()}"></textarea>
+                                      class="form-control" required="" th:text="${inputEvent.getDescription()}"></textarea>
                             <label for="description" th:if="${#fields.hasErrors('description')}"
                                    th:text="${#messages.msg('error.event.description')}" th:class="'error'">Description
                                 Error</label>
@@ -138,7 +136,7 @@
                                 <label>
                                     <input type="radio" name="type_of_dates" id="optionsRadios1" value="0" checked=""
                                            onclick="radio(0);"/>
-                                    Индивидуальная по запросу. Заказать экскурсию можно на дни недели, которые указали в
+                                    <b>Индивидуальная по запросу.</b> Заказать экскурсию можно на дни недели, которые указали в
                                     расписании. Оплатить заказ можно только после вашего подтверждения.
                                 </label>
                             </div>
@@ -146,7 +144,7 @@
                                 <label>
                                     <input type="radio" name="type_of_dates" id="optionsRadios2" value="1"
                                            onclick="radio(1);"/>
-                                    Групповая по еженедельному расписанию. Вы составляете повторяющееся расписание
+                                    <b>Групповая по еженедельному расписанию.</b> Вы составляете повторяющееся расписание
                                     экскурсии, участники записываются на доступные даты независимо друг от друга.
                                     Бронирования подтверждаются автоматически.
                                 </label>
@@ -155,7 +153,7 @@
                                 <label>
                                     <input type="radio" name="type_of_dates" id="optionsRadios3" value="2"
                                            onclick="radio(2);"/>
-                                    Групповая по фиксированным датам. Вы указываете даты проведения экскурсии, участники
+                                    <b>Групповая по фиксированным датам.</b> Вы указываете даты проведения экскурсии, участники
                                     записываются на доступные даты независимо друг от друга. Бронирования подтверждаются
                                     автоматически.
                                 </label>
@@ -168,49 +166,49 @@
                             Расписание
                         </div>
                         <div class="panel-body" id="radio0">
-                            <div class="day-of-week">
+                            <div class="day-of-week00">
                                 <b>Пн.</b><a class="add-time" onclick="addTime(0, 0);">Добавить время</a>
                             </div>
-                            <div class="day-of-week">
+                            <div class="day-of-week" id="01">
                                 <b>Вт.</b><a class="add-time" onclick="addTime(0, 1);">Добавить время</a>
                             </div>
-                            <div class="day-of-week">
+                            <div class="day-of-week" id="02">
                                 <b>Ср.</b><a class="add-time" onclick="addTime(0, 2);">Добавить время</a>
                             </div>
-                            <div class="day-of-week">
+                            <div class="day-of-week" id="03">
                                 <b>Чт.</b><a class="add-time" onclick="addTime(0, 3);">Добавить время</a>
                             </div>
-                            <div class="day-of-week">
+                            <div class="day-of-week" id="04">
                                 <b>Пт.</b><a class="add-time" onclick="addTime(0, 4);">Добавить время</a>
                             </div>
-                            <div class="day-of-week">
+                            <div class="day-of-week" id="05">
                                 <b>Сб.</b><a class="add-time" onclick="addTime(0, 5);">Добавить время</a>
                             </div>
-                            <div class="day-of-week">
+                            <div class="day-of-week" id="06">
                                 <b>Вс.</b><a class="add-time" onclick="addTime(0, 6);">Добавить время</a>
                             </div>
                         </div>
 
                         <div class="panel-body" id="radio1" style="display: none;">
-                            <div class="day-of-week">
+                            <div class="day-of-week" id="10">
                                 <b>Пн.</b><a class="add-time" onclick="addTime(1, 0);">Добавить время</a>
                             </div>
-                            <div class="day-of-week">
+                            <div class="day-of-week" id="11">
                                 <b>Вт.</b><a class="add-time" onclick="addTime(1, 1);">Добавить время</a>
                             </div>
-                            <div class="day-of-week">
+                            <div class="day-of-week" id="12">
                                 <b>Ср.</b><a class="add-time" onclick="addTime(1, 2);">Добавить время</a>
                             </div>
-                            <div class="day-of-week">
+                            <div class="day-of-week" id="13">
                                 <b>Чт.</b><a class="add-time" onclick="addTime(1, 3);">Добавить время</a>
                             </div>
-                            <div class="day-of-week">
+                            <div class="day-of-week" id="14">
                                 <b>Пт.</b><a class="add-time" onclick="addTime(1, 4);">Добавить время</a>
                             </div>
-                            <div class="day-of-week">
+                            <div class="day-of-week" id="15">
                                 <b>Сб.</b><a class="add-time" onclick="addTime(1, 5);">Добавить время</a>
                             </div>
-                            <div class="day-of-week">
+                            <div class="day-of-week" id="16">
                                 <b>Вс.</b><a class="add-time" onclick="addTime(1, 6);">Добавить время</a>
                             </div>
                         </div>
@@ -226,10 +224,8 @@
                             Количество участников
                         </div>
                         <div class="panel-body">
-                            <input name="usersCount" id="users_count" type="number" class="form-control"
-                                   placeholder="Количество участников" required=""
-                                   aria-label="Количество участников" min="1" max="100"
-                                   th:value="${inputEvent.getUsersCount()}?${inputEvent.getUsersCount()}"/>
+                            <input name="usersCount" id="users_count" type="number" class="form-control" required=""
+                                   min="1" max="100" th:value="${inputEvent.getUsersCount()}?${inputEvent.getUsersCount()}"/>
                             <label for="users_count" th:if="${#fields.hasErrors('usersCount')}"
                                    th:text="${#messages.msg('error.event.users_count')}" th:class="'error'">UsersCount
                                 Error</label>
@@ -243,9 +239,7 @@
                         <div class="panel-body">
                             <div class="input-group">
                                 <input name="duration" id="duration" type="number" class="form-control"
-                                       placeholder="Длительность:" required=""
-                                       aria-label="Длительность:"
-                                       th:value="${inputEvent.getDuration()}?${inputEvent.getDuration()}" min="1" max="240"/>
+                                       required="" th:value="${inputEvent.getDuration()}?${inputEvent.getDuration()}" min="1" max="240"/>
                                 <span class="input-group-addon" th:text="${#messages.msg('words.hours')}">часов</span>
                             </div>
                             <label for="duration" th:if="${#fields.hasErrors('duration')}"
@@ -278,9 +272,8 @@
                             Место встречи
                         </div>
                         <div class="panel-body">
-                            <input name="place" id="place" type="text" class="form-control" placeholder="Место встречи"
-                                   required="" minlength="5" maxlength="100"
-                                   aria-label="Место встречи"
+                            <input name="place" id="place" type="text" class="form-control" required=""
+                                   minlength="5" maxlength="100"
                                    th:value="${inputEvent.getPlace()}?${inputEvent.getPlace()}"/>
                             <label for="place" th:if="${#fields.hasErrors('place')}"
                                    th:text="${#messages.msg('error.event.place')}" th:class="'error'">Place Error</label>
@@ -295,9 +288,8 @@
                         </div>
                         <div class="panel-body">
                             <div class="input-group">
-                                <input name="price" id="price" type="number" class="form-control" placeholder="Цена"
-                                       aria-label="Цена" required="" min="100" max="100000"
-                                       th:value="${inputEvent.getPrice()}?${inputEvent.getPrice()}"/>
+                                <input name="price" id="price" type="number" class="form-control" required=""
+                                       min="100" max="100000" th:value="${inputEvent.getPrice()}?${inputEvent.getPrice()}"/>
                                 <span class="input-group-addon">&#8381;</span>
                             </div>
                             <label for="price" th:if="${#fields.hasErrors('price')}"
@@ -391,7 +383,10 @@
     /*<![CDATA[*/
 
     function addTime(type, dayOfWeek) {
-        alert(type + " " + dayOfWeek);
+        $('#'+type + dayOfWeek).append('<select name="time" class="form-control selectpicker"> ' +
+            '<option value="0">08:00</option>' +
+            '<option value="1">08:30</option>' +
+            '</select>')
     }
 
     function radio(type) {
