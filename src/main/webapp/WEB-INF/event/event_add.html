@@ -333,11 +333,10 @@
                         <div class="panel-body">
                             <input type="file" multiple="multiple" required="" size="30000000"
                                    accept="image/jpeg,image/png" name="files[]" style="display:none;" id="upload_input"/>
-                            <div class="result" id="result">
                             <div class="upload-img" draggable="false" style="cursor: auto;padding-top: 9%;">
                                 <input type="button" value="Добавить" class="btn btn-block" tabindex="9" id="upload_button" style="width: auto;margin: auto;"/>
                             </div>
-                            </div>
+                            <div class="result" id="result"></div>
                         </div>
                     </div>
 
@@ -400,8 +399,8 @@
 <script th:inline="javascript">
     /*<![CDATA[*/
 
-    function generateOptions() {
-        var st = '';
+    function generateOptions(select) {
+        var st = '<select class="form-control selectpicker my-sp"' + select + '><option value="null">--:--</option>';
         var hour = 7;
         var zero = '0';
         for (var i=0; i<48; i++){
@@ -415,6 +414,7 @@
             else zero = '';
             st += '<option value="' + i + '">' + zero + hour + ':' + minutes + '0</option>';
         }
+        st+='</select>';
         return st;
     }
 
@@ -426,10 +426,7 @@
             '<span class="input-group-addon" style="width: auto;margin-right: 20px;border-left-width: 0;border-radius: 0 4px 4px 0;">'+
             '<span class="glyphicon glyphicon-calendar"></span>'+
             '</span>'+
-            '<select name="time" class="form-control selectpicker my-sp" style="border-top-left-radius: 4px;border-bottom-left-radius: 4px;width: auto;">' +
-            '<option value="null">--:--</option>' +
-            generateOptions()+
-            '</select>' +
+            generateOptions(' style="border-top-left-radius: 4px;border-bottom-left-radius: 4px;width: auto;" name="time"')+
             '</div></div></div>');
 
         $('.date').datetimepicker({
@@ -442,24 +439,14 @@
 
     function addTime(type, dayOfWeek) {
         if(type===0) {
-            $('#' + type + dayOfWeek).append('<select name="time-down" class="form-control selectpicker my-sp"> ' +
-                '<option value="null">--:--</option>' +
-                generateOptions()+
-                '</select>' +
+            $('#' + type + dayOfWeek).append(generateOptions(' name="time-down"') +
                 '<span> –</span>' +
-                '<select name="time-up" class="form-control selectpicker my-sp"> ' +
-                '<option value="null">--:--</option>' +
-                generateOptions()+
-                '</select>');
+                generateOptions(' name="time-up"'));
             $('#' + dayOfWeek).css('display','none');
         }
 
         if(type===1) {
-            $('#' + type + dayOfWeek).append('<select name="time" class="form-control selectpicker my-sp"> ' +
-                '<option value="null">--:--</option>' +
-                '<option value="0">08:00</option>' +
-                '<option value="1">08:30</option>' +
-                '</select>');
+            $('#' + type + dayOfWeek).append(generateOptions(' name="time"'));
         }
     }
 
@@ -521,7 +508,7 @@
                     $("#result").append(data); // вставляю миниатюру в #result
                 },
                 error: function (data) {
-                    // действие при ошибке
+                    alert("Не все фотографии загрузились. Повторите, пожалуйста, попытку.");
                 }
             });
         }
@@ -581,7 +568,7 @@
                 $('#price-help').css('display','block');
                 var our_price = txt / 20 * 3;
                 $('#our_price').text(our_price);
-                $('#your_price').text(txt - our_price);
+                $('#guide_price').text(txt - our_price);
             } else $('#price-help').css('display','none');
         });
         $("#category").change(function () {
