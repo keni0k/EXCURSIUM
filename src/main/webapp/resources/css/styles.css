@@ -209,3 +209,8 @@ h2.title {
 .day-of-week {padding: 0;min-height: 53px;line-height: 53px;margin: 0;border-bottom: 1px solid #ccc;box-sizing: border-box;}
 .add-time{margin-left: 10px;border-bottom: 1px dashed #2e78c1;cursor: pointer;}
 .add-time:hover {border-color: transparent;}
+
+.age-limit-input{
+    padding-right: 0!important;padding-left: 0!important;margin-left: calc(100%/12);
+}
+.category-input{padding-left: 0!important; padding-right: 0!important;}
