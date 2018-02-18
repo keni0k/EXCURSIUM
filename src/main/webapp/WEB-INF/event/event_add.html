@@ -399,8 +399,10 @@
 
 <script th:inline="javascript">
     /*<![CDATA[*/
-    function remove_img() {
-        $('#add-photo').css('display','block');
+    function remove_img(el) {
+        el.parent().remove();
+        if ($('#result').children().length<4)
+            $('#add-photo').css('display','block');
     }
     function sbmt() {
         var type = 0;//$('input[name="type_of_dates"]')[0].value;
@@ -408,7 +410,7 @@
         if (type === 1) {$('#radio0').remove();$('#radio2').remove();}
         if (type === 2) {$('#radio0').remove();$('#radio1').remove();}
         var st = type.toString();
-        $('#result').each(function(index, elem) {
+        $('#result').children().each(function(index, elem) {
             console.log("Дочерний элемент: " + elem.attr('src') + " " + elem.className);
             st= st + ' ' + elem.attr('src');
         });
