@@ -17,7 +17,7 @@ public class Photo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private int eventId = 0;
+    private long eventId = 0;
 
     public Photo(int eventId, String data) {
         this.eventId = eventId;
@@ -27,11 +27,11 @@ public class Photo {
     public Photo() {
     }
 
-    public int getEventId() {
+    public long getEventId() {
         return eventId;
     }
 
-    public void setEventId(int eventId) {
+    public void setEventId(long eventId) {
         this.eventId = eventId;
     }
 

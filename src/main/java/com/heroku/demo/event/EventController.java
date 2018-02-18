@@ -23,18 +23,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import static com.heroku.demo.utils.Utils.*;
+import static com.heroku.demo.utils.Utils.localeToLang;
 
 @Controller
 @RequestMapping("/events")
@@ -76,8 +72,7 @@ public class EventController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String insertEvent(@ModelAttribute("inputEvent") @Valid Event event,
-                              BindingResult result,
-                              @RequestParam("file") MultipartFile file,
+                              BindingResult result, String photoTokens,
                               @RequestParam(value = "city_and_country", required = false) String cityAndCountry,
                               ModelMap modelMap, Principal principal, Locale locale) {
         event.setCountryAndCity(cityAndCountry);
@@ -85,6 +80,7 @@ public class EventController {
         time = time.substring(0,time.indexOf('.'));
         event.setTime(time);
         event.setType(Consts.EXCURSION_MODERATION);
+        String[] tokens = photoTokens.split(";");
 
         Person person = utils.getPerson(principal);
         if (person!=null && !result.hasErrors()) {
@@ -92,62 +88,22 @@ public class EventController {
             event.setPhotoOfGuide(person.getImageToken());
             event.setGuideId(person.getId());
         } else {
-            return eventAddAgain(modelMap, event, messageSource.getMessage("error.event.add", null, locale), file, principal);
+            return eventAddAgain(modelMap, event, messageSource.getMessage("error.event.add", null, locale), principal);
         }
-        String photoToken = randomToken(32) + ".jpg";
-        Photo photo = new Photo((int) event.getId(), photoToken);
-        if (file != null && !file.isEmpty()) {
-            try {
-                byte[] bytes = file.getBytes();
 
-                // Creating the directory to store file
-                String rootPath = System.getProperty("catalina.home");
-                File dir = new File(rootPath + File.separator + "tmpFiles");
-                if (!dir.exists())
-                    dir.mkdirs();
-
-                String fileName = file.getOriginalFilename();
-
-                // Create the file on server
-                File serverFile = new File(fileName);
-                BufferedOutputStream stream = new BufferedOutputStream(
-                        new FileOutputStream(serverFile));
-                stream.write(bytes);
-                stream.close();
-
-                if (getFileSizeMegaBytes(serverFile) > 1)
-                    serverFile = compress(serverFile, getFileExtension(fileName), getFileSizeMegaBytes(serverFile));
-
-                logger.info("Server File Location="
-                        + serverFile.getAbsolutePath());
-
-                putImg(serverFile.getAbsolutePath(), photoToken);
-
-                photoRepository.save(photo);//todo
-                eventService.addEvent(event);
-            } catch (Exception e) {
-                logger.error("You failed to upload file => " + e.getMessage());
-                eventService.delete(event.getId());
-                photoRepository.delete(photo.getId());
-                return eventAddAgain(modelMap, event, "You failed to upload file. Please, try again.", file, principal);
-            }
-            return event(modelMap, (int) event.getId(), principal);
-        } else if (file == null) {
-            eventService.delete(event.getId());
-            photoRepository.delete(photo.getId());
-            return eventAddAgain(modelMap, event, "You failed to upload file because the file is null.", null, principal);
-        } else {
-            eventService.delete(event.getId());
-            photoRepository.delete(photo.getId());
-            return eventAddAgain(modelMap, event, "You failed to upload file because the file is empty.", file, principal);
+        for (int i=0; i<photoTokens.length(); i++) {
+            Photo photo = photoService.getByToken(tokens[i]);
+            photo.setEventId(event.getId());
+            photoRepository.save(photo);//todo
         }
+        eventService.addEvent(event);
+        return event(modelMap, (int)event.getId(), principal);
     }
 
-    private String eventAddAgain(ModelMap model, Event event, String errorData, MultipartFile file, Principal principal) {
+    private String eventAddAgain(ModelMap model, Event event, String errorData, Principal principal) {
         model.addAttribute("inputEvent", event);
         model.addAttribute("error_data", errorData);
         model.addAttribute("utils", new UtilsForWeb());
-        model.addAttribute("file", file);
         model.addAttribute("person", utils.getPerson(principal));
         return "event/event_add";
     }

@@ -334,6 +334,7 @@
                         <div class="panel-body">
                             <input type="file" multiple="multiple" required="" size="30000000"
                                    accept="image/jpeg,image/png" name="files[]" style="display:none;" id="upload_input"/>
+                            <input type="text" name="photos" style="display:none;" id="photos"/>
                             <div class="result" id="result"></div>
                             <div id = "add-photo" class="upload-img" draggable="false" style="cursor: auto;padding-top: 9%;">
                                 <input type="button" value="Добавить" class="btn btn-block" tabindex="9" id="upload_button" style="width: auto;margin: auto;"/>
@@ -406,15 +407,16 @@
     }
     function sbmt() {
         var type = $('input[name=radio]:checked').val();
-        if (type===0) {$('#radio1').remove();$('#radio2').remove();}
-        if (type===1) {$('#radio0').remove();$('#radio2').remove();}
-        if (type===2) {$('#radio0').remove();$('#radio1').remove();}
+        if (type==='0') {$('#radio1').remove();$('#radio2').remove();}
+        if (type==='1') {$('#radio0').remove();$('#radio2').remove();}
+        if (type==='2') {$('#radio0').remove();$('#radio1').remove();}
         var st = '';
         $('#result').children().each(function(index, elem) {
             var img = elem.getElementsByClassName('img-rounded')[0];
             var token = img.src.toString().substring(44,76)+';';
             st += token;
         });
+        $('#photos').val(st);
         alert(st);
         $("#upload_input").remove();
         //$('#sbmt').click();

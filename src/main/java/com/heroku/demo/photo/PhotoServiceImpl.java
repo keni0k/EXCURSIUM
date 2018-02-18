@@ -34,6 +34,14 @@ public class PhotoServiceImpl implements PhotoService {
         return null;
     }
 
+    public Photo getByToken(String token) {
+        List<Photo> list = photoRepository.findAll();
+        for (Photo photo: list) {
+            if (photo.getData().equals(token)) return photo;
+        }
+        return null;
+    }
+
     @Override
     public Photo editPhoto(Photo photo) {
         return photoRepository.saveAndFlush(photo);
