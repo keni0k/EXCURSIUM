@@ -72,7 +72,7 @@ public class EventController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String insertEvent(@ModelAttribute("inputEvent") @Valid Event event,
-                              BindingResult result, String photoTokens,
+                              BindingResult result, @RequestParam(value = "photos") String photoTokens,
                               @RequestParam(value = "city_and_country", required = false) String cityAndCountry,
                               ModelMap modelMap, Principal principal, Locale locale) {
         event.setCountryAndCity(cityAndCountry);
