@@ -341,8 +341,7 @@
                         </div>
                     </div>
 
-                    <button class="btn btn-default" th:text="${#messages.msg('words.submit')}" onclick="sbmt();">Отправить
-                    </button>
+                    <a class="btn btn-default" th:text="${#messages.msg('words.submit')}" onclick="sbmt();">Отправить</a>
 
                     <button type="submit" value="Upload" style="display: none" id="sbmt">Отправить</button>
                 </form>
@@ -401,6 +400,7 @@
 <script th:inline="javascript">
     /*<![CDATA[*/
     function sbmt() {
+        var type = $('input[name="type_of_dates"]').val();
         if (type === 0) {$('#radio1').remove();$('#radio2').remove();}
         if (type === 1) {$('#radio0').remove();$('#radio2').remove();}
         if (type === 2) {$('#radio0').remove();$('#radio1').remove();}
