@@ -173,8 +173,8 @@
                             Расписание
                         </div>
                         <div class="panel-body" id="radio0">
-                            <div class="day-of-week" id="00">
-                                <b>Пн.</b><a class="add-time" id="0" onclick="addTime(0, 0);">Добавить время</a>
+                            <div class="day-of-week">
+                                <b>Пн.</b><div id="00"></div><a class="add-time" id="0" onclick="addTime(0, 0);">Добавить время</a>
                             </div>
                             <div class="day-of-week" id="01">
                                 <b>Вт.</b><a class="add-time" id="1" onclick="addTime(0, 1);">Добавить время</a>
@@ -333,10 +333,10 @@
                         <div class="panel-body">
                             <input type="file" multiple="multiple" required="" size="30000000"
                                    accept="image/jpeg,image/png" name="files[]" style="display:none;" id="upload_input"/>
-                            <div class="upload-img" draggable="false" style="cursor: auto;padding-top: 9%;">
+                            <div class="result" id="result"></div>
+                            <div id = "add-photo" class="upload-img" draggable="false" style="cursor: auto;padding-top: 9%;">
                                 <input type="button" value="Добавить" class="btn btn-block" tabindex="9" id="upload_button" style="width: auto;margin: auto;"/>
                             </div>
-                            <div class="result" id="result"></div>
                         </div>
                     </div>
 
@@ -417,7 +417,7 @@
         return st;
     }
     function addDate() {
-        $('#radio2').prepend('<div class="day-of-week">' +
+        $('#radio2').append('<div class="day-of-week">' +
             '<div class="form-group" style="margin-top: 15px;">'+
             '<div class="input-group date" id="datetimepicker" style="display: flex;">'+
             '<input type="text" class="form-control" style="width: auto;">'+
@@ -441,7 +441,7 @@
             $('#' + dayOfWeek).css('display','none');
         }
         if(type===1) {
-            $('#' + type + dayOfWeek).prepend(generateOptions(' name="time"'));
+            $('#' + type + dayOfWeek).append(generateOptions(' name="time"'));
         }
     }
     function radio(type) {
@@ -476,6 +476,8 @@
                 type: 'POST',
                 success: function (data) {
                     $("#result").append(data); // вставляю миниатюру в #result
+                    if ($('#result').children('.upload-img').length>=4)
+                        $('#add-photo').css('display','none');
                 },
                 error: function (data) {
                     alert("Не все фотографии загрузились. Повторите, пожалуйста, попытку.");
