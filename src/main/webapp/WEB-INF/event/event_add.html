@@ -304,7 +304,7 @@
                                        min="100" max="100000" th:value="${inputEvent.getPrice()}?${inputEvent.getPrice()}"/>
                                 <span class="input-group-addon">&#8381;</span>
                             </div>
-                            <b><p class="mb-0 right" id = "price-help" style="display: none;"><span id = "our_price">100</span> руб. (15%) путешественники заплатят нам на сайте, а <span id = "guide_price">600</span> руб. вам на месте</p></b>
+                            <b><p class="mb-0 mb-0 mt-05 f16" id = "price-help" style="display: none;"><span id = "our_price">100</span> рублей (15%) путешественники заплатят нам на сайте, а <span id = "guide_price">600</span> рублей - вам на месте</p></b>
                             <label for="price" th:if="${#fields.hasErrors('price')}"
                                    th:text="${#messages.msg('error.event.price')}" th:class="'error'">Price Error</label>
                         </div>
@@ -398,7 +398,6 @@
 
 <script th:inline="javascript">
     /*<![CDATA[*/
-
     function generateOptions(select) {
         var st = '<select class="form-control selectpicker my-sp"' + select + '><option value="null">--:--</option>';
         var hour = 7;
@@ -417,9 +416,8 @@
         st+='</select>';
         return st;
     }
-
     function addDate() {
-        $('#radio2').append('<div class="day-of-week">' +
+        $('#radio2').prepend('<div class="day-of-week">' +
             '<div class="form-group" style="margin-top: 15px;">'+
             '<div class="input-group date" id="datetimepicker" style="display: flex;">'+
             '<input type="text" class="form-control" style="width: auto;">'+
@@ -428,7 +426,6 @@
             '</span>'+
             generateOptions(' style="border-top-left-radius: 4px;border-bottom-left-radius: 4px;width: auto;" name="time"')+
             '</div></div></div>');
-
         $('.date').datetimepicker({
             locale: 'ru',
             format: 'DD.MM.YYYY',
@@ -436,7 +433,6 @@
             maxDate: moment().add(3, 'months')
         });
     }
-
     function addTime(type, dayOfWeek) {
         if(type===0) {
             $('#' + type + dayOfWeek).append(generateOptions(' name="time-down"') +
@@ -444,57 +440,32 @@
                 generateOptions(' name="time-up"'));
             $('#' + dayOfWeek).css('display','none');
         }
-
         if(type===1) {
-            $('#' + type + dayOfWeek).append(generateOptions(' name="time"'));
+            $('#' + type + dayOfWeek).prepend(generateOptions(' name="time"'));
         }
     }
-
     function radio(type) {
-        if (type === 0) {
-            $('#radio0').css('display', 'block');
-            $('#radio1').css('display', 'none');
-            $('#radio2').css('display', 'none');
-        }
-        if (type === 1) {
-            $('#radio0').css('display', 'none');
-            $('#radio1').css('display', 'block');
-            $('#radio2').css('display', 'none');
-        }
-        if (type === 2) {
-            $('#radio0').css('display', 'none');
-            $('#radio1').css('display', 'none');
-            $('#radio2').css('display', 'block');
-        }
+        if (type === 0) {$('#radio0').css('display', 'block');$('#radio1').css('display', 'none');$('#radio2').css('display', 'none');}
+        if (type === 1) {$('#radio0').css('display', 'none');$('#radio1').css('display', 'block');$('#radio2').css('display', 'none');}
+        if (type === 2) {$('#radio0').css('display', 'none');$('#radio1').css('display', 'none');$('#radio2').css('display', 'block');}
     }
-
     function setimage() { // функция загрузки на сервер
-        var iter; // кол-во загруженных картинок
-
-        // с классом file_link_name приходят загруженные изображения - счетаем их кол-во
-        iter = $('.upload-img').length;
-
+        var iter = $('.upload-img').length;
         var max = 5 - iter;
         if (max <= 0) {
             alert('Максимально количество фотографий = 4!');
             return;
         }
-
         $input = $("#upload_input");
-
         var id = [[${inputEvent.getId()}]];
-        // адрес приемщика файлов
         var $url = '/upload_images';
-        // массив файлов в нашем инпате
         var inputFile = document.getElementById('upload_input').files;
-        // в цикле по данному массиву отправляем файлы на сервер
         for (var i = 0; i < inputFile.length; i++) {
             var fd = new FormData;
             if (i > max - 1) { // проверка на кол-во
                 alert('Максимально количество фотографий = 4!');
                 break;
             }
-            // формирую объект data
             fd.append('img', $input.prop('files')[i]);
             fd.append('id', id);
             $.ajax({
@@ -504,7 +475,6 @@
                 contentType: false,
                 type: 'POST',
                 success: function (data) {
-                    // сервер возвращает нам нимиатюру в data
                     $("#result").append(data); // вставляю миниатюру в #result
                 },
                 error: function (data) {
@@ -514,16 +484,13 @@
         }
 
     }
-
-    /* Обработчики событий кнопки загрузки и нашего input */
-    // откладываю возможность загрузки картинок до полной загрузки страницы
     $(document).ready(function () {
-        $("#upload_button").click(function () { // при нажатии на кнопку загрузить
-            $("#upload_input").click(); // нажимаю на input file
+        $("#upload_button").click(function () {
+            $("#upload_input").click();
         });
 
-        $("#upload_input").change(function () { // когда состояние нашего input file меняется
-            setimage(); // вызываю функцию асинхронной загрузки файлов
+        $("#upload_input").change(function () {
+            setimage();
         });
     });
     /*]]>*/
@@ -531,11 +498,9 @@
 <script th:inline="javascript">
     /*<![CDATA[*/
     $(document).ready(function () {
-
-// Используем
         var container = document.getElementById("result");
         var sort = Sortable.create(container, {
-            animation: 150, // ms, animation speed moving items when sorting, `0` — without animation
+            animation: 150,
             /*handle: ".tile__title", // Restricts sort start click/touch to the specified element*/
             /*draggable: ".tile", // Specifies which items inside the element should be sortable*/
             onUpdate: function (evt/**Event*/) {
@@ -566,7 +531,7 @@
             $('#card-price').text(txt + "₽");
             if (txt!=='') {
                 $('#price-help').css('display','block');
-                var our_price = txt / 20 * 3;
+                var our_price = (txt / 20 * 3).toFixed();
                 $('#our_price').text(our_price);
                 $('#guide_price').text(txt - our_price);
             } else $('#price-help').css('display','none');
