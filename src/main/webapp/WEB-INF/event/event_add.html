@@ -416,10 +416,11 @@
             var token = img.src.toString().substring(44,76)+';';
             st += token;
         });
+        st = st.substring(0,st.length-2);
         $('#photos').val(st);
         alert(st);
         $("#upload_input").remove();
-        //$('#sbmt').click();
+        $('#sbmt').click();
     }
     function generateOptions(select) {
         var st = '<select class="form-control selectpicker my-sp"' + select + '><option value="null">--:--</option>';
