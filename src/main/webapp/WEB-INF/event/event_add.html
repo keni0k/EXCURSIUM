@@ -23,7 +23,16 @@
     <link rel="stylesheet" type="text/css" href="../../resources/css/styles.css"/>
     <link rel="stylesheet" href="../../resources/css/media.css"/>
 
-    <style rel="stylesheet">.form-control {padding-top: 7px;padding-bottom: 7px;padding-left: 12px;margin-top: 0;border-bottom-right-radius: 4px;border-top-right-radius: 4px;border: 1px solid #bdbdbd}
+    <style rel="stylesheet">.form-control {
+        padding-top: 7px;
+        padding-bottom: 7px;
+        padding-left: 12px;
+        margin-top: 0;
+        border-bottom-right-radius: 4px;
+        border-top-right-radius: 4px;
+        border: 1px solid #bdbdbd
+    }
+
     .dropdown-toggle {
         border-radius: 4px;
     }</style>
@@ -51,63 +60,79 @@
 
                 <form th:object="${inputEvent}" method="POST" action="/events/add" enctype="multipart/form-data"
                       autocomplete="off">
-                    <br/>
-                    <div class="input-group">
-                        <span class="input-group-addon" th:text="${#messages.msg('words.name')}">Название</span>
-                        <input name="name" type="text" class="form-control" id="name" placeholder="Название"
-                               aria-label="Название"
-                               th:value="${inputEvent.getName()}" required="" minlength="10" maxlength="35"/>
-                        <label for="name" th:if="${#fields.hasErrors('name')}"
-                               th:text="${#messages.msg('error.event.name')}" th:class="'error'">Name Error</label>
-                    </div>
-                    <br/>
-                    <div class="input-group">
-                        <span class="input-group-addon" th:text="${#messages.msg('words.description')}">Описание</span>
-                        <textarea name="description" minlength="150" maxlength="1000" type="text" id="description"
-                                  class="form-control" placeholder="Описание" required=""
-                                  aria-label="Описание" th:text="${inputEvent.getDescription()}"></textarea>
-                        <label for="description" th:if="${#fields.hasErrors('description')}"
-                               th:text="${#messages.msg('error.event.description')}" th:class="'error'">Description
-                            Error</label>
-                    </div>
-                    <br/>
+
                     <div class="panel panel-default">
-                        <div class="panel-heading" th:text="${#messages.msg('words.type_of_excursion')}">
-                            Категория экскурсии
+                        <div class="panel-heading" th:text="${#messages.msg('words.name')}">
+                            Название
                         </div>
                         <div class="panel-body">
                             <div class="input-group">
-                                <select name="category" id="category" class="form-control selectpicker"
-                                        th:selected="${inputEvent.getCategory()}?${inputEvent.getCategory()}:0">
-                                    <option value="0" th:text="${#messages.msg('category.0')}">Развлечения</option>
-                                    <option value="1" th:text="${#messages.msg('category.1')}">Наука</option>
-                                    <option value="2" th:text="${#messages.msg('category.2')}">История</option>
-                                    <option value="3" th:text="${#messages.msg('category.3')}">Искусство</option>
-                                    <option value="4" th:text="${#messages.msg('category.4')}">Производство</option>
-                                    <option value="5" th:text="${#messages.msg('category.5')}">Гастрономия</option>
-                                    <option value="6" th:text="${#messages.msg('category.6')}">Квесты</option>
-                                    <option value="7" th:text="${#messages.msg('category.7')}">Экстрим</option>
-                                </select>
+                                <input name="name" type="text" class="form-control" id="name" placeholder="Название"
+                                       aria-label="Название"
+                                       th:value="${inputEvent.getName()}" required="" minlength="10" maxlength="35"/>
+                                <label for="name" th:if="${#fields.hasErrors('name')}"
+                                       th:text="${#messages.msg('error.event.name')}" th:class="'error'">Name
+                                    Error</label>
                             </div>
                         </div>
                     </div>
+
                     <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Возрастное ограничение
+                        <div class="panel-heading" th:text="${#messages.msg('words.description')}">
+                            Описание
                         </div>
                         <div class="panel-body">
                             <div class="input-group">
-                                <select name="ageLimit" id="age_limit" class="form-control selectpicker"
-                                        th:selected="${inputEvent.getAgeLimit()}?${inputEvent.getAgeLimit()}:0">
-                                    <option value="0">0+</option>
-                                    <option value="6">6+</option>
-                                    <option value="12">12+</option>
-                                    <option value="16">16+</option>
-                                    <option value="18">18+</option>
-                                </select>
+                                <textarea name="description" minlength="150" maxlength="1000" type="text"
+                                          id="description"
+                                          class="form-control" placeholder="Описание" required=""
+                                          aria-label="Описание" th:text="${inputEvent.getDescription()}"></textarea>
+                                <label for="description" th:if="${#fields.hasErrors('description')}"
+                                       th:text="${#messages.msg('error.event.description')}" th:class="'error'">Description
+                                    Error</label>
                             </div>
                         </div>
                     </div>
+                    <div class="row ml-0 mr-0">
+                        <div class="panel panel-default col-md-6 pr-0 pl-0">
+                            <div class="panel-heading" th:text="${#messages.msg('words.type_of_excursion')}">
+                                Категория экскурсии
+                            </div>
+                            <div class="panel-body">
+                                <div class="input-group">
+                                    <select name="category" id="category" class="form-control selectpicker"
+                                            th:selected="${inputEvent.getCategory()}?${inputEvent.getCategory()}:0">
+                                        <option value="0" th:text="${#messages.msg('category.0')}">Развлечения</option>
+                                        <option value="1" th:text="${#messages.msg('category.1')}">Наука</option>
+                                        <option value="2" th:text="${#messages.msg('category.2')}">История</option>
+                                        <option value="3" th:text="${#messages.msg('category.3')}">Искусство</option>
+                                        <option value="4" th:text="${#messages.msg('category.4')}">Производство</option>
+                                        <option value="5" th:text="${#messages.msg('category.5')}">Гастрономия</option>
+                                        <option value="6" th:text="${#messages.msg('category.6')}">Квесты</option>
+                                        <option value="7" th:text="${#messages.msg('category.7')}">Экстрим</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default col-md-6 pr-0 pl-0">
+                            <div class="panel-heading">
+                                Возрастное ограничение
+                            </div>
+                            <div class="panel-body">
+                                <div class="input-group">
+                                    <select name="ageLimit" id="age_limit" class="form-control selectpicker"
+                                            th:selected="${inputEvent.getAgeLimit()}?${inputEvent.getAgeLimit()}:0">
+                                        <option value="0">0+</option>
+                                        <option value="6">6+</option>
+                                        <option value="12">12+</option>
+                                        <option value="16">16+</option>
+                                        <option value="18">18+</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             Тип экскурсии
@@ -115,20 +140,28 @@
                         <div class="panel-body">
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="type_of_dates" id="optionsRadios1" value="0" checked="" onclick="radio(0);"/>
-                                    Индивидуальная по запросу. Заказать экскурсию можно на дни недели, которые указали в расписании. Оплатить заказ можно только после вашего подтверждения.
+                                    <input type="radio" name="type_of_dates" id="optionsRadios1" value="0" checked=""
+                                           onclick="radio(0);"/>
+                                    Индивидуальная по запросу. Заказать экскурсию можно на дни недели, которые указали в
+                                    расписании. Оплатить заказ можно только после вашего подтверждения.
                                 </label>
                             </div>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="type_of_dates" id="optionsRadios2" value="1" onclick="radio(1);"/>
-                                    Групповая по еженедельному расписанию. Вы составляете повторяющееся расписание экскурсии, участники записываются на доступные даты независимо друг от друга. Бронирования подтверждаются автоматически.
+                                    <input type="radio" name="type_of_dates" id="optionsRadios2" value="1"
+                                           onclick="radio(1);"/>
+                                    Групповая по еженедельному расписанию. Вы составляете повторяющееся расписание
+                                    экскурсии, участники записываются на доступные даты независимо друг от друга.
+                                    Бронирования подтверждаются автоматически.
                                 </label>
                             </div>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="type_of_dates" id="optionsRadios3" value="2" onclick="radio(2);"/>
-                                    Групповая по фиксированным датам. Вы указываете даты проведения экскурсии, участники записываются на доступные даты независимо друг от друга. Бронирования подтверждаются автоматически.
+                                    <input type="radio" name="type_of_dates" id="optionsRadios3" value="2"
+                                           onclick="radio(2);"/>
+                                    Групповая по фиксированным датам. Вы указываете даты проведения экскурсии, участники
+                                    записываются на доступные даты независимо друг от друга. Бронирования подтверждаются
+                                    автоматически.
                                 </label>
                             </div>
                         </div>
@@ -140,30 +173,50 @@
                         </div>
                         <div class="panel-body" id="radio0">
                             <div class="day-of-week">
-                                <b>Пн.</b><a class="add-time" onclick="addTime(0, 0);">Добавить</a>
+                                <b>Пн.</b><a class="add-time" onclick="addTime(0, 0);">Добавить время</a>
                             </div>
                             <div class="day-of-week">
-                                <b>Вт.</b><a class="add-time" onclick="addTime(0, 1);">Добавить</a>
+                                <b>Вт.</b><a class="add-time" onclick="addTime(0, 1);">Добавить время</a>
                             </div>
                             <div class="day-of-week">
-                                <b>Ср.</b><a class="add-time" onclick="addTime(0, 2);">Добавить</a>
+                                <b>Ср.</b><a class="add-time" onclick="addTime(0, 2);">Добавить время</a>
                             </div>
                             <div class="day-of-week">
-                                <b>Чт.</b><a class="add-time" onclick="addTime(0, 3);">Добавить</a>
+                                <b>Чт.</b><a class="add-time" onclick="addTime(0, 3);">Добавить время</a>
                             </div>
                             <div class="day-of-week">
-                                <b>Пт.</b><a class="add-time" onclick="addTime(0, 4);">Добавить</a>
+                                <b>Пт.</b><a class="add-time" onclick="addTime(0, 4);">Добавить время</a>
                             </div>
                             <div class="day-of-week">
-                                <b>Сб.</b><a class="add-time" onclick="addTime(0, 5);">Добавить</a>
+                                <b>Сб.</b><a class="add-time" onclick="addTime(0, 5);">Добавить время</a>
                             </div>
                             <div class="day-of-week">
-                                <b>Вс.</b><a class="add-time" onclick="addTime(0, 6);">Добавить</a>
+                                <b>Вс.</b><a class="add-time" onclick="addTime(0, 6);">Добавить время</a>
                             </div>
                         </div>
 
                         <div class="panel-body" id="radio1" style="display: none;">
-
+                            <div class="day-of-week">
+                                <b>Пн.</b><a class="add-time" onclick="addTime(1, 0);">Добавить время</a>
+                            </div>
+                            <div class="day-of-week">
+                                <b>Вт.</b><a class="add-time" onclick="addTime(1, 1);">Добавить время</a>
+                            </div>
+                            <div class="day-of-week">
+                                <b>Ср.</b><a class="add-time" onclick="addTime(1, 2);">Добавить время</a>
+                            </div>
+                            <div class="day-of-week">
+                                <b>Чт.</b><a class="add-time" onclick="addTime(1, 3);">Добавить время</a>
+                            </div>
+                            <div class="day-of-week">
+                                <b>Пт.</b><a class="add-time" onclick="addTime(1, 4);">Добавить время</a>
+                            </div>
+                            <div class="day-of-week">
+                                <b>Сб.</b><a class="add-time" onclick="addTime(1, 5);">Добавить время</a>
+                            </div>
+                            <div class="day-of-week">
+                                <b>Вс.</b><a class="add-time" onclick="addTime(1, 6);">Добавить время</a>
+                            </div>
                         </div>
 
                         <div class="panel-body" id="radio2" style="display: none;">
@@ -199,9 +252,11 @@
                         <select class="selectpicker" data-live-search="true" name="city_and_country">
                             <!--/*@thymesVar id="utils" type="com.heroku.demo.utils.UtilsForWeb"*/-->
                             <th:block th:each="j : ${#numbers.sequence(0, utils.getCountriesCount()-1)}">
-                            <option th:each="i : ${#numbers.sequence(0, utils.getCitiesCount(j)-1)}" th:value="${j}+'.'+${i}"
-                                    th:text="${#messages.msg('city.'+j+'.'+i)}+', '+ ${#messages.msg('country.'+j)}">Москва, Россия
-                            </option>
+                                <option th:each="i : ${#numbers.sequence(0, utils.getCitiesCount(j)-1)}"
+                                        th:value="${j}+'.'+${i}"
+                                        th:text="${#messages.msg('city.'+j+'.'+i)}+', '+ ${#messages.msg('country.'+j)}">
+                                    Москва, Россия
+                                </option>
                             </th:block>
                         </select>
                     </div>
@@ -235,7 +290,8 @@
                                th:class="'error'">File Error</label>-->
                         <input type="file" multiple="multiple" required="" size="30000000"
                                accept="image/jpeg,image/png" name="files[]" style="display:none;" id="upload_input"/>
-                        <input type="button" value="Добавить фотографии" class="btn btn-block" tabindex="9" id="upload_button"/><br/>
+                        <input type="button" value="Добавить фотографии" class="btn btn-block" tabindex="9"
+                               id="upload_button"/><br/>
                         <div class="result" id="result">
                         </div>
                     </div>
@@ -273,7 +329,7 @@
                                                    class="img-fluid" alt=""
                                                    style="height: 240px; min-width: -webkit-fill-available;"/>
                         </div>
-                            <div class="mask waves-effect waves-light"></div>
+                        <div class="mask waves-effect waves-light"></div>
                     </div>
                     <!--/*Card image*/-->
                     <!--/*Card content*/-->
@@ -309,27 +365,27 @@
 <script type="text/javascript" src="../../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
 <script type="text/javascript" src="../../resources/js/Sortable.min.js"></script>
 <script th:inline="javascript">
-/*<![CDATA[*/
+    /*<![CDATA[*/
 
-function addTime(type, dayOfWeek) {
-    alert(type+" "+dayOfWeek);
-}
+    function addTime(type, dayOfWeek) {
+        alert(type + " " + dayOfWeek);
+    }
 
     function radio(type) {
-        if (type===0) {
-            $('#radio0').style(this, 'display', 'block');
-            $('#radio1').style(this, 'display', 'none');
-            $('#radio2').style(this, 'display', 'none');
+        if (type === 0) {
+            $('#radio0').css('display', 'block');
+            $('#radio1').css('display', 'none');
+            $('#radio2').css('display', 'none');
         }
-        if (type===1) {
-            $('#radio0').style(this, 'display', 'none');
-            $('#radio1').style(this, 'display', 'block');
-            $('#radio2').style(this, 'display', 'none');
+        if (type === 1) {
+            $('#radio0').css('display', 'none');
+            $('#radio1').css('display', 'block');
+            $('#radio2').css('display', 'none');
         }
-        if (type===2) {
-            $('#radio0').style(this, 'display', 'none');
-            $('#radio1').style(this, 'display', 'none');
-            $('#radio2').style(this, 'display', 'block');
+        if (type === 2) {
+            $('#radio0').css('display', 'none');
+            $('#radio1').css('display', 'none');
+            $('#radio2').css('display', 'block');
         }
     }
 
@@ -339,8 +395,8 @@ function addTime(type, dayOfWeek) {
         // с классом file_link_name приходят загруженные изображения - счетаем их кол-во
         iter = $('.upload-img').length;
 
-        var max = 4-iter;
-        if(max<=0){
+        var max = 4 - iter;
+        if (max <= 0) {
             alert('Максимально количество фотографий = 4!');
             return;
         }
@@ -349,13 +405,13 @@ function addTime(type, dayOfWeek) {
 
         var id = [[${inputEvent.getId()}]];
         // адрес приемщика файлов
-        var $url='/upload_images';
+        var $url = '/upload_images';
         // массив файлов в нашем инпате
         var inputFile = document.getElementById('upload_input').files;
         // в цикле по данному массиву отправляем файлы на сервер
         for (var i = 0; i < inputFile.length; i++) {
             var fd = new FormData;
-            if(i>max-1){ // проверка на кол-во
+            if (i > max - 1) { // проверка на кол-во
                 alert('Максимально количество фотографий = 4!');
                 break;
             }
@@ -372,29 +428,30 @@ function addTime(type, dayOfWeek) {
                     // сервер возвращает нам нимиатюру в data
                     $("#result").append(data); // вставляю миниатюру в #result
                 },
-                error: function(data) {
+                error: function (data) {
                     // действие при ошибке
                 }
             });
         }
 
     }
+
     /* Обработчики событий кнопки загрузки и нашего input */
     // откладываю возможность загрузки картинок до полной загрузки страницы
-    $(document).ready(function() {
-        $( "#upload_button").click(function() { // при нажатии на кнопку загрузить
+    $(document).ready(function () {
+        $("#upload_button").click(function () { // при нажатии на кнопку загрузить
             $("#upload_input").click(); // нажимаю на input file
         });
 
-        $("#upload_input").change(function() { // когда состояние нашего input file меняется
+        $("#upload_input").change(function () { // когда состояние нашего input file меняется
             setimage(); // вызываю функцию асинхронной загрузки файлов
         });
     });
-/*]]>*/
+    /*]]>*/
 </script>
 <script th:inline="javascript">
     /*<![CDATA[*/
-    $(document).ready(function() {
+    $(document).ready(function () {
 
 // Используем
         var container = document.getElementById("result");
@@ -402,44 +459,44 @@ function addTime(type, dayOfWeek) {
             animation: 150, // ms, animation speed moving items when sorting, `0` — without animation
             /*handle: ".tile__title", // Restricts sort start click/touch to the specified element*/
             /*draggable: ".tile", // Specifies which items inside the element should be sortable*/
-            onUpdate: function (evt/**Event*/){
+            onUpdate: function (evt/**Event*/) {
                 var item = evt.item; // the current dragged HTMLElement
             },
             draggable: ".upload-img"
         });
 
-        $("#description").keyup(function() {
-            var txt=$('#description').val();
-            if (txt.length<120) $('#card-text').text(txt);
+        $("#description").keyup(function () {
+            var txt = $('#description').val();
+            if (txt.length < 120) $('#card-text').text(txt);
             else {
                 var i = 0;
                 for (i = 0; i < 120; i++) {
-                    var substr =  txt.substring(120 - i, 120);
+                    var substr = txt.substring(120 - i, 120);
                     if (substr.indexOf('.') !== -1 || substr.indexOf('!') !== -1 || substr.indexOf('?') !== -1) break;
                 }
-                if (i!==120 && i<50) $('#card-text').text(txt.substring(0,120-i+1));
-                else $('#card-text').text(txt.substring(0,117)+'…');
+                if (i !== 120 && i < 50) $('#card-text').text(txt.substring(0, 120 - i + 1));
+                else $('#card-text').text(txt.substring(0, 117) + '…');
             }
         });
-        $("#name").keyup(function() {
-            var txt=$('#name').val();
+        $("#name").keyup(function () {
+            var txt = $('#name').val();
             $('#card-title').text(txt);
         });
-        $("#price").keyup(function() {
-            var txt=$('#price').val();
-            $('#card-price').text(txt+"₽");
+        $("#price").keyup(function () {
+            var txt = $('#price').val();
+            $('#card-price').text(txt + "₽");
         });
-        $("#category").change(function() {
-            var txt=$('#category').val();
+        $("#category").change(function () {
+            var txt = $('#category').val();
             var lang = [[${#locale.getLanguage().toString()=='en'?1:0}]];
             var ru = ["Развлечения", "Наука", "История", "Искусство", "Квесты", "Экстрим", "Производство", "Гастрономия"];
             var en = ["Entertainment", "Science", "History", "Art", "Quests", "Extreme", "Manufacture", "Gastronomy"];
-            var categories = lang===0?ru[txt]:en[txt];
+            var categories = lang === 0 ? ru[txt] : en[txt];
             $('#card-category').text(categories);
         });
         $("#age_limit").change(function () {
             var age = $("#age_limit").val();
-            var src = "../../resources/img/age_limits/"+age+".png";
+            var src = "../../resources/img/age_limits/" + age + ".png";
             $("#card-age_limit").attr("src", src);
         })
     });
