@@ -410,8 +410,8 @@
         // if ($('#optionsRadios3').checked()) {$('#radio0').remove();$('#radio1').remove();}
         var st = '';
         $('#result').children().each(function(index, elem) {
-            var img = elem.getElementsByClassName('img');
-            console.log("Дочерний элемент: " + img.src + " " + elem.className);
+            var img = elem.getElementsByClassName('img-rounded');
+            console.log("Дочерний элемент: " + img.src + " " + img.className);
             st = st + ' ' + img.src;
         });
         alert(st);
