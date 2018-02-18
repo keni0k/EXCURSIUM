@@ -405,14 +405,14 @@
             $('#add-photo').css('display','block');
     }
     function sbmt() {
-        if ($('#optionsRadios1').checked) {$('#radio1').remove();$('#radio2').remove();}
-        if ($('#optionsRadios2').checked) {$('#radio0').remove();$('#radio2').remove();}
-        if ($('#optionsRadios3').checked) {$('#radio0').remove();$('#radio1').remove();}
+        if ($('#optionsRadios1').check()) {$('#radio1').remove();$('#radio2').remove();}
+        if ($('#optionsRadios2').check()) {$('#radio0').remove();$('#radio2').remove();}
+        if ($('#optionsRadios3').check()) {$('#radio0').remove();$('#radio1').remove();}
         var st = '';
         $('#result').children().each(function(index, elem) {
             var img = elem.getElementsByClassName('img-rounded')[0];
-            var token = img.src.toString().substring(53,85);
-            st = st + ';' + token;
+            var token = img.src.toString().substring(44,76)+';';
+            st += token;
         });
         alert(st);
         $("#upload_input").remove();
