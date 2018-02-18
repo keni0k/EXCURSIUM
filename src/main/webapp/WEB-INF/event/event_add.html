@@ -90,7 +90,7 @@
                         </div>
                     </div>
                     <div class="row ml-0 mr-0">
-                        <div class="panel panel-default category-input col-md-6">
+                        <div class="panel panel-default category-input col-xs-6">
                             <div class="panel-heading" th:text="${#messages.msg('words.type_of_excursion')}">
                                 Категория экскурсии
                             </div>
@@ -110,7 +110,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="panel panel-default age-limit-input col-md-5">
+                        <div class="panel panel-default age-limit-input col-xs-5">
                             <div class="panel-heading">
                                 Возрастное ограничение
                             </div>
@@ -220,7 +220,8 @@
                         </div>
                     </div>
 
-                    <div class="panel panel-default">
+                    <div class="row">
+                    <div class="panel panel-default col-sm-6">
                         <div class="panel-heading" th:text="${#messages.msg('words.users_count')}">
                             Количество участников
                         </div>
@@ -235,30 +236,32 @@
                         </div>
                     </div>
 
-                    <div class="panel panel-default">
+                    <div class="panel panel-default col-sm-5">
                         <div class="panel-heading" th:text="${#messages.msg('words.duration')}">
                             Длительность
                         </div>
                         <div class="panel-body">
                             <div class="input-group">
-                            <input name="duration" id="duration" type="number" class="form-control"
-                                   placeholder="Длительность:" required=""
-                                   aria-label="Длительность:"
-                                   th:value="${inputEvent.getDuration()}?${inputEvent.getDuration()}" min="1" max="240"/>
-                            <span class="input-group-addon" th:text="${#messages.msg('words.hours')}">часов</span>
+                                <input name="duration" id="duration" type="number" class="form-control"
+                                       placeholder="Длительность:" required=""
+                                       aria-label="Длительность:"
+                                       th:value="${inputEvent.getDuration()}?${inputEvent.getDuration()}" min="1" max="240"/>
+                                <span class="input-group-addon" th:text="${#messages.msg('words.hours')}">часов</span>
                             </div>
                             <label for="duration" th:if="${#fields.hasErrors('duration')}"
                                    th:text="${#messages.msg('error.event.duration')}" th:class="'error'">Duration
                                 Error</label>
                         </div>
                     </div>
+                    </div>
 
-                    <div class="panel panel-default">
+                    <div class="row">
+                    <div class="panel panel-default col-sm-6">
                         <div class="panel-heading" th:text="${#messages.msg('words.city')}">
                             Город
                         </div>
                         <div class="panel-body">
-                            <select class="selectpicker" data-live-search="true" name="city_and_country">
+                            <select class="selectpicker form-control" data-live-search="true" name="city_and_country">
                                 <!--/*@thymesVar id="utils" type="com.heroku.demo.utils.UtilsForWeb"*/-->
                                 <th:block th:each="j : ${#numbers.sequence(0, utils.getCountriesCount()-1)}">
                                     <option th:each="i : ${#numbers.sequence(0, utils.getCitiesCount(j)-1)}"
@@ -270,8 +273,7 @@
                             </select>
                         </div>
                     </div>
-
-                    <div class="panel panel-default">
+                    <div class="panel panel-default col-sm-5">
                         <div class="panel-heading" th:text="${#messages.msg('words.place')}">
                             Место встречи
                         </div>
@@ -284,25 +286,43 @@
                                    th:text="${#messages.msg('error.event.place')}" th:class="'error'">Place Error</label>
                         </div>
                     </div>
+                    </div>
 
-                    <div class="panel panel-default">
+                    <div class="row">
+                    <div class="panel panel-default col-sm-6">
                         <div class="panel-heading" th:text="${#messages.msg('words.price')}">
                             Цена
                         </div>
                         <div class="panel-body">
                             <div class="input-group">
-                            <input name="price" id="price" type="number" class="form-control" placeholder="Цена"
-                                   aria-label="Цена" required="" min="100" max="100000"
-                                   th:value="${inputEvent.getPrice()}?${inputEvent.getPrice()}"/>
-                            <span class="input-group-addon">&#8381;</span>
+                                <input name="price" id="price" type="number" class="form-control" placeholder="Цена"
+                                       aria-label="Цена" required="" min="100" max="100000"
+                                       th:value="${inputEvent.getPrice()}?${inputEvent.getPrice()}"/>
+                                <span class="input-group-addon">&#8381;</span>
                             </div>
                             <label for="price" th:if="${#fields.hasErrors('price')}"
                                    th:text="${#messages.msg('error.event.price')}" th:class="'error'">Price Error</label>
                         </div>
                     </div>
 
+                    <div class="panel panel-default col-sm-5">
+                        <div class="panel-heading" th:text="${#messages.msg('words.language')}">
+                            Язык
+                        </div>
+                        <div class="panel-body">
+                            <div class="input-group">
+                                <select name="language" class="form-control selectpicker"
+                                        th:selected="${inputEvent.getLanguage()}?${inputEvent.getLanguage()}">
+                                    <option value="0" th:text="${#messages.msg('language.0')}">Русский</option>
+                                    <option value="1" th:text="${#messages.msg('language.1')}">Английский</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+
                     <div class="panel panel-default">
-                        <div class="panel-heading" th:text="${#messages.msg('words.price')}">
+                        <div class="panel-heading" th:text="${#messages.msg('words.photos')}">
                             Фотографии
                         </div>
                         <div class="panel-body">
@@ -315,21 +335,6 @@
                         </div>
                     </div>
 
-                    <div class="panel panel-default">
-                        <div class="panel-heading" th:text="${#messages.msg('words.language')}">
-                            Язык экскурсии
-                        </div>
-                        <div class="panel-body">
-                            <div class="input-group">
-                                <select name="language" class="form-control selectpicker"
-                                        th:selected="${inputEvent.getLanguage()}?${inputEvent.getLanguage()}">
-                                    <option value="0" th:text="${#messages.msg('language.0')}">Русский</option>
-                                    <option value="1" th:text="${#messages.msg('language.1')}">Английский</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <br/>
                     <button type="submit" value="Upload" class="btn btn-default"
                             th:text="${#messages.msg('words.submit')}">Отправить
                     </button>

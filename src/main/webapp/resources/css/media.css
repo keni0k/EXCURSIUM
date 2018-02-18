@@ -105,6 +105,10 @@
 	/* Small Devices, Tablets */
 	@media only screen and (max-width : 768px) {
 
+        .age-limit-input{
+            margin-left: 0;
+        }
+
 		.upload-img {
 			height: 163px;
 		}
