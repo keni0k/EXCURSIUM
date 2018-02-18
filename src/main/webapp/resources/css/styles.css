@@ -210,7 +210,10 @@ h2.title {
 .add-time{margin-left: 10px;border-bottom: 1px dashed #2e78c1;cursor: pointer;}
 .add-time:hover {border-color: transparent;}
 
-.right-input{
-    padding-right: 0!important;padding-left: 0!important;margin-left: calc(100%/12);
-}
+.right-input{padding-right: 0!important;padding-left: 0!important;margin-left: calc(100%/12);}
 .left-input{padding-left: 0!important; padding-right: 0!important;}
+.my-sp{
+    width: auto;
+    display: inline-block;
+    margin-left: 10px;
+}
