@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -90,11 +91,13 @@ public class EventController {
         } else {
             return eventAddAgain(modelMap, event, messageSource.getMessage("error.event.add", null, locale), principal);
         }
-
+        logger.debug(Arrays.toString(tokens));
         for (int i=0; i<photoTokens.length(); i++) {
             Photo photo = photoService.getByToken(tokens[i]);
-            photo.setEventId(event.getId());
-            photoRepository.save(photo);//todo
+            if (photo!=null) {
+                photo.setEventId(event.getId());
+                photoRepository.save(photo);//todo
+            }
         }
         eventService.addEvent(event);
         return event(modelMap, (int)event.getId(), principal);
