@@ -115,19 +115,19 @@
                         <div class="panel-body">
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="type_of_dates" id="optionsRadios1" value="0" checked=""/>
+                                    <input type="radio" name="type_of_dates" id="optionsRadios1" value="0" checked="" onclick="radio(0);"/>
                                     Индивидуальная по запросу. Заказать экскурсию можно на дни недели, которые указали в расписании. Оплатить заказ можно только после вашего подтверждения.
                                 </label>
                             </div>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="type_of_dates" id="optionsRadios2" value="1"/>
+                                    <input type="radio" name="type_of_dates" id="optionsRadios2" value="1" onclick="radio(1);"/>
                                     Групповая по еженедельному расписанию. Вы составляете повторяющееся расписание экскурсии, участники записываются на доступные даты независимо друг от друга. Бронирования подтверждаются автоматически.
                                 </label>
                             </div>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="type_of_dates" id="optionsRadios3" value="2"/>
+                                    <input type="radio" name="type_of_dates" id="optionsRadios3" value="2" onclick="radio(2);"/>
                                     Групповая по фиксированным датам. Вы указываете даты проведения экскурсии, участники записываются на доступные даты независимо друг от друга. Бронирования подтверждаются автоматически.
                                 </label>
                             </div>
@@ -272,6 +272,11 @@
 <script type="text/javascript" src="../../resources/js/Sortable.min.js"></script>
 <script th:inline="javascript">
 /*<![CDATA[*/
+
+function radio(type) {
+    alert(type);
+}
+
     function setimage() { // функция загрузки на сервер
         var iter; // кол-во загруженных картинок
 
