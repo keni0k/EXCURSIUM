@@ -408,7 +408,7 @@
         // if ($('#optionsRadios1').checked()) {$('#radio1').remove();$('#radio2').remove();}
         // if ($('#optionsRadios2').checked()) {$('#radio0').remove();$('#radio2').remove();}
         // if ($('#optionsRadios3').checked()) {$('#radio0').remove();$('#radio1').remove();}
-        var st = type.toString();
+        var st = '';
         $('#result').children().each(function(index, elem) {
             console.log("Дочерний элемент: " + elem.src + " " + elem.className);
             st = st + ' ' + elem.src;
