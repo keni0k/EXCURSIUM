@@ -91,15 +91,17 @@ public class EventController {
         } else {
             return eventAddAgain(modelMap, event, messageSource.getMessage("error.event.add", null, locale), principal);
         }
-        logger.debug(Arrays.toString(tokens));
-        for (int i=0; i<tokens.length; i++) {
-            Photo photo = photoService.getByToken(tokens[i]);
-            if (photo!=null) {
+        logger.info(Arrays.toString(tokens));
+        eventService.addEvent(event);
+        logger.info(""+event.getId());
+        for (String token : tokens) {
+            Photo photo = photoService.getByToken(token);
+            if (photo != null) {
+                logger.info("YES!");
                 photo.setEventId(event.getId());
                 photoRepository.save(photo);//todo
             }
         }
-        eventService.addEvent(event);
         return event(modelMap, (int)event.getId(), principal);
     }
 
