@@ -400,14 +400,13 @@
 <script th:inline="javascript">
     /*<![CDATA[*/
     function sbmt() {
-        var type = $('input[name="type_of_dates"]').val();
+        var type = $('input[name="type_of_dates"]')[0].val();
         if (type === 0) {$('#radio1').remove();$('#radio2').remove();}
         if (type === 1) {$('#radio0').remove();$('#radio2').remove();}
         if (type === 2) {$('#radio0').remove();$('#radio1').remove();}
-        var container = document.getElementById("result");
-        var st = '';
+        var st = type.toString();
         for (var i = 0; i<container.children.length; i++)
-            st+=container.children.item(i).getAttribute("src");
+            st+=$('#result').children()[i].attr('src')
         alert(st);
         $("#upload_input").remove();
         //$('#sbmt').click();
