@@ -81,7 +81,7 @@
                         </div>
                         <div class="panel-body">
                             <textarea name="description" minlength="150" maxlength="1000" type="text"
-                                      id="description"
+                                      id="description" style="resize: vertical"
                                       class="form-control" placeholder="Описание" required=""
                                       aria-label="Описание" th:text="${inputEvent.getDescription()}"></textarea>
                             <label for="description" th:if="${#fields.hasErrors('description')}"
@@ -90,7 +90,7 @@
                         </div>
                     </div>
                     <div class="row ml-0 mr-0">
-                        <div class="panel panel-default category-input col-xs-6">
+                        <div class="panel panel-default left-input col-sm-6">
                             <div class="panel-heading" th:text="${#messages.msg('words.type_of_excursion')}">
                                 Категория экскурсии
                             </div>
@@ -110,7 +110,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="panel panel-default age-limit-input col-xs-5">
+                        <div class="panel panel-default right-input col-sm-5">
                             <div class="panel-heading">
                                 Возрастное ограничение
                             </div>
@@ -220,8 +220,8 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                    <div class="panel panel-default col-sm-6">
+                    <div class="row ml-0 mr-0">
+                    <div class="panel panel-default col-sm-6 left-input">
                         <div class="panel-heading" th:text="${#messages.msg('words.users_count')}">
                             Количество участников
                         </div>
@@ -236,7 +236,7 @@
                         </div>
                     </div>
 
-                    <div class="panel panel-default col-sm-5">
+                    <div class="panel panel-default col-sm-5 right-input">
                         <div class="panel-heading" th:text="${#messages.msg('words.duration')}">
                             Длительность
                         </div>
@@ -255,8 +255,8 @@
                     </div>
                     </div>
 
-                    <div class="row">
-                    <div class="panel panel-default col-sm-6">
+                    <div class="row ml-0 mr-0">
+                    <div class="panel panel-default col-sm-6 left-input">
                         <div class="panel-heading" th:text="${#messages.msg('words.city')}">
                             Город
                         </div>
@@ -273,7 +273,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="panel panel-default col-sm-5">
+                    <div class="panel panel-default col-sm-5 right-input">
                         <div class="panel-heading" th:text="${#messages.msg('words.place')}">
                             Место встречи
                         </div>
@@ -288,8 +288,8 @@
                     </div>
                     </div>
 
-                    <div class="row">
-                    <div class="panel panel-default col-sm-6">
+                    <div class="row ml-0 mr-0">
+                    <div class="panel panel-default col-sm-6 left-input">
                         <div class="panel-heading" th:text="${#messages.msg('words.price')}">
                             Цена
                         </div>
@@ -305,7 +305,7 @@
                         </div>
                     </div>
 
-                    <div class="panel panel-default col-sm-5">
+                    <div class="panel panel-default col-sm-5 right-input">
                         <div class="panel-heading" th:text="${#messages.msg('words.language')}">
                             Язык
                         </div>

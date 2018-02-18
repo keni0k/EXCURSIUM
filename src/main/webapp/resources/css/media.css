@@ -105,7 +105,7 @@
 	/* Small Devices, Tablets */
 	@media only screen and (max-width : 768px) {
 
-        .age-limit-input{
+        .right-input{
             margin-left: 0;
         }
 

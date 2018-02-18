@@ -210,7 +210,7 @@ h2.title {
 .add-time{margin-left: 10px;border-bottom: 1px dashed #2e78c1;cursor: pointer;}
 .add-time:hover {border-color: transparent;}
 
-.age-limit-input{
+.right-input{
     padding-right: 0!important;padding-left: 0!important;margin-left: calc(100%/12);
 }
-.category-input{padding-left: 0!important; padding-right: 0!important;}
+.left-input{padding-left: 0!important; padding-right: 0!important;}
