@@ -133,6 +133,29 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Расписание
+                        </div>
+                        <div class="panel-body" id="radio0">
+                            <div class="day-of-week">
+                                <span>Пн.</span><a onclick="addTime(0, 0);">Добавить</a>
+                            </div>
+                            <div class="day-of-week">
+                                <span>Вт.</span><a onclick="addTime(0, 1);">Добавить</a>
+                            </div>
+                        </div>
+
+                        <div class="panel-body" id="radio1" style="display: none;">
+
+                        </div>
+
+                        <div class="panel-body" id="radio2" style="display: none;">
+
+                        </div>
+                    </div>
+
                     <div class="input-group">
                         <span class="input-group-addon" th:text="${#messages.msg('words.users_count')}">Количество участников</span>
                         <input name="usersCount" id="users_count" type="number" class="form-control"
@@ -273,9 +296,27 @@
 <script th:inline="javascript">
 /*<![CDATA[*/
 
-function radio(type) {
-    alert(type);
+function addTime(type, dayOfWeek) {
+    alert(type+" "+dayOfWeek);
 }
+
+    function radio(type) {
+        if (type===0) {
+            $('#radio0').style(this, 'display', 'block');
+            $('#radio1').style(this, 'display', 'none');
+            $('#radio2').style(this, 'display', 'none');
+        }
+        if (type===1) {
+            $('#radio0').style(this, 'display', 'none');
+            $('#radio1').style(this, 'display', 'block');
+            $('#radio2').style(this, 'display', 'none');
+        }
+        if (type===2) {
+            $('#radio0').style(this, 'display', 'none');
+            $('#radio1').style(this, 'display', 'none');
+            $('#radio2').style(this, 'display', 'block');
+        }
+    }
 
     function setimage() { // функция загрузки на сервер
         var iter; // кол-во загруженных картинок
