@@ -304,6 +304,7 @@
                                        min="100" max="100000" th:value="${inputEvent.getPrice()}?${inputEvent.getPrice()}"/>
                                 <span class="input-group-addon">&#8381;</span>
                             </div>
+                            <b><p class="mb-0 right" id = "price-help" style="display: none;"><span id = "our_price">100</span> руб. (15%) путешественники заплатят нам на сайте, а <span id = "guide_price">600</span> руб. вам на месте</p></b>
                             <label for="price" th:if="${#fields.hasErrors('price')}"
                                    th:text="${#messages.msg('error.event.price')}" th:class="'error'">Price Error</label>
                         </div>
@@ -402,6 +403,7 @@
     function generateOptions() {
         var st = '';
         var hour = 7;
+        var zero = '0';
         for (var i=0; i<48; i++){
             if (i%2===0) hour++;
             if (hour===24) hour = 0;
@@ -409,7 +411,9 @@
             if (i%2===0)
                 minutes = '0';
             else minutes = '3';
-            st += '<option value="' + i + '">0' + hour + ':' + minutes + '0</option>';
+            if (hour<10) zero = '0';
+            else zero = '';
+            st += '<option value="' + i + '">' + zero + hour + ':' + minutes + '0</option>';
         }
         return st;
     }
@@ -440,14 +444,12 @@
         if(type===0) {
             $('#' + type + dayOfWeek).append('<select name="time-down" class="form-control selectpicker my-sp"> ' +
                 '<option value="null">--:--</option>' +
-                '<option value="0">08:00</option>' +
-                '<option value="1">08:30</option>' +
+                generateOptions()+
                 '</select>' +
                 '<span> –</span>' +
                 '<select name="time-up" class="form-control selectpicker my-sp"> ' +
                 '<option value="null">--:--</option>' +
-                '<option value="0">08:00</option>' +
-                '<option value="1">08:30</option>' +
+                generateOptions()+
                 '</select>');
             $('#' + dayOfWeek).css('display','none');
         }
@@ -575,6 +577,12 @@
         $("#price").keyup(function () {
             var txt = $('#price').val();
             $('#card-price').text(txt + "₽");
+            if (txt!=='') {
+                $('#price-help').css('display','block');
+                var our_price = txt / 20 * 3;
+                $('#our_price').text(our_price);
+                $('#your_price').text(txt - our_price);
+            } else $('#price-help').css('display','none');
         });
         $("#category").change(function () {
             var txt = $('#category').val();
