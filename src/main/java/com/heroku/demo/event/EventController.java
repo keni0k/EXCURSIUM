@@ -92,7 +92,7 @@ public class EventController {
             return eventAddAgain(modelMap, event, messageSource.getMessage("error.event.add", null, locale), principal);
         }
         logger.debug(Arrays.toString(tokens));
-        for (int i=0; i<photoTokens.length(); i++) {
+        for (int i=0; i<tokens.length; i++) {
             Photo photo = photoService.getByToken(tokens[i]);
             if (photo!=null) {
                 photo.setEventId(event.getId());
