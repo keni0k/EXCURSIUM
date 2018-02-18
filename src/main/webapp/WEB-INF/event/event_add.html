@@ -341,9 +341,10 @@
                         </div>
                     </div>
 
-                    <button type="submit" value="Upload" class="btn btn-default"
-                            th:text="${#messages.msg('words.submit')}">Отправить
+                    <button class="btn btn-default" th:text="${#messages.msg('words.submit')}" onclick="sbmt();">Отправить
                     </button>
+
+                    <button type="submit" value="Upload" style="display: none" id="sbmt">Отправить</button>
                 </form>
             </div>
             <div class="hidden visible-md visible-lg col-md-5 col-lg-6">
@@ -399,6 +400,18 @@
 
 <script th:inline="javascript">
     /*<![CDATA[*/
+    function sbmt() {
+        if (type === 0) {$('#radio1').remove();$('#radio2').remove();}
+        if (type === 1) {$('#radio0').remove();$('#radio2').remove();}
+        if (type === 2) {$('#radio0').remove();$('#radio1').remove();}
+        var container = document.getElementById("result");
+        var st = '';
+        for (var i = 0; i<container.children.length; i++)
+            st+=container.children.item(i).getAttribute("src");
+        alert(st);
+        $("#upload_input").remove();
+        //$('#sbmt').click();
+    }
     function generateOptions(select) {
         var st = '<select class="form-control selectpicker my-sp"' + select + '><option value="null">--:--</option>';
         var hour = 7;
@@ -468,7 +481,6 @@
                 break;
             }
             fd.append('img', $input.prop('files')[i]);
-            fd.append('id', id);
             $.ajax({
                 url: $url,
                 data: fd,
@@ -485,7 +497,6 @@
                 }
             });
         }
-
     }
     $(document).ready(function () {
         $("#upload_button").click(function () {
