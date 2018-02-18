@@ -215,7 +215,7 @@
 
                         <div class="panel-body" id="radio2" style="display: none;">
                             <div class="day-of-week">
-                                <b>Пн.</b><a class="add-time" onclick="addTime(0, 0);">Добавить время</a>
+                                <b><a class="add-time" onclick="addTime(0, 0);">Добавить дату</a></b>
                             </div>
                         </div>
                     </div>
@@ -388,10 +388,25 @@
     /*<![CDATA[*/
 
     function addTime(type, dayOfWeek) {
+        if(type===0)
+            $('#'+type + dayOfWeek).append('<select name="time-down" class="form-control selectpicker my-sp"> ' +
+                '<option value="null">--:--</option>' +
+                '<option value="0">08:00</option>' +
+                '<option value="1">08:30</option>' +
+                '</select>'+
+                '<span> – </span>'+
+                '<select name="time-up" class="form-control selectpicker my-sp"> ' +
+                '<option value="null">--:--</option>' +
+                '<option value="0">08:00</option>' +
+                '<option value="1">08:30</option>' +
+                '</select>');
+
+        if(type===1)
         $('#'+type + dayOfWeek).append('<select name="time" class="form-control selectpicker my-sp"> ' +
+            '<option value="null">--:--</option>' +
             '<option value="0">08:00</option>' +
             '<option value="1">08:30</option>' +
-            '</select>')
+            '</select>');
     }
 
     function radio(type) {
