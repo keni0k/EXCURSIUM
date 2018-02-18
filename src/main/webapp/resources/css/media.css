@@ -72,9 +72,9 @@
 		margin-top: 95px;
 	}
 	.demo {
-		top: 141px;
+		top: 131px;
 	}
-	.demo>.page-header{
+	.demo>.page-header>h3{
 		font-size: 20px;
 	}
 }

@@ -399,19 +399,19 @@
 
 <script th:inline="javascript">
     /*<![CDATA[*/
-    function remove_img(el) {
-        el.parent.remove();
+    function remove_img() {
         $('#add-photo').css('display','block');
     }
     function sbmt() {
-        var type = $('input[name="type_of_dates"]')[0].value;
+        var type = 0;//$('input[name="type_of_dates"]')[0].value;
         if (type === 0) {$('#radio1').remove();$('#radio2').remove();}
         if (type === 1) {$('#radio0').remove();$('#radio2').remove();}
         if (type === 2) {$('#radio0').remove();$('#radio1').remove();}
         var st = type.toString();
-        var container = document.getElementById('result');
-        for (var i = 0; i<container.children.length; i++)
-            st+=$('#result').children()[i].attr('src')
+        $('#result').each(function(index, elem) {
+            console.log("Дочерний элемент: " + elem.attr('src') + " " + elem.className);
+            st= st + ' ' + elem.attr('src');
+        });
         alert(st);
         $("#upload_input").remove();
         //$('#sbmt').click();

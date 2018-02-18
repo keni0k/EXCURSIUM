@@ -119,7 +119,7 @@ public class HomeController {
                 putImg(serverFile.getAbsolutePath(), photoToken);
                 photoRepository.save(photo);
                 message.append("<div class=\"upload-img\"><img src=\"").append(Consts.URL_PATH).append(photoToken).append("\" class=\"img-rounded\"/>" +
-                        "<div class=\"closer\" onclick=\"remove_img(this);\"></div></div>");
+                        "<div class=\"closer\" onclick=\"$(this).parent().remove();remove_img();\"></div></div>");
             } catch (Exception e) {
                 message.append("<p>").append(e.getMessage()).append("</p>");
             }
