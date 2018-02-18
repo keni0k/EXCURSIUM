@@ -335,7 +335,7 @@
                             <div class="upload-img" draggable="false" style="cursor: auto;">
                                 <img class="img-rounded"
                                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAA8CAIAAAAiz+n/AAAAAXNSR0IArs4c6QAAAARnQU1BAACx&#10;jwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAu&#10;MjHxIGmVAAAAkUlEQVR4Xu3QMQEAAAzDoPnXWDFzwRUkcAtRNFI0UjRSNFI0UjRSNFI0UjRSNFI0&#10;UjRSNFI0UjRSNFI0UjRSNFI0UjRSNFI0UjRSNFI0UjRSNFI0UjRSNFI0UjRSNFI0UjRSNFI0UjRS&#10;NFI0UjRSNFI0UjRSNFI0UjRSNFI0UjRSNFI0UjRSNFI0UjRSNFI0sT3eqIa5HCIQEgAAAABJRU5E&#10;rkJggg=="
-                                     draggable="false" >
+                                     draggable="false"/>
                                 <input type="button" value="Добавить фотографии" class="btn btn-block" tabindex="9" id="upload_button" style="
                                     background: #eee;
                                     width: auto;
@@ -343,8 +343,7 @@
                                     left: 40px;
                                     top: 65px;"/>
                             </div>
-                            <!--<input type="button" value="Добавить фотографии" class="btn btn-block" tabindex="9"
-                                   id="upload_button"/>--><br/>
+                            <br/>
                             <div class="result" id="result">
                             </div>
                         </div>
@@ -495,7 +494,7 @@
         // с классом file_link_name приходят загруженные изображения - счетаем их кол-во
         iter = $('.upload-img').length;
 
-        var max = 4 - iter;
+        var max = 5 - iter;
         if (max <= 0) {
             alert('Максимально количество фотографий = 4!');
             return;
