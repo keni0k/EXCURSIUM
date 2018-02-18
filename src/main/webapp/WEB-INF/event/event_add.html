@@ -405,14 +405,15 @@
             $('#add-photo').css('display','block');
     }
     function sbmt() {
-        // if ($('#optionsRadios1').checked()) {$('#radio1').remove();$('#radio2').remove();}
-        // if ($('#optionsRadios2').checked()) {$('#radio0').remove();$('#radio2').remove();}
-        // if ($('#optionsRadios3').checked()) {$('#radio0').remove();$('#radio1').remove();}
+        if ($('#optionsRadios1').checked()) {$('#radio1').remove();$('#radio2').remove();}
+        if ($('#optionsRadios2').checked()) {$('#radio0').remove();$('#radio2').remove();}
+        if ($('#optionsRadios3').checked()) {$('#radio0').remove();$('#radio1').remove();}
         var st = '';
         $('#result').children().each(function(index, elem) {
             var img = elem.getElementsByClassName('img-rounded')[0];
             console.log("Дочерний элемент: " + img.src + " " + img.className);
-            st = st + ' ' + img.src;
+            var token = img.src.toString().substring(53,85);
+            st = st + ';' + token;
         });
         alert(st);
         $("#upload_input").remove();
