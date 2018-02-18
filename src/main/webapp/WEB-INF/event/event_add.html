@@ -392,29 +392,25 @@
 
 <script th:inline="javascript">
     /*<![CDATA[*/
-    $(function () {
-        $('#datetimepicker').datetimepicker({
-            locale: 'ru',
-            format: 'dd.MM.YYYY'
-        });
-    });
     function addDate() {
-        $('#radio2').append('' +
-            '<div class="day-of-week">' +
-            '<div class="form-group">\n' +
-            '<div class=\'input-group date\' id=\'datetimepicker2\'>\n' +
-            '<input type=\'text\' class="form-control" />\n' +
-            '<span class="input-group-addon">\n' +
-            '<span class="glyphicon glyphicon-calendar"></span>\n' +
-            '</span>\n' +
-            '</div>\n' +
-            '</div>'+
+        $('#radio2').append('<div class="day-of-week">' +
+            '<div class="form-group" style="margin-top: 15px;">'+
+            '<div class="input-group date" id="datetimepicker" style="display: flex;">'+
+            '<input type="text" class="form-control" style="width: auto;">'+
+            '<span class="input-group-addon" style="width: auto;margin-right: 20px;border-left-width: 0;border-radius: 0 4px 4px 0;">'+
+            '<span class="glyphicon glyphicon-calendar"></span>'+
+            '</span>'+
             '<select name="time" class="form-control selectpicker my-sp"> ' +
             '<option value="null">--:--</option>' +
             '<option value="0">08:00</option>' +
             '<option value="1">08:30</option>' +
-            '</select>'+
-            '</div>');
+            '</select>' +
+            '</div></div></div>');
+
+        $('.date').datetimepicker({
+            locale: 'ru',
+            format: 'dd.MM.YYYY'
+        });
     }
 
     function addTime(type, dayOfWeek) {
