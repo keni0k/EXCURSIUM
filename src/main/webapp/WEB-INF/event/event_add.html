@@ -493,8 +493,12 @@
                 contentType: false,
                 type: 'POST',
                 success: function (data) {
-                    $("#result").append(data); // вставляю миниатюру в #result
-                    if ($('#result').children('.upload-img').length>=4)
+                    var final = '<div class="upload-img"><img src="'+data+'" class="img-rounded"/>"' +
+                    '"<div class="closer" onclick="remove_img($(this));"></div></div>';
+                    var $result = $('#result');
+                    if ($result.children().length<4)
+                        $result.append(final); // вставляю миниатюру в #result
+                    if ($result.children('.upload-img').length>=4)
                         $('#add-photo').css('display','none');
                 },
                 error: function (data) {
