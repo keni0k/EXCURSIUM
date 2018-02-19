@@ -40,7 +40,7 @@ public class Photo {
     }
 
     public String getToken() {
-        return data.substring(0,32);
+        return data.substring(0,data.length()-4);
     }
 
     public void setData(String data) {
