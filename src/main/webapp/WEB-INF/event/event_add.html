@@ -143,7 +143,7 @@
                         <div class="panel-body">
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="type_of_dates" id="optionsRadios1" value="0" checked=""
+                                    <input type="radio" name="typeOfDates" id="optionsRadios1" value="0" checked=""
                                            onclick="radio(0);"/>
                                     <b>Индивидуальная по запросу.</b> Заказать экскурсию можно на дни недели, которые
                                     указали в
@@ -152,7 +152,7 @@
                             </div>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="type_of_dates" id="optionsRadios2" value="1"
+                                    <input type="radio" name="typeOfDates" id="optionsRadios2" value="1"
                                            onclick="radio(1);"/>
                                     <b>Групповая по еженедельному расписанию.</b> Вы составляете повторяющееся
                                     расписание
@@ -162,7 +162,7 @@
                             </div>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="type_of_dates" id="optionsRadios3" value="2"
+                                    <input type="radio" name="typeOfDates" id="optionsRadios3" value="2"
                                            onclick="radio(2);"/>
                                     <b>Групповая по фиксированным датам.</b> Вы указываете даты проведения экскурсии,
                                     участники
@@ -447,7 +447,7 @@
     }
 
     function sbmt() {
-        var type = Number($('input[name=type_of_dates]:checked').val());
+        var type = Number($('input[name=typeOfDates]:checked').val());
         var $radio0 = $('#radio0');var $radio1 = $('#radio1');var $radio2 = $('#radio2');
         var inp = document.getElementById('active_dates');
         if (type === 0) {
