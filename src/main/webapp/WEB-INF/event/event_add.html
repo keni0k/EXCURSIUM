@@ -406,19 +406,16 @@
             $('#add-photo').css('display','block');
     }
     function sbmt() {
-        var type = $('input[name=type_of_dates]:checked').val().toInt();
+        var type = Number($('input[name=type_of_dates]:checked').val());
         console.log('type: '+type);
         var $solve;
         var $radio0 = $('#radio0');
         var $radio1 = $('#radio1');
         var $radio2 = $('#radio2');
         switch (type){
-            case 0:
-                $solve = $radio0;break;
-            case 1:
-                $solve = $radio1;break;
-            case 2:
-                $solve = $radio2;break;
+            case 0:$solve = $radio0;break;
+            case 1:$solve = $radio1;break;
+            case 2:$solve = $radio2;break;
         }
         $solve.children().each(function(index, elem) {
             console.log(elem.className);
