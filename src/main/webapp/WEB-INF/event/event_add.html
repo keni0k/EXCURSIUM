@@ -421,10 +421,15 @@
                 console.log(index+":");
                 for (var childItem in elem.childNodes) {
                     var elem1 = elem.childNodes[childItem];
-                    if (elem1.nodeType === 1 && elem1.className === "my-sp form-control")
-                        console.log(elem1.value);
+                    if (elem1.nodeType === 1 && elem1.className === "my-sp form-control") {
+                        //console.log(elem1.value);
+                        inp.value+=elem1.value;
+                        inp.value+='-';
+                    }
                 }
-                console.log(";");
+                inp.value = inp.value.substring(0,inp.value.length-1);
+                inp.value+=';';
+                //console.log(";");
             });
         }
         else if (type===1) {
@@ -433,9 +438,19 @@
                 console.log(index+":");
                 for (var childItem in elem.childNodes) {
                     var elem1 = elem.childNodes[childItem];
-                    if (elem1.nodeType === 1 && elem1.className === "my-sp form-control")
-                        console.log(elem1.value);
+                    if (elem1.nodeType === 1 && elem1.className === "day-of-week"){
+                        for (var childItem1 in elem1.childNodes) {
+                            var elem2 = elem1.childNodes[childItem1];
+                            if (elem2.nodeType === 1 && elem1.className === "my-sp form-control") {
+                                console.log(elem2.value);
+                                inp.value += elem2.value;
+                                inp.value += ',';
+                            }
+                        }
+                    }
                 }
+                inp.value = inp.value.substring(0,inp.value.length-1);
+                inp.value+=';';
                 console.log(";");
             });
         }
