@@ -33,15 +33,17 @@
         border-top-right-radius: 4px;
         border: 1px solid #bdbdbd
     }
+
     .bootstrap-select.form-control:not([class*="col-"]) {
-         width: auto;
-     }
+        width: auto;
+    }
 
     .dropdown-toggle {
-        border-radius: 4px!important;
+        border-radius: 4px !important;
     }
+
     select.bs-select-hidden, select.selectpicker {
-        display: inline-block!important;
+        display: inline-block !important;
     }</style>
 </head>
 <body style="background-color: #f9f9f9;">
@@ -88,7 +90,8 @@
                         <div class="panel-body">
                             <textarea name="description" minlength="150" maxlength="1000" type="text"
                                       id="description" style="resize: vertical"
-                                      class="form-control" required="" th:text="${inputEvent.getDescription()}"></textarea>
+                                      class="form-control" required=""
+                                      th:text="${inputEvent.getDescription()}"></textarea>
                             <label for="description" th:if="${#fields.hasErrors('description')}"
                                    th:text="${#messages.msg('error.event.description')}" th:class="'error'">Description
                                 Error</label>
@@ -143,7 +146,8 @@
                                 <label>
                                     <input type="radio" name="type_of_dates" id="optionsRadios1" value="0" checked=""
                                            onclick="radio(0);"/>
-                                    <b>Индивидуальная по запросу.</b> Заказать экскурсию можно на дни недели, которые указали в
+                                    <b>Индивидуальная по запросу.</b> Заказать экскурсию можно на дни недели, которые
+                                    указали в
                                     расписании. Оплатить заказ можно только после вашего подтверждения.
                                 </label>
                             </div>
@@ -151,7 +155,8 @@
                                 <label>
                                     <input type="radio" name="type_of_dates" id="optionsRadios2" value="1"
                                            onclick="radio(1);"/>
-                                    <b>Групповая по еженедельному расписанию.</b> Вы составляете повторяющееся расписание
+                                    <b>Групповая по еженедельному расписанию.</b> Вы составляете повторяющееся
+                                    расписание
                                     экскурсии, участники записываются на доступные даты независимо друг от друга.
                                     Бронирования подтверждаются автоматически.
                                 </label>
@@ -160,7 +165,8 @@
                                 <label>
                                     <input type="radio" name="type_of_dates" id="optionsRadios3" value="2"
                                            onclick="radio(2);"/>
-                                    <b>Групповая по фиксированным датам.</b> Вы указываете даты проведения экскурсии, участники
+                                    <b>Групповая по фиксированным датам.</b> Вы указываете даты проведения экскурсии,
+                                    участники
                                     записываются на доступные даты независимо друг от друга. Бронирования подтверждаются
                                     автоматически.
                                 </label>
@@ -174,55 +180,69 @@
                         </div>
                         <div class="panel-body pb-0 pt-0" id="radio0">
                             <div class="day-of-week" id="00">
-                                <b>Пн.</b><a class="add-time" id="0" onclick="addTime(0, 0);">Задать интервал времени</a>
+                                <b>Пн.</b><a class="add-time" id="0" onclick="addTime(0, 0);">Задать интервал
+                                времени</a>
                             </div>
                             <div class="day-of-week" id="01">
-                                <b>Вт.</b><a class="add-time" id="1" onclick="addTime(0, 1);">Задать интервал времени</a>
+                                <b>Вт.</b><a class="add-time" id="1" onclick="addTime(0, 1);">Задать интервал
+                                времени</a>
                             </div>
                             <div class="day-of-week" id="02">
-                                <b>Ср.</b><a class="add-time" id="2" onclick="addTime(0, 2);">Задать интервал времени</a>
+                                <b>Ср.</b><a class="add-time" id="2" onclick="addTime(0, 2);">Задать интервал
+                                времени</a>
                             </div>
                             <div class="day-of-week" id="03">
-                                <b>Чт.</b><a class="add-time" id="3" onclick="addTime(0, 3);">Задать интервал времени</a>
+                                <b>Чт.</b><a class="add-time" id="3" onclick="addTime(0, 3);">Задать интервал
+                                времени</a>
                             </div>
                             <div class="day-of-week" id="04">
-                                <b>Пт.</b><a class="add-time" id="4" onclick="addTime(0, 4);">Задать интервал времени</a>
+                                <b>Пт.</b><a class="add-time" id="4" onclick="addTime(0, 4);">Задать интервал
+                                времени</a>
                             </div>
                             <div class="day-of-week" id="05">
-                                <b>Сб.</b><a class="add-time" id="5" onclick="addTime(0, 5);">Задать интервал времени</a>
+                                <b>Сб.</b><a class="add-time" id="5" onclick="addTime(0, 5);">Задать интервал
+                                времени</a>
                             </div>
                             <div class="day-of-week bw-0" id="06">
-                                <b>Вс.</b><a class="add-time" id="6" onclick="addTime(0, 6);">Задать интервал времени</a>
+                                <b>Вс.</b><a class="add-time" id="6" onclick="addTime(0, 6);">Задать интервал
+                                времени</a>
                             </div>
                         </div>
 
                         <div class="panel-body pb-0 pt-0" id="radio1" style="display: none;">
                             <div class="day-of-week">
-                                <b>Пн.</b><span id = "10"></span><a class="add-time" onclick="addTime(1, 0);">Добавить время</a>
+                                <b>Пн.</b><span id="10"></span><a class="add-time" onclick="addTime(1, 0);">Добавить
+                                время</a>
                             </div>
                             <div class="day-of-week">
-                                <b>Вт.</b><span id = "11"></span><a class="add-time" onclick="addTime(1, 1);">Добавить время</a>
+                                <b>Вт.</b><span id="11"></span><a class="add-time" onclick="addTime(1, 1);">Добавить
+                                время</a>
                             </div>
                             <div class="day-of-week">
-                                <b>Ср.</b><span id = "12"></span><a class="add-time" onclick="addTime(1, 2);">Добавить время</a>
+                                <b>Ср.</b><span id="12"></span><a class="add-time" onclick="addTime(1, 2);">Добавить
+                                время</a>
                             </div>
                             <div class="day-of-week">
-                                <b>Чт.</b><span id = "13"></span><a class="add-time" onclick="addTime(1, 3);">Добавить время</a>
+                                <b>Чт.</b><span id="13"></span><a class="add-time" onclick="addTime(1, 3);">Добавить
+                                время</a>
                             </div>
                             <div class="day-of-week">
-                                <b>Пт.</b><span id = "14"></span><a class="add-time" onclick="addTime(1, 4);">Добавить время</a>
+                                <b>Пт.</b><span id="14"></span><a class="add-time" onclick="addTime(1, 4);">Добавить
+                                время</a>
                             </div>
                             <div class="day-of-week">
-                                <b>Сб.</b><span id = "15"></span><a class="add-time" onclick="addTime(1, 5);">Добавить время</a>
+                                <b>Сб.</b><span id="15"></span><a class="add-time" onclick="addTime(1, 5);">Добавить
+                                время</a>
                             </div>
                             <div class="day-of-week bw-0">
-                                <b>Вс.</b><span id = "16"></span><a class="add-time" onclick="addTime(1, 6);">Добавить время</a>
+                                <b>Вс.</b><span id="16"></span><a class="add-time" onclick="addTime(1, 6);">Добавить
+                                время</a>
                             </div>
                         </div>
 
                         <div class="panel-body pb-0 pt-0" id="radio2" style="display: none;">
                             <div class="day-of-week bw-0">
-                                <div id = "20"></div>
+                                <div id="20"></div>
                                 <b><a class="add-time" onclick="addDate();">Добавить дату</a></b>
                             </div>
                         </div>
@@ -231,102 +251,113 @@
                     </div>
 
                     <div class="row ml-0 mr-0">
-                    <div class="panel panel-default col-sm-6 left-input">
-                        <div class="panel-heading" th:text="${#messages.msg('words.users_count')}">
-                            Количество участников
-                        </div>
-                        <div class="panel-body">
-                            <div class="input-group">
-                            <input name="usersCount" id="users_count" type="number" class="form-control" required=""
-                                   min="1" max="100" th:value="${inputEvent.getUsersCount()}?${inputEvent.getUsersCount()}"/>
-                            <span class="input-group-addon">человек</span>
+                        <div class="panel panel-default col-sm-6 left-input">
+                            <div class="panel-heading" th:text="${#messages.msg('words.users_count')}">
+                                Количество участников
                             </div>
-                            <label for="users_count" th:if="${#fields.hasErrors('usersCount')}"
-                                   th:text="${#messages.msg('error.event.users_count')}" th:class="'error'">UsersCount
-                                Error</label>
+                            <div class="panel-body">
+                                <div class="input-group">
+                                    <input name="usersCount" id="users_count" type="number" class="form-control"
+                                           required=""
+                                           min="1" max="100"
+                                           th:value="${inputEvent.getUsersCount()}?${inputEvent.getUsersCount()}"/>
+                                    <span class="input-group-addon">человек</span>
+                                </div>
+                                <label for="users_count" th:if="${#fields.hasErrors('usersCount')}"
+                                       th:text="${#messages.msg('error.event.users_count')}" th:class="'error'">UsersCount
+                                    Error</label>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="panel panel-default col-sm-5 right-input">
-                        <div class="panel-heading" th:text="${#messages.msg('words.duration')}">
-                            Длительность
-                        </div>
-                        <div class="panel-body">
-                            <div class="input-group">
-                                <input name="duration" id="duration" type="number" class="form-control"
-                                       required="" th:value="${inputEvent.getDuration()}?${inputEvent.getDuration()}" min="1" max="240"/>
-                                <span class="input-group-addon" th:text="${#messages.msg('words.hours')}">часов</span>
+                        <div class="panel panel-default col-sm-5 right-input">
+                            <div class="panel-heading" th:text="${#messages.msg('words.duration')}">
+                                Длительность
                             </div>
-                            <label for="duration" th:if="${#fields.hasErrors('duration')}"
-                                   th:text="${#messages.msg('error.event.duration')}" th:class="'error'">Duration
-                                Error</label>
+                            <div class="panel-body">
+                                <div class="input-group">
+                                    <input name="duration" id="duration" type="number" class="form-control"
+                                           required=""
+                                           th:value="${inputEvent.getDuration()}?${inputEvent.getDuration()}" min="1"
+                                           max="240"/>
+                                    <span class="input-group-addon"
+                                          th:text="${#messages.msg('words.hours')}">часов</span>
+                                </div>
+                                <label for="duration" th:if="${#fields.hasErrors('duration')}"
+                                       th:text="${#messages.msg('error.event.duration')}" th:class="'error'">Duration
+                                    Error</label>
+                            </div>
                         </div>
-                    </div>
                     </div>
 
                     <div class="row ml-0 mr-0">
-                    <div class="panel panel-default col-sm-6 left-input">
-                        <div class="panel-heading" th:text="${#messages.msg('words.city')}">
-                            Город
-                        </div>
-                        <div class="panel-body">
-                            <select class="selectpicker form-control" data-live-search="true" name="city_and_country">
-                                <!--/*@thymesVar id="utils" type="com.heroku.demo.utils.UtilsForWeb"*/-->
-                                <th:block th:each="j : ${#numbers.sequence(0, utils.getCountriesCount()-1)}">
-                                    <option th:each="i : ${#numbers.sequence(0, utils.getCitiesCount(j)-1)}"
-                                            th:value="${j}+'.'+${i}"
-                                            th:text="${#messages.msg('city.'+j+'.'+i)}+', '+ ${#messages.msg('country.'+j)}">
-                                        Москва, Россия
-                                    </option>
-                                </th:block>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="panel panel-default col-sm-5 right-input">
-                        <div class="panel-heading" th:text="${#messages.msg('words.place')}">
-                            Место встречи
-                        </div>
-                        <div class="panel-body">
-                            <input name="place" id="place" type="text" class="form-control" required=""
-                                   minlength="5" maxlength="100"
-                                   th:value="${inputEvent.getPlace()}?${inputEvent.getPlace()}"/>
-                            <label for="place" th:if="${#fields.hasErrors('place')}"
-                                   th:text="${#messages.msg('error.event.place')}" th:class="'error'">Place Error</label>
-                        </div>
-                    </div>
-                    </div>
-
-                    <div class="row ml-0 mr-0">
-                    <div class="panel panel-default col-sm-6 left-input">
-                        <div class="panel-heading" th:text="${#messages.msg('words.price')}">
-                            Цена
-                        </div>
-                        <div class="panel-body">
-                            <div class="input-group">
-                                <input name="price" id="price" type="number" class="form-control" required=""
-                                       min="100" max="100000" th:value="${inputEvent.getPrice()}?${inputEvent.getPrice()}"/>
-                                <span class="input-group-addon">&#8381;</span>
+                        <div class="panel panel-default col-sm-6 left-input">
+                            <div class="panel-heading" th:text="${#messages.msg('words.city')}">
+                                Город
                             </div>
-                            <b><p class="mb-0 mb-0 mt-05 f16" id = "price-help" style="display: none;"><span id = "our_price">100</span> рублей (15%) путешественники заплатят нам на сайте, а <span id = "guide_price">600</span> рублей - вам на месте</p></b>
-                            <label for="price" th:if="${#fields.hasErrors('price')}"
-                                   th:text="${#messages.msg('error.event.price')}" th:class="'error'">Price Error</label>
-                        </div>
-                    </div>
-
-                    <div class="panel panel-default col-sm-5 right-input">
-                        <div class="panel-heading" th:text="${#messages.msg('words.language')}">
-                            Язык
-                        </div>
-                        <div class="panel-body">
-                            <div class="input-group">
-                                <select name="language" class="form-control selectpicker"
-                                        th:selected="${inputEvent.getLanguage()}?${inputEvent.getLanguage()}">
-                                    <option value="0" th:text="${#messages.msg('language.0')}">Русский</option>
-                                    <option value="1" th:text="${#messages.msg('language.1')}">Английский</option>
+                            <div class="panel-body">
+                                <select class="selectpicker form-control" data-live-search="true"
+                                        name="city_and_country">
+                                    <!--/*@thymesVar id="utils" type="com.heroku.demo.utils.UtilsForWeb"*/-->
+                                    <th:block th:each="j : ${#numbers.sequence(0, utils.getCountriesCount()-1)}">
+                                        <option th:each="i : ${#numbers.sequence(0, utils.getCitiesCount(j)-1)}"
+                                                th:value="${j}+'.'+${i}"
+                                                th:text="${#messages.msg('city.'+j+'.'+i)}+', '+ ${#messages.msg('country.'+j)}">
+                                            Москва, Россия
+                                        </option>
+                                    </th:block>
                                 </select>
                             </div>
                         </div>
+                        <div class="panel panel-default col-sm-5 right-input">
+                            <div class="panel-heading" th:text="${#messages.msg('words.place')}">
+                                Место встречи
+                            </div>
+                            <div class="panel-body">
+                                <input name="place" id="place" type="text" class="form-control" required=""
+                                       minlength="5" maxlength="100"
+                                       th:value="${inputEvent.getPlace()}?${inputEvent.getPlace()}"/>
+                                <label for="place" th:if="${#fields.hasErrors('place')}"
+                                       th:text="${#messages.msg('error.event.place')}" th:class="'error'">Place
+                                    Error</label>
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="row ml-0 mr-0">
+                        <div class="panel panel-default col-sm-6 left-input">
+                            <div class="panel-heading" th:text="${#messages.msg('words.price')}">
+                                Цена
+                            </div>
+                            <div class="panel-body">
+                                <div class="input-group">
+                                    <input name="price" id="price" type="number" class="form-control" required=""
+                                           min="100" max="100000"
+                                           th:value="${inputEvent.getPrice()}?${inputEvent.getPrice()}"/>
+                                    <span class="input-group-addon">&#8381;</span>
+                                </div>
+                                <b><p class="mb-0 mb-0 mt-05 f16" id="price-help" style="display: none;"><span
+                                        id="our_price">100</span> рублей (15%) путешественники заплатят нам на сайте, а
+                                    <span id="guide_price">600</span> рублей - вам на месте</p></b>
+                                <label for="price" th:if="${#fields.hasErrors('price')}"
+                                       th:text="${#messages.msg('error.event.price')}" th:class="'error'">Price
+                                    Error</label>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default col-sm-5 right-input">
+                            <div class="panel-heading" th:text="${#messages.msg('words.language')}">
+                                Язык
+                            </div>
+                            <div class="panel-body">
+                                <div class="input-group">
+                                    <select name="language" class="form-control selectpicker"
+                                            th:selected="${inputEvent.getLanguage()}?${inputEvent.getLanguage()}">
+                                        <option value="0" th:text="${#messages.msg('language.0')}">Русский</option>
+                                        <option value="1" th:text="${#messages.msg('language.1')}">Английский</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="panel panel-default">
@@ -335,16 +366,20 @@
                         </div>
                         <div class="panel-body">
                             <input type="file" multiple="multiple" required="" size="30000000"
-                                   accept="image/jpeg,image/png" name="files[]" style="display:none;" id="upload_input"/>
+                                   accept="image/jpeg,image/png" name="files[]" style="display:none;"
+                                   id="upload_input"/>
                             <input type="text" name="photos" style="display:none;" id="photos"/>
                             <div class="result" id="result"></div>
-                            <div id = "add-photo" class="upload-img" draggable="false" style="cursor: auto;padding-top: 9%;">
-                                <input type="button" value="Добавить" class="btn btn-block" tabindex="9" id="upload_button" style="width: auto;margin: auto;"/>
+                            <div id="add-photo" class="upload-img" draggable="false"
+                                 style="cursor: auto;padding-top: 9%;">
+                                <input type="button" value="Добавить" class="btn btn-block" tabindex="9"
+                                       id="upload_button" style="width: auto;margin: auto;"/>
                             </div>
                         </div>
                     </div>
 
-                    <a class="btn btn-default" th:text="${#messages.msg('words.submit')}" onclick="sbmt();">Отправить</a>
+                    <a class="btn btn-default" th:text="${#messages.msg('words.submit')}"
+                       onclick="sbmt();">Отправить</a>
 
                     <button type="submit" value="Upload" style="display: none" id="sbmt">Отправить</button>
                 </form>
@@ -395,8 +430,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
-<script type="text/javascript" src="../../resources/libs/datetimepicker/js/bower_components/moment/moment.min.js"></script>
-<script type="text/javascript" src="../../resources/libs/datetimepicker/js/bower_components/moment/locale/ru.js"></script>
+<script type="text/javascript"
+        src="../../resources/libs/datetimepicker/js/bower_components/moment/moment.min.js"></script>
+<script type="text/javascript"
+        src="../../resources/libs/datetimepicker/js/bower_components/moment/locale/ru.js"></script>
 <script type="text/javascript" src="../../resources/libs/datetimepicker/js/datetimepicker.min.js"></script>
 <script type="text/javascript" src="../../resources/js/Sortable.min.js"></script>
 
@@ -404,126 +441,131 @@
     /*<![CDATA[*/
     function remove_img(el) {
         el.parent().remove();
-        if ($('#result').children().length<4)
-            $('#add-photo').css('display','block');
+        if ($('#result').children().length < 4)
+            $('#add-photo').css('display', 'block');
     }
+
     function sbmt() {
         var type = Number($('input[name=type_of_dates]:checked').val());
-        console.log('type: '+type);
+        console.log('type: ' + type);
         var $solve;
         var $radio0 = $('#radio0');
         var $radio1 = $('#radio1');
         var $radio2 = $('#radio2');
         var inp = document.getElementById('active_dates');
-        if (type===0) {
+
+        if (type === 0) {
             $solve = $radio0;
-            $solve.children().each(function(index, elem) {
-                console.log(index+":");
+            $solve.children().each(function (index, elem) {
+                console.log(index + ":");
                 for (var childItem in elem.childNodes) {
                     var elem1 = elem.childNodes[childItem];
                     if (elem1.nodeType === 1 && elem1.className === "my-sp form-control") {
                         //console.log(elem1.value);
-                        inp.value+=elem1.value;
-                        inp.value+='-';
+                        inp.value += elem1.value;
+                        inp.value += '-';
                     }
                 }
-                inp.value = inp.value.substring(0,inp.value.length-1);
-                inp.value+=';';
+                inp.value = inp.value.substring(0, inp.value.length - 1);
+                inp.value += ';';
                 //console.log(";");
             });
         }
-        else if (type===1) {
-            $solve = $radio1;
-            $solve.children().each(function(index, elem) {
-                console.log(index+":");
-                for (var childItem in elem.childNodes) {
-                    var elem1 = elem.childNodes[childItem];
-                    if (elem1.nodeType === 1 && elem1.className === "day-of-week"){
-                        for (var childItem1 in elem1.childNodes) {
-                            var elem2 = elem1.childNodes[childItem1];
-                            if (elem2.nodeType === 1 && elem1.className === "my-sp form-control") {
-                                console.log(elem2.value);
-                                inp.value += elem2.value;
-                                inp.value += ',';
-                            }
+        else if (type === 1) {
+            for (var i = 0; i < 7; i++) {
+                var el = document.getElementById('1' + i);
+                for (var childItemT in el.childNodes) {
+                    var el1 = el.childNodes[childItemT];
+                    if (el1.nodeType === 1 && el1.className === "my-sp form-control"){
+                            console.log(el1.value);
+                            inp.value += el1.value;
+                            inp.value += ',';
                         }
-                    }
                 }
-                inp.value = inp.value.substring(0,inp.value.length-1);
-                inp.value+=';';
+                inp.value = inp.value.substring(0, inp.value.length - 1);
+                inp.value += ';';
                 console.log(";");
-            });
+            }
         }
-        else if (type===2) {
-            var e1 = document.getElementById('20');
-            for (var childItem in e1.childNodes) {
-                var e2 = e1.childNodes[childItem];
-                if (e2.nodeType === 1 && e2.className==="day-of-week")
-                    for (var childItem1 in e2.childNodes) {
-                        var e3 = e2.childNodes[childItem1];
-                        if (e3.nodeType === 1 && e3.className === "form-group")
-                            for (var childItem2 in e3.childNodes) {
-                                var e4 = e3.childNodes[childItem2];
-                                if (e4.nodeType === 1 && e4.className === "input-group date") {
-                                    for (var childItem3 in e4.childNodes) {
-                                        var e5 = e4.childNodes[childItem3];
-                                        if (e5.nodeType === 1) {
-                                            if (e5.className === "form-control") {
-                                                console.log("date: " + e5.value);
-                                                inp.value+=e5.value+':';
-                                            }
-                                            if (e5.className === "my-sp form-control") {
-                                                console.log("time: " + e5.value);
-                                                inp.value += e5.value + ';';
-                                            }
+        else if (type === 2) {
+        var e1 = document.getElementById('20');
+        for (var childItem in e1.childNodes) {
+            var e2 = e1.childNodes[childItem];
+            if (e2.nodeType === 1 && e2.className === "day-of-week")
+                for (var childItem1 in e2.childNodes) {
+                    var e3 = e2.childNodes[childItem1];
+                    if (e3.nodeType === 1 && e3.className === "form-group")
+                        for (var childItem2 in e3.childNodes) {
+                            var e4 = e3.childNodes[childItem2];
+                            if (e4.nodeType === 1 && e4.className === "input-group date") {
+                                for (var childItem3 in e4.childNodes) {
+                                    var e5 = e4.childNodes[childItem3];
+                                    if (e5.nodeType === 1) {
+                                        if (e5.className === "form-control") {
+                                            console.log("date: " + e5.value);
+                                            inp.value += e5.value + ':';
+                                        }
+                                        if (e5.className === "my-sp form-control") {
+                                            console.log("time: " + e5.value);
+                                            inp.value += e5.value + ';';
                                         }
                                     }
                                 }
                             }
-                    }
-            }
+                        }
+                }
         }
-        $radio0.remove(); $radio1.remove(); $radio2.remove();
+    }
+        $radio0.remove();
+        $radio1.remove();
+        $radio2.remove();
+
+        var test = document.getElementById('20');
+        console.log(test.className);
+        console.log(test.firstChild.className);
+        console.log(test.firstChild.firstChild.className);
 
         var st = '';
-        $('#result').children().each(function(index, elem) {
+        $('#result').children().each(function (index, elem) {
             var img = elem.getElementsByClassName('img-rounded')[0];
             st += img.src.toString().substring(44, 76) + ';';
         });
-        st = st.substring(0,st.length-1);
+        st = st.substring(0, st.length - 1);
         $('#photos').val(st);
-        inp.value = inp.value.substring(0,inp.value.length-1);
+        inp.value = inp.value.substring(0, inp.value.length - 1);
         alert(inp.value);
         $("#upload_input").remove();
         $('#sbmt').click();
     }
+
     function generateOptions(select) {
         var st = '<select class="my-sp form-control"' + select + '><option value="null">--:--</option>';
         var hour = 7;
         var zero = '0';
-        for (var i=0; i<48; i++){
-            if (i%2===0) hour++;
-            if (hour===24) hour = 0;
+        for (var i = 0; i < 48; i++) {
+            if (i % 2 === 0) hour++;
+            if (hour === 24) hour = 0;
             var minutes;
-            if (i%2===0)
+            if (i % 2 === 0)
                 minutes = '0';
             else minutes = '3';
-            if (hour<10) zero = '0';
+            if (hour < 10) zero = '0';
             else zero = '';
             st += '<option value="' + i + '">' + zero + hour + ':' + minutes + '0</option>';
         }
-        st+='</select>';
+        st += '</select>';
         return st;
     }
+
     function addDate() {
         $('#20').append('<div class="day-of-week">' +
-            '<div class="form-group" style="margin-top: 15px;">'+
-            '<div class="input-group date" id="datetimepicker" style="display: flex;">'+ //TODO: ID
-            '<input type="text" class="form-control" style="width: auto;">'+
-            '<span class="input-group-addon" style="width: auto;margin-right: 20px;border-left-width: 0;border-radius: 0 4px 4px 0;">'+
-            '<span class="glyphicon glyphicon-calendar"></span>'+
-            '</span>'+
-            generateOptions(' style="border-radius: 4px;width: auto;" name="time"')+
+            '<div class="form-group" style="margin-top: 15px;">' +
+            '<div class="input-group date" id="datetimepicker" style="display: flex;">' + //TODO: ID
+            '<input type="text" class="form-control" style="width: auto;">' +
+            '<span class="input-group-addon" style="width: auto;margin-right: 20px;border-left-width: 0;border-radius: 0 4px 4px 0;">' +
+            '<span class="glyphicon glyphicon-calendar"></span>' +
+            '</span>' +
+            generateOptions(' style="border-radius: 4px;width: auto;" name="time"') +
             '</div></div></div>');
         $('.date').datetimepicker({
             locale: 'ru',
@@ -532,22 +574,37 @@
             maxDate: moment().add(3, 'months')
         });
     }
+
     function addTime(type, dayOfWeek) {
-        if(type===0) {
+        if (type === 0) {
             $('#' + type + dayOfWeek).append(generateOptions(' name="time-down"') + //TODO: NAME FOR WEEK
                 '<span> –</span>' +
                 generateOptions(' name="time-up"'));
-            $('#' + dayOfWeek).css('display','none');
+            $('#' + dayOfWeek).css('display', 'none');
         }
-        if(type===1) {
+        if (type === 1) {
             $('#' + type + dayOfWeek).append(generateOptions(' name="time"')); //TODO: NAME FOR WEEK
         }
     }
+
     function radio(type) {
-        if (type === 0) {$('#radio0').css('display', 'block');$('#radio1').css('display', 'none');$('#radio2').css('display', 'none');}
-        if (type === 1) {$('#radio0').css('display', 'none');$('#radio1').css('display', 'block');$('#radio2').css('display', 'none');}
-        if (type === 2) {$('#radio0').css('display', 'none');$('#radio1').css('display', 'none');$('#radio2').css('display', 'block');}
+        if (type === 0) {
+            $('#radio0').css('display', 'block');
+            $('#radio1').css('display', 'none');
+            $('#radio2').css('display', 'none');
+        }
+        if (type === 1) {
+            $('#radio0').css('display', 'none');
+            $('#radio1').css('display', 'block');
+            $('#radio2').css('display', 'none');
+        }
+        if (type === 2) {
+            $('#radio0').css('display', 'none');
+            $('#radio1').css('display', 'none');
+            $('#radio2').css('display', 'block');
+        }
     }
+
     function setimage() { // функция загрузки на сервер
         var iter = $('.upload-img').length;
         var max = 5 - iter;
@@ -573,13 +630,13 @@
                 contentType: false,
                 type: 'POST',
                 success: function (data) {
-                    var final = '<div class="upload-img"><img src="'+data+'" class="img-rounded"/>"' +
-                    '"<div class="closer" onclick="remove_img($(this));"></div></div>';
+                    var final = '<div class="upload-img"><img src="' + data + '" class="img-rounded"/>"' +
+                        '"<div class="closer" onclick="remove_img($(this));"></div></div>';
                     var $result = $('#result');
-                    if ($result.children().length<4)
+                    if ($result.children().length < 4)
                         $result.append(final); // вставляю миниатюру в #result
-                    if ($result.children('.upload-img').length>=4)
-                        $('#add-photo').css('display','none');
+                    if ($result.children('.upload-img').length >= 4)
+                        $('#add-photo').css('display', 'none');
                 },
                 error: function (data) {
                     alert("Не все фотографии загрузились. Повторите, пожалуйста, попытку.");
@@ -587,6 +644,7 @@
             });
         }
     }
+
     $(document).ready(function () {
         $("#upload_button").click(function () {
             $("#upload_input").click();
@@ -632,12 +690,12 @@
         $("#price").keyup(function () {
             var txt = $('#price').val();
             $('#card-price').text(txt + "₽");
-            if (txt!=='') {
-                $('#price-help').css('display','block');
+            if (txt !== '') {
+                $('#price-help').css('display', 'block');
                 var our_price = (txt / 20 * 3).toFixed();
                 $('#our_price').text(our_price);
                 $('#guide_price').text(txt - our_price);
-            } else $('#price-help').css('display','none');
+            } else $('#price-help').css('display', 'none');
         });
         $("#category").change(function () {
             var txt = $('#category').val();
