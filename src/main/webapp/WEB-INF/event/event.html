@@ -97,17 +97,12 @@
                                             <div class="carousel-inner" role="listbox">
                                                 <div class="item active">
                                                     <img src="../../resources/img/bg-cta.jpg" th:src="${event.getSrcImage(0)}" class="img-fluid"/>
-                                                    <div class="carousel-caption">
-                                                        ...1
-                                                    </div>
+                                                    <div class="carousel-caption"></div>
                                                 </div>
                                                 <div class="item" th:each="i : ${#numbers.sequence(1, 3)}" th:if="${event.getSrcImage(i)}">
                                                     <img th:src="${event.getSrcImage(i)}"/>
-                                                    <div class="carousel-caption">
-                                                        ...i
-                                                    </div>
+                                                    <div class="carousel-caption"></div>
                                                 </div>
-                                                ...2
                                             </div>
 
                                             <!-- Controls -->
