@@ -148,8 +148,8 @@
 		height: 143px;
 	}
 	.profile-avatar>.avatar>img{height: 75px;}
-	.profile-avatar{margin: -40px 25px -100px auto;}
-	.profile-avatar-span{margin: -20px 10px -50px auto; font-size: small}
+	.profile-avatar{margin: -40px 25px -100px auto!important;}
+	.profile-avatar-span{margin: -20px 17px -50px auto!important; font-size: small!important;}
 }
 
 /* Small Devices, Tablets */
@@ -167,8 +167,8 @@
 			height: 110px;
 		}
 		.profile-avatar>.avatar>img{height: 50px;}
-		.profile-avatar{margin: -20px 35px -100px auto;}
-		.profile-avatar-span{margin: -45px 8px -10px auto; font-size: small}
+		.profile-avatar{margin: -20px 35px -100px auto!important;}
+		.profile-avatar-span{margin: -45px 8px -10px auto;!important; font-size: small;}
 	}
 
 	/* Extra Small Devices, Phones */
