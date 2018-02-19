@@ -438,8 +438,12 @@
     /*<![CDATA[*/
     function remove_img(el) {
         el.parent().remove();
-        if ($('#result').children().length < 4)
+        var $result = $('#result');var $demoImg = $('#demo-img');
+        if ($result.children().length < 4)
             $('#add-photo').css('display', 'block');
+        var src = $result.find('div:first-child img:first-child').attr('src');
+        if ($demoImg.attr('src')!==src)
+            $demoImg.attr("src", src);
     }
 
     function sbmt() {
@@ -618,11 +622,14 @@
                 success: function (data) {
                     var final = '<div class="upload-img"><img src="' + data + '" class="img-rounded"/>"' +
                         '"<div class="closer" onclick="remove_img($(this));"></div></div>';
-                    var $result = $('#result');
+                    var $result = $('#result'); var $demoImg = $('#demo-img');
                     if ($result.children().length < 4)
                         $result.append(final); // вставляю миниатюру в #result
                     if ($result.children('.upload-img').length >= 4)
                         $('#add-photo').css('display', 'none');
+                    var src = $result.find('div:first-child img:first-child').attr('src');
+                    if ($demoImg.attr('src')!==src)
+                        $demoImg.attr("src", src);
                 },
                 error: function (data) {
                     alert("Не все фотографии загрузились. Повторите, пожалуйста, попытку.");
@@ -653,13 +660,13 @@
             /*draggable: ".tile", // Specifies which items inside the element should be sortable*/
             onUpdate: function (evt/**Event*/) {
                 var src = $('#result').find('div:first-child img:first-child').attr('src');
-                console.log(src);
-                $('#demo-img').attr("src", src);
-                var item = evt.item; // the current dragged HTMLElement
+                var $demoImg = $('#demo-img');
+                if ($demoImg.attr('src')!==src)
+                    $demoImg.attr("src", src);
+                // var item = evt.item; // the current dragged HTMLElement
             },
             draggable: ".upload-img"
         });
-
         $("#description").keyup(function () {
             var txt = $('#description').val();
             if (txt.length < 150) $('#card-text').text(txt);
