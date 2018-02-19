@@ -118,7 +118,7 @@ public class Event {
     @Size(min=10, max=60)
     private String name = "";
 
-    private String activeDates = "0000000";
+    private String activeDates = "";
 
     private int typeOfDates = 0;
 

@@ -76,7 +76,7 @@
                         </div>
                         <div class="panel-body">
                             <input name="name" type="text" class="form-control" id="name"
-                                   th:value="${inputEvent.getName()}" required="" minlength="10" maxlength="35"/>
+                                   th:value="${inputEvent.getName()}" minlength="10" maxlength="35"/>
                             <label for="name" th:if="${#fields.hasErrors('name')}"
                                    th:text="${#messages.msg('error.event.name')}" th:class="'error'">Name
                                 Error</label>
@@ -90,8 +90,7 @@
                         <div class="panel-body">
                             <textarea name="description" minlength="150" maxlength="1000" type="text"
                                       id="description" style="resize: vertical"
-                                      class="form-control" required=""
-                                      th:text="${inputEvent.getDescription()}"></textarea>
+                                      class="form-control" th:text="${inputEvent.getDescription()}"></textarea>
                             <label for="description" th:if="${#fields.hasErrors('description')}"
                                    th:text="${#messages.msg('error.event.description')}" th:class="'error'">Description
                                 Error</label>
@@ -247,7 +246,7 @@
                             </div>
                         </div>
 
-                        <input type="text" name="active_dates" style="display:none;" id="active_dates"/>
+                        <input type="text" name="activeDates" style="display:none;" id="active_dates"/>
                     </div>
 
                     <div class="row ml-0 mr-0">
@@ -258,7 +257,6 @@
                             <div class="panel-body">
                                 <div class="input-group">
                                     <input name="usersCount" id="users_count" type="number" class="form-control"
-                                           required=""
                                            min="1" max="100"
                                            th:value="${inputEvent.getUsersCount()}?${inputEvent.getUsersCount()}"/>
                                     <span class="input-group-addon">человек</span>
@@ -276,7 +274,6 @@
                             <div class="panel-body">
                                 <div class="input-group">
                                     <input name="duration" id="duration" type="number" class="form-control"
-                                           required=""
                                            th:value="${inputEvent.getDuration()}?${inputEvent.getDuration()}" min="1"
                                            max="240"/>
                                     <span class="input-group-addon"
@@ -313,7 +310,7 @@
                                 Место встречи
                             </div>
                             <div class="panel-body">
-                                <input name="place" id="place" type="text" class="form-control" required=""
+                                <input name="place" id="place" type="text" class="form-control"
                                        minlength="5" maxlength="100"
                                        th:value="${inputEvent.getPlace()}?${inputEvent.getPlace()}"/>
                                 <label for="place" th:if="${#fields.hasErrors('place')}"
@@ -330,7 +327,7 @@
                             </div>
                             <div class="panel-body">
                                 <div class="input-group">
-                                    <input name="price" id="price" type="number" class="form-control" required=""
+                                    <input name="price" id="price" type="number" class="form-control"
                                            min="100" max="100000"
                                            th:value="${inputEvent.getPrice()}?${inputEvent.getPrice()}"/>
                                     <span class="input-group-addon">&#8381;</span>
@@ -365,7 +362,7 @@
                             Фотографии
                         </div>
                         <div class="panel-body">
-                            <input type="file" multiple="multiple" required="" size="30000000"
+                            <input type="file" multiple="multiple" size="30000000"
                                    accept="image/jpeg,image/png" name="files[]" style="display:none;"
                                    id="upload_input"/>
                             <input type="text" name="photos" style="display:none;" id="photos"/>
@@ -506,7 +503,6 @@
             }
         }
 
-
         $radio0.remove();
         $radio1.remove();
         $radio2.remove();
@@ -516,13 +512,14 @@
             var img = elem.getElementsByClassName('img-rounded')[0];
             st += img.src.toString().substring(44, 76) + ';';
         });
-        st = st.substring(0, st.length - 1);
+        if (st.length>0)
+            st = st.substring(0, st.length - 1);
         $('#photos').val(st);
-        inp.value = inp.value.substring(0, inp.value.length - 1);
 
+        inp.value = inp.value.substring(0, inp.value.length - 1);
         inp.value = inp.value.split("null").join("");
 
-        console.log("inp.value: "+inp.value);
+        // console.log("inp.value: "+inp.value);
         $("#upload_input").remove();
         $('#sbmt').click();
     }
