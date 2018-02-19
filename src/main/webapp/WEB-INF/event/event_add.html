@@ -457,7 +457,6 @@
         if (type === 0) {
             $solve = $radio0;
             $solve.children().each(function (index, elem) {
-                console.log(index + ":");
                 for (var childItem in elem.childNodes) {
                     var elem1 = elem.childNodes[childItem];
                     if (elem1.nodeType === 1 && elem1.className === "my-sp form-control") {
@@ -466,7 +465,8 @@
                         inp.value += '-';
                     }
                 }
-                inp.value = inp.value.substring(0, inp.value.length - 1);
+                if (inp.value[inp.value.length-1]==='-')
+                    inp.value = inp.value.substring(0, inp.value.length - 1);
                 inp.value += ';';
             });
         }
@@ -481,13 +481,14 @@
                         inp.value += ',';
                     }
                 }
+                inp.value = inp.value.substring(0, inp.value.length - 1);
                 inp.value += ';';
                 console.log(";");
             }
         }
         else if (type === 2) {
             var e1 = document.getElementById('20');
-            for (var childItem1 in el.childNodes) {
+            for (var childItem1 in e1.childNodes) {
                 var e = e1.childNodes[childItem1];
                 if (e.nodeType === 1 && e.className === "day-of-week") {
                     var child3 = e.firstChild.firstChild;
