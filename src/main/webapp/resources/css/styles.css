@@ -224,4 +224,5 @@ h2.title {
 .carousel-indicators {top: 270px;}
 .carousel-control{background: aliceblue;}
 ol.carousel-indicators > li{background: #eee;border-color: #999;}
+.carousel-inner>.item>img{height: 290px;}
 
