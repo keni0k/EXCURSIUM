@@ -361,12 +361,8 @@ public class EventController {
                         if (i != 6)
                             event.setActiveDates(event.getActiveDates() + ';');
                     } else {
-                        String minutes1 = random.nextInt(2)==0?"00":"30";
-                        String minutes2 = random.nextInt(2)==0?"00":"30";
-                        String time1 = "" + random.nextInt(2) + random.nextInt(10) + ':' + minutes1;
-                        String time2 = "" + random.nextInt(2) + random.nextInt(10) + ':' + minutes2;
                         String suffix = i != 6 ? ";" : "";
-                        event.setActiveDates(event.getActiveDates() + time1 + '-' + time2 + suffix);
+                        event.setActiveDates(event.getActiveDates() + random.nextInt(48) + '-' + random.nextInt(48) + suffix);
                     }
                 }
             }
@@ -401,10 +397,8 @@ public class EventController {
 
     private void addTime(Random random, Event event, int times) {
         for (int j = 0; j<times; j++){
-            String minutes1 = random.nextInt(2)==0?"00":"30";
-            String time1 = "" + random.nextInt(2) + random.nextInt(10) + ':' + minutes1;
             String suffix = j != times-1 ? "," : "";
-            event.setActiveDates(event.getActiveDates()+time1+suffix);
+            event.setActiveDates(event.getActiveDates()+random.nextInt(48)+suffix);
         }
     }
 
