@@ -520,11 +520,12 @@
         var test = document.getElementById('20');
         console.log(test.className);
         var child1 = test.firstChild;
-        if (child1.className!=null)
+        if (child1!=null) {
             console.log(child1.className);
-        var child2 = child1.firstChild;
-        if (child2.className!=null)
-            console.log(child2.className);
+            var child2 = child1.firstChild;
+            if (child2 != null)
+                console.log(child2.className);
+        }
 
         $radio0.remove();
         $radio1.remove();

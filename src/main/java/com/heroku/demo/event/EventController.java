@@ -368,12 +368,10 @@ public class EventController {
             }
             if (type==1){
                 for (i = 0; i<7; i++) {
-                    if (random.nextInt(3) == 0) event.setActiveDates(event.getActiveDates() + i + ":null");
-                    else {
+                    if (random.nextInt(3) != 0)
                         addTime(random, event, random.nextInt(8));
-                        if (i!=6)
-                            event.setActiveDates(event.getActiveDates() + ';');
-                    }
+                    if (i!=6)
+                        event.setActiveDates(event.getActiveDates() + ';');
                 }
             }
             if (type==2){
@@ -383,7 +381,6 @@ public class EventController {
                     event.setActiveDates(event.getActiveDates() + date1+ ":");
                     int times = random.nextInt(5);
                     addTime(random, event, times);
-                    if (times==0) event.setActiveDates(event.getActiveDates()+"null");
                     if (i!=dates-1)
                         event.setActiveDates(event.getActiveDates() + ";");
                 }
