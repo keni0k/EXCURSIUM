@@ -380,7 +380,7 @@ public class EventController {
             if (type==2){
                 int dates = random.nextInt(5);
                 for (i = 0; i<dates; i++){
-                    String date1 = "" + random.nextInt(3) + random.nextInt(10) + ".0" + random.nextInt(10) + ".2018";
+                    String date1 = "" + random.nextInt(3) + random.nextInt(10) + ".0" + (random.nextInt(9)+1) + ".2018";
                     event.setActiveDates(event.getActiveDates() + date1+ ":");
                     int times = random.nextInt(5);
                     addTime(random, event, times);
