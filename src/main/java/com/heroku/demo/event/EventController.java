@@ -374,7 +374,7 @@ public class EventController {
                 for (i = 0; i<7; i++) {
                     if (random.nextInt(3) == 0) event.setActiveDates(event.getActiveDates() + i + ":null");
                     else {
-                        event.setActiveDates(event.getActiveDates() + i);
+                        event.setActiveDates(event.getActiveDates() + i + ":");
                         addTime(random, event, random.nextInt(8));
                         if (i!=6)
                             event.setActiveDates(event.getActiveDates() + ';');
@@ -386,7 +386,9 @@ public class EventController {
                 for (i = 0; i<dates; i++){
                     String date1 = "" + random.nextInt(3) + random.nextInt(10) + ".0" + random.nextInt(10) + ".2018";
                     event.setActiveDates(event.getActiveDates() + date1+ ":");
-                    addTime(random, event, random.nextInt(5));
+                    int times = random.nextInt(5);
+                    addTime(random, event, times);
+                    if (times==0) event.setActiveDates(event.getActiveDates()+"null");
                     if (i!=dates-1)
                         event.setActiveDates(event.getActiveDates() + ";");
                 }
