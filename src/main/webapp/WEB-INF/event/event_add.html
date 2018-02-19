@@ -446,9 +446,15 @@
                         if (e3.nodeType === 1 && e3.className === "form-group")
                             for (var childItem2 in e3.childNodes) {
                                 var e4 = e3.childNodes[childItem2];
-                                if (e4.nodeType === 1) {
-                                    console.log(e4.className);
-                                    console.log(";");
+                                if (e4.nodeType === 1 && e4.className === "input-group date") {
+                                    for (var childItem3 in e4.childNodes) {
+                                        var e5 = e4.childNodes[childItem3];
+                                        if (e5.nodeType === 1) {
+                                            console.log(e5.className);
+                                            console.log(e5.value);
+                                            console.log(";");
+                                        }
+                                    }
                                 }
                             }
                     }
