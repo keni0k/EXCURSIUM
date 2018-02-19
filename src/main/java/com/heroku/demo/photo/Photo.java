@@ -39,6 +39,10 @@ public class Photo {
         return Consts.URL_PATH + data;
     }
 
+    public String getToken() {
+        return data.substring(0,32);
+    }
+
     public void setData(String data) {
         this.data = data;
     }

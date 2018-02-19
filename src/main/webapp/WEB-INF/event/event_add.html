@@ -174,25 +174,25 @@
                         </div>
                         <div class="panel-body" id="radio0">
                             <div class="day-of-week" id="00">
-                                <b>Пн.</b><a class="add-time" id="0" onclick="addTime(0, 0);">Добавить время</a>
+                                <b>Пн.</b><a class="add-time" id="0" onclick="addTime(0, 0);">Добавить интервал времени</a>
                             </div>
                             <div class="day-of-week" id="01">
-                                <b>Вт.</b><a class="add-time" id="1" onclick="addTime(0, 1);">Добавить время</a>
+                                <b>Вт.</b><a class="add-time" id="1" onclick="addTime(0, 1);">Добавить интервал времени</a>
                             </div>
                             <div class="day-of-week" id="02">
-                                <b>Ср.</b><a class="add-time" id="2" onclick="addTime(0, 2);">Добавить время</a>
+                                <b>Ср.</b><a class="add-time" id="2" onclick="addTime(0, 2);">Добавить интервал времени</a>
                             </div>
                             <div class="day-of-week" id="03">
-                                <b>Чт.</b><a class="add-time" id="3" onclick="addTime(0, 3);">Добавить время</a>
+                                <b>Чт.</b><a class="add-time" id="3" onclick="addTime(0, 3);">Добавить интервал времени</a>
                             </div>
                             <div class="day-of-week" id="04">
-                                <b>Пт.</b><a class="add-time" id="4" onclick="addTime(0, 4);">Добавить время</a>
+                                <b>Пт.</b><a class="add-time" id="4" onclick="addTime(0, 4);">Добавить интервал времени</a>
                             </div>
                             <div class="day-of-week" id="05">
-                                <b>Сб.</b><a class="add-time" id="5" onclick="addTime(0, 5);">Добавить время</a>
+                                <b>Сб.</b><a class="add-time" id="5" onclick="addTime(0, 5);">Добавить интервал времени</a>
                             </div>
                             <div class="day-of-week" id="06">
-                                <b>Вс.</b><a class="add-time" id="6" onclick="addTime(0, 6);">Добавить время</a>
+                                <b>Вс.</b><a class="add-time" id="6" onclick="addTime(0, 6);">Добавить интервал времени</a>
                             </div>
                         </div>
 
@@ -413,10 +413,9 @@
         var st = '';
         $('#result').children().each(function(index, elem) {
             var img = elem.getElementsByClassName('img-rounded')[0];
-            var token = img.src.toString().substring(44,76)+';';
-            st += token;
+            st += img.src.toString().substring(44, 76) + ';';
         });
-        st = st.substring(0,st.length-2);
+        st = st.substring(0,st.length-1);
         $('#photos').val(st);
         //alert(st);
         $("#upload_input").remove();

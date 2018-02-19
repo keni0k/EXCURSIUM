@@ -92,9 +92,8 @@ public class EventController {
         }
         eventService.addEvent(event);
         for (String token : tokens) {
-            Photo photo = photoService.getByToken(token+".jpg");
+            Photo photo = photoService.getByToken(token);
             if (photo != null) {
-                logger.info("EVENT YES! " + token);
                 photo.setEventId(event.getId());
                 photoService.editPhoto(photo);
             }

@@ -43,8 +43,7 @@ public class PhotoServiceImpl implements PhotoService {
         List<Photo> list = getAll();
         logger.info(token);
         for (Photo photo: list) {
-            if (photo.getData().equals(token)) {
-                logger.info("YES!");
+            if (photo.getToken().equals(token)) {
                 return photo;
             }
         }
