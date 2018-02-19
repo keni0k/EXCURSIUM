@@ -653,6 +653,7 @@
             /*draggable: ".tile", // Specifies which items inside the element should be sortable*/
             onUpdate: function (evt/**Event*/) {
                 var item = evt.item; // the current dragged HTMLElement
+                console.log(item.className);
             },
             draggable: ".upload-img"
         });
