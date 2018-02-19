@@ -417,8 +417,10 @@
             $solve.children().each(function(index, elem) {
                 console.log(index+":");
                 for (var childItem in elem.childNodes) {
-                    if (elem.childNodes[childItem].nodeType === 1)
-                        console.log(elem.childNodes[childItem].className);
+                    var elem1 = elem.childNodes[childItem];
+                    if (elem1.nodeType === 1)
+                        if (elem1.className === "form-control selectpicker my-sp")
+                            console.log(elem1.value);
                 }
                 console.log(";");
             });
@@ -439,8 +441,12 @@
             $solve.children().each(function(index, elem) {
                 console.log(index+":");
                 for (var childItem in elem.childNodes) {
-                    if (elem.childNodes[childItem].nodeType === 1)
-                        console.log(elem.childNodes[childItem].className);
+                    var elem1 = elem.childNodes[childItem];
+                    if (elem1.nodeType === 1 && elem1.className.length>0)
+                        for (var childItem1 in elem1.childNodes) {
+                            var elem2 = elem1.childNodes[childItem1];
+                            if (elem2.className.length>0) console.log(elem2.className);
+                        }
                 }
                 console.log(";");
             });
