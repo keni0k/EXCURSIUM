@@ -214,3 +214,12 @@ h2.title {
 .left-input{padding-left: 0!important; padding-right: 0!important;}
 .my-sp{width: auto;display: inline-block!important;margin-left: 10px;}
 .demo{position: fixed;top: 127px;right: 10px;}
+
+.right .carousel-control > .glyphicon-chevron-right{margin-top: 0;top: 1px;right: 14px;}
+.right .carousel-control {top: 120px;right: 40px;}
+
+.left .carousel-control > .glyphicon-chevron-left{margin-top: 0;top: 1px;left: 14px;}
+.left .carousel-control {top: 120px;left: 40px;}
+
+.carousel-indicators {top: 270px;}
+
