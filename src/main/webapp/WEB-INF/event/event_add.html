@@ -167,32 +167,32 @@
                             </div>
                         </div>
                     </div>
-
+                    <input type="text" name="schedule" style="display:none;" id="schedule"/>
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             Расписание
                         </div>
                         <div class="panel-body" id="radio0">
                             <div class="day-of-week" id="00">
-                                <b>Пн.</b><a class="add-time" id="0" onclick="addTime(0, 0);">Добавить интервал времени</a>
+                                <b>Пн.</b><a class="add-time" id="0" onclick="addTime(0, 0);">Задать интервал времени</a>
                             </div>
                             <div class="day-of-week" id="01">
-                                <b>Вт.</b><a class="add-time" id="1" onclick="addTime(0, 1);">Добавить интервал времени</a>
+                                <b>Вт.</b><a class="add-time" id="1" onclick="addTime(0, 1);">Задать интервал времени</a>
                             </div>
                             <div class="day-of-week" id="02">
-                                <b>Ср.</b><a class="add-time" id="2" onclick="addTime(0, 2);">Добавить интервал времени</a>
+                                <b>Ср.</b><a class="add-time" id="2" onclick="addTime(0, 2);">Задать интервал времени</a>
                             </div>
                             <div class="day-of-week" id="03">
-                                <b>Чт.</b><a class="add-time" id="3" onclick="addTime(0, 3);">Добавить интервал времени</a>
+                                <b>Чт.</b><a class="add-time" id="3" onclick="addTime(0, 3);">Задать интервал времени</a>
                             </div>
                             <div class="day-of-week" id="04">
-                                <b>Пт.</b><a class="add-time" id="4" onclick="addTime(0, 4);">Добавить интервал времени</a>
+                                <b>Пт.</b><a class="add-time" id="4" onclick="addTime(0, 4);">Задать интервал времени</a>
                             </div>
                             <div class="day-of-week" id="05">
-                                <b>Сб.</b><a class="add-time" id="5" onclick="addTime(0, 5);">Добавить интервал времени</a>
+                                <b>Сб.</b><a class="add-time" id="5" onclick="addTime(0, 5);">Задать интервал времени</a>
                             </div>
                             <div class="day-of-week" id="06">
-                                <b>Вс.</b><a class="add-time" id="6" onclick="addTime(0, 6);">Добавить интервал времени</a>
+                                <b>Вс.</b><a class="add-time" id="6" onclick="addTime(0, 6);">Задать интервал времени</a>
                             </div>
                         </div>
 
@@ -407,6 +407,7 @@
     }
     function sbmt() {
         var type = $('input[name=radio]:checked').val();
+        console.log('type:'+type);
         if (type==='0') {$('#radio1').remove();$('#radio2').remove();}
         if (type==='1') {$('#radio0').remove();$('#radio2').remove();}
         if (type==='2') {$('#radio0').remove();$('#radio1').remove();}
@@ -442,7 +443,7 @@
     function addDate() {
         $('#20').append('<div class="day-of-week">' +
             '<div class="form-group" style="margin-top: 15px;">'+
-            '<div class="input-group date" id="datetimepicker" style="display: flex;">'+
+            '<div class="input-group date" id="datetimepicker" style="display: flex;">'+ //TODO: ID
             '<input type="text" class="form-control" style="width: auto;">'+
             '<span class="input-group-addon" style="width: auto;margin-right: 20px;border-left-width: 0;border-radius: 0 4px 4px 0;">'+
             '<span class="glyphicon glyphicon-calendar"></span>'+
@@ -458,13 +459,13 @@
     }
     function addTime(type, dayOfWeek) {
         if(type===0) {
-            $('#' + type + dayOfWeek).append(generateOptions(' name="time-down"') +
+            $('#' + type + dayOfWeek).append(generateOptions(' name="time-down"') + //TODO: NAME FOR WEEK
                 '<span> –</span>' +
                 generateOptions(' name="time-up"'));
             $('#' + dayOfWeek).css('display','none');
         }
         if(type===1) {
-            $('#' + type + dayOfWeek).append(generateOptions(' name="time"'));
+            $('#' + type + dayOfWeek).append(generateOptions(' name="time"')); //TODO: NAME FOR WEEK
         }
     }
     function radio(type) {

@@ -1,3 +1,4 @@
+html{font-size: 15px;}
 .card.card-cascade.narrower {margin-top: 20px;}
 .card.card-cascade {width: 100%;}
 .card:not([class*=card-outline-]) {border: 0;}

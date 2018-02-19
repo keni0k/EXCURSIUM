@@ -168,7 +168,7 @@
 		}
 		.profile-avatar>.avatar>img{height: 50px;}
 		.profile-avatar{margin: -20px 35px -100px auto!important;}
-		.profile-avatar-span{margin: -45px 8px -10px auto;!important; font-size: small;}
+		.profile-avatar-span{margin: -45px 8px -10px auto!important;}
 	}
 
 	/* Extra Small Devices, Phones */
