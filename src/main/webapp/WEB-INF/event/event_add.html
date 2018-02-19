@@ -406,7 +406,7 @@
             $('#add-photo').css('display','block');
     }
     function sbmt() {
-        var type = $('input[name=radio]:checked').val();
+        var type = $('input[name=type_of_dates]:checked').val();
         console.log('type:'+type);
         if (type==='0') {$('#radio1').remove();$('#radio2').remove();}
         if (type==='1') {$('#radio0').remove();$('#radio2').remove();}
