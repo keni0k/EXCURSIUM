@@ -516,9 +516,6 @@
                 }
         }
     }
-        $radio0.remove();
-        $radio1.remove();
-        $radio2.remove();
 
         var test = document.getElementById('20');
         console.log(test.className);
@@ -528,6 +525,10 @@
         var child2 = child1.firstChild;
         if (child2.className!=null)
             console.log(child2.className);
+
+        $radio0.remove();
+        $radio1.remove();
+        $radio2.remove();
 
         var st = '';
         $('#result').children().each(function (index, elem) {
