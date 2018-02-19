@@ -652,7 +652,7 @@
             /*handle: ".tile__title", // Restricts sort start click/touch to the specified element*/
             /*draggable: ".tile", // Specifies which items inside the element should be sortable*/
             onUpdate: function (evt/**Event*/) {
-                var src = $('#result:first-child:first-child').attr('src');
+                var src = $('#result').find('div:first-child img:first-child').attr('src');
                 console.log(src);
                 $('#demo-img').attr("src", src);
                 var item = evt.item; // the current dragged HTMLElement
