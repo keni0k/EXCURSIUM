@@ -447,16 +447,10 @@
 
     function sbmt() {
         var type = Number($('input[name=type_of_dates]:checked').val());
-        console.log('type: ' + type);
-        var $solve;
-        var $radio0 = $('#radio0');
-        var $radio1 = $('#radio1');
-        var $radio2 = $('#radio2');
+        var $radio0 = $('#radio0');var $radio1 = $('#radio1');var $radio2 = $('#radio2');
         var inp = document.getElementById('active_dates');
-
         if (type === 0) {
-            $solve = $radio0;
-            $solve.children().each(function (index, elem) {
+            $radio0.children().each(function (index, elem) {
                 for (var childItem in elem.childNodes) {
                     var elem1 = elem.childNodes[childItem];
                     if (elem1.nodeType === 1 && elem1.className === "my-sp form-control") {
@@ -525,6 +519,9 @@
         st = st.substring(0, st.length - 1);
         $('#photos').val(st);
         inp.value = inp.value.substring(0, inp.value.length - 1);
+
+        inp.value = inp.value.split("null").join("");
+
         console.log("inp.value: "+inp.value);
         $("#upload_input").remove();
         $('#sbmt').click();
