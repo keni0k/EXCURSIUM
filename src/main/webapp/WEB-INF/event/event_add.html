@@ -172,7 +172,7 @@
                         <div class="panel-heading">
                             Расписание
                         </div>
-                        <div class="panel-body" id="radio0">
+                        <div class="panel-body pb-0 pt-0" id="radio0">
                             <div class="day-of-week" id="00">
                                 <b>Пн.</b><a class="add-time" id="0" onclick="addTime(0, 0);">Задать интервал времени</a>
                             </div>
@@ -196,7 +196,7 @@
                             </div>
                         </div>
 
-                        <div class="panel-body" id="radio1" style="display: none;">
+                        <div class="panel-body pb-0 pt-0" id="radio1" style="display: none;">
                             <div class="day-of-week">
                                 <b>Пн.</b><span id = "10"></span><a class="add-time" onclick="addTime(1, 0);">Добавить время</a>
                             </div>
@@ -220,8 +220,8 @@
                             </div>
                         </div>
 
-                        <div class="panel-body" id="radio2" style="display: none;">
-                            <div class="day-of-week">
+                        <div class="panel-body pb-0 pt-0" id="radio2" style="display: none;">
+                            <div class="day-of-week bw-0">
                                 <div id = "20"></div>
                                 <b><a class="add-time" onclick="addDate();">Добавить дату</a></b>
                             </div>
@@ -541,7 +541,7 @@
             var txt = $('#description').val();
             if (txt.length < 120) $('#card-text').text(txt);
             else {
-                var i = 0;
+                var i;
                 for (i = 0; i < 120; i++) {
                     var substr = txt.substring(120 - i, 120);
                     if (substr.indexOf('.') !== -1 || substr.indexOf('!') !== -1 || substr.indexOf('?') !== -1) break;

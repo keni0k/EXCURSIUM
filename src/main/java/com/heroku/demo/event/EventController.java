@@ -29,6 +29,7 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 import static com.heroku.demo.utils.Utils.localeToLang;
 
@@ -341,19 +342,68 @@ public class EventController {
     @ResponseBody
     public String updateDBEvents() {
         List<Event> events = eventService.getAll();
+        Random random = new Random();
         for (Event event: events) {
-            int tochka = event.getDescription().indexOf('.');
-            int voskl = event.getDescription().indexOf('!');
-            int vopr = event.getDescription().indexOf('?');
-            if (tochka<10) tochka=61;
-            if (voskl<10) voskl=61;
-            if (vopr<10) vopr=61;
-            int i = Math.min(Math.min(Math.min(tochka,vopr),voskl),60);
-            if (i==60) event.setSmallData(event.getDescription().substring(0,57)+"...");
-            else event.setSmallData(event.getDescription().substring(0,i+1));
+            int i;
+            String txt = event.getDescription();
+            for (i = 0; i < 120; i++) {
+                String substr = txt.substring(120 - i, 120);
+                if (substr.indexOf('.') != -1 || substr.indexOf('!') != -1 || substr.indexOf('?') != -1) break;
+            }
+            if (i != 120 && i < 50) event.setSmallData(txt.substring(0, 120 - i + 1));
+            else event.setSmallData(txt.substring(0, 117) + '…');
+
+            int type = event.getTypeOfDates();
+
+            if (type==0){
+                for (i = 0; i<7; i++) {
+                    if (random.nextInt(2) == 0) {
+                        if (i != 6)
+                            event.setActiveDates(event.getActiveDates() + ';');
+                    } else {
+                        String minutes1 = random.nextInt(2)==0?"00":"30";
+                        String minutes2 = random.nextInt(2)==0?"00":"30";
+                        String time1 = "" + random.nextInt(2) + random.nextInt(10) + ':' + minutes1;
+                        String time2 = "" + random.nextInt(2) + random.nextInt(10) + ':' + minutes2;
+                        String suffix = i != 6 ? ";" : "";
+                        event.setActiveDates(event.getActiveDates() + time1 + '-' + time2 + suffix);
+                    }
+                }
+            }
+            if (type==1){
+                for (i = 0; i<7; i++) {
+                    if (random.nextInt(3) == 0) event.setActiveDates(event.getActiveDates() + i + ":null");
+                    else {
+                        event.setActiveDates(event.getActiveDates() + i);
+                        addTime(random, event, random.nextInt(8));
+                        if (i!=6)
+                            event.setActiveDates(event.getActiveDates() + ';');
+                    }
+                }
+            }
+            if (type==2){
+                int dates = random.nextInt(5);
+                for (i = 0; i<dates; i++){
+                    String date1 = "" + random.nextInt(3) + random.nextInt(10) + ".0" + random.nextInt(10) + ".2018";
+                    event.setActiveDates(event.getActiveDates() + date1+ ":");
+                    addTime(random, event, random.nextInt(5));
+                    if (i!=dates-1)
+                        event.setActiveDates(event.getActiveDates() + ";");
+                }
+            }
+
             eventService.editEvent(event);
         }
         return "Yes";
+    }
+
+    private void addTime(Random random, Event event, int times) {
+        for (int j = 0; j<times; j++){
+            String minutes1 = random.nextInt(2)==0?"00":"30";
+            String time1 = "" + random.nextInt(2) + random.nextInt(10) + ':' + minutes1;
+            String suffix = j != times-1 ? "," : "";
+            event.setActiveDates(event.getActiveDates()+time1+suffix);
+        }
     }
 
 }
