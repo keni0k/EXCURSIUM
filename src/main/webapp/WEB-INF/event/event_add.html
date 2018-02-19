@@ -412,14 +412,33 @@
         var $radio0 = $('#radio0');
         var $radio1 = $('#radio1');
         var $radio2 = $('#radio2');
-        switch (type){
-            case 0:$solve = $radio0;break;
-            case 1:$solve = $radio1;break;
-            case 2:$solve = $radio2;break;
+        if (type===0) {
+            $solve = $radio0;
+            $solve.children().each(function(index, elem) {
+                elem.children().each(function(index, elem1) {
+                    console.log(elem1.className)
+                });
+                console.log(index)
+            });
         }
-        $solve.children().each(function(index, elem) {
-            console.log(elem.className);
-        });
+        else if (type===1) {
+            $solve = $radio1;
+            $solve.children().each(function(index, elem) {
+                elem.children().each(function(index, elem1) {
+                    console.log(elem1.className)
+                });
+                console.log(index)
+            });
+        }
+        else if (type===2) {
+            $solve = $radio2;
+            $solve.children().each(function(index, elem) {
+                elem.children().each(function(index, elem1) {
+                    console.log(elem1.className)
+                });
+                console.log(index)
+            });
+        }
         $radio0.remove(); $radio1.remove(); $radio2.remove();
 
         var st = '';
