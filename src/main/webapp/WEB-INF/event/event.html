@@ -123,13 +123,12 @@
                                 </div>
                                 <!--/.Card image-->
                                 <!--Button-->
-                                <a class="btn-action waves-effect waves-light" style="background: none;width: auto;" th:href="@{/users/user(id=${event.getGuideId()})}">
+                                <a class="btn-action waves-effect waves-light profile-avatar" th:href="@{/users/user(id=${event.getGuideId()})}">
                                     <div class="avatar">
-                                        <img th:src="${event.getPhotoOfGuide()}" src="../../resources/img/user.png" style="height: 100px; width:auto; border-radius: 50%;" alt="Аватар"/>
+                                        <img th:src="${event.getPhotoOfGuide()}" src="../../resources/img/user.png" alt="Аватар"/>
                                     </div>
                                 </a>
-                                <span style="font-size: medium;color: #000000;text-align:right;padding-top: 100px;margin: 2px 30px -80px auto;"
-                                      th:text="${event.getFullNameOfGuide()}">%FULL_NAME%</span>
+                                <span class="profile-avatar-span" th:text="${event.getFullNameOfGuide()}">%FULL_NAME%</span>
 
                                 <!--Card content-->
                                 <div class="card-body no-padding text-center">

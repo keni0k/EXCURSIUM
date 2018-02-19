@@ -147,6 +147,9 @@
 	.upload-img {
 		height: 143px;
 	}
+	.profile-avatar>.avatar>img{height: 75px;}
+	.profile-avatar{margin: -40px 25px -100px auto;}
+	.profile-avatar-span{margin: -20px 10px -50px auto; font-size: small}
 }
 
 /* Small Devices, Tablets */
@@ -163,6 +166,9 @@
 		.upload-img {
 			height: 110px;
 		}
+		.profile-avatar>.avatar>img{height: 50px;}
+		.profile-avatar{margin: -20px 35px -100px auto;}
+		.profile-avatar-span{margin: -45px 8px -10px auto; font-size: small}
 	}
 
 	/* Extra Small Devices, Phones */
