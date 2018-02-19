@@ -354,7 +354,7 @@ public class EventController {
             else event.setSmallData(txt.substring(0, 117) + '…');
 
             int type = event.getTypeOfDates();
-
+            event.setActiveDates("");
             if (type==0){
                 for (i = 0; i<7; i++) {
                     if (random.nextInt(2) == 0) {
