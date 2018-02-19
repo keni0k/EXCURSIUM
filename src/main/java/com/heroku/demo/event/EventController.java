@@ -370,7 +370,6 @@ public class EventController {
                 for (i = 0; i<7; i++) {
                     if (random.nextInt(3) == 0) event.setActiveDates(event.getActiveDates() + i + ":null");
                     else {
-                        event.setActiveDates(event.getActiveDates() + i + ":");
                         addTime(random, event, random.nextInt(8));
                         if (i!=6)
                             event.setActiveDates(event.getActiveDates() + ';');

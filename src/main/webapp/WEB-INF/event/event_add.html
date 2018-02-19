@@ -482,10 +482,10 @@
                             inp.value += ',';
                         }
                 }
-                inp.value = inp.value.substring(0, inp.value.length - 1);
                 inp.value += ';';
                 console.log(";");
             }
+            inp.value = inp.value.substring(0, inp.value.length - 1);
         }
         else if (type === 2) {
         var e1 = document.getElementById('20');
@@ -522,8 +522,12 @@
 
         var test = document.getElementById('20');
         console.log(test.className);
-        console.log(test.firstChild.className);
-        console.log(test.firstChild.firstChild.className);
+        var child1 = test.firstChild;
+        if (child1.className!=null)
+            console.log(child1.className);
+        var child2 = child1.firstChild;
+        if (child2.className!=null)
+            console.log(child2.className);
 
         var st = '';
         $('#result').children().each(function (index, elem) {
