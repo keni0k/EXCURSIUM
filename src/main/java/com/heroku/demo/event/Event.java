@@ -101,7 +101,7 @@ public class Event {
     private String fullNameOfGuide = "";
 
     @Transient
-    public ArrayList<String> pathToPhoto;
+    public ArrayList<String> pathToPhoto = new ArrayList<>();
 
     private int city = -1;
 
