@@ -415,28 +415,34 @@
         if (type===0) {
             $solve = $radio0;
             $solve.children().each(function(index, elem) {
-                elem.children().each(function(index, elem1) {
-                    console.log(elem1.className)
-                });
-                console.log(index)
+                console.log(index+":");
+                for (var childItem in elem.childNodes) {
+                    if (elem.childNodes[childItem].nodeType === 1)
+                        console.log(elem.childNodes[childItem].className);
+                }
+                console.log(";");
             });
         }
         else if (type===1) {
             $solve = $radio1;
             $solve.children().each(function(index, elem) {
-                elem.children().each(function(index, elem1) {
-                    console.log(elem1.className)
-                });
-                console.log(index)
+                console.log(index+":");
+                for (var childItem in elem.childNodes) {
+                    if (elem.childNodes[childItem].nodeType === 1)
+                        console.log(elem.childNodes[childItem].className);
+                }
+                console.log(";");
             });
         }
         else if (type===2) {
             $solve = $radio2;
             $solve.children().each(function(index, elem) {
-                elem.children().each(function(index, elem1) {
-                    console.log(elem1.className)
-                });
-                console.log(index)
+                console.log(index+":");
+                for (var childItem in elem.childNodes) {
+                    if (elem.childNodes[childItem].nodeType === 1)
+                        console.log(elem.childNodes[childItem].className);
+                }
+                console.log(";");
             });
         }
         $radio0.remove(); $radio1.remove(); $radio2.remove();
