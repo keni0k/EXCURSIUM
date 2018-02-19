@@ -390,7 +390,7 @@
                     <!--/*Card image*/-->
                     <div class="view overlay hm-white-slight z-depth-1" style="margin-top: 20px;">
                         <div class="img_crop"><img src="../../resources/img/bg-cta.jpg"
-                                                   class="img-fluid" alt=""
+                                                   class="img-fluid" alt="" id = "demo-img"
                                                    style="height: 240px; min-width: -webkit-fill-available;"/>
                         </div>
                         <div class="mask waves-effect waves-light"></div>
@@ -652,8 +652,10 @@
             /*handle: ".tile__title", // Restricts sort start click/touch to the specified element*/
             /*draggable: ".tile", // Specifies which items inside the element should be sortable*/
             onUpdate: function (evt/**Event*/) {
+                var src = $('#result:first-child:first-child').src();
+                console.log(src);
+                $('#demo-img').attr("src", src);
                 var item = evt.item; // the current dragged HTMLElement
-                console.log(item.className);
             },
             draggable: ".upload-img"
         });
