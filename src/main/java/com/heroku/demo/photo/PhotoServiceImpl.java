@@ -1,5 +1,8 @@
 package com.heroku.demo.photo;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.List;
 
 public class PhotoServiceImpl implements PhotoService {
@@ -9,6 +12,8 @@ public class PhotoServiceImpl implements PhotoService {
     }
 
     private PhotoRepository photoRepository;
+
+    private static final Logger logger = LoggerFactory.getLogger(PhotoServiceImpl.class);
 
     @Override
     public Photo addPhoto(Photo photo) {
@@ -27,7 +32,7 @@ public class PhotoServiceImpl implements PhotoService {
 
     @Override
     public Photo getByEventId(long eventId) {
-        List<Photo> list = photoRepository.findAll();
+        List<Photo> list = getAll();
         for (Photo photo: list) {
             if (photo.getEventId()==eventId) return photo;
         }
@@ -35,9 +40,13 @@ public class PhotoServiceImpl implements PhotoService {
     }
 
     public Photo getByToken(String token) {
-        List<Photo> list = photoRepository.findAll();
+        List<Photo> list = getAll();
+        logger.info(token);
         for (Photo photo: list) {
-            if (photo.getData().equals(token)) return photo;
+            if (photo.getData().equals(token)) {
+                logger.info("YES!");
+                return photo;
+            }
         }
         return null;
     }
