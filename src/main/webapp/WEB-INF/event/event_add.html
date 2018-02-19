@@ -414,15 +414,15 @@
         var $radio0 = $('#radio0');
         var $radio1 = $('#radio1');
         var $radio2 = $('#radio2');
+        var inp = document.getElementById('active_dates');
         if (type===0) {
             $solve = $radio0;
             $solve.children().each(function(index, elem) {
                 console.log(index+":");
                 for (var childItem in elem.childNodes) {
                     var elem1 = elem.childNodes[childItem];
-                    if (elem1.nodeType === 1)
-                        if (elem1.className === "form-control selectpicker my-sp")
-                            console.log(elem1.value);
+                    if (elem1.nodeType === 1 && elem1.className === "my-sp form-control")
+                        console.log(elem1.value);
                 }
                 console.log(";");
             });
@@ -432,8 +432,9 @@
             $solve.children().each(function(index, elem) {
                 console.log(index+":");
                 for (var childItem in elem.childNodes) {
-                    if (elem.childNodes[childItem].nodeType === 1)
-                        console.log(elem.childNodes[childItem].className);
+                    var elem1 = elem.childNodes[childItem];
+                    if (elem1.nodeType === 1 && elem1.className === "my-sp form-control")
+                        console.log(elem1.value);
                 }
                 console.log(";");
             });
@@ -452,7 +453,6 @@
                                     for (var childItem3 in e4.childNodes) {
                                         var e5 = e4.childNodes[childItem3];
                                         if (e5.nodeType === 1) {
-                                            var inp = document.getElementById('active_dates');
                                             if (e5.className === "form-control") {
                                                 console.log("date: " + e5.value);
                                                 inp.value+=e5.value+':';
@@ -477,7 +477,8 @@
         });
         st = st.substring(0,st.length-1);
         $('#photos').val(st);
-        alert($('#active_dates').val());
+        inp.value = inp.value.substring(0,inp.value.length-1);
+        alert(inp.value);
         $("#upload_input").remove();
         $('#sbmt').click();
     }
