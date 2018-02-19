@@ -476,14 +476,15 @@
                 for (var childItemT in el.childNodes) {
                     var el1 = el.childNodes[childItemT];
                     if (el1.nodeType === 1 && el1.className === "my-sp form-control") {
-                        console.log(el1.value);
+                        // console.log(el1.value);
                         inp.value += el1.value;
                         inp.value += ',';
                     }
                 }
-                inp.value = inp.value.substring(0, inp.value.length - 1);
+                if (inp.value[inp.value.length-1]===',')
+                    inp.value = inp.value.substring(0, inp.value.length - 1);
                 inp.value += ';';
-                console.log(";");
+                // console.log(";");
             }
         }
         else if (type === 2) {
@@ -497,11 +498,11 @@
                             var e5 = child3.childNodes[childItem];
                             if (e5.nodeType === 1) {
                                 if (e5.className === "form-control") {
-                                    console.log("date: " + e5.value);
+                                    // console.log("date: " + e5.value);
                                     inp.value += e5.value + ':';
                                 }
                                 if (e5.className === "my-sp form-control") {
-                                    console.log("time: " + e5.value);
+                                    // console.log("time: " + e5.value);
                                     inp.value += e5.value + ';';
                                 }
                             }
