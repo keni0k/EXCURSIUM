@@ -226,6 +226,6 @@ h2.title {
 ol.carousel-indicators > li{background: #eee;border-color: #999;}
 .carousel-inner>.item>img{height: 290px;}
 
-.profile-avatar{background: none;!important;width: auto;!important;}
+.profile-avatar{background: none!important;width: auto!important;}
 .profile-avatar>.avatar>img{height: 100px; width:auto; border-radius: 50%;}
 .profile-avatar-span{font-size: medium;color: #000000;text-align:right;padding-top: 100px;margin: 2px 15px -80px auto;}
