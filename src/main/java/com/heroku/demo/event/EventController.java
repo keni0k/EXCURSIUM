@@ -346,12 +346,12 @@ public class EventController {
         for (Event event: events) {
             int i;
             String txt = event.getDescription();
-            for (i = 0; i < 120; i++) {
-                String substr = txt.substring(120 - i, 120);
+            for (i = 0; i < 150; i++) {
+                String substr = txt.substring(150 - i, 150);
                 if (substr.indexOf('.') != -1 || substr.indexOf('!') != -1 || substr.indexOf('?') != -1) break;
             }
-            if (i != 120 && i < 50) event.setSmallData(txt.substring(0, 120 - i + 1));
-            else event.setSmallData(txt.substring(0, 117) + '…');
+            if (i != 150 && i < 70) event.setSmallData(txt.substring(0, 150 - i + 1));
+            else event.setSmallData(txt.substring(0, 147) + '…');
 
             int type = event.getTypeOfDates();
             event.setActiveDates("");
