@@ -138,7 +138,7 @@ th:text="${#messages.msg('error.event.place')}" th:class="'error'">Place Error</
 </div>
 <br/>
 <div class="view overlay hm-white-slight z-depth-1">
-<img th:src="${inputEvent.pathToPhoto.get(0)}" class="img-fluid" style="height: 300px;" alt=""/>
+<img th:src="${inputEvent.getSrcImage(0)}" class="img-fluid" style="height: 300px;" alt=""/>
 <a>
 <div class="mask waves-effect waves-light"></div>
 </a>

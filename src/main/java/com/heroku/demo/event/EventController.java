@@ -91,10 +91,11 @@ public class EventController {
             return eventAddAgain(modelMap, event, messageSource.getMessage("error.event.add", null, locale), principal);
         }
         eventService.addEvent(event);
-        for (String token : tokens) {
-            Photo photo = photoService.getByToken(token);
+        for (int i = 0; i<tokens.length; i++) {
+            Photo photo = photoService.getByToken(tokens[i]);
             if (photo != null) {
                 photo.setEventId(event.getId());
+                photo.setNumber(i);
                 photoService.editPhoto(photo);
             }
         }

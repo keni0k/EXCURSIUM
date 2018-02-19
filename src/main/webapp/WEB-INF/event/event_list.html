@@ -215,7 +215,7 @@ th:with="event=${events.get(j)}">
 <!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
 <!--/*Card image*/-->
 <div class="view overlay hm-white-slight z-depth-1" style="margin-top: 20px;">
-<div class="img_crop"><img src="../../resources/img/bg-cta.jpg" th:src="${event.pathToPhoto}"
+<div class="img_crop"><img src="../../resources/img/bg-cta.jpg" th:src="${event.getSrcImage(0)}"
                            class="img-fluid" alt="" style="height: 240px; min-width: -webkit-fill-available;"/></div>
 <a th:href="@{/events/event(id = ${event.getId()})}"><div class="mask waves-effect waves-light"></div></a>
 </div>
