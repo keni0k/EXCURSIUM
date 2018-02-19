@@ -114,7 +114,7 @@ public class HomeController {
                     serverFile = compress(serverFile, getFileExtension(fileName), getFileSizeMegaBytes(serverFile));
 
                 photoToken+=".jpg";
-                Photo photo = new Photo(0, photoToken);
+                Photo photo = new Photo(0, photoToken, 0);
 
                 putImg(serverFile.getAbsolutePath(), photoToken);
                 photoRepository.save(photo);

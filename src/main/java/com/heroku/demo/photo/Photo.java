@@ -21,10 +21,13 @@ public class Photo {
 
     private int number = 0;
 
-    public Photo(int eventId, String data) {
-        this.eventId = eventId;
-        this.data = data;
+    public Photo(long eventId, String data, int number) {
+        setEventId(eventId);
+        setData(data);
+        setNumber(number);
     }
+
+    public Photo(){}
 
     public long getEventId() {
         return eventId;

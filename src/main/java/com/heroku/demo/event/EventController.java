@@ -331,7 +331,7 @@ public class EventController {
             event.setType(Consts.EXCURSION_MODERATION);
             eventService.addEvent(event);
             if (photo != null)
-                photoService.addPhoto(new Photo((int) event.getId(), photo));
+                photoService.addPhoto(new Photo(event.getId(), photo, 0));
         } else return "{}";
         return event.toString();
     }
