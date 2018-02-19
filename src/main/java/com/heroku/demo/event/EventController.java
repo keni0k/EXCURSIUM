@@ -100,7 +100,7 @@ public class EventController {
                 photoService.editPhoto(photo);
             }
         }
-        return event(modelMap, (int)event.getId(), principal);
+        return "redirect:/event?id="+event.getId();
     }
 
     private String eventAddAgain(ModelMap model, Event event, String errorData, Principal principal) {
