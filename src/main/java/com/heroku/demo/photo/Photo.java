@@ -19,12 +19,11 @@ public class Photo {
     private long id;
     private long eventId = 0;
 
+    private int number = 0;
+
     public Photo(int eventId, String data) {
         this.eventId = eventId;
         this.data = data;
-    }
-
-    public Photo() {
     }
 
     public long getEventId() {
@@ -57,5 +56,13 @@ public class Photo {
                 "\t\"event_id\":\"" + eventId + "\",\n" +
                 "\t\"data\":\"" + data + "\",\n" +
                 "}";
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
     }
 }

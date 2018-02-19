@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 
 @Entity
 @Table(name = "event")
@@ -21,7 +22,7 @@ public class Event {
                 "\t\"price\":\"" + price + "\",\n" +
                 "\t\"description\":\"" + description + "\",\n" +
                 "\t\"name\":\"" + name + "\",\n" +
-                "\t\"photo_url\":\"" + pathToPhoto + "\",\n" +
+                "\t\"photo_url\":\"" + pathToPhoto.get(0) + "\",\n" +
                 "\t\"photo_of_guide\":\"" + getPhotoOfGuide() + "\",\n" +
                 "\t\"reviews_count\":\"" + reviewsCount + "\",\n" +
                 "\t\"full_name_of_guide\":\"" + fullNameOfGuide + "\",\n" +
@@ -100,7 +101,7 @@ public class Event {
     private String fullNameOfGuide = "";
 
     @Transient
-    public String pathToPhoto = "";
+    public ArrayList<String> pathToPhoto;
 
     private int city = -1;
 

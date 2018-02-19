@@ -363,7 +363,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                 <!--/*Card image*/-->
                                 <div class="view overlay hm-white-slight"  style="margin-top: 20px">
                                     <div class="img_crop">
-                                        <img th:src="${event.pathToPhoto}" src="#" class="img-fluid"
+                                        <img th:src="${event.pathToPhoto.get(0)}" src="#" class="img-fluid"
                                              style="height: 240px; min-width: -webkit-fill-available;"
                                              alt=""/>
                                     </div>

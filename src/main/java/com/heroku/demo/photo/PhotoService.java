@@ -7,7 +7,9 @@ public interface PhotoService {
 
     void delete(long id);
 
-    Photo getByEventId(long eventId);
+    List<Photo> getByEventId(long eventId);
+
+    Photo getByToken(String token);
 
     Photo editPhoto(Photo photo);
 

@@ -284,9 +284,11 @@ public class EventController {
 
         if (id != null) {
             Event editEvent = eventService.getById(id);
-            Photo img = photoService.getByEventId(id);
-            if (img != null)
-                editEvent.pathToPhoto = img.getData();
+            List<Photo> photos = photoService.getByEventId(editEvent.getId());
+            if (photos != null)
+                for (Photo p:photos) {
+                    editEvent.pathToPhoto.add(p.getData());
+                }
             model.addAttribute("inputEvent", editEvent);
         }
         model.addAttribute("utils", new UtilsForWeb());

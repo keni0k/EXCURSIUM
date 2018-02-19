@@ -3,6 +3,8 @@ package com.heroku.demo.photo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class PhotoServiceImpl implements PhotoService {
@@ -31,17 +33,20 @@ public class PhotoServiceImpl implements PhotoService {
     }
 
     @Override
-    public Photo getByEventId(long eventId) {
+    public List<Photo> getByEventId(long eventId) {
         List<Photo> list = getAll();
+        ArrayList<Photo> solve = new ArrayList<>();
         for (Photo photo: list) {
-            if (photo.getEventId()==eventId) return photo;
+            if (photo.getEventId()==eventId)
+                solve.add(photo);
         }
-        return null;
+        solve.sort(Comparator.comparingInt(Photo::getNumber));
+        return solve;
     }
 
+    @Override
     public Photo getByToken(String token) {
         List<Photo> list = getAll();
-        logger.info(token);
         for (Photo photo: list) {
             if (photo.getToken().equals(token)) {
                 return photo;

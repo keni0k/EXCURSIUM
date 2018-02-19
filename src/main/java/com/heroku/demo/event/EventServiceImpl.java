@@ -37,9 +37,11 @@ public class EventServiceImpl implements EventService {
     @Override
     public Event getById(long id) {
         Event e = eventRepository.findOne(id);
-        Photo img = photoService.getByEventId(id);
-        if (img!=null)
-            e.pathToPhoto=img.getData();
+        List<Photo> photos = photoService.getByEventId(e.getId());
+        if (photos != null)
+            for (Photo p:photos) {
+                e.pathToPhoto.add(p.getData());
+            }
         return e;
     }
 
@@ -75,9 +77,11 @@ public class EventServiceImpl implements EventService {
             if (((aList.getCategory() == category) || (category == -1)) && ((aList.getLanguage() == language) || isAllLang) && (aList.getType() == Consts.EXCURSION_ACTIVE || isAll)) {
                 if ((aList.getPrice() >= priceDown) && (aList.getPrice() <= priceUp)) {
 
-                    Photo img = photoService.getByEventId(aList.getId());
-                    if (img != null)
-                        aList.pathToPhoto = img.getData();
+                    List<Photo> photos = photoService.getByEventId(aList.getId());
+                    if (photos != null)
+                        for (Photo p:photos) {
+                            aList.pathToPhoto.add(p.getData());
+                        }
 
                     if (!words.equals("")) {
                         for (String word : wds) {
@@ -109,9 +113,11 @@ public class EventServiceImpl implements EventService {
         List<Event> copy = getAll();
         for (Event event:copy) {
             if (event.getGuideId()==guideId) {
-                Photo img = photoService.getByEventId(event.getId());
-                if (img != null)
-                    event.pathToPhoto = img.getData();
+                List<Photo> photos = photoService.getByEventId(event.getId());
+                if (photos != null)
+                    for (Photo p:photos) {
+                        event.pathToPhoto.add(p.getData());
+                    }
                 eventList.add(event);
             }
         }
