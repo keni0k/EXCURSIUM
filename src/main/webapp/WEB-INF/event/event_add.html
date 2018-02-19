@@ -226,6 +226,8 @@
                                 <b><a class="add-time" onclick="addDate();">Добавить дату</a></b>
                             </div>
                         </div>
+
+                        <input type="text" name="active_dates" style="display:none;" id="active_dates"/>
                     </div>
 
                     <div class="row ml-0 mr-0">
@@ -450,10 +452,15 @@
                                     for (var childItem3 in e4.childNodes) {
                                         var e5 = e4.childNodes[childItem3];
                                         if (e5.nodeType === 1) {
-                                            if (e5.className === "form-control")
-                                                console.log("date: "+e5.value);
-                                            if (e5.className === "my-sp")
-                                                console.log("time: "+e5.value);
+                                            var inp = document.getElementById('active_dates');
+                                            if (e5.className === "form-control") {
+                                                console.log("date: " + e5.value);
+                                                inp.value+=e5.value+':';
+                                            }
+                                            if (e5.className === "my-sp form-control") {
+                                                console.log("time: " + e5.value);
+                                                inp.value += e5.value + ';';
+                                            }
                                         }
                                     }
                                 }
@@ -470,12 +477,12 @@
         });
         st = st.substring(0,st.length-1);
         $('#photos').val(st);
-        //alert(st);
+        alert($('#active_dates').val());
         $("#upload_input").remove();
         $('#sbmt').click();
     }
     function generateOptions(select) {
-        var st = '<select class="my-sp"' + select + '><option value="null">--:--</option>';
+        var st = '<select class="my-sp form-control"' + select + '><option value="null">--:--</option>';
         var hour = 7;
         var zero = '0';
         for (var i=0; i<48; i++){
