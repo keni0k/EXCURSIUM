@@ -333,4 +333,8 @@ public class Event {
         if (pathToPhoto.size()>i) return pathToPhoto.get(i);
         return null;
     }
+
+    public String[] getActiveDatesArr() {
+        return activeDates.split(";");
+    }
 }

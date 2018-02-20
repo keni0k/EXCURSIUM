@@ -135,7 +135,7 @@ public class EventController {
 
             if (errors.isErrors())
                 return eventAddAgain(modelMap, event, new MessageUtil("warning", messageSource.getMessage("error.event.add", null, locale)), principal, errors);
-            return "redirect:/events/event?id=" + event.getId();
+            return "redirect:/events/event?id=" + solveEvent.getId();
         }
         return "redirect:/users/login";
     }
