@@ -66,7 +66,7 @@ public class Event {
     private String time = "";
 
 //    @Range(min = 1, max = 240)
-    private int duration;
+    private int duration = -1;
 
     public int getLanguage() {
         return language;
