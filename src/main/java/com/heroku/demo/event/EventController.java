@@ -238,7 +238,12 @@ public class EventController {
     public String listTest(ModelMap model,
                            @RequestParam(value = "country", required = false) Integer country,
                            @RequestParam(value = "city", required = false) Integer city,
+                           @RequestParam(value = "country_and_city", required = false) String countryAndCity,
                            Locale locale, Principal principal){
+        if (countryAndCity!=null) {
+            country = Integer.parseInt(countryAndCity.substring(0,1));
+            city = Integer.parseInt(countryAndCity.substring(2,3));
+        }
         if (country==null) return countries(model, principal);
         if (city==null) return cities(model, country, principal);
         ListEvents events = eventService.getByFilter(null, null, null, localeToLang(locale), country, city, null, 0, false);

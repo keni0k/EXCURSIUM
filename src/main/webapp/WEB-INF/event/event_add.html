@@ -449,7 +449,7 @@
         else if (type === 1) {
             for (var i = 0; i < 7; i++) {
                 var el = document.getElementById('1' + i);
-                if (el.childNodes!==null) {
+                if (el!==null && el.childNodes!==null) {
                     for (var childItemT in el.childNodes) {
                         var el1 = el.childNodes[childItemT];
                         if (el1.nodeType === 1 && el1.className === "my-sp form-control") {
