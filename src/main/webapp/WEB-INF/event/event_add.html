@@ -24,27 +24,7 @@
     <link rel="stylesheet" type="text/css" href="../../resources/css/styles.css"/>
     <link rel="stylesheet" href="../../resources/css/media.css"/>
 
-    <style rel="stylesheet">.form-control {
-        padding-top: 7px;
-        padding-bottom: 7px;
-        padding-left: 12px;
-        margin-top: 0;
-        border-bottom-right-radius: 4px;
-        border-top-right-radius: 4px;
-        border: 1px solid #bdbdbd
-    }
-
-    .bootstrap-select.form-control:not([class*="col-"]) {
-        width: auto;
-    }
-
-    .dropdown-toggle {
-        border-radius: 4px !important;
-    }
-
-    select.bs-select-hidden, select.selectpicker {
-        display: inline-block !important;
-    }</style>
+    <style rel="stylesheet">.bootstrap-select.form-control:not([class*="col-"]){width: auto;}.dropdown-toggle{border-radius: 4px !important;}select.bs-select-hidden, select.selectpicker{display: inline-block !important;}</style>
 </head>
 <body style="background-color: #f9f9f9;">
 <!--/*@thymesVar id="inputEvent" type="com.heroku.demo.event.Event"*/-->
@@ -59,14 +39,12 @@
         </div>
         <div class="row">
             <div class="col-xs-12 col-md-7 col-lg-6">
-
                 <!-- /* Handling the flash message */-->
                 <th:block th:if="${message != null}">
                     <div th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message.type)}, message=${message.message})">
                         &nbsp;
                     </div>
                 </th:block>
-
                 <form th:object="${inputEvent}" method="POST" action="/events/add" enctype="multipart/form-data"
                       autocomplete="off">
 
@@ -77,12 +55,10 @@
                         <div class="panel-body">
                             <input name="name" type="text" class="form-control" id="name"
                                    th:value="${inputEvent.getName()}" minlength="10" maxlength="35"/>
-
                             <label for="name" th:if="${errors.isName()}"
                                    th:text="${#messages.msg('error.event.name')}" th:class="'error'">Name Error</label>
                         </div>
                     </div>
-
                     <div class="panel panel-default">
                         <div class="panel-heading" th:text="${#messages.msg('words.description')}">
                             Описание
@@ -92,8 +68,7 @@
                                       id="description" style="resize: vertical"
                                       class="form-control" th:text="${inputEvent.getDescription()}"></textarea>
                             <label for="description" th:if="${errors.isDescription()}"
-                                   th:text="${#messages.msg('error.event.description')}" th:class="'error'">Description
-                                Error</label>
+                                   th:text="${#messages.msg('error.event.description')}" th:class="'error'">Description Error</label>
                         </div>
                     </div>
                     <div class="row ml-0 mr-0">
@@ -474,12 +449,14 @@
         else if (type === 1) {
             for (var i = 0; i < 7; i++) {
                 var el = document.getElementById('1' + i);
-                for (var childItemT in el.childNodes) {
-                    var el1 = el.childNodes[childItemT];
-                    if (el1.nodeType === 1 && el1.className === "my-sp form-control") {
-                        // console.log(el1.value);
-                        inp.value += el1.value;
-                        inp.value += ',';
+                if (el.childNodes!==null) {
+                    for (var childItemT in el.childNodes) {
+                        var el1 = el.childNodes[childItemT];
+                        if (el1.nodeType === 1 && el1.className === "my-sp form-control") {
+                            // console.log(el1.value);
+                            inp.value += el1.value;
+                            inp.value += ',';
+                        }
                     }
                 }
                 if (inp.value[inp.value.length-1]===',')

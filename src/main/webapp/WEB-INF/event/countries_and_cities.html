@@ -15,7 +15,6 @@
     <!--<title th:text="${#messages.msg('city.all')}" th:if="${type==1}">Города</title>-->
 
     <link rel="stylesheet" type="text/css" href="../../resources/css/footer.css"/>
-    <link rel="stylesheet" href="../../resources/libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>
     <link rel="stylesheet" href="../../resources/libs/bootstrap-select/css/bootstrap-select.css"/>
 
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
@@ -44,9 +43,6 @@
             display: block;
         }
     </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
 </head>
 <body style="background-color: #f9f9f9;">
 <!--/*@thymesVar id="type" type="java.lang.Integer"*/-->
@@ -61,11 +57,22 @@
         <div class="welcome-search">
             <form action="/events/list" class="welcome-search-form">
                 <div class="welcome-search-control">
-                    <input type="text" class="typeahead w-a" placeholder="Куда вы собираетесь?" autocomplete="off"/>
+                    <select class="selectpicker form-control" data-live-search="true"
+                            name="city_and_country">
+                        <option value="Куда вы собираетесь?"/>
+                        <!--/*@thymesVar id="utils" type="com.heroku.demo.utils.UtilsForWeb"*/-->
+                        <th:block th:each="j : ${#numbers.sequence(0, utils.getCountriesCount()-1)}">
+                            <option th:each="i : ${#numbers.sequence(0, utils.getCitiesCount(j)-1)}"
+                                    th:value="${j}+'.'+${i}"
+                                    th:text="${#messages.msg('city.'+j+'.'+i)}+', '+ ${#messages.msg('country.'+j)}">
+                                Москва, Россия
+                            </option>
+                        </th:block>
+                    </select>
                 </div>
                 <div class="welcome-search-control">
                     <button type="submit" class="welcome-button btn" style="color: #000!important;">
-                        Найти
+                        Открыть
                     </button>
                 </div>
             </form>
@@ -155,5 +162,8 @@
     </div>
 </div>
 <div th:replace="fragments/footer :: footer"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
 </body>
 </html>
