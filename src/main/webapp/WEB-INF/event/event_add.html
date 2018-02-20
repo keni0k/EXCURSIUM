@@ -169,6 +169,7 @@
                                     <span> - </span>
                                     <div th:replace="fragments/modals :: select"></div>
                                 </th:block>
+
                             </div>
                             <div class="day-of-week" id="01">
                                 <b>Вт.</b><a class="add-time" id="1" onclick="addTime(0, 1);" th:if="${isEdit and inputEvent.getType()==0?inputEvent.getActiveDatesArr()[1].length()==0:true}">Задать интервал
