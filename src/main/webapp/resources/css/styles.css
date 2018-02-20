@@ -140,7 +140,6 @@ h2.title {
 .welcome-search-control{display: inline-block;}
 .welcome-search-form{width: fit-content;margin: -40px auto 0;background: #17174a;padding: 10px 40px;position: relative;border-radius: 20px;}
 .welcome-button {margin-left: 20px !important;}
-.w-a {color: #eeeeee;width: auto !important;}
 .c_a_c-h1{margin-top: 10px !important;}
 .before-120:before{width: 120px !important;margin-left: -60px !important;}
 .rating{padding-left: 0; color: #ffa000;}
@@ -229,8 +228,10 @@ ol.carousel-indicators > li{background: #eee;border-color: #999;}
 .profile-avatar{background: none!important;width: auto!important;}
 .profile-avatar>.avatar>img{height: 100px; width:auto; border-radius: 50%;}
 .profile-avatar-span{font-size: medium;color: #000000;text-align:right;padding-top: 100px;margin: 2px 15px -80px auto;}
-
+.w-a{width: auto!important;}
 .bw-0{border-width: 0!important;}
+.day-span{margin-right: 20px!important;border-left-width: 0!important;border-radius: 0 4px 4px 0!important;}
+
 
 /*.fresh-table[class*="full-color-"] .fixed-table-toolbar .btn, .fresh-table[class*="toolbar-color-"] .fixed-table-toolbar .btn{color:black;}*/
 /*.fresh-table[class*="full-color-"] .fixed-table-toolbar .btn .caret, .fresh-table[class*="toolbar-color-"] .fixed-table-toolbar .btn .caret{border-top-color:black;}*/

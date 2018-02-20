@@ -156,18 +156,18 @@
                         </div>
                     </div>
                     <input type="text" name="schedule" style="display:none;" id="schedule"/>
-                    <div class="panel panel-default">
+                    <th:block class="panel panel-default">
                         <div class="panel-heading">
                             Расписание
                         </div>
-                        <div class="panel-body pb-0 pt-0" id="radio0">
+                        <select class="panel-body pb-0 pt-0" id="radio0">
                             <div class="day-of-week" id="00">
                                 <b>Пн.</b><a class="add-time" id="0" onclick="addTime(0, 0);" th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[0]=='null':true}">Задать интервал
                                 времени</a>
                                 <th:block th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[0]!='null':false}">
-                                    <div th:replace="fragments/select :: times"></div>
+                                    <select class="my-sp form-control" ><th:block th:replace="fragments/select :: times"></th:block></select>
                                     <span> - </span>
-                                    <div th:replace="fragments/select :: times"></div>
+                                    <select class="my-sp form-control" ><th:block th:replace="fragments/select :: times"></th:block></select>
                                 </th:block>
 
                             </div>
@@ -175,92 +175,138 @@
                                 <b>Вт.</b><a class="add-time" id="1" onclick="addTime(0, 1);" th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[1]=='null':true}">Задать интервал
                                 времени</a>
                                 <th:block th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[1]!='null':false}">
-                                    <div th:replace="fragments/select :: times"></div>
+                                    <select class="my-sp form-control" ><th:block th:replace="fragments/select :: times"></th:block></select>
                                     <span> - </span>
-                                    <div th:replace="fragments/select :: times"></div>
+                                    <select class="my-sp form-control" ><th:block th:replace="fragments/select :: times"></th:block></select>
                                 </th:block>
                             </div>
                             <div class="day-of-week" id="02">
                                 <b>Ср.</b><a class="add-time" id="2" onclick="addTime(0, 2);" th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[2]=='null':true}">Задать интервал
                                 времени</a>
                                 <th:block th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[2]!='null':false}">
-                                    <div th:replace="fragments/select :: times"></div>
+                                    <select class="my-sp form-control" ><th:block th:replace="fragments/select :: times"></th:block></select>
                                     <span> - </span>
-                                    <div th:replace="fragments/select :: times"></div>
+                                    <select class="my-sp form-control" ><th:block th:replace="fragments/select :: times"></th:block></select>
                                 </th:block>
                             </div>
                             <div class="day-of-week" id="03">
                                 <b>Чт.</b><a class="add-time" id="3" onclick="addTime(0, 3);" th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[3]=='null':true}">Задать интервал
                                 времени</a>
                                 <th:block th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[3]!='null':false}">
-                                    <div th:replace="fragments/select :: times"></div>
+                                    <select class="my-sp form-control" ><th:block th:replace="fragments/select :: times"></th:block></select>
                                     <span> - </span>
-                                    <div th:replace="fragments/select :: times"></div>
+                                    <select class="my-sp form-control" ><th:block th:replace="fragments/select :: times"></th:block></select>
                                 </th:block>
                             </div>
                             <div class="day-of-week" id="04">
                                 <b>Пт.</b><a class="add-time" id="4" onclick="addTime(0, 4);" th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[4]=='null':true}">Задать интервал
                                 времени</a>
                                 <th:block th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[4]!='null':false}">
-                                    <div th:replace="fragments/select :: times"></div>
+                                    <select class="my-sp form-control" ><th:block th:replace="fragments/select :: times"></th:block></select>
                                     <span> - </span>
-                                    <div th:replace="fragments/select :: times"></div>
+                                    <select class="my-sp form-control" ><th:block th:replace="fragments/select :: times"></th:block></select>
                                 </th:block>
                             </div>
-                            <div class="day-of-week" id="05">
+                            <th:block class="day-of-week" id="05">
                                 <b>Сб.</b><a class="add-time" id="5" onclick="addTime(0, 5);" th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[5]=='null':true}">Задать интервал
                                 времени</a>
                                 <th:block th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[5]!='null':false}">
-                                    <div th:replace="fragments/select :: times"></div>
+                                    <select class="my-sp form-control" ><th:block th:replace="fragments/select :: times"></th:block></select>
                                     <span> - </span>
-                                    <div th:replace="fragments/select :: times"></div>
+                                    <select class="my-sp form-control" ><th:block th:replace="fragments/select :: times"></th:block></select>
                                 </th:block>
                             </div>
                             <div class="day-of-week bw-0" id="06">
                                 <b>Вс.</b><a class="add-time" id="6" onclick="addTime(0, 6);" th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[6]=='null':true}">Задать интервал
                                 времени</a>
                                 <th:block th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[6]!='null':false}">
-                                    <div th:replace="fragments/select :: times"></div>
+                                    <select class="my-sp form-control" ><th:block th:replace="fragments/select :: times"></th:block></select>
                                     <span> - </span>
-                                    <div th:replace="fragments/select :: times"></div>
+                                    <select class="my-sp form-control" ><th:block th:replace="fragments/select :: times"></th:block></select>
                                 </th:block>
                             </div>
                         </div>
 
                         <div class="panel-body pb-0 pt-0" id="radio1" style="display: none;">
                             <div class="day-of-week">
-                                <b>Пн.</b><span id="10"></span><a class="add-time" onclick="addTime(1, 0);">Добавить
-                                время</a>
+                                <b>Пн.</b>
+                                <span id="10">
+                                    <select th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[0]!='null':false}" class="my-sp form-control">
+                                        <th:block th:replace="fragments/select :: times"/>
+                                    </select>
+                                </span><a class="add-time" onclick="addTime(1, 0);">Добавить время</a>
                             </div>
                             <div class="day-of-week">
-                                <b>Вт.</b><span id="11"></span><a class="add-time" onclick="addTime(1, 1);">Добавить
-                                время</a>
+                                <b>Вт.</b>
+                                <span id="11">
+                                    <select th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[1]!='null':false}" class="my-sp form-control">
+                                        <th:block th:replace="fragments/select :: times"/>
+                                    </select>
+                                </span>
+                                <a class="add-time" onclick="addTime(1, 1);">Добавить время</a>
                             </div>
                             <div class="day-of-week">
-                                <b>Ср.</b><span id="12"></span><a class="add-time" onclick="addTime(1, 2);">Добавить
-                                время</a>
+                                <b>Ср.</b>
+                                <span id="12">
+                                    <select th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[2]!='null':false}" class="my-sp form-control">
+                                        <th:block th:replace="fragments/select :: times"/>
+                                    </select>
+                                </span>
+                                <a class="add-time" onclick="addTime(1, 2);">Добавить время</a>
                             </div>
                             <div class="day-of-week">
-                                <b>Чт.</b><span id="13"></span><a class="add-time" onclick="addTime(1, 3);">Добавить
-                                время</a>
+                                <b>Чт.</b>
+                                <span id="13">
+                                    <select th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[3]!='null':false}" class="my-sp form-control">
+                                        <th:block th:replace="fragments/select :: times"/>
+                                    </select>
+                                </span>
+                                <a class="add-time" onclick="addTime(1, 3);">Добавить время</a>
                             </div>
                             <div class="day-of-week">
-                                <b>Пт.</b><span id="14"></span><a class="add-time" onclick="addTime(1, 4);">Добавить
-                                время</a>
+                                <b>Пт.</b>
+                                <span id="14">
+                                    <select th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[4]!='null':false}" class="my-sp form-control">
+                                        <th:block th:replace="fragments/select :: times"/>
+                                    </select>
+                                </span>
+                                <a class="add-time" onclick="addTime(1, 4);">Добавить время</a>
                             </div>
                             <div class="day-of-week">
-                                <b>Сб.</b><span id="15"></span><a class="add-time" onclick="addTime(1, 5);">Добавить
-                                время</a>
+                                <b>Сб.</b>
+                                <span id="15">
+                                    <select th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[5]!='null':false}" class="my-sp form-control">
+                                        <th:block th:replace="fragments/select :: times"/>
+                                    </select>
+                                </span>
+                                <a class="add-time" onclick="addTime(1, 5);">Добавить время</a>
                             </div>
                             <div class="day-of-week bw-0">
-                                <b>Вс.</b><span id="16"></span><a class="add-time" onclick="addTime(1, 6);">Добавить
-                                время</a>
+                                <b>Вс.</b>
+                                <span id="16">
+                                    <select th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[6]!='null':false}" class="my-sp form-control">
+                                        <th:block th:replace="fragments/select :: times"/>
+                                    </select>
+                                </span>
+                                <a class="add-time" onclick="addTime(1, 6);">Добавить время</a>
                             </div>
                         </div>
 
                         <div class="panel-body pb-0 pt-0" id="radio2" style="display: none;">
                             <div class="day-of-week bw-0">
-                                <div id="20"></div>
+                                <div id="20">
+                                    <div class="day-of-week" th:if="${isEdit and inputEvent.getTypeOfDates()==2?inputEvent.getActiveDates()!='null':false}" th:each="date: ${inputEvent.getActiveDatesArr()}">
+                                        <div class="form-group" style="margin-top: 15px;">
+                                            <div class="input-group date" id="datetimepicker" style="display: flex;">
+                                                <input type="text" class="form-control" style="width: auto;" th:value="date[0].substring(0,date[0].indexOf(':'))!='null'?date[0].substring(0,date[0].indexOf(':')):''">
+                                                <span class="input-group-addon w-a day-span">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                                <select class="my-sp form-control" style="border-radius: 4px;width: auto;"><th:block th:replace="fragments/select :: times"></th:block></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <b><a class="add-time" onclick="addDate();">Добавить дату</a></b>
                             </div>
                         </div>

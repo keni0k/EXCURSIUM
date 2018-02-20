@@ -452,8 +452,9 @@ public class EventController {
                 for (i = 0; i<dates; i++){
                     String date1 = "" + random.nextInt(3) + random.nextInt(10) + ".0" + (random.nextInt(9)+1) + ".2018";
                     event.setActiveDates(event.getActiveDates() + date1+ ":");
-                    int times = random.nextInt(5);
+                    int times = random.nextInt(2);
                     addTime(random, event, times);
+                    if (times==0) event.setActiveDates(event.getActiveDates() + "null");
                     if (i!=dates-1)
                         event.setActiveDates(event.getActiveDates() + ";");
                 }
