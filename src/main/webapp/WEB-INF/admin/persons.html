@@ -150,9 +150,7 @@ placeholder="Город" required="" aria-label="Город"/>
 Изменение фона тулбара страницы: toolbar-color-blue, toolbar-color-azure, toolbar-color-green, toolbar-color-red, toolbar-color-orange
 */-->
 
-<div class="toolbar">
-<button id="alertBtn" class="btn btn-default">Alert</button>
-</div>
+<div class="toolbar"></div>
 
 <table id="fresh-table" class="table">
 <thead>
@@ -199,7 +197,6 @@ placeholder="Город" required="" aria-label="Город"/>
 
 <script th:inline="javascript">
 var $table = $('#fresh-table'),
-$alertBtn = $('#alertBtn'),
 full_screen = false;
 
 $().ready(function () {
@@ -252,10 +249,6 @@ values: [row.id]
 document.location.href = "http://excursium.me/users/delete?id=" + row.id;
 }
 };
-
-$alertBtn.click(function () {
-alert("You pressed on Alert");
-});
 
 });
 

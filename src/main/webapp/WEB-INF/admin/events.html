@@ -40,7 +40,7 @@ xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" href="../../resources/css/mycards.css"/>
 <link rel="stylesheet" href="../../resources/css/media.css"/>
 <link rel="stylesheet" type="text/css" href="../../resources/css/styles.css"/>
-
+    <link rel="stylesheet" href="../../resources/libs/bootstrap-select/css/bootstrap-select.css"/>
 </head>
 <body style="background-color: #f9f9f9;" th:with="price_up=${#httpServletRequest.getParameter('price_up')},price_down=${#httpServletRequest.getParameter('price_down')},
 id=${#httpServletRequest.getParameter('id')},category=${#httpServletRequest.getParameter('category')},
@@ -178,9 +178,7 @@ th:text="${#messages.msg('error.event.place')}" th:class="'error'">Place Error</
 Изменение фона тулбара страницы: toolbar-color-blue, toolbar-color-azure, toolbar-color-green, toolbar-color-red, toolbar-color-orange
 */-->
 
-<div class="toolbar">
-<button id="alertBtn" class="btn btn-default">Alert</button>
-</div>
+<div class="toolbar"></div>
 
 <table class="table" id = "fresh-table">
 <thead>
@@ -243,7 +241,6 @@ th:text="${#messages.msg('words.description')}" data-hidden="true" data-th-hidde
 <script type="text/javascript" src="https://demos.creative-tim.com/fresh-bootstrap-table/assets/js/bootstrap-table.js"></script>
 <script th:inline="javascript">
 var $table = $('#fresh-table'),
-$alertBtn = $('#alertBtn'),
 full_screen = false;
 $().ready(function () {
 $table.bootstrapTable({
@@ -289,9 +286,6 @@ values: [row.id]
 document.location.href="http://excursium.me/events/delete?id="+row.id;
 }
 };
-$alertBtn.click(function () {
-alert("You pressed on Alert");
-});
 });
 function operateFormatter(value, row, index) {
 return [
