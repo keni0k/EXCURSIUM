@@ -465,6 +465,7 @@
                 }
                 if (inp.value[inp.value.length-1]==='-')
                     inp.value = inp.value.substring(0, inp.value.length - 1);
+                else inp.value += 'null';
                 inp.value += ';';
             });
         }
@@ -483,8 +484,8 @@
                 }
                 if (inp.value[inp.value.length-1]===',')
                     inp.value = inp.value.substring(0, inp.value.length - 1);
+                else inp.value += 'null';
                 inp.value += ';';
-                // console.log(";");
             }
         }
         else if (type === 2) {
@@ -510,6 +511,7 @@
                     }
                 }
             }
+            if (el.childElementCount===0) inp.value+='null';
         }
 
         $radio0.remove();
@@ -526,8 +528,8 @@
         $('#photos').val(st);
 
         inp.value = inp.value.substring(0, inp.value.length - 1);
-        inp.value = inp.value.split("null").join("");
-        // console.log("inp.value: "+inp.value);
+        //inp.value = inp.value.split("null").join("");
+        console.log("inp.value: "+inp.value);
         $("#upload_input").remove();
         $('#sbmt').click();
     }

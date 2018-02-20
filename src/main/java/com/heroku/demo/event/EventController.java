@@ -430,7 +430,8 @@ public class EventController {
                 for (i = 0; i<7; i++) {
                     if (random.nextInt(2) == 0) {
                         if (i != 6)
-                            event.setActiveDates(event.getActiveDates() + ';');
+                            event.setActiveDates(event.getActiveDates() + "null;");
+                        else event.setActiveDates(event.getActiveDates() + "null");
                     } else {
                         String suffix = i != 6 ? ";" : "";
                         event.setActiveDates(event.getActiveDates() + random.nextInt(48) + '-' + random.nextInt(48) + suffix);
@@ -441,6 +442,7 @@ public class EventController {
                 for (i = 0; i<7; i++) {
                     if (random.nextInt(3) != 0)
                         addTime(random, event, random.nextInt(8));
+                    else event.setActiveDates(event.getActiveDates() + "null");
                     if (i!=6)
                         event.setActiveDates(event.getActiveDates() + ';');
                 }
@@ -455,6 +457,7 @@ public class EventController {
                     if (i!=dates-1)
                         event.setActiveDates(event.getActiveDates() + ";");
                 }
+                if (dates==0) event.setActiveDates("null");
             }
 
             eventService.editEvent(event);
