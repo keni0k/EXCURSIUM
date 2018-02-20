@@ -530,6 +530,13 @@
         inp.value = inp.value.substring(0, inp.value.length - 1);
         inp.value = inp.value.split("null").join("");
 
+        var $usersCount = $('#users_count'); var $price = $('#price');  var $duration = $('#duration');
+        if ($usersCount.val()===null)
+            $usersCount.val(-1);
+        if ($price.val()===null)
+            $price.val(-1);
+        if ($duration.val()===null)
+            $duration.val(-1);
         // console.log("inp.value: "+inp.value);
         $("#upload_input").remove();
         $('#sbmt').click();

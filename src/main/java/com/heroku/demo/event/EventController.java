@@ -111,6 +111,17 @@ public class EventController {
         return "redirect:/events/event?id="+event.getId();
     }
 
+    @RequestMapping(value = "/edit")
+    public String eventEdit(ModelMap model, Principal principal, @RequestParam(value = "id") long id){
+        Person person = utils.getPerson(principal);
+        if (person!=null) {
+            Event event = eventService.getById(id);
+            if (event.getGuideId()==person.getId())
+                return eventAddAgain(model, event, "", principal, findErrors(event));
+        }
+        return "redirect:/login";
+    }
+
     private String eventAddAgain(ModelMap model, Event event, String errorData, Principal principal, Errors errors) {
         model.addAttribute("inputEvent", event);
         model.addAttribute("photos", photoService.getByEventId(event.getId()));
