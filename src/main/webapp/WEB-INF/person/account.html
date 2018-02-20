@@ -252,7 +252,12 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                         <div class="clearfix"></div>
                                         <div class="left">
                                             <a th:href="@{/orders/confirm(id=${order.getId()})}"
-                                               data-title="Confirm order?" data-toggle="confirmation"
+                                               data-btn-ok-label="Подтвердить" data-btn-ok-icon="glyphicon glyphicon-share-alt"
+                                               data-btn-ok-class="btn-success"
+                                               data-btn-cancel-label="Отмена" data-btn-cancel-icon="glyphicon glyphicon-ban-circle"
+                                               data-btn-cancel-class="btn-danger"
+                                               data-title="Подтвердить?" data-content="Отменить это действе будет невозможно!"
+                                               data-toggle="confirmation"
                                                class="waves-effect" style="display: inline">Подтвердить
                                                 заказ<i
                                                         class="fa fa-handshake-o ml-05"></i></a>
@@ -389,10 +394,15 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                                 class="fa fa-photo ml-05"></i>
                                         </a>
                                         <a rel="tooltip" title="Edit" th:href="@{/events/edit(id=${event.getId()})}"
-                                           style="margin-left: 10px; margin-right: 2px; margin-top: 8px;">
+                                            style="margin-left: 10px; margin-right: 2px; margin-top: 8px;">
                                             <i class="fa fa-edit" style="font-size: 20px;"></i>
                                         </a>
-                                        <a rel="tooltip" title="Delete" role="button"
+                                        <a rel="tooltip" data-btn-ok-label="Подтвердить" data-btn-ok-icon="glyphicon glyphicon-share-alt"
+                                           data-btn-ok-class="btn-success"
+                                           data-btn-cancel-label="Отмена" data-btn-cancel-icon="glyphicon glyphicon-ban-circle"
+                                           data-btn-cancel-class="btn-danger"
+                                           data-title="Удалить?" data-content="Отменить это действе будет невозможно!"
+                                           data-toggle="confirmation" th:href="@{/events/delete(id=${event.getId()})}"
                                            style="margin-left: 10px; margin-top: 7px;">
                                             <i class="fa fa-trash" style="font-size: 20px;"></i>
                                         </a>
