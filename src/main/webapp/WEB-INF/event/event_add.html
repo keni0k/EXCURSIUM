@@ -54,7 +54,8 @@
                 <form th:object="${inputEvent}" method="POST" th:action="${isEdit?'/events/edit':'/event/add'}" enctype="multipart/form-data"
                       autocomplete="off">
 
-                    <input th:if="${isEdit}" name="id" th:value="${inputEvent.getId()}" style="display: none"/>
+                    <!--/*@thymesVar id="id" type="java.lang.Integer"*/-->
+                    <input th:if="${isEdit}" name="id" th:value="${id}" style="display: none"/>
                     <div class="panel panel-default">
                         <div class="panel-heading" th:text="${#messages.msg('words.name')}">
                             Название

@@ -166,6 +166,7 @@ public class EventController {
 
     private String eventAddAgain(ModelMap model, Event event, MessageUtil message, Principal principal, Errors errors) {
         model.addAttribute("inputEvent", event);
+        model.addAttribute("id", event.getId());
         model.addAttribute("photos", photoService.getByEventId(event.getId()));
         model.addAttribute("errors", errors);
         model.addAttribute("message", message);
