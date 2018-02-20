@@ -258,7 +258,7 @@
                             <div class="panel-body">
                                 <div class="input-group">
                                     <input name="usersCount" id="users_count" type="number" class="form-control"
-                                           min="1" max="100"
+                                           min="1" max="100" required=""
                                            th:value="${inputEvent.getUsersCount()>0}?${inputEvent.getUsersCount()}"/>
                                     <span class="input-group-addon">человек</span>
                                 </div>
@@ -274,7 +274,7 @@
                             </div>
                             <div class="panel-body">
                                 <div class="input-group">
-                                    <input name="duration" id="duration" type="number" class="form-control"
+                                    <input name="duration" id="duration" type="number" class="form-control" required=""
                                            th:value="${inputEvent.getDuration()>0}?${inputEvent.getDuration()}" min="1"
                                            max="240"/>
                                     <span class="input-group-addon"
@@ -329,7 +329,7 @@
                             <div class="panel-body">
                                 <div class="input-group">
                                     <input name="price" id="price" type="number" class="form-control"
-                                           min="100" max="100000"
+                                           min="100" max="100000" required=""
                                            th:value="${inputEvent.getPrice()>0}?${inputEvent.getPrice()}"/>
                                     <span class="input-group-addon">&#8381;</span>
                                 </div>
@@ -530,14 +530,7 @@
         inp.value = inp.value.substring(0, inp.value.length - 1);
         inp.value = inp.value.split("null").join("");
 
-        var $usersCount = $('#users_count'); var $price = $('#price');  var $duration = $('#duration');
-        if ($usersCount.val()==="")
-            $usersCount.val(-1);
-        if ($price.val()===null)
-            $price.val(-1);
-        if ($duration.val()===null)
-            $duration.val(-1);
-        console.log("UCVAL: "+$usersCount.val())
+        console.log("UCVAL: "+$usersCount.val());
         // console.log("inp.value: "+inp.value);
         $("#upload_input").remove();
         $('#sbmt').click();
