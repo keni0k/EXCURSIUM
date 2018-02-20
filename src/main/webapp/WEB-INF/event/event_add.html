@@ -34,6 +34,7 @@
 <!--/*@thymesVar id="inputEvent" type="com.heroku.demo.event.Event"*/-->
 <!--/*@thymesVar id="message" type="com.heroku.demo.utils.MessageUtil"*/-->
 <!--/*@thymesVar id="errors" type="com.heroku.demo.utils.Errors"*/-->
+<!--/*@thymesVar id="isEdit" type="java.lang.Boolean"*/-->
 <div class="content"
      th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}, lang = ${#locale.getLanguage().toString()=='en'?1:0}">
     <div th:replace="fragments/header :: header"></div>
@@ -629,11 +630,9 @@
             setimage();
         });
 
-        function(){(function($){
-            $('[data-toggle=confirmation]').confirmation({
-                rootSelector: '[data-toggle=confirmation]'
-            });
-        })(jQuery);
+        $('[data-toggle=confirmation]').confirmation({
+            rootSelector: '[data-toggle=confirmation]'
+        });
 
         var container = document.getElementById("result");
         var sort = Sortable.create(container, {
