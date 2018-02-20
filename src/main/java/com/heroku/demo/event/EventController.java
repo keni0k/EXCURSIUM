@@ -441,7 +441,7 @@ public class EventController {
             if (type==1){
                 for (i = 0; i<7; i++) {
                     if (random.nextInt(3) != 0)
-                        addTime(random, event, random.nextInt(8));
+                        addTime(random, event, random.nextInt(7)+1);
                     else event.setActiveDates(event.getActiveDates() + "null");
                     if (i!=6)
                         event.setActiveDates(event.getActiveDates() + ';');
