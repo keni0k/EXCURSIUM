@@ -42,6 +42,9 @@
         .card-inverse {
             display: block;
         }
+        .bootstrap-select.btn-group:not(.input-group-btn), .bootstrap-select.btn-group[class*="col-"]{display: grid;}
+        input[type=text]{height: 0.5rem;}
+
     </style>
 </head>
 <body style="background-color: #f9f9f9;">
@@ -58,8 +61,8 @@
             <form action="/events/list" class="welcome-search-form">
                 <div class="welcome-search-control">
                     <select class="selectpicker form-control" data-live-search="true"
-                            name="country_and_city" style="display: grid;">
-                        <option value="">Куда вы собтаетесь?</option>
+                            name="country_and_city">
+                        <option value="">Куда вы собираетесь?</option>
                         <!--/*@thymesVar id="utils" type="com.heroku.demo.utils.UtilsForWeb"*/-->
                         <th:block th:each="j : ${#numbers.sequence(0, utils.getCountriesCount()-1)}">
                             <option th:each="i : ${#numbers.sequence(0, utils.getCitiesCount(j)-1)}"
