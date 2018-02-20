@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
+import static com.heroku.demo.utils.Consts.PERSON_ADMIN;
 import static com.heroku.demo.utils.Utils.localeToLang;
 
 @Controller
@@ -137,9 +138,14 @@ public class EventController {
                               @RequestParam(value = "words", required = false) String words,
                               Locale locale, Principal principal) {
         Event e = eventService.getById(id);
-        e.setType(Consts.EXCURSION_DELETED);
-        eventService.editEvent(e);
-        return events(model, null, priceUp, priceDown, category, null, null, words, locale, principal);
+        Person p = utils.getPerson(principal);
+        if (e!=null && p!=null && (e.getGuideId()==p.getId()||p.getType()== PERSON_ADMIN)) {
+            e.setType(Consts.EXCURSION_DELETED);
+            eventService.editEvent(e);
+        }
+        if (p!=null && p.getType()==PERSON_ADMIN)
+            return events(model, null, priceUp, priceDown, category, null, null, words, locale, principal);
+        else return "redirect:/users/account";
     }
 
     @RequestMapping(value = "/event", method = RequestMethod.GET)
