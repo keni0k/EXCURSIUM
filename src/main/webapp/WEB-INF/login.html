@@ -10,8 +10,8 @@ xmlns:th="http://www.thymeleaf.org">
 <meta name="keywords" content="excursium"/>
 
 <link rel="stylesheet" type="text/css" href="../resources/css/footer.css"/>
-<link rel="stylesheet" href="../resources/libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>
-<link rel="stylesheet" href="../resources/libs/bootstrap-select/css/bootstrap-select.css"/>
+<!--<link rel="stylesheet" href="../resources/libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>-->
+<!--<link rel="stylesheet" href="../resources/libs/bootstrap-select/css/bootstrap-select.css"/>-->
 
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
@@ -22,12 +22,6 @@ xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" type="text/css" href="../resources/css/styles.css"/>
 <link rel="stylesheet" href="../resources/css/mycards.css"/>
 <link rel="stylesheet" href="../resources/css/media.css"/>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
-
-    <script src='https://www.google.com/recaptcha/api.js'></script>
 
 <title th:text="${#messages.msg('titles.login')}">Авторизация</title>
 
@@ -98,5 +92,9 @@ class="btn btn-lg btn-primary btn-block"/>
 </div>
 </div>
 </div>
-<div th:replace="fragments/footer :: footer"></div></body>
+<div th:replace="fragments/footer :: footer"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+</body>
 </html>

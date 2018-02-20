@@ -30,7 +30,6 @@ xmlns:th="http://www.thymeleaf.org">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-<link rel="stylesheet" href="http://bootstraptema.ru/plugins/2015/bootstrap3/bootstrap.min.css"/>
 <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'/>
 <link href="https://demos.creative-tim.com/fresh-bootstrap-table/assets/css/fresh-bootstrap-table.css" rel="stylesheet"/>
     <link rel="stylesheet" href="http://bootstraptema.ru/plugins/font-awesome/4-4-0/font-awesome.min.css"/>
@@ -41,7 +40,6 @@ xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" href="../../resources/css/mycards.css"/>
 <link rel="stylesheet" href="../../resources/css/media.css"/>
 <link rel="stylesheet" type="text/css" href="../../resources/css/styles.css"/>
-<link rel="stylesheet" href="../../resources/libs/bootstrap-select/css/bootstrap-select.css"/>
 
 </head>
 <body style="background-color: #f9f9f9;" th:with="price_up=${#httpServletRequest.getParameter('price_up')},price_down=${#httpServletRequest.getParameter('price_down')},
@@ -230,13 +228,6 @@ th:text="${#messages.msg('words.description')}" data-hidden="true" data-th-hidde
 <td th:text="${event.type}">Some text</td>
 <td th:text="${event.rate}">Some text</td>
 <td></td>
-<!--/*<td>
-<a th:href="@{/events/moderation(id=${event.id},price_up=${price_up},price_down=${price_down},category=${category}, words=${words}, sort_by=${sort_by})}"><img
-src="../resources/img/icons/edit.png"/></a></td>
-<td>
-<a th:href="@{/events/delete(id=${event.id},price_up=${price_up},price_down=${price_down},category=${category}, words=${words}, sort_by=${sort_by})}"><img
-src="../resources/img/icons/del.png"/></a>
-</td>*/-->
 </tr>
 </tbody>
 </table>
@@ -249,7 +240,6 @@ src="../resources/img/icons/del.png"/></a>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
-
 <script type="text/javascript" src="https://demos.creative-tim.com/fresh-bootstrap-table/assets/js/bootstrap-table.js"></script>
 <script th:inline="javascript">
 var $table = $('#fresh-table'),
