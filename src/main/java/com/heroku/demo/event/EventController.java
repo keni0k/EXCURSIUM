@@ -395,15 +395,16 @@ public class EventController {
         }
     }
 
-    private void setSmallData(Event event){
+    private void setSmallData(Event event) {
         String txt = event.getDescription();
-        int i;
-        for (i = 0; i < 150; i++) {
-            String substr = txt.substring(150 - i, 150);
-            if (substr.indexOf('.') != -1 || substr.indexOf('!') != -1 || substr.indexOf('?') != -1) break;
+        if (txt.length() > 150) {
+            int i;
+            for (i = 0; i < 150; i++) {
+                String substr = txt.substring(150 - i, 150);
+                if (substr.indexOf('.') != -1 || substr.indexOf('!') != -1 || substr.indexOf('?') != -1) break;
+            }
+            if (i != 150 && i < 70) event.setSmallData(txt.substring(0, 150 - i + 1));
+            else event.setSmallData(txt.substring(0, 147) + '…');
         }
-        if (i != 150 && i < 70) event.setSmallData(txt.substring(0, 150 - i + 1));
-        else event.setSmallData(txt.substring(0, 147) + '…');
     }
-
 }
