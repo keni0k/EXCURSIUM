@@ -137,7 +137,7 @@ public class EventController {
                               @RequestParam(value = "words", required = false) String words,
                               Locale locale, Principal principal) {
         Event e = eventService.getById(id);
-        e.setType(Consts.EXCURSION_BLOCKED);
+        e.setType(Consts.EXCURSION_DELETED);
         eventService.editEvent(e);
         return events(model, null, priceUp, priceDown, category, null, null, words, locale, principal);
     }

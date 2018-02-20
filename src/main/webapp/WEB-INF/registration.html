@@ -8,15 +8,11 @@ xmlns:th="http://www.thymeleaf.org">
 <meta name="author" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="keywords" content="excursium"/>
-
 <link rel="stylesheet" type="text/css" href="../resources/css/footer.css"/>
-
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-
 <link rel="icon" href="../resources/img/icon.ico" type="image/x-icon"/>
 <link rel="shortcut icon" href="../resources/img/icon.ico" type="image/x-icon"/>
-
 <link rel="stylesheet" type="text/css" href="../resources/css/styles.css"/>
 <link rel="stylesheet" href="../resources/css/mycards.css"/>
 <link rel="stylesheet" href="../resources/css/media.css"/>
@@ -54,7 +50,7 @@ th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#http
 enctype="multipart/form-data">
 <br/>
 <div class="row">
-<div class="col-xs-12 col-md-6">
+<div class="col-xs-12 col-sm-6">
 <div class="input-group">
 <span class="input-group-addon"
 th:text="${#messages.msg('words.first_name')} + ' *'">Имя</span>
@@ -63,10 +59,10 @@ th:value="${insertPerson.getFirstName()}" placeholder="Имя" aria-label="Им�
 required=""/>
 </div>
 </div>
-<div class="visible-sm-block visible-xs-block col-xs-12">
+<div class="visible-xs-block col-xs-12">
 <br/>
 </div>
-<div class="col-xs-12 col-md-6">
+<div class="col-xs-12 col-sm-6">
 <div class="input-group">
 <span class="input-group-addon"
 th:text="${#messages.msg('words.last_name')} + ' *'">Фамилия</span>
@@ -79,7 +75,7 @@ aria-label="Фамилия"/>
 </div>
 <br/>
 <div class="row">
-<div class="col-xs-12 col-md-6">
+<div class="col-xs-12 col-sm-6">
 <div class="input-group">
 <span class="input-group-addon">Email *</span>
 <input name="email" id="email" type="email" class="form-control"
@@ -95,10 +91,10 @@ th:text="${#messages.msg('error.user.email.valid')}" th:class="'error'">Name
 Error</label>
 </div>
 </div>
-<div class="visible-sm-block visible-xs-block col-xs-12">
+<div class="visible-xs-block col-xs-12">
 <br/>
 </div>
-<div class="col-xs-12 col-md-6">
+<div class="col-xs-12 col-sm-6">
 <div class="input-group">
 <span class="input-group-addon"
 th:text="${#messages.msg('words.login')} + ' *'">Логин</span>
@@ -116,7 +112,7 @@ Error</label>
 </div>
 <br/>
 <div class="row">
-<div class="col-xs-12 col-md-6">
+<div class="col-xs-12 col-sm-6">
 <div class="input-group">
 <span class="input-group-addon"
 th:text="${#messages.msg('words.password')} + ' *'">Пароль</span>
@@ -128,10 +124,10 @@ th:class="'error'">Name Error</label>
 <!--/*<label for="pass" th:if="${#fields.hasErrors('pass')}" th:text="${#messages.msg('error.user.pass')}" th:class="'error'">Name Error</label>*/-->
 </div>
 </div>
-<div class="visible-sm-block visible-xs-block col-xs-12">
+<div class="visible-xs-block col-xs-12">
 <br/>
 </div>
-<div class="col-xs-12 col-md-6">
+<div class="col-xs-12 col-sm-6">
 <div class="input-group">
 <span class="input-group-addon"
 th:text="${#messages.msg('words.password_again')} + ' *'">Повторите пароль</span>
@@ -184,8 +180,6 @@ th:text="${#messages.msg('titles.registration')}">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="../resources/js/maskedinput.min.js"></script>
-<script>$(document).ready(function () {
-$("#phone_number").mask("+7 (999) 999-9999");
-});</script>
+<script>$(document).ready(function () {$("#phone_number").mask("+7 (999) 999-9999");});</script>
 </body>
 </html>

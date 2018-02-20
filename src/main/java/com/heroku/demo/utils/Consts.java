@@ -5,6 +5,7 @@ public class Consts {
     public static final int EXCURSION_MODERATION = -3;
     public static final int EXCURSION_MODER_FAULT = -2;
     public static final int EXCURSION_BLOCKED = -1;
+    public static final int EXCURSION_DELETED = 9;
     public static final int EXCURSION_DISABLED = 0;
     public static final int EXCURSION_ACTIVE = 1;
 

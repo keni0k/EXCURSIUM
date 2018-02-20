@@ -2,12 +2,14 @@ package com.heroku.demo.event;
 
 import com.heroku.demo.photo.Photo;
 import com.heroku.demo.photo.PhotoServiceImpl;
-import com.heroku.demo.utils.Consts;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.heroku.demo.utils.Consts.EXCURSION_ACTIVE;
+import static com.heroku.demo.utils.Consts.EXCURSION_DELETED;
 
 public class EventServiceImpl implements EventService {
 
@@ -74,7 +76,7 @@ public class EventServiceImpl implements EventService {
         ListEvents copy = new ListEvents();
         for (Event aList : list) {
             if ((aList.getCountry()==country || country==-1) && (aList.getCity()==city || city==-1))
-            if (((aList.getCategory() == category) || (category == -1)) && ((aList.getLanguage() == language) || isAllLang) && (aList.getType() == Consts.EXCURSION_ACTIVE || isAll)) {
+            if (((aList.getCategory() == category) || (category == -1)) && ((aList.getLanguage() == language) || isAllLang) && (aList.getType() == EXCURSION_ACTIVE || isAll)) {
                 if ((aList.getPrice() >= priceDown) && (aList.getPrice() <= priceUp)) {
 
                     List<Photo> photos = photoService.getByEventId(aList.getId());
@@ -112,7 +114,7 @@ public class EventServiceImpl implements EventService {
         List<Event> eventList = new ArrayList<>();
         List<Event> copy = getAll();
         for (Event event:copy) {
-            if (event.getGuideId()==guideId) {
+            if (event.getGuideId()==guideId && event.getType()!=EXCURSION_DELETED) {
                 List<Photo> photos = photoService.getByEventId(event.getId());
                 if (photos != null)
                     for (Photo p:photos) {
@@ -128,7 +130,7 @@ public class EventServiceImpl implements EventService {
         List<Event> list = getAll();
         int k = 0;
         for (Event e:list) {
-            if (e.getCountry()==country && e.getCity()==city && e.getLanguage()==language && e.getType()==Consts.EXCURSION_ACTIVE)
+            if (e.getCountry()==country && e.getCity()==city && e.getLanguage()==language && e.getType()==EXCURSION_ACTIVE)
                 k++;
         }
         return k;
@@ -138,7 +140,7 @@ public class EventServiceImpl implements EventService {
         List<Event> list = getAll();
         int k = 0;
         for (Event e:list) {
-            if (e.getCountry()==country && e.getLanguage()==language && e.getType()==Consts.EXCURSION_ACTIVE)
+            if (e.getCountry()==country && e.getLanguage()==language && e.getType()== EXCURSION_ACTIVE)
                 k++;
         }
         return k;
