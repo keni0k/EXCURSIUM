@@ -168,7 +168,7 @@
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                     <span> - </span>
-                                    <select class="my-sp form-control" th:with="opt = arrI.substring(0,arrI.indexOf('-'))">
+                                    <select class="my-sp form-control" th:with="opt = arrI.substring(arrI.indexOf('-')+1, arrI.length()-1)">
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                 </th:block>
@@ -182,7 +182,7 @@
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                     <span> - </span>
-                                    <select class="my-sp form-control" th:with="opt = arrI.substring(0,arrI.indexOf('-'))">
+                                    <select class="my-sp form-control" th:with="opt = arrI.substring(arrI.indexOf('-')+1, arrI.length()-1)">
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                 </th:block>
@@ -195,7 +195,7 @@
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                     <span> - </span>
-                                    <select class="my-sp form-control" th:with="opt = arrI.substring(0,arrI.indexOf('-'))">
+                                    <select class="my-sp form-control" th:with="opt = arrI.substring(arrI.indexOf('-')+1, arrI.length()-1)">
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                 </th:block>
@@ -208,7 +208,7 @@
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                     <span> - </span>
-                                    <select class="my-sp form-control" th:with="opt = arrI.substring(0,arrI.indexOf('-'))">
+                                    <select class="my-sp form-control" th:with="opt = arrI.substring(arrI.indexOf('-')+1, arrI.length()-1)">
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                 </th:block>
@@ -221,7 +221,7 @@
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                     <span> - </span>
-                                    <select class="my-sp form-control" th:with="opt = arrI.substring(0,arrI.indexOf('-'))">
+                                    <select class="my-sp form-control" th:with="opt = arrI.substring(arrI.indexOf('-')+1, arrI.length()-1)">
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                 </th:block>
@@ -233,7 +233,7 @@
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                     <span> - </span>
-                                    <select class="my-sp form-control" th:with="opt = arrI.substring(0,arrI.indexOf('-'))">
+                                    <select class="my-sp form-control" th:with="opt = arrI.substring(arrI.indexOf('-')+1, arrI.length()-1)">
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                 </th:block>
@@ -245,7 +245,7 @@
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                     <span> - </span>
-                                    <select class="my-sp form-control" th:with="opt = arrI.substring(0,arrI.indexOf('-'))">
+                                    <select class="my-sp form-control" th:with="opt = arrI.substring(arrI.indexOf('-')+1, arrI.length()-1)">
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                 </th:block>
@@ -327,7 +327,7 @@
                                                 <span class="input-group-addon w-a day-span">
                                                     <span class="glyphicon glyphicon-calendar"></span>
                                                 </span>
-                                                <select class="my-sp form-control" style="border-radius: 4px;width: auto;"><th:block th:replace="fragments/select :: times"></th:block></select>
+                                                <select class="my-sp form-control" style="border-radius: 4px;width: auto;" th:with="opt = ${date.substring(date.indexOf(':')+1,date.length()-1)}"><th:block th:replace="fragments/select :: times"></th:block></select>
                                             </div>
                                         </div>
                                     </div>
