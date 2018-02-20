@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
+import static com.heroku.demo.utils.Consts.EXCURSION_ACTIVE;
 import static com.heroku.demo.utils.Consts.PERSON_ADMIN;
 import static com.heroku.demo.utils.Utils.localeToLang;
 
@@ -97,7 +98,30 @@ public class EventController {
         }
 
         eventService.addEvent(event);
-        logger.info("ID1: "+event.getId());
+        for (int i = 0; i<tokens.length; i++) {
+            Photo photo = photoService.getByToken(tokens[i]);
+            if (photo != null) {
+                photo.setEventId(event.getId());
+                photo.setNumber(i);
+                photoService.editPhoto(photo);
+            }
+        }
+        if (errors.isErrors()) return eventAddAgain(modelMap, event, new MessageUtil("warning", messageSource.getMessage("error.event.add", null, locale)), principal, errors);
+        return "redirect:/events/event?id="+event.getId();
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public String editEvent(@ModelAttribute("inputEvent") @Valid Event event,
+                              @RequestParam(value = "photos") String photoTokens,
+                              @RequestParam(value = "city_and_country", required = false) String cityAndCountry,
+                              ModelMap modelMap, Principal principal, Locale locale) {
+        event.setCountryAndCity(cityAndCountry);
+        event.setType(Consts.EXCURSION_MODERATION);
+        String[] tokens = photoTokens.split(";");
+        setSmallData(event);
+        Errors errors = findErrors(event);
+
+        eventService.editEvent(event);
         for (int i = 0; i<tokens.length; i++) {
             Photo photo = photoService.getByToken(tokens[i]);
             if (photo != null) {
@@ -153,11 +177,16 @@ public class EventController {
 
     @RequestMapping(value = "/event", method = RequestMethod.GET)
     public String event(ModelMap model, @RequestParam("id") int id, Principal principal) {
-        model.addAttribute("event", eventService.getById(id));
-        model.addAttribute("reviews", reviewService.getByEvent(id));
-        model.addAttribute("utils", new UtilsForWeb());
-        model.addAttribute("person", utils.getPerson(principal));
-        return "event/event";
+        Event e = eventService.getById(id);
+        Person p = utils.getPerson(principal);
+        if (e.getType()==EXCURSION_ACTIVE || (p!=null && e.getGuideId()==p.getId())) {
+            model.addAttribute("event", e);
+            model.addAttribute("reviews", reviewService.getByEvent(id));
+            model.addAttribute("utils", new UtilsForWeb());
+            model.addAttribute("person", utils.getPerson(principal));
+            return "event/event";
+        }
+        return "redirect:/users/login";
     }
 
     @RequestMapping(value = "/cities", method = RequestMethod.GET)
