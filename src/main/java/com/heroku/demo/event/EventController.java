@@ -9,6 +9,7 @@ import com.heroku.demo.photo.PhotoServiceImpl;
 import com.heroku.demo.review.ReviewRepository;
 import com.heroku.demo.review.ReviewServiceImpl;
 import com.heroku.demo.utils.Consts;
+import com.heroku.demo.utils.Errors;
 import com.heroku.demo.utils.Utils;
 import com.heroku.demo.utils.UtilsForWeb;
 import org.joda.time.LocalTime;
@@ -67,13 +68,15 @@ public class EventController {
     public String eventAdd(ModelMap model, Principal principal) {
         model.addAttribute("inputEvent", new Event());
         model.addAttribute("utils", new UtilsForWeb());
+        model.addAttribute("photos", null);
+        model.addAttribute("errors", new Errors(false));
         model.addAttribute("person", utils.getPerson(principal));
         return "event/event_add";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String insertEvent(@ModelAttribute("inputEvent") @Valid Event event,
-                              BindingResult result, @RequestParam(value = "photos") String photoTokens,
+                              @RequestParam(value = "photos") String photoTokens,
                               @RequestParam(value = "city_and_country", required = false) String cityAndCountry,
                               ModelMap modelMap, Principal principal, Locale locale) {
         event.setCountryAndCity(cityAndCountry);
@@ -83,14 +86,15 @@ public class EventController {
         event.setType(Consts.EXCURSION_MODERATION);
         String[] tokens = photoTokens.split(";");
         setSmallData(event);
+        Errors errors = findErrors(event);
 
         Person person = utils.getPerson(principal);
-        if (person!=null && !result.hasErrors()) {
+        if (person!=null) {
             event.setFullNameOfGuide(person.getFullName());
             event.setPhotoOfGuide(person.getImageToken());
             event.setGuideId(person.getId());
         } else {
-            return eventAddAgain(modelMap, event, messageSource.getMessage("error.event.add", null, locale), principal);
+            return "redirect:/login";
         }
 
         eventService.addEvent(event);
@@ -103,13 +107,14 @@ public class EventController {
                 photoService.editPhoto(photo);
             }
         }
-        if (event.getDescription().length()<150) return eventAddAgain(modelMap, event, messageSource.getMessage("error.event.add", null, locale), principal);
+        if (errors.isErrors()) return eventAddAgain(modelMap, event, messageSource.getMessage("error.event.add", null, locale), principal, errors);
         return "redirect:/events/event?id="+event.getId();
     }
 
-    private String eventAddAgain(ModelMap model, Event event, String errorData, Principal principal) {
+    private String eventAddAgain(ModelMap model, Event event, String errorData, Principal principal, Errors errors) {
         model.addAttribute("inputEvent", event);
-        //model.addAttribute("photos", photoService.getByEventId(event.getId()));
+        model.addAttribute("photos", photoService.getByEventId(event.getId()));
+        model.addAttribute("errors", errors);
         model.addAttribute("error_data", errorData);
         model.addAttribute("utils", new UtilsForWeb());
         model.addAttribute("person", utils.getPerson(principal));
@@ -397,14 +402,24 @@ public class EventController {
 
     private void setSmallData(Event event) {
         String txt = event.getDescription();
-        if (txt.length() > 150) {
+        if (txt.length() >= 150) {
             int i;
-            for (i = 0; i < 150; i++) {
-                String substr = txt.substring(150 - i, 150);
+            for (i = 1; i < 149; i++) {
+                String substr = txt.substring(149 - i, 149);
                 if (substr.indexOf('.') != -1 || substr.indexOf('!') != -1 || substr.indexOf('?') != -1) break;
             }
-            if (i != 150 && i < 70) event.setSmallData(txt.substring(0, 150 - i + 1));
-            else event.setSmallData(txt.substring(0, 147) + '…');
+            if (i != 149 && i < 70) event.setSmallData(txt.substring(0, 149 - i + 1));
+            else event.setSmallData(txt.substring(0, 148) + '…');
         }
+    }
+
+    private Errors findErrors(Event event){
+        boolean isN = event.getName().length()<10||event.getName().length()>60;
+        boolean isDesc = event.getDescription().length()<150;
+        boolean isPlace = event.getPlace().length()<5||event.getPlace().length()>100;
+        boolean isPrice = event.getPrice()<100||event.getPrice()>100000;
+        boolean isDur = event.getDuration()<1||event.getDuration()>240;
+        boolean isUC = event.getUsersCount()<1||event.getUsersCount()>100;
+        return new Errors(isN, isDesc, isPlace, isPrice, isDur, isUC);
     }
 }

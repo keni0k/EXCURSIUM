@@ -50,6 +50,7 @@
 <!--/*@thymesVar id="inputEvent" type="com.heroku.demo.event.Event"*/-->
 <!--/*@thymesVar id="message" type="com.heroku.demo.utils.MessageUtil"*/-->
 <!--/*@thymesVar id="error_data" type="java.lang.String"*/-->
+<!--/*@thymesVar id="errors" type="com.heroku.demo.utils.Errors"*/-->
 <div class="content"
      th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}, lang = ${#locale.getLanguage().toString()=='en'?1:0}">
     <div th:replace="fragments/header :: header"></div>
@@ -77,9 +78,9 @@
                         <div class="panel-body">
                             <input name="name" type="text" class="form-control" id="name"
                                    th:value="${inputEvent.getName()}" minlength="10" maxlength="35"/>
-                            <label for="name" th:if="${#fields.hasErrors('name')}"
-                                   th:text="${#messages.msg('error.event.name')}" th:class="'error'">Name
-                                Error</label>
+
+                            <label for="name" th:if="${errors.isName()}"
+                                   th:text="${#messages.msg('error.event.name')}" th:class="'error'">Name Error</label>
                         </div>
                     </div>
 
@@ -91,7 +92,7 @@
                             <textarea name="description" minlength="150" maxlength="1000" type="text"
                                       id="description" style="resize: vertical"
                                       class="form-control" th:text="${inputEvent.getDescription()}"></textarea>
-                            <label for="description" th:if="${#fields.hasErrors('description')}"
+                            <label for="description" th:if="${errors.isDescription()}"
                                    th:text="${#messages.msg('error.event.description')}" th:class="'error'">Description
                                 Error</label>
                         </div>
@@ -313,7 +314,7 @@
                                 <input name="place" id="place" type="text" class="form-control"
                                        minlength="5" maxlength="100"
                                        th:value="${inputEvent.getPlace()}?${inputEvent.getPlace()}"/>
-                                <label for="place" th:if="${#fields.hasErrors('place')}"
+                                <label for="place" th:if="${errors.isPlace()}"
                                        th:text="${#messages.msg('error.event.place')}" th:class="'error'">Place
                                     Error</label>
                             </div>
@@ -329,13 +330,13 @@
                                 <div class="input-group">
                                     <input name="price" id="price" type="number" class="form-control"
                                            min="100" max="100000"
-                                           th:value="${inputEvent.getPrice()}?${inputEvent.getPrice()}"/>
+                                           th:value="${inputEvent.getPrice()}?${inputEvent.getPrice()>0}?${inputEvent.getPrice()}"/>
                                     <span class="input-group-addon">&#8381;</span>
                                 </div>
                                 <b><p class="mb-0 mb-0 mt-05 f16" id="price-help" style="display: none;"><span
                                         id="our_price">100</span> рублей (15%) путешественники заплатят нам на сайте, а
                                     <span id="guide_price">600</span> рублей - вам на месте</p></b>
-                                <label for="price" th:if="${#fields.hasErrors('price')}"
+                                <label for="price" th:if="${errors.isPrice()}"
                                        th:text="${#messages.msg('error.event.price')}" th:class="'error'">Price
                                     Error</label>
                             </div>
@@ -366,7 +367,13 @@
                                    accept="image/jpeg,image/png" name="files[]" style="display:none;"
                                    id="upload_input"/>
                             <input type="text" name="photos" style="display:none;" id="photos"/>
-                            <div class="result" id="result"></div>
+                            <div class="result" id="result">
+                                <!--/*@thymesVar id="photos" type="java.util.List<com.heroku.demo.photo.Photo>"*/-->
+                                <div class="upload-img" th:if="${photos!=null}" th:each="photo : ${photos}">
+                                    <img th:src="${photo.getData()}" class="img-rounded"/>
+                                    <div class="closer" onclick="remove_img($(this));"></div>
+                                </div>
+                            </div>
                             <div id="add-photo" class="upload-img" draggable="false"
                                  style="cursor: auto;padding-top: 9%;">
                                 <input type="button" value="Добавить" class="btn btn-block" tabindex="9"
@@ -672,12 +679,12 @@
             if (txt.length < 150) $('#card-text').text(txt);
             else {
                 var i;
-                for (i = 0; i < 150; i++) {
-                    var substr = txt.substring(150 - i, 150);
+                for (i = 1; i < 149; i++) {
+                    var substr = txt.substring(149 - i, 149);
                     if (substr.indexOf('.') !== -1 || substr.indexOf('!') !== -1 || substr.indexOf('?') !== -1) break;
                 }
-                if (i !== 150 && i < 70) $('#card-text').text(txt.substring(0, 150 - i + 1));
-                else $('#card-text').text(txt.substring(0, 147) + '…');
+                if (i !== 149 && i < 70) $('#card-text').text(txt.substring(0, 149 - i + 1));
+                else $('#card-text').text(txt.substring(0, 148) + '…');
             }
         });
         $("#name").keyup(function () {

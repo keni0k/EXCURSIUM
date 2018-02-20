@@ -57,13 +57,13 @@ public class Event {
     }
 
 //    @Size(min=5, max=100)
-    private String place;
+    private String place = "";
 
     private int category=0;
 
     private int reviewsCount = 0;
 
-    private String time;
+    private String time = "";
 
 //    @Range(min = 1, max = 240)
     private int duration;
@@ -79,10 +79,10 @@ public class Event {
     private int language=0;
 
 //    @Range(min = 1, max = 100)
-    private int usersCount;
+    private int usersCount = -1;
 
 //    @Range(min = 100, max = 100000)
-    private int price;
+    private int price = -1;
 
 //    @Size(min=150, max=1000)
     private String description = "";
