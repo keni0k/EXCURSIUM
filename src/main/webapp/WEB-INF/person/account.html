@@ -26,32 +26,6 @@
     <link rel="stylesheet" href="../../resources/css/mycards.css"/>
     <link rel="stylesheet" href="../../resources/css/media.css"/>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
-    <script type="text/javascript"
-            src="../../resources/libs/bootstrap-confirmation/js/bootstrap-confirmation.min.js"></script>
-
-    <script th:inline="javascript">
-        /*<![CDATA[*/
-
-        function modalReview(id) {
-            document.getElementById('order_id').value = id;
-        }
-
-        function modalDispute(id) {
-            document.getElementById('order_id1').value = id;
-        }
-
-        $('#modalDispute').on('show.bs.modal', function (e) {
-            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
-
-            $('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>');
-        });
-
-        /*]]>*/
-    </script>
-
 </head>
 
 <body style="background-color: #f9f9f9;">
@@ -956,6 +930,31 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
     </div>
 </div>
 <div th:replace="fragments/footer :: footer"></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
+<script type="text/javascript" src="../../resources/libs/bootstrap-confirmation/js/bootstrap-confirmation.min.js"></script>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+
+    function modalReview(id) {
+        document.getElementById('order_id').value = id;
+    }
+
+    function modalDispute(id) {
+        document.getElementById('order_id1').value = id;
+    }
+
+    $('#modalDispute').on('show.bs.modal', function (e) {
+        $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+
+        $('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>');
+    });
+
+    /*]]>*/
+</script>
 <script type="text/javascript" src="../../resources/js/compiled.min.js"></script>
 <script type="text/javascript" src="../../resources/libs/popper/popper.js"></script>
 <!--/*Custom scripts*/-->
