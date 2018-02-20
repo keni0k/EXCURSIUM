@@ -22,16 +22,10 @@
 <link rel="icon" href="../../resources/img/icon.ico" type="image/x-icon"/>
 <link rel="shortcut icon" href="../../resources/img/icon.ico" type="image/x-icon"/>
 
-<link rel="stylesheet" href="../../resources/css/cards.css"/>
+<link rel="stylesheet" href="../../resources/css/mycards.css"/>
 <link rel="stylesheet" href="../../resources/css/media.css"/>
 <link rel="stylesheet" type="text/css" href="../../resources/css/styles.css"/>
     <link rel="stylesheet" href="../../resources/libs/bootstrap-select/css/bootstrap-select.css"/>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
-
-<script type="text/javascript" src="https://demos.creative-tim.com/fresh-bootstrap-table/assets/js/bootstrap-table.js"></script>
 </head>
 <body style="background-color: #f9f9f9;">
 <style>input[type=checkbox]{left: 130px;visibility: visible;}.fixed-table-toolbar .dropdown-menu {max-height: 600px;}.btn .btn-default.dropdown-toggle{padding: 0.8rem 1.5rem;} .fixed-table-toolbar .bars,.fixed-table-toolbar .search,.fixed-table-toolbar .columns {margin-top: 0; margin-bottom: 0}.pull-right .search>.form-control{padding-bottom: 0;margin-bottom: 5px;}</style>
@@ -205,6 +199,11 @@ placeholder="Город" required="" aria-label="Город"/>
 
 <div th:replace="fragments/footer :: footer"></div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
+<script type="text/javascript" src="https://demos.creative-tim.com/fresh-bootstrap-table/assets/js/bootstrap-table.js"></script>
+
 <script th:inline="javascript">
 var $table = $('#fresh-table'),
 $alertBtn = $('#alertBtn'),
@@ -267,7 +266,6 @@ alert("You pressed on Alert");
 
 });
 
-
 function operateFormatter(value, row, index) {
 return [
 '<a rel="tooltip" title="Like" class="table-action like" href="javascript:void(0)">',
@@ -281,8 +279,6 @@ return [
 '</a>'
 ].join('');
 }
-
-
 </script>
 </body>
 </html>

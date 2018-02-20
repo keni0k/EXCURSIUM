@@ -231,3 +231,6 @@ ol.carousel-indicators > li{background: #eee;border-color: #999;}
 .profile-avatar-span{font-size: medium;color: #000000;text-align:right;padding-top: 100px;margin: 2px 15px -80px auto;}
 
 .bw-0{border-width: 0!important;}
+
+/*.fresh-table[class*="full-color-"] .fixed-table-toolbar .btn, .fresh-table[class*="toolbar-color-"] .fixed-table-toolbar .btn{color:black;}*/
+/*.fresh-table[class*="full-color-"] .fixed-table-toolbar .btn .caret, .fresh-table[class*="toolbar-color-"] .fixed-table-toolbar .btn .caret{border-top-color:black;}*/
