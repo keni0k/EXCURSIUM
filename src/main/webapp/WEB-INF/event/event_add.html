@@ -531,12 +531,13 @@
         inp.value = inp.value.split("null").join("");
 
         var $usersCount = $('#users_count'); var $price = $('#price');  var $duration = $('#duration');
-        if ($usersCount.val()===null)
+        if ($usersCount.val()==="")
             $usersCount.val(-1);
         if ($price.val()===null)
             $price.val(-1);
         if ($duration.val()===null)
             $duration.val(-1);
+        console.log("UCVAL: "+$usersCount.val())
         // console.log("inp.value: "+inp.value);
         $("#upload_input").remove();
         $('#sbmt').click();
@@ -592,21 +593,9 @@
     }
 
     function radio(type) {
-        if (type === 0) {
-            $('#radio0').css('display', 'block');
-            $('#radio1').css('display', 'none');
-            $('#radio2').css('display', 'none');
-        }
-        if (type === 1) {
-            $('#radio0').css('display', 'none');
-            $('#radio1').css('display', 'block');
-            $('#radio2').css('display', 'none');
-        }
-        if (type === 2) {
-            $('#radio0').css('display', 'none');
-            $('#radio1').css('display', 'none');
-            $('#radio2').css('display', 'block');
-        }
+        if (type === 0) {$('#radio0').css('display', 'block');$('#radio1').css('display', 'none');$('#radio2').css('display', 'none');}
+        if (type === 1) {$('#radio0').css('display', 'none');$('#radio1').css('display', 'block');$('#radio2').css('display', 'none');}
+        if (type === 2) {$('#radio0').css('display', 'none');$('#radio1').css('display', 'none');$('#radio2').css('display', 'block');}
     }
 
     function setimage() { // функция загрузки на сервер
