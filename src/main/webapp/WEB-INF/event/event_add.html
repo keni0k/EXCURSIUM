@@ -360,8 +360,15 @@
                         </div>
                     </div>
 
-                    <a class="btn btn-default" th:text="${#messages.msg('words.submit')}"
-                       onclick="sbmt();">Отправить</a>
+                    <a th:if="${isEdit}" class="btn btn-default" th:text="${#messages.msg('words.submit')}"
+                       data-btn-ok-label="Удалить" data-btn-ok-icon="glyphicon glyphicon-share-alt"
+                       data-btn-ok-class="btn-success"
+                       data-btn-cancel-label="Отмена" data-btn-cancel-icon="glyphicon glyphicon-ban-circle"
+                       data-btn-cancel-class="btn-danger"
+                       data-title="Удалить?" data-content="Отменить это действе будет невозможно!"
+                       data-toggle="confirmation" onclick="sbmt();">Отправить</a>
+
+                    <a th:unless="${isEdit}" class="btn btn-default" th:text="${#messages.msg('words.submit')}" onclick="sbmt();">Отправить</a>
 
                     <button type="submit" value="Upload" style="display: none" id="sbmt">Отправить</button>
                 </form>
@@ -418,6 +425,7 @@
         src="../../resources/libs/datetimepicker/js/bower_components/moment/locale/ru.js"></script>
 <script type="text/javascript" src="../../resources/libs/datetimepicker/js/datetimepicker.min.js"></script>
 <script type="text/javascript" src="../../resources/js/Sortable.min.js"></script>
+<script type="text/javascript" src="../../resources/libs/bootstrap-confirmation/js/bootstrap-confirmation.min.js"></script>
 
 <script th:inline="javascript">
     /*<![CDATA[*/
@@ -620,6 +628,13 @@
         $("#upload_input").change(function () {
             setimage();
         });
+
+        function(){(function($){
+            $('[data-toggle=confirmation]').confirmation({
+                rootSelector: '[data-toggle=confirmation]'
+            });
+        })(jQuery);
+
         var container = document.getElementById("result");
         var sort = Sortable.create(container, {
             animation: 150,

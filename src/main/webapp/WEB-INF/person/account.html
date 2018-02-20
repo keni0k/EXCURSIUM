@@ -48,24 +48,10 @@ notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==c
 lang=${#locale.getLanguage().toString()=='en'?1:0}">
     <!--/*TODO isThisUserAccount*/-->
     <div th:replace="fragments/header :: header"></div>
-    <style>.pe:before {
-        width: 300px !important;
-        margin-left: -150px !important;
-    }
-
-    .nepe:before {
-        width: 620px !important;
-        margin-left: -310px !important;
-    }
-
-    .notify {
-        margin-top: 4px;
-        margin-bottom: 8px;
-    }
-
-    .pull-right {
-        margin-top: 3px;
-    }</style>
+    <style>.pe:before {width: 300px !important;margin-left: -150px !important;}
+    .nepe:before {width: 620px !important;margin-left: -310px !important;}
+    .notify {margin-top: 4px;margin-bottom: 8px;}
+    .pull-right {margin-top: 3px;}</style>
 
     <div class="container">
 
@@ -1040,12 +1026,12 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
     /*]]>*/
 </script>
 <script>
-    $(document).ready(function(){(function($){
-        $('[data-toggle=confirmation]').confirmation({
-        rootSelector: '[data-toggle=confirmation]'
-        // other options
-    });
-    })(jQuery);
+    $(document).ready(
+        function(){(function($){
+            $('[data-toggle=confirmation]').confirmation({
+                rootSelector: '[data-toggle=confirmation]'
+            });
+        })(jQuery);
     });
 
     // SideNav Initialization

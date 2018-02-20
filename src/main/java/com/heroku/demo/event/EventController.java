@@ -69,6 +69,7 @@ public class EventController {
         model.addAttribute("photos", null);
         model.addAttribute("errors", new Errors(false));
         model.addAttribute("person", utils.getPerson(principal));
+        model.addAttribute("isEdit", false);
         return "event/event_add";
     }
 
@@ -114,8 +115,10 @@ public class EventController {
         Person person = utils.getPerson(principal);
         if (person!=null) {
             Event event = eventService.getById(id);
-            if (event.getGuideId()==person.getId())
+            if (event.getGuideId()==person.getId()){
+                model.addAttribute("isEdit", true);
                 return eventAddAgain(model, event, null, principal, findErrors(event));
+            }
         }
         return "redirect:/users/login";
     }
