@@ -22,10 +22,6 @@ xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" type="text/css" href="../../resources/css/styles.css"/>
 <link rel="stylesheet" href="../../resources/css/cards.css"/>
 <link rel="stylesheet" href="../../resources/css/media.css"/>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
 <title>404</title>
 </head>
 <body style="background-color: #f9f9f9;">
@@ -39,6 +35,8 @@ th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#http
 </div>
 </div>
 <div th:replace="fragments/footer :: footer"></div>
-<script type="text/javascript" src="../../resources/js/compiled.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
 </body>
 </html>
