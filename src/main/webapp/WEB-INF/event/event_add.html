@@ -164,11 +164,11 @@
                             <div class="day-of-week" id="00">
                                 <b>Пн.</b><a class="add-time" id="0" onclick="addTime(0, 0);" th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[0]=='null':true}">Задать интервал времени</a>
                                 <th:block th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[0]!='null':false}" th:with="arrI = ${inputEvent.getActiveDatesArr()[0]}">
-                                    <select class="my-sp form-control" th:with="opt = arrI.substring(0,arrI.indexOf('-'))">
+                                    <select class="my-sp form-control" th:with="opt = ${arrI.substring(0,arrI.indexOf('-'))}">
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                     <span> - </span>
-                                    <select class="my-sp form-control" th:with="opt = arrI.substring(arrI.indexOf('-')+1, arrI.length()-1)">
+                                    <select class="my-sp form-control" th:with="opt = ${arrI.substring(arrI.indexOf('-')+1, arrI.length()-1)}">
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                 </th:block>
@@ -178,11 +178,11 @@
                                 <b>Вт.</b><a class="add-time" id="1" onclick="addTime(0, 1);" th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[1]=='null':true}">Задать интервал
                                 времени</a>
                                 <th:block th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[1]!='null':false}" th:with="arrI = ${inputEvent.getActiveDatesArr()[1]}">
-                                    <select class="my-sp form-control" th:with="opt = arrI.substring(0,arrI.indexOf('-'))">
+                                    <select class="my-sp form-control" th:with="opt = ${arrI.substring(0,arrI.indexOf('-'))}">
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                     <span> - </span>
-                                    <select class="my-sp form-control" th:with="opt = arrI.substring(arrI.indexOf('-')+1, arrI.length()-1)">
+                                    <select class="my-sp form-control" th:with="opt = ${arrI.substring(arrI.indexOf('-')+1, arrI.length()-1)}">
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                 </th:block>
@@ -191,11 +191,11 @@
                                 <b>Ср.</b><a class="add-time" id="2" onclick="addTime(0, 2);" th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[2]=='null':true}">Задать интервал
                                 времени</a>
                                 <th:block th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[2]!='null':false}" th:with="arrI = ${inputEvent.getActiveDatesArr()[2]}">
-                                    <select class="my-sp form-control" th:with="opt = arrI.substring(0,arrI.indexOf('-'))">
+                                    <select class="my-sp form-control" th:with="opt = ${arrI.substring(0,arrI.indexOf('-'))}">
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                     <span> - </span>
-                                    <select class="my-sp form-control" th:with="opt = arrI.substring(arrI.indexOf('-')+1, arrI.length()-1)">
+                                    <select class="my-sp form-control" th:with="opt = ${arrI.substring(arrI.indexOf('-')+1, arrI.length()-1)}">
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                 </th:block>
@@ -204,11 +204,11 @@
                                 <b>Чт.</b><a class="add-time" id="3" onclick="addTime(0, 3);" th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[3]=='null':true}">Задать интервал
                                 времени</a>
                                 <th:block th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[3]!='null':false}" th:with="arrI = ${inputEvent.getActiveDatesArr()[3]}">
-                                    <select class="my-sp form-control" th:with="opt = arrI.substring(0,arrI.indexOf('-'))">
+                                    <select class="my-sp form-control" th:with="opt = ${arrI.substring(0,arrI.indexOf('-'))}">
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                     <span> - </span>
-                                    <select class="my-sp form-control" th:with="opt = arrI.substring(arrI.indexOf('-')+1, arrI.length()-1)">
+                                    <select class="my-sp form-control" th:with="opt = ${arrI.substring(arrI.indexOf('-')+1, arrI.length()-1)}">
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                 </th:block>
@@ -217,11 +217,11 @@
                                 <b>Пт.</b><a class="add-time" id="4" onclick="addTime(0, 4);" th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[4]=='null':true}">Задать интервал
                                 времени</a>
                                 <th:block th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[4]!='null':false}" th:with="arrI = ${inputEvent.getActiveDatesArr()[4]}">
-                                    <select class="my-sp form-control" th:with="opt = arrI.substring(0,arrI.indexOf('-'))">
+                                    <select class="my-sp form-control" th:with="opt = ${arrI.substring(0,arrI.indexOf('-'))}">
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                     <span> - </span>
-                                    <select class="my-sp form-control" th:with="opt = arrI.substring(arrI.indexOf('-')+1, arrI.length()-1)">
+                                    <select class="my-sp form-control" th:with="opt = ${arrI.substring(arrI.indexOf('-')+1, arrI.length()-1)}">
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                 </th:block>
@@ -229,11 +229,11 @@
                             <div class="day-of-week" id="05">
                                 <b>Сб.</b><a class="add-time" id="5" onclick="addTime(0, 5);" th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[5]=='null':true}">Задать интервал времени</a>
                                 <th:block th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[5]!='null':false}" th:with="arrI = ${inputEvent.getActiveDatesArr()[5]}">
-                                    <select class="my-sp form-control" th:with="opt = arrI.substring(0,arrI.indexOf('-'))">
+                                    <select class="my-sp form-control" th:with="opt = ${arrI.substring(0,arrI.indexOf('-'))}">
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                     <span> - </span>
-                                    <select class="my-sp form-control" th:with="opt = arrI.substring(arrI.indexOf('-')+1, arrI.length()-1)">
+                                    <select class="my-sp form-control" th:with="opt = ${arrI.substring(arrI.indexOf('-')+1, arrI.length()-1)}">
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                 </th:block>
@@ -241,11 +241,11 @@
                             <div class="day-of-week bw-0" id="06">
                                 <b>Вс.</b><a class="add-time" id="6" onclick="addTime(0, 6);" th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[6]=='null':true}">Задать интервал времени</a>
                                 <th:block th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[6]!='null':false}" th:with="arrI = ${inputEvent.getActiveDatesArr()[6]}">
-                                    <select class="my-sp form-control" th:with="opt = arrI.substring(0,arrI.indexOf('-'))">
+                                    <select class="my-sp form-control" th:with="opt = ${arrI.substring(0,arrI.indexOf('-'))}">
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                     <span> - </span>
-                                    <select class="my-sp form-control" th:with="opt = arrI.substring(arrI.indexOf('-')+1, arrI.length()-1)">
+                                    <select class="my-sp form-control" th:with="opt = ${arrI.substring(arrI.indexOf('-')+1, arrI.length()-1)}">
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                 </th:block>
