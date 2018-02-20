@@ -1033,11 +1033,12 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
     /*]]>*/
 </script>
 <script>
-    $(document).ready(function(){
+    $(document).ready(function(){(function($){
         $('[data-toggle=confirmation]').confirmation({
-            rootSelector: '[data-toggle=confirmation]'
-            // other options
-        });
+        rootSelector: '[data-toggle=confirmation]'
+        // other options
+    });
+    })(jQuery);
     });
 
     // SideNav Initialization
