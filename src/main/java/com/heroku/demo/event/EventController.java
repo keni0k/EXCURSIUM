@@ -120,7 +120,15 @@ public class EventController {
         String[] tokens = photoTokens.split(";");
         setSmallData(event);
         Errors errors = findErrors(event);
-
+        logger.info("IDEDIT:"+event.getId());
+        Person person = utils.getPerson(principal);
+        if (person!=null) {
+            event.setFullNameOfGuide(person.getFullName());
+            event.setPhotoOfGuide(person.getImageToken());
+            event.setGuideId(person.getId());
+        } else {
+            return "redirect:/users/login";
+        }
         eventService.editEvent(event);
         for (int i = 0; i<tokens.length; i++) {
             Photo photo = photoService.getByToken(tokens[i]);
@@ -179,7 +187,7 @@ public class EventController {
     public String event(ModelMap model, @RequestParam("id") int id, Principal principal) {
         Event e = eventService.getById(id);
         Person p = utils.getPerson(principal);
-        if (e.getType()==EXCURSION_ACTIVE || (p!=null && e.getGuideId()==p.getId())) {
+        if (e.getType()==EXCURSION_ACTIVE || (p!=null && (e.getGuideId()==p.getId() || p.getType()==PERSON_ADMIN))) {
             model.addAttribute("event", e);
             model.addAttribute("reviews", reviewService.getByEvent(id));
             model.addAttribute("utils", new UtilsForWeb());

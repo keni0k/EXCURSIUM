@@ -364,11 +364,11 @@
                     </div>
 
                     <a th:if="${isEdit}" class="btn btn-default" th:text="${#messages.msg('words.submit')}"
-                       data-btn-ok-label="Удалить" data-btn-ok-icon="glyphicon glyphicon-share-alt"
+                       data-btn-ok-label="Изменить" data-btn-ok-icon="glyphicon glyphicon-share-alt"
                        data-btn-ok-class="btn-success"
                        data-btn-cancel-label="Отмена" data-btn-cancel-icon="glyphicon glyphicon-ban-circle"
                        data-btn-cancel-class="btn-danger"
-                       data-title="Удалить?" data-content="Отменить это действе будет невозможно!"
+                       data-title="Изменить?" data-content="Экскурсия снова будет отправлена на модерацию!"
                        data-toggle="confirmation" onclick="sbmt();">Отправить</a>
 
                     <a th:unless="${isEdit}" class="btn btn-default" th:text="${#messages.msg('words.submit')}" onclick="sbmt();">Отправить</a>
