@@ -162,37 +162,37 @@
                         </div>
                         <div class="panel-body pb-0 pt-0" id="radio0">
                             <div class="day-of-week" id="00">
-                                <b>Пн.</b><a class="add-time" id="0" onclick="addTime(0, 0);" th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[0].length()==0:true}">Задать интервал
+                                <b>Пн.</b><a class="add-time" id="0" onclick="addTime(0, 0);" th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[0]=='null':true}">Задать интервал
                                 времени</a>
-                                <th:block th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[0].length()!=0:false}">
-                                    <div th:replace="fragments/modals :: select"></div>
+                                <th:block th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[0]!='null':false}">
+                                    <div th:replace="fragments/select :: times"></div>
                                     <span> - </span>
-                                    <div th:replace="fragments/modals :: select"></div>
+                                    <div th:replace="fragments/select :: times"></div>
                                 </th:block>
 
                             </div>
                             <div class="day-of-week" id="01">
-                                <b>Вт.</b><a class="add-time" id="1" onclick="addTime(0, 1);" th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[1].length()==0:true}">Задать интервал
+                                <b>Вт.</b><a class="add-time" id="1" onclick="addTime(0, 1);" th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[1]!='null':true}">Задать интервал
                                 времени</a>
                             </div>
                             <div class="day-of-week" id="02">
-                                <b>Ср.</b><a class="add-time" id="2" onclick="addTime(0, 2);" th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[2].length()==0:true}">Задать интервал
+                                <b>Ср.</b><a class="add-time" id="2" onclick="addTime(0, 2);" th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[2]!='null':true}">Задать интервал
                                 времени</a>
                             </div>
                             <div class="day-of-week" id="03">
-                                <b>Чт.</b><a class="add-time" id="3" onclick="addTime(0, 3);" th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[3].length()==0:true}">Задать интервал
+                                <b>Чт.</b><a class="add-time" id="3" onclick="addTime(0, 3);" th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[3]!='null':true}">Задать интервал
                                 времени</a>
                             </div>
                             <div class="day-of-week" id="04">
-                                <b>Пт.</b><a class="add-time" id="4" onclick="addTime(0, 4);" th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[4].length()==0:true}">Задать интервал
+                                <b>Пт.</b><a class="add-time" id="4" onclick="addTime(0, 4);" th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[4]!='null':true}">Задать интервал
                                 времени</a>
                             </div>
                             <div class="day-of-week" id="05">
-                                <b>Сб.</b><a class="add-time" id="5" onclick="addTime(0, 5);" th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[5].length()==0:true}">Задать интервал
+                                <b>Сб.</b><a class="add-time" id="5" onclick="addTime(0, 5);" th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[5]!='null':true}">Задать интервал
                                 времени</a>
                             </div>
                             <div class="day-of-week bw-0" id="06">
-                                <b>Вс.</b><a class="add-time" id="6" onclick="addTime(0, 6);" th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[6].length()==0:true}">Задать интервал
+                                <b>Вс.</b><a class="add-time" id="6" onclick="addTime(0, 6);" th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[6]!='null':true}">Задать интервал
                                 времени</a>
                             </div>
                         </div>
