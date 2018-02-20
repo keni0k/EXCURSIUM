@@ -83,7 +83,6 @@ public class EventController {
         event.setType(Consts.EXCURSION_MODERATION);
         String[] tokens = photoTokens.split(";");
         setSmallData(event);
-        logger.info("ID: "+event.getId());
 
         Person person = utils.getPerson(principal);
         if (person!=null && !result.hasErrors()) {
@@ -104,6 +103,7 @@ public class EventController {
                 photoService.editPhoto(photo);
             }
         }
+        if (event.getDescription().length()<150) return eventAddAgain(modelMap, event, messageSource.getMessage("error.event.add", null, locale), principal);
         return "redirect:/events/event?id="+event.getId();
     }
 
