@@ -11,7 +11,7 @@ xmlns:th="http://www.thymeleaf.org">
 
 <link rel="stylesheet" type="text/css" href="../resources/css/footer.css"/>
 
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 
 <link rel="icon" href="../resources/img/icon.ico" type="image/x-icon"/>
@@ -20,7 +20,7 @@ xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" type="text/css" href="../resources/css/styles.css"/>
 <link rel="stylesheet" href="../resources/css/mycards.css"/>
 <link rel="stylesheet" href="../resources/css/media.css"/>
-    <link rel="stylesheet" href="../resources/libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>
+<link rel="stylesheet" href="../resources/libs/bootstrapformhelpers/css/bootstrap-formhelpers.min.css"/>
 
 <title th:text="${#messages.msg('titles.registration')}">Регистрация</title>
 
@@ -54,7 +54,7 @@ th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#http
 enctype="multipart/form-data">
 <br/>
 <div class="row">
-<div class="col-md-12 col-lg-6">
+<div class="col-xs-12 col-md-6">
 <div class="input-group">
 <span class="input-group-addon"
 th:text="${#messages.msg('words.first_name')} + ' *'">Имя</span>
@@ -63,10 +63,10 @@ th:value="${insertPerson.getFirstName()}" placeholder="Имя" aria-label="Им�
 required=""/>
 </div>
 </div>
-<div class="visible-sm-block visible-xs-block visible-md-block ">
+<div class="visible-sm-block visible-xs-block col-xs-12">
 <br/>
 </div>
-<div class="col-md-12 col-lg-6">
+<div class="col-xs-12 col-md-6">
 <div class="input-group">
 <span class="input-group-addon"
 th:text="${#messages.msg('words.last_name')} + ' *'">Фамилия</span>
@@ -78,42 +78,45 @@ aria-label="Фамилия"/>
 </div>
 </div>
 <br/>
-    <div class="row">
-    <div class="col-md-12 col-lg-6">
-    <div class="input-group">
-        <span class="input-group-addon">Email *</span>
-        <input name="email" id="email" type="email" class="form-control"
-               th:value="${insertPerson.getEmail()}" placeholder="Email" aria-label="Email"
-               required=""/>
-        <!--/*@thymesVar id="error_email_free" type="java.lang.Boolean"*/-->
-        <label for="email" th:if="${error_email_free}"
-               th:text="${#messages.msg('error.user.email.free')}" th:class="'error'">Name
-            Error</label>
-        <!--/*@thymesVar id="error_email_valid" type="java.lang.Boolean"*/-->
-        <label for="email" th:if="${error_email_valid}"
-               th:text="${#messages.msg('error.user.email.valid')}" th:class="'error'">Name
-            Error</label>
-    </div>
-    </div>
-    <div class="visible-sm-block visible-xs-block visible-md-block ">
-        <br/>
-    </div>
-    <div class="col-md-12 col-lg-6">
+<div class="row">
+<div class="col-xs-12 col-md-6">
 <div class="input-group">
-<span class="input-group-addon" th:text="${#messages.msg('words.login')} + ' *'">Логин</span>
+<span class="input-group-addon">Email *</span>
+<input name="email" id="email" type="email" class="form-control"
+th:value="${insertPerson.getEmail()}" placeholder="Email" aria-label="Email"
+required=""/>
+<!--/*@thymesVar id="error_email_free" type="java.lang.Boolean"*/-->
+<label for="email" th:if="${error_email_free}"
+th:text="${#messages.msg('error.user.email.free')}" th:class="'error'">Name
+Error</label>
+<!--/*@thymesVar id="error_email_valid" type="java.lang.Boolean"*/-->
+<label for="email" th:if="${error_email_valid}"
+th:text="${#messages.msg('error.user.email.valid')}" th:class="'error'">Name
+Error</label>
+</div>
+</div>
+<div class="visible-sm-block visible-xs-block col-xs-12">
+<br/>
+</div>
+<div class="col-xs-12 col-md-6">
+<div class="input-group">
+<span class="input-group-addon"
+th:text="${#messages.msg('words.login')} + ' *'">Логин</span>
 <input name="login" id="login" type="text" class="form-control" placeholder="Логин"
 aria-label="Логин" th:value="${insertPerson.getLogin()}" required=""/>
 <!--/*@thymesVar id="error_login" type="java.lang.Boolean"*/-->
-<label for="login" th:if="${error_login}" th:text="${#messages.msg('error.user.login.free')}"
+<label for="login" th:if="${error_login}"
+th:text="${#messages.msg('error.user.login.free')}"
 th:class="'error'">Name Error</label>
 <label for="login" th:if="${#fields.hasErrors('login')}"
-th:text="${#messages.msg('error.user.login.size')}" th:class="'error'">Name Error</label>
+th:text="${#messages.msg('error.user.login.size')}" th:class="'error'">Name
+Error</label>
 </div>
-    </div>
-    </div>
+</div>
+</div>
 <br/>
 <div class="row">
-<div class="col-md-12 col-lg-6">
+<div class="col-xs-12 col-md-6">
 <div class="input-group">
 <span class="input-group-addon"
 th:text="${#messages.msg('words.password')} + ' *'">Пароль</span>
@@ -125,12 +128,13 @@ th:class="'error'">Name Error</label>
 <!--/*<label for="pass" th:if="${#fields.hasErrors('pass')}" th:text="${#messages.msg('error.user.pass')}" th:class="'error'">Name Error</label>*/-->
 </div>
 </div>
-<div class="visible-sm-block visible-xs-block visible-md-block ">
+<div class="visible-sm-block visible-xs-block col-xs-12">
 <br/>
 </div>
-<div class="col-md-12 col-lg-6">
+<div class="col-xs-12 col-md-6">
 <div class="input-group">
-<span class="input-group-addon" th:text="${#messages.msg('words.password_again')} + ' *'">Повторите пароль</span>
+<span class="input-group-addon"
+th:text="${#messages.msg('words.password_again')} + ' *'">Повторите пароль</span>
 <input name="pass2" type="password" id="pass2" class="form-control"
 placeholder="Повторите пароль" aria-label="Повторите пароль" required=""/>
 <!--/*@thymesVar id="error_pass" type="java.lang.Boolean"*/-->
@@ -163,13 +167,14 @@ Error</label>
 <div class="input-group">
 <span class="input-group-addon" th:text="${#messages.msg('words.photo')}">Фотография</span>
 <input name="file" type="file" id="file" class="form-control" placeholder="Фотография"
-accept="image/jpeg,image/png" aria-label="Фотография" style="padding-top: 5px; margin-top: 0"/>
+accept="image/jpeg,image/png" aria-label="Фотография"
+style="padding-top: 5px; margin-top: 0"/>
 </div>
 <br/>
-<button type="submit" class="btn btn-lg btn-primary btn-block" th:text="${#messages.msg('titles.registration')}">
+<button type="submit" class="btn btn-lg btn-primary btn-block"
+th:text="${#messages.msg('titles.registration')}">
 Регистрация
 </button>
-
 </form>
 </div>
 </div>
@@ -179,6 +184,8 @@ accept="image/jpeg,image/png" aria-label="Фотография" style="padding-t
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="../resources/js/maskedinput.min.js"></script>
-<script>$(document).ready(function () {$("#phone_number").mask("+7 (999) 999-9999");});</script>
+<script>$(document).ready(function () {
+$("#phone_number").mask("+7 (999) 999-9999");
+});</script>
 </body>
 </html>
