@@ -98,14 +98,7 @@ public class EventController {
         }
 
         eventService.addEvent(event);
-        for (int i = 0; i<tokens.length; i++) {
-            Photo photo = photoService.getByToken(tokens[i]);
-            if (photo != null) {
-                photo.setEventId(event.getId());
-                photo.setNumber(i);
-                photoService.editPhoto(photo);
-            }
-        }
+        editPhotos(event, tokens);
         if (errors.isErrors()) return eventAddAgain(modelMap, event, new MessageUtil("warning", messageSource.getMessage("error.event.add", null, locale)), principal, errors);
         return "redirect:/events/event?id="+event.getId();
     }
@@ -114,32 +107,48 @@ public class EventController {
     public String editEvent(@ModelAttribute("inputEvent") @Valid Event event,
                               @RequestParam(value = "photos") String photoTokens,
                               @RequestParam(value = "city_and_country", required = false) String cityAndCountry,
+                              @RequestParam(value = "id") int id,
                               ModelMap modelMap, Principal principal, Locale locale) {
-        event.setCountryAndCity(cityAndCountry);
-        event.setType(Consts.EXCURSION_MODERATION);
-        String[] tokens = photoTokens.split(";");
-        setSmallData(event);
-        Errors errors = findErrors(event);
-        logger.info("IDEDIT:"+event.getId());
-        Person person = utils.getPerson(principal);
-        if (person!=null) {
-            event.setFullNameOfGuide(person.getFullName());
-            event.setPhotoOfGuide(person.getImageToken());
-            event.setGuideId(person.getId());
-        } else {
-            return "redirect:/users/login";
+        Event solveEvent = eventService.getById(id);
+        Person p = utils.getPerson(principal);
+        if (solveEvent!=null && p!=null && solveEvent.getGuideId()==p.getId()){
+            solveEvent.setCountryAndCity(cityAndCountry);
+            solveEvent.setType(Consts.EXCURSION_MODERATION);
+            solveEvent.setDescription(event.getDescription());
+            solveEvent.setName(event.getName());
+            solveEvent.setActiveDates(event.getActiveDates());
+            solveEvent.setAgeLimit(event.getAgeLimit());
+            solveEvent.setCategory(event.getCategory());
+            solveEvent.setDuration(event.getDuration());
+            solveEvent.setPlace(event.getPlace());
+            solveEvent.setPrice(event.getPrice());
+            solveEvent.setTypeOfDates(event.getTypeOfDates());
+            solveEvent.setLanguage(event.getLanguage());
+            solveEvent.setUsersCount(event.getUsersCount());
+            setSmallData(solveEvent);
+            Errors errors = findErrors(solveEvent);
+
+            eventService.editEvent(solveEvent);
+
+            String[] tokens = photoTokens.split(";");
+            editPhotos(solveEvent, tokens);
+
+            if (errors.isErrors())
+                return eventAddAgain(modelMap, event, new MessageUtil("warning", messageSource.getMessage("error.event.add", null, locale)), principal, errors);
+            return "redirect:/events/event?id=" + event.getId();
         }
-        eventService.editEvent(event);
-        for (int i = 0; i<tokens.length; i++) {
+        return "redirect:/users/login";
+    }
+
+    private void editPhotos(Event solveEvent, String[] tokens) {
+        for (int i = 0; i < tokens.length; i++) {
             Photo photo = photoService.getByToken(tokens[i]);
             if (photo != null) {
-                photo.setEventId(event.getId());
+                photo.setEventId(solveEvent.getId());
                 photo.setNumber(i);
                 photoService.editPhoto(photo);
             }
         }
-        if (errors.isErrors()) return eventAddAgain(modelMap, event, new MessageUtil("warning", messageSource.getMessage("error.event.add", null, locale)), principal, errors);
-        return "redirect:/events/event?id="+event.getId();
     }
 
     @RequestMapping(value = "/edit")
