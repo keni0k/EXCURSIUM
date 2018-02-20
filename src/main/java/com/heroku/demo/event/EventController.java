@@ -139,7 +139,7 @@ public class EventController {
                               Locale locale, Principal principal) {
         Event e = eventService.getById(id);
         Person p = utils.getPerson(principal);
-        if (e!=null && p!=null && (e.getGuideId()==p.getId()||p.getType()== PERSON_ADMIN)) {
+        if (e!=null && p!=null && (e.getGuideId()==p.getId()||p.getType()==PERSON_ADMIN)) {
             e.setType(Consts.EXCURSION_DELETED);
             eventService.editEvent(e);
         }
