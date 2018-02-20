@@ -259,7 +259,7 @@
                                 <div class="input-group">
                                     <input name="usersCount" id="users_count" type="number" class="form-control"
                                            min="1" max="100"
-                                           th:value="${inputEvent.getUsersCount()}?${inputEvent.getUsersCount()}"/>
+                                           th:value="${inputEvent.getUsersCount()>0}?${inputEvent.getUsersCount()}"/>
                                     <span class="input-group-addon">человек</span>
                                 </div>
                                 <label for="users_count" th:if="${#fields.hasErrors('usersCount')}"
@@ -275,7 +275,7 @@
                             <div class="panel-body">
                                 <div class="input-group">
                                     <input name="duration" id="duration" type="number" class="form-control"
-                                           th:value="${inputEvent.getDuration()}?${inputEvent.getDuration()}" min="1"
+                                           th:value="${inputEvent.getDuration()>0}?${inputEvent.getDuration()}" min="1"
                                            max="240"/>
                                     <span class="input-group-addon"
                                           th:text="${#messages.msg('words.hours')}">часов</span>
@@ -330,7 +330,7 @@
                                 <div class="input-group">
                                     <input name="price" id="price" type="number" class="form-control"
                                            min="100" max="100000"
-                                           th:value="${inputEvent.getPrice()}?${inputEvent.getPrice()>0}?${inputEvent.getPrice()}"/>
+                                           th:value="${inputEvent.getPrice()>0}?${inputEvent.getPrice()}"/>
                                     <span class="input-group-addon">&#8381;</span>
                                 </div>
                                 <b><p class="mb-0 mb-0 mt-05 f16" id="price-help" style="display: none;"><span
