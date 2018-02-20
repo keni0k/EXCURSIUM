@@ -49,7 +49,6 @@
 <body style="background-color: #f9f9f9;">
 <!--/*@thymesVar id="inputEvent" type="com.heroku.demo.event.Event"*/-->
 <!--/*@thymesVar id="message" type="com.heroku.demo.utils.MessageUtil"*/-->
-<!--/*@thymesVar id="error_data" type="java.lang.String"*/-->
 <!--/*@thymesVar id="errors" type="com.heroku.demo.utils.Errors"*/-->
 <div class="content"
      th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}, lang = ${#locale.getLanguage().toString()=='en'?1:0}">

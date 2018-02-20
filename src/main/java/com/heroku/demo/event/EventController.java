@@ -8,10 +8,7 @@ import com.heroku.demo.photo.PhotoRepository;
 import com.heroku.demo.photo.PhotoServiceImpl;
 import com.heroku.demo.review.ReviewRepository;
 import com.heroku.demo.review.ReviewServiceImpl;
-import com.heroku.demo.utils.Consts;
-import com.heroku.demo.utils.Errors;
-import com.heroku.demo.utils.Utils;
-import com.heroku.demo.utils.UtilsForWeb;
+import com.heroku.demo.utils.*;
 import org.joda.time.LocalTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -94,7 +91,7 @@ public class EventController {
             event.setPhotoOfGuide(person.getImageToken());
             event.setGuideId(person.getId());
         } else {
-            return "redirect:/login";
+            return "redirect:/users/login";
         }
 
         eventService.addEvent(event);
@@ -107,7 +104,7 @@ public class EventController {
                 photoService.editPhoto(photo);
             }
         }
-        if (errors.isErrors()) return eventAddAgain(modelMap, event, messageSource.getMessage("error.event.add", null, locale), principal, errors);
+        if (errors.isErrors()) return eventAddAgain(modelMap, event, new MessageUtil("warning", messageSource.getMessage("error.event.add", null, locale)), principal, errors);
         return "redirect:/events/event?id="+event.getId();
     }
 
@@ -117,16 +114,16 @@ public class EventController {
         if (person!=null) {
             Event event = eventService.getById(id);
             if (event.getGuideId()==person.getId())
-                return eventAddAgain(model, event, "", principal, findErrors(event));
+                return eventAddAgain(model, event, null, principal, findErrors(event));
         }
-        return "redirect:/login";
+        return "redirect:/users/login";
     }
 
-    private String eventAddAgain(ModelMap model, Event event, String errorData, Principal principal, Errors errors) {
+    private String eventAddAgain(ModelMap model, Event event, MessageUtil message, Principal principal, Errors errors) {
         model.addAttribute("inputEvent", event);
         model.addAttribute("photos", photoService.getByEventId(event.getId()));
         model.addAttribute("errors", errors);
-        model.addAttribute("error_data", errorData);
+        model.addAttribute("message", message);
         model.addAttribute("utils", new UtilsForWeb());
         model.addAttribute("person", utils.getPerson(principal));
         return "event/event_add";

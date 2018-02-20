@@ -146,11 +146,13 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                        data-toggle="modal" data-target="#modalUpToGuide">Стать экскурсоводом
                                     </a>
                                     <!--/*TODO translate*/-->
-                                    <a th:if="${isThisUserAccount}" class="btn btn-primary waves-effect waves-light mt-1"
+                                    <a th:if="${isThisUserAccount}"
+                                       class="btn btn-primary waves-effect waves-light mt-1"
                                        href="#" role="button"
                                        data-toggle="modal" data-target="#modalEditProfile">Редактировать профиль <i
                                             class="fa fa-pencil ml-2"></i></a>
-                                    <a class="btn btn-outline-primary waves-effect waves-light mt-1" href="#" role="button"
+                                    <a class="btn btn-outline-primary waves-effect waves-light mt-1" href="#"
+                                       role="button"
                                        data-toggle="modal" data-target="#modalFeedback">Сообщить об ошибке <i
                                             class="fa fa-paper-plane ml-2"></i></a>
                                 </div>
@@ -232,78 +234,78 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                             </div>
                             <!--/*Heading*/-->
                             <!--/*Card row*/-->
-                                <!--/*Card*/-->
-                                <div th:if="${orders.size()>0}"
-                                     th:each="j : ${#numbers.sequence(0,orders.size()-1)}"
-                                     class="card card-cascade narrower"
-                                     th:id="'id-0'+${j}"
-                                     th:style="${j != 0}?'display: none;'"
-                                     th:with="order=${orders.get(j)}">
-                                    <!--/*@thymesVar id="order" type="com.heroku.demo.order.Buy"*/-->
-                                    <!--/*Card image*/-->
-                                    <div class="view overlay hm-white-slight" style="margin-top: 20px">
-                                        <div class="img_crop">
-                                            <img th:src="${order.getImageUrl()}" src="#" class="img-fluid"
-                                                 alt=""
-                                                 style="height: 240px; min-width: -webkit-fill-available;"/>
-                                        </div>
-                                        <a href="#">
-                                            <div class="mask waves-effect waves-light"></div>
-                                        </a>
+                            <!--/*Card*/-->
+                            <div th:if="${orders.size()>0}"
+                                 th:each="j : ${#numbers.sequence(0,orders.size()-1)}"
+                                 class="card card-cascade narrower"
+                                 th:id="'id-0'+${j}"
+                                 th:style="${j != 0}?'display: none;'"
+                                 th:with="order=${orders.get(j)}">
+                                <!--/*@thymesVar id="order" type="com.heroku.demo.order.Buy"*/-->
+                                <!--/*Card image*/-->
+                                <div class="view overlay hm-white-slight" style="margin-top: 20px">
+                                    <div class="img_crop">
+                                        <img th:src="${order.getImageUrl()}" src="#" class="img-fluid"
+                                             alt=""
+                                             style="height: 240px; min-width: -webkit-fill-available;"/>
                                     </div>
-                                    <!--/*Card content*/-->
-                                    <div class="card-body pb-0">
-                                        <!--/*Title*/-->
-                                        <h4 class="card-title" th:text="${order.getName()}">Название
-                                            экскурсии</h4>
-                                        <!--/*Text*/-->
-                                        <span class="card-text" style="font-size: small;" align="left"
-                                              th:text="'Time of order: '+${order.getTime()}">Время заказа</span>
-                                        <br/>
-                                        <span class="card-text" style="font-size: small;" align="right"
-                                              th:text="'Time of book: '+${order.getTimeComplete()}">Время экскурсии</span>
+                                    <a href="#">
+                                        <div class="mask waves-effect waves-light"></div>
+                                    </a>
+                                </div>
+                                <!--/*Card content*/-->
+                                <div class="card-body pb-0">
+                                    <!--/*Title*/-->
+                                    <h4 class="card-title" th:text="${order.getName()}">Название
+                                        экскурсии</h4>
+                                    <!--/*Text*/-->
+                                    <span class="card-text" style="font-size: small;" align="left"
+                                          th:text="'Time of order: '+${order.getTime()}">Время заказа</span>
+                                    <br/>
+                                    <span class="card-text" style="font-size: small;" align="right"
+                                          th:text="'Time of book: '+${order.getTimeComplete()}">Время экскурсии</span>
+                                </div>
+                                <!--/*Card footer*/-->
+                                <div class="card-footer links-light">
+                                    <div class="left price-text">
+                                        <strong th:text="${order.getPrice()}+'&#8381;  '">%Цена% </strong>
                                     </div>
-                                    <!--/*Card footer*/-->
-                                    <div class="card-footer links-light">
-                                        <div class="left price-text">
-                                            <strong th:text="${order.getPrice()}+'&#8381;  '">%Цена% </strong>
+                                    <div class="right">
+                                        <a th:href="@{/orders/order(id=${order.getId()})}"
+                                           class="waves-effect p-2">Открыть<i
+                                                class="fa fa-photo ml-05"></i></a>
+                                    </div>
+                                    <th:block th:if="${order.getType()==consts.ORDER_OPEN}">
+                                        <div class="clearfix"></div>
+                                        <div class="left">
+                                            <a th:href="@{/orders/confirm(id=${order.getId()})}"
+                                               data-title="Confirm order?" data-toggle="confirmation"
+                                               class="waves-effect" style="display: inline">Подтвердить
+                                                заказ<i
+                                                        class="fa fa-handshake-o ml-05"></i></a>
                                         </div>
                                         <div class="right">
-                                            <a th:href="@{/orders/order(id=${order.getId()})}"
-                                               class="waves-effect p-2">Открыть<i
-                                                    class="fa fa-photo ml-05"></i></a>
+                                            <a href="#" data-toggle="modal"
+                                               th:onclick="'modalDispute('+${order.getId()}+')'"
+                                               data-target="#modalDispute"
+                                               class="waves-effect p-2">Открыть спор<i
+                                                    class="fa fa-gavel ml-05"></i></a>
                                         </div>
-                                        <th:block th:if="${order.getType()==consts.ORDER_OPEN}">
-                                            <div class="clearfix"></div>
-                                            <div class="left">
-                                                <a th:href="@{/orders/confirm(id=${order.getId()})}"
-                                                   data-title="Confirm order?" data-toggle="confirmation"
-                                                   class="waves-effect" style="display: inline">Подтвердить
-                                                    заказ<i
-                                                            class="fa fa-handshake-o ml-05"></i></a>
-                                            </div>
-                                            <div class="right">
-                                                <a href="#" data-toggle="modal"
-                                                   th:onclick="'modalDispute('+${order.getId()}+')'"
-                                                   data-target="#modalDispute"
-                                                   class="waves-effect p-2">Открыть спор<i
-                                                        class="fa fa-gavel ml-05"></i></a>
-                                            </div>
-                                        </th:block>
-                                        <th:block
-                                                th:if="${order.getReviewId()==-1 and order.getType()==consts.ORDER_CONFIRM}">
-                                            <div class="clearfix"></div>
-                                            <div class="pt-05">
-                                                <a href="#" data-toggle="modal" data-target="#modalAddReview"
-                                                   th:onclick="'modalReview('+${order.getId()}+')'">Оставить
-                                                    отзыв<i
-                                                            class="fa fa-comments ml-05"></i></a>
-                                                <!--role="button" -->
-                                            </div>
-                                        </th:block>
-                                    </div>
+                                    </th:block>
+                                    <th:block
+                                            th:if="${order.getReviewId()==-1 and order.getType()==consts.ORDER_CONFIRM}">
+                                        <div class="clearfix"></div>
+                                        <div class="pt-05">
+                                            <a href="#" data-toggle="modal" data-target="#modalAddReview"
+                                               th:onclick="'modalReview('+${order.getId()}+')'">Оставить
+                                                отзыв<i
+                                                        class="fa fa-comments ml-05"></i></a>
+                                            <!--role="button" -->
+                                        </div>
+                                    </th:block>
                                 </div>
-                                <!--/*End-of-Card*/-->
+                            </div>
+                            <!--/*End-of-Card*/-->
                             <!--/*End-of-Card row*/-->
                             <!--/*Pagination */-->
                             <nav class="my-4 d-flex justify-content-center mb-1" th:if="${orders.size()>1}">
@@ -344,11 +346,13 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                     будут
                                     отображаться добавленные экскурсии</h2> <!--/*-310,615 TODO: translate*/-->
                                 <a href="/events/add">
-                                <button th:if="${isThisUserAccount and excursovod}" type="button"
-                                        class="btn btn-primary mb-3 waves-effect waves-light">
-                                    <th:block th:text="${#messages.msg('titles.add_event')+' '}">Добавить новую экскурсию</th:block>
-                                    <i class="fa fa-photo ml-05"></i>
-                                </button>
+                                    <button th:if="${isThisUserAccount and excursovod}" type="button"
+                                            class="btn btn-primary mb-3 waves-effect waves-light">
+                                        <th:block th:text="${#messages.msg('titles.add_event')+' '}">Добавить новую
+                                            экскурсию
+                                        </th:block>
+                                        <i class="fa fa-photo ml-05"></i>
+                                    </button>
                                 </a>
                             </div>
                             <!--/* End-of-Heading */-->
@@ -361,7 +365,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                  th:style="${j != 0}?'display: none;'">
                                 <!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
                                 <!--/*Card image*/-->
-                                <div class="view overlay hm-white-slight"  style="margin-top: 20px">
+                                <div class="view overlay hm-white-slight" style="margin-top: 20px">
                                     <div class="img_crop">
                                         <img th:src="${event.getSrcImage(0)}" src="#" class="img-fluid"
                                              style="height: 240px; min-width: -webkit-fill-available;"
@@ -406,19 +410,20 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                     <span class="left price-text">
                                         <strong th:text="${event.getPrice()}+'&#8381;  '">%Цена%  </strong>
                                     </span>
-                                    <span class="right">
-                                    <a th:href="@{/events/event(id=${event.getId()})}"
-                                       class="waves-effect">Открыть<i
-                                            class="fa fa-photo ml-05"></i></a>
-                                        <a rel="tooltip" title="Edit" href="javascript:void(0)" role="button"
+                                    <div class="right">
+                                        <a th:href="@{/events/event(id=${event.getId()})}"
+                                           class="waves-effect">Открыть<i
+                                                class="fa fa-photo ml-05"></i>
+                                        </a>
+                                        <a rel="tooltip" title="Edit" th:href="@{/events/edit(id=${event.getId()})}"
                                            style="margin-left: 10px; margin-right: 2px; margin-top: 8px;">
-                                        <i class="fa fa-edit" style="font-size: 20px;"></i>
-                                    </a>
-                                    <a rel="tooltip" title="Delete" href="javascript:void(0)" role="button"
-                                       style="margin-left: 10px; margin-top: 7px;">
-                                        <i class="fa fa-trash" style="font-size: 20px;"></i>
-                                    </a>
-                                    </span>
+                                            <i class="fa fa-edit" style="font-size: 20px;"></i>
+                                        </a>
+                                        <a rel="tooltip" title="Delete" role="button"
+                                           style="margin-left: 10px; margin-top: 7px;">
+                                            <i class="fa fa-trash" style="font-size: 20px;"></i>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                             <!--/*End-of-Card*/-->
@@ -624,7 +629,8 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                                     <div class="col-xs-6">
                                                         <div class="md-form form-sm">
                                                             <input type="password" name="pass" id="form26"
-                                                                   class="form-control" minlength="6" autocomplete="off"/>
+                                                                   class="form-control" minlength="6"
+                                                                   autocomplete="off"/>
                                                             <label for="form26">Новый пароль</label>
                                                         </div>
                                                     </div>
@@ -636,7 +642,8 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12">
-                                                        <h4 style="font-weight: bold">Для применения изменений введите текущий пароль</h4>
+                                                        <h4 style="font-weight: bold">Для применения изменений введите
+                                                            текущий пароль</h4>
                                                     </div>
                                                     <div class="clearfix"></div>
                                                     <br/>
@@ -853,17 +860,20 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                             <div class="col-md-12" th:if="${person.getPhoneNumber()==''}">
                                                 <!--/*Company website*/-->
                                                 <div class="md-form form-sm">
-                                                        <input name="phone_number" type="text" class="form-control bfh-phone" required=""
-                                                               minlength="17" data-format="+7 (ddd) ddd-dddd" id="phone_number"/>
-                                                        <label for="phone_number"
-                                                               th:text="${#messages.msg('words.phone')}">Номер телефона</label>
-                                                        <!--/*@thymesVar id="error_phone" type="java.lang.Boolean"*/-->
-                                                        <!--<label for="phone_number" th:if="${error_phone}"
-                                                               th:text="${#messages.msg('error.user.phone_number.free')}" th:class="'error'">Name
-                                                            Error</label>
-                                                        <label for="phone_number" th:if="${#fields.hasErrors('phoneNumber')}"
-                                                               th:text="${#messages.msg('error.user.phone_number.invalid')}" th:class="'error'">Name
-                                                            Error</label>--><!--TODO-->
+                                                    <input name="phone_number" type="text"
+                                                           class="form-control bfh-phone" required=""
+                                                           minlength="17" data-format="+7 (ddd) ddd-dddd"
+                                                           id="phone_number"/>
+                                                    <label for="phone_number"
+                                                           th:text="${#messages.msg('words.phone')}">Номер
+                                                        телефона</label>
+                                                    <!--/*@thymesVar id="error_phone" type="java.lang.Boolean"*/-->
+                                                    <!--<label for="phone_number" th:if="${error_phone}"
+                                                           th:text="${#messages.msg('error.user.phone_number.free')}" th:class="'error'">Name
+                                                        Error</label>
+                                                    <label for="phone_number" th:if="${#fields.hasErrors('phoneNumber')}"
+                                                           th:text="${#messages.msg('error.user.phone_number.invalid')}" th:class="'error'">Name
+                                                        Error</label>--><!--TODO-->
                                                 </div>
                                             </div>
                                             <!--/*End-of-Grid column*/-->
@@ -958,7 +968,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
 
     function showHide0(page) {
 //Если элемент с id-шником element_id существует
-        var id = page-1;
+        var id = page - 1;
         var i;
         var pages = [[${orders.size()}]];
         for (i = 0; i < pages; i++) {
@@ -990,7 +1000,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
 
     function showHide(page) {
 //Если элемент с id-шником element_id существует
-        var id = page-1;
+        var id = page - 1;
         var i;
         var pages = [[${events.size()}]];
 
