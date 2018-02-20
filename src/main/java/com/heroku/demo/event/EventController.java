@@ -82,6 +82,8 @@ public class EventController {
         event.setTime(time);
         event.setType(Consts.EXCURSION_MODERATION);
         String[] tokens = photoTokens.split(";");
+        setSmallData(event);
+        logger.info("ID: "+event.getId());
 
         Person person = utils.getPerson(principal);
         if (person!=null && !result.hasErrors()) {
@@ -91,7 +93,9 @@ public class EventController {
         } else {
             return eventAddAgain(modelMap, event, messageSource.getMessage("error.event.add", null, locale), principal);
         }
+
         eventService.addEvent(event);
+        logger.info("ID1: "+event.getId());
         for (int i = 0; i<tokens.length; i++) {
             Photo photo = photoService.getByToken(tokens[i]);
             if (photo != null) {
@@ -105,6 +109,7 @@ public class EventController {
 
     private String eventAddAgain(ModelMap model, Event event, String errorData, Principal principal) {
         model.addAttribute("inputEvent", event);
+        //model.addAttribute("photos", photoService.getByEventId(event.getId()));
         model.addAttribute("error_data", errorData);
         model.addAttribute("utils", new UtilsForWeb());
         model.addAttribute("person", utils.getPerson(principal));
@@ -345,14 +350,6 @@ public class EventController {
         Random random = new Random();
         for (Event event: events) {
             int i;
-            String txt = event.getDescription();
-            for (i = 0; i < 150; i++) {
-                String substr = txt.substring(150 - i, 150);
-                if (substr.indexOf('.') != -1 || substr.indexOf('!') != -1 || substr.indexOf('?') != -1) break;
-            }
-            if (i != 150 && i < 70) event.setSmallData(txt.substring(0, 150 - i + 1));
-            else event.setSmallData(txt.substring(0, 147) + '…');
-
             int type = event.getTypeOfDates();
             event.setActiveDates("");
             if (type==0){
@@ -396,6 +393,17 @@ public class EventController {
             String suffix = j != times-1 ? "," : "";
             event.setActiveDates(event.getActiveDates()+random.nextInt(48)+suffix);
         }
+    }
+
+    private void setSmallData(Event event){
+        String txt = event.getDescription();
+        int i;
+        for (i = 0; i < 150; i++) {
+            String substr = txt.substring(150 - i, 150);
+            if (substr.indexOf('.') != -1 || substr.indexOf('!') != -1 || substr.indexOf('?') != -1) break;
+        }
+        if (i != 150 && i < 70) event.setSmallData(txt.substring(0, 150 - i + 1));
+        else event.setSmallData(txt.substring(0, 147) + '…');
     }
 
 }
