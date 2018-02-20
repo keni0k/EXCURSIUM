@@ -323,7 +323,7 @@
                                     <div class="day-of-week" th:if="${isEdit and inputEvent.getTypeOfDates()==2?inputEvent.getActiveDates()!='null':false}" th:each="date: ${inputEvent.getActiveDatesArr()}">
                                         <div class="form-group" style="margin-top: 15px;">
                                             <div class="input-group date" id="datetimepicker" style="display: flex;">
-                                                <input type="text" class="form-control" style="width: auto;" th:value="date.substring(0,date.indexOf(':'))!='null'?date.substring(0,date.indexOf(':')):''"/>
+                                                <input type="text" class="form-control" style="width: auto;" th:value="${date.substring(0,date.indexOf(':'))!='null'?date.substring(0,date.indexOf(':')):''}"/>
                                                 <span class="input-group-addon w-a day-span">
                                                     <span class="glyphicon glyphicon-calendar"></span>
                                                 </span>
