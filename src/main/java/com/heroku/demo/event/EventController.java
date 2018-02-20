@@ -240,7 +240,7 @@ public class EventController {
                            @RequestParam(value = "city", required = false) Integer city,
                            @RequestParam(value = "country_and_city", required = false) String countryAndCity,
                            Locale locale, Principal principal){
-        if (countryAndCity!=null) {
+        if (countryAndCity!=null && countryAndCity.length()>0) {
             country = Integer.parseInt(countryAndCity.substring(0,1));
             city = Integer.parseInt(countryAndCity.substring(2,3));
         }

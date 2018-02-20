@@ -148,10 +148,9 @@ placeholder="Город" required="" aria-label="Город"/>
 <br/>
 <div class="input-group">
 <span class="input-group-addon" th:text="${#messages.msg('words.phone')}">Телефон</span>
-<input name="phoneNumber" type="text" class="form-control bfh-phone"
+<input name="phoneNumber" type="text" class="form-control"
 th:value="${insertPerson.getPhoneNumber()}" placeholder="Телефон"
-minlength="17"
-aria-label="Телефон" data-format="+7 (ddd) ddd-dddd" id="phone_number"/>
+minlength="17" aria-label="Телефон" id="phone_number"/>
 <!--/*@thymesVar id="error_phone" type="java.lang.Boolean"*/-->
 <label for="phone_number" th:if="${error_phone}"
 th:text="${#messages.msg('error.user.phone_number.free')}" th:class="'error'">Name
@@ -179,6 +178,7 @@ accept="image/jpeg,image/png" aria-label="Фотография" style="padding-t
 <div th:replace="fragments/footer :: footer"></div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="../resources/libs/bootstrapformhelpers/js/bootstrap-formhelpers.min.js"></script>
+<script src="../resources/js/maskedinput.min.js"></script>
+<script>$(document).ready(function () {$("#phone_number").mask("+7 (999) 999-9999");});</script>
 </body>
 </html>
