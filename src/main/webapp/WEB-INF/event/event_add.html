@@ -590,7 +590,7 @@
                     <!--/*Card image*/-->
                     <div class="view overlay hm-white-slight z-depth-1" style="margin-top: 20px;">
                         <div class="img_crop"><img
-                                th:src="${inputEvent.pathToPhoto.size()>0?inputEvent.pathToPhoto.get(0):'../../resources/img/bg-cta.jpg'}"
+                                th:src="${inputEvent.pathToPhoto.size()>0?inputEvent.pathToPhoto.get(0):'../../resources/img/no-img.jpg'}"
                                 class="img-fluid" alt="" id="demo-img"
                                 style="height: 240px; min-width: -webkit-fill-available;"/>
                         </div>
@@ -648,6 +648,7 @@
         if ($result.children().length < 4)
             $('#add-photo').css('display', 'block');
         var src = $result.find('div:first-child img:first-child').attr('src');
+        console.log("src: "+src);
         if ($demoImg.attr('src') !== src)
             $demoImg.attr("src", src);
     }
@@ -704,11 +705,11 @@
                             var e5 = child3.childNodes[childItem];
                             if (e5.nodeType === 1) {
                                 if (e5.className === "form-control") {
-                                    console.log("date: " + e5.value);
+                                    // console.log("date: " + e5.value);
                                     inp.value += e5.value + ':';
                                 }
                                 if (e5.className === "my-sp form-control") {
-                                    console.log("time: " + e5.value);
+                                    // console.log("time: " + e5.value);
                                     inp.value += e5.value + ';';
                                 }
                             }
@@ -734,7 +735,7 @@
 
         inp.value = inp.value.substring(0, inp.value.length - 1);
         //inp.value = inp.value.split("null").join("");
-        console.log("inp.value: " + inp.value);
+        // console.log("inp.value: " + inp.value);
         $("#upload_input").remove();
         $('#sbmt').click();
     }
