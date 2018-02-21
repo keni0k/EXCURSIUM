@@ -395,10 +395,10 @@
                             <div class="day-of-week bw-0">
                                 <div id="20">
                                     <div class="day-of-week"
-                                         th:if="${isEdit and inputEvent.getTypeOfDates()==2?inputEvent.getActiveDates()!='null':false}"
+                                         th:if="${isEdit and inputEvent.getTypeOfDates()==2?inputEvent.getActiveDates()!='null' and inputEvent.getActiveDates()!='':false}"
                                          th:each="date: ${inputEvent.getActiveDatesArr()}">
                                         <div class="form-group" style="margin-top: 15px;">
-                                            <div class="input-group date" id="datetimepicker" style="display: flex;">
+                                            <div class="input-group date" style="display: flex;">
                                                 <input type="text" class="form-control" style="width: auto;"
                                                        th:value="${date.substring(0,date.indexOf(':'))!='null'?date.substring(0,date.indexOf(':')):''}"/>
                                                 <span class="input-group-addon w-a day-span">
@@ -700,7 +700,7 @@
                                 }
                             }
                         }
-                    }
+                    } else inp.value += 'null;';
                 }
             }
             if (e1.childElementCount === 0) inp.value += 'null';
@@ -748,7 +748,7 @@
     function addDate() {
         $('#20').append('<div class="day-of-week">' +
             '<div class="form-group" style="margin-top: 15px;">' +
-            '<div class="input-group date" id="datetimepicker" style="display: flex;">' + //TODO: ID
+            '<div class="input-group date" style="display: flex;">' +
             '<input type="text" class="form-control" style="width: auto;">' +
             '<span class="input-group-addon" style="width: auto;margin-right: 20px;border-left-width: 0;border-radius: 0 4px 4px 0;">' +
             '<span class="glyphicon glyphicon-calendar"></span>' +
