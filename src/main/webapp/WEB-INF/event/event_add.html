@@ -28,7 +28,17 @@
     <link rel="stylesheet" type="text/css" href="../../resources/css/styles.css"/>
     <link rel="stylesheet" href="../../resources/css/media.css"/>
 
-    <style rel="stylesheet">.bootstrap-select.form-control:not([class*="col-"]){width: auto;}.dropdown-toggle{border-radius: 4px !important;}select.bs-select-hidden, select.selectpicker{display: inline-block !important;}</style>
+    <style rel="stylesheet">.bootstrap-select.form-control:not([class*="col-"]) {
+        width: auto;
+    }
+
+    .dropdown-toggle {
+        border-radius: 4px !important;
+    }
+
+    select.bs-select-hidden, select.selectpicker {
+        display: inline-block !important;
+    }</style>
 </head>
 <body style="background-color: #f9f9f9;">
 <!--/*@thymesVar id="inputEvent" type="com.heroku.demo.event.Event"*/-->
@@ -51,7 +61,8 @@
                         &nbsp;
                     </div>
                 </th:block>
-                <form th:object="${inputEvent}" method="POST" th:action="${isEdit?'/events/edit':'/event/add'}" enctype="multipart/form-data"
+                <form th:object="${inputEvent}" method="POST" th:action="${isEdit?'/events/edit':'/event/add'}"
+                      enctype="multipart/form-data"
                       autocomplete="off">
 
                     <!--/*@thymesVar id="id" type="java.lang.Integer"*/-->
@@ -76,7 +87,8 @@
                                       id="description" style="resize: vertical"
                                       class="form-control" th:text="${inputEvent.getDescription()}"></textarea>
                             <label for="description" th:if="${errors.isDescription()}"
-                                   th:text="${#messages.msg('error.event.description')}" th:class="'error'">Description Error</label>
+                                   th:text="${#messages.msg('error.event.description')}" th:class="'error'">Description
+                                Error</label>
                         </div>
                     </div>
                     <div class="row ml-0 mr-0">
@@ -126,7 +138,8 @@
                         <div class="panel-body">
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="typeOfDates" id="optionsRadios1" value="0" th:checked="${inputEvent.getTypeOfDates()==0}"
+                                    <input type="radio" name="typeOfDates" id="optionsRadios1" value="0"
+                                           th:checked="${inputEvent.getTypeOfDates()==0}"
                                            onclick="radio(0);"/>
                                     <b>Индивидуальная по запросу.</b> Заказать экскурсию можно на дни недели, которые
                                     указали в
@@ -135,7 +148,8 @@
                             </div>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="typeOfDates" id="optionsRadios2" value="1" th:checked="${inputEvent.getTypeOfDates()==1}"
+                                    <input type="radio" name="typeOfDates" id="optionsRadios2" value="1"
+                                           th:checked="${inputEvent.getTypeOfDates()==1}"
                                            onclick="radio(1);"/>
                                     <b>Групповая по еженедельному расписанию.</b> Вы составляете повторяющееся
                                     расписание
@@ -145,7 +159,8 @@
                             </div>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="typeOfDates" id="optionsRadios3" value="2" th:checked="${inputEvent.getTypeOfDates()==2}"
+                                    <input type="radio" name="typeOfDates" id="optionsRadios3" value="2"
+                                           th:checked="${inputEvent.getTypeOfDates()==2}"
                                            onclick="radio(2);"/>
                                     <b>Групповая по фиксированным датам.</b> Вы указываете даты проведения экскурсии,
                                     участники
@@ -160,175 +175,240 @@
                         <div class="panel-heading">
                             Расписание
                         </div>
-                        <div class="panel-body pb-0 pt-0" id="radio0" th:style="${inputEvent.getTypeOfDates()!=0}?'display: none;'">
+                        <div class="panel-body pb-0 pt-0" id="radio0"
+                             th:style="${inputEvent.getTypeOfDates()!=0}?'display: none;'">
                             <div class="day-of-week" id="00">
-                                <b>Пн.</b><a class="add-time" id="0" onclick="addTime(0, 0);" th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[0]=='null':true}">Задать интервал времени</a>
-                                <th:block th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[0]!='null':false}" th:with="arrI = ${inputEvent.getActiveDatesArr()[0]}">
-                                    <select class="my-sp form-control" th:with="opt = ${arrI.substring(0,arrI.indexOf('-'))}">
+                                <b>Пн.</b><a class="add-time" id="0" onclick="addTime(0, 0);"
+                                             th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[0]=='null':true}">Задать
+                                интервал времени</a>
+                                <th:block
+                                        th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[0]!='null':false}"
+                                        th:with="arrI = ${inputEvent.getActiveDatesArr()[0]}">
+                                    <select class="my-sp form-control"
+                                            th:with="opt = ${arrI.substring(0,arrI.indexOf('-'))}">
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                     <span> - </span>
-                                    <select class="my-sp form-control" th:with="opt = ${arrI.substring(arrI.indexOf('-')+1, arrI.length())}">
+                                    <select class="my-sp form-control"
+                                            th:with="opt = ${arrI.substring(arrI.indexOf('-')+1, arrI.length())}">
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                 </th:block>
 
                             </div>
                             <div class="day-of-week" id="01">
-                                <b>Вт.</b><a class="add-time" id="1" onclick="addTime(0, 1);" th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[1]=='null':true}">Задать интервал
+                                <b>Вт.</b><a class="add-time" id="1" onclick="addTime(0, 1);"
+                                             th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[1]=='null':true}">Задать
+                                интервал
                                 времени</a>
-                                <th:block th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[1]!='null':false}" th:with="arrI = ${inputEvent.getActiveDatesArr()[1]}">
-                                    <select class="my-sp form-control" th:with="opt = ${arrI.substring(0,arrI.indexOf('-'))}">
+                                <th:block
+                                        th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[1]!='null':false}"
+                                        th:with="arrI = ${inputEvent.getActiveDatesArr()[1]}">
+                                    <select class="my-sp form-control"
+                                            th:with="opt = ${arrI.substring(0,arrI.indexOf('-'))}">
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                     <span> - </span>
-                                    <select class="my-sp form-control" th:with="opt = ${arrI.substring(arrI.indexOf('-')+1, arrI.length())}">
+                                    <select class="my-sp form-control"
+                                            th:with="opt = ${arrI.substring(arrI.indexOf('-')+1, arrI.length())}">
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                 </th:block>
                             </div>
                             <div class="day-of-week" id="02">
-                                <b>Ср.</b><a class="add-time" id="2" onclick="addTime(0, 2);" th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[2]=='null':true}">Задать интервал
+                                <b>Ср.</b><a class="add-time" id="2" onclick="addTime(0, 2);"
+                                             th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[2]=='null':true}">Задать
+                                интервал
                                 времени</a>
-                                <th:block th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[2]!='null':false}" th:with="arrI = ${inputEvent.getActiveDatesArr()[2]}">
-                                    <select class="my-sp form-control" th:with="opt = ${arrI.substring(0,arrI.indexOf('-'))}">
+                                <th:block
+                                        th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[2]!='null':false}"
+                                        th:with="arrI = ${inputEvent.getActiveDatesArr()[2]}">
+                                    <select class="my-sp form-control"
+                                            th:with="opt = ${arrI.substring(0,arrI.indexOf('-'))}">
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                     <span> - </span>
-                                    <select class="my-sp form-control" th:with="opt = ${arrI.substring(arrI.indexOf('-')+1, arrI.length())}">
+                                    <select class="my-sp form-control"
+                                            th:with="opt = ${arrI.substring(arrI.indexOf('-')+1, arrI.length())}">
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                 </th:block>
                             </div>
                             <div class="day-of-week" id="03">
-                                <b>Чт.</b><a class="add-time" id="3" onclick="addTime(0, 3);" th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[3]=='null':true}">Задать интервал
+                                <b>Чт.</b><a class="add-time" id="3" onclick="addTime(0, 3);"
+                                             th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[3]=='null':true}">Задать
+                                интервал
                                 времени</a>
-                                <th:block th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[3]!='null':false}" th:with="arrI = ${inputEvent.getActiveDatesArr()[3]}">
-                                    <select class="my-sp form-control" th:with="opt = ${arrI.substring(0,arrI.indexOf('-'))}">
+                                <th:block
+                                        th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[3]!='null':false}"
+                                        th:with="arrI = ${inputEvent.getActiveDatesArr()[3]}">
+                                    <select class="my-sp form-control"
+                                            th:with="opt = ${arrI.substring(0,arrI.indexOf('-'))}">
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                     <span> - </span>
-                                    <select class="my-sp form-control" th:with="opt = ${arrI.substring(arrI.indexOf('-')+1, arrI.length())}">
+                                    <select class="my-sp form-control"
+                                            th:with="opt = ${arrI.substring(arrI.indexOf('-')+1, arrI.length())}">
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                 </th:block>
                             </div>
                             <div class="day-of-week" id="04">
-                                <b>Пт.</b><a class="add-time" id="4" onclick="addTime(0, 4);" th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[4]=='null':true}">Задать интервал
+                                <b>Пт.</b><a class="add-time" id="4" onclick="addTime(0, 4);"
+                                             th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[4]=='null':true}">Задать
+                                интервал
                                 времени</a>
-                                <th:block th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[4]!='null':false}" th:with="arrI = ${inputEvent.getActiveDatesArr()[4]}">
-                                    <select class="my-sp form-control" th:with="opt = ${arrI.substring(0,arrI.indexOf('-'))}">
+                                <th:block
+                                        th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[4]!='null':false}"
+                                        th:with="arrI = ${inputEvent.getActiveDatesArr()[4]}">
+                                    <select class="my-sp form-control"
+                                            th:with="opt = ${arrI.substring(0,arrI.indexOf('-'))}">
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                     <span> - </span>
-                                    <select class="my-sp form-control" th:with="opt = ${arrI.substring(arrI.indexOf('-')+1, arrI.length())}">
+                                    <select class="my-sp form-control"
+                                            th:with="opt = ${arrI.substring(arrI.indexOf('-')+1, arrI.length())}">
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                 </th:block>
                             </div>
                             <div class="day-of-week" id="05">
-                                <b>Сб.</b><a class="add-time" id="5" onclick="addTime(0, 5);" th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[5]=='null':true}">Задать интервал времени</a>
-                                <th:block th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[5]!='null':false}" th:with="arrI = ${inputEvent.getActiveDatesArr()[5]}">
-                                    <select class="my-sp form-control" th:with="opt = ${arrI.substring(0,arrI.indexOf('-'))}">
+                                <b>Сб.</b><a class="add-time" id="5" onclick="addTime(0, 5);"
+                                             th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[5]=='null':true}">Задать
+                                интервал времени</a>
+                                <th:block
+                                        th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[5]!='null':false}"
+                                        th:with="arrI = ${inputEvent.getActiveDatesArr()[5]}">
+                                    <select class="my-sp form-control"
+                                            th:with="opt = ${arrI.substring(0,arrI.indexOf('-'))}">
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                     <span> - </span>
-                                    <select class="my-sp form-control" th:with="opt = ${arrI.substring(arrI.indexOf('-')+1, arrI.length())}">
+                                    <select class="my-sp form-control"
+                                            th:with="opt = ${arrI.substring(arrI.indexOf('-')+1, arrI.length())}">
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                 </th:block>
                             </div>
                             <div class="day-of-week bw-0" id="06">
-                                <b>Вс.</b><a class="add-time" id="6" onclick="addTime(0, 6);" th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[6]=='null':true}">Задать интервал времени</a>
-                                <th:block th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[6]!='null':false}" th:with="arrI = ${inputEvent.getActiveDatesArr()[6]}">
-                                    <select class="my-sp form-control" th:with="opt = ${arrI.substring(0,arrI.indexOf('-'))}">
+                                <b>Вс.</b><a class="add-time" id="6" onclick="addTime(0, 6);"
+                                             th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[6]=='null':true}">Задать
+                                интервал времени</a>
+                                <th:block
+                                        th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[6]!='null':false}"
+                                        th:with="arrI = ${inputEvent.getActiveDatesArr()[6]}">
+                                    <select class="my-sp form-control"
+                                            th:with="opt = ${arrI.substring(0,arrI.indexOf('-'))}">
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                     <span> - </span>
-                                    <select class="my-sp form-control" th:with="opt = ${arrI.substring(arrI.indexOf('-')+1, arrI.length())}">
+                                    <select class="my-sp form-control"
+                                            th:with="opt = ${arrI.substring(arrI.indexOf('-')+1, arrI.length())}">
                                         <th:block th:replace="fragments/select :: times"></th:block>
                                     </select>
                                 </th:block>
                             </div>
                         </div>
 
-                        <div class="panel-body pb-0 pt-0" id="radio1" th:style="${inputEvent.getTypeOfDates()!=1}?'display: none;'">
+                        <div class="panel-body pb-0 pt-0" id="radio1"
+                             th:style="${inputEvent.getTypeOfDates()!=1}?'display: none;'">
                             <div class="day-of-week">
                                 <b>Пн.</b>
                                 <span id="10">
-                                    <select th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[0]!='null':false}" th:each="time: ${inputEvent.getActiveDatesArr()[0].split(',')}"
-                                            class="my-sp form-control">
-                                        <th:block th:with="opt=${time}" th:replace="fragments/select :: times"></th:block>
-                                    </select>
+                                    <th:block th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[0]!='null':false}">
+                                        <select th:each="time: ${inputEvent.getActiveDatesArr()[0].split(',')}" class="my-sp form-control" th:with="opt=${time}">
+                                            <th:block th:replace="fragments/select :: times"></th:block>
+                                        </select>
+                                    </th:block>
                                 </span><a class="add-time" onclick="addTime(1, 0);">Добавить время</a>
                             </div>
                             <div class="day-of-week">
                                 <b>Вт.</b>
                                 <span id="11">
-                                    <select th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[1]!='null':false}" class="my-sp form-control">
-                                        <th:block th:replace="fragments/select :: times"></th:block>
-                                    </select>
+                                    <th:block th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[1]!='null':false}">
+                                        <select th:each="time: ${inputEvent.getActiveDatesArr()[1].split(',')}" class="my-sp form-control" th:with="opt=${time}">
+                                            <th:block th:replace="fragments/select :: times"></th:block>
+                                        </select>
+                                    </th:block>
                                 </span>
                                 <a class="add-time" onclick="addTime(1, 1);">Добавить время</a>
                             </div>
                             <div class="day-of-week">
                                 <b>Ср.</b>
                                 <span id="12">
-                                    <select th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[2]!='null':false}" class="my-sp form-control">
-                                        <th:block th:replace="fragments/select :: times"></th:block>
-                                    </select>
+                                    <th:block th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[2]!='null':false}">
+                                        <select th:each="time: ${inputEvent.getActiveDatesArr()[2].split(',')}" class="my-sp form-control" th:with="opt=${time}">
+                                            <th:block th:replace="fragments/select :: times"></th:block>
+                                        </select>
+                                    </th:block>
                                 </span>
                                 <a class="add-time" onclick="addTime(1, 2);">Добавить время</a>
                             </div>
                             <div class="day-of-week">
                                 <b>Чт.</b>
                                 <span id="13">
-                                    <select th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[3]!='null':false}" class="my-sp form-control">
-                                        <th:block th:replace="fragments/select :: times"></th:block>
-                                    </select>
+                                    <th:block th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[3]!='null':false}">
+                                        <select th:each="time: ${inputEvent.getActiveDatesArr()[3].split(',')}" class="my-sp form-control" th:with="opt=${time}">
+                                            <th:block th:replace="fragments/select :: times"></th:block>
+                                        </select>
+                                    </th:block>
                                 </span>
                                 <a class="add-time" onclick="addTime(1, 3);">Добавить время</a>
                             </div>
                             <div class="day-of-week">
                                 <b>Пт.</b>
                                 <span id="14">
-                                    <select th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[4]!='null':false}" class="my-sp form-control">
-                                        <th:block th:replace="fragments/select :: times"></th:block>
-                                    </select>
+                                    <th:block th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[4]!='null':false}">
+                                        <select th:each="time: ${inputEvent.getActiveDatesArr()[4].split(',')}" class="my-sp form-control" th:with="opt=${time}">
+                                            <th:block th:replace="fragments/select :: times"></th:block>
+                                        </select>
+                                    </th:block>
                                 </span>
                                 <a class="add-time" onclick="addTime(1, 4);">Добавить время</a>
                             </div>
                             <div class="day-of-week">
                                 <b>Сб.</b>
                                 <span id="15">
-                                    <select th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[5]!='null':false}" class="my-sp form-control">
-                                        <th:block th:replace="fragments/select :: times"></th:block>
-                                    </select>
+                                    <th:block th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[5]!='null':false}">
+                                        <select th:each="time: ${inputEvent.getActiveDatesArr()[5].split(',')}" class="my-sp form-control" th:with="opt=${time}">
+                                            <th:block th:replace="fragments/select :: times"></th:block>
+                                        </select>
+                                    </th:block>
                                 </span>
                                 <a class="add-time" onclick="addTime(1, 5);">Добавить время</a>
                             </div>
                             <div class="day-of-week bw-0">
                                 <b>Вс.</b>
                                 <span id="16">
-                                    <select th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[6]!='null':false}" class="my-sp form-control">
-                                        <th:block th:replace="fragments/select :: times"></th:block>
-                                    </select>
+                                    <th:block th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[6]!='null':false}">
+                                        <select th:each="time: ${inputEvent.getActiveDatesArr()[6].split(',')}" class="my-sp form-control" th:with="opt=${time}">
+                                            <th:block th:replace="fragments/select :: times"></th:block>
+                                        </select>
+                                    </th:block>
                                 </span>
                                 <a class="add-time" onclick="addTime(1, 6);">Добавить время</a>
                             </div>
                         </div>
 
-                        <div class="panel-body pb-0 pt-0" id="radio2" th:style="${inputEvent.getTypeOfDates()!=2}?'display: none;'">
+                        <div class="panel-body pb-0 pt-0" id="radio2"
+                             th:style="${inputEvent.getTypeOfDates()!=2}?'display: none;'">
                             <div class="day-of-week bw-0">
                                 <div id="20">
-                                    <div class="day-of-week" th:if="${isEdit and inputEvent.getTypeOfDates()==2?inputEvent.getActiveDates()!='null':false}" th:each="date: ${inputEvent.getActiveDatesArr()}">
+                                    <div class="day-of-week"
+                                         th:if="${isEdit and inputEvent.getTypeOfDates()==2?inputEvent.getActiveDates()!='null':false}"
+                                         th:each="date: ${inputEvent.getActiveDatesArr()}">
                                         <div class="form-group" style="margin-top: 15px;">
                                             <div class="input-group date" id="datetimepicker" style="display: flex;">
-                                                <input type="text" class="form-control" style="width: auto;" th:value="${date.substring(0,date.indexOf(':'))!='null'?date.substring(0,date.indexOf(':')):''}"/>
+                                                <input type="text" class="form-control" style="width: auto;"
+                                                       th:value="${date.substring(0,date.indexOf(':'))!='null'?date.substring(0,date.indexOf(':')):''}"/>
                                                 <span class="input-group-addon w-a day-span">
                                                     <span class="glyphicon glyphicon-calendar"></span>
                                                 </span>
-                                                <select class="my-sp form-control" style="border-radius: 4px;width: auto;" th:with="opt = ${date.substring(date.indexOf(':')+1,date.length())}"><th:block th:replace="fragments/select :: times"></th:block></select>
+                                                <select class="my-sp form-control"
+                                                        style="border-radius: 4px;width: auto;"
+                                                        th:with="opt = ${date.substring(date.indexOf(':')+1,date.length())}">
+                                                    <th:block th:replace="fragments/select :: times"></th:block>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -480,7 +560,8 @@
                        data-title="Изменить?" data-content="Экскурсия снова будет отправлена на модерацию!"
                        data-toggle="confirmation" onclick="sbmt();">Отправить</a>
 
-                    <a th:unless="${isEdit}" class="btn btn-default" th:text="${#messages.msg('words.submit')}" onclick="sbmt();">Отправить</a>
+                    <a th:unless="${isEdit}" class="btn btn-default" th:text="${#messages.msg('words.submit')}"
+                       onclick="sbmt();">Отправить</a>
 
                     <button type="submit" value="Upload" style="display: none" id="sbmt">Отправить</button>
                 </form>
@@ -493,9 +574,10 @@
                     <img class="img_age" id="card-age_limit" src="../../resources/img/age_limits/0.png"/>
                     <!--/*Card image*/-->
                     <div class="view overlay hm-white-slight z-depth-1" style="margin-top: 20px;">
-                        <div class="img_crop"><img th:src="${inputEvent.pathToPhoto.size()>0?inputEvent.pathToPhoto.get(0):'../../resources/img/bg-cta.jpg'}"
-                                                   class="img-fluid" alt="" id = "demo-img"
-                                                   style="height: 240px; min-width: -webkit-fill-available;"/>
+                        <div class="img_crop"><img
+                                th:src="${inputEvent.pathToPhoto.size()>0?inputEvent.pathToPhoto.get(0):'../../resources/img/bg-cta.jpg'}"
+                                class="img-fluid" alt="" id="demo-img"
+                                style="height: 240px; min-width: -webkit-fill-available;"/>
                         </div>
                         <div class="mask waves-effect waves-light"></div>
                     </div>
@@ -517,7 +599,9 @@
                     </div>
                     <!--/*Card footer*/-->
                     <div class="card-footer links-light">
-                        <h3 class="left card-footer-left mt-0 mb-0"><strong id="card-price"  th:text="${inputEvent.getPrice()>0?inputEvent.getPrice()+'₽':'%ЦЕНА%'}">%PRICE%</strong></h3>
+                        <h3 class="left card-footer-left mt-0 mb-0"><strong id="card-price"
+                                                                            th:text="${inputEvent.getPrice()>0?inputEvent.getPrice()+'₽':'%ЦЕНА%'}">%PRICE%</strong>
+                        </h3>
                         <a class="btn btn-primary waves-effect waves-light right disabled mt-05">Открыть</a>
                     </div>
                     <!--/*End-of-Card content*/-->
@@ -537,23 +621,27 @@
         src="../../resources/libs/datetimepicker/js/bower_components/moment/locale/ru.js"></script>
 <script type="text/javascript" src="../../resources/libs/datetimepicker/js/datetimepicker.min.js"></script>
 <script type="text/javascript" src="../../resources/js/Sortable.min.js"></script>
-<script type="text/javascript" src="../../resources/libs/bootstrap-confirmation/js/bootstrap-confirmation.min.js"></script>
+<script type="text/javascript"
+        src="../../resources/libs/bootstrap-confirmation/js/bootstrap-confirmation.min.js"></script>
 
 <script th:inline="javascript">
     /*<![CDATA[*/
     function remove_img(el) {
         el.parent().remove();
-        var $result = $('#result');var $demoImg = $('#demo-img');
+        var $result = $('#result');
+        var $demoImg = $('#demo-img');
         if ($result.children().length < 4)
             $('#add-photo').css('display', 'block');
         var src = $result.find('div:first-child img:first-child').attr('src');
-        if ($demoImg.attr('src')!==src)
+        if ($demoImg.attr('src') !== src)
             $demoImg.attr("src", src);
     }
 
     function sbmt() {
         var type = Number($('input[name=typeOfDates]:checked').val());
-        var $radio0 = $('#radio0');var $radio1 = $('#radio1');var $radio2 = $('#radio2');
+        var $radio0 = $('#radio0');
+        var $radio1 = $('#radio1');
+        var $radio2 = $('#radio2');
         var inp = document.getElementById('active_dates');
         if (type === 0) {
             $radio0.children().each(function (index, elem) {
@@ -565,7 +653,7 @@
                         inp.value += '-';
                     }
                 }
-                if (inp.value[inp.value.length-1]==='-')
+                if (inp.value[inp.value.length - 1] === '-')
                     inp.value = inp.value.substring(0, inp.value.length - 1);
                 else inp.value += 'null';
                 inp.value += ';';
@@ -574,7 +662,7 @@
         else if (type === 1) {
             for (var i = 0; i < 7; i++) {
                 var el = document.getElementById('1' + i);
-                if (el!==null && el.childNodes!==null) {
+                if (el !== null && el.childNodes !== null) {
                     for (var childItemT in el.childNodes) {
                         var el1 = el.childNodes[childItemT];
                         if (el1.nodeType === 1 && el1.className === "my-sp form-control") {
@@ -584,7 +672,7 @@
                         }
                     }
                 }
-                if (inp.value[inp.value.length-1]===',')
+                if (inp.value[inp.value.length - 1] === ',')
                     inp.value = inp.value.substring(0, inp.value.length - 1);
                 else inp.value += 'null';
                 inp.value += ';';
@@ -596,24 +684,26 @@
                 var e = e1.childNodes[childItem1];
                 if (e.nodeType === 1 && e.className === "day-of-week") {
                     var child3 = e.firstChild.firstChild;
-                    if (child3.className === "input-group date") {
-                        for (var childItem in child3.childNodes) {
-                            var e5 = child3.childNodes[childItem];
-                            if (e5.nodeType === 1) {
-                                if (e5.className === "form-control") {
-                                    // console.log("date: " + e5.value);
-                                    inp.value += e5.value + ':';
-                                }
-                                if (e5.className === "my-sp form-control") {
-                                    // console.log("time: " + e5.value);
-                                    inp.value += e5.value + ';';
+                    if (child3 !== null) {
+                        if (child3.className === "input-group date") {
+                            for (var childItem in child3.childNodes) {
+                                var e5 = child3.childNodes[childItem];
+                                if (e5.nodeType === 1) {
+                                    if (e5.className === "form-control") {
+                                        // console.log("date: " + e5.value);
+                                        inp.value += e5.value + ':';
+                                    }
+                                    if (e5.className === "my-sp form-control") {
+                                        // console.log("time: " + e5.value);
+                                        inp.value += e5.value + ';';
+                                    }
                                 }
                             }
                         }
                     }
                 }
             }
-            if (el.childElementCount===0) inp.value+='null';
+            if (el.childElementCount === 0) inp.value += 'null';
         }
 
         $radio0.remove();
@@ -625,13 +715,13 @@
             var img = elem.getElementsByClassName('img-rounded')[0];
             st += img.src.toString().substring(44, 76) + ';';
         });
-        if (st.length>0)
+        if (st.length > 0)
             st = st.substring(0, st.length - 1);
         $('#photos').val(st);
 
         inp.value = inp.value.substring(0, inp.value.length - 1);
         //inp.value = inp.value.split("null").join("");
-        console.log("inp.value: "+inp.value);
+        console.log("inp.value: " + inp.value);
         $("#upload_input").remove();
         $('#sbmt').click();
     }
@@ -686,9 +776,21 @@
     }
 
     function radio(type) {
-        if (type === 0) {$('#radio0').css('display', 'block');$('#radio1').css('display', 'none');$('#radio2').css('display', 'none');}
-        if (type === 1) {$('#radio0').css('display', 'none');$('#radio1').css('display', 'block');$('#radio2').css('display', 'none');}
-        if (type === 2) {$('#radio0').css('display', 'none');$('#radio1').css('display', 'none');$('#radio2').css('display', 'block');}
+        if (type === 0) {
+            $('#radio0').css('display', 'block');
+            $('#radio1').css('display', 'none');
+            $('#radio2').css('display', 'none');
+        }
+        if (type === 1) {
+            $('#radio0').css('display', 'none');
+            $('#radio1').css('display', 'block');
+            $('#radio2').css('display', 'none');
+        }
+        if (type === 2) {
+            $('#radio0').css('display', 'none');
+            $('#radio1').css('display', 'none');
+            $('#radio2').css('display', 'block');
+        }
     }
 
     function setimage() { // функция загрузки на сервер
@@ -718,13 +820,14 @@
                 success: function (data) {
                     var final = '<div class="upload-img"><img src="' + data + '" class="img-rounded"/>"' +
                         '"<div class="closer" onclick="remove_img($(this));"></div></div>';
-                    var $result = $('#result'); var $demoImg = $('#demo-img');
+                    var $result = $('#result');
+                    var $demoImg = $('#demo-img');
                     if ($result.children().length < 4)
                         $result.append(final); // вставляю миниатюру в #result
                     if ($result.children('.upload-img').length >= 4)
                         $('#add-photo').css('display', 'none');
                     var src = $result.find('div:first-child img:first-child').attr('src');
-                    if ($demoImg.attr('src')!==src)
+                    if ($demoImg.attr('src') !== src)
                         $demoImg.attr("src", src);
                 },
                 error: function (data) {
@@ -755,7 +858,7 @@
             onUpdate: function (evt/**Event*/) {
                 var src = $('#result').find('div:first-child img:first-child').attr('src');
                 var $demoImg = $('#demo-img');
-                if ($demoImg.attr('src')!==src)
+                if ($demoImg.attr('src') !== src)
                     $demoImg.attr("src", src);
                 // var item = evt.item; // the current dragged HTMLElement
             },
