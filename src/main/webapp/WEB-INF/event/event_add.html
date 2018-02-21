@@ -700,6 +700,7 @@
                 if (elem !== null && elem.className === "day-of-week") {
                     if (elem.getElementsByClassName("input-group date").length !== 0) {
                         var child3 = elem.getElementsByClassName("input-group date")[0];
+                        console.log(child3.className);
                         for (var childItem in child3.childNodes) {
                             var e5 = child3.childNodes[childItem];
                             if (e5.nodeType === 1) {
