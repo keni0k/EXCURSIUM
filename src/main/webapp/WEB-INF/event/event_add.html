@@ -568,13 +568,12 @@
                         </div>
                     </div>
 
-                    <a th:if="${isEdit}" class="btn btn-default" th:text="${#messages.msg('words.submit')}"
+                    <a th:if="${isEdit}" class="btn btn-default"
                        data-btn-ok-label="Изменить" data-btn-ok-icon="glyphicon glyphicon-share-alt"
-                       data-btn-ok-class="btn-success"
+                       data-btn-ok-class="btn-success" data-btn-cancel-class="btn-danger"
                        data-btn-cancel-label="Отмена" data-btn-cancel-icon="glyphicon glyphicon-ban-circle"
-                       data-btn-cancel-class="btn-danger"
                        data-title="Изменить?" data-content="Экскурсия снова будет отправлена на модерацию!"
-                       data-toggle="confirmation" onclick="sbmt();">Отправить</a>
+                       data-toggle="confirmation">Изменить</a>
 
                     <a th:unless="${isEdit}" class="btn btn-default" th:text="${#messages.msg('words.submit')}"
                        onclick="sbmt();">Отправить</a>
@@ -852,24 +851,14 @@
     }
 
     $(document).ready(function () {
-        $("#upload_button").click(function () {
-            $("#upload_input").click();
-        });
+        $("#upload_button").click(function () {$("#upload_input").click();});
+        $('.btn-success').click(function () {sbmt();});
 
-        $('.date').datetimepicker({
-            locale: 'ru',
-            format: 'DD.MM.YYYY',
-            minDate: moment(),
-            maxDate: moment().add(3, 'months')
-        });
+        $('.date').datetimepicker({locale: 'ru', format: 'DD.MM.YYYY', minDate: moment(), maxDate: moment().add(3, 'months')});
 
-        $("#upload_input").change(function () {
-            setimage();
-        });
+        $("#upload_input").change(function () {setimage();});
 
-        $('[data-toggle=confirmation]').confirmation({
-            rootSelector: '[data-toggle=confirmation]'
-        });
+        $('[data-toggle=confirmation]').confirmation({rootSelector: '[data-toggle=confirmation]'});
 
         var container = document.getElementById("result");
         var sort = Sortable.create(container, {
