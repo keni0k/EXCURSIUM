@@ -46,7 +46,6 @@ public class Person implements UserDetails{
 
     private String dateAndPlaceOfPassport = "";
     private String seriesAndNumberOfPassport = "";
-    private String imageOfPassportUrl = "";
 
 
     public String getTime() {
@@ -288,14 +287,6 @@ public class Person implements UserDetails{
 
     public void setSeriesAndNumberOfPassport(String seriesAndNumberOfPassport) {
         this.seriesAndNumberOfPassport = seriesAndNumberOfPassport;
-    }
-
-    public String getImageOfPassportUrl() {
-        return imageOfPassportUrl;
-    }
-
-    public void setImageOfPassportUrl(String imageOfPassportUrl) {
-        this.imageOfPassportUrl = imageOfPassportUrl;
     }
 
     public String getVk() {

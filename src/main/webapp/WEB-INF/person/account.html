@@ -12,7 +12,7 @@
     <title th:text="${#messages.msg('titles.account')}">Профиль</title>
 
     <link rel="stylesheet" type="text/css" href="../../resources/css/footer.css"/>
-    <link rel="stylesheet" href="../../resources/libs/bootstrap-select/css/bootstrap-select.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
@@ -33,16 +33,14 @@
     <link rel="stylesheet" href="../../resources/css/mycards.css"/>
     <link rel="stylesheet" href="../../resources/css/media.css"/>
 </head>
-
-<body style="background-color: #f9f9f9;">
 <!--/*@thymesVar id="person" type="com.heroku.demo.person.Person"*/-->
 <!--/*@thymesVar id="consts" type="com.heroku.demo.utils.Consts"*/-->
+<body style="background-color: #f9f9f9;" th:with="excursovod = ${person.getType()==consts.PERSON_GUIDE or person.getType()==consts.PERSON_MODER_GUIDE or person.getType()==consts.PERSON_ADMIN},
+tourist = ${person.getType()==consts.PERSON_TOURIST or person.getType()==consts.PERSON_MODER_TOURIST or person.getType()==consts.PERSON_ADMIN}">
 <!--/*@thymesVar id="orders" type="java.util.List<com.heroku.demo.order.Buy>"*/-->
 <!--/*@thymesVar id="events" type="java.util.List"*/-->
 <div class="content mb-0"
-     th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}, isThisUserAccount = ${true},
-excursovod = ${person.getType()==consts.PERSON_GUIDE or person.getType()==consts.PERSON_MODER_GUIDE or person.getType()==consts.PERSON_ADMIN},
-tourist = ${person.getType()==consts.PERSON_TOURIST or person.getType()==consts.PERSON_MODER_TOURIST or person.getType()==consts.PERSON_ADMIN},
+     th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}, isThisUserAccount = ${#httpServletRequest.getUserPrincipal().getName().toLowerCase()==person.getLogin().toLowerCase() || #httpServletRequest.getUserPrincipal().getName().toLowerCase()==person.getEmail().toLowerCase()},
 notConfirmed = ${person.getType()==consts.PERSON_DISABLED or person.getType()==consts.PERSON_ADMIN},
 lang=${#locale.getLanguage().toString()=='en'?1:0}">
     <!--/*TODO isThisUserAccount*/-->
@@ -98,7 +96,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                     <p th:if="${person.getPhoneNumber()!=''}" class="card-text">тел.
                                         <th:block th:text="${person.getPhoneNumber()}"/>
                                     </p>
-                                    <button th:unless="${isThisUserAccount}" type="button"
+                                    <button th:if="${isAdmin}" type="button"
                                             class="btn btn-info waves-effect waves-light"
                                             data-toggle="modal" data-target="#modalContactUser">Связаться<i
                                             class="fa fa-paper-plane ml-2"></i></button>
@@ -121,6 +119,11 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                        role="button"
                                        data-toggle="modal" data-target="#modalFeedback">Сообщить об ошибке <i
                                             class="fa fa-paper-plane ml-2"></i></a>
+
+                                    <button th:if="${isAdmin}" type="button"
+                                            class="btn btn-info waves-effect waves-light"
+                                            data-toggle="modal" data-target="#modalArchivement">modalArchivement<i
+                                            class="fa fa-paper-plane ml-2"></i></button>
                                 </div>
                             </section>
                             <!--/*End-of-Section: Basic Info*/-->
@@ -204,7 +207,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                             <div th:if="${orders.size()>0}"
                                  th:each="j : ${#numbers.sequence(0,orders.size()-1)}"
                                  class="card card-cascade narrower"
-                                 th:id="'id-0'+${j}"
+                                 th:id="'id-1'+${j}"
                                  th:style="${j != 0}?'display: none;'"
                                  th:with="order=${orders.get(j)}">
                                 <!--/*@thymesVar id="order" type="com.heroku.demo.order.Buy"*/-->
@@ -284,9 +287,9 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                     <!--/*Numbers*/-->
                                     <li th:each="i : ${#numbers.sequence(1, orders.size())}"
                                         th:class="'page-item' + (${i==1}?' active':'')"
-                                        th:id="'page_events-0'+${i}">
+                                        th:id="'page_events-1'+${i}">
                                         <a class="page-link waves-effect waves-effect" th:text="${i}"
-                                           th:onclick="'showHide0('+${i}+');'">1
+                                           th:onclick="'showHide(1, '+${i}+');'">1
                                         </a>
                                     </li>
                                     <!--/*Arrow right*/-->
@@ -324,7 +327,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                  th:each="j : ${#numbers.sequence(0, events.size()-1)}"
                                  class="card card-cascade narrower"
                                  th:with="event = ${events.get(j)}"
-                                 th:id="'id'+${j}"
+                                 th:id="'id-0'+${j}"
                                  th:style="${j != 0}?'display: none;'">
                                 <!--/*@thymesVar id="event" type="com.heroku.demo.event.Event"*/-->
                                 <!--/*Card image*/-->
@@ -410,9 +413,9 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                     <!--/*Numbers*/-->
                                     <li th:each="i : ${#numbers.sequence(1, pagesev)}"
                                         th:class="'page-item' + (${i==1}?' active':'')"
-                                        th:id="'page_events'+${i}">
+                                        th:id="'page_events-0'+${i}">
                                         <a class="page-link waves-effect waves-effect" th:text="${i}"
-                                           th:onclick="'showHide('+${i}+');'">1
+                                           th:onclick="'showHide(0,'+${i}+');'">1
                                         </a>
                                     </li>
                                     <!--/*Arrow right*/-->
@@ -435,7 +438,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                 <!--/*Section: Modals*/-->
                 <section class="pt-0">
                     <!--/*Modal: modalEditProfile*/-->
-                    <div class="modal fade" id="modalEditProfile" tabindex="-1" role="dialog"
+                    <div class="modal fade" id="modalEditProfile" tabindex="-1" role="dialog" th:if="${isThisUserAccount}"
                          aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                         <div class="modal-dialog cascading-modal modal-lg" role="document">
                             <!--/*Content*/-->
@@ -499,9 +502,9 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                                         <div class="col-md-12">
                                                             <!--/*Company website*/-->
                                                             <div class="md-form form-sm">
-<textarea type="text" id="editProfile5" name="about_me"
-          class="md-textarea"
-          th:text="${person.getAbout()}"></textarea>
+                                                                <textarea type="text" id="editProfile5" name="about_me"
+                                                                          class="md-textarea"
+                                                                          th:text="${person.getAbout()}"></textarea>
                                                                 <label for="editProfile5" class=""
                                                                        th:text="${#messages.msg('words.about_me')}">About
                                                                     me</label>
@@ -644,7 +647,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                     </div>
                     <!--/*End-of-Modal: modalEditProfile*/-->
                     <!--/*Modal: modalFeedback*/-->
-                    <div class="modal fade" id="modalFeedback" tabindex="-1" role="dialog"
+                    <div class="modal fade" id="modalFeedback" tabindex="-1" role="dialog" th:if="${isThisUserAccount}"
                          aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                         <div class="modal-dialog cascading-modal modal-lg" role="document">
                             <!--/*Content*/-->
@@ -698,7 +701,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                     </div>
                     <!--/*End-of-Modal: modalFeedback*/-->
                     <!--/*Modal: modalAchievment*/-->
-                    <div class="modal fade" id="modalAchievment" tabindex="-1" role="dialog"
+                    <div class="modal fade" id="modalAchievment" tabindex="-1" role="dialog" th:if="${isAdmin}"
                          aria-labelledby="myModalLabel" aria-hidden="true">
                         <div class="modal-dialog cascading-modal" role="document">
                             <!--/*Content*/-->
@@ -727,7 +730,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                     </div>
                     <!--/*End-of-Modal: modalAchievment*/-->
                     <!--/*Modal: modalContactUser */-->
-                    <div class="modal fade" id="modalContactUser" tabindex="-1" role="dialog"
+                    <div class="modal fade" id="modalContactUser" tabindex="-1" role="dialog" th:if="${isAdmin}"
                          aria-labelledby="myModalLabel" aria-hidden="true">
                         <div class="modal-dialog cascading-modal modal-lg" role="document">
                             <!--/*Content*/-->
@@ -761,7 +764,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                     </div>
                     <!--/*End-of-Modal: modalContactUser*/-->
                     <!--/*Modal: modalUpToGuide*/-->
-                    <div class="modal fade" id="modalUpToGuide" tabindex="-1" role="dialog"
+                    <div class="modal fade" id="modalUpToGuide" tabindex="-1" role="dialog" th:if="${tourist}"
                          aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                         <div class="modal-dialog cascading-modal modal-lg" role="document">
                             <!--/*Content*/-->
@@ -798,26 +801,12 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                             </div>
                                             <!--/*End-of-Grid column*/-->
                                             <!--/*Grid column*/-->
-                                            <div class="col-md-12">
-                                                <div class="md-form form-sm">
-                                                    <input name="file" type="file" id="upToGuide3" required=""
-                                                           class="form-control"
-                                                           size="30000000"
-                                                           style="padding-left: 10rem; padding-top: 5px; font-size: 1rem;"
-                                                           accept="image/jpeg,image/png"
-                                                           aria-label="Фотография паспорта"/>
-                                                    <label for="upToGuide3" class="" style="top: 0.5rem;">Фотография
-                                                        паспорта</label>
-                                                </div>
-                                            </div>
-                                            <!--/*End-of-Grid column*/-->
-                                            <!--/*Grid column*/-->
                                             <div class="col-md-12" th:if="${person.getAbout()==''}">
                                                 <!--/*Company website*/-->
                                                 <div class="md-form form-sm">
-<textarea type="text" id="upToGuide4" name="about_me"
-          class="md-textarea" required=""
-          th:text="${person.getAbout()}"></textarea>
+                                                    <textarea type="text" id="upToGuide4" name="about_me"
+                                                              class="md-textarea" required=""
+                                                              th:text="${person.getAbout()}"></textarea>
                                                     <label for="upToGuide4"
                                                            th:text="${#messages.msg('words.about_me')}">О себе</label>
                                                 </div>
@@ -829,8 +818,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                                 <!--/*Company website*/-->
                                                 <div class="md-form form-sm">
                                                     <input name="phone_number" type="text"
-                                                           class="form-control bfh-phone" required=""
-                                                           minlength="17" data-format="+7 (ddd) ddd-dddd"
+                                                           class="form-control" required=""
                                                            id="phone_number"/>
                                                     <label for="phone_number"
                                                            th:text="${#messages.msg('words.phone')}">Номер
@@ -864,7 +852,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                     </div>
                     <!--/*End-of-Modal: modalUpToGuide*/-->
 
-                    <div class="modal fade" id="modalDispute" tabindex="-1" role="dialog"
+                    <div class="modal fade" id="modalDispute" tabindex="-1" role="dialog" th:if="${orders.size()>0}"
                          aria-labelledby="myModalLabel" aria-hidden="true">
                         <div class="modal-dialog cascading-modal modal-lg">
                             <div class="modal-content">
@@ -876,7 +864,7 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                 </div>
 
                                 <div class="modal-body">
-                                    <form action="/orders/add_disute" method="post">
+                                    <form action="/orders/add_dispute" method="post">
                                         <!--/*Subject*/-->
                                         <input id="order_id1" name="order_id"
                                                style="visibility: hidden; width: 0; height: 0; display: none;"/>
@@ -885,11 +873,9 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
                                             <fieldset class="">
                                                 <h4 style="font-weight: bold">Выберите категорию:</h4>
                                                 <input type="radio" id="star28" name="category" value="1"/>
-                                                <label for="star28">Идея</label>
+                                                <label for="star28">Не явка на место встречи</label>
                                                 <input type="radio" id="star27" name="category" value="2"/>
-                                                <label for="star27">Отзыв</label>
-                                                <input type="radio" id="star26" name="category" value="3"/>
-                                                <label for="star26">Ошибка</label>
+                                                <label for="star27">Оскорбительное поведение</label>
                                             </fieldset>
                                         </div>
                                         <!--/*Message*/-->
@@ -929,85 +915,16 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
 <script type="text/javascript" src="../../resources/libs/bootstrap-confirmation/js/bootstrap-confirmation.min.js"></script>
+<script src="../../resources/js/maskedinput.min.js" th:if="${person.getPhoneNumber()==''}"></script>
+<script th:if="${person.getPhoneNumber()==''}">$(document).ready(function () {$("#phone_number").mask("+7 (999) 999-9999");});</script>
 
 <script th:inline="javascript">
     /*<![CDATA[*/
-
-    function modalReview(id) {
-        document.getElementById('order_id').value = id;
-    }
-
-    function modalDispute(id) {
-        document.getElementById('order_id1').value = id;
-    }
-
-    $('#modalDispute').on('show.bs.modal', function (e) {
-        $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
-
-        $('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>');
-    });
-
-    /*]]>*/
-</script>
-<!--/*Custom scripts*/-->
-<script th:inline="javascript">
-    /*<![CDATA[*/
-    function onImgError() {
-        document.getElementById("img-person").style.display = "none";
-        document.getElementById("card-person").style.marginTop = '0';
-    }
-
-    function showHide0(page) {
-//Если элемент с id-шником element_id существует
-        var id = page - 1;
-        var i;
-        var pages = [[${orders.size()}]];
-        for (i = 0; i < pages; i++) {
-            var j = i + 1;
-            document.getElementById('id-0' + i).style.display = "none";
-            if (i < pages && document.getElementById('page_events-0' + j))
-                document.getElementById('page_events-0' + j).className = "page-item";
-            if (j === page && document.getElementById('page_events-0' + j))
-                document.getElementById('page_events-0' + j).className = "page-item active";
-        }
-
-        if (document.getElementById('id-0' + id))
-            document.getElementById('id-0' + id).style.display = "";
-
-        /*switch (page) {
-            case 0:
-                document.getElementById('to-home-exc-0').className = "page-item disabled clearfix d-none d-sm-block";
-                document.getElementById('to-end-exc-0').className = "page-item clearfix d-none d-sm-block";
-                break;
-            case pages:
-                document.getElementById('to-home-exc-0').className = "page-item clearfix d-none d-sm-block";
-                document.getElementById('to-end-exc-0').className = "page-item disabled clearfix d-none d-sm-block";
-                break;
-            default:
-                document.getElementById('to-home-exc-0').className = "page-item clearfix d-none d-sm-block";
-                document.getElementById('to-end-exc-0').className = "page-item clearfix d-none d-sm-block";
-        }*/
-    }
-
-    function showHide(page) {
-//Если элемент с id-шником element_id существует
-        var id = page - 1;
-        var i;
-        var pages = [[${events.size()}]];
-
-        for (i = 0; i < pages; i++) {
-            var j = i + 1;
-            document.getElementById('id' + i).style.display = "none";
-            if (i < pages && document.getElementById('page_events' + j))
-                document.getElementById('page_events' + j).className = "page-item";
-            if (j === page && document.getElementById('page_events' + j))
-                document.getElementById('page_events' + j).className = "page-item active";
-        }
-
-        if (document.getElementById('id' + id))
-            document.getElementById('id' + id).style.display = "";
-
-        /*switch (page) {
+    function modalReview(id) {document.getElementById('order_id').value = id;}
+    function modalDispute(id) {document.getElementById('order_id1').value = id;}
+    $('#modalDispute').on('show.bs.modal', function (e) {$(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));$('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>');});
+    function onImgError() {document.getElementById("img-person").style.display = "none";document.getElementById("card-person").style.marginTop = '0';}
+    function showHide(type, page) {var id = page - 1;var i;var pages;if (type===0) pages = [[${events.size()}]]; else pages = [[${orders.size()}]];for (i = 0; i < pages; i++) {var j = i + 1;document.getElementById('id-' + type + i).style.display = "none";if (i < pages && document.getElementById('page_events-'+type+j)) document.getElementById('page_events-'+type+j).className = "page-item";if (j===page && document.getElementById('page_events-'+type+j)) document.getElementById('page_events-'+type+j).className = "page-item active";}if (document.getElementById('id-'+type+id)) document.getElementById('id-'+type+id).style.display = "";/*switch (page) {
             case 1:
                 document.getElementById('to-home-exc').className = "page-item disabled clearfix d-none d-sm-block";
                 document.getElementById('to-end-exc').className = "page-item clearfix d-none d-sm-block";
@@ -1019,28 +936,9 @@ lang=${#locale.getLanguage().toString()=='en'?1:0}">
             default:
                 document.getElementById('to-home-exc').className = "page-item clearfix d-none d-sm-block";
                 document.getElementById('to-end-exc').className = "page-item clearfix d-none d-sm-block";
-        }*/
-    }
-
+        }*/}
+    $(document).ready(function(){(function($){$('[data-toggle=confirmation]').confirmation({rootSelector: '[data-toggle=confirmation]'});})(jQuery);});
     /*]]>*/
-</script>
-<script>
-    $(document).ready(
-        function(){(function($){
-            $('[data-toggle=confirmation]').confirmation({
-                rootSelector: '[data-toggle=confirmation]'
-            });
-        })(jQuery);
-    });
-
-    // SideNav Initialization
-    // $(".button-collapse").sideNav();
-    // var container = document.getElementById('slide-out');
-    // Ps.initialize(container, {
-    //     wheelSpeed: 2,
-    //     wheelPropagation: true,
-    //     minScrollbarLength: 20
-    // });
 </script>
 <div class="drag-target"
      style="left: 0; touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div>
