@@ -629,17 +629,15 @@
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../resources/js/event_add/script.min.js"></script>
 <script type="text/javascript" src="../../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>
-<script type="text/javascript"
-        src="../../resources/libs/datetimepicker/js/bower_components/moment/moment.min.js"></script>
-<script type="text/javascript"
-        src="../../resources/libs/datetimepicker/js/bower_components/moment/locale/ru.js"></script>
+<script type="text/javascript" src="../../resources/libs/datetimepicker/js/bower_components/moment/moment.min.js"></script>
+<script type="text/javascript" src="../../resources/libs/datetimepicker/js/bower_components/moment/locale/ru.js"></script>
 <script type="text/javascript" src="../../resources/libs/datetimepicker/js/datetimepicker.min.js"></script>
 <script type="text/javascript" src="../../resources/js/Sortable.min.js"></script>
-<script type="text/javascript"
-        src="../../resources/libs/bootstrap-confirmation/js/bootstrap-confirmation.min.js"></script>
+<script type="text/javascript" src="../../resources/libs/bootstrap-confirmation/js/bootstrap-confirmation.min.js"></script>
 
-<script th:inline="javascript">
+<!--/*<script th:inline="javascript">
     /*<![CDATA[*/
     function remove_img(el) {
         el.parent().remove();
@@ -648,9 +646,10 @@
         if ($result.children().length < 4)
             $('#add-photo').css('display', 'block');
         var src = $result.find('div:first-child img:first-child').attr('src');
-        console.log("src: "+src);
         if ($demoImg.attr('src') !== src)
             $demoImg.attr("src", src);
+        if (src==="undefined")
+            $demoImg.attr("src", "../../resources/img/no-img.jpg");
     }
 
     function sbmt() {
@@ -741,7 +740,7 @@
     }
 
     function generateOptions(select) {
-        var st = '<select class="my-sp form-control"' + select + '><option value="null">--:--</option>';
+        var st = '<select class="my-sp form-control"' + select + '><option value="null">&#45;&#45;:&#45;&#45;</option>';
         var hour = 7;
         var zero = '0';
         for (var i = 0; i < 48; i++) {
@@ -917,5 +916,5 @@
         })
     });
     /*]]>*/
-</script>
+</script>*/-->
 </html>
