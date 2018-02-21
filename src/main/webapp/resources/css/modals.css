@@ -263,7 +263,7 @@ input[type=date], input[type=datetime-local], input[type=email], input[type=numb
     font-size: 1rem;
     cursor: text;
 }
-.md-form label.active {
+label.active {
     -webkit-transform: translateY(-140%);
     -ms-transform: translateY(-140%);
     transform: translateY(-140%);
