@@ -232,6 +232,6 @@ ol.carousel-indicators > li{background: #eee;border-color: #999;}
 .bw-0{border-width: 0!important;}
 .day-span{margin-right: 20px!important;border-left-width: 0!important;border-radius: 0 4px 4px 0!important;}
 
-
+.btn-group{display: inline-flex;}
 /*.fresh-table[class*="full-color-"] .fixed-table-toolbar .btn, .fresh-table[class*="toolbar-color-"] .fixed-table-toolbar .btn{color:black;}*/
 /*.fresh-table[class*="full-color-"] .fixed-table-toolbar .btn .caret, .fresh-table[class*="toolbar-color-"] .fixed-table-toolbar .btn .caret{border-top-color:black;}*/
