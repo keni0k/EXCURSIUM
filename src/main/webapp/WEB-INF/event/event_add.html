@@ -12,7 +12,7 @@ xmlns:th="http://www.thymeleaf.org">
 <title th:text="${#messages.msg('titles.add_event')}">Добавить тур</title>
 <link rel="stylesheet" type="text/css" href="../../resources/css/footer.css"/>
 <!--<link rel="stylesheet" href="../../resources/libs/bootstrap-select/css/bootstrap-select.css"/>-->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.12.4/dist/css/bootstrap-select.min.css"/>
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 <link rel="stylesheet" href="../../resources/libs/datetimepicker/css/datetimepicker.min.css"/>
@@ -416,14 +416,14 @@ th:each="date: ${inputEvent.getActiveDatesArr()}">
 <div class="form-group" style="margin-top: 15px;">
 <div class="input-group date" style="display: flex;">
 <input type="text" class="form-control" style="width: auto;"
-   th:value="${date.substring(0,date.indexOf(':'))!='null'?date.substring(0,date.indexOf(':')):''}"/>
+       th:value="${date.substring(0,date.indexOf(':'))!='null'?date.substring(0,date.indexOf(':')):''}"/>
 <span class="input-group-addon w-a day-span">
 <span class="glyphicon glyphicon-calendar"></span>
 </span>
 <select class="my-sp form-control"
-    style="border-radius: 4px;width: auto;"
-    th:with="opt = ${date.substring(date.indexOf(':')+1,date.length())}">
-<th:block th:replace="fragments/select :: times"></th:block>
+        style="border-radius: 4px;width: auto;"
+        th:with="opt = ${date.substring(date.indexOf(':')+1,date.length())}">
+    <th:block th:replace="fragments/select :: times"></th:block>
 </select>
 </div>
 </div>
@@ -612,7 +612,7 @@ align="justify" th:text="${inputEvent.getSmallData()}">%Краткое опис�
 <!--/*Card footer*/-->
 <div class="card-footer links-light">
 <h3 class="left card-footer-left mt-0 mb-0"><strong id="card-price"
-                    th:text="${inputEvent.getPrice()>0?inputEvent.getPrice()+'₽':'%ЦЕНА%'}">%PRICE%</strong>
+                        th:text="${inputEvent.getPrice()>0?inputEvent.getPrice()+'₽':'%ЦЕНА%'}">%PRICE%</strong>
 </h3>
 <a class="btn btn-primary waves-effect waves-light right disabled mt-05">Открыть</a>
 </div>
@@ -627,15 +627,14 @@ align="justify" th:text="${inputEvent.getSmallData()}">%Краткое опис�
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!--<script type="text/javascript" src="../../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/bootstrap-select.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.12.4/dist/js/bootstrap-select.min.js"></script>
 <script type="text/javascript"
 src="../../resources/libs/datetimepicker/js/bower_components/moment/moment.min.js"></script>
 <script type="text/javascript"
 src="../../resources/libs/datetimepicker/js/bower_components/moment/locale/ru.js"></script>
 <script type="text/javascript" src="../../resources/libs/datetimepicker/js/datetimepicker.min.js"></script>
 <script type="text/javascript" src="../../resources/js/Sortable.min.js"></script>
-<script type="text/javascript"
-src="../../resources/libs/bootstrap-confirmation/js/bootstrap-confirmation.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap-confirmation2@2.4.0/bootstrap-confirmation.min.js"></script>
 
 <script th:inline="javascript">/*<![CDATA[*/
 function remove_img(el) {el.parent().remove();var $result = $('#result');var $demoImg = $('#demo-img');if ($result.children().length < 4) $('#add-photo').css('display', 'block');var src = $result.find('div:first-child img:first-child').attr('src');if ($demoImg.attr('src') !== src) $demoImg.attr("src", src);if (src==="undefined") $demoImg.attr("src", "../../resources/img/no-img.jpg");}
