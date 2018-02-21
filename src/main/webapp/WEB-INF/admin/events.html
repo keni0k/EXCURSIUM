@@ -33,13 +33,18 @@ xmlns:th="http://www.thymeleaf.org">
 <link href="https://demos.creative-tim.com/fresh-bootstrap-table/assets/css/fresh-bootstrap-table.css" rel="stylesheet"/>
     <link rel="stylesheet" href="http://bootstraptema.ru/plugins/font-awesome/4-4-0/font-awesome.min.css"/>
 
-<link rel="icon" href="../../resources/img/icon.ico" type="image/x-icon"/>
-<link rel="shortcut icon" href="../../resources/img/icon.ico" type="image/x-icon"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="../../resources/img/favicons/apple-touch-icon.png"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="../../resources/img/favicons/favicon-32x32.png"/>
+    <link rel="icon" type="image/png" sizes="16x16" href="../../resources/img/favicons/favicon-16x16.png"/>
+    <link rel="manifest" href="../../resources/img/favicons/site.webmanifest"/>
+    <link rel="mask-icon" href="../../resources/img/favicons/safari-pinned-tab.svg" color="#5bbad5"/>
+    <meta name="msapplication-TileColor" content="#ffc40d"/>
+    <meta name="theme-color" content="#ffffff"/>
 
 <link rel="stylesheet" href="../../resources/css/mycards.css"/>
 <link rel="stylesheet" href="../../resources/css/media.css"/>
 <link rel="stylesheet" type="text/css" href="../../resources/css/styles.css"/>
-    <link rel="stylesheet" href="../../resources/libs/bootstrap-select/css/bootstrap-select.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css"/>
 </head>
 <body style="background-color: #f9f9f9;" th:with="price_up=${#httpServletRequest.getParameter('price_up')},price_down=${#httpServletRequest.getParameter('price_down')},
 id=${#httpServletRequest.getParameter('id')},category=${#httpServletRequest.getParameter('category')},

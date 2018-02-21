@@ -1,45 +1,45 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+xmlns:th="http://www.thymeleaf.org">
 <head>
-    <!--/*<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>*/-->
-    <meta name="description" content=""/>
-    <meta name="title" content=""/>
-    <meta name="author" content=""/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-    <meta name="keywords" content="excursium"/>
+<!--/*<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>*/-->
+<meta name="description" content=""/>
+<meta name="title" content=""/>
+<meta name="author" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="keywords" content="excursium"/>
 
-    <title th:text="${#messages.msg('titles.add_event')}">Добавить тур</title>
-    <link rel="stylesheet" type="text/css" href="../../resources/css/footer.css"/>
-    <!--<link rel="stylesheet" href="../../resources/libs/bootstrap-select/css/bootstrap-select.css"/>-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css"/>
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="../../resources/libs/datetimepicker/css/datetimepicker.min.css"/>
+<title th:text="${#messages.msg('titles.add_event')}">Добавить тур</title>
+<link rel="stylesheet" type="text/css" href="../../resources/css/footer.css"/>
+<!--<link rel="stylesheet" href="../../resources/libs/bootstrap-select/css/bootstrap-select.css"/>-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css"/>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="../../resources/libs/datetimepicker/css/datetimepicker.min.css"/>
 
-    <link rel="apple-touch-icon" sizes="180x180" href="../../resources/img/favicons/apple-touch-icon.png"/>
-    <link rel="icon" type="image/png" sizes="32x32" href="../../resources/img/favicons/favicon-32x32.png"/>
-    <link rel="icon" type="image/png" sizes="16x16" href="../../resources/img/favicons/favicon-16x16.png"/>
-    <link rel="manifest" href="../../resources/img/favicons/site.webmanifest"/>
-    <link rel="mask-icon" href="../../resources/img/favicons/safari-pinned-tab.svg" color="#5bbad5"/>
-    <meta name="msapplication-TileColor" content="#ffc40d"/>
-    <meta name="theme-color" content="#ffffff"/>
+<link rel="apple-touch-icon" sizes="180x180" href="../../resources/img/favicons/apple-touch-icon.png"/>
+<link rel="icon" type="image/png" sizes="32x32" href="../../resources/img/favicons/favicon-32x32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="../../resources/img/favicons/favicon-16x16.png"/>
+<link rel="manifest" href="../../resources/img/favicons/site.webmanifest"/>
+<link rel="mask-icon" href="../../resources/img/favicons/safari-pinned-tab.svg" color="#5bbad5"/>
+<meta name="msapplication-TileColor" content="#ffc40d"/>
+<meta name="theme-color" content="#ffffff"/>
 
-    <link rel="stylesheet" href="../../resources/css/mycards.css"/>
-    <link rel="stylesheet" type="text/css" href="../../resources/css/styles.css"/>
-    <link rel="stylesheet" href="../../resources/css/media.css"/>
+<link rel="stylesheet" href="../../resources/css/mycards.css"/>
+<link rel="stylesheet" type="text/css" href="../../resources/css/styles.css"/>
+<link rel="stylesheet" href="../../resources/css/media.css"/>
 
-    <style rel="stylesheet">.bootstrap-select.form-control:not([class*="col-"]) {
-        width: auto;
-    }
+<style rel="stylesheet">.bootstrap-select.form-control:not([class*="col-"]) {
+width: auto;
+}
 
-    .dropdown-toggle {
-        border-radius: 4px !important;
-    }
+.dropdown-toggle {
+border-radius: 4px !important;
+}
 
-    select.bs-select-hidden, select.selectpicker {
-        display: inline-block !important;
-    }</style>
+select.bs-select-hidden, select.selectpicker {
+display: inline-block !important;
+}</style>
 </head>
 <body style="background-color: #f9f9f9;">
 <!--/*@thymesVar id="inputEvent" type="com.heroku.demo.event.Event"*/-->
@@ -47,584 +47,580 @@
 <!--/*@thymesVar id="errors" type="com.heroku.demo.utils.Errors"*/-->
 <!--/*@thymesVar id="isEdit" type="java.lang.Boolean"*/-->
 <div class="content"
-     th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}, lang = ${#locale.getLanguage().toString()=='en'?1:0}">
-    <div th:replace="fragments/header :: header"></div>
-    <div class="container">
-        <div class="page-header">
-            <h2 th:unless="isEdit" th:text="${#messages.msg('titles.add_event')}">Добавление экскурсии</h2>
-            <h2 th:if="isEdit">Редактирование экскурсии</h2>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-md-7 col-lg-6">
-                <!-- /* Handling the flash message */-->
-                <th:block th:if="${message != null}">
-                    <div th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message.type)}, message=${message.message})">
-                        &nbsp;
-                    </div>
-                </th:block>
-                <form th:object="${inputEvent}" method="POST" th:action="${isEdit?'/events/edit':'/event/add'}"
-                      enctype="multipart/form-data"
-                      autocomplete="off">
+th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}, lang = ${#locale.getLanguage().toString()=='en'?1:0}">
+<div th:replace="fragments/header :: header"></div>
+<div class="container">
+<div class="page-header">
+<h2 th:unless="isEdit" th:text="${#messages.msg('titles.add_event')}">Добавление экскурсии</h2>
+<h2 th:if="isEdit">Редактирование экскурсии</h2>
+</div>
+<div class="row">
+<div class="col-xs-12 col-md-7 col-lg-6">
+<!-- /* Handling the flash message */-->
+<th:block th:if="${message != null}">
+<div th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message.type)}, message=${message.message})">
+&nbsp;
+</div>
+</th:block>
+<form th:object="${inputEvent}" method="POST" th:action="${isEdit?'/events/edit':'/events/add'}"
+enctype="multipart/form-data"
+autocomplete="off">
 
-                    <!--/*@thymesVar id="id" type="java.lang.Integer"*/-->
-                    <input th:if="${isEdit}" name="id" th:value="${id}" style="display: none"/>
-                    <div class="panel panel-default">
-                        <div class="panel-heading" th:text="${#messages.msg('words.name')}">
-                            Название
-                        </div>
-                        <div class="panel-body">
-                            <input name="name" type="text" class="form-control" id="name"
-                                   th:value="${inputEvent.getName()}" minlength="10" maxlength="35"/>
-                            <label for="name" th:if="${errors.isName()}"
-                                   th:text="${#messages.msg('error.event.name')}" th:class="'error'">Name Error</label>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading" th:text="${#messages.msg('words.description')}">
-                            Описание
-                        </div>
-                        <div class="panel-body">
-                            <textarea name="description" minlength="150" maxlength="1000" type="text"
-                                      id="description" style="resize: vertical"
-                                      class="form-control" th:text="${inputEvent.getDescription()}"></textarea>
-                            <label for="description" th:if="${errors.isDescription()}"
-                                   th:text="${#messages.msg('error.event.description')}" th:class="'error'">Description
-                                Error</label>
-                        </div>
-                    </div>
-                    <div class="row ml-0 mr-0">
-                        <div class="panel panel-default left-input col-sm-6">
-                            <div class="panel-heading" th:text="${#messages.msg('words.type_of_excursion')}">
-                                Категория экскурсии
-                            </div>
-                            <div class="panel-body">
-                                <div class="input-group">
-                                    <select name="category" id="category" class="form-control selectpicker"
-                                            th:selected="${inputEvent.getCategory()}?${inputEvent.getCategory()}:0">
-                                        <option value="0" th:text="${#messages.msg('category.0')}">Развлечения</option>
-                                        <option value="1" th:text="${#messages.msg('category.1')}">Наука</option>
-                                        <option value="2" th:text="${#messages.msg('category.2')}">История</option>
-                                        <option value="3" th:text="${#messages.msg('category.3')}">Искусство</option>
-                                        <option value="4" th:text="${#messages.msg('category.4')}">Производство</option>
-                                        <option value="5" th:text="${#messages.msg('category.5')}">Гастрономия</option>
-                                        <option value="6" th:text="${#messages.msg('category.6')}">Квесты</option>
-                                        <option value="7" th:text="${#messages.msg('category.7')}">Экстрим</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-default right-input col-sm-5">
-                            <div class="panel-heading">
-                                Возрастное ограничение
-                            </div>
-                            <div class="panel-body">
-                                <div class="input-group">
-                                    <select name="ageLimit" id="age_limit" class="form-control selectpicker"
-                                            th:selected="${inputEvent.getAgeLimit()}?${inputEvent.getAgeLimit()}:0">
-                                        <option value="0">0+</option>
-                                        <option value="6">6+</option>
-                                        <option value="12">12+</option>
-                                        <option value="16">16+</option>
-                                        <option value="18">18+</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+<!--/*@thymesVar id="id" type="java.lang.Integer"*/-->
+<input th:if="${isEdit}" name="id" th:value="${id}" style="display: none"/>
+<div class="panel panel-default">
+<div class="panel-heading" th:text="${#messages.msg('words.name')}">
+Название
+</div>
+<div class="panel-body">
+<input name="name" type="text" class="form-control" id="name"
+th:value="${inputEvent.getName()}" minlength="10" maxlength="35"/>
+<label for="name" th:if="${errors.isName()}"
+th:text="${#messages.msg('error.event.name')}" th:class="'error'">Name Error</label>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading" th:text="${#messages.msg('words.description')}">
+Описание
+</div>
+<div class="panel-body">
+<textarea name="description" minlength="150" maxlength="1000" type="text"
+id="description" style="resize: vertical"
+class="form-control" th:text="${inputEvent.getDescription()}"></textarea>
+<label for="description" th:if="${errors.isDescription()}"
+th:text="${#messages.msg('error.event.description')}" th:class="'error'">Description
+Error</label>
+</div>
+</div>
+<div class="row ml-0 mr-0">
+<div class="panel panel-default left-input col-sm-6">
+<div class="panel-heading" th:text="${#messages.msg('words.type_of_excursion')}">
+Категория экскурсии
+</div>
+<div class="panel-body">
+<div class="input-group">
+<select name="category" id="category" class="form-control selectpicker"
+th:selected="${inputEvent.getCategory()}?${inputEvent.getCategory()}:0">
+<option value="0" th:text="${#messages.msg('category.0')}">Развлечения</option>
+<option value="1" th:text="${#messages.msg('category.1')}">Наука</option>
+<option value="2" th:text="${#messages.msg('category.2')}">История</option>
+<option value="3" th:text="${#messages.msg('category.3')}">Искусство</option>
+<option value="4" th:text="${#messages.msg('category.4')}">Производство</option>
+<option value="5" th:text="${#messages.msg('category.5')}">Гастрономия</option>
+<option value="6" th:text="${#messages.msg('category.6')}">Квесты</option>
+<option value="7" th:text="${#messages.msg('category.7')}">Экстрим</option>
+</select>
+</div>
+</div>
+</div>
+<div class="panel panel-default right-input col-sm-5">
+<div class="panel-heading">
+Возрастное ограничение
+</div>
+<div class="panel-body">
+<div class="input-group">
+<select name="ageLimit" id="age_limit" class="form-control selectpicker"
+th:selected="${inputEvent.getAgeLimit()}?${inputEvent.getAgeLimit()}:0">
+<option value="0">0+</option>
+<option value="6">6+</option>
+<option value="12">12+</option>
+<option value="16">16+</option>
+<option value="18">18+</option>
+</select>
+</div>
+</div>
+</div>
+</div>
 
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Тип экскурсии
-                        </div>
-                        <div class="panel-body">
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="typeOfDates" id="optionsRadios1" value="0"
-                                           th:checked="${inputEvent.getTypeOfDates()==0}"
-                                           onclick="radio(0);"/>
-                                    <b>Индивидуальная по запросу.</b> Заказать экскурсию можно на дни недели, которые
-                                    указали в
-                                    расписании. Оплатить заказ можно только после вашего подтверждения.
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="typeOfDates" id="optionsRadios2" value="1"
-                                           th:checked="${inputEvent.getTypeOfDates()==1}"
-                                           onclick="radio(1);"/>
-                                    <b>Групповая по еженедельному расписанию.</b> Вы составляете повторяющееся
-                                    расписание
-                                    экскурсии, участники записываются на доступные даты независимо друг от друга.
-                                    Бронирования подтверждаются автоматически.
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="typeOfDates" id="optionsRadios3" value="2"
-                                           th:checked="${inputEvent.getTypeOfDates()==2}"
-                                           onclick="radio(2);"/>
-                                    <b>Групповая по фиксированным датам.</b> Вы указываете даты проведения экскурсии,
-                                    участники
-                                    записываются на доступные даты независимо друг от друга. Бронирования подтверждаются
-                                    автоматически.
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <input type="text" name="schedule" style="display:none;" id="schedule"/>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Расписание
-                        </div>
-                        <div class="panel-body pb-0 pt-0" id="radio0"
-                             th:style="${inputEvent.getTypeOfDates()!=0}?'display: none;'">
-                            <div class="day-of-week" id="00">
-                                <b>Пн.</b><a class="add-time" id="0" onclick="addTime(0, 0);"
-                                             th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[0]=='null':true}">Задать
-                                интервал времени</a>
-                                <th:block
-                                        th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[0]!='null':false}"
-                                        th:with="arrI = ${inputEvent.getActiveDatesArr()[0]}">
-                                    <select class="my-sp form-control"
-                                            th:with="opt = ${arrI.substring(0,arrI.indexOf('-'))}">
-                                        <th:block th:replace="fragments/select :: times"></th:block>
-                                    </select>
-                                    <span> - </span>
-                                    <select class="my-sp form-control"
-                                            th:with="opt = ${arrI.substring(arrI.indexOf('-')+1, arrI.length())}">
-                                        <th:block th:replace="fragments/select :: times"></th:block>
-                                    </select>
-                                </th:block>
+<div class="panel panel-default">
+<div class="panel-heading">
+Тип экскурсии
+</div>
+<div class="panel-body">
+<div class="radio">
+<label>
+<input type="radio" name="typeOfDates" id="optionsRadios1" value="0"
+th:checked="${inputEvent.getTypeOfDates()==0}"
+onclick="radio(0);"/>
+<b>Индивидуальная по запросу.</b> Заказать экскурсию можно на дни недели, которые
+указали в
+расписании. Оплатить заказ можно только после вашего подтверждения.
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="typeOfDates" id="optionsRadios2" value="1"
+th:checked="${inputEvent.getTypeOfDates()==1}"
+onclick="radio(1);"/>
+<b>Групповая по еженедельному расписанию.</b> Вы составляете повторяющееся
+расписание
+экскурсии, участники записываются на доступные даты независимо друг от друга.
+Бронирования подтверждаются автоматически.
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="typeOfDates" id="optionsRadios3" value="2"
+th:checked="${inputEvent.getTypeOfDates()==2}"
+onclick="radio(2);"/>
+<b>Групповая по фиксированным датам.</b> Вы указываете даты проведения экскурсии,
+участники
+записываются на доступные даты независимо друг от друга. Бронирования подтверждаются
+автоматически.
+</label>
+</div>
+</div>
+</div>
+<input type="text" name="schedule" style="display:none;" id="schedule"/>
+<div class="panel panel-default">
+<div class="panel-heading">
+Расписание
+</div>
+<div class="panel-body pb-0 pt-0" id="radio0"
+th:style="${inputEvent.getTypeOfDates()!=0}?'display: none;'">
+<div class="day-of-week" id="00">
+<b>Пн.</b><a class="add-time" id="0" onclick="addTime(0, 0);"
+th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[0]=='null':true}">Задать
+интервал времени</a>
+<th:block
+th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[0]!='null':false}"
+th:with="arrI = ${inputEvent.getActiveDatesArr()[0]}">
+<select class="my-sp form-control"
+th:with="opt = ${arrI.substring(0,arrI.indexOf('-'))}">
+<th:block th:replace="fragments/select :: times"></th:block>
+</select>
+<span> - </span>
+<select class="my-sp form-control"
+th:with="opt = ${arrI.substring(arrI.indexOf('-')+1, arrI.length())}">
+<th:block th:replace="fragments/select :: times"></th:block>
+</select>
+</th:block>
 
-                            </div>
-                            <div class="day-of-week" id="01">
-                                <b>Вт.</b><a class="add-time" id="1" onclick="addTime(0, 1);"
-                                             th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[1]=='null':true}">Задать
-                                интервал
-                                времени</a>
-                                <th:block
-                                        th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[1]!='null':false}"
-                                        th:with="arrI = ${inputEvent.getActiveDatesArr()[1]}">
-                                    <select class="my-sp form-control"
-                                            th:with="opt = ${arrI.substring(0,arrI.indexOf('-'))}">
-                                        <th:block th:replace="fragments/select :: times"></th:block>
-                                    </select>
-                                    <span> - </span>
-                                    <select class="my-sp form-control"
-                                            th:with="opt = ${arrI.substring(arrI.indexOf('-')+1, arrI.length())}">
-                                        <th:block th:replace="fragments/select :: times"></th:block>
-                                    </select>
-                                </th:block>
-                            </div>
-                            <div class="day-of-week" id="02">
-                                <b>Ср.</b><a class="add-time" id="2" onclick="addTime(0, 2);"
-                                             th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[2]=='null':true}">Задать
-                                интервал
-                                времени</a>
-                                <th:block
-                                        th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[2]!='null':false}"
-                                        th:with="arrI = ${inputEvent.getActiveDatesArr()[2]}">
-                                    <select class="my-sp form-control"
-                                            th:with="opt = ${arrI.substring(0,arrI.indexOf('-'))}">
-                                        <th:block th:replace="fragments/select :: times"></th:block>
-                                    </select>
-                                    <span> - </span>
-                                    <select class="my-sp form-control"
-                                            th:with="opt = ${arrI.substring(arrI.indexOf('-')+1, arrI.length())}">
-                                        <th:block th:replace="fragments/select :: times"></th:block>
-                                    </select>
-                                </th:block>
-                            </div>
-                            <div class="day-of-week" id="03">
-                                <b>Чт.</b><a class="add-time" id="3" onclick="addTime(0, 3);"
-                                             th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[3]=='null':true}">Задать
-                                интервал
-                                времени</a>
-                                <th:block
-                                        th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[3]!='null':false}"
-                                        th:with="arrI = ${inputEvent.getActiveDatesArr()[3]}">
-                                    <select class="my-sp form-control"
-                                            th:with="opt = ${arrI.substring(0,arrI.indexOf('-'))}">
-                                        <th:block th:replace="fragments/select :: times"></th:block>
-                                    </select>
-                                    <span> - </span>
-                                    <select class="my-sp form-control"
-                                            th:with="opt = ${arrI.substring(arrI.indexOf('-')+1, arrI.length())}">
-                                        <th:block th:replace="fragments/select :: times"></th:block>
-                                    </select>
-                                </th:block>
-                            </div>
-                            <div class="day-of-week" id="04">
-                                <b>Пт.</b><a class="add-time" id="4" onclick="addTime(0, 4);"
-                                             th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[4]=='null':true}">Задать
-                                интервал
-                                времени</a>
-                                <th:block
-                                        th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[4]!='null':false}"
-                                        th:with="arrI = ${inputEvent.getActiveDatesArr()[4]}">
-                                    <select class="my-sp form-control"
-                                            th:with="opt = ${arrI.substring(0,arrI.indexOf('-'))}">
-                                        <th:block th:replace="fragments/select :: times"></th:block>
-                                    </select>
-                                    <span> - </span>
-                                    <select class="my-sp form-control"
-                                            th:with="opt = ${arrI.substring(arrI.indexOf('-')+1, arrI.length())}">
-                                        <th:block th:replace="fragments/select :: times"></th:block>
-                                    </select>
-                                </th:block>
-                            </div>
-                            <div class="day-of-week" id="05">
-                                <b>Сб.</b><a class="add-time" id="5" onclick="addTime(0, 5);"
-                                             th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[5]=='null':true}">Задать
-                                интервал времени</a>
-                                <th:block
-                                        th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[5]!='null':false}"
-                                        th:with="arrI = ${inputEvent.getActiveDatesArr()[5]}">
-                                    <select class="my-sp form-control"
-                                            th:with="opt = ${arrI.substring(0,arrI.indexOf('-'))}">
-                                        <th:block th:replace="fragments/select :: times"></th:block>
-                                    </select>
-                                    <span> - </span>
-                                    <select class="my-sp form-control"
-                                            th:with="opt = ${arrI.substring(arrI.indexOf('-')+1, arrI.length())}">
-                                        <th:block th:replace="fragments/select :: times"></th:block>
-                                    </select>
-                                </th:block>
-                            </div>
-                            <div class="day-of-week bw-0" id="06">
-                                <b>Вс.</b><a class="add-time" id="6" onclick="addTime(0, 6);"
-                                             th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[6]=='null':true}">Задать
-                                интервал времени</a>
-                                <th:block
-                                        th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[6]!='null':false}"
-                                        th:with="arrI = ${inputEvent.getActiveDatesArr()[6]}">
-                                    <select class="my-sp form-control"
-                                            th:with="opt = ${arrI.substring(0,arrI.indexOf('-'))}">
-                                        <th:block th:replace="fragments/select :: times"></th:block>
-                                    </select>
-                                    <span> - </span>
-                                    <select class="my-sp form-control"
-                                            th:with="opt = ${arrI.substring(arrI.indexOf('-')+1, arrI.length())}">
-                                        <th:block th:replace="fragments/select :: times"></th:block>
-                                    </select>
-                                </th:block>
-                            </div>
-                        </div>
+</div>
+<div class="day-of-week" id="01">
+<b>Вт.</b><a class="add-time" id="1" onclick="addTime(0, 1);"
+th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[1]=='null':true}">Задать
+интервал
+времени</a>
+<th:block
+th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[1]!='null':false}"
+th:with="arrI = ${inputEvent.getActiveDatesArr()[1]}">
+<select class="my-sp form-control"
+th:with="opt = ${arrI.substring(0,arrI.indexOf('-'))}">
+<th:block th:replace="fragments/select :: times"></th:block>
+</select>
+<span> - </span>
+<select class="my-sp form-control"
+th:with="opt = ${arrI.substring(arrI.indexOf('-')+1, arrI.length())}">
+<th:block th:replace="fragments/select :: times"></th:block>
+</select>
+</th:block>
+</div>
+<div class="day-of-week" id="02">
+<b>Ср.</b><a class="add-time" id="2" onclick="addTime(0, 2);"
+th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[2]=='null':true}">Задать
+интервал
+времени</a>
+<th:block
+th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[2]!='null':false}"
+th:with="arrI = ${inputEvent.getActiveDatesArr()[2]}">
+<select class="my-sp form-control"
+th:with="opt = ${arrI.substring(0,arrI.indexOf('-'))}">
+<th:block th:replace="fragments/select :: times"></th:block>
+</select>
+<span> - </span>
+<select class="my-sp form-control"
+th:with="opt = ${arrI.substring(arrI.indexOf('-')+1, arrI.length())}">
+<th:block th:replace="fragments/select :: times"></th:block>
+</select>
+</th:block>
+</div>
+<div class="day-of-week" id="03">
+<b>Чт.</b><a class="add-time" id="3" onclick="addTime(0, 3);"
+th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[3]=='null':true}">Задать
+интервал
+времени</a>
+<th:block
+th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[3]!='null':false}"
+th:with="arrI = ${inputEvent.getActiveDatesArr()[3]}">
+<select class="my-sp form-control"
+th:with="opt = ${arrI.substring(0,arrI.indexOf('-'))}">
+<th:block th:replace="fragments/select :: times"></th:block>
+</select>
+<span> - </span>
+<select class="my-sp form-control"
+th:with="opt = ${arrI.substring(arrI.indexOf('-')+1, arrI.length())}">
+<th:block th:replace="fragments/select :: times"></th:block>
+</select>
+</th:block>
+</div>
+<div class="day-of-week" id="04">
+<b>Пт.</b><a class="add-time" id="4" onclick="addTime(0, 4);"
+th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[4]=='null':true}">Задать
+интервал
+времени</a>
+<th:block
+th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[4]!='null':false}"
+th:with="arrI = ${inputEvent.getActiveDatesArr()[4]}">
+<select class="my-sp form-control"
+th:with="opt = ${arrI.substring(0,arrI.indexOf('-'))}">
+<th:block th:replace="fragments/select :: times"></th:block>
+</select>
+<span> - </span>
+<select class="my-sp form-control"
+th:with="opt = ${arrI.substring(arrI.indexOf('-')+1, arrI.length())}">
+<th:block th:replace="fragments/select :: times"></th:block>
+</select>
+</th:block>
+</div>
+<div class="day-of-week" id="05">
+<b>Сб.</b><a class="add-time" id="5" onclick="addTime(0, 5);"
+th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[5]=='null':true}">Задать
+интервал времени</a>
+<th:block
+th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[5]!='null':false}"
+th:with="arrI = ${inputEvent.getActiveDatesArr()[5]}">
+<select class="my-sp form-control"
+th:with="opt = ${arrI.substring(0,arrI.indexOf('-'))}">
+<th:block th:replace="fragments/select :: times"></th:block>
+</select>
+<span> - </span>
+<select class="my-sp form-control"
+th:with="opt = ${arrI.substring(arrI.indexOf('-')+1, arrI.length())}">
+<th:block th:replace="fragments/select :: times"></th:block>
+</select>
+</th:block>
+</div>
+<div class="day-of-week bw-0" id="06">
+<b>Вс.</b><a class="add-time" id="6" onclick="addTime(0, 6);"
+th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[6]=='null':true}">Задать
+интервал времени</a>
+<th:block
+th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[6]!='null':false}"
+th:with="arrI = ${inputEvent.getActiveDatesArr()[6]}">
+<select class="my-sp form-control"
+th:with="opt = ${arrI.substring(0,arrI.indexOf('-'))}">
+<th:block th:replace="fragments/select :: times"></th:block>
+</select>
+<span> - </span>
+<select class="my-sp form-control"
+th:with="opt = ${arrI.substring(arrI.indexOf('-')+1, arrI.length())}">
+<th:block th:replace="fragments/select :: times"></th:block>
+</select>
+</th:block>
+</div>
+</div>
 
-                        <div class="panel-body pb-0 pt-0" id="radio1"
-                             th:style="${inputEvent.getTypeOfDates()!=1}?'display: none;'">
-                            <div class="day-of-week">
-                                <b>Пн.</b>
-                                <span id="10">
-                                    <th:block
-                                            th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[0]!='null':false}">
-                                        <select th:each="time: ${inputEvent.getActiveDatesArr()[0].split(',')}"
-                                                class="my-sp form-control" th:with="opt=${time}">
-                                            <th:block th:replace="fragments/select :: times"></th:block>
-                                        </select>
-                                    </th:block>
-                                </span><a class="add-time" onclick="addTime(1, 0);">Добавить время</a>
-                            </div>
-                            <div class="day-of-week">
-                                <b>Вт.</b>
-                                <span id="11">
-                                    <th:block
-                                            th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[1]!='null':false}">
-                                        <select th:each="time: ${inputEvent.getActiveDatesArr()[1].split(',')}"
-                                                class="my-sp form-control" th:with="opt=${time}">
-                                            <th:block th:replace="fragments/select :: times"></th:block>
-                                        </select>
-                                    </th:block>
-                                </span>
-                                <a class="add-time" onclick="addTime(1, 1);">Добавить время</a>
-                            </div>
-                            <div class="day-of-week">
-                                <b>Ср.</b>
-                                <span id="12">
-                                    <th:block
-                                            th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[2]!='null':false}">
-                                        <select th:each="time: ${inputEvent.getActiveDatesArr()[2].split(',')}"
-                                                class="my-sp form-control" th:with="opt=${time}">
-                                            <th:block th:replace="fragments/select :: times"></th:block>
-                                        </select>
-                                    </th:block>
-                                </span>
-                                <a class="add-time" onclick="addTime(1, 2);">Добавить время</a>
-                            </div>
-                            <div class="day-of-week">
-                                <b>Чт.</b>
-                                <span id="13">
-                                    <th:block
-                                            th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[3]!='null':false}">
-                                        <select th:each="time: ${inputEvent.getActiveDatesArr()[3].split(',')}"
-                                                class="my-sp form-control" th:with="opt=${time}">
-                                            <th:block th:replace="fragments/select :: times"></th:block>
-                                        </select>
-                                    </th:block>
-                                </span>
-                                <a class="add-time" onclick="addTime(1, 3);">Добавить время</a>
-                            </div>
-                            <div class="day-of-week">
-                                <b>Пт.</b>
-                                <span id="14">
-                                    <th:block
-                                            th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[4]!='null':false}">
-                                        <select th:each="time: ${inputEvent.getActiveDatesArr()[4].split(',')}"
-                                                class="my-sp form-control" th:with="opt=${time}">
-                                            <th:block th:replace="fragments/select :: times"></th:block>
-                                        </select>
-                                    </th:block>
-                                </span>
-                                <a class="add-time" onclick="addTime(1, 4);">Добавить время</a>
-                            </div>
-                            <div class="day-of-week">
-                                <b>Сб.</b>
-                                <span id="15">
-                                    <th:block
-                                            th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[5]!='null':false}">
-                                        <select th:each="time: ${inputEvent.getActiveDatesArr()[5].split(',')}"
-                                                class="my-sp form-control" th:with="opt=${time}">
-                                            <th:block th:replace="fragments/select :: times"></th:block>
-                                        </select>
-                                    </th:block>
-                                </span>
-                                <a class="add-time" onclick="addTime(1, 5);">Добавить время</a>
-                            </div>
-                            <div class="day-of-week bw-0">
-                                <b>Вс.</b>
-                                <span id="16">
-                                    <th:block
-                                            th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[6]!='null':false}">
-                                        <select th:each="time: ${inputEvent.getActiveDatesArr()[6].split(',')}"
-                                                class="my-sp form-control" th:with="opt=${time}">
-                                            <th:block th:replace="fragments/select :: times"></th:block>
-                                        </select>
-                                    </th:block>
-                                </span>
-                                <a class="add-time" onclick="addTime(1, 6);">Добавить время</a>
-                            </div>
-                        </div>
+<div class="panel-body pb-0 pt-0" id="radio1"
+th:style="${inputEvent.getTypeOfDates()!=1}?'display: none;'">
+<div class="day-of-week">
+<b>Пн.</b>
+<span id="10">
+<th:block
+th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[0]!='null':false}">
+<select th:each="time: ${inputEvent.getActiveDatesArr()[0].split(',')}"
+class="my-sp form-control" th:with="opt=${time}">
+<th:block th:replace="fragments/select :: times"></th:block>
+</select>
+</th:block>
+</span><a class="add-time" onclick="addTime(1, 0);">Добавить время</a>
+</div>
+<div class="day-of-week">
+<b>Вт.</b>
+<span id="11">
+<th:block
+th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[1]!='null':false}">
+<select th:each="time: ${inputEvent.getActiveDatesArr()[1].split(',')}"
+class="my-sp form-control" th:with="opt=${time}">
+<th:block th:replace="fragments/select :: times"></th:block>
+</select>
+</th:block>
+</span>
+<a class="add-time" onclick="addTime(1, 1);">Добавить время</a>
+</div>
+<div class="day-of-week">
+<b>Ср.</b>
+<span id="12">
+<th:block
+th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[2]!='null':false}">
+<select th:each="time: ${inputEvent.getActiveDatesArr()[2].split(',')}"
+class="my-sp form-control" th:with="opt=${time}">
+<th:block th:replace="fragments/select :: times"></th:block>
+</select>
+</th:block>
+</span>
+<a class="add-time" onclick="addTime(1, 2);">Добавить время</a>
+</div>
+<div class="day-of-week">
+<b>Чт.</b>
+<span id="13">
+<th:block
+th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[3]!='null':false}">
+<select th:each="time: ${inputEvent.getActiveDatesArr()[3].split(',')}"
+class="my-sp form-control" th:with="opt=${time}">
+<th:block th:replace="fragments/select :: times"></th:block>
+</select>
+</th:block>
+</span>
+<a class="add-time" onclick="addTime(1, 3);">Добавить время</a>
+</div>
+<div class="day-of-week">
+<b>Пт.</b>
+<span id="14">
+<th:block
+th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[4]!='null':false}">
+<select th:each="time: ${inputEvent.getActiveDatesArr()[4].split(',')}"
+class="my-sp form-control" th:with="opt=${time}">
+<th:block th:replace="fragments/select :: times"></th:block>
+</select>
+</th:block>
+</span>
+<a class="add-time" onclick="addTime(1, 4);">Добавить время</a>
+</div>
+<div class="day-of-week">
+<b>Сб.</b>
+<span id="15">
+<th:block
+th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[5]!='null':false}">
+<select th:each="time: ${inputEvent.getActiveDatesArr()[5].split(',')}"
+class="my-sp form-control" th:with="opt=${time}">
+<th:block th:replace="fragments/select :: times"></th:block>
+</select>
+</th:block>
+</span>
+<a class="add-time" onclick="addTime(1, 5);">Добавить время</a>
+</div>
+<div class="day-of-week bw-0">
+<b>Вс.</b>
+<span id="16">
+<th:block
+th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[6]!='null':false}">
+<select th:each="time: ${inputEvent.getActiveDatesArr()[6].split(',')}"
+class="my-sp form-control" th:with="opt=${time}">
+<th:block th:replace="fragments/select :: times"></th:block>
+</select>
+</th:block>
+</span>
+<a class="add-time" onclick="addTime(1, 6);">Добавить время</a>
+</div>
+</div>
 
-                        <div class="panel-body pb-0 pt-0" id="radio2"
-                             th:style="${inputEvent.getTypeOfDates()!=2}?'display: none;'">
-                            <div class="day-of-week bw-0">
-                                <div id="20">
-                                    <th:block
-                                            th:if="${isEdit and inputEvent.getTypeOfDates()==2?inputEvent.getActiveDates()!='null' and inputEvent.getActiveDates()!='':false}"
-                                            th:each="date: ${inputEvent.getActiveDatesArr()}">
-                                        <div class="day-of-week" th:if="${date.indexOf(':')>=0}">
-                                            <div class="form-group" style="margin-top: 15px;">
-                                                <div class="input-group date" style="display: flex;">
-                                                    <input type="text" class="form-control" style="width: auto;"
-                                                           th:value="${date.substring(0,date.indexOf(':'))!='null'?date.substring(0,date.indexOf(':')):''}"/>
-                                                    <span class="input-group-addon w-a day-span">
-                                                    <span class="glyphicon glyphicon-calendar"></span>
-                                                </span>
-                                                    <select class="my-sp form-control"
-                                                            style="border-radius: 4px;width: auto;"
-                                                            th:with="opt = ${date.substring(date.indexOf(':')+1,date.length())}">
-                                                        <th:block th:replace="fragments/select :: times"></th:block>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </th:block>
-                                </div>
-                                <b><a class="add-time" onclick="addDate();">Добавить дату</a></b>
-                            </div>
-                        </div>
+<div class="panel-body pb-0 pt-0" id="radio2"
+th:style="${inputEvent.getTypeOfDates()!=2}?'display: none;'">
+<div class="day-of-week bw-0">
+<div id="20">
+<th:block
+th:if="${isEdit and inputEvent.getTypeOfDates()==2?inputEvent.getActiveDates()!='null' and inputEvent.getActiveDates()!='':false}"
+th:each="date: ${inputEvent.getActiveDatesArr()}">
+<div class="day-of-week" th:if="${date.indexOf(':')>=0}">
+<div class="form-group" style="margin-top: 15px;">
+<div class="input-group date" style="display: flex;">
+<input type="text" class="form-control" style="width: auto;"
+   th:value="${date.substring(0,date.indexOf(':'))!='null'?date.substring(0,date.indexOf(':')):''}"/>
+<span class="input-group-addon w-a day-span">
+<span class="glyphicon glyphicon-calendar"></span>
+</span>
+<select class="my-sp form-control"
+    style="border-radius: 4px;width: auto;"
+    th:with="opt = ${date.substring(date.indexOf(':')+1,date.length())}">
+<th:block th:replace="fragments/select :: times"></th:block>
+</select>
+</div>
+</div>
+</div>
+</th:block>
+</div>
+<b><a class="add-time" onclick="addDate();">Добавить дату</a></b>
+</div>
+</div>
 
-                        <input type="text" name="activeDates" style="display:none;" id="active_dates"/>
-                    </div>
+<input type="text" name="activeDates" style="display:none;" id="active_dates"/>
+</div>
 
-                    <div class="row ml-0 mr-0">
-                        <div class="panel panel-default col-sm-6 left-input">
-                            <div class="panel-heading" th:text="${#messages.msg('words.users_count')}">
-                                Количество участников
-                            </div>
-                            <div class="panel-body">
-                                <div class="input-group">
-                                    <input name="usersCount" id="users_count" type="number" class="form-control"
-                                           min="1" max="100" required=""
-                                           th:value="${inputEvent.getUsersCount()>0}?${inputEvent.getUsersCount()}"/>
-                                    <span class="input-group-addon">человек</span>
-                                </div>
-                                <label for="users_count" th:if="${#fields.hasErrors('usersCount')}"
-                                       th:text="${#messages.msg('error.event.users_count')}" th:class="'error'">UsersCount
-                                    Error</label>
-                            </div>
-                        </div>
+<div class="row ml-0 mr-0">
+<div class="panel panel-default col-sm-6 left-input">
+<div class="panel-heading" th:text="${#messages.msg('words.users_count')}">
+Количество участников
+</div>
+<div class="panel-body">
+<div class="input-group">
+<input name="usersCount" id="users_count" type="number" class="form-control"
+min="1" max="100" required=""
+th:value="${inputEvent.getUsersCount()>0}?${inputEvent.getUsersCount()}"/>
+<span class="input-group-addon">человек</span>
+</div>
+<label for="users_count" th:if="${#fields.hasErrors('usersCount')}"
+th:text="${#messages.msg('error.event.users_count')}" th:class="'error'">UsersCount
+Error</label>
+</div>
+</div>
 
-                        <div class="panel panel-default col-sm-5 right-input">
-                            <div class="panel-heading" th:text="${#messages.msg('words.duration')}">
-                                Длительность
-                            </div>
-                            <div class="panel-body">
-                                <div class="input-group">
-                                    <input name="duration" id="duration" type="number" class="form-control" required=""
-                                           th:value="${inputEvent.getDuration()>0}?${inputEvent.getDuration()}" min="1"
-                                           max="240"/>
-                                    <span class="input-group-addon"
-                                          th:text="${#messages.msg('words.hours')}">часов</span>
-                                </div>
-                                <label for="duration" th:if="${#fields.hasErrors('duration')}"
-                                       th:text="${#messages.msg('error.event.duration')}" th:class="'error'">Duration
-                                    Error</label>
-                            </div>
-                        </div>
-                    </div>
+<div class="panel panel-default col-sm-5 right-input">
+<div class="panel-heading" th:text="${#messages.msg('words.duration')}">
+Длительность
+</div>
+<div class="panel-body">
+<div class="input-group">
+<input name="duration" id="duration" type="number" class="form-control" required=""
+th:value="${inputEvent.getDuration()>0}?${inputEvent.getDuration()}" min="1"
+max="240"/>
+<span class="input-group-addon"
+th:text="${#messages.msg('words.hours')}">часов</span>
+</div>
+<label for="duration" th:if="${#fields.hasErrors('duration')}"
+th:text="${#messages.msg('error.event.duration')}" th:class="'error'">Duration
+Error</label>
+</div>
+</div>
+</div>
 
-                    <div class="row ml-0 mr-0">
-                        <div class="panel panel-default col-sm-6 left-input">
-                            <div class="panel-heading" th:text="${#messages.msg('words.city')}">
-                                Город
-                            </div>
-                            <div class="panel-body">
-                                <select class="selectpicker form-control" data-live-search="true"
-                                        name="city_and_country">
-                                    <!--/*@thymesVar id="utils" type="com.heroku.demo.utils.UtilsForWeb"*/-->
-                                    <th:block th:each="j : ${#numbers.sequence(0, utils.getCountriesCount()-1)}">
-                                        <option th:each="i : ${#numbers.sequence(0, utils.getCitiesCount(j)-1)}"
-                                                th:value="${j}+'.'+${i}"
-                                                th:text="${#messages.msg('city.'+j+'.'+i)}+', '+ ${#messages.msg('country.'+j)}">
-                                            Москва, Россия
-                                        </option>
-                                    </th:block>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="panel panel-default col-sm-5 right-input">
-                            <div class="panel-heading" th:text="${#messages.msg('words.place')}">
-                                Место встречи
-                            </div>
-                            <div class="panel-body">
-                                <input name="place" id="place" type="text" class="form-control"
-                                       minlength="5" maxlength="100"
-                                       th:value="${inputEvent.getPlace()}?${inputEvent.getPlace()}"/>
-                                <label for="place" th:if="${errors.isPlace()}"
-                                       th:text="${#messages.msg('error.event.place')}" th:class="'error'">Place
-                                    Error</label>
-                            </div>
-                        </div>
-                    </div>
+<div class="row ml-0 mr-0">
+<div class="panel panel-default col-sm-6 left-input">
+<div class="panel-heading" th:text="${#messages.msg('words.city')}">
+Город
+</div>
+<div class="panel-body">
+<select class="selectpicker form-control" data-live-search="true"
+name="city_and_country">
+<!--/*@thymesVar id="utils" type="com.heroku.demo.utils.UtilsForWeb"*/-->
+<th:block th:each="j : ${#numbers.sequence(0, utils.getCountriesCount()-1)}">
+<option th:each="i : ${#numbers.sequence(0, utils.getCitiesCount(j)-1)}"
+th:value="${j}+'.'+${i}"
+th:text="${#messages.msg('city.'+j+'.'+i)}+', '+ ${#messages.msg('country.'+j)}">
+Москва, Россия
+</option>
+</th:block>
+</select>
+</div>
+</div>
+<div class="panel panel-default col-sm-5 right-input">
+<div class="panel-heading" th:text="${#messages.msg('words.place')}">
+Место встречи
+</div>
+<div class="panel-body">
+<input name="place" id="place" type="text" class="form-control"
+minlength="5" maxlength="100"
+th:value="${inputEvent.getPlace()}?${inputEvent.getPlace()}"/>
+<label for="place" th:if="${errors.isPlace()}"
+th:text="${#messages.msg('error.event.place')}" th:class="'error'">Place
+Error</label>
+</div>
+</div>
+</div>
+<div class="row ml-0 mr-0">
+<div class="panel panel-default col-sm-6 left-input">
+<div class="panel-heading" th:text="${#messages.msg('words.price')}">
+Цена
+</div>
+<div class="panel-body">
+<div class="input-group">
+<input name="price" id="price" type="number" class="form-control"
+min="100" max="100000" required=""
+th:value="${inputEvent.getPrice()>0}?${inputEvent.getPrice()}"/>
+<span class="input-group-addon">&#8381;</span>
+</div>
+<b><p class="mb-0 mb-0 mt-05 f16" id="price-help" style="display: none;"><span
+id="our_price">100</span> рублей (15%) путешественники заплатят нам на сайте, а
+<span id="guide_price">600</span> рублей - вам на месте</p></b>
+<label for="price" th:if="${errors.isPrice()}"
+th:text="${#messages.msg('error.event.price')}" th:class="'error'">Price
+Error</label>
+</div>
+</div>
+<div class="panel panel-default col-sm-5 right-input">
+<div class="panel-heading" th:text="${#messages.msg('words.language')}">
+Язык
+</div>
+<div class="panel-body">
+<div class="input-group">
+<select name="language" class="form-control selectpicker"
+th:selected="${inputEvent.getLanguage()}?${inputEvent.getLanguage()}">
+<option value="0" th:text="${#messages.msg('language.0')}">Русский</option>
+<option value="1" th:text="${#messages.msg('language.1')}">Английский</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading" th:text="${#messages.msg('words.photos')}">
+Фотографии
+</div>
+<div class="panel-body">
+<input type="file" multiple="multiple" size="30000000"
+accept="image/jpeg,image/png" name="files[]" style="display:none;"
+id="upload_input"/>
+<input type="text" name="photos" style="display:none;" id="photos"/>
+<div class="result" id="result">
+<!--/*@thymesVar id="photos" type="java.util.List<com.heroku.demo.photo.Photo>"*/-->
+<div class="upload-img" th:if="${photos!=null}" th:each="photo : ${photos}">
+<img th:src="${photo.getData()}" class="img-rounded"/>
+<div class="closer" onclick="remove_img($(this));"></div>
+</div>
+</div>
+<div id="add-photo" class="upload-img" draggable="false"
+style="cursor: auto;padding-top: 9%;">
+<input type="button" value="Добавить" class="btn btn-block" tabindex="9"
+id="upload_button" style="width: auto;margin: auto;"/>
+</div>
+</div>
+</div>
+<a th:if="${isEdit}" class="btn btn-default"
+data-btn-ok-label="Да" data-btn-ok-icon="glyphicon glyphicon-share-alt"
+data-btn-ok-class="btn-success" data-btn-cancel-class="btn-danger"
+data-btn-cancel-label="Нет" data-btn-cancel-icon="glyphicon glyphicon-ban-circle"
+data-title="Изменить?" data-content="Экскурсия снова будет отправлена на модерацию!"
+data-toggle="confirmation" data-on-confirm="sbmt">Изменить</a>
 
-                    <div class="row ml-0 mr-0">
-                        <div class="panel panel-default col-sm-6 left-input">
-                            <div class="panel-heading" th:text="${#messages.msg('words.price')}">
-                                Цена
-                            </div>
-                            <div class="panel-body">
-                                <div class="input-group">
-                                    <input name="price" id="price" type="number" class="form-control"
-                                           min="100" max="100000" required=""
-                                           th:value="${inputEvent.getPrice()>0}?${inputEvent.getPrice()}"/>
-                                    <span class="input-group-addon">&#8381;</span>
-                                </div>
-                                <b><p class="mb-0 mb-0 mt-05 f16" id="price-help" style="display: none;"><span
-                                        id="our_price">100</span> рублей (15%) путешественники заплатят нам на сайте, а
-                                    <span id="guide_price">600</span> рублей - вам на месте</p></b>
-                                <label for="price" th:if="${errors.isPrice()}"
-                                       th:text="${#messages.msg('error.event.price')}" th:class="'error'">Price
-                                    Error</label>
-                            </div>
-                        </div>
+<a th:unless="${isEdit}" class="btn btn-default" th:text="${#messages.msg('words.submit')}"
+onclick="sbmt();">Отправить</a>
 
-                        <div class="panel panel-default col-sm-5 right-input">
-                            <div class="panel-heading" th:text="${#messages.msg('words.language')}">
-                                Язык
-                            </div>
-                            <div class="panel-body">
-                                <div class="input-group">
-                                    <select name="language" class="form-control selectpicker"
-                                            th:selected="${inputEvent.getLanguage()}?${inputEvent.getLanguage()}">
-                                        <option value="0" th:text="${#messages.msg('language.0')}">Русский</option>
-                                        <option value="1" th:text="${#messages.msg('language.1')}">Английский</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="panel panel-default">
-                        <div class="panel-heading" th:text="${#messages.msg('words.photos')}">
-                            Фотографии
-                        </div>
-                        <div class="panel-body">
-                            <input type="file" multiple="multiple" size="30000000"
-                                   accept="image/jpeg,image/png" name="files[]" style="display:none;"
-                                   id="upload_input"/>
-                            <input type="text" name="photos" style="display:none;" id="photos"/>
-                            <div class="result" id="result">
-                                <!--/*@thymesVar id="photos" type="java.util.List<com.heroku.demo.photo.Photo>"*/-->
-                                <div class="upload-img" th:if="${photos!=null}" th:each="photo : ${photos}">
-                                    <img th:src="${photo.getData()}" class="img-rounded"/>
-                                    <div class="closer" onclick="remove_img($(this));"></div>
-                                </div>
-                            </div>
-                            <div id="add-photo" class="upload-img" draggable="false"
-                                 style="cursor: auto;padding-top: 9%;">
-                                <input type="button" value="Добавить" class="btn btn-block" tabindex="9"
-                                       id="upload_button" style="width: auto;margin: auto;"/>
-                            </div>
-                        </div>
-                    </div>
-
-                    <a th:if="${isEdit}" class="btn btn-default"
-                       data-btn-ok-label="Да" data-btn-ok-icon="glyphicon glyphicon-share-alt"
-                       data-btn-ok-class="btn-success" data-btn-cancel-class="btn-danger"
-                       data-btn-cancel-label="Нет" data-btn-cancel-icon="glyphicon glyphicon-ban-circle"
-                       data-title="Изменить?" data-content="Экскурсия снова будет отправлена на модерацию!"
-                       data-toggle="confirmation" data-on-confirm="sbmt">Изменить</a>
-
-                    <a th:unless="${isEdit}" class="btn btn-default" th:text="${#messages.msg('words.submit')}"
-                       onclick="sbmt();">Отправить</a>
-
-                    <button type="submit" value="Upload" style="display: none" id="sbmt">Отправить</button>
-                </form>
-            </div>
-            <div class="hidden visible-md visible-lg col-md-5 col-lg-6 demo">
-                <div class="page-header mt-1">
-                    <h3>Такой она будет в списке экскурсий</h3>
-                </div>
-                <div class="card card-cascade narrower">
-                    <img class="img_age" id="card-age_limit" src="../../resources/img/age_limits/0.png"/>
-                    <!--/*Card image*/-->
-                    <div class="view overlay hm-white-slight z-depth-1" style="margin-top: 20px;">
-                        <div class="img_crop"><img
-                                th:src="${inputEvent.pathToPhoto.size()>0?inputEvent.pathToPhoto.get(0):'../../resources/img/no-img.jpg'}"
-                                class="img-fluid" alt="" id="demo-img"
-                                style="height: 240px; min-width: -webkit-fill-available;"/>
-                        </div>
-                        <div class="mask waves-effect waves-light"></div>
-                    </div>
-                    <!--/*Card image*/-->
-                    <!--/*Card content*/-->
-                    <div class="card-body pb-0 no-padding text-center"><!--/*Category & Title*/-->
-                        <h4 id="card-category" th:text="${inputEvent.getCategoryString()}">Развлечения</h4>
-                        <h3 class="card-title">
-                            <strong id="card-title" th:text="${inputEvent.getName()}">%Название экскурсии%</strong>
-                        </h3>
-                        <!--/*Rating*/-->
-                        <ul class="rating">
-                            <li th:each="i : ${#numbers.sequence(0, 4)}"><i class="fa fa-star-o"></i></li>
-                            <li><span>(0)</span></li>
-                        </ul>
-                        <!--/*Description*/-->
-                        <p class="card-text" style="font-size: 18px; color: #000000" id="card-text"
-                           align="justify" th:text="${inputEvent.getSmallData()}">%Краткое описание%</p>
-                    </div>
-                    <!--/*Card footer*/-->
-                    <div class="card-footer links-light">
-                        <h3 class="left card-footer-left mt-0 mb-0"><strong id="card-price"
-                                                                            th:text="${inputEvent.getPrice()>0?inputEvent.getPrice()+'₽':'%ЦЕНА%'}">%PRICE%</strong>
-                        </h3>
-                        <a class="btn btn-primary waves-effect waves-light right disabled mt-05">Открыть</a>
-                    </div>
-                    <!--/*End-of-Card content*/-->
-                </div>
-            </div>
-        </div>
-    </div>
+<button type="submit" value="Upload" style="display: none" id="sbmt">Отправить</button>
+</form>
+</div>
+<div class="hidden visible-md visible-lg col-md-5 col-lg-6 demo">
+<div class="page-header mt-1">
+<h3>Такой она будет в списке экскурсий</h3>
+</div>
+<div class="card card-cascade narrower">
+<img class="img_age" id="card-age_limit" src="../../resources/img/age_limits/0.png"/>
+<!--/*Card image*/-->
+<div class="view overlay hm-white-slight z-depth-1" style="margin-top: 20px;">
+<div class="img_crop"><img
+th:src="${inputEvent.pathToPhoto.size()>0?inputEvent.pathToPhoto.get(0):'../../resources/img/no-img.jpg'}"
+class="img-fluid" alt="" id="demo-img"
+style="height: 240px; min-width: -webkit-fill-available;"/>
+</div>
+<div class="mask waves-effect waves-light"></div>
+</div>
+<!--/*Card image*/-->
+<!--/*Card content*/-->
+<div class="card-body pb-0 no-padding text-center"><!--/*Category & Title*/-->
+<h4 id="card-category" th:text="${inputEvent.getCategoryString()}">Развлечения</h4>
+<h3 class="card-title">
+<strong id="card-title" th:text="${inputEvent.getName()}">%Название экскурсии%</strong>
+</h3>
+<!--/*Rating*/-->
+<ul class="rating">
+<li th:each="i : ${#numbers.sequence(0, 4)}"><i class="fa fa-star-o"></i></li>
+<li><span>(0)</span></li>
+</ul>
+<!--/*Description*/-->
+<p class="card-text" style="font-size: 18px; color: #000000" id="card-text"
+align="justify" th:text="${inputEvent.getSmallData()}">%Краткое описание%</p>
+</div>
+<!--/*Card footer*/-->
+<div class="card-footer links-light">
+<h3 class="left card-footer-left mt-0 mb-0"><strong id="card-price"
+                    th:text="${inputEvent.getPrice()>0?inputEvent.getPrice()+'₽':'%ЦЕНА%'}">%PRICE%</strong>
+</h3>
+<a class="btn btn-primary waves-effect waves-light right disabled mt-05">Открыть</a>
+</div>
+<!--/*End-of-Card content*/-->
+</div>
+</div>
+</div>
+</div>
 </div>
 <div th:replace="fragments/footer :: footer"></div>
 </body>
@@ -633,13 +629,13 @@
 <!--<script type="text/javascript" src="../../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/bootstrap-select.min.js"></script>
 <script type="text/javascript"
-        src="../../resources/libs/datetimepicker/js/bower_components/moment/moment.min.js"></script>
+src="../../resources/libs/datetimepicker/js/bower_components/moment/moment.min.js"></script>
 <script type="text/javascript"
-        src="../../resources/libs/datetimepicker/js/bower_components/moment/locale/ru.js"></script>
+src="../../resources/libs/datetimepicker/js/bower_components/moment/locale/ru.js"></script>
 <script type="text/javascript" src="../../resources/libs/datetimepicker/js/datetimepicker.min.js"></script>
 <script type="text/javascript" src="../../resources/js/Sortable.min.js"></script>
 <script type="text/javascript"
-        src="../../resources/libs/bootstrap-confirmation/js/bootstrap-confirmation.min.js"></script>
+src="../../resources/libs/bootstrap-confirmation/js/bootstrap-confirmation.min.js"></script>
 
 <script th:inline="javascript">/*<![CDATA[*/
 function remove_img(el) {el.parent().remove();var $result = $('#result');var $demoImg = $('#demo-img');if ($result.children().length < 4) $('#add-photo').css('display', 'block');var src = $result.find('div:first-child img:first-child').attr('src');if ($demoImg.attr('src') !== src) $demoImg.attr("src", src);if (src==="undefined") $demoImg.attr("src", "../../resources/img/no-img.jpg");}

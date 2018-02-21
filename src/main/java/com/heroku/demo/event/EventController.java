@@ -99,7 +99,7 @@ public class EventController {
 
         eventService.addEvent(event);
         editPhotos(event, tokens);
-        if (errors.isErrors()) return eventAddAgain(modelMap, event, new MessageUtil("warning", messageSource.getMessage("error.event.add", null, locale)), principal, errors);
+        if (errors.isErrors()) return eventAddAgain(modelMap, event, new MessageUtil("warning", messageSource.getMessage("error.event.add", null, locale)), principal, errors,false);
         return "redirect:/events/event?id="+event.getId();
     }
 
@@ -134,7 +134,7 @@ public class EventController {
             editPhotos(solveEvent, tokens);
 
             if (errors.isErrors())
-                return eventAddAgain(modelMap, event, new MessageUtil("warning", messageSource.getMessage("error.event.add", null, locale)), principal, errors);
+                return eventAddAgain(modelMap, event, new MessageUtil("warning", messageSource.getMessage("error.event.add", null, locale)), principal, errors, true);
             return "redirect:/events/event?id=" + solveEvent.getId();
         }
         return "redirect:/users/login";
@@ -156,16 +156,16 @@ public class EventController {
         Person person = utils.getPerson(principal);
         if (person!=null) {
             Event event = eventService.getById(id);
-            if (event.getGuideId()==person.getId()){
-                model.addAttribute("isEdit", true);
-                return eventAddAgain(model, event, null, principal, findErrors(event));
-            }
+            if (event.getGuideId()==person.getId())
+                return eventAddAgain(model, event, null, principal, findErrors(event), true);
+
         }
         return "redirect:/users/login";
     }
 
-    private String eventAddAgain(ModelMap model, Event event, MessageUtil message, Principal principal, Errors errors) {
+    private String eventAddAgain(ModelMap model, Event event, MessageUtil message, Principal principal, Errors errors, boolean isEdit) {
         model.addAttribute("inputEvent", event);
+        model.addAttribute("isEdit", isEdit);
         model.addAttribute("id", event.getId());
         model.addAttribute("photos", photoService.getByEventId(event.getId()));
         model.addAttribute("errors", errors);
