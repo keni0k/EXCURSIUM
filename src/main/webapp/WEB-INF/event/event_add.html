@@ -682,6 +682,9 @@
             var $e1 = $('#20');
             $e1.children().each(function (index, elem) {
                 if (elem!==null && elem.className==="day-of-week"){
+                    console.log("Elem not NULL");
+                    console.log("Elem.child class: " + elem.firstChild.className);
+                    console.log("Elem.child.child class: " + elem.firstChild.firstChild.className);
                     var child3 = elem.firstChild.firstChild;
                     if (child3 !== null) {
                         if (child3.className === "input-group date") {
