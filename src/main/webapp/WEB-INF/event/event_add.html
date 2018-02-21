@@ -414,12 +414,12 @@
                                         <div class="day-of-week" th:if="${date.indexOf(':')>=0}">
                                             <div class="form-group" style="margin-top: 15px;">
                                                 <div class="input-group date" style="display: flex;">
-                                                    <input type="text" class="form-control my-date" style="width: auto;"
+                                                    <input type="text" class="form-control" style="width: auto;"
                                                            th:value="${date.substring(0,date.indexOf(':'))!='null'?date.substring(0,date.indexOf(':')):''}"/>
                                                     <span class="input-group-addon w-a day-span">
                                                     <span class="glyphicon glyphicon-calendar"></span>
                                                 </span>
-                                                    <select class="my-sp form-control my-time"
+                                                    <select class="my-sp form-control"
                                                             style="border-radius: 4px;width: auto;"
                                                             th:with="opt = ${date.substring(date.indexOf(':')+1,date.length())}">
                                                         <th:block th:replace="fragments/select :: times"></th:block>
@@ -704,11 +704,11 @@
                         for (var childItem in child3.childNodes) {
                             var e5 = child3.childNodes[childItem];
                             if (e5.nodeType === 1) {
-                                if (e5.className === "form-control my-date") {
+                                if (e5.className === "form-control") {
                                     console.log("date: " + e5.value);
                                     inp.value += e5.value + ':';
                                 }
-                                if (e5.className === "my-sp form-control my-time") {
+                                if (e5.className === "my-sp form-control") {
                                     console.log("time: " + e5.value);
                                     inp.value += e5.value + ';';
                                 }
