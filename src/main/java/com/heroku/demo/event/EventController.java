@@ -188,7 +188,7 @@ public class EventController {
             e.setType(Consts.EXCURSION_DELETED);
             eventService.editEvent(e);
         }
-        if (p!=null && p.getType()==PERSON_ADMIN)
+        if (p!=null && e!=null && p.getType()==PERSON_ADMIN && p.getId()!=e.getGuideId())
             return events(model, null, priceUp, priceDown, category, null, null, words, locale, principal);
         else return "redirect:/users/account";
     }
