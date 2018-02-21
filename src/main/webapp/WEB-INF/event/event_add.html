@@ -574,7 +574,7 @@
                        data-btn-ok-class="btn-success" data-btn-cancel-class="btn-danger"
                        data-btn-cancel-label="Нет" data-btn-cancel-icon="glyphicon glyphicon-ban-circle"
                        data-title="Изменить?" data-content="Экскурсия снова будет отправлена на модерацию!"
-                       data-toggle="confirmation" data-on-confirm="sbmt();">Изменить</a>
+                       data-toggle="confirmation" data-on-confirm="sbmt">Изменить</a>
 
                     <a th:unless="${isEdit}" class="btn btn-default" th:text="${#messages.msg('words.submit')}"
                        onclick="sbmt();">Отправить</a>
