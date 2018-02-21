@@ -315,8 +315,10 @@
                             <div class="day-of-week">
                                 <b>Пн.</b>
                                 <span id="10">
-                                    <th:block th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[0]!='null':false}">
-                                        <select th:each="time: ${inputEvent.getActiveDatesArr()[0].split(',')}" class="my-sp form-control" th:with="opt=${time}">
+                                    <th:block
+                                            th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[0]!='null':false}">
+                                        <select th:each="time: ${inputEvent.getActiveDatesArr()[0].split(',')}"
+                                                class="my-sp form-control" th:with="opt=${time}">
                                             <th:block th:replace="fragments/select :: times"></th:block>
                                         </select>
                                     </th:block>
@@ -325,8 +327,10 @@
                             <div class="day-of-week">
                                 <b>Вт.</b>
                                 <span id="11">
-                                    <th:block th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[1]!='null':false}">
-                                        <select th:each="time: ${inputEvent.getActiveDatesArr()[1].split(',')}" class="my-sp form-control" th:with="opt=${time}">
+                                    <th:block
+                                            th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[1]!='null':false}">
+                                        <select th:each="time: ${inputEvent.getActiveDatesArr()[1].split(',')}"
+                                                class="my-sp form-control" th:with="opt=${time}">
                                             <th:block th:replace="fragments/select :: times"></th:block>
                                         </select>
                                     </th:block>
@@ -336,8 +340,10 @@
                             <div class="day-of-week">
                                 <b>Ср.</b>
                                 <span id="12">
-                                    <th:block th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[2]!='null':false}">
-                                        <select th:each="time: ${inputEvent.getActiveDatesArr()[2].split(',')}" class="my-sp form-control" th:with="opt=${time}">
+                                    <th:block
+                                            th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[2]!='null':false}">
+                                        <select th:each="time: ${inputEvent.getActiveDatesArr()[2].split(',')}"
+                                                class="my-sp form-control" th:with="opt=${time}">
                                             <th:block th:replace="fragments/select :: times"></th:block>
                                         </select>
                                     </th:block>
@@ -347,8 +353,10 @@
                             <div class="day-of-week">
                                 <b>Чт.</b>
                                 <span id="13">
-                                    <th:block th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[3]!='null':false}">
-                                        <select th:each="time: ${inputEvent.getActiveDatesArr()[3].split(',')}" class="my-sp form-control" th:with="opt=${time}">
+                                    <th:block
+                                            th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[3]!='null':false}">
+                                        <select th:each="time: ${inputEvent.getActiveDatesArr()[3].split(',')}"
+                                                class="my-sp form-control" th:with="opt=${time}">
                                             <th:block th:replace="fragments/select :: times"></th:block>
                                         </select>
                                     </th:block>
@@ -358,8 +366,10 @@
                             <div class="day-of-week">
                                 <b>Пт.</b>
                                 <span id="14">
-                                    <th:block th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[4]!='null':false}">
-                                        <select th:each="time: ${inputEvent.getActiveDatesArr()[4].split(',')}" class="my-sp form-control" th:with="opt=${time}">
+                                    <th:block
+                                            th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[4]!='null':false}">
+                                        <select th:each="time: ${inputEvent.getActiveDatesArr()[4].split(',')}"
+                                                class="my-sp form-control" th:with="opt=${time}">
                                             <th:block th:replace="fragments/select :: times"></th:block>
                                         </select>
                                     </th:block>
@@ -369,8 +379,10 @@
                             <div class="day-of-week">
                                 <b>Сб.</b>
                                 <span id="15">
-                                    <th:block th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[5]!='null':false}">
-                                        <select th:each="time: ${inputEvent.getActiveDatesArr()[5].split(',')}" class="my-sp form-control" th:with="opt=${time}">
+                                    <th:block
+                                            th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[5]!='null':false}">
+                                        <select th:each="time: ${inputEvent.getActiveDatesArr()[5].split(',')}"
+                                                class="my-sp form-control" th:with="opt=${time}">
                                             <th:block th:replace="fragments/select :: times"></th:block>
                                         </select>
                                     </th:block>
@@ -380,8 +392,10 @@
                             <div class="day-of-week bw-0">
                                 <b>Вс.</b>
                                 <span id="16">
-                                    <th:block th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[6]!='null':false}">
-                                        <select th:each="time: ${inputEvent.getActiveDatesArr()[6].split(',')}" class="my-sp form-control" th:with="opt=${time}">
+                                    <th:block
+                                            th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[6]!='null':false}">
+                                        <select th:each="time: ${inputEvent.getActiveDatesArr()[6].split(',')}"
+                                                class="my-sp form-control" th:with="opt=${time}">
                                             <th:block th:replace="fragments/select :: times"></th:block>
                                         </select>
                                     </th:block>
@@ -394,23 +408,25 @@
                              th:style="${inputEvent.getTypeOfDates()!=2}?'display: none;'">
                             <div class="day-of-week bw-0">
                                 <div id="20">
-                                    <th:block th:if="${isEdit and inputEvent.getTypeOfDates()==2?inputEvent.getActiveDates()!='null' and inputEvent.getActiveDates()!='':false}"  th:each="date: ${inputEvent.getActiveDatesArr()}">
-                                    <div class="day-of-week" th:if="${date.indexOf(':')>=0}">
-                                        <div class="form-group" style="margin-top: 15px;">
-                                            <div class="input-group date" style="display: flex;">
-                                                <input type="text" class="form-control my-date" style="width: auto;"
-                                                       th:value="${date.substring(0,date.indexOf(':'))!='null'?date.substring(0,date.indexOf(':')):''}"/>
-                                                <span class="input-group-addon w-a day-span">
+                                    <th:block
+                                            th:if="${isEdit and inputEvent.getTypeOfDates()==2?inputEvent.getActiveDates()!='null' and inputEvent.getActiveDates()!='':false}"
+                                            th:each="date: ${inputEvent.getActiveDatesArr()}">
+                                        <div class="day-of-week" th:if="${date.indexOf(':')>=0}">
+                                            <div class="form-group" style="margin-top: 15px;">
+                                                <div class="input-group date" style="display: flex;">
+                                                    <input type="text" class="form-control my-date" style="width: auto;"
+                                                           th:value="${date.substring(0,date.indexOf(':'))!='null'?date.substring(0,date.indexOf(':')):''}"/>
+                                                    <span class="input-group-addon w-a day-span">
                                                     <span class="glyphicon glyphicon-calendar"></span>
                                                 </span>
-                                                <select class="my-sp form-control my-time"
-                                                        style="border-radius: 4px;width: auto;"
-                                                        th:with="opt = ${date.substring(date.indexOf(':')+1,date.length())}">
-                                                    <th:block th:replace="fragments/select :: times"></th:block>
-                                                </select>
+                                                    <select class="my-sp form-control my-time"
+                                                            style="border-radius: 4px;width: auto;"
+                                                            th:with="opt = ${date.substring(date.indexOf(':')+1,date.length())}">
+                                                        <th:block th:replace="fragments/select :: times"></th:block>
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
                                     </th:block>
                                 </div>
                                 <b><a class="add-time" onclick="addDate();">Добавить дату</a></b>
@@ -681,24 +697,19 @@
         else if (type === 2) {
             var $e1 = $('#20');
             $e1.children().each(function (index, elem) {
-                if (elem!==null && elem.className==="day-of-week"){
-                    console.log("Elem not NULL");
-                    console.log("Elem inp.group.date: " + elem.getElementsByClassName("input-group date").length);
-                    console.log("Elem inp.group: " + elem.getElementsByClassName("input-group").length);
-                    var child3 = elem.firstChild.firstChild;
-                    if (child3 !== null) {
-                        if (child3.className === "input-group date") {
-                            for (var childItem in child3.childNodes) {
-                                var e5 = child3.childNodes[childItem];
-                                if (e5.nodeType === 1) {
-                                    if (e5.className === "form-control my-date") {
-                                        console.log("date: " + e5.value);
-                                        inp.value += e5.value + ':';
-                                    }
-                                    if (e5.className === "my-sp form-control my-time") {
-                                        console.log("time: " + e5.value);
-                                        inp.value += e5.value + ';';
-                                    }
+                if (elem !== null && elem.className === "day-of-week") {
+                    if (elem.getElementsByClassName("input-group date").length !== 0) {
+                        var child3 = elem.getElementsByClassName("input-group date")[0];
+                        for (var childItem in child3.childNodes) {
+                            var e5 = child3.childNodes[childItem];
+                            if (e5.nodeType === 1) {
+                                if (e5.className === "form-control my-date") {
+                                    console.log("date: " + e5.value);
+                                    inp.value += e5.value + ':';
+                                }
+                                if (e5.className === "my-sp form-control my-time") {
+                                    console.log("time: " + e5.value);
+                                    inp.value += e5.value + ';';
                                 }
                             }
                         }
