@@ -301,7 +301,7 @@
                                                                 <input type="number" id="editProfile10" value="1"
                                                                        class="form-control"
                                                                        th:max="${event.getUsersCount()}" min="1"/>
-                                                                <label for="editProfile10"
+                                                                <label for="editProfile10" class=""
                                                                        th:text="${#messages.msg('words.users_count')} + ' (1 - ' + ${event.getUsersCount()} + ')'">Users
                                                                     count</label>
                                                             </div>
@@ -476,12 +476,12 @@
         var $input = $('input[type=text]');
         $input.focusin( function() {
             if ( $(this).val().length === 0 ) {
-                $(this).prev('label').addClass('active');
+                $(this).next('label').addClass('active');
             }
         });
         $input.focusout( function() {
             if ( $(this).val().length === 0 ) {
-                $(this).prev('label').removeClass('active');
+                $(this).next('label').removeClass('active');
             }
         });
         $('.carousel').carousel({interval: 8000});
