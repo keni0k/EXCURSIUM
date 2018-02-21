@@ -160,7 +160,7 @@
                         <div class="panel-heading">
                             Расписание
                         </div>
-                        <div class="panel-body pb-0 pt-0" id="radio0">
+                        <div class="panel-body pb-0 pt-0" id="radio0" th:style="${inputEvent.getTypeOfDates()!=0}?'display: none;'">
                             <div class="day-of-week" id="00">
                                 <b>Пн.</b><a class="add-time" id="0" onclick="addTime(0, 0);" th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[0]=='null':true}">Задать интервал времени</a>
                                 <th:block th:if="${isEdit and inputEvent.getTypeOfDates()==0?inputEvent.getActiveDatesArr()[0]!='null':false}" th:with="arrI = ${inputEvent.getActiveDatesArr()[0]}">
@@ -252,12 +252,13 @@
                             </div>
                         </div>
 
-                        <div class="panel-body pb-0 pt-0" id="radio1" style="display: none;">
+                        <div class="panel-body pb-0 pt-0" id="radio1" th:style="${inputEvent.getTypeOfDates()!=1}?'display: none;'">
                             <div class="day-of-week">
                                 <b>Пн.</b>
                                 <span id="10">
-                                    <select th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[0]!='null':false}" class="my-sp form-control">
-                                        <th:block th:replace="fragments/select :: times"></th:block>
+                                    <select th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[0]!='null':false}" th:each="time = ${inputEvent.getActiveDatesArr()[0].split(',')}"
+                                            class="my-sp form-control">
+                                        <th:block th:with="opt=${time}" th:replace="fragments/select :: times"></th:block>
                                     </select>
                                 </span><a class="add-time" onclick="addTime(1, 0);">Добавить время</a>
                             </div>
@@ -317,7 +318,7 @@
                             </div>
                         </div>
 
-                        <div class="panel-body pb-0 pt-0" id="radio2" style="display: none;">
+                        <div class="panel-body pb-0 pt-0" id="radio2" th:style="${inputEvent.getTypeOfDates()!=2}?'display: none;'">
                             <div class="day-of-week bw-0">
                                 <div id="20">
                                     <div class="day-of-week" th:if="${isEdit and inputEvent.getTypeOfDates()==2?inputEvent.getActiveDates()!='null':false}" th:each="date: ${inputEvent.getActiveDatesArr()}">
@@ -327,7 +328,7 @@
                                                 <span class="input-group-addon w-a day-span">
                                                     <span class="glyphicon glyphicon-calendar"></span>
                                                 </span>
-                                                <select class="my-sp form-control" style="border-radius: 4px;width: auto;" th:with="opt = ${date.substring(date.indexOf(':')+1,date.length()-1)}"><th:block th:replace="fragments/select :: times"></th:block></select>
+                                                <select class="my-sp form-control" style="border-radius: 4px;width: auto;" th:with="opt = ${date.substring(date.indexOf(':')+1,date.length())}"><th:block th:replace="fragments/select :: times"></th:block></select>
                                             </div>
                                         </div>
                                     </div>
