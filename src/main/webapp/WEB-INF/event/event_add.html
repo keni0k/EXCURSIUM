@@ -256,7 +256,7 @@
                             <div class="day-of-week">
                                 <b>Пн.</b>
                                 <span id="10">
-                                    <select th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[0]!='null':false}" th:each="time = ${inputEvent.getActiveDatesArr()[0].split(',')}"
+                                    <select th:if="${isEdit and inputEvent.getTypeOfDates()==1?inputEvent.getActiveDatesArr()[0]!='null':false}" th:each="time: ${inputEvent.getActiveDatesArr()[0].split(',')}"
                                             class="my-sp form-control">
                                         <th:block th:with="opt=${time}" th:replace="fragments/select :: times"></th:block>
                                     </select>
