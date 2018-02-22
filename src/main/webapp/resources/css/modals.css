@@ -45,13 +45,6 @@ body.modal-open {
     -ms-transform: translate(0,0);
     transform: translate(0,0);
 }
-/*.modal.fade .modal-dialog {
-    -webkit-transition: -webkit-transform .3s ease-out;
-    transition: transform .3s ease-out,-webkit-transform .3s ease-out;
-    -webkit-transform: translate(0,-25%);
-    -ms-transform: translate(0,-25%);
-    transform: translate(0,-25%);
-}*/
 .modal-dialog {
     position: relative;
     width: auto;
@@ -61,12 +54,6 @@ body.modal-open {
     border-radius: 2px;
     border: 0;
 }
-
-.btn-floating, .btn:active, .btn:focus, .btn:hover, .card.card-cascade.card-avatar img, .colorful-select .dropdown-content li.active span, .dropdown .dropdown-menu .dropdown-item:active, .dropdown .dropdown-menu .dropdown-item:hover, .form-header, .media .media-left img, .modal-dialog .modal-content, .modal-dialog.cascading-modal .modal-header, .nav-tabs {
-    -webkit-box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
-    box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
-}
-
 .modal-content {
     position: relative;
     display: flex;
@@ -77,21 +64,12 @@ body.modal-open {
     border: 1px solid rgba(0,0,0,.2);
     border-radius: .3rem;
     outline: 0;
+    background-clip: padding-box;
 }
-
 .modal-content, .modal-header {
     display: -ms-flexbox;
     display: -webkit-box;
     display: -webkit-flex;
-}
-
-.modal-content {
-    background-clip: padding-box;
-}
-
-.list-group, .modal-content {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
 }
 .list-group, .modal-content {
     -webkit-box-orient: vertical;
@@ -207,7 +185,6 @@ body.modal-open {
     padding: 15px;
     border-top: 1px solid #e9ecef;
 }
-
 .md-form {
     position: relative;
 }
@@ -217,7 +194,6 @@ body.modal-open {
 .mt-2, .my-2 {
     margin-top: .5rem!important;
 }
-
 .md-form.form-sm input {
     padding-bottom: .2rem;
     padding-top: .2rem;
