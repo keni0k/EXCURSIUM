@@ -263,7 +263,7 @@ input[type=date], input[type=datetime-local], input[type=email], input[type=numb
     font-size: 1rem;
     cursor: text;
 }
-label.active {
+.md-form label.active {
     -webkit-transform: translateY(-140%);
     -ms-transform: translateY(-140%);
     transform: translateY(-140%);
@@ -281,7 +281,23 @@ input[type=date]+label:after, input[type=datetime-local]+label:after, input[type
 .modal-dialog.cascading-modal {
     margin-top: 10%;
 }
-
+.modal-header .close {
+    right: 25px;
+    top: 25px;
+    position: absolute;
+    color: aliceblue;
+    opacity: 0.7;
+}
+.modal-header .close:focus, .modal-header .close:hover {
+    text-decoration: none;
+    cursor: pointer;
+    filter: alpha(opacity=100);
+    opacity: 1;
+}
+.modal-header h4{
+    margin-left:10px;
+    color:aliceblue;
+}
 @media (min-width: 576px) {
     .modal-dialog {
         max-width: 500px;
