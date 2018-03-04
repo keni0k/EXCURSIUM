@@ -67,8 +67,8 @@
                 <div class="welcome-search-control">
                     <select class="selectpicker form-control" data-live-search="true"
                             name="country_and_city">
-                        <option value="" class="hidden-sm-down">Куда вы собираетесь?</option>
-                        <option value="" class="visible-xs visible-sm">Выбрать город</option>
+                        <option value="" class="d-none d-sm-block">Куда вы собираетесь?</option>
+                        <option value="" class="d-sm-none">Выбрать город</option>
                         <!--/*@thymesVar id="utils" type="com.heroku.demo.utils.UtilsForWeb"*/-->
                         <th:block th:each="j : ${#numbers.sequence(0, utils.getCountriesCount()-1)}">
                             <option th:each="i : ${#numbers.sequence(0, utils.getCitiesCount(j)-1)}"
