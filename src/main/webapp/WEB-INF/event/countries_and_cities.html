@@ -67,7 +67,8 @@
                 <div class="welcome-search-control">
                     <select class="selectpicker form-control" data-live-search="true"
                             name="country_and_city">
-                        <option value="">Куда вы собираетесь?</option>
+                        <option value="" class="hidden-sm-down">Куда вы собираетесь?</option>
+                        <option value="" class="visible-xs visible-sm">Выбрать город</option>
                         <!--/*@thymesVar id="utils" type="com.heroku.demo.utils.UtilsForWeb"*/-->
                         <th:block th:each="j : ${#numbers.sequence(0, utils.getCountriesCount()-1)}">
                             <option th:each="i : ${#numbers.sequence(0, utils.getCitiesCount(j)-1)}"
@@ -170,6 +171,13 @@
     </div>
 </div>
 <div th:replace="fragments/footer :: footer"></div>
+<script>
+    $(window).resize(function () { /* сюда функционал */ });
+    var width = $('body').innerWidth()
+    if (width < 1000) {
+        $('.a1').removeClass('a1').addClass('a1s');
+    }
+</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../../resources/libs/bootstrap-select/js/bootstrap-select.js"></script>

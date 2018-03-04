@@ -206,9 +206,10 @@
 		.c_a_c-ci{
 			 padding: 10px !important;
 		 }
-		.welcome-button{
-			padding: 6px 12px;
-			margin-left: 6px !important;
+		.welcome-button, .welcome-search-control>.btn-group>.btn{
+			padding: 6px 16px;
+			margin: 6px 3px!important;
+			width: auto!important;
 		}
 		.typeahead{
 			width: 160px !important;
