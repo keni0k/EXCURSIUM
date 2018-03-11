@@ -65,13 +65,10 @@ th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#http
 <form th:object="${inputEvent}" method="POST" th:action="${isEdit?'/events/edit':'/events/add'}"
 enctype="multipart/form-data"
 autocomplete="off">
-
 <!--/*@thymesVar id="id" type="java.lang.Integer"*/-->
 <input th:if="${isEdit}" name="id" th:value="${id}" style="display: none"/>
 <div class="panel panel-default">
-<div class="panel-heading" th:text="${#messages.msg('words.name')}">
-Название
-</div>
+<div class="panel-heading" th:text="${#messages.msg('words.name')}"></div>
 <div class="panel-body">
 <input name="name" type="text" class="form-control" id="name"
 th:value="${inputEvent.getName()}" minlength="10" maxlength="35"/>
@@ -80,23 +77,18 @@ th:text="${#messages.msg('error.event.name')}" th:class="'error'">Name Error</la
 </div>
 </div>
 <div class="panel panel-default">
-<div class="panel-heading" th:text="${#messages.msg('words.description')}">
-Описание
-</div>
+<div class="panel-heading" th:text="${#messages.msg('words.description')}">Описание</div>
 <div class="panel-body">
 <textarea name="description" minlength="150" maxlength="1000" type="text"
 id="description" style="resize: vertical"
 class="form-control" th:text="${inputEvent.getDescription()}"></textarea>
 <label for="description" th:if="${errors.isDescription()}"
-th:text="${#messages.msg('error.event.description')}" th:class="'error'">Description
-Error</label>
+th:text="${#messages.msg('error.event.description')}" th:class="'error'">Description Error</label>
 </div>
 </div>
 <div class="row ml-0 mr-0">
 <div class="panel panel-default left-input col-sm-6">
-<div class="panel-heading" th:text="${#messages.msg('words.type_of_excursion')}">
-Категория экскурсии
-</div>
+<div class="panel-heading" th:text="${#messages.msg('words.type_of_excursion')}"></div>
 <div class="panel-body">
 <div class="input-group">
 <select name="category" id="category" class="form-control selectpicker"
@@ -114,9 +106,7 @@ th:selected="${inputEvent.getCategory()}?${inputEvent.getCategory()}:0">
 </div>
 </div>
 <div class="panel panel-default right-input col-sm-5">
-<div class="panel-heading">
-Возрастное ограничение
-</div>
+<div class="panel-heading">Возрастное ограничение</div>
 <div class="panel-body">
 <div class="input-group">
 <select name="ageLimit" id="age_limit" class="form-control selectpicker"
@@ -131,11 +121,8 @@ th:selected="${inputEvent.getAgeLimit()}?${inputEvent.getAgeLimit()}:0">
 </div>
 </div>
 </div>
-
 <div class="panel panel-default">
-<div class="panel-heading">
-Тип экскурсии
-</div>
+<div class="panel-heading">Тип экскурсии</div>
 <div class="panel-body">
 <div class="radio">
 <label>
@@ -173,9 +160,7 @@ onclick="radio(2);"/>
 </div>
 <input type="text" name="schedule" style="display:none;" id="schedule"/>
 <div class="panel panel-default">
-<div class="panel-heading">
-Расписание
-</div>
+<div class="panel-heading">Расписание</div>
 <div class="panel-body pb-0 pt-0" id="radio0"
 th:style="${inputEvent.getTypeOfDates()!=0}?'display: none;'">
 <div class="day-of-week" id="00">
@@ -310,7 +295,6 @@ th:with="opt = ${arrI.substring(arrI.indexOf('-')+1, arrI.length())}">
 </th:block>
 </div>
 </div>
-
 <div class="panel-body pb-0 pt-0" id="radio1"
 th:style="${inputEvent.getTypeOfDates()!=1}?'display: none;'">
 <div class="day-of-week">
@@ -404,7 +388,6 @@ class="my-sp form-control" th:with="opt=${time}">
 <a class="add-time" onclick="addTime(1, 6);">Добавить время</a>
 </div>
 </div>
-
 <div class="panel-body pb-0 pt-0" id="radio2"
 th:style="${inputEvent.getTypeOfDates()!=2}?'display: none;'">
 <div class="day-of-week bw-0">
@@ -423,7 +406,7 @@ th:each="date: ${inputEvent.getActiveDatesArr()}">
 <select class="my-sp form-control"
         style="border-radius: 4px;width: auto;"
         th:with="opt = ${date.substring(date.indexOf(':')+1,date.length())}">
-    <th:block th:replace="fragments/select :: times"></th:block>
+    <div th:replace="fragments/select :: times"></div>
 </select>
 </div>
 </div>
@@ -433,15 +416,11 @@ th:each="date: ${inputEvent.getActiveDatesArr()}">
 <b><a class="add-time" onclick="addDate();">Добавить дату</a></b>
 </div>
 </div>
-
 <input type="text" name="activeDates" style="display:none;" id="active_dates"/>
 </div>
-
 <div class="row ml-0 mr-0">
 <div class="panel panel-default col-sm-6 left-input">
-<div class="panel-heading" th:text="${#messages.msg('words.users_count')}">
-Количество участников
-</div>
+<div class="panel-heading" th:text="${#messages.msg('words.users_count')}">Количество участников</div>
 <div class="panel-body">
 <div class="input-group">
 <input name="usersCount" id="users_count" type="number" class="form-control"
@@ -450,15 +429,11 @@ th:value="${inputEvent.getUsersCount()>0}?${inputEvent.getUsersCount()}"/>
 <span class="input-group-addon">человек</span>
 </div>
 <label for="users_count" th:if="${#fields.hasErrors('usersCount')}"
-th:text="${#messages.msg('error.event.users_count')}" th:class="'error'">UsersCount
-Error</label>
+th:text="${#messages.msg('error.event.users_count')}" th:class="'error'">UsersCount Error</label>
 </div>
 </div>
-
 <div class="panel panel-default col-sm-5 right-input">
-<div class="panel-heading" th:text="${#messages.msg('words.duration')}">
-Длительность
-</div>
+<div class="panel-heading" th:text="${#messages.msg('words.duration')}">Длительность</div>
 <div class="panel-body">
 <div class="input-group">
 <input name="duration" id="duration" type="number" class="form-control" required=""
@@ -468,17 +443,13 @@ max="240"/>
 th:text="${#messages.msg('words.hours')}">часов</span>
 </div>
 <label for="duration" th:if="${#fields.hasErrors('duration')}"
-th:text="${#messages.msg('error.event.duration')}" th:class="'error'">Duration
-Error</label>
+th:text="${#messages.msg('error.event.duration')}" th:class="'error'">Duration Error</label>
 </div>
 </div>
 </div>
-
 <div class="row ml-0 mr-0">
 <div class="panel panel-default col-sm-6 left-input">
-<div class="panel-heading" th:text="${#messages.msg('words.city')}">
-Город
-</div>
+<div class="panel-heading" th:text="${#messages.msg('words.city')}">Город</div>
 <div class="panel-body">
 <select class="selectpicker form-control" data-live-search="true"
 name="city_and_country">
@@ -486,32 +457,26 @@ name="city_and_country">
 <th:block th:each="j : ${#numbers.sequence(0, utils.getCountriesCount()-1)}">
 <option th:each="i : ${#numbers.sequence(0, utils.getCitiesCount(j)-1)}"
 th:value="${j}+'.'+${i}"
-th:text="${#messages.msg('city.'+j+'.'+i)}+', '+ ${#messages.msg('country.'+j)}">
-Москва, Россия
+th:text="${#messages.msg('city.'+j+'.'+i)}+', '+ ${#messages.msg('country.'+j)}">Москва, Россия
 </option>
 </th:block>
 </select>
 </div>
 </div>
 <div class="panel panel-default col-sm-5 right-input">
-<div class="panel-heading" th:text="${#messages.msg('words.place')}">
-Место встречи
-</div>
+<div class="panel-heading" th:text="${#messages.msg('words.place')}">Место встречи</div>
 <div class="panel-body">
 <input name="place" id="place" type="text" class="form-control"
 minlength="5" maxlength="100"
 th:value="${inputEvent.getPlace()}?${inputEvent.getPlace()}"/>
 <label for="place" th:if="${errors.isPlace()}"
-th:text="${#messages.msg('error.event.place')}" th:class="'error'">Place
-Error</label>
+th:text="${#messages.msg('error.event.place')}" th:class="'error'">Place Error</label>
 </div>
 </div>
 </div>
 <div class="row ml-0 mr-0">
 <div class="panel panel-default col-sm-6 left-input">
-<div class="panel-heading" th:text="${#messages.msg('words.price')}">
-Цена
-</div>
+<div class="panel-heading" th:text="${#messages.msg('words.price')}">Цена</div>
 <div class="panel-body">
 <div class="input-group">
 <input name="price" id="price" type="number" class="form-control"
@@ -523,14 +488,11 @@ th:value="${inputEvent.getPrice()>0}?${inputEvent.getPrice()}"/>
 id="our_price">100</span> рублей (15%) путешественники заплатят нам на сайте, а
 <span id="guide_price">600</span> рублей - вам на месте</p></b>
 <label for="price" th:if="${errors.isPrice()}"
-th:text="${#messages.msg('error.event.price')}" th:class="'error'">Price
-Error</label>
+th:text="${#messages.msg('error.event.price')}" th:class="'error'">Price Error</label>
 </div>
 </div>
 <div class="panel panel-default col-sm-5 right-input">
-<div class="panel-heading" th:text="${#messages.msg('words.language')}">
-Язык
-</div>
+<div class="panel-heading" th:text="${#messages.msg('words.language')}">Язык</div>
 <div class="panel-body">
 <div class="input-group">
 <select name="language" class="form-control selectpicker"
@@ -571,10 +533,8 @@ data-btn-ok-class="btn-success" data-btn-cancel-class="btn-danger"
 data-btn-cancel-label="Нет" data-btn-cancel-icon="glyphicon glyphicon-ban-circle"
 data-title="Изменить?" data-content="Экскурсия снова будет отправлена на модерацию!"
 data-toggle="confirmation" data-on-confirm="sbmt">Изменить</a>
-
 <a th:unless="${isEdit}" class="btn btn-default" th:text="${#messages.msg('words.submit')}"
 onclick="sbmt();">Отправить</a>
-
 <button type="submit" value="Upload" style="display: none" id="sbmt">Отправить</button>
 </form>
 </div>
@@ -584,7 +544,6 @@ onclick="sbmt();">Отправить</a>
 </div>
 <div class="card card-cascade narrower">
 <img class="img_age" id="card-age_limit" src="../../resources/img/age_limits/0.png"/>
-<!--/*Card image*/-->
 <div class="view overlay hm-white-slight z-depth-1" style="margin-top: 20px;">
 <div class="img_crop"><img
 th:src="${inputEvent.pathToPhoto.size()>0?inputEvent.pathToPhoto.get(0):'../../resources/img/no-img.jpg'}"
@@ -593,30 +552,24 @@ style="height: 240px; min-width: -webkit-fill-available;"/>
 </div>
 <div class="mask waves-effect waves-light"></div>
 </div>
-<!--/*Card image*/-->
-<!--/*Card content*/-->
 <div class="card-body pb-0 no-padding text-center"><!--/*Category & Title*/-->
 <h4 id="card-category" th:text="${inputEvent.getCategoryString()}">Развлечения</h4>
 <h3 class="card-title">
 <strong id="card-title" th:text="${inputEvent.getName()}">%Название экскурсии%</strong>
 </h3>
-<!--/*Rating*/-->
 <ul class="rating">
 <li th:each="i : ${#numbers.sequence(0, 4)}"><i class="fa fa-star-o"></i></li>
 <li><span>(0)</span></li>
 </ul>
-<!--/*Description*/-->
 <p class="card-text" style="font-size: 18px; color: #000000" id="card-text"
 align="justify" th:text="${inputEvent.getSmallData()}">%Краткое описание%</p>
 </div>
-<!--/*Card footer*/-->
 <div class="card-footer links-light">
 <h3 class="left card-footer-left mt-0 mb-0"><strong id="card-price"
                         th:text="${inputEvent.getPrice()>0?inputEvent.getPrice()+'₽':'%ЦЕНА%'}">%PRICE%</strong>
 </h3>
 <a class="btn btn-primary waves-effect waves-light right disabled mt-05">Открыть</a>
 </div>
-<!--/*End-of-Card content*/-->
 </div>
 </div>
 </div>
