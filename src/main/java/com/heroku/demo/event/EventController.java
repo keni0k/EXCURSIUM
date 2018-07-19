@@ -466,6 +466,7 @@ public class EventController {
         return "Yes";
     }
 
+
     private void addTime(Random random, Event event, int times) {
         for (int j = 0; j<times; j++){
             String suffix = j != times-1 ? "," : "";
